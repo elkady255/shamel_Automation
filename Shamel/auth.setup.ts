@@ -8,7 +8,8 @@ setup('authenticate', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Password' }).fill(process.env.APP_PASSWORD!);
   await page.getByRole('button', { name: 'Continue' }).click();
 
-  // The desk loads slowly after login, so allow more than the default 5s
-  await expect(page).toHaveURL(/\/desk\//, { timeout: 30_000 });
+  // After login the server redirects to /desk/... or /app/... (it changed during testing), and the
+  // landing page loads slowly, so wait for the redirect away from /login rather than a specific page
+  await expect(page).toHaveURL(/\/(desk|app)\//, { timeout: 60_000 });
   await page.context().storageState({ path: authFile });
 });

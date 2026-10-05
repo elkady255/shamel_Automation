@@ -8,6 +8,7 @@ node_modules/
 /playwright/.auth/
 .env
 srs-run.log
-test-results-srs.json
+uc4-run.log
+test-results-*.json
 .venv/
 .playwright-cli/

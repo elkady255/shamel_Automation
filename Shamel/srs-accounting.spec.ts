@@ -7,12 +7,15 @@ const srs = (description: string) => ({ annotation: { type: 'SRS', description }
 /** Each test gets its own throwaway item, deleted afterwards. */
 function withItem(seed: ItemSeed) {
   let name = '';
+
   test.beforeEach(async () => {
     name = await createItem({ item_name: `PW UC4 ${Date.now()}`, ...seed });
   });
+
   test.afterEach(async () => {
     if (name) await deleteItem(name);
   });
+
   return () => name;
 }
 
