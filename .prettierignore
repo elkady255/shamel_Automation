@@ -1,0 +1,7 @@
+node_modules/
+.venv/
+.claude/
+.playwright/
+playwright-report/
+test-results/
+package-lock.json
