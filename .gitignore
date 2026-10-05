@@ -7,5 +7,7 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 .env
+srs-run.log
+test-results-srs.json
 .venv/
 .playwright-cli/

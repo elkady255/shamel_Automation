@@ -13,6 +13,9 @@ dotenv.config({ path: path.resolve(__dirname, '.env'), quiet: true });
  */
 export default defineConfig({
   testDir: './Shamel',
+  /* The test server is slow (page loads and saves can take 5-10s), so allow more time than the defaults */
+  timeout: 60_000,
+  expect: { timeout: 15_000 },
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -32,23 +35,31 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    /* Set SLOWMO=500 to slow every action down when watching a headed run */
+    launchOptions: { slowMo: Number(process.env.SLOWMO ?? 0) },
   },
 
   /* Configure projects for major browsers */
   projects: [
+    /* Logs in once and saves the session to playwright/.auth/user.json */
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], storageState: 'playwright/.auth/user.json' },
+      dependencies: ['setup'],
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Firefox'], storageState: 'playwright/.auth/user.json' },
+      dependencies: ['setup'],
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: { ...devices['Desktop Safari'], storageState: 'playwright/.auth/user.json' },
+      dependencies: ['setup'],
     },
 
     /* Test against mobile viewports. */

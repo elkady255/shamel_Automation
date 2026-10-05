@@ -1,0 +1,927 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Playwright_Automation\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "srs-items-list",
+      "--project=chromium",
+      "--headed",
+      "--workers=1",
+      "--reporter=list,json"
+    ],
+    "configFile": "C:\\Playwright_Automation\\playwright.config.ts",
+    "rootDir": "C:/Playwright_Automation/Shamel",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Playwright_Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "C:/Playwright_Automation/Shamel",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/Playwright_Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Playwright_Automation/Shamel",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/Playwright_Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "C:/Playwright_Automation/Shamel",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "C:/Playwright_Automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "C:/Playwright_Automation/Shamel",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth.setup.ts",
+      "file": "auth.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authenticate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36421,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T09:49:35.792Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "17e3fe6f4d9d8bd79c6b-60f085b113a677673906",
+          "file": "auth.setup.ts",
+          "line": 5,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "title": "srs-items-list.spec.ts",
+      "file": "srs-items-list.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "SRS UC1 - Items List",
+          "file": "srs-items-list.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "table shows the SRS columns",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Item List table columns",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 15,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 46374,
+                      "error": {
+                        "message": "Error: column \"Status\"\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i })\nExpected: not \u001b[32m0\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - column \"Status\" getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i })\u001b[22m\n\u001b[2m    32 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n",
+                        "stack": "Error: column \"Status\"\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i })\nExpected: not \u001b[32m0\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - column \"Status\" getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i })\u001b[22m\n\u001b[2m    32 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:18:105",
+                        "location": {
+                          "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                          "column": 105,
+                          "line": 18
+                        },
+                        "snippet": "  16 |     const headers = list.table.getByRole('columnheader');\n  17 |     for (const column of ['Item Code', 'Item Name', 'Item Group', 'Status', 'Unit of Measure', 'Available Quantity']) {\n> 18 |       await expect.soft(headers.filter({ hasText: new RegExp(column, 'i') }), `column \"${column}\"`).not.toHaveCount(0);\n     |                                                                                                         ^\n  19 |     }\n  20 |   });\n  21 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "column": 105,
+                            "line": 18
+                          },
+                          "message": "Error: column \"Status\"\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i })\nExpected: not \u001b[32m0\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - column \"Status\" getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Status/i })\u001b[22m\n\u001b[2m    32 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  16 |     const headers = list.table.getByRole('columnheader');\n  17 |     for (const column of ['Item Code', 'Item Name', 'Item Group', 'Status', 'Unit of Measure', 'Available Quantity']) {\n> 18 |       await expect.soft(headers.filter({ hasText: new RegExp(column, 'i') }), `column \"${column}\"`).not.toHaveCount(0);\n     |                                                                                                         ^\n  19 |     }\n  20 |   });\n  21 |\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:18:105"
+                        },
+                        {
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "column": 105,
+                            "line": 18
+                          },
+                          "message": "Error: column \"Available Quantity\"\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Available Quantity/i })\nExpected: not \u001b[32m0\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - column \"Available Quantity\" getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Available Quantity/i }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main').getByRole('table').getByRole('columnheader').filter({ hasText: /Available Quantity/i })\u001b[22m\n\u001b[2m    31 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  16 |     const headers = list.table.getByRole('columnheader');\n  17 |     for (const column of ['Item Code', 'Item Name', 'Item Group', 'Status', 'Unit of Measure', 'Available Quantity']) {\n> 18 |       await expect.soft(headers.filter({ hasText: new RegExp(column, 'i') }), `column \"${column}\"`).not.toHaveCount(0);\n     |                                                                                                         ^\n  19 |     }\n  20 |   });\n  21 |\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:18:105"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:50:14.867Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Item List table columns",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 15,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-7df1b-table-shows-the-SRS-columns-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-7df1b-table-shows-the-SRS-columns-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-7df1b-table-shows-the-SRS-columns-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "column": 105,
+                        "line": 18
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-21071f4ffc283ec897ee",
+              "file": "srs-items-list.spec.ts",
+              "line": 15,
+              "column": 7
+            },
+            {
+              "title": "Add Item popup contains the SRS fields",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Add Item pop-up fields",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 22,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 17228,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:51:07.891Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Add Item pop-up fields",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 22,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-2f6962aea03e56458255",
+              "file": "srs-items-list.spec.ts",
+              "line": 22,
+              "column": 7
+            },
+            {
+              "title": "Item Group offers only child groups (is_group = 0)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Item group: displays only child item groups",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 36,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 20689,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:51:25.657Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Item group: displays only child item groups",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 36,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-465240acf1f5415d602e",
+              "file": "srs-items-list.spec.ts",
+              "line": 36,
+              "column": 7
+            },
+            {
+              "title": "Default Unit of Measure offers every UOM",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Default unit of measure: Link \"UOM\" doctype",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 47,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 32611,
+                      "error": {
+                        "message": "Error: common unit \"Nos\" is selectable\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('li:visible').filter({ hasText: /^Nos$/ })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - common unit \"Nos\" is selectable locator('li:visible').filter({ hasText: /^Nos$/ }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('li:visible').filter({ hasText: /^Nos$/ })\u001b[22m\n\u001b[2m    33 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n",
+                        "stack": "Error: common unit \"Nos\" is selectable\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('li:visible').filter({ hasText: /^Nos$/ })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - common unit \"Nos\" is selectable locator('li:visible').filter({ hasText: /^Nos$/ }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('li:visible').filter({ hasText: /^Nos$/ })\u001b[22m\n\u001b[2m    33 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:55:91",
+                        "location": {
+                          "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                          "column": 91,
+                          "line": 55
+                        },
+                        "snippet": "  53 |     await expect(options.first()).toBeVisible();\n  54 |     await options.last().scrollIntoViewIfNeeded();\n> 55 |     await expect(options.filter({ hasText: /^Nos$/ }), 'common unit \"Nos\" is selectable').toHaveCount(1);\n     |                                                                                           ^\n  56 |     await expect(options, `options shown vs ${total} UOMs in the system`).toHaveCount(total);\n  57 |   });\n  58 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "column": 91,
+                            "line": 55
+                          },
+                          "message": "Error: common unit \"Nos\" is selectable\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('li:visible').filter({ hasText: /^Nos$/ })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - common unit \"Nos\" is selectable locator('li:visible').filter({ hasText: /^Nos$/ }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('li:visible').filter({ hasText: /^Nos$/ })\u001b[22m\n\u001b[2m    33 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  53 |     await expect(options.first()).toBeVisible();\n  54 |     await options.last().scrollIntoViewIfNeeded();\n> 55 |     await expect(options.filter({ hasText: /^Nos$/ }), 'common unit \"Nos\" is selectable').toHaveCount(1);\n     |                                                                                           ^\n  56 |     await expect(options, `options shown vs ${total} UOMs in the system`).toHaveCount(total);\n  57 |   });\n  58 |\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:55:91"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:51:46.381Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Default unit of measure: Link \"UOM\" doctype",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 47,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-ddecf-of-Measure-offers-every-UOM-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-ddecf-of-Measure-offers-every-UOM-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-ddecf-of-Measure-offers-every-UOM-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "column": 91,
+                        "line": 55
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-69bce5632e022b08f502",
+              "file": "srs-items-list.spec.ts",
+              "line": 47,
+              "column": 7
+            },
+            {
+              "title": "Is Fixed Asset hides Maintain Stock",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Maintain stock: appears only when Is Fixed Asset = 0",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 59,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 33339,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true })\u001b[22m\n\u001b[2m    32 × locator resolved to <h4 data-v-71b8ff9f=\"\">Maintain Stock</h4>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true })\u001b[22m\n\u001b[2m    32 × locator resolved to <h4 data-v-71b8ff9f=\"\">Maintain Stock</h4>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:62:56",
+                        "location": {
+                          "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                          "column": 56,
+                          "line": 62
+                        },
+                        "snippet": "  60 |     await list.openAddItem();\n  61 |     await list.dialogSetting('Is Fixed Asset').click();\n> 62 |     await expect(list.dialogSetting('Maintain Stock')).toBeHidden();\n     |                                                        ^\n  63 |   });\n  64 |\n  65 |   test('Maintain Stock hides Is Fixed Asset', srs('UC1 > Is Fixed Asset: appears only when Maintain stock = 0'), async () => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "column": 56,
+                            "line": 62
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog').getByRole('heading', { name: 'Maintain Stock', exact: true })\u001b[22m\n\u001b[2m    32 × locator resolved to <h4 data-v-71b8ff9f=\"\">Maintain Stock</h4>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  60 |     await list.openAddItem();\n  61 |     await list.dialogSetting('Is Fixed Asset').click();\n> 62 |     await expect(list.dialogSetting('Maintain Stock')).toBeHidden();\n     |                                                        ^\n  63 |   });\n  64 |\n  65 |   test('Maintain Stock hides Is Fixed Asset', srs('UC1 > Is Fixed Asset: appears only when Maintain stock = 0'), async () => {\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:62:56"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:52:20.503Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Maintain stock: appears only when Is Fixed Asset = 0",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 59,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-7910e--Asset-hides-Maintain-Stock-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-7910e--Asset-hides-Maintain-Stock-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-7910e--Asset-hides-Maintain-Stock-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "column": 56,
+                        "line": 62
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-8f2ca7c7d8bdebd4ca50",
+              "file": "srs-items-list.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "Maintain Stock hides Is Fixed Asset",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Is Fixed Asset: appears only when Maintain stock = 0",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 65,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 31880,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true })\u001b[22m\n\u001b[2m    32 × locator resolved to <h4 data-v-71b8ff9f=\"\">Is Fixed Asset</h4>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true })\u001b[22m\n\u001b[2m    32 × locator resolved to <h4 data-v-71b8ff9f=\"\">Is Fixed Asset</h4>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:68:56",
+                        "location": {
+                          "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                          "column": 56,
+                          "line": 68
+                        },
+                        "snippet": "  66 |     await list.openAddItem();\n  67 |     await list.dialogSetting('Maintain Stock').click();\n> 68 |     await expect(list.dialogSetting('Is Fixed Asset')).toBeHidden();\n     |                                                        ^\n  69 |   });\n  70 |\n  71 |   test('popup buttons are not covered at 1280x720', srs('UC1 > Add Item pop-up: Save and Edit full form buttons usable'), async () => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "column": 56,
+                            "line": 68
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog').getByRole('heading', { name: 'Is Fixed Asset', exact: true })\u001b[22m\n\u001b[2m    32 × locator resolved to <h4 data-v-71b8ff9f=\"\">Is Fixed Asset</h4>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  66 |     await list.openAddItem();\n  67 |     await list.dialogSetting('Maintain Stock').click();\n> 68 |     await expect(list.dialogSetting('Is Fixed Asset')).toBeHidden();\n     |                                                        ^\n  69 |   });\n  70 |\n  71 |   test('popup buttons are not covered at 1280x720', srs('UC1 > Add Item pop-up: Save and Edit full form buttons usable'), async () => {\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:68:56"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:52:56.121Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Is Fixed Asset: appears only when Maintain stock = 0",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 65,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-e846e--Stock-hides-Is-Fixed-Asset-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-e846e--Stock-hides-Is-Fixed-Asset-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-e846e--Stock-hides-Is-Fixed-Asset-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "column": 56,
+                        "line": 68
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-fea33a41eadabd6a5097",
+              "file": "srs-items-list.spec.ts",
+              "line": 65,
+              "column": 7
+            },
+            {
+              "title": "popup buttons are not covered at 1280x720",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Add Item pop-up: Save and Edit full form buttons usable",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 71,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 25500,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog').getByRole('button', { name: 'Edit Full Form' })\u001b[22m\n\u001b[2m    - locator resolved to <button data-v-71b8ff9f=\"\" class=\"secondary-btn\">Edit Full Form</button>\u001b[22m\n\u001b[2m  - attempting click action (trial run)\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    8 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog').getByRole('button', { name: 'Edit Full Form' })\u001b[22m\n\u001b[2m    - locator resolved to <button data-v-71b8ff9f=\"\" class=\"secondary-btn\">Edit Full Form</button>\u001b[22m\n\u001b[2m  - attempting click action (trial run)\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    8 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:75:35",
+                        "location": {
+                          "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                          "column": 35,
+                          "line": 75
+                        },
+                        "snippet": "  73 |     await expect(list.dialogSave).toBeVisible();\n  74 |     // trial: true runs the actionability checks (visible, stable, not covered) without clicking\n> 75 |     await list.dialogEditFullForm.click({ trial: true, timeout: 5_000 });\n     |                                   ^\n  76 |     await list.dialogSave.click({ trial: true, timeout: 5_000 });\n  77 |   });\n  78 | });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "column": 35,
+                            "line": 75
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog').getByRole('button', { name: 'Edit Full Form' })\u001b[22m\n\u001b[2m    - locator resolved to <button data-v-71b8ff9f=\"\" class=\"secondary-btn\">Edit Full Form</button>\u001b[22m\n\u001b[2m  - attempting click action (trial run)\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    8 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-v-71b8ff9f=\"\" class=\"dialog-body-ltr\">…</div> from <div class=\"form-body\" data-v-68d4aa00=\"\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action (trial run)\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\n\n  73 |     await expect(list.dialogSave).toBeVisible();\n  74 |     // trial: true runs the actionability checks (visible, stable, not covered) without clicking\n> 75 |     await list.dialogEditFullForm.click({ trial: true, timeout: 5_000 });\n     |                                   ^\n  76 |     await list.dialogSave.click({ trial: true, timeout: 5_000 });\n  77 |   });\n  78 | });\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:75:35"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:53:30.321Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Add Item pop-up: Save and Edit full form buttons usable",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 71,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-023c9-are-not-covered-at-1280x720-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-023c9-are-not-covered-at-1280x720-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---I-023c9-are-not-covered-at-1280x720-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "column": 35,
+                        "line": 75
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-2ffc9b78e545afa135bb",
+              "file": "srs-items-list.spec.ts",
+              "line": 71,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "SRS UC1 - Add Item popup flows (taller window)",
+          "file": "srs-items-list.spec.ts",
+          "line": 80,
+          "column": 6,
+          "specs": [
+            {
+              "title": "saving from the popup keeps the typed Item Code",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Item code: mandatory, unique, user-entered",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 91,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 25640,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"QE-3I70MQIA\"\u001b[39m\nReceived: \u001b[31m\"STO-ITEM-2026-00040\"\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"QE-3I70MQIA\"\u001b[39m\nReceived: \u001b[31m\"STO-ITEM-2026-00040\"\u001b[39m\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:105:30",
+                        "location": {
+                          "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                          "column": 30,
+                          "line": 105
+                        },
+                        "snippet": "  103 |     const res = await page.request.get(`/api/resource/Item?filters=[[\"item_name\",\"=\",\"${name}\"]]&fields=[\"item_code\"]`);\n  104 |     const [saved] = (await res.json()).data;\n> 105 |     expect(saved?.item_code).toBe(code);\n      |                              ^\n  106 |   });\n  107 |\n  108 |   test('Edit Full Form opens the Add Item screen', srs('UC1 > Edit full form: redirects to the \"Add Item screen\"'), async ({ page }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "column": 30,
+                            "line": 105
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"QE-3I70MQIA\"\u001b[39m\nReceived: \u001b[31m\"STO-ITEM-2026-00040\"\u001b[39m\n\n  103 |     const res = await page.request.get(`/api/resource/Item?filters=[[\"item_name\",\"=\",\"${name}\"]]&fields=[\"item_code\"]`);\n  104 |     const [saved] = (await res.json()).data;\n> 105 |     expect(saved?.item_code).toBe(code);\n      |                              ^\n  106 |   });\n  107 |\n  108 |   test('Edit Full Form opens the Add Item screen', srs('UC1 > Edit full form: redirects to the \"Add Item screen\"'), async ({ page }) => {\n    at C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts:105:30"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:53:59.618Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Item code: mandatory, unique, user-entered",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 91,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---A-bb0be-p-keeps-the-typed-Item-Code-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---A-bb0be-p-keeps-the-typed-Item-Code-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Playwright_Automation\\test-results\\srs-items-list-SRS-UC1---A-bb0be-p-keeps-the-typed-Item-Code-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "column": 30,
+                        "line": 105
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-33236b6c4529c7f37cb4",
+              "file": "srs-items-list.spec.ts",
+              "line": 91,
+              "column": 7
+            },
+            {
+              "title": "Edit Full Form opens the Add Item screen",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "SRS",
+                      "description": "UC1 > Edit full form: redirects to the \"Add Item screen\"",
+                      "location": {
+                        "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                        "line": 108,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11442,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-05T09:54:27.762Z",
+                      "annotations": [
+                        {
+                          "type": "SRS",
+                          "description": "UC1 > Edit full form: redirects to the \"Add Item screen\"",
+                          "location": {
+                            "file": "C:\\Playwright_Automation\\Shamel\\srs-items-list.spec.ts",
+                            "line": 108,
+                            "column": 7
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d09ac0dd86da757feeed-a0094d933e4a110f99aa",
+              "file": "srs-items-list.spec.ts",
+              "line": 108,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T09:49:34.628Z",
+    "duration": 305531.19399999996,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 6,
+    "flaky": 0
+  }
+}
