@@ -46,6 +46,7 @@ test.describe('SRS UC2 - Add Item, Details tab', () => {
   });
 
   test('empty required fields each show an error', srs('UC2 > Save: a validation error message is displayed for each invalid field'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-06: no field errors for Item Group / UOM; raw server error');
     await form.itemCode.fill(`PW-${faker.string.alphanumeric(6)}`);
     await form.save.click();
 
@@ -56,6 +57,7 @@ test.describe('SRS UC2 - Add Item, Details tab', () => {
 
   test.describe('saving', () => {
     test('saved item keeps the typed Item Code', srs('UC2 > Item code: user-entered, unique'), async ({ page }) => {
+      test.fail(true, 'Known bug BUG-01: typed Item Code replaced by naming series');
       const code = `PW-${faker.string.alphanumeric(8).toUpperCase()}`;
       await form.fillRequired({ code, name: `PW Item ${faker.commerce.productName()}`, group: 'Services', uom: 'Unit' });
       await form.save.click();
@@ -106,6 +108,7 @@ test.describe('SRS UC2 - Add Item, Details tab', () => {
     });
 
     test('Fixed Asset hides Maintain Stock and Has Variants', srs('UC2 > Maintain stock / Has Variants: appear only when Is Fixed Asset = 0'), async () => {
+      test.fail(true, 'Known bug BUG-10: Fixed Asset does not hide Maintain Stock / Has Variants');
       await form.setting('Fixed Asset').click();
       await expect(form.setting('Auto Create Assets on Purchase')).toBeVisible();
       await expect.soft(form.setting('Maintain Stock')).toBeHidden();
@@ -121,6 +124,7 @@ test.describe('SRS UC2 - Add Item, Details tab', () => {
     });
 
     test('Maintain Stock hides Fixed Asset', srs('UC2 > Is Fixed Asset: appears only when Maintain stock = 0'), async () => {
+      test.fail(true, 'Known bug BUG-10: Maintain Stock does not hide Fixed Asset');
       await form.setting('Maintain Stock').click();
       await expect(form.main.getByText('Opening Stock', { exact: true })).toBeVisible();
       await expect(form.setting('Fixed Asset')).toBeHidden();
@@ -133,6 +137,7 @@ test.describe('SRS UC2 - Add Item, Details tab', () => {
   });
 
   test('Connections and All Activities tabs are not shown on a new item', srs('UC7/UC8 > tabs displayed only on the item details page'), async () => {
+    test.fail(true, 'Known bug BUG-13: Connections tab shown on a new item');
     await expect(form.tab('Details')).toBeVisible();
     await expect.soft(form.tab('All Activities')).toBeHidden();
     await expect.soft(form.tab('Connections')).toBeHidden();

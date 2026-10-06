@@ -1,19 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { AccountingTab } from './pages/AccountingTab';
-import { createItem, deleteItem, getItem, UI_DEFAULTS, type ItemSeed } from './helpers/api';
+import { createItem, getItem, UI_DEFAULTS, type ItemSeed } from './helpers/api';
 
 const srs = (description: string) => ({ annotation: { type: 'SRS', description } });
 
-/** Each test gets its own throwaway item, deleted afterwards. */
+/** Each test gets its own fresh item. Test data is kept on the server (never deleted), by request. */
 function withItem(seed: ItemSeed) {
+  // Creating the item through the slow API adds ~10-20s to every test
+  test.describe.configure({ timeout: 120_000 });
   let name = '';
 
   test.beforeEach(async () => {
     name = await createItem({ item_name: `PW UC4 ${Date.now()}`, ...seed });
-  });
-
-  test.afterEach(async () => {
-    if (name) await deleteItem(name);
   });
 
   return () => name;
@@ -57,6 +55,7 @@ test.describe('SRS UC4 - Accounting & Taxes (item as created by the UI)', () => 
   });
 
   test('Number of Months starts empty, not prefilled with 0', srs('UC4 > Number of Months: mandatory, error if left empty'), async () => {
+    test.fail(true, 'Known bug BUG-19: Number of Months prefilled with 0');
     await tab.switch('Enable Deferred Revenue').click();
     await expect(tab.months('Revenue')).toHaveValue('');
   });
@@ -74,12 +73,14 @@ test.describe('SRS UC4 - Accounting & Taxes (item as created by the UI)', () => 
   });
 
   test('toggling Deferred Expense enables Save', srs('UC4 > Save: changes on the tab can be saved'), async () => {
+    test.fail(true, 'Known bug BUG-18: Deferred Expense toggle does not enable Save');
     await expect(tab.saveButton).toBeDisabled();
     await tab.switch('Enable Deferred Expense').click();
     await expect(tab.saveButton).toBeEnabled();
   });
 
   test('the default tax row (0 rates) does not block saving', srs('UC4 > Save: valid data is saved; numeric rates 0..n allowed'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-15: min-length rule blocks 0 tax rates');
     await tab.switch('Enable Deferred Revenue').click();
     await tab.typeInto(tab.months('Revenue'), '12');
     await tab.save();
@@ -87,6 +88,7 @@ test.describe('SRS UC4 - Accounting & Taxes (item as created by the UI)', () => 
   });
 
   test('a failed save keeps both net rate inputs', srs('UC4 > Taxes: Minimum and Maximum Net Rate columns'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-17: Maximum Net Rate input disappears after failed save');
     await expect(tab.netRates).toHaveCount(2);
     await tab.switch('Enable Deferred Revenue').click();
     await tab.typeInto(tab.months('Revenue'), '12');
@@ -113,6 +115,7 @@ test.describe('SRS UC4 - Accounting & Taxes (item as created by the UI)', () => 
   });
 
   test('Item Defaults column settings: width defaults to 3 and takes up to 3 digits', srs('UC4 > Item Defaults > Setting > Column width: numbers only, 1-3 chars, default 3'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-22: column width "auto", accepts letters/5 digits');
     await tab.settings(tab.itemDefaults).click();
     const width = tab.dialog().locator('input[type=text]').first();
     await expect.soft(width).toHaveValue('3');
@@ -123,12 +126,14 @@ test.describe('SRS UC4 - Accounting & Taxes (item as created by the UI)', () => 
   });
 
   test('Item Defaults column settings have Update and Reset to default', srs('UC4 > Item Defaults > Setting: "Update" and "Reset to default" buttons'), async () => {
+    test.fail(true, 'Known bug BUG-22: no Reset to default button');
     await tab.settings(tab.itemDefaults).click();
     await expect.soft(tab.dialog().getByRole('button', { name: 'Update' })).toBeVisible();
     await expect(tab.dialog().getByRole('button', { name: 'Reset to default' })).toBeVisible();
   });
 
   test('Item Defaults Add/Remove columns offers all 15 columns', srs('UC4 > Item Defaults > Setting > Add / Remove columns: 15 columns'), async () => {
+    test.fail(true, 'Known bug BUG-23: only 3 of 15 columns offered');
     await tab.settings(tab.itemDefaults).click();
     await tab.dialog().getByText('Add/Remove Fields').click();
     const picker = tab.dialog();
@@ -169,19 +174,27 @@ test.describe('SRS UC4 - Accounting & Taxes (clean item, no tax row)', () => {
   });
 
   test('new Item Defaults row defaults the warehouse to Stores', srs('UC4 > Item Defaults > Default Warehouse: default value is Stores warehouse'), async () => {
+    test.fail(true, 'Known bug BUG-21: warehouse not defaulted to Stores');
     await tab.itemDefaults.getByText('Add Setting').click();
     await tab.selectOption(tab.companies.last(), 'Warrqa', /Warrqa/);
     await expect(tab.warehouses.last()).toHaveValue(/^Stores - /);
   });
 
   test('empty Company in Item Defaults shows a field error', srs('UC4 > Item Defaults > Company: mandatory, error if left empty'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-20: no field error for empty Company');
     await tab.itemDefaults.getByText('Add Setting').click();
+    // Adding a row does not always enable Save, so make a valid change elsewhere too
+    await tab.switch('Enable Deferred Revenue').click();
+    await tab.typeInto(tab.months('Revenue'), '12');
+    // Without this the click below just times out: Save stays disabled with no message at all
+    await expect(tab.saveButton, 'Save is usable so the user can see what is missing').toBeEnabled();
     await tab.save();
     await expect(page.getByText(/Company.*required/i).first()).toBeVisible();
     await expect(tab.serverError.filter({ hasText: 'Validation Error' }), 'no raw server error').toBeHidden();
   });
 
   test('empty Default Warehouse in Item Defaults shows a field error', srs('UC4 > Item Defaults > Default Warehouse: mandatory, error if left empty'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-20: no field error for empty Warehouse');
     await tab.itemDefaults.getByText('Add Setting').click();
     await tab.selectOption(tab.companies.last(), 'Warrqa', /Warrqa/);
     await tab.warehouses.last().fill('');
@@ -213,6 +226,7 @@ test.describe('SRS UC4 - Accounting & Taxes (clean item, no tax row)', () => {
   });
 
   test('empty Item Tax Template shows a field error', srs('UC4 > Taxes > Item Tax Template: mandatory, error if left empty'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-20: no field error for empty Item Tax Template');
     await tab.taxes.getByText('Add Tax').click();
     await tab.typeInto(tab.netRates.first(), '10');
     await tab.typeInto(tab.netRates.last(), '99');

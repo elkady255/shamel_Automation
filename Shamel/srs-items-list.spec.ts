@@ -13,6 +13,7 @@ test.describe('SRS UC1 - Items List', () => {
   });
 
   test('table shows the SRS columns', srs('UC1 > Item List table columns'), async () => {
+    test.fail(true, 'Known bug BUG-12: list has no Status / Available Quantity columns');
     const headers = list.table.getByRole('columnheader');
     for (const column of ['Item Code', 'Item Name', 'Item Group', 'Status', 'Unit of Measure', 'Available Quantity']) {
       await expect.soft(headers.filter({ hasText: new RegExp(column, 'i') }), `column "${column}"`).not.toHaveCount(0);
@@ -45,6 +46,7 @@ test.describe('SRS UC1 - Items List', () => {
   });
 
   test('Default Unit of Measure offers every UOM', srs('UC1 > Default unit of measure: Link "UOM" doctype'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-08: popup UOM list stops at 100 of 246 units');
     const res = await page.request.get('/api/method/frappe.client.get_count?doctype=UOM');
     const total: number = (await res.json()).message;
 
@@ -57,18 +59,21 @@ test.describe('SRS UC1 - Items List', () => {
   });
 
   test('Is Fixed Asset hides Maintain Stock', srs('UC1 > Maintain stock: appears only when Is Fixed Asset = 0'), async () => {
+    test.fail(true, 'Known bug BUG-10: Fixed Asset does not hide Maintain Stock');
     await list.openAddItem();
     await list.dialogSetting('Is Fixed Asset').click();
     await expect(list.dialogSetting('Maintain Stock')).toBeHidden();
   });
 
   test('Maintain Stock hides Is Fixed Asset', srs('UC1 > Is Fixed Asset: appears only when Maintain stock = 0'), async () => {
+    test.fail(true, 'Known bug BUG-10: Maintain Stock does not hide Is Fixed Asset');
     await list.openAddItem();
     await list.dialogSetting('Maintain Stock').click();
     await expect(list.dialogSetting('Is Fixed Asset')).toBeHidden();
   });
 
   test('popup buttons are not covered at 1280x720', srs('UC1 > Add Item pop-up: Save and Edit full form buttons usable'), async () => {
+    test.fail(true, 'Known bug BUG-09: popup buttons covered at 1280x720');
     await list.openAddItem();
     await expect(list.dialogSave).toBeVisible();
     // trial: true runs the actionability checks (visible, stable, not covered) without clicking
@@ -89,6 +94,7 @@ test.describe('SRS UC1 - Add Item popup flows (taller window)', () => {
   });
 
   test('saving from the popup keeps the typed Item Code', srs('UC1 > Item code: mandatory, unique, user-entered'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-01: typed Item Code replaced by naming series');
     const code = `QE-${faker.string.alphanumeric(8).toUpperCase()}`;
     const name = `PW Quick ${faker.commerce.productName()}`;
 

@@ -39,6 +39,7 @@ test.describe('SRS UC7/UC8 - Item details', () => {
   });
 
   test('a new item has its creation logged in All Activities', srs('UC8 > Item Creation activity is automatically logged'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-11: item creation not logged');
     const form = new ItemFormPage(page);
     await form.gotoNew();
     await form.fillRequired({

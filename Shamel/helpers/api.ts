@@ -27,7 +27,8 @@ export async function createItem(seed: ItemSeed = {}): Promise<string> {
   const ctx = await apiSession();
   try {
     const res = await ctx.post('/api/resource/Item', {
-      data: { item_name: `PW API ${Date.now()}`, item_group: 'Services', stock_uom: 'Unit', ...seed },
+      // is_stock_item: 0 matches the UI default (Maintain Stock off); the API would default it to 1
+      data: { item_name: `PW API ${Date.now()}`, item_group: 'Services', stock_uom: 'Unit', is_stock_item: 0, ...seed },
     });
     if (!res.ok()) throw new Error(`Create item failed: ${res.status()} ${await res.text()}`);
     return (await res.json()).data.name;
