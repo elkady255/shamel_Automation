@@ -65,6 +65,10 @@ test.describe('SRS UC4 - Accounting & Taxes (item as created by the UI)', () => 
     await tab.switch('Enable Deferred Expense').click();
     await tab.switch('Enable Deferred Revenue').click(); // also enables Save (see next test)
     await tab.typeInto(tab.months('Revenue'), '12');
+    // The field is prefilled with "0", which counts as filled (covered by the "starts empty" test); clear it
+    await tab.months('Expense').click();
+    await page.keyboard.press('Control+A');
+    await page.keyboard.press('Backspace');
     await tab.save();
     await expect(page.getByText('Number of Months (Expense) is required')).toBeVisible();
   });
