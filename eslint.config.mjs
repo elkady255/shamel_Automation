@@ -7,5 +7,10 @@ export default tseslint.config(
   {
     ...playwright.configs['flat/recommended'],
     files: ['**/*.spec.ts', '**/*.test.ts'],
+    rules: {
+      ...playwright.configs['flat/recommended'].rules,
+      // Page-object helpers that assert internally
+      'playwright/expect-expect': ['warn', { assertFunctionNames: ['expectStatus'] }],
+    },
   },
 );
