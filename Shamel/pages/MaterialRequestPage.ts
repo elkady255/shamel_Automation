@@ -159,14 +159,10 @@ export class MaterialRequestPage {
     if (opts.uom) await this.search(r.uom, opts.uom, opts.uom);
   }
 
-  /** Read-only fields on the "Additional Information" tab (Status, % Ordered) are inputs that follow their label. */
-  fieldAfterLabel(label: string): Locator {
-    return this.main.getByText(label, { exact: true }).first().locator('xpath=following::input[1]');
-  }
-
+  /** Status and % Ordered are read-only text boxes (not inputs) on the "Additional Information" tab. */
   async expectStatus(status: string, perOrdered?: string) {
     await this.tab('Additional Information').click();
-    await expect(this.fieldAfterLabel('Status')).toHaveValue(status, LOAD);
-    if (perOrdered !== undefined) await expect(this.fieldAfterLabel('% Ordered')).toHaveValue(perOrdered);
+    const pattern = perOrdered === undefined ? `Status\\s*${status}\\s*% Ordered` : `Status\\s*${status}\\s*% Ordered\\s*${perOrdered}(?!\\d)`;
+    await expect(this.main).toContainText(new RegExp(pattern), LOAD);
   }
 }
