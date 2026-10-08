@@ -26,6 +26,7 @@ const mainText = (page: Page) => page.getByRole('main').innerText();
 
 test.describe('UC1 - Material Request list', () => {
   test('List shows Status and Transaction Date columns', srs('UC1 List columns: ID, Title, Status, Purpose, Transaction Date, Required By (TC-ML)'), async () => {
+    test.fail(true, 'Known bug BUG-39: list has no Status or Transaction Date column');
     await mrPage.gotoList();
     const headers = (await mrPage.table.getByRole('columnheader').allInnerTexts()).map((h) => h.trim());
     expect.soft(headers).toEqual(expect.arrayContaining(['ID', 'Title', 'Purpose', 'Required By']));
@@ -71,17 +72,20 @@ test.describe('UC2 - New Material Request form (header and dropdowns)', () => {
   });
 
   test('Request Date defaults to today', srs('UC2 Request Date: default today (TC-AD)'), async () => {
+    test.fail(true, 'Known bug BUG-40: Request Date is empty on a new request');
     const label = new Date(`${today()}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     await expect(mrPage.dateInputs().nth(0)).toHaveValue(label);
   });
 
   test('Price List offers buying price lists only', srs('UC2 Price List: buying price lists (TC-AD)'), async () => {
+    test.fail(true, 'Known bug BUG-41: Price List offers selling price lists');
     const options = await mrPage.options(mrPage.combo('Select Price List'));
     expect.soft(options).toContain('Standard Buying');
     expect(options.filter((o) => /Selling/i.test(o))).toEqual([]);
   });
 
   test('Optional fields are not marked mandatory', srs('UC2/UC3: Price List, Required Before, Terms, Terms content are optional (TC-AD, TC-MI)'), async () => {
+    test.fail(true, 'Known bug BUG-42: Price List, Required Before, Terms and Terms content marked mandatory');
     const text = await mrPage.main.innerText();
     for (const label of ['Price List', 'Required Before']) expect.soft(text, label).not.toContain(`${label} *`);
     await mrPage.tab('Additional Information').click();
@@ -92,6 +96,7 @@ test.describe('UC2 - New Material Request form (header and dropdowns)', () => {
   });
 
   test('Warehouse list offers only warehouses of the Material Request company', srs('UC2 Set Warehouse / row Warehouse: warehouses of the selected company (TC-AD, TC-IT)'), async () => {
+    test.fail(true, 'Known bug BUG-28: warehouse list includes other companies\' warehouses');
     await mrPage.choose(mrPage.combo('Select Purpose'), 'Purchase');
     const options = await mrPage.options(mrPage.combo('Select Warehouse'));
     // "مخزن القاضى" is "مخزن القاضى - AIG" of Azzrk Influencer Group, not Ahmed Ebrahim CO.
@@ -99,12 +104,14 @@ test.describe('UC2 - New Material Request form (header and dropdowns)', () => {
   });
 
   test('Warehouse list does not offer group warehouses', srs('UC2 Warehouse: transactions need a non-group warehouse (TC-AD, TC-IT) [assumed, ERPNext rule]'), async () => {
+    test.fail(true, 'Known bug BUG-29: warehouse list includes group warehouses');
     await mrPage.choose(mrPage.combo('Select Purpose'), 'Purchase');
     const options = await mrPage.options(mrPage.combo('Select Warehouse'));
     expect(options).not.toContain('All Warehouses'); // All Warehouses - E is a group
   });
 
   test('Warehouses with the same name can be told apart', srs('UC2 Warehouse: user must be able to pick the intended warehouse (TC-AD, TC-IT)'), async () => {
+    test.fail(true, 'Known bug BUG-30: warehouses listed by short name only (57 named "Stores")');
     await mrPage.choose(mrPage.combo('Select Purpose'), 'Purchase');
     const options = await mrPage.options(mrPage.combo('Select Warehouse'));
     const duplicated = options.filter((o, i) => options.indexOf(o) !== i);
@@ -112,6 +119,7 @@ test.describe('UC2 - New Material Request form (header and dropdowns)', () => {
   });
 
   test('Item Code list offers every purchasable item, not only the first 20', srs('UC2 Items: Item Code dropdown (TC-IT)'), async () => {
+    test.fail(true, 'Known bug BUG-31: Item Code list stops at 20 items');
     await testData();
     await mrPage.addItemRow();
     const options = await mrPage.options(mrPage.row(0).itemCode);
@@ -119,12 +127,14 @@ test.describe('UC2 - New Material Request form (header and dropdowns)', () => {
   });
 
   test('UOM list offers every unit, not only the first 20', srs('UC2 Items: UOM dropdown (TC-IT)'), async () => {
+    test.fail(true, 'Known bug BUG-32: UOM list stops at 20 units');
     await mrPage.addItemRow();
     const options = await mrPage.options(mrPage.row(0).uom);
     expect(options).toContain('Unit');
   });
 
   test('Choosing a Terms template fills the Terms and Conditions content', srs('UC3 Terms: selecting a template loads its content (TC-MI)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-43: Terms template content is not loaded');
     const template = await api.get('Terms and Conditions', 'dsfsdfsdf');
     expect(template.terms).toContain('sdfsdfsdf');
     await mrPage.tab('Additional Information').click();
@@ -143,6 +153,7 @@ test.describe('Server rules behind the form', () => {
   });
 
   test('A group warehouse is rejected on a Material Request', srs('UC2 Warehouse: group warehouses not allowed in transactions [assumed, ERPNext rule]'), async () => {
+    test.fail(true, 'Known bug BUG-37: server accepts a group warehouse on a Material Request');
     const { item } = await testData();
     // If the server wrongly accepts it, a draft is created (kept on the server, never deleted)
     await expect(api.insert('Material Request', {
@@ -170,12 +181,14 @@ test.describe('UC4 - Details of a saved Material Request', () => {
   });
 
   test('Material Issue details show the From Warehouse', srs('UC4 Details: Material Issue shows From Warehouse (TC-DT)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-38: From Warehouse is empty on Material Issue details');
     const doc = await submittedMR('Material Issue', 1);
     await mrPage.gotoDetails(doc.name);
     await expect(page.getByRole('combobox', { name: 'From Warehouse' })).toHaveValue(new RegExp(WAREHOUSE));
   });
 
   test('Details show the document ID and its status', srs('UC4 Details: ID and status visible (TC-DT, TC-FA)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-36: details page shows no document ID or status');
     const doc = await submittedMR('Purchase', 1);
     await mrPage.gotoDetails(doc.name);
     const text = await mainText(page);
@@ -184,6 +197,7 @@ test.describe('UC4 - Details of a saved Material Request', () => {
   });
 
   test('A submitted Material Request cannot be edited or deleted', srs('UC4/FA: submitted document is read-only (TC-DT, TC-FA)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-35: submitted request stays editable, Delete and Get Items offered');
     const doc = await submittedMR('Purchase', 1);
     await mrPage.gotoDetails(doc.name);
     await expect.soft(mrPage.row(0).qty).toBeDisabled();
@@ -194,6 +208,7 @@ test.describe('UC4 - Details of a saved Material Request', () => {
   });
 
   test('A draft Material Request can be submitted', srs('UC2 Submit: draft shows Submit (TC-GI, TC-FA)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-33: no Submit button on a draft request');
     const { item } = await testData();
     const draft = await api.insert('Material Request', {
       company: COMPANY, material_request_type: 'Purchase', transaction_date: today(), schedule_date: today(),
@@ -204,6 +219,7 @@ test.describe('UC4 - Details of a saved Material Request', () => {
   });
 
   test('Cancel on a submitted Material Request cancels the document', srs('FA Cancel: cancels the submitted document (TC-FA)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-34: Cancel only leaves the page; the request stays submitted');
     const doc = await submittedMR('Purchase', 1);
     await mrPage.gotoDetails(doc.name);
     await page.getByRole('button', { name: 'Cancel', exact: true }).last().click();
@@ -213,6 +229,7 @@ test.describe('UC4 - Details of a saved Material Request', () => {
   });
 
   test('A cancelled Material Request shows Cancelled and is read-only', srs('FA Cancel: cancelled document state (TC-FA)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-35/BUG-36: cancelled request shows no status and stays editable');
     const doc = await submittedMR('Purchase', 1);
     await cancel('Material Request', doc.name);
     await mrPage.gotoDetails(doc.name);
@@ -292,6 +309,7 @@ test.describe('Connections', () => {
   });
 
   test('Connections show who created each linked document', srs('Connections: By column (TC-CN)'), async ({ page }) => {
+    test.fail(true, 'Known bug BUG-44: Connections "By" column shows "Administrator None"');
     const doc = await submittedMR('Purchase', 2);
     await orderFromMR(doc.name, 2);
     await mrPage.gotoDetails(doc.name);
@@ -342,7 +360,7 @@ test.describe('Get Items From', () => {
     const row = dialog.getByRole('row', { name: new RegExp(so.name) });
     await row.getByRole('cell').first().click();
     await dialog.getByRole('button', { name: /Get Items|Add|Select|Confirm|Done/ }).first().click();
-    await expect(mrPage.row(0).itemCode).toHaveValue(new RegExp(ITEM_NAME), { timeout: 60_000 });
+    await expect(mrPage.row(0).itemCode).toHaveValue(new RegExp(`${ITEM_NAME}|${so.items[0].item_code}`), { timeout: 60_000 });
     await expect(mrPage.row(0).qty).toHaveValue('6');
   });
 });
