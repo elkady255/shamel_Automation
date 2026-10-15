@@ -1,0 +1,10 @@
+{
+    "chat.mcp.serverSampling": {
+        "Playwright_Automation/.mcp.json: playwright": {
+            "allowedModels": [
+                "copilot/auto",
+                "copilotcli/auto"
+            ]
+        }
+    }
+}

@@ -21,6 +21,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@faker-js/faker": "^10.6.0",
+    "@playwright/mcp": "^0.0.83",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.4",
     "dotenv": "^18.0.5",

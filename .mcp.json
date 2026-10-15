@@ -1,0 +1,18 @@
+{
+	"mcpServers": {
+		"playwright": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"playwright-mcp",
+				"--browser", "chrome",
+				"--isolated",
+				"--storage-state", "playwright/.auth/user.json",
+				"--viewport-size", "1400x1000",
+				"--timeout-action", "30000",
+				"--timeout-navigation", "120000",
+				"--output-dir", "playwright/.mcp-output"
+			]
+		}
+	}
+}

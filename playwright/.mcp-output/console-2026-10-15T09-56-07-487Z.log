@@ -1,0 +1,6 @@
+[    5685ms] [LOG] localStorage cleared @ https://test.hr.azzrk.com/assets/frappe/dist/js/desk.bundle.XWPGY5D6.js:24601
+[    5685ms] [LOG] Cleared App Cache. @ https://test.hr.azzrk.com/assets/frappe/dist/js/desk.bundle.XWPGY5D6.js:24574
+[    5686ms] [LOG] localStorage cleared @ https://test.hr.azzrk.com/assets/frappe/dist/js/desk.bundle.XWPGY5D6.js:24601
+[    6285ms] [WARNING] WebSocket connection to 'wss://test.hr.azzrk.com/socket.io/?EIO=4&transport=websocket&sid=OQc44u3C8XXV7MAGAAJE' failed: WebSocket is closed before the connection is established. @ https://test.hr.azzrk.com/assets/frappe/dist/js/desk.bundle.XWPGY5D6.js:33559
+[    6286ms] [ERROR] Error connecting to socket.io: Unauthorized: TypeError: fetch failed @ https://test.hr.azzrk.com/assets/frappe/dist/js/desk.bundle.XWPGY5D6.js:35258
+[    6302ms] [ERROR] Mixed Content: The page at 'https://test.hr.azzrk.com/desk/shamel#/inventory/packing-slip' was loaded over HTTPS, but requested an insecure resource 'http://test.hr.azzrk.com:5173/assets/shamel/frontend/@vite/client'. This request has been blocked; the content must be served over HTTPS. @ shamel.js:26

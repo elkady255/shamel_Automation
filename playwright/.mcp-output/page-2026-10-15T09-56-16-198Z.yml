@@ -1,0 +1,34 @@
+- generic [ref=e2]:
+  - banner
+  - generic [ref=e6]:
+    - complementary [ref=e7]:
+      - generic [ref=e8]:
+        - img "شعار القائمة الجانبية" [ref=e9] [cursor=pointer]
+        - img "الشعار" [ref=e11]
+      - navigation [ref=e12]:
+        - button "منزل" [ref=e13] [cursor=pointer]
+        - button "طلبات الإجازة" [ref=e17] [cursor=pointer]
+        - button "الأذونات / الإستئذان" [ref=e21] [cursor=pointer]
+        - button "طلبات العمل عن بعد" [ref=e25] [cursor=pointer]
+        - button "الملف الشخصي" [ref=e29] [cursor=pointer]
+        - button "مركز المساعده" [ref=e33] [cursor=pointer]
+        - button "الإعدادات" [ref=e37] [cursor=pointer]
+        - button "المخزون" [ref=e42] [cursor=pointer]
+        - button "المبيعات" [ref=e54] [cursor=pointer]
+        - button "المبيعات" [ref=e63] [cursor=pointer]
+        - button "الشراء" [ref=e73] [cursor=pointer]
+        - button "الحسابات" [ref=e82] [cursor=pointer]
+      - button "تسجيل الخروج" [ref=e91] [cursor=pointer]
+    - main [ref=e96]:
+      - generic [ref=e97]:
+        - heading "مرحباً Administrator !" [level=1] [ref=e98]
+        - generic [ref=e99]:
+          - generic [ref=e101] [cursor=pointer]:
+            - paragraph [ref=e103]: AN
+            - generic [ref=e104]:
+              - generic [ref=e105]: Administrator
+              - generic [ref=e106]: admin@example.com
+          - button [ref=e107] [cursor=pointer]:
+            - img "notification" [ref=e108]
+          - searchbox "بحث..." [ref=e110]
+  - contentinfo

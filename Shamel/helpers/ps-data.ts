@@ -17,18 +17,23 @@ export async function customer(): Promise<string> {
   customerName ??= (
     await api.ensure('Customer', [['customer_name', '=', CUSTOMER_NAME]], {
       customer_name: CUSTOMER_NAME, customer_type: 'Individual', customer_group: 'Individual', territory: 'KSA',
+      custom_company: COMPANY, // mandatory custom field in this environment
     })
   ).name as string;
   return customerName;
 }
 
-async function ensureItem(code: string, weight: number): Promise<void> {
-  await api.ensure('Item', [['item_code', '=', code]], {
-    item_code: code, item_name: code, item_group: 'Products', stock_uom: 'Nos', is_stock_item: 1,
+const itemCodes: Record<string, string> = {}; // item_name -> generated item code
+async function ensureItem(name: string, weight: number): Promise<void> {
+  const doc = await api.ensure('Item', [['item_name', '=', name]], {
+    item_name: name, item_group: 'Services', stock_uom: 'Nos', is_stock_item: 1, valuation_rate: 10,
     weight_per_unit: weight, weight_uom: weight ? 'Kg' : '',
     item_defaults: [{ company: COMPANY, default_warehouse: WAREHOUSE }],
   });
+  itemCodes[name] = doc.name as string;
 }
+/** The generated item code for one of the ITEM_* names (after seed()). */
+export const code = (name: string) => itemCodes[name];
 
 let ready: Promise<void> | undefined;
 /** Items with weights and plenty of stock in Stores - E. */
@@ -38,12 +43,13 @@ export function seed(): Promise<void> {
     await ensureItem(ITEM_A, 2);
     await ensureItem(ITEM_B, 0.5);
     await ensureItem(ITEM_C, 0);
-    for (const code of [ITEM_A, ITEM_B, ITEM_C]) {
-      const [bin] = await api.list('Bin', [['item_code', '=', code], ['warehouse', '=', WAREHOUSE]], ['actual_qty']);
+    for (const name of [ITEM_A, ITEM_B, ITEM_C]) {
+      const item = code(name);
+      const [bin] = await api.list('Bin', [['item_code', '=', item], ['warehouse', '=', WAREHOUSE]], ['actual_qty']);
       if (!bin || bin.actual_qty < 500) {
         await api.insertAndSubmit('Stock Entry', {
           stock_entry_type: 'Material Receipt', company: COMPANY, posting_date: today(),
-          items: [{ item_code: code, qty: 1000, t_warehouse: WAREHOUSE, basic_rate: 10 }],
+          items: [{ item_code: item, qty: 1000, t_warehouse: WAREHOUSE, basic_rate: 10 }],
         });
       }
     }
@@ -58,7 +64,7 @@ export async function draftDN(lines: Line[] = [{ item: ITEM_A, qty: 10 }]): Prom
   await seed();
   return api.insert('Delivery Note', {
     customer: await customer(), company: COMPANY, posting_date: today(), set_warehouse: WAREHOUSE,
-    items: lines.map((l) => ({ item_code: l.item, qty: l.qty, rate: 10, warehouse: WAREHOUSE })),
+    items: lines.map((l) => ({ item_code: code(l.item), qty: l.qty, rate: 10, warehouse: WAREHOUSE })),
   });
 }
 

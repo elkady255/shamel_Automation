@@ -1,0 +1,4 @@
+[    4194ms] TypeError: login[route] is not a function
+    at login.route (https://test.hr.azzrk.com/login?redirect-to=%2Fdesk%2Fshamel:466:14)
+    at https://test.hr.azzrk.com/login?redirect-to=%2Fdesk%2Fshamel:760:7
+[    4227ms] [LOG] Deprecated as of 10.6.0. initHighlighting() is deprecated.  Use highlightAll() instead. @ https://test.hr.azzrk.com/assets/frappe/dist/js/frappe-web.bundle.Q5E2ARNA.js:20628
