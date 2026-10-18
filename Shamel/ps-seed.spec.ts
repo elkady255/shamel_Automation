@@ -1,9 +1,10 @@
 import { test } from '@playwright/test';
-import { draftDN, packingSlip } from './helpers/ps-data';
+import { note, stockOf, ITEM_A } from './helpers/dn-data';
 
-test('seed smoke', async () => {
-  const dn = await draftDN();
-  console.log('DN', dn.name, JSON.stringify(dn.items.map((i: any) => [i.name, i.item_code, i.qty])));
-  const ps = await packingSlip(dn);
-  console.log('PS', ps.name, ps.docstatus, JSON.stringify(ps.items.map((i: any) => [i.item_code, i.qty, i.net_weight, i.weight_uom])), ps.net_weight_pkg);
+test('delivery note seed smoke', async () => {
+  const before = await stockOf(ITEM_A);
+  for (const s of ['Draft', 'Submitted', 'Cancelled', 'Closed'] as const) {
+    try { const d = await note(s); console.log(s, d.name, 'docstatus', d.docstatus, 'status', d.status); } catch (e) { console.log(s, 'FAILED', String(e).slice(0, 300)); }
+  }
+  console.log('stock', before, '->', await stockOf(ITEM_A));
 });
