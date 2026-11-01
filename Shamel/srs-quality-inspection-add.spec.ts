@@ -19,16 +19,23 @@ const observe = (text: string) => test.info().annotations.push({ type: 'observed
 const clean = (s: string) => s.replace(/\s+/g, ' ').trim();
 
 /** Open a dropdown and return the options it offers. */
-async function options(page: Page, trigger: Locator): Promise<string[]> {
+async function options(page: Page, trigger: Locator, chips: string[] = []): Promise<string[]> {
   await trigger.click(); await page.waitForTimeout(900);
-  return (await page.getByRole('option').locator('visible=true').allInnerTexts()).map(clean).filter(Boolean);
+  const listed = (await page.getByRole('option').locator('visible=true').allInnerTexts()).map(clean).filter(Boolean);
+  if (listed.length || !chips.length) return listed;
+  // the Status / Inspection Type / Reference Type lists are plain chips without a role: report which known values are visible
+  const seen: string[] = [];
+  for (const c of chips) if (await page.getByText(c, { exact: true }).locator('visible=true').count()) seen.push(c);
+  return seen;
 }
 async function pick(page: Page, trigger: Locator, text: string | RegExp) {
   await trigger.click(); await page.waitForTimeout(700);
-  await page.getByRole('option', { name: text }).locator('visible=true').first().click(); await page.waitForTimeout(500);
+  const opt = page.getByRole('option', { name: text }).locator('visible=true').first();
+  if (await opt.count()) await opt.click(); else await page.getByText(text, typeof text === 'string' ? { exact: true } : {}).locator('visible=true').last().click();
+  await page.waitForTimeout(500);
 }
 const ph = (page: Page, p: string) => page.getByRole('main').getByPlaceholder(p, { exact: true }).first();
-const dd = (page: Page, text: string | RegExp) => page.getByRole('main').getByRole('button', { name: text }).first();
+const dd = (page: Page, text: string | RegExp) => page.getByRole('main').getByText(text).locator('visible=true').first();
 
 /** Fill every field the SRS marks mandatory that the Add screen offers, using the test Delivery Note and item. */
 async function fillValid(page: Page, dnName: string) {
@@ -45,6 +52,9 @@ async function fillValid(page: Page, dnName: string) {
   await ph(page, 'Select Item').click(); await page.waitForTimeout(1200);
   await page.getByRole('option').locator('visible=true').first().click(); await page.waitForTimeout(800);
   await ph(page, 'Enter sample size').fill('2');
+  await q.openSection('Review');
+  await ph(page, 'Select User').click(); await page.waitForTimeout(1200);
+  await page.getByRole('option').locator('visible=true').first().click(); await page.waitForTimeout(600);
 }
 const save = async (page: Page) => { await page.getByRole('main').getByRole('button', { name: 'Save', exact: true }).click(); await page.waitForTimeout(3500); };
 const lastQI = async () => (await api.list('Quality Inspection', [], ['name', 'docstatus', 'status', 'reference_name', 'item_code', 'sample_size', 'description', 'inspected_by', 'inspection_type'], 1))[0];
@@ -74,30 +84,31 @@ test.describe('Basic Information', () => {
 
   test('TC-AQI-008/009/010 Report Date is a date picker defaulting to today and can be changed', srs('UC2 Report Date'), async ({ page }) => {
     await q.gotoNew();
-    const today = new Date(); const label = today.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+    const t = new Date(); const iso = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+    const label = t.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
     const field = ph(page, 'Select date');
-    expect(await field.inputValue()).toBe(label);
+    expect([iso, label]).toContain(await field.inputValue());
     await field.click(); await page.waitForTimeout(800);
     observe('date picker after click: ' + (await page.locator('[class*=calendar]:visible, [class*=datepicker]:visible, [role=dialog]:visible').count()) + ' popups');
   });
 
   test('TC-AQI-011/012/013 Status offers Accepted / Rejected / Cancelled and is mandatory', srs('UC2 Status'), async ({ page }) => {
     await q.gotoNew();
-    const o = await options(page, dd(page, /Select Status/));
+    const o = await options(page, dd(page, /Select Status/), ['Accepted', 'Rejected', 'Cancelled']);
     observe('Status options: ' + o.join(', '));
     expect(o).toEqual(expect.arrayContaining(['Accepted', 'Rejected', 'Cancelled']));
   });
 
   test('TC-AQI-014/015/016 Inspection Type offers Incoming / Outgoing / In process', srs('UC2 Inspection Type'), async ({ page }) => {
     await q.gotoNew();
-    const o = await options(page, dd(page, /Select Inspection/));
+    const o = await options(page, dd(page, /Select Inspection/), ['Incoming', 'Outgoing', 'In Process', 'In process']);
     observe('Inspection Type options: ' + o.join(', '));
     expect(o.map((x) => x.toLowerCase())).toEqual(expect.arrayContaining(['incoming', 'outgoing', 'in process']));
   });
 
   test('TC-AQI-017/018/019 Reference Type offers exactly the 5 SRS document types', srs('UC2 Reference Type'), async ({ page }) => {
     await q.gotoNew(); await q.openSection('Reference Document');
-    const o = await options(page, dd(page, /Select Reference Type/));
+    const o = await options(page, dd(page, /Select Reference Type/), ['Purchase Receipt', 'Purchase Invoice', 'Delivery Note', 'Sales Invoice', 'Stock Entry', 'Subcontracting Receipt', 'Job Card']);
     observe('Reference Type options: ' + o.join(', '));
     expect(o).toEqual(expect.arrayContaining(['Purchase Receipt', 'Purchase Invoice', 'Delivery Note', 'Sales Invoice', 'Stock Entry']));
     expect(o.length, 'the SRS lists 5 types only').toBe(5);
@@ -187,22 +198,36 @@ test.describe('Item & Inspection fields', () => {
 
 test.describe('Inspected By, Verified By, Remarks, Letter Head', () => {
   test('TC-AQI-104/105/106 Inspected By (User, mandatory) is on the Add screen', srs('UC2 Inspected By'), async ({ page }) => {
-    await q.gotoNew(); await q.openSection('Reference Document'); await q.openSection('Item & Inspection');
+    await q.gotoNew(); await q.openSection('Review');
     const text = await q.bodyText();
-    observe('Add screen contains Inspected By: ' + /Inspected By/.test(text));
+    observe('Review section: ' + (text.match(/Review.{0,160}Cancel Save/)?.[0] ?? ''));
     expect(text).toContain('Inspected By');
+    await expect(ph(page, 'Select User')).toBeVisible();
   });
-  test('TC-AQI-107/108/109 Verified By (text, optional, max 100) is on the Add screen', srs('UC2 Verified By'), async ({ page }) => {
-    await q.gotoNew(); await q.openSection('Item & Inspection');
-    expect(await q.bodyText()).toContain('Verified By');
+  test('TC-AQI-107/108/109 Verified By (text, optional, max 100)', srs('UC2 Verified By'), async ({ page }) => {
+    await q.gotoNew(); await q.openSection('Review');
+    const v = ph(page, 'Enter verifier name');
+    await v.fill('v'.repeat(120));
+    expect((await v.inputValue()).length).toBe(100);
+    expect(await q.bodyText(), 'Verified By is optional per SRS (no asterisk)').not.toMatch(/Verified By \*/);
   });
-  test('TC-AQI-110/111/112/113 Remarks (text area, 3..500) is on the Add screen', srs('UC2 Remarks'), async ({ page }) => {
-    await q.gotoNew(); await q.openSection('Item & Inspection');
-    expect(await q.bodyText()).toContain('Remarks');
+  test('TC-AQI-110/111/112/113 Remarks (text area, optional, 3..500)', srs('UC2 Remarks'), async ({ page }) => {
+    await q.gotoNew(); await q.openSection('Review');
+    const r = ph(page, 'Enter remarks');
+    await r.fill('r'.repeat(520));
+    expect((await r.inputValue()).length).toBe(500);
+    expect(await q.bodyText()).not.toMatch(/Remarks \*/);
   });
-  test('TC-AQI-117/118/119 Print Settings / Letter Head is on the Add screen', srs('UC2 Letter Head'), async ({ page }) => {
-    await q.gotoNew(); await q.openSection('Item & Inspection');
-    expect(await q.bodyText()).toContain('Letter Head');
+  test('TC-AQI-114 Amended From is hidden for a Quality Inspection that is not an amendment', srs('UC2 Amended From'), async ({ page }) => {
+    await q.gotoNew(); await q.openSection('Review');
+    observe('Review section text: ' + (await q.bodyText()).match(/Remarks.{0,80}Letter Head/)?.[0]);
+    expect(await q.bodyText()).not.toContain('Amended From');
+  });
+  test('TC-AQI-117/118/119 Print Settings / Letter Head is optional', srs('UC2 Letter Head'), async ({ page }) => {
+    await q.gotoNew(); await q.openSection('Review');
+    const text = await q.bodyText();
+    expect(text).toContain('Letter Head');
+    expect(text, 'Letter Head is optional per SRS (no asterisk)').not.toMatch(/Letter Head \*/);
   });
 });
 

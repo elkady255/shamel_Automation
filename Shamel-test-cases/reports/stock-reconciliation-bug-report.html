@@ -1,0 +1,872 @@
+<title>Stock Reconciliation Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "SR-01",
+  "sev": "Critical",
+  "pri": "P1",
+  "layer": "Frontend",
+  "also": "Backend",
+  "title": "Save, Submit and Cancel on the Details screen fail with 403 \"Not permitted\": the screen sends POST and the update endpoint accepts only PUT",
+  "area": "Stock Reconciliation Details (Draft and Submitted)",
+  "tc": [
+   "TC-RCD-004",
+   "TC-RCD-007",
+   "TC-RCD-009",
+   "TC-RCD-014",
+   "TC-RCW-001",
+   "TC-RCL-029",
+   "TC-RCL-034"
+  ],
+  "srs": "Details: a Draft can be modified and saved; Submit submits it; Cancel (Submitted only) cancels it. Update popup: Draft updates, Submitted and Cancelled show an error",
+  "steps": [
+   "Open a Draft Stock Reconciliation (Details).",
+   "Change the Quantity of the first row and click Save. Then try Submit on another Draft, and Cancel on a Submitted record.",
+   "Watch the red message and the Network tab."
+  ],
+  "expected": "Save stores the change; Submit changes the status to Submitted and adjusts the stock; Cancel changes it to Cancelled and reverses the stock.",
+  "actual": "All three actions show \"Error: Not permitted / Failed to save stock reconciliation\" and nothing changes (status stays Draft or Submitted, the quantity is not stored). Even Cancel calls update_stock_reconciliation instead of a cancel endpoint. The same request sent with PUT succeeds, so the only difference is the HTTP method: the endpoint is whitelisted for PUT and the screen sends POST. A Draft therefore cannot be edited, submitted or cancelled from the UI. Submit and Cancel were exercised through the API for the stock checks (they work).",
+  "code": "Save / Submit / Cancel on Details all send:\nPOST /api/method/shamel.api.routes.inventory.transactions.stock_reconciliation.update_stock_reconciliation\ndata={\"name\":\"MAT-RECO-2026-00023\",\"naming_series\":\"MAT-RECO-.YYYY.-\",\"company\":\"Ahmed Ebrahim CO.\",\"purpose\":\"Stock Reconciliation\",\n      \"set_warehouse\":\"Stores - E\",\"expense_account\":\"5317 - ديون معدومة - E\",\"cost_center\":\"101 - Main X - E\",\n      \"items\":[{\"item_code\":\"STO-ITEM-2026-00074\",\"warehouse\":\"Stores - E\",\"qty\":77,\"batch_no\":\"\"}]}\n-> HTTP 403  frappe.exceptions.PermissionError: Not permitted\n   raised in apps/frappe/frappe/handler.py, line 110, is_valid_http_method\n\nSame payload, only the HTTP method changed:\nPOST   -> 403 Not permitted\nPATCH  -> 403 Not permitted\nPUT    -> 200 {\"message\":{\"status\":201,\"message\":\"product bundle updated successfully\",\"data\":{\"name\":\"MAT-RECO-2026-00023\"}}}  (Quantity stored: 77)",
+  "shots": [],
+  "fix": "Make the screen and the endpoint agree: either send PUT from the screen, or allow POST on update_stock_reconciliation. Submit and Cancel should call their own submit/cancel endpoints, not the update endpoint."
+ },
+ {
+  "id": "SR-02",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "Amend does nothing: the button shows on a Cancelled record but no request is sent and no amended record is created",
+  "area": "Stock Reconciliation Details (Cancelled)",
+  "tc": [
+   "TC-RCD-016",
+   "TC-RCW-026",
+   "TC-RCW-027",
+   "TC-RCW-028"
+  ],
+  "srs": "Amend button appears only for a Cancelled record; Amend creates a new Draft linked through Amended From",
+  "steps": [
+   "Open a Cancelled Stock Reconciliation.",
+   "Click Amend."
+  ],
+  "expected": "A new Draft is created with Amended From pointing to the cancelled record, and it opens.",
+  "actual": "Amend is shown (buttons: Amend, Details, Add Item) but a click sends no request, shows no message and the page does not change. No record with amended_from set exists afterwards. Creating the amendment through the API works (the new name gets the suffix -1).",
+  "shots": [],
+  "fix": "Wire the Amend button to the amend action (create the copy with amended_from) and open the new Draft."
+ },
+ {
+  "id": "SR-03",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "Choosing the Purpose does not set the Difference Account",
+  "area": "Add Stock Reconciliation › Basic Information and Accounting Fields",
+  "tc": [
+   "TC-RCA-014",
+   "TC-RCA-015",
+   "TC-RCA-143",
+   "TC-RCA-144",
+   "TC-RCA-145"
+  ],
+  "srs": "Purpose = Opening Stock sets Difference Account to Temporary Opening - C; Purpose = Stock Reconciliation sets it to Stock Adjustment - C",
+  "steps": [
+   "Open Add Stock Reconciliation and choose the Company.",
+   "Choose Purpose = Opening Stock, then Purpose = Stock Reconciliation.",
+   "Look at Difference Account."
+  ],
+  "expected": "Difference Account fills with Temporary Opening - E (Opening Stock) and Stock Adjustment - E (Stock Reconciliation).",
+  "actual": "Difference Account stays \"Select Expense Account\" after either choice. The user must pick an account by hand, so the SRS defaults are never applied.",
+  "shots": [],
+  "fix": "When the Purpose changes, set the Difference Account to the default account of that purpose for the selected company."
+ },
+ {
+  "id": "SR-04",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "After Save the Add screen stays on /new with no Submit button",
+  "area": "Add Stock Reconciliation › Save",
+  "tc": [
+   "TC-RCA-173",
+   "TC-RCA-176",
+   "TC-RCA-177",
+   "TC-RCA-178"
+  ],
+  "srs": "Save stores the record as a Draft and adds it to the list; the Submit button appears only after Save",
+  "steps": [
+   "Fill a valid Stock Reconciliation (Series, Company, Purpose, Default Warehouse, one item, Difference Account, Cost Center).",
+   "Click Save."
+  ],
+  "expected": "\"Saved\" message, the saved record is shown with a Submit button.",
+  "actual": "The record is created (create_stock_reconciliation returns 201 and a Draft exists) and the message \"Stock Reconciliation saved successfully\" shows, but the URL stays on /inventory/stock-reconciliation/new with the filled form and there is no Submit button. A second Save would create a duplicate. The user has to go to the list to find and open the record.",
+  "code": "POST .../stock_reconciliation.create_stock_reconciliation -> 200 {\"message\":{\"status\":201,\"message\":\"product bundle created successfully\",\"data\":{\"name\":\"MAT-RECO-2026-00011\"}}}\nURL after Save: #/inventory/stock-reconciliation/new   Submit button: 0",
+  "shots": [],
+  "fix": "After a successful create, navigate to the Details of the returned name (or reset the form), and show Submit for the Draft."
+ },
+ {
+  "id": "SR-05",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Frontend",
+  "also": "Backend",
+  "title": "Current Qty is never fetched on the Add screen, so Quantity Difference and Amount stay empty",
+  "area": "Add Stock Reconciliation › Items table and Edit Row",
+  "tc": [
+   "TC-RCA-059",
+   "TC-RCA-060",
+   "TC-RCA-061",
+   "TC-RCA-113",
+   "TC-RCA-136",
+   "TC-RCA-137",
+   "TC-RCA-138"
+  ],
+  "srs": "Current Qty = the actual quantity of the item in the row warehouse; Quantity Difference = Quantity - Current Qty; Amount = Quantity x Valuation Rate",
+  "steps": [
+   "Choose the Default Warehouse Stores - E and add a row.",
+   "Choose the item PW-PS-ITEM-A (stock 814 in Stores - E).",
+   "Type Quantity 30 and Valuation Rate 4, then open Edit Row."
+  ],
+  "expected": "Current Qty shows 814; Quantity Difference shows -784; Amount shows 120.",
+  "actual": "Choosing the item sends no request. Current Qty and Stock UOM stay \"Auto-generated\" and Valuation Rate stays 0. Edit Row shows \"-\" for Amount, Current Qty, Current Amount, Current Valuation Rate, Quantity Difference and Amount Difference. The values only exist after the record is saved (the stored row has current_qty 814 and the Difference Amount -7303.58), so the user cannot see the effect before saving.",
+  "shots": [],
+  "fix": "Fetch Current Qty, Valuation Rate and Stock UOM when the item and warehouse are chosen (and again when the warehouse changes), and compute the differences in Edit Row."
+ },
+ {
+  "id": "SR-06",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "List action bar has no Submit, Cancel or Clear Assignment",
+  "area": "Stock Reconciliation list › action bar",
+  "tc": [
+   "TC-RCL-017",
+   "TC-RCL-027",
+   "TC-RCL-028",
+   "TC-RCL-029",
+   "TC-RCL-032",
+   "TC-RCL-033",
+   "TC-RCL-034",
+   "TC-RCL-049"
+  ],
+  "srs": "The action bar offers Edit, Export, Assign to, Clear assignment, Add tags, Print, Submit (Draft rows), Cancel (Submitted rows) and Delete",
+  "steps": [
+   "Select a Draft row, then a Submitted row, then a Cancelled row."
+  ],
+  "expected": "Draft: Submit available. Submitted: Cancel available. A Clear assignment action for every selection.",
+  "actual": "Every status shows the same buttons: Edit, Export, Assign, Add Tags, Print, Delete. Submit, Cancel and Clear Assignment never appear.",
+  "code": "Draft / Submitted / Cancelled   Select All | Edit | Export | Assign | Add Tags | Print | Delete",
+  "shots": [],
+  "fix": "Show Submit for Draft rows and Cancel for Submitted rows (hide them otherwise) and add Clear Assignment."
+ },
+ {
+  "id": "SR-07",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The list has no Status column, so Draft, Submitted and Cancelled cannot be told apart",
+  "area": "Stock Reconciliation list › columns",
+  "tc": [
+   "TC-RCL-007",
+   "TC-RCL-008",
+   "TC-RCL-009",
+   "TC-RCL-010",
+   "TC-RCL-013"
+  ],
+  "srs": "The list shows Checkbox, ID, Status (Draft, Submitted, Cancelled), Posting Date, Posting Time",
+  "steps": [
+   "Open the Stock Reconciliation list."
+  ],
+  "expected": "A Status column with Draft, Submitted or Cancelled for every row.",
+  "actual": "The columns are ID, Posting Date and Posting Time only. A Draft, a Submitted and a Cancelled record look the same (for example \"MAT-RECO-2026-00038 2026-10-28 14:07:30.20429\").",
+  "shots": [],
+  "fix": "Add the Status column. Also show the Posting Time without microseconds."
+ },
+ {
+  "id": "SR-08",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "No View dropdown (Stock Ledger, Serial / Batch Nos, Accounting Ledger) after Submit",
+  "area": "Stock Reconciliation Details (Submitted)",
+  "tc": [
+   "TC-RCD-018",
+   "TC-RCD-019",
+   "TC-RCD-020",
+   "TC-RCD-021",
+   "TC-RCD-022"
+  ],
+  "srs": "After Submit the View dropdown lists Stock Ledger, Serial / Batch Nos and Accounting Ledger and opens the matching report",
+  "steps": [
+   "Open a Submitted Stock Reconciliation.",
+   "Look for the View dropdown."
+  ],
+  "expected": "View dropdown with the three reports.",
+  "actual": "The only buttons are Cancel, Details and Add Item. There is no View control, so the stock and accounting entries of the record cannot be opened from it.",
+  "shots": [],
+  "fix": "Add the View dropdown for Submitted records with the three entries and their navigation."
+ },
+ {
+  "id": "SR-09",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Details screen has none of the fixed page actions: Assign, Attachment, Tags, Share, Print",
+  "area": "Stock Reconciliation Details",
+  "tc": [
+   "TC-RCD-023",
+   "TC-RCD-024",
+   "TC-RCD-025",
+   "TC-RCD-026",
+   "TC-RCD-027",
+   "TC-RCD-028",
+   "TC-RCD-029"
+  ],
+  "srs": "The page actions Assign, Attachment, Tags, Share and Print are fixed at the top of the Details page for every status",
+  "steps": [
+   "Open a Draft and a Submitted record.",
+   "Look for the five actions."
+  ],
+  "expected": "All five actions on every status.",
+  "actual": "Neither a Draft (buttons: Submit, Details, Add Item, Cancel, Save) nor a Submitted record (Cancel, Details, Add Item) shows any of them.",
+  "shots": [],
+  "fix": "Add the fixed page actions to the Details header."
+ },
+ {
+  "id": "SR-10",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Items table has no Settings control (column order, column width, add or remove columns)",
+  "area": "Add Stock Reconciliation › Items table",
+  "tc": [
+   "TC-RCA-089",
+   "TC-RCA-090",
+   "TC-RCA-091",
+   "TC-RCA-096",
+   "TC-RCA-099",
+   "TC-RCA-100"
+  ],
+  "srs": "The Items table has a Settings popup: reorder columns by drag and drop, column width (default 3), Add / Remove Columns, Update and Reset to default",
+  "steps": [
+   "Open Add Stock Reconciliation and add a row.",
+   "Look in the table header for the Settings control."
+  ],
+  "expected": "A Settings control that opens the popup.",
+  "actual": "The table header has no buttons. The row has only Edit and Delete.",
+  "shots": [],
+  "fix": "Add the Settings control and popup to the Items table."
+ },
+ {
+  "id": "SR-11",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Quantity and Valuation Rate accept 120 characters; the SRS limit is 100",
+  "area": "Add Stock Reconciliation › Items table",
+  "tc": [
+   "TC-RCA-071",
+   "TC-RCA-072",
+   "TC-RCA-082",
+   "TC-RCA-083"
+  ],
+  "srs": "Quantity and Valuation Rate: numbers only, maximum length 100 characters; further input is blocked",
+  "steps": [
+   "Add a row and type 120 digits in Quantity, then in Valuation Rate."
+  ],
+  "expected": "Typing stops at 100 characters.",
+  "actual": "Both fields keep all 120 digits. Letters are rejected correctly.",
+  "shots": [],
+  "fix": "Set the maximum length of both inputs to 100."
+ },
+ {
+  "id": "SR-12",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "Add Items from Warehouse: get_item_details returns 417 for an item, so its row arrives incomplete",
+  "area": "Add Stock Reconciliation › Add Items from Warehouse",
+  "tc": [
+   "TC-RCA-157",
+   "TC-RCA-158",
+   "TC-RCA-162",
+   "TC-RCA-164"
+  ],
+  "srs": "Fetching a warehouse adds one row per item with its Current Qty and Quantity",
+  "steps": [
+   "Click Add Items from Warehouse, choose Work In Progress - E and click Update."
+  ],
+  "expected": "Every item of the warehouse arrives as a complete row (UOM, rate, quantity).",
+  "actual": "Four rows arrive. The details request for item IND182210 fails and that row has no Stock UOM and no Valuation Rate (\"[Auto-generated]\" and \"[0]\").",
+  "code": "GET .../master_data.item.get_item_details?item_code=IND182210 -> 417\n{\"field_errors\":[{\"field\":\"_form\",\"message\":\"Value error, You can't enter batch number series if item can't create a new batch\"}]}",
+  "shots": [],
+  "fix": "Do not fail when reading an item whose batch settings are inconsistent (or return the details without validating them), and show a clear message for the row if a detail cannot be loaded."
+ },
+ {
+  "id": "SR-13",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A Stock Reconciliation can be saved without Difference Account and Cost Center",
+  "area": "Stock Reconciliation › Save (API)",
+  "tc": [
+   "TC-RCW-012",
+   "TC-RCA-174"
+  ],
+  "srs": "Difference Account and Cost Center are mandatory",
+  "steps": [
+   "Create a Stock Reconciliation through the API with Purpose, Company and one item but no Difference Account and no Cost Center."
+  ],
+  "expected": "The save is refused with a message naming the missing fields.",
+  "actual": "The record is saved as a Draft. The Add screen blocks the empty fields, so only the API (and the Details screen once SR-01 is fixed) is exposed.",
+  "shots": [],
+  "fix": "Validate the mandatory fields in the backend on create and update."
+ },
+ {
+  "id": "SR-14",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Edit popup in the list offers only Posting Date and Posting Time",
+  "area": "Stock Reconciliation list › Edit popup",
+  "tc": [
+   "TC-RCL-018",
+   "TC-RCL-019",
+   "TC-RCL-021",
+   "TC-RCL-023"
+  ],
+  "srs": "The Field dropdown lists the editable fields of the Stock Reconciliation doctype and the Value input adapts to the chosen field",
+  "steps": [
+   "Select a Draft row, click Edit and open the Field dropdown."
+  ],
+  "expected": "The editable fields of the record (Purpose, Company, Default Warehouse, Difference Account, Cost Center and so on).",
+  "actual": "Only Posting Date and Posting Time are offered, so almost nothing can be changed through this popup.",
+  "shots": [],
+  "fix": "List all editable fields (or confirm with the SRS owner that the popup is limited to these two)."
+ },
+ {
+  "id": "SR-15",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "Amended From is shown on a new record",
+  "area": "Add Stock Reconciliation › Accounting Fields",
+  "tc": [
+   "TC-RCA-151",
+   "TC-RCW-029"
+  ],
+  "srs": "Amended From is displayed only for a record that was amended from another record",
+  "steps": [
+   "Open Add Stock Reconciliation."
+  ],
+  "expected": "No Amended From field.",
+  "actual": "\"Amended From\" is shown under Difference Amount with an empty box.",
+  "shots": [],
+  "fix": "Hide the field unless amended_from has a value."
+ },
+ {
+  "id": "SR-16",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The item search in the table does not find an item by its code",
+  "area": "Add Stock Reconciliation › Items table",
+  "tc": [
+   "TC-RCA-049",
+   "TC-RCA-050",
+   "TC-RCA-052"
+  ],
+  "srs": "Item Code is a searchable dropdown",
+  "steps": [
+   "Open the Item Code dropdown of a row and type 2026-00074 (part of the code of PW-PS-ITEM-A), then type PW-PS."
+  ],
+  "expected": "The item is found in both cases.",
+  "actual": "The code text finds nothing (\"No options found\"); the item name finds it. The dropdown shows the item name while the stored value is the code, so users who know the code cannot search for it.",
+  "shots": [],
+  "fix": "Search both the item code and the item name."
+ },
+ {
+  "id": "SR-17",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "The save messages say \"product bundle created / updated successfully\"",
+  "area": "Stock Reconciliation API responses",
+  "tc": [
+   "TC-RCA-173"
+  ],
+  "srs": "The user sees a success message for the saved Stock Reconciliation",
+  "steps": [
+   "Create or update a Stock Reconciliation and read the response."
+  ],
+  "expected": "A message naming the Stock Reconciliation.",
+  "actual": "create_stock_reconciliation answers \"product bundle created successfully\" and update_stock_reconciliation answers \"product bundle updated successfully\" (text copied from Product Bundle).",
+  "shots": [],
+  "fix": "Change the message text."
+ }
+];
+const BUG_AR = {
+ "SR-01": {
+  "t": "Save وSubmit وCancel في صفحة التفاصيل بيفشلوا بـ 403 «Not permitted»: الشاشة بتبعت POST والـ endpoint بيقبل PUT بس",
+  "area": "تفاصيل Stock Reconciliation (Draft وSubmitted)",
+  "srs": "التفاصيل: الـ Draft ينفع يتعدل ويتحفظ؛ Submit بيعمل Submit؛ Cancel (للـ Submitted بس) بيلغي. نافذة Update: الـ Draft بيتحدّث، والـ Submitted والـ Cancelled بيطلّعوا رسالة خطأ",
+  "steps": [
+   "افتح Stock Reconciliation حالته Draft (التفاصيل).",
+   "غيّر الكمية في أول صف واضغط Save. بعدين جرّب Submit على Draft تاني، وCancel على Submitted.",
+   "بص على الرسالة الحمرا وعلى تاب Network."
+  ],
+  "exp": "Save يحفظ التغيير؛ Submit يغيّر الحالة لـ Submitted ويعدّل المخزون؛ Cancel يغيّرها لـ Cancelled ويعكس المخزون.",
+  "act": "التلات أزرار بيظهروا «Error: Not permitted / Failed to save stock reconciliation» ومفيش حاجة بتتغير (الحالة بتفضل Draft أو Submitted والكمية مبتتحفظش). حتى Cancel بينادي update_stock_reconciliation بدل endpoint إلغاء. نفس الطلب بـ PUT بينجح، يعني الفرق الوحيد هو نوع الـ HTTP: الـ endpoint مسموح فيه PUT والشاشة بتبعت POST. فالـ Draft مينفعش يتعدل ولا يتعمله Submit ولا Cancel من الواجهة. جرّبنا Submit وCancel بالـ API لفحص المخزون (وبيشتغلوا).",
+  "fix": "خلّي الشاشة والـ endpoint يتفقوا: يا الشاشة تبعت PUT، يا الـ endpoint يسمح بـ POST. وSubmit وCancel لازم ينادوا endpoint الـ submit/cancel بتوعهم مش الـ update."
+ },
+ "SR-02": {
+  "t": "Amend مبيعملش حاجة: الزر بيظهر على سجل Cancelled لكن مفيش request بيتبعت ومفيش سجل معدّل بيتعمل",
+  "area": "تفاصيل Stock Reconciliation (Cancelled)",
+  "srs": "زر Amend بيظهر للـ Cancelled بس؛ Amend بيعمل Draft جديد مربوط بـ Amended From",
+  "steps": [
+   "افتح Stock Reconciliation حالته Cancelled.",
+   "اضغط Amend."
+  ],
+  "exp": "يتعمل Draft جديد فيه Amended From للسجل الملغي، ويتفتح.",
+  "act": "الزر ظاهر (الأزرار: Amend وDetails وAdd Item) لكن الضغطة مبتبعتش request ومبتظهرش رسالة والصفحة مبتتغيرش. ومفيش سجل فيه amended_from بعدها. إنشاء التعديل بالـ API بيشتغل (الاسم الجديد بيبقى بلاحقة -1).",
+  "fix": "اربط زر Amend بإجراء التعديل (نسخة فيها amended_from) وافتح الـ Draft الجديد."
+ },
+ "SR-03": {
+  "t": "اختيار الـ Purpose مبيملاش الـ Difference Account",
+  "area": "إضافة Stock Reconciliation › Basic Information وAccounting Fields",
+  "srs": "Purpose = Opening Stock بيحدد Difference Account بـ Temporary Opening - C؛ وPurpose = Stock Reconciliation بيحدده بـ Stock Adjustment - C",
+  "steps": [
+   "افتح إضافة Stock Reconciliation واختار الشركة.",
+   "اختار Purpose = Opening Stock وبعدين Stock Reconciliation.",
+   "بص على Difference Account."
+  ],
+  "exp": "الحساب يتملا بـ Temporary Opening - E (Opening Stock) وStock Adjustment - E (Stock Reconciliation).",
+  "act": "Difference Account بيفضل «Select Expense Account» بعد أي اختيار. المستخدم لازم يختار حساب بإيده، فالقيم الافتراضية بتاعة الـ SRS مبتتطبقش أبدًا.",
+  "fix": "لما الـ Purpose يتغير، حدد الـ Difference Account بالحساب الافتراضي للغرض ده للشركة المختارة."
+ },
+ "SR-04": {
+  "t": "بعد Save شاشة الإضافة بتفضل على /new ومفيش زر Submit",
+  "area": "إضافة Stock Reconciliation › Save",
+  "srs": "Save بيحفظ السجل Draft ويضيفه للقايمة؛ وزر Submit بيظهر بعد Save",
+  "steps": [
+   "املا Stock Reconciliation صح (Series وCompany وPurpose وDefault Warehouse وصنف وDifference Account وCost Center).",
+   "اضغط Save."
+  ],
+  "exp": "رسالة «تم الحفظ»، ويظهر السجل المحفوظ ومعاه زر Submit.",
+  "act": "السجل بيتعمل (create_stock_reconciliation بيرجّع 201 والـ Draft موجود) وبتظهر رسالة «Stock Reconciliation saved successfully»، لكن الرابط بيفضل /inventory/stock-reconciliation/new والفورم معبّي ومفيش زر Submit. وSave تاني هيعمل سجل مكرر. المستخدم لازم يروح للقايمة يدوّر على السجل ويفتحه.",
+  "fix": "بعد النجاح روح لتفاصيل الاسم الراجع (أو صفّر الفورم)، وأظهر Submit للـ Draft."
+ },
+ "SR-05": {
+  "t": "الـ Current Qty مبتتجبش في شاشة الإضافة، فـ Quantity Difference وAmount بيفضلوا فاضيين",
+  "area": "إضافة Stock Reconciliation › جدول Items وEdit Row",
+  "srs": "Current Qty = الكمية الفعلية للصنف في مستودع الصف؛ Quantity Difference = Quantity - Current Qty؛ Amount = Quantity × Valuation Rate",
+  "steps": [
+   "اختار الـ Default Warehouse بـ Stores - E وضيف صف.",
+   "اختار الصنف PW-PS-ITEM-A (مخزونه 814 في Stores - E).",
+   "اكتب Quantity 30 وValuation Rate 4 وافتح Edit Row."
+  ],
+  "exp": "Current Qty تظهر 814؛ Quantity Difference تظهر -784؛ Amount تظهر 120.",
+  "act": "اختيار الصنف مبيبعتش أي request. Current Qty وStock UOM بيفضلوا «Auto-generated» وValuation Rate بيفضل 0. وEdit Row بيعرض «-» في Amount وCurrent Qty وCurrent Amount وCurrent Valuation Rate وQuantity Difference وAmount Difference. القيم بتظهر بعد الحفظ بس (الصف المحفوظ فيه current_qty 814 والـ Difference Amount -7303.58)، فالمستخدم مبيشوفش الأثر قبل ما يحفظ.",
+  "fix": "هات Current Qty وValuation Rate وStock UOM لما الصنف والمستودع يتختاروا (وكمان لما المستودع يتغير)، واحسب الفروقات في Edit Row."
+ },
+ "SR-06": {
+  "t": "شريط الإجراءات في القايمة مفيهوش Submit ولا Cancel ولا Clear Assignment",
+  "area": "قايمة Stock Reconciliation › شريط الإجراءات",
+  "srs": "الشريط بيعرض Edit وExport وAssign to وClear assignment وAdd tags وPrint وSubmit (للـ Draft) وCancel (للـ Submitted) وDelete",
+  "steps": [
+   "اختار صف Draft، وبعده صف Submitted، وبعده صف Cancelled."
+  ],
+  "exp": "Draft: يظهر Submit. Submitted: يظهر Cancel. وClear assignment في أي اختيار.",
+  "act": "كل الحالات فيها نفس الأزرار: Edit وExport وAssign وAdd Tags وPrint وDelete. Submit وCancel وClear Assignment مبيظهروش أبدًا.",
+  "fix": "أظهر Submit للـ Draft وCancel للـ Submitted (واخفيهم في غير كده) وضيف Clear Assignment."
+ },
+ "SR-07": {
+  "t": "القايمة مفيهاش عمود Status فمينفعش نفرّق بين Draft وSubmitted وCancelled",
+  "area": "قايمة Stock Reconciliation › الأعمدة",
+  "srs": "القايمة بتعرض Checkbox وID وStatus (Draft وSubmitted وCancelled) وPosting Date وPosting Time",
+  "steps": [
+   "افتح قايمة Stock Reconciliation."
+  ],
+  "exp": "عمود Status فيه Draft أو Submitted أو Cancelled لكل صف.",
+  "act": "الأعمدة هي ID وPosting Date وPosting Time بس. السجل الـ Draft والـ Submitted والـ Cancelled شكلهم واحد (مثلًا «MAT-RECO-2026-00038 2026-10-28 14:07:30.20429»).",
+  "fix": "ضيف عمود Status. وكمان اعرض Posting Time من غير الميكروثانية."
+ },
+ "SR-08": {
+  "t": "مفيش قايمة View (Stock Ledger وSerial / Batch Nos وAccounting Ledger) بعد Submit",
+  "area": "تفاصيل Stock Reconciliation (Submitted)",
+  "srs": "بعد Submit قايمة View بتعرض Stock Ledger وSerial / Batch Nos وAccounting Ledger وبتفتح التقرير المناسب",
+  "steps": [
+   "افتح Stock Reconciliation حالته Submitted.",
+   "دوّر على قايمة View."
+  ],
+  "exp": "قايمة View فيها التلات تقارير.",
+  "act": "الأزرار الوحيدة هي Cancel وDetails وAdd Item. مفيش View، فقيود المخزون والحسابات بتاعة السجل مينفعش تتفتح منه.",
+  "fix": "ضيف قايمة View للسجلات الـ Submitted بالتلات اختيارات وتنقلها."
+ },
+ "SR-09": {
+  "t": "صفحة التفاصيل مفيهاش أي إجراء ثابت: Assign وAttachment وTags وShare وPrint",
+  "area": "تفاصيل Stock Reconciliation",
+  "srs": "الإجراءات Assign وAttachment وTags وShare وPrint ثابتة أعلى صفحة التفاصيل في كل الحالات",
+  "steps": [
+   "افتح سجل Draft وسجل Submitted.",
+   "دوّر على الخمس إجراءات."
+  ],
+  "exp": "الخمس إجراءات في كل حالة.",
+  "act": "لا الـ Draft (أزرار: Submit وDetails وAdd Item وCancel وSave) ولا الـ Submitted (Cancel وDetails وAdd Item) فيهم أي واحد منهم.",
+  "fix": "ضيف الإجراءات الثابتة لهيدر التفاصيل."
+ },
+ "SR-10": {
+  "t": "جدول Items مفيهوش Settings (ترتيب الأعمدة وعرضها وإضافة/إزالة أعمدة)",
+  "area": "إضافة Stock Reconciliation › جدول Items",
+  "srs": "جدول Items فيه نافذة Settings: ترتيب الأعمدة بالسحب، عرض العمود (الافتراضي 3)، Add / Remove Columns، Update وReset to default",
+  "steps": [
+   "افتح إضافة Stock Reconciliation وضيف صف.",
+   "دوّر على Settings في هيدر الجدول."
+  ],
+  "exp": "زر Settings بيفتح النافذة.",
+  "act": "هيدر الجدول مفيهوش أي أزرار. والصف فيه Edit وDelete بس.",
+  "fix": "ضيف زر ونافذة Settings لجدول Items."
+ },
+ "SR-11": {
+  "t": "Quantity وValuation Rate بيقبلوا 120 حرف والـ SRS بيقول 100",
+  "area": "إضافة Stock Reconciliation › جدول Items",
+  "srs": "Quantity وValuation Rate: أرقام بس، أقصى طول 100 حرف؛ والإدخال بيتوقف بعدها",
+  "steps": [
+   "ضيف صف واكتب 120 رقم في Quantity وبعدين في Valuation Rate."
+  ],
+  "exp": "الكتابة تقف عند 100 حرف.",
+  "act": "الحقلين بيحتفظوا بالـ 120 رقم. الحروف بتترفض صح.",
+  "fix": "خلّي أقصى طول للحقلين 100."
+ },
+ "SR-12": {
+  "t": "Add Items from Warehouse: طلب get_item_details بيرجّع 417 لصنف فصفه بييجي ناقص",
+  "area": "إضافة Stock Reconciliation › Add Items from Warehouse",
+  "srs": "جلب المستودع بيضيف صف لكل صنف فيه Current Qty وQuantity",
+  "steps": [
+   "اضغط Add Items from Warehouse، واختار Work In Progress - E واضغط Update."
+  ],
+  "exp": "كل أصناف المستودع تيجي صفوف كاملة (وحدة وسعر وكمية).",
+  "act": "بييجي 4 صفوف. طلب تفاصيل الصنف IND182210 بيفشل وصفه بيبقى من غير Stock UOM ومن غير Valuation Rate («[Auto-generated]» و«[0]»).",
+  "fix": "ماتفشلش لما تقرا صنف إعدادات الـ batch بتاعته متناقضة (أو رجّع التفاصيل من غير validation)، وأظهر رسالة واضحة للصف لو تفصيلة معرفتش تتحمّل."
+ },
+ "SR-13": {
+  "t": "Stock Reconciliation ينفع يتحفظ من غير Difference Account وCost Center",
+  "area": "Stock Reconciliation › Save (API)",
+  "srs": "Difference Account وCost Center إجباريين",
+  "steps": [
+   "اعمل Stock Reconciliation بالـ API فيه Purpose وCompany وصنف من غير Difference Account ولا Cost Center."
+  ],
+  "exp": "الحفظ يترفض برسالة بتسمّي الحقول الناقصة.",
+  "act": "السجل بيتحفظ Draft. شاشة الإضافة بتمنع الحقول الفاضية، فالمعرّض للمشكلة هو الـ API بس (وشاشة التفاصيل بعد ما SR-01 يتصلح).",
+  "fix": "اعمل validation للحقول الإجبارية في الـ backend عند الإنشاء والتعديل."
+ },
+ "SR-14": {
+  "t": "نافذة Edit في القايمة بتعرض Posting Date وPosting Time بس",
+  "area": "قايمة Stock Reconciliation › نافذة Edit",
+  "srs": "قايمة Field بتعرض الحقول القابلة للتعديل في الـ doctype وحقل Value بيتغير حسب الحقل المختار",
+  "steps": [
+   "اختار صف Draft واضغط Edit وافتح قايمة Field."
+  ],
+  "exp": "الحقول القابلة للتعديل (Purpose وCompany وDefault Warehouse وDifference Account وCost Center وغيرهم).",
+  "act": "بتعرض Posting Date وPosting Time بس، فتقريبًا مفيش حاجة تتغير من النافذة دي.",
+  "fix": "اعرض كل الحقول القابلة للتعديل (أو أكّد مع صاحب الـ SRS إن النافذة محدودة بالاتنين دول)."
+ },
+ "SR-15": {
+  "t": "Amended From ظاهر في سجل جديد",
+  "area": "إضافة Stock Reconciliation › Accounting Fields",
+  "srs": "Amended From بيظهر بس لو السجل متعدّل من سجل تاني",
+  "steps": [
+   "افتح إضافة Stock Reconciliation."
+  ],
+  "exp": "مفيش حقل Amended From.",
+  "act": "«Amended From» ظاهر تحت Difference Amount بصندوق فاضي.",
+  "fix": "اخفي الحقل إلا لو amended_from فيه قيمة."
+ },
+ "SR-16": {
+  "t": "بحث الصنف في الجدول مبيلاقيش الصنف بالكود",
+  "area": "إضافة Stock Reconciliation › جدول Items",
+  "srs": "Item Code قايمة قابلة للبحث",
+  "steps": [
+   "افتح قايمة Item Code في صف واكتب 2026-00074 (جزء من كود PW-PS-ITEM-A) وبعدين PW-PS."
+  ],
+  "exp": "الصنف يتلاقي في الحالتين.",
+  "act": "نص الكود مبيلاقيش حاجة («No options found»)، واسم الصنف بيلاقيه. القايمة بتعرض اسم الصنف والقيمة المخزنة هي الكود، فاللي يعرف الكود بس مينفعش يدوّر بيه.",
+  "fix": "ابحث في كود الصنف واسمه مع بعض."
+ },
+ "SR-17": {
+  "t": "رسايل الحفظ بتقول «product bundle created / updated successfully»",
+  "area": "ردود API بتاعة Stock Reconciliation",
+  "srs": "المستخدم بيشوف رسالة نجاح للـ Stock Reconciliation المحفوظ",
+  "steps": [
+   "اعمل أو عدّل Stock Reconciliation واقرا الرد."
+  ],
+  "exp": "رسالة بتذكر Stock Reconciliation.",
+  "act": "create_stock_reconciliation بيرد «product bundle created successfully» وupdate_stock_reconciliation بيرد «product bundle updated successfully» (نص منسوخ من Product Bundle).",
+  "fix": "غيّر نص الرسالة."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Stock Reconciliation Bug Report","eyebrow":"QA bug report · Inventory › Stock Reconciliation","h1":"Stock Reconciliation: 17 defects, 1 blocks Save, Submit and Cancel","lede":"Functional and end-to-end run against the SRS (the Add screen, the Details screen after saving, the list, and what Submit and Cancel do to the stock) on the test server. The Add (create) request works, but every change made on the Details screen fails: Save, Submit and Cancel send POST to an endpoint that accepts only PUT (SR-01), so a Draft cannot be edited, submitted or cancelled from the UI. The stock logic itself is correct: through the API, Submit sets the Bin to the entered quantity, writes the Stock Ledger Entry and the accounting entries, and Cancel reverses them. 165 of the 299 sheet cases are covered.","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop, 1400×1000)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","English"],["Run date","2026-10-28"],["Specs","Shamel/srs-stock-reconciliation-*.spec.ts"],["Bug IDs","SR-01 to SR-17 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["UC2 Add: header, Purpose, Default Warehouse, Items table, Edit Row, Fetch, Save",18,2,12,4],["Details after saving: Draft, Submitted, Submit, Cancel, Amend, View, page actions",9,2,5,2],["Stock effect through the API: Submit, Cancel, Ledger, Bin, accounting entries, backdated and concurrent cases",11,10,1,0],["UC1 list: columns, Status, row selection, action bar, Submit, Cancel, Edit popup, Delete, Export, Assign, Tags, Print",11,6,5,0]],"total":"Total","covNote":"165 of the 299 cases in the sheet are covered by a check (55%). The 6 checks that could not be completed (Company search, Submit and invalid-data checks on Details, the Fetch popup and the empty Save in the first run) are not counted as passed. The Fetch popup was verified separately afterwards. Submit and Cancel through the UI are blocked by SR-01.","okTitle":"Verified working","ok":["Create works: Save on the Add screen sends create_stock_reconciliation and a Draft is stored with the entered Series, Company, Purpose, Default Warehouse, item, Quantity, Difference Account and Cost Center","Add screen validation: Series, Company and Purpose are mandatory; letters are rejected in Quantity and Valuation Rate; a row can be deleted; the Items table has the SRS columns","Add Items from Warehouse fetches the items of a warehouse with Current Qty and Quantity (one row had incomplete details, SR-12)","Details of a Draft show the saved data in input fields with Submit; a Submitted record is read-only and offers Cancel","Stock effect (API): Submit sets the Bin to the Quantity for an increase, a decrease and a rate-only change; the Stock Ledger Entry records the new balance; accounting entries use the Difference Account; Cancel restores the Bin and reverses the ledger and accounting entries","Cancel is refused when a later transaction depends on the reconciliation (BackDatedStockTransaction); an unchanged quantity and rate is refused (\"None of the items have any change\"); a Submitted record cannot be edited or deleted","The Submit sets the stock to the saved Quantity even if the stock changed between Save and Submit","List: loads, ID opens Details, Add button works, Delete asks for confirmation (Cancel keeps the record, confirming deletes a Draft, a Submitted record is refused), Export, Assign, Add Tags and Print each open their popup"],"noTitle":"Not executed, and why","no":["Submit, Cancel, Amend and Save of a Draft from the Details screen and the list: blocked by SR-01 (the update request is refused) and SR-06 (no Submit or Cancel in the list)","Scan Barcode and Scan Mode (camera, +1 per scan, quantity locked), barcode length rules","Batch and serial items: Batch No picking, Serial and Batch Bundle, Pick Serial / Batch No, serial count against quantity, serials from different batches","Stock Reservation checks on Save (quantity below the reserved quantity, reserved serials missing)","The Items table Settings popup (SR-10: the control does not exist) and the Edit Row serial and batch section","Purpose = Opening Stock through the whole flow, Posting Date in a closed period or in the future, Edit Posting Datetime","Company search with no result and the empty-form Save messages (the first run timed out), single-digit Quantity and Valuation Rate (SRS minimum of 2 characters), negative and decimal quantities","Print preview, Assign dialog, Attachment upload, Share and Tags on Details (the actions do not exist, SR-09)","Permissions: a user without access to Stock Reconciliation"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Inventory SRS v1.0, Stock Reconciliation","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 is finished. Retesting starts when the developers mark SR-01 as Fixed here (or tell the tester). SR-02 to SR-06 follow in order of impact."],["h","When a fix lands"],["ol",["Re-run the four Stock Reconciliation specs (add, details, list, workflow).","Run the blocked UI flows: edit a Draft and Save, Submit from Details and from the list, check the Bin, Stock Ledger Entry and General Ledger, Cancel from Details and from the list, Amend (SR-02).","Check the Add screen after Save (SR-04), Purpose and Difference Account (SR-03) and Current Qty (SR-05).","Run the not-executed groups: Scan Mode, batch and serial items, reservations, the Items table Settings popup and Opening Stock.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","Item PW-PS-ITEM-A (STO-ITEM-2026-00074) with stock in Stores - E, company Ahmed Ebrahim CO., accounts 5317 - ديون معدومة - E and 101 - Main X - E. The tests deleted the Drafts they created. About 26 test records could not be deleted because the system does not allow it (Cancelled records stay linked to their ledger entries; four Submitted ones cannot be cancelled while later transactions exist): MAT-RECO-2026-00014 to MAT-RECO-2026-00047 (test records only). The Quality Inspection tests had set Inspection Required on the same test item; it was switched off again."]],"obs":["Purpose lists an empty option (SRS lists only Opening Stock and Stock Reconciliation) although it is mandatory.","Edit Row marks Barcode, Valuation Rate and Project as required (*). The SRS mentions Barcode only as text with length rules; the required status needs confirming.","The Stock Ledger Entry of a reconciliation shows Qty Change 0 and the new balance in Qty after Transaction (the standard behaviour of the platform for this document). The SRS does not describe the entry; confirm the expected Qty Change.","The SRS asks for a minimum of 2 characters in Quantity and Valuation Rate, which blocks single digits, while Quantity defaults to 0. Single digits were not tested.","Default Warehouse fills a row that is added after it is chosen; a row added first stays empty when the warehouse is chosen later. The SRS says it fills empty rows only.","Delete has no status restriction in the SRS; the system refuses to delete a Submitted record (\"Submitted Record cannot be deleted\"), which looks right.","Posting Time is shown with microseconds in the list (\"14:07:30.20429\")."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Stock Reconciliation sheet (TC-RCL, TC-RCA, TC-RCW, TC-RCD), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Stock Reconciliation","eyebrow":"تقرير مشاكل الجودة · Inventory › Stock Reconciliation","h1":"Stock Reconciliation: 17 مشكلة، ومشكلة واحدة بتمنع Save وSubmit وCancel","lede":"اختبار وظيفي وشامل على السيرفر التجريبي بحسب الـ SRS (شاشة الإضافة، وصفحة التفاصيل بعد الحفظ، والقايمة، وأثر Submit وCancel على المخزون). طلب الإضافة (Create) بيشتغل، لكن أي تعديل في صفحة التفاصيل بيفشل: Save وSubmit وCancel بيبعتوا POST لـ endpoint بيقبل PUT بس (SR-01)، فالـ Draft مينفعش يتعدل ولا يتعمله Submit ولا Cancel من الواجهة. منطق المخزون نفسه سليم: بالـ API، Submit بيضبط الـ Bin على الكمية المدخلة ويكتب قيد الـ Stock Ledger والقيود المحاسبية، وCancel بيعكسهم. غطّينا 165 من 299 حالة في الشيت.","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر، 1400×1000)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","الإنجليزية"],["تاريخ التشغيل","2026-10-28"],["ملفات الاختبار","Shamel/srs-stock-reconciliation-*.spec.ts"],["أرقام المشاكل","SR-01 لـ SR-17 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["UC2 الإضافة: الهيدر والـ Purpose والـ Default Warehouse وجدول Items وEdit Row وFetch وSave",18,2,12,4],["التفاصيل بعد الحفظ: Draft وSubmitted وSubmit وCancel وAmend وView وإجراءات الصفحة",9,2,5,2],["أثر المخزون بالـ API: Submit وCancel والـ Ledger والـ Bin والقيود المحاسبية وحالات backdated والتغيير المتزامن",11,10,1,0],["قايمة UC1: الأعمدة والـ Status واختيار الصفوف وشريط الإجراءات وSubmit وCancel ونافذة Edit وDelete وExport وAssign وTags وPrint",11,6,5,0]],"total":"الإجمالي","covNote":"165 من 299 حالة في الشيت اتغطّت بفحص (55%). الـ 6 فحوصات اللي ماخلصتش (بحث الشركة، وSubmit وفحص البيانات الغلط في التفاصيل، ونافذة Fetch وSave الفاضي في أول تشغيل) مش محسوبة ناجحة. نافذة Fetch اتأكدت بعد كده لوحدها. وSubmit وCancel من الواجهة موقوفين بسبب SR-01.","okTitle":"اللي اتأكدنا إنه شغال","ok":["الإضافة (Create) شغّالة: Save في شاشة الإضافة بيبعت create_stock_reconciliation والـ Draft بيتخزن بالـ Series والـ Company والـ Purpose والـ Default Warehouse والصنف والـ Quantity والـ Difference Account والـ Cost Center اللي اتدخلوا","فحوصات شاشة الإضافة: Series وCompany وPurpose إجباريين؛ الحروف بتترفض في Quantity وValuation Rate؛ الصف ينفع يتحذف؛ وجدول Items فيه أعمدة الـ SRS","Add Items from Warehouse بيجيب أصناف المستودع بـ Current Qty وQuantity (صف واحد تفاصيله ناقصة، SR-12)","تفاصيل الـ Draft بتعرض البيانات المحفوظة في حقول إدخال ومعاها Submit؛ والـ Submitted read-only وفيه Cancel","أثر المخزون (بالـ API): Submit بيضبط الـ Bin على الكمية في الزيادة والنقصان وتغيير السعر بس؛ قيد الـ Stock Ledger بيسجل الرصيد الجديد؛ والقيود المحاسبية بتستخدم الـ Difference Account؛ وCancel بيرجّع الـ Bin ويعكس قيود الـ Ledger والحسابات","Cancel بيترفض لو فيه حركة لاحقة معتمدة على التسوية (BackDatedStockTransaction)؛ وكمية وسعر مغيّرتش بيترفضوا («None of the items have any change»)؛ والـ Submitted مينفعش يتعدل ولا يتحذف","الـ Submit بيضبط المخزون على الكمية المحفوظة حتى لو المخزون اتغير بين Save وSubmit","القايمة: بتفتح، والـ ID بيفتح التفاصيل، وزر Add شغّال، وDelete بيسأل تأكيد (Cancel بيحتفظ بالسجل، والتأكيد بيحذف الـ Draft، والـ Submitted بيترفض)، وExport وAssign وAdd Tags وPrint كل واحد بيفتح نافذته"],"noTitle":"اللي ماتنفذش وليه","no":["Submit وCancel وAmend وSave للـ Draft من التفاصيل والقايمة: موقوفين بسبب SR-01 (طلب الـ update بيترفض) وSR-06 (مفيش Submit ولا Cancel في القايمة)","Scan Barcode وScan Mode (الكاميرا، +1 لكل مسح، قفل الكمية) وقواعد طول الباركود","أصناف الـ batch والـ serial: اختيار Batch No وSerial and Batch Bundle وPick Serial / Batch No وعدد الـ serials مقابل الكمية والـ serials من batches مختلفة","فحوصات Stock Reservation عند Save (كمية أقل من المحجوز، serials محجوزة ناقصة)","نافذة Settings في جدول Items (SR-10: الزر مش موجود) وقسم الـ serial والـ batch في Edit Row","Purpose = Opening Stock في المسار كله، وPosting Date في فترة مقفولة أو في المستقبل، وEdit Posting Datetime","بحث الشركة من غير نتيجة ورسايل Save الفاضي (أول تشغيل خلص وقته)، وQuantity وValuation Rate برقم واحد (الـ SRS بيقول أقل من حرفين)، والكميات السالبة والعشرية","معاينة الطباعة ونافذة Assign ورفع Attachment وShare وTags في التفاصيل (الإجراءات مش موجودة، SR-09)","الصلاحيات: مستخدم ملوش صلاحية على Stock Reconciliation"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Inventory SRS v1.0, Stock Reconciliation","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا SR-01 كـ Fixed هنا (أو يبلّغوا الـ tester). وبعده SR-02 لـ SR-06 بترتيب الأثر."],["h","لما يوصل إصلاح"],["ol",["أعد تشغيل ملفات Stock Reconciliation الأربعة (add وdetails وlist وworkflow).","شغّل مسارات الواجهة الموقوفة: تعديل Draft وSave، وSubmit من التفاصيل ومن القايمة، وراجع الـ Bin والـ Stock Ledger Entry والـ General Ledger، وCancel من التفاصيل ومن القايمة، وAmend (SR-02).","راجع شاشة الإضافة بعد Save (SR-04)، والـ Purpose والـ Difference Account (SR-03)، والـ Current Qty (SR-05).","شغّل المجموعات اللي ماتنفذتش: Scan Mode وأصناف الـ batch والـ serial والـ reservations ونافذة Settings في جدول Items وOpening Stock.","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","الصنف PW-PS-ITEM-A (STO-ITEM-2026-00074) وليه مخزون في Stores - E، والشركة Ahmed Ebrahim CO.، والحسابات 5317 - ديون معدومة - E و101 - Main X - E. الاختبارات مسحت الـ Drafts اللي عملتها. حوالي 26 سجل تجارب مقدرناش نمسحهم لأن النظام مش بيسمح (الـ Cancelled فاضلين مربوطين بقيود الـ ledger، وأربعة Submitted مينفعش يتلغوا وفيه حركات بعدهم): من MAT-RECO-2026-00014 لـ MAT-RECO-2026-00047 (سجلات تجارب بس). اختبارات Quality Inspection كانت مفعّلة Inspection Required على نفس الصنف، واتقفلت تاني."]],"obs":["قايمة Purpose فيها خيار فاضي (الـ SRS بيذكر Opening Stock وStock Reconciliation بس) مع إنها إجبارية.","Edit Row بيعلّم Barcode وValuation Rate وProject كإجباري (*). الـ SRS بيذكر Barcode كنص بقواعد طول بس؛ محتاج تأكيد هل هو إجباري.","قيد الـ Stock Ledger للتسوية بيعرض Qty Change = 0 والرصيد الجديد في Qty after Transaction (ده السلوك القياسي للمنصة للمستند ده). الـ SRS مبيوصفش القيد؛ أكّد Qty Change المتوقع.","الـ SRS بيطلب أقل حد حرفين في Quantity وValuation Rate وده بيمنع الرقم الواحد، بينما Quantity افتراضيها 0. الرقم الواحد ماتجرّبش.","الـ Default Warehouse بيملا الصف اللي بيتضاف بعد ما بيتختار؛ والصف اللي اتضاف الأول بيفضل فاضي لو المستودع اتختار بعده. الـ SRS بيقول إنه بيملا الصفوف الفاضية بس.","الـ SRS مبيحطش شرط على حالة الحذف؛ والنظام بيرفض حذف الـ Submitted («Submitted Record cannot be deleted») وده شكله صح.","الـ Posting Time ظاهر بالميكروثانية في القايمة («14:07:30.20429»)."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Stock Reconciliation (TC-RCL وTC-RCA وTC-RCW وTC-RCD)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

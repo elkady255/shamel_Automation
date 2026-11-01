@@ -15,11 +15,13 @@ test.use({ viewport: { width: 1400, height: 1000 } });
 let q: QualityInspectionPage;
 test.beforeEach(async ({ page }) => { q = new QualityInspectionPage(page); });
 const observe = (text: string) => test.info().annotations.push({ type: 'observed', description: text });
-const msg = async (page: Page) => ((await page.locator('body').innerText()).replace(/\s+/g, ' ').match(/(Error|Cannot|cannot|not allowed|Not Permitted|modif).{0,160}/)?.[0] ?? 'no message');
+const msg = async (page: Page) => ((await page.locator('body').innerText()).replace(/\s+/g, ' ').match(/(Error|Cannot|cannot|not allowed|Not Permitted|modif|is required).{0,160}/)?.[0] ?? 'no message');
 
 let draft: { name: string }, submitted: { name: string }, cancelled: { name: string };
 test.beforeAll(async () => {
-  draft = await qi('Draft'); submitted = await qi('Submitted'); cancelled = await qi('Cancelled');
+  draft = await qi('Draft') as unknown as { name: string };
+  submitted = await qi('Submitted') as unknown as { name: string };
+  cancelled = await qi('Cancelled') as unknown as { name: string };
 });
 
 test.describe('List display', () => {
@@ -114,33 +116,38 @@ test.describe('Row selection, action bar and Edit popup', () => {
   test('TC-QIL-018/019 Edit popup: the Field list offers the Quality Inspection fields and the Value input adapts', srs('UC1 Edit popup'), async ({ page }) => {
     await q.gotoList(); await q.select(draft.name);
     await q.actionBar('Edit').click(); await expect(q.editDialog()).toBeVisible();
-    await q.editDialog().getByText('Report Date', { exact: true }).first().click(); await page.waitForTimeout(800);
-    const options = (await page.locator('[role=option], .dropdown-item, [class*=option]:visible').allInnerTexts()).map((t) => t.trim()).filter(Boolean);
-    observe('Field options: ' + options.slice(0, 30).join(', '));
+    const options = await q.editFieldOptions();
+    observe('Field options: ' + options.slice(0, 40).join(', '));
     expect(options.length).toBeGreaterThan(3);
+    const kinds = [`Report Date => ${await q.editValueKind()}`];
+    for (const f of options.slice(1, 4)) {
+      try {
+        await q.editField().click({ timeout: 5000 }); await page.waitForTimeout(500);
+        await page.getByRole('option', { name: f, exact: true }).locator('visible=true').first().click({ timeout: 5000 }); await page.waitForTimeout(700);
+        kinds.push(`${f} => ${await q.editValueKind()}`);
+      } catch { kinds.push(`${f} => could not be selected`); break; }
+    }
+    observe('Value control per field: ' + kinds.join(' ; '));
+    expect(new Set(kinds.map((k) => k.split('=>')[1])).size, 'the Value control adapts to the chosen field').toBeGreaterThan(1);
   });
 
-  test('TC-QIL-023 Edit a Draft Quality Inspection: Remarks is updated', srs('UC1 Edit: Draft -> Update succeeds'), async ({ page }) => {
+  test('TC-QIL-023 Edit a Draft Quality Inspection: Status is updated', srs('UC1 Edit: Draft -> Update succeeds'), async ({ page }) => {
     const d = await qi('Draft');
     await q.gotoList(); await q.select(d.name);
     await q.actionBar('Edit').click(); await expect(q.editDialog()).toBeVisible();
-    await q.editDialog().getByText('Report Date', { exact: true }).first().click(); await page.waitForTimeout(600);
-    await page.getByText('Remarks', { exact: true }).locator('visible=true').last().click(); await page.waitForTimeout(600);
-    await q.editDialog().locator('textarea:visible, input[type=text]:visible').last().fill('edited by PW');
+    await q.editSet('Status', 'Rejected');
     await q.editDialog().getByRole('button', { name: 'Update' }).click(); await page.waitForTimeout(4000);
-    expect((await api.get('Quality Inspection', d.name)).remarks).toBe('edited by PW');
+    expect((await api.get('Quality Inspection', d.name)).status).toBe('Rejected');
   });
 
   test('TC-QIL-021/022 Update is refused for a Submitted and for a Cancelled Quality Inspection with an error message', srs('UC1 Edit: Submitted / Cancelled cannot be modified'), async ({ page }) => {
     for (const rec of [submitted, cancelled]) {
       await q.gotoList(); await q.select(rec.name);
       await q.actionBar('Edit').click(); await expect(q.editDialog()).toBeVisible();
-      await q.editDialog().getByText('Report Date', { exact: true }).first().click(); await page.waitForTimeout(600);
-      await page.getByText('Remarks', { exact: true }).locator('visible=true').last().click(); await page.waitForTimeout(600);
-      await q.editDialog().locator('textarea:visible, input[type=text]:visible').last().fill('should not save');
+      await q.editSet('Status', 'Rejected');
       await q.editDialog().getByRole('button', { name: 'Update' }).click(); await page.waitForTimeout(4000);
       observe(`${rec.name}: ${await msg(page)}`);
-      expect((await api.get('Quality Inspection', rec.name)).remarks ?? '').not.toBe('should not save');
+      expect((await api.get('Quality Inspection', rec.name)).status).toBe('Accepted');
     }
   });
 
@@ -250,20 +257,24 @@ test.describe('Details screen', () => {
   test('TC-QID-006 a change made to a Draft on the Details screen is saved', srs('UC3: Draft changes can be saved'), async ({ page }) => {
     const d = await qi('Draft');
     await q.gotoDetails(d.name);
-    await q.openSection('Item & Inspection');
-    await q.main.getByPlaceholder('Enter description').fill('changed by PW');
+    const desc = q.main.getByPlaceholder('Enter description');
+    if (!(await desc.isVisible())) await q.openSection('Item & Inspection');
+    await desc.fill('changed by PW');
     await q.main.getByRole('button', { name: 'Save', exact: true }).click(); await page.waitForTimeout(4000);
+    observe('after Save on Details: ' + (await msg(page)));
     expect((await api.get('Quality Inspection', d.name)).description).toBe('changed by PW');
   });
 
   test('TC-QID-007 invalid data on the Details screen (Sample Size cleared) shows a per-field error', srs('UC3: invalid data -> error'), async ({ page }) => {
     const d = await qi('Draft');
     await q.gotoDetails(d.name);
-    await q.openSection('Item & Inspection');
-    await q.main.getByPlaceholder('Enter sample size').fill('');
+    const size = q.main.getByPlaceholder('Enter sample size');
+    if (!(await size.isVisible())) await q.openSection('Item & Inspection');
+    await size.fill('');
     await q.main.getByRole('button', { name: 'Save', exact: true }).click(); await page.waitForTimeout(2500);
-    observe('after clearing Sample Size: ' + (await msg(page)));
-    expect(await q.bodyText()).toMatch(/required|mandatory|invalid|Sample Size/i);
+    const text = await q.bodyText();
+    observe('after clearing Sample Size: ' + (text.match(/(required|mandatory|invalid|Sample Size is)[^.]{0,100}/i)?.[0] ?? 'no message'));
+    expect(text, 'an error message names the empty Sample Size').toMatch(/(required|mandatory)/i);
     expect((await api.get('Quality Inspection', d.name)).sample_size).toBe(1);
   });
 

@@ -27,6 +27,27 @@ export class QualityInspectionPage {
   actionBar(name: string): Locator { return this.main.getByRole('button', { name, exact: true }); }
   confirmDialog(): Locator { return this.page.locator('.shamel-confirm-dialog'); }
   editDialog(): Locator { return this.page.locator('.edit-modal-content'); }
+  /** The Field combobox of the Edit popup, and the Value input below it. */
+  editField(): Locator { return this.editDialog().getByPlaceholder('Select a field'); }
+  editValue(): Locator { return this.editDialog().locator('.edit-field').nth(1).locator('input:visible, textarea:visible').first(); }
+  async editFieldOptions(): Promise<string[]> {
+    await this.editField().click(); await this.page.waitForTimeout(900);
+    return (await this.page.getByRole('option').locator('visible=true').allInnerTexts()).map((t) => t.replace(/\s+/g, ' ').trim()).filter(Boolean);
+  }
+  /** Choose a field in the Edit popup and set its value (typed into a text input, or picked from a list). */
+  async editSet(field: string, value: string) {
+    await this.editField().click(); await this.page.waitForTimeout(600);
+    await this.page.getByRole('option', { name: field, exact: true }).locator('visible=true').first().click(); await this.page.waitForTimeout(700);
+    const v = this.editValue();
+    await v.click(); await this.page.waitForTimeout(500);
+    const opt = this.page.getByRole('option', { name: value, exact: true }).locator('visible=true').first();
+    if (await opt.count()) await opt.click(); else await v.fill(value);
+  }
+  /** What kind of control the Value box turns into for the chosen field. */
+  async editValueKind(): Promise<string> {
+    const v = this.editValue();
+    return v.evaluate((e: HTMLElement) => `${e.tagName.toLowerCase()}[type=${(e as HTMLInputElement).type}] placeholder="${(e as HTMLInputElement).placeholder}" role=${e.getAttribute('role') ?? ''}`);
+  }
   /** A section header on the Add / Details form that has to be opened before its fields are visible. */
   async openSection(name: string) {
     const head = this.main.getByRole('button', { name, exact: true });
