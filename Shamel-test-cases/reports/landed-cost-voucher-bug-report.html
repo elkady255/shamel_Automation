@@ -1,0 +1,690 @@
+<title>Landed Cost Voucher Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "LC-01",
+  "sev": "Critical",
+  "pri": "P1",
+  "layer": "Frontend",
+  "title": "Get Items does nothing, and the Items table cannot be filled by hand, so a Landed Cost Voucher cannot be saved from the screen",
+  "area": "Add Landed Cost Voucher › Vouchers and Items",
+  "tc": [
+   "TC-LCA-062",
+   "TC-LCA-063",
+   "TC-LCA-065",
+   "TC-LCA-066",
+   "TC-LCA-194",
+   "TC-LCA-198",
+   "TC-LCA-199",
+   "TC-LCA-200"
+  ],
+  "srs": "Get Items fetches the items of the selected receipt documents into Receipt Items; Applicable Charges are distributed by Qty, Amount or manually; Save stores the voucher",
+  "steps": [
+   "Open Landed Cost Voucher › Add. Choose Series and Company \"Ahmed Ebrahim CO.\".",
+   "Vouchers › Add Row: Receipt Document Type = Purchase Receipt, Receipt Document = MAT-PRE-2026-00024 (Submitted, 1 item, total 50). Tick the row.",
+   "Click Get Items and watch the Network tab. Then Landed Cost › Add Row: Description \"PW freight charge\", Landed Cost Amount 50, Distribute Charges Based On = Qty. Click Save."
+  ],
+  "expected": "Get Items sends a request and fills Receipt Items with the item of the receipt (qty 10, amount 50). Save sends create_landed_cost and the voucher opens as a Draft.",
+  "actual": "Get Items is enabled but sends no request at all (also after ticking the voucher row; 0 requests in 4 seconds) and the Items table stays \"No items yet\". The Items table has its own Add Row, but every field of a new row (Item Code, Description, Qty, Amount, Applicable Charges) is read-only \"Auto-generated\", so items cannot be typed. Total applicable charges stays 0 against a Total Landed Cost of 50, and Save is blocked in the browser with \"Total applicable charges must equal total landed cost\" followed by \"Please complete all required fields and fix the highlighted errors before saving.\" No request reaches the server and no voucher is created. The create endpoint itself works when it is called with items (MAT-LCV-2026-00003 and MAT-LCV-2026-00010 were created that way), so the Add screen is the blocker. The earlier modal error on opening the screen (get_supplier_options) no longer appears.",
+  "code": "Click on Get Items -> requests sent to the server: none\nSave -> no create_landed_cost request (blocked in the browser)\n\nSame data sent straight to the endpoint with the item row filled in:\nPOST .../landed_cost.create_landed_cost -> 200 {\"status\":201,\"message\":\"landed cost voucher item created successfully\",\"data\":{\"name\":\"MAT-LCV-2026-00003\"}}",
+  "shots": [],
+  "fix": "Connect the Get Items button to its handler (read the Items of the selected receipt documents and distribute the charges). Add a result message when nothing is returned. Until then the voucher cannot be added from the UI."
+ },
+ {
+  "id": "LC-02",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Backend",
+  "also": "Frontend",
+  "title": "Expense Account is mandatory in the backend, but the SRS says it is optional, and the screen does not say so",
+  "area": "Add Landed Cost Voucher › Landed Cost table",
+  "tc": [
+   "TC-LCA-133",
+   "TC-LCA-134",
+   "TC-LCA-135",
+   "TC-LCA-194"
+  ],
+  "srs": "Landed Cost row: Expense Account (optional dropdown), Description (mandatory 3-500), Landed Cost Amount (mandatory)",
+  "steps": [
+   "Create a voucher with a valid Purchase Receipt, items with applicable charges equal to the landed cost, and one Landed Cost row with Description and Amount but no Expense Account.",
+   "Save (call create_landed_cost)."
+  ],
+  "expected": "The voucher is stored as a Draft (Expense Account is optional).",
+  "actual": "The server refuses the save with \"Row 1: Expense Account is required for each Landed Cost charge.\" With an Expense Account set (type Expenses Included In Valuation) the same data is stored. The Expense Account field on the screen has no required mark, so the user cannot know. Either the SRS or the backend is wrong.",
+  "code": "POST /api/method/shamel.api.routes.inventory.transactions.landed_cost.create_landed_cost\ndata={\"naming_series\":\"MAT-LCV-.YYYY.-\",\"company\":\"Ahmed Ebrahim CO.\",\"posting_date\":\"2026-11-03\",\n \"purchase_receipts\":[{\"receipt_document_type\":\"Purchase Receipt\",\"receipt_document\":\"MAT-PRE-2026-00024\",...}],\n \"items\":[],\"vendor_invoices\":[],\n \"taxes\":[{\"expense_account\":\"\",\"description\":\"Freight\",\"amount\":0,\"exchange_rate\":0}],\n \"distribute_charges_based_on\":\"Qty\",\"total_taxes_and_charges\":0}\n-> HTTP 417 ValidationError: Row 1: Expense Account is required for each Landed Cost charge.",
+  "shots": [],
+  "fix": "Decide the rule with the SRS owner. If it is mandatory, mark the field required in the SRS and on the screen and show a field-level message; if it is optional, remove the server check."
+ },
+ {
+  "id": "LC-03",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Backend",
+  "also": "Frontend",
+  "title": "Landed Cost Amount of 0 and of -50 are saved (the SRS minimum is 1)",
+  "area": "Add Landed Cost Voucher › Landed Cost table › Landed Cost Amount",
+  "tc": [
+   "TC-LCA-151",
+   "TC-LCA-152",
+   "TC-LCA-146"
+  ],
+  "srs": "Landed Cost Amount: numbers only, minimum 1, maximum 100",
+  "steps": [
+   "Create a voucher as in LC-02 (with an Expense Account) and set the amount of the Landed Cost row to 0, then to -50 (applicable charges the same).",
+   "Call create_landed_cost."
+  ],
+  "expected": "Both are rejected with a message about the Landed Cost Amount.",
+  "actual": "Both are accepted: HTTP 201 and the Drafts MAT-LCV-2026-00004 (amount 0) and MAT-LCV-2026-00005 (amount -50) were stored (deleted afterwards). In the browser, a row with amount 0 and no items passes the screen check (0 equals 0) and the request reaches the server. A negative landed cost would reduce the item valuation on Submit.",
+  "code": "POST .../landed_cost.create_landed_cost  taxes:[{\"description\":\"PW freight\",\"amount\":-50,...}]\n-> 200 {\"status\":201,\"message\":\"landed cost voucher item created successfully\",\"data\":{\"name\":\"MAT-LCV-2026-00005\"}}",
+  "shots": [],
+  "fix": "Validate amount >= 1 on the server and on the screen with a field message."
+ },
+ {
+  "id": "LC-04",
+  "sev": "High",
+  "pri": "P2",
+  "layer": "Backend",
+  "title": "Description of 2 characters and of 600 characters are saved (the SRS allows 3 to 500)",
+  "area": "Add Landed Cost Voucher › Landed Cost table › Description",
+  "tc": [
+   "TC-LCA-138",
+   "TC-LCA-141",
+   "TC-LCA-143"
+  ],
+  "srs": "Landed Cost row Description: mandatory, 3 to 500 characters",
+  "steps": [
+   "Create a valid voucher and set the Landed Cost Description to \"ab\", then to 600 times \"D\".",
+   "Call create_landed_cost."
+  ],
+  "expected": "Both are rejected with a length message.",
+  "actual": "Both are stored (MAT-LCV-2026-00006 with \"ab\" and MAT-LCV-2026-00007 with 600 characters; deleted afterwards). Only an empty Description is refused (MandatoryError: description).",
+  "code": "POST .../landed_cost.create_landed_cost  taxes:[{\"description\":\"ab\",...}]\n-> 201 {\"data\":{\"name\":\"MAT-LCV-2026-00006\"}}\ntaxes:[{\"description\":\"DDDD... (600)\",...}] -> 201 {\"data\":{\"name\":\"MAT-LCV-2026-00007\"}}",
+  "shots": [],
+  "fix": "Add the 3-500 length check to the server validation for the Landed Cost Description."
+ },
+ {
+  "id": "LC-05",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Description box takes 510 characters and the Landed Cost Amount box takes 105 digits (limits 500 and 100)",
+  "area": "Add Landed Cost Voucher › Landed Cost table",
+  "tc": [
+   "TC-LCA-141",
+   "TC-LCA-149",
+   "TC-LCA-150"
+  ],
+  "srs": "Description maximum 500 characters; Landed Cost Amount maximum 100 characters",
+  "steps": [
+   "Landed Cost › Add Row.",
+   "Paste 510 characters in Description and 105 digits in Landed Cost Amount."
+  ],
+  "expected": "The fields stop at 500 and at 100 characters.",
+  "actual": "Description keeps 510 characters and Landed Cost Amount keeps 105 digits. The other Item fields stop at their limits, so this screen is the exception.",
+  "shots": [],
+  "fix": "Set the maximum lengths on both inputs."
+ },
+ {
+  "id": "LC-06",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The same Receipt Document can be added twice in one voucher",
+  "area": "Add Landed Cost Voucher › Vouchers",
+  "tc": [
+   "TC-LCA-037",
+   "TC-LCA-038"
+  ],
+  "srs": "The SRS does not define duplicates (open question); the landed cost would be applied twice to the same items",
+  "steps": [
+   "Create a voucher with MAT-PRE-2026-00024 in two rows of Vouchers.",
+   "Call create_landed_cost."
+  ],
+  "expected": "A message that the receipt document is already in the list.",
+  "actual": "The voucher is stored with two receipt rows (MAT-LCV-2026-00009; deleted afterwards).",
+  "shots": [],
+  "fix": "Reject duplicate receipt documents in the same voucher, or ask the SRS owner for the rule."
+ },
+ {
+  "id": "LC-07",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "also": "Frontend",
+  "title": "A voucher with no Landed Cost rows is sent to the server and fails with a technical \"MandatoryError: taxes\"",
+  "area": "Add Landed Cost Voucher › Save",
+  "tc": [
+   "TC-LCA-197",
+   "TC-LCA-196"
+  ],
+  "srs": "Landed Cost rows are required for a voucher (the SRS does not give the message)",
+  "steps": [
+   "Choose Series, Company and a Receipt Document; add no Landed Cost row; set Distribute = Qty.",
+   "Click Save."
+  ],
+  "expected": "A message on the Landed Cost table, with no request sent.",
+  "actual": "The browser sends the request and the server answers \"frappe.exceptions.MandatoryError: [Landed Cost Voucher, MAT-LCV-2026-0000x]: taxes\". The user sees a raw platform error that names a child table the screen calls Landed Cost.",
+  "code": "POST .../landed_cost.create_landed_cost  taxes:[]\n-> 417 MandatoryError: [Landed Cost Voucher, MAT-LCV-2026-00004]: taxes",
+  "shots": [],
+  "fix": "Check on the screen that at least one Landed Cost row or vendor invoice exists and show a field message."
+ },
+ {
+  "id": "LC-08",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A decimal Landed Cost Amount (12.75) is refused with \"Input should be a valid integer\"",
+  "area": "Add Landed Cost Voucher › Landed Cost Amount",
+  "tc": [
+   "TC-LCA-153"
+  ],
+  "srs": "Landed Cost Amount: numbers (decimals are not excluded; costs normally have cents)",
+  "steps": [
+   "Create a voucher with a Landed Cost Amount of 12.75 and applicable charges 12.75.",
+   "Call create_landed_cost."
+  ],
+  "expected": "The voucher is stored with 12.75.",
+  "actual": "HTTP 417 with field errors on \"taxes.0.amount\" and \"total_taxes_and_charges\": \"Input should be a valid integer, got a number with a fractional part\". The typed value is accepted on the screen (TC-LCA-153 passes there), so the error appears only at Save.",
+  "code": "-> 417 {\"field_errors\":[{\"field\":\"taxes.0.amount\",\"message\":\"Input should be a valid integer, got a number with a fractional part\"},{\"field\":\"total_taxes_and_charges\",...}]}",
+  "shots": [],
+  "fix": "Confirm with the SRS owner. If decimals are allowed, change the schema to a float/currency field; if not, block decimals on the screen with a clear message."
+ },
+ {
+  "id": "LC-09",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Save shows no message on the field for an empty Series / Company / Description / Amount; the only message is \"Total applicable charges must equal total landed cost\"",
+  "area": "Add Landed Cost Voucher › Save",
+  "tc": [
+   "TC-LCA-004",
+   "TC-LCA-007",
+   "TC-LCA-012",
+   "TC-LCA-144",
+   "TC-LCA-146",
+   "TC-LCA-195"
+  ],
+  "srs": "Add: a validation error message is displayed for each invalid field",
+  "steps": [
+   "Open the Add screen and click Save with nothing entered.",
+   "Repeat with a voucher row and a Landed Cost row whose Description (or Amount) is empty."
+  ],
+  "expected": "Each invalid field shows its own message.",
+  "actual": "With the form empty, no text appears on the page and no request is sent. With a Landed Cost row whose Description or Amount is empty, the page shows only \"must equal total landed cost\", so the user is not told which field is wrong. Description of 2 characters gets the same single message.",
+  "shots": [],
+  "fix": "Show the required / length message under each invalid field before the totals rule."
+ },
+ {
+  "id": "LC-10",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The screen blocks Save when applicable charges differ from the landed cost; the SRS places this check on Submit",
+  "area": "Add Landed Cost Voucher › Save",
+  "tc": [
+   "TC-LCA-198",
+   "TC-LCA-189"
+  ],
+  "srs": "On Submit: if total applicable charges differ from total landed cost, an error is shown. Save has no such rule",
+  "steps": [
+   "Fill a valid voucher with Distribute Manually and applicable charges that differ from the landed cost.",
+   "Click Save (screen) or call create_landed_cost (backend)."
+  ],
+  "expected": "The Draft is stored; the check fires on Submit.",
+  "actual": "The browser refuses Save with \"Total applicable charges must equal total landed cost\", but the server stores the same data (MAT-LCV-2026-00008 with charges 10 against 50; deleted afterwards). The screen and the server disagree, and a user cannot save a draft while still distributing.",
+  "shots": [],
+  "fix": "Use one rule: check on Submit (as the SRS says) in both places, or document Save-time validation in the SRS."
+ },
+ {
+  "id": "LC-11",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "Receipt Items shows an Add Row button, but the SRS says Add Row is not available there",
+  "area": "Add Landed Cost Voucher › Receipt Items",
+  "tc": [
+   "TC-LCA-075"
+  ],
+  "srs": "Receipt Items: filled only by Get Items; no Add Row",
+  "steps": [
+   "Open the Add screen and count the Add Row buttons."
+  ],
+  "expected": "Add Row only in Vouchers, Vendor Invoices and Landed Cost (3).",
+  "actual": "Four Add Row buttons. The Items one adds a row whose fields are all \"Auto-generated\" and not editable (see LC-01).",
+  "shots": [],
+  "fix": "Hide Add Row in Receipt Items."
+ },
+ {
+  "id": "LC-12",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "Get Items without any Receipt Document shows no message",
+  "area": "Add Landed Cost Voucher › Get Items",
+  "tc": [
+   "TC-LCA-064"
+  ],
+  "srs": "Get Items needs at least one receipt document (message not given in the SRS)",
+  "steps": [
+   "Choose Series and Company only.",
+   "Click Get Items."
+  ],
+  "expected": "A message that a Receipt Document is required.",
+  "actual": "No message and no request (the button is also dead with a document, see LC-01).",
+  "shots": [],
+  "fix": "Show a message when no voucher row is selected."
+ }
+];
+const BUG_AR = {
+ "LC-01": {
+  "t": "زر Get Items مبيعملش حاجة وجدول Items مينفعش يتملى يدوي، فمينفعش يتحفظ Landed Cost Voucher من الشاشة",
+  "area": "إضافة Landed Cost Voucher › Vouchers وItems",
+  "srs": "Get Items بيجيب أصناف مستندات الاستلام المختارة في Receipt Items؛ الـ Applicable Charges بتتوزع بالـ Qty أو الـ Amount أو يدوي؛ Save بيخزن الـ voucher",
+  "steps": [
+   "افتح Landed Cost Voucher › Add. اختار Series والـ Company \"Ahmed Ebrahim CO.\".",
+   "Vouchers › Add Row: Receipt Document Type = Purchase Receipt، وReceipt Document = MAT-PRE-2026-00024 (Submitted، صنف واحد، إجمالي 50). علّم الصف.",
+   "اضغط Get Items وبص على تاب Network. بعدين Landed Cost › Add Row: Description \"PW freight charge\" وLanded Cost Amount 50 وDistribute Charges Based On = Qty. اضغط Save."
+  ],
+  "exp": "Get Items يبعت request ويملا Receipt Items بصنف الاستلام (كمية 10، مبلغ 50). Save يبعت create_landed_cost والـ voucher يتفتح Draft.",
+  "act": "Get Items شغال كزر لكن مبيبعتش أي request (حتى بعد تعليم صف الـ voucher؛ صفر requests في 4 ثواني) وجدول Items بيفضل «No items yet». جدول Items فيه Add Row بتاعه، لكن كل حقول الصف الجديد (Item Code وDescription وQty وAmount وApplicable Charges) read-only «Auto-generated» فمينفعش تكتب أصناف. الـ Total applicable charges بيفضل 0 مقابل Total Landed Cost = 50، وSave بيتمنع في المتصفح برسالة «Total applicable charges must equal total landed cost» وبعدها «Please complete all required fields and fix the highlighted errors before saving.» مفيش request بيوصل للسيرفر ومفيش voucher بيتعمل. الـ endpoint نفسه بيشتغل لما بنبعتله الأصناف (MAT-LCV-2026-00003 وMAT-LCV-2026-00010 اتعملوا كده)، يعني المعطّل هو شاشة الإضافة. رسالة الخطأ القديمة عند فتح الشاشة (get_supplier_options) اختفت.",
+  "fix": "وصّل زر Get Items بالـ handler بتاعه (يقرا أصناف مستندات الاستلام المختارة ويوزع التكاليف). وضيف رسالة لما مفيش نتيجة. لحد ما ده يحصل الـ voucher مينفعش يتضاف من الواجهة."
+ },
+ "LC-02": {
+  "t": "Expense Account إجباري في الـ backend، بينما الـ SRS بيقول اختياري، والشاشة مبتقولش",
+  "area": "إضافة Landed Cost Voucher › جدول Landed Cost",
+  "srs": "صف Landed Cost: Expense Account (قايمة اختيارية)، وDescription (إجباري 3-500)، وLanded Cost Amount (إجباري)",
+  "steps": [
+   "اعمل voucher بـ Purchase Receipt صالح وأصناف applicable charges فيها = landed cost وصف Landed Cost فيه Description وAmount من غير Expense Account.",
+   "Save (نداء create_landed_cost)."
+  ],
+  "exp": "الـ voucher يتخزن Draft (الـ Expense Account اختياري).",
+  "act": "السيرفر بيرفض بـ «Row 1: Expense Account is required for each Landed Cost charge.» ولما بنحط Expense Account (نوعه Expenses Included In Valuation) نفس البيانات بتتخزن. حقل Expense Account في الشاشة مفيهوش علامة إجباري، فالمستخدم مش هيعرف. يا الـ SRS غلط يا الـ backend.",
+  "fix": "اتفقوا على القاعدة مع صاحب الـ SRS. لو إجباري: علّمه إجباري في الـ SRS والشاشة وطلّع رسالة على الحقل؛ ولو اختياري: شيل شرط السيرفر."
+ },
+ "LC-03": {
+  "t": "Landed Cost Amount = 0 و -50 بيتخزنوا (الحد الأدنى في الـ SRS هو 1)",
+  "area": "إضافة Landed Cost Voucher › جدول Landed Cost › Landed Cost Amount",
+  "srs": "Landed Cost Amount: أرقام بس، الحد الأدنى 1، الحد الأقصى 100",
+  "steps": [
+   "اعمل voucher زي LC-02 (مع Expense Account) وخلّي مبلغ صف Landed Cost = 0 وبعدين -50 (والـ applicable charges نفسه).",
+   "نادي create_landed_cost."
+  ],
+  "exp": "الاتنين يترفضوا برسالة عن Landed Cost Amount.",
+  "act": "الاتنين اتقبلوا: HTTP 201 واتخزنوا الـ Drafts MAT-LCV-2026-00004 (مبلغ 0) وMAT-LCV-2026-00005 (مبلغ -50) واتمسحوا بعد كده. في المتصفح، صف بمبلغ 0 ومن غير أصناف بيعدّي فحص الشاشة (0 = 0) والطلب بيوصل للسيرفر. تكلفة سالبة هتقلل تقييم الصنف عند Submit.",
+  "fix": "اعمل تحقق amount >= 1 في السيرفر والشاشة برسالة على الحقل."
+ },
+ "LC-04": {
+  "t": "Description من حرفين ومن 600 حرف بيتخزنوا (الـ SRS بيسمح من 3 لـ 500)",
+  "area": "إضافة Landed Cost Voucher › جدول Landed Cost › Description",
+  "srs": "Description صف Landed Cost: إجباري، من 3 لـ 500 حرف",
+  "steps": [
+   "اعمل voucher صالح وخلّي Description = \"ab\" وبعدين 600 حرف \"D\".",
+   "نادي create_landed_cost."
+  ],
+  "exp": "الاتنين يترفضوا برسالة طول.",
+  "act": "الاتنين اتخزنوا (MAT-LCV-2026-00006 بـ \"ab\" وMAT-LCV-2026-00007 بـ 600 حرف؛ واتمسحوا بعد كده). الـ Description الفاضي بس هو اللي بيترفض (MandatoryError: description).",
+  "fix": "ضيف فحص الطول 3-500 في تحقق السيرفر لـ Description بتاع Landed Cost."
+ },
+ "LC-05": {
+  "t": "خانة Description بتاخد 510 حرف وخانة Landed Cost Amount بتاخد 105 رقم (الحدود 500 و100)",
+  "area": "إضافة Landed Cost Voucher › جدول Landed Cost",
+  "srs": "Description الحد الأقصى 500 حرف؛ Landed Cost Amount الحد الأقصى 100 حرف",
+  "steps": [
+   "Landed Cost › Add Row.",
+   "الصق 510 حرف في Description و105 رقم في Landed Cost Amount."
+  ],
+  "exp": "الحقول توقف عند 500 وعند 100 حرف.",
+  "act": "Description بيحتفظ بـ 510 حرف وLanded Cost Amount بيحتفظ بـ 105 رقم. باقي حقول الـ Item بتقف عند حدودها، فالشاشة دي استثناء.",
+  "fix": "حدد الحد الأقصى للطول في الخانتين."
+ },
+ "LC-06": {
+  "t": "نفس الـ Receipt Document ينفع يتضاف مرتين في voucher واحد",
+  "area": "إضافة Landed Cost Voucher › Vouchers",
+  "srs": "الـ SRS مبيعرّفش التكرار (سؤال مفتوح)؛ التكلفة هتتحمّل مرتين على نفس الأصناف",
+  "steps": [
+   "اعمل voucher فيه MAT-PRE-2026-00024 في صفين من Vouchers.",
+   "نادي create_landed_cost."
+  ],
+  "exp": "رسالة إن مستند الاستلام موجود بالفعل.",
+  "act": "الـ voucher اتخزن بصفين استلام (MAT-LCV-2026-00009؛ واتمسح بعد كده).",
+  "fix": "ارفض تكرار مستند الاستلام في نفس الـ voucher، أو اسأل صاحب الـ SRS عن القاعدة."
+ },
+ "LC-07": {
+  "t": "voucher من غير صفوف Landed Cost بيتبعت للسيرفر وبيفشل بـ «MandatoryError: taxes» تقنية",
+  "area": "إضافة Landed Cost Voucher › Save",
+  "srs": "صفوف Landed Cost مطلوبة في الـ voucher (الـ SRS مش بيحدد الرسالة)",
+  "steps": [
+   "اختار Series وCompany وReceipt Document؛ متضيفش صف Landed Cost؛ وDistribute = Qty.",
+   "اضغط Save."
+  ],
+  "exp": "رسالة على جدول Landed Cost ومن غير ما request يتبعت.",
+  "act": "المتصفح بيبعت الطلب والسيرفر بيرد «frappe.exceptions.MandatoryError: [Landed Cost Voucher, MAT-LCV-2026-0000x]: taxes». المستخدم بيشوف خطأ خام من المنصة بيذكر جدول فرعي الشاشة بتسميه Landed Cost.",
+  "fix": "افحص في الشاشة إن فيه صف Landed Cost واحد على الأقل أو Vendor Invoice وطلّع رسالة على الحقل."
+ },
+ "LC-08": {
+  "t": "Landed Cost Amount عشري (12.75) بيترفض بـ «Input should be a valid integer»",
+  "area": "إضافة Landed Cost Voucher › Landed Cost Amount",
+  "srs": "Landed Cost Amount: أرقام (العشري مش مستبعد؛ التكاليف عادة فيها قروش)",
+  "steps": [
+   "اعمل voucher بـ Landed Cost Amount = 12.75 وapplicable charges = 12.75.",
+   "نادي create_landed_cost."
+  ],
+  "exp": "الـ voucher يتخزن بـ 12.75.",
+  "act": "HTTP 417 بأخطاء حقول على «taxes.0.amount» و«total_taxes_and_charges»: «Input should be a valid integer, got a number with a fractional part». القيمة بتتكتب عادي في الشاشة (TC-LCA-153 بينجح هناك)، فالخطأ بيظهر عند Save بس.",
+  "fix": "أكّد مع صاحب الـ SRS. لو العشري مسموح غيّر الحقل لـ float/currency؛ ولو مش مسموح امنعه في الشاشة برسالة واضحة."
+ },
+ "LC-09": {
+  "t": "Save مبيطلّعش رسالة على الحقل لـ Series / Company / Description / Amount الفاضيين؛ الرسالة الوحيدة «Total applicable charges must equal total landed cost»",
+  "area": "إضافة Landed Cost Voucher › Save",
+  "srs": "الإضافة: رسالة تحقق بتظهر لكل حقل غير صالح",
+  "steps": [
+   "افتح شاشة الإضافة واضغط Save من غير ما تكتب حاجة.",
+   "كرر مع صف voucher وصف Landed Cost فيه Description (أو Amount) فاضي."
+  ],
+  "exp": "كل حقل غير صالح يعرض رسالته.",
+  "act": "والفورم فاضي مفيش أي نص بيظهر في الصفحة ومفيش request بيتبعت. ومع صف Landed Cost فيه Description أو Amount فاضي، الصفحة بتعرض «must equal total landed cost» بس، فالمستخدم مش عارف أنهي حقل غلط. Description من حرفين بياخد نفس الرسالة الوحيدة.",
+  "fix": "اعرض رسالة الإجباري / الطول تحت كل حقل غير صالح قبل قاعدة الإجماليات."
+ },
+ "LC-10": {
+  "t": "الشاشة بتمنع Save لما applicable charges تختلف عن landed cost، والـ SRS بيحط الفحص ده عند Submit",
+  "area": "إضافة Landed Cost Voucher › Save",
+  "srs": "عند Submit: لو إجمالي applicable charges مختلف عن إجمالي landed cost بتظهر رسالة خطأ. Save ملوش قاعدة زي دي",
+  "steps": [
+   "املا voucher صالح بـ Distribute Manually وapplicable charges مختلفة عن landed cost.",
+   "اضغط Save (الشاشة) أو نادي create_landed_cost (الـ backend)."
+  ],
+  "exp": "الـ Draft يتخزن؛ والفحص يحصل عند Submit.",
+  "act": "المتصفح بيرفض Save بـ «Total applicable charges must equal total landed cost» لكن السيرفر بيخزن نفس البيانات (MAT-LCV-2026-00008 بـ charges 10 مقابل 50؛ واتمسح بعد كده). الشاشة والسيرفر مش متفقين، والمستخدم مينفعش يحفظ Draft وهو لسه بيوزع.",
+  "fix": "استخدموا قاعدة واحدة: الفحص عند Submit (زي الـ SRS) في المكانين، أو وثّقوا فحص وقت Save في الـ SRS."
+ },
+ "LC-11": {
+  "t": "Receipt Items فيه زر Add Row، والـ SRS بيقول إن Add Row مش متاح هناك",
+  "area": "إضافة Landed Cost Voucher › Receipt Items",
+  "srs": "Receipt Items بتتملى بـ Get Items بس؛ مفيش Add Row",
+  "steps": [
+   "افتح شاشة الإضافة وعُد أزرار Add Row."
+  ],
+  "exp": "Add Row في Vouchers وVendor Invoices وLanded Cost بس (3).",
+  "act": "أربع أزرار Add Row. اللي في Items بيضيف صف كل حقوله «Auto-generated» ومش قابلة للتعديل (شوف LC-01).",
+  "fix": "اخفي Add Row في Receipt Items."
+ },
+ "LC-12": {
+  "t": "Get Items من غير أي Receipt Document مبيطلّعش رسالة",
+  "area": "إضافة Landed Cost Voucher › Get Items",
+  "srs": "Get Items محتاج مستند استلام واحد على الأقل (الرسالة مش مذكورة في الـ SRS)",
+  "steps": [
+   "اختار Series وCompany بس.",
+   "اضغط Get Items."
+  ],
+  "exp": "رسالة إن Receipt Document مطلوب.",
+  "act": "مفيش رسالة ومفيش request (والزر ميت كمان مع وجود مستند، شوف LC-01).",
+  "fix": "اعرض رسالة لما مفيش صف voucher مختار."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Landed Cost Voucher Bug Report","eyebrow":"QA bug report · Inventory › Landed Cost Voucher (Add)","h1":"Landed Cost Voucher (Add): 12 defects, 1 stops the Add screen from saving","lede":"Functional run of the Add screen against the SRS on the test server: 32 checks in the browser and 15 against the create endpoint the screen uses. The Add screen cannot save a voucher: Get Items sends no request and the Items table cannot be typed in (LC-01). The server side does accept a voucher when it receives items, but it breaks several SRS rules on the way: it demands an Expense Account the SRS calls optional, and it stores amounts of 0 and -50 and descriptions of 2 and 600 characters. 57 of the 201 Add cases in the sheet are touched by a check.","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","English"],["Run date","2026-11-03"],["Specs","Shamel/srs-landed-cost-add.spec.ts, srs-landed-cost-add-api.spec.ts"],["Bug IDs","LC-01 to LC-12 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["Header fields: screen layout, Series, Company, Posting Date, Distribute list",6,5,1,0],["Vouchers table: Add Row, document types, Receipt Document filter, type change, delete, mandatory",6,3,1,2],["Get Items and Receipt Items",3,0,3,0],["Landed Cost table in the browser: Description lengths, Amount (letters, 0, negative, decimal, max), totals, delete",14,8,6,0],["Save in the browser: no receipts, no landed cost rows, valid voucher",3,1,2,0],["Create endpoint: valid voucher, Expense Account, empty tables, Company, Amount 0 / -50, Description 2 / 600 / empty, decimal, charges mismatch, duplicate receipt, Distribute Manually, Draft status",15,6,9,0]],"total":"Total","covNote":"57 of the 201 Add cases (28%) are referenced by a check. Two checks timed out (Receipt Document list on the open screen, Receipt Document before a type), so they are counted as not completed, not as passed. Some checks that fail in the browser do so because of the same bug as another one (for example LC-01 hides everything after Get Items).","okTitle":"Verified working","ok":["The Add screen opens without the old error dialog (get_supplier_options); all sections are shown and Amended From is hidden","Series lists the LCV series; Company search with no match shows nothing; Posting Date defaults to today; Distribute Charges Based On lists Qty, Amount and Distribute Manually","Receipt Document Type lists Purchase Receipt, Purchase Invoice and Stock Entry; Supplier and Grand Total fill from the receipt; changing the type clears the Receipt Document; a voucher row can be deleted","Landed Cost row: Description of 3, 500 and special characters is accepted; letters are rejected in Amount; negative amount does not pass the screen; Total Landed Cost follows the rows; a row can be deleted","Create endpoint: a valid voucher is stored as a Draft (MAT-LCV-2026-00003 with Qty, MAT-LCV-2026-00010 with Distribute Manually); an empty Description, a missing Company and no receipt document are refused"],"noTitle":"Not executed, and why","no":["Receipt Items after Get Items (read-only labels, Applicable Charges by mode, Edit Row popup, fixed asset items, delete rows): Get Items is dead (LC-01)","Distribute by Qty / Amount / manually results, rounding and recalculation (TC-LCA-186 to 191): need items in the table","Vendor Invoices table (TC-LCA-101 to 129): no eligible invoice was prepared","Receipt Document of type Purchase Invoice (Update Stock) and Stock Entry (Repack): no such documents were prepared","Table Settings popups, column width, hide / show / reorder / reset columns for the four tables (TC-LCA-050 to 061, 089 to 100, 118 to 129, 167 to 178)","Edit Row popups of the four tables","Posting Date earlier than the receipt, in a closed period, or empty; Account Currency and Exchange Rate; Submit after Save (TC-LCA-200, 201)","Receipt Document search with no match and Receipt Document list on the open screen (the checks timed out; run again after LC-01)"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Inventory SRS v1.0, Landed Cost Voucher","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 (Add only) is finished. Retesting starts when the developers mark LC-01 as Fixed here (or tell the tester). LC-02 to LC-04 follow, since they decide what a stored voucher may contain."],["h","When a fix lands"],["ol",["Re-run srs-landed-cost-add.spec.ts and srs-landed-cost-add-api.spec.ts.","In the browser: add a voucher with Get Items, check the item row, the distribution by Qty, Amount and Distribute Manually, and Save.","Run the not-executed groups: Vendor Invoices, Purchase Invoice and Stock Entry receipts, table Settings, Edit Row popups and Submit.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","Purchase Receipt MAT-PRE-2026-00024 (supplier 1, item PW-PS-ITEM-A / STO-ITEM-2026-00074, qty 10, rate 5, total 50, Stores - E, Submitted). Valid Drafts kept on request: MAT-LCV-2026-00003 (Qty) and MAT-LCV-2026-00010 (Distribute Manually). The six vouchers saved with invalid data during the checks (MAT-LCV-2026-00004 to 00009) were deleted."]],"obs":["Receipt Document Type lists \"Empty\" in the SRS although it is mandatory.","The SRS names the list table \"Stock Entries\"; Get Items is described as \"when checked\" without saying what is checked.","The SRS limits Landed Cost Amount to a maximum of 100 characters while also saying \"min 1, max 100\" for the value: the intended limit (length or value) needs confirming.","The SRS does not define duplicates, rounding, negative amounts or empty tables for the voucher (see LC-06, LC-03, LC-07).","Cancel has no confirmation or link check in the SRS, and Delete has no status restriction.","The create payload sent by the browser carried supplier \"\" and grand_total 0 for the voucher row in one run, while the screen showed Supplier 1 and Grand Total 50. Not confirmed again; check that the values shown are the values sent.","The success message of create_landed_cost says \"landed cost voucher item created successfully\" (text copied from another module)."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Landed Cost Voucher sheet (TC-LCL, TC-LCA, TC-LCW, TC-LCD), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Landed Cost Voucher","eyebrow":"تقرير مشاكل الجودة · Inventory › Landed Cost Voucher (الإضافة)","h1":"Landed Cost Voucher (الإضافة): 12 مشكلة، ومشكلة واحدة بتمنع شاشة الإضافة من الحفظ","lede":"اختبار وظيفي لشاشة الإضافة بحسب الـ SRS على السيرفر التجريبي: 32 فحص في المتصفح و15 فحص على endpoint الإنشاء اللي الشاشة بتستخدمه. شاشة الإضافة مش بتقدر تحفظ voucher: Get Items مبيبعتش request وجدول Items مينفعش يتكتب فيه (LC-01). الـ backend بيقبل voucher لما يوصله أصناف، لكنه بيكسر كذا قاعدة في الـ SRS: بيطلب Expense Account والـ SRS بيقول اختياري، وبيخزن مبالغ 0 و-50 ووصف من حرفين و600 حرف. 57 من 201 حالة إضافة في الشيت اتلمست بفحص.","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","الإنجليزية"],["تاريخ التشغيل","2026-11-03"],["ملفات الاختبار","Shamel/srs-landed-cost-add.spec.ts و srs-landed-cost-add-api.spec.ts"],["أرقام المشاكل","LC-01 لـ LC-12 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["حقول الهيدر: شكل الشاشة وSeries وCompany وPosting Date وقايمة Distribute",6,5,1,0],["جدول Vouchers: Add Row وأنواع المستندات وفلتر Receipt Document وتغيير النوع والحذف والإجباري",6,3,1,2],["Get Items وReceipt Items",3,0,3,0],["جدول Landed Cost في المتصفح: أطوال Description وAmount (حروف وصفر وسالب وعشري والحد الأقصى) والإجماليات والحذف",14,8,6,0],["Save في المتصفح: من غير استلام، ومن غير صفوف landed cost، وvoucher صالح",3,1,2,0],["Endpoint الإنشاء: voucher صالح وExpense Account والجداول الفاضية وCompany وAmount 0 / -50 وDescription 2 / 600 / فاضي وعشري وعدم تطابق الـ charges وتكرار الاستلام وDistribute Manually وحالة Draft",15,6,9,0]],"total":"الإجمالي","covNote":"57 من 201 حالة إضافة (28%) متغطّية بفحص. فحصين خلص وقتهم (قايمة Receipt Document والـ Receipt Document قبل اختيار النوع) فهم محسوبين «ماخلصوش» مش ناجحين. فحوصات بتفشل في المتصفح بنفس سبب مشكلة تانية (مثلًا LC-01 بيخفي كل اللي بعد Get Items).","okTitle":"اللي اتأكدنا إنه شغال","ok":["شاشة الإضافة بتفتح من غير نافذة الخطأ القديمة (get_supplier_options)؛ كل الأقسام ظاهرة وAmended From مخفي","Series بيعرض series الـ LCV؛ بحث Company من غير نتيجة مبيعرضش حاجة؛ Posting Date افتراضيه النهارده؛ وDistribute Charges Based On فيه Qty وAmount وDistribute Manually","Receipt Document Type فيه Purchase Receipt وPurchase Invoice وStock Entry؛ Supplier وGrand Total بيتملوا من الاستلام؛ تغيير النوع بيمسح الـ Receipt Document؛ وصف الـ voucher ينفع يتحذف","صف Landed Cost: Description من 3 و500 حرف وحروف خاصة بيتقبل؛ الحروف بتترفض في Amount؛ المبلغ السالب مبيعديش الشاشة؛ Total Landed Cost بيتابع الصفوف؛ والصف ينفع يتحذف","Endpoint الإنشاء: voucher صالح بيتخزن Draft (MAT-LCV-2026-00003 بـ Qty وMAT-LCV-2026-00010 بـ Distribute Manually)؛ Description فاضي وCompany ناقصة ومن غير مستند استلام بيترفضوا"],"noTitle":"اللي ماتنفذش وليه","no":["Receipt Items بعد Get Items (الـ labels القراءة بس والـ Applicable Charges حسب الوضع ونافذة Edit Row وأصناف الأصول الثابتة وحذف الصفوف): Get Items ميت (LC-01)","نتايج التوزيع بالـ Qty / Amount / يدوي والتقريب وإعادة الحساب (TC-LCA-186 لـ 191): محتاجة أصناف في الجدول","جدول Vendor Invoices (TC-LCA-101 لـ 129): ماجهزناش فاتورة مناسبة","Receipt Document من نوع Purchase Invoice (Update Stock) وStock Entry (Repack): ماجهزناش مستندات من النوع ده","نوافذ Settings للجداول وعرض العمود وإخفاء / إظهار / ترتيب / Reset الأعمدة للجداول الأربعة (TC-LCA-050 لـ 061 و089 لـ 100 و118 لـ 129 و167 لـ 178)","نوافذ Edit Row للجداول الأربعة","Posting Date أقدم من الاستلام أو في فترة مقفولة أو فاضي؛ Account Currency وExchange Rate؛ وSubmit بعد Save (TC-LCA-200 و201)","بحث Receipt Document من غير نتيجة وقايمة Receipt Document على الشاشة المفتوحة (الفحصين خلص وقتهم؛ يتعادوا بعد إصلاح LC-01)"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Inventory SRS v1.0, Landed Cost Voucher","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى (الإضافة بس) خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا LC-01 كـ Fixed هنا (أو يبلّغوا الـ tester). وبعده LC-02 لـ LC-04 لأنهم بيحددوا إيه اللي ينفع يتخزن في الـ voucher."],["h","لما يوصل إصلاح"],["ol",["أعد تشغيل srs-landed-cost-add.spec.ts و srs-landed-cost-add-api.spec.ts.","في المتصفح: ضيف voucher بـ Get Items، وراجع صف الصنف والتوزيع بالـ Qty والـ Amount والـ Distribute Manually، واعمل Save.","شغّل المجموعات اللي ماتنفذتش: Vendor Invoices واستلامات Purchase Invoice وStock Entry وSettings الجداول ونوافذ Edit Row وSubmit.","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","Purchase Receipt MAT-PRE-2026-00024 (المورد 1، الصنف PW-PS-ITEM-A / STO-ITEM-2026-00074، كمية 10، سعر 5، إجمالي 50، Stores - E، Submitted). الـ Drafts الصالحة اللي سبناها بطلبك: MAT-LCV-2026-00003 (Qty) وMAT-LCV-2026-00010 (Distribute Manually). الستة vouchers اللي اتحفظوا ببيانات غلط أثناء الفحوصات (MAT-LCV-2026-00004 لـ 00009) اتمسحوا."]],"obs":["Receipt Document Type في الـ SRS فيه «Empty» مع إنه إجباري.","الـ SRS بيسمي جدول القايمة «Stock Entries»؛ وGet Items متوصف «when checked» من غير ما يقول إيه اللي بيتعلّم.","الـ SRS بيحدد Landed Cost Amount بحد أقصى 100 حرف وفي نفس الوقت «min 1, max 100» للقيمة: محتاج تأكيد الحد المقصود (طول ولا قيمة).","الـ SRS مبيعرّفش التكرار والتقريب والمبالغ السالبة والجداول الفاضية للـ voucher (شوف LC-06 وLC-03 وLC-07).","Cancel في الـ SRS من غير تأكيد ولا فحص روابط، وDelete من غير شرط على الحالة.","الـ payload اللي المتصفح بعته كان فيه supplier \"\" وgrand_total 0 لصف الـ voucher في تشغيل واحد، والشاشة كانت بتعرض Supplier 1 وGrand Total 50. ماتأكدش تاني؛ اتأكد إن القيم المعروضة هي المبعوتة.","رسالة نجاح create_landed_cost بتقول «landed cost voucher item created successfully» (نص منسوخ من موديول تاني)."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Landed Cost Voucher (TC-LCL وTC-LCA وTC-LCW وTC-LCD)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+
