@@ -1,0 +1,516 @@
+<title>Customer Group Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "CG-01",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts a Customer Group Name of 1 character and of 101 characters",
+  "area": "Add Customer Group › Customer Group Name",
+  "tc": [],
+  "srs": "Customer Group Name: minimum 2, maximum 100 characters",
+  "steps": [
+   "Send the create request with a name of \"q\", then with a name of 101 characters."
+  ],
+  "expected": "Both are refused with a length message.",
+  "actual": "Both are saved: a customer group named \"q\" and one with a 101-character name. On the screen the field stops at 100 characters; the minimum-length message of the screen was not tried (saving a short name could have created a group).",
+  "code": "Customer Group  customer_group_name=\"q\"  -> saved\nCustomer Group  customer_group_name=<101 characters>  -> saved",
+  "shots": [],
+  "fix": "Add the 2 to 100 character rule to the Customer Group validation on the server."
+ },
+ {
+  "id": "CG-02",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A customer group that is not a Parent Group can be chosen as the parent of another group",
+  "area": "Add Customer Group › Parent Customer Group",
+  "tc": [],
+  "srs": "Parent Customer Group: only the customer groups with Is Group checked are displayed",
+  "steps": [
+   "Send the create request for a group with Parent Customer Group = \"Individual\" (a group with Is Group unchecked)."
+  ],
+  "expected": "The request is refused with a message that the parent must be a group.",
+  "actual": "The group is saved (\"PW CG B 840148\" under \"Individual\"). The dropdown of the screen is correct: it lists only \"All Customer Groups\". The data now has a child under a group that is not a parent.",
+  "code": "Customer Group  parent_customer_group=\"Individual\" (is_group=0)  -> saved",
+  "shots": [],
+  "fix": "Refuse a parent whose Is Group is unchecked on the server."
+ },
+ {
+  "id": "CG-03",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "Credit Limits: a negative limit and the same company twice are accepted",
+  "area": "Add Customer Group › Credit Limits",
+  "tc": [],
+  "srs": "Credit Limit: numbers only; one limit per company is expected (the SRS does not define duplicates)",
+  "steps": [
+   "Send the create request with a Credit Limits row of -500 for the company.",
+   "Send the create request with two rows for the same company (500 and 900)."
+  ],
+  "expected": "The negative limit is refused; the duplicate company is refused or merged.",
+  "actual": "Both are saved (\"PW CG C 840148\" with -500, \"PW CG E 840148\" with two rows for the same company). A row without a company is also saved (\"PW CG D 840148\"; the SRS says Company is optional in the table but mandatory in the Edit Row popup, which contradicts itself). On the screen the Credit Limit box stops at 100 characters.",
+  "code": "credit_limits: [{company, credit_limit: -500}]  -> saved\ncredit_limits: [{company, 500}, {company, 900}]  -> saved",
+  "shots": [],
+  "fix": "Validate credit_limit >= 0 and one row per company on the server; decide the Company rule with the SRS owner."
+ },
+ {
+  "id": "CG-04",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Details screen has no \"Open Customers\" and no \"Customer Group Tree\" buttons",
+  "area": "Customer Group Details › fixed page actions",
+  "tc": [],
+  "srs": "Fixed page actions: Open › Customers (opens the Customers list for this group), Open › Customer Group Tree (shows the hierarchy and highlights this group), Assign, Attachment, Tags, Share, Print, Delete",
+  "steps": [
+   "Open Selling › Customer Groups and click \"Individual\".",
+   "Read the buttons at the top of the screen."
+  ],
+  "expected": "Open (Customers / Customer Group Tree) and the six standard actions.",
+  "actual": "The top of the screen has Back, Assign To, Tags, Attachments, Print, Share and Delete. The two Open buttons are missing, so the customers of a group and the tree cannot be reached from the screen.",
+  "code": "controls: Back | Assign To | Tags | Attachments | Print | Share | Delete",
+  "shots": [],
+  "fix": "Add the Open › Customers and Open › Customer Group Tree actions."
+ },
+ {
+  "id": "CG-05",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Save on an untouched Add form does nothing: no message is shown for the empty mandatory field",
+  "area": "Add Customer Group › Save",
+  "tc": [],
+  "srs": "If incorrect or incomplete data is entered, a validation message is displayed for each invalid field",
+  "steps": [
+   "Open Selling › Customer Groups › Add Customer Group.",
+   "Without typing anything, click Save."
+  ],
+  "expected": "A message under Customer Group Name.",
+  "actual": "Nothing happens: no message and no toast. Same behavior as CC-11 (Coupon Code), PL-04 (Price List) and IP-07 (Item Price).",
+  "code": "Add form untouched  -> Save -> no message",
+  "shots": [],
+  "fix": "Validate the whole form on Save even when the form is not marked as changed."
+ },
+ {
+  "id": "CG-06",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "also": "Backend",
+  "title": "The system group \"All Customer Groups\" can be edited and shows a Delete button (the SRS says it cannot be edited or deleted)",
+  "area": "Customer Group Details › All Customer Groups",
+  "tc": [],
+  "srs": "There is a system-defined parent Customer Group named \"All Customer Groups\" that cannot be edited or deleted",
+  "steps": [
+   "Open Selling › Customer Groups and click \"All Customer Groups\".",
+   "Look at the fields and the top buttons."
+  ],
+  "expected": "Read only fields and no Delete button.",
+  "actual": "Only the name box is disabled. Default Price List, Default Payment Terms Template and Is Group can be changed, and Delete and Save are available. Only the state of the screen was checked: nothing was changed or deleted on the server, to protect the root of the tree.",
+  "code": "All Customer Groups: name disabled; default price list / payment terms / Is Group enabled; Delete present",
+  "shots": [],
+  "fix": "Make the screen read only for the system group and refuse its edit and delete on the server."
+ },
+ {
+  "id": "CG-07",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The list action bar has no Clear Assignment",
+  "area": "Customer Groups list › bulk actions",
+  "tc": [],
+  "srs": "Actions: Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete",
+  "steps": [
+   "Open Selling › Customer Groups.",
+   "Tick the checkbox of one group and read the action bar."
+  ],
+  "expected": "Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete.",
+  "actual": "The bar shows Select All, Edit, Export, Assign, Add Tags, Print and Delete. Clear Assignment is missing (same as CC-06, PL-05 and IP-08).",
+  "code": "bulk bar: Select All | Edit | Export | Assign | Add Tags | Print | Delete",
+  "shots": [],
+  "fix": "Add the Clear Assignment action."
+ },
+ {
+  "id": "CG-08",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "A duplicate Customer Group Name shows a raw database error",
+  "area": "Add Customer Group › Customer Group Name",
+  "tc": [],
+  "srs": "Customer Group Name has a unique value; an error message is displayed",
+  "steps": [
+   "Create a customer group named \"Individual\"."
+  ],
+  "expected": "A message such as \"this customer group already exists\".",
+  "actual": "The group is refused (uniqueness works), but the message is the database error (DuplicateEntryError ... IntegrityError 1062).",
+  "code": "frappe.exceptions.DuplicateEntryError: ('Customer Group', 'Individual', IntegrityError(1062, ...))",
+  "shots": [],
+  "fix": "Catch the duplicate and show a field message on Customer Group Name."
+ }
+];
+const BUG_AR = {
+ "CG-01": {
+  "t": "السيرفر بيقبل اسم Customer Group من حرف واحد ومن 101 حرف",
+  "area": "إضافة Customer Group › Customer Group Name",
+  "srs": "Customer Group Name: من 2 لـ 100 حرف",
+  "steps": [
+   "ابعت طلب الإنشاء باسم «q»، وبعدين باسم من 101 حرف."
+  ],
+  "exp": "الاتنين يترفضوا برسالة طول.",
+  "act": "الاتنين بيتحفظوا: customer group اسمه «q» وواحد باسم من 101 حرف. في الشاشة الحقل بيقف عند 100 حرف؛ ورسالة الحد الأدنى في الشاشة ماتجربتش (حفظ اسم قصير ممكن كان يعمل group فعلًا).",
+  "fix": "ضيفوا قاعدة 2 لـ 100 حرف في validation الـ Customer Group في السيرفر."
+ },
+ "CG-02": {
+  "t": "ينفع تختار customer group مش Parent Group كأب لمجموعة تانية",
+  "area": "إضافة Customer Group › Parent Customer Group",
+  "srs": "Parent Customer Group: بيعرض الـ customer groups اللي Is Group متعلّم فيها بس",
+  "steps": [
+   "ابعت طلب إنشاء group بـ Parent Customer Group = «Individual» (group مش متعلّم فيها Is Group)."
+  ],
+  "exp": "الطلب يترفض برسالة إن الأب لازم يكون group.",
+  "act": "الـ group بيتحفظ («PW CG B 840148» تحت «Individual»). والـ dropdown في الشاشة صح: بيعرض «All Customer Groups» بس. فبقى في الداتا ابن تحت group مش أب.",
+  "fix": "ارفضوا أب Is Group فيه غير متعلّم في السيرفر."
+ },
+ "CG-03": {
+  "t": "Credit Limits: حد سالب ونفس الشركة مرتين بيتقبلوا",
+  "area": "إضافة Customer Group › Credit Limits",
+  "srs": "Credit Limit: أرقام بس؛ ومتوقع حد واحد لكل شركة (الـ SRS مبيعرّفش التكرار)",
+  "steps": [
+   "ابعت طلب إنشاء بصف Credit Limits بـ -500 للشركة.",
+   "ابعت طلب إنشاء بصفّين لنفس الشركة (500 و900)."
+  ],
+  "exp": "الحد السالب يترفض؛ والشركة المكررة تترفض أو تتدمج.",
+  "act": "الاتنين بيتحفظوا («PW CG C 840148» بـ -500 و«PW CG E 840148» بصفّين لنفس الشركة). وصف من غير شركة كمان بيتحفظ («PW CG D 840148»؛ والـ SRS بيقول إن Company اختياري في الجدول وإجباري في نافذة Edit Row، يعني بيناقض نفسه). في الشاشة Credit Limit بيقف عند 100 حرف.",
+  "fix": "تحقق إن credit_limit >= 0 وصف واحد لكل شركة في السيرفر؛ واحسموا قاعدة Company مع صاحب الـ SRS."
+ },
+ "CG-04": {
+  "t": "شاشة التفاصيل مفيهاش زرارين «Open Customers» و«Customer Group Tree»",
+  "area": "تفاصيل Customer Group › الأزرار الثابتة",
+  "srs": "الأزرار الثابتة: Open › Customers (بيفتح قايمة العملاء لـ group دي) وOpen › Customer Group Tree (بيعرض التسلسل ويظلّل الـ group دي) وAssign وAttachment وTags وShare وPrint وDelete",
+  "steps": [
+   "افتح Selling › Customer Groups واضغط على «Individual».",
+   "اقرأ الأزرار في أعلى الشاشة."
+  ],
+  "exp": "Open (Customers / Customer Group Tree) والستة إجراءات العادية.",
+  "act": "أعلى الشاشة فيه Back وAssign To وTags وAttachments وPrint وShare وDelete. زرارين Open ناقصين، فمفيش طريق من الشاشة لعملاء الـ group ولا للشجرة.",
+  "fix": "ضيفوا إجراءي Open › Customers وOpen › Customer Group Tree."
+ },
+ "CG-05": {
+  "t": "Save على فورم إضافة لسه ماتلمسش مبيعمل حاجة: مفيش رسالة للحقل الإجباري الفاضي",
+  "area": "إضافة Customer Group › Save",
+  "srs": "لو اتدخلت بيانات غلط أو ناقصة بتظهر رسالة تحقق لكل حقل غير صالح",
+  "steps": [
+   "افتح Selling › Customer Groups › Add Customer Group.",
+   "من غير ما تكتب أي حاجة، اضغط Save."
+  ],
+  "exp": "رسالة تحت Customer Group Name.",
+  "act": "مفيش أي حاجة بتحصل: مفيش رسالة ولا toast. نفس سلوك CC-11 (Coupon Code) وPL-04 (Price List) وIP-07 (Item Price).",
+  "fix": "اعملوا validation للفورم كله عند Save حتى لو الفورم لسه ماتعلّمش إنه اتغيّر."
+ },
+ "CG-06": {
+  "t": "المجموعة بتاعة النظام «All Customer Groups» ينفع تتعدّل وفيها زر Delete (الـ SRS بيقول مينفعش تتعدّل ولا تتمسح)",
+  "area": "تفاصيل Customer Group › All Customer Groups",
+  "srs": "فيه customer group أب بتاعة النظام اسمها «All Customer Groups» مينفعش تتعدّل ولا تتمسح",
+  "steps": [
+   "افتح Selling › Customer Groups واضغط على «All Customer Groups».",
+   "بص على الحقول والأزرار اللي فوق."
+  ],
+  "exp": "حقول للقراءة بس ومفيش زر Delete.",
+  "act": "خانة الاسم بس مقفولة. Default Price List وDefault Payment Terms Template وIs Group ينفع تتغيّر، وDelete وSave موجودين. اتفحصت حالة الشاشة بس: ماغيّرتش ولا مسحت حاجة في السيرفر عشان أحمي جذر الشجرة.",
+  "fix": "خلّوا الشاشة للقراءة بس للمجموعة دي، وارفضوا تعديلها ومسحها في السيرفر."
+ },
+ "CG-07": {
+  "t": "شريط إجراءات القايمة مفيهوش Clear Assignment",
+  "area": "قايمة Customer Groups › الإجراءات الجماعية",
+  "srs": "الإجراءات: Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete",
+  "steps": [
+   "افتح Selling › Customer Groups.",
+   "علّم الـ checkbox بتاع group واحدة واقرأ شريط الإجراءات."
+  ],
+  "exp": "Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete.",
+  "act": "الشريط فيه Select All وEdit وExport وAssign وAdd Tags وPrint وDelete. Clear Assignment ناقص (زي CC-06 وPL-05 وIP-08).",
+  "fix": "ضيفوا إجراء Clear Assignment."
+ },
+ "CG-08": {
+  "t": "اسم Customer Group مكرر بيظهر خطأ الداتابيز الخام",
+  "area": "إضافة Customer Group › Customer Group Name",
+  "srs": "Customer Group Name قيمته فريدة؛ وبتظهر رسالة خطأ",
+  "steps": [
+   "اعمل customer group باسم «Individual»."
+  ],
+  "exp": "رسالة زي «الـ customer group دي موجودة قبل كده».",
+  "act": "الـ group بيترفض (التفرد شغال)، لكن الرسالة هي خطأ الداتابيز (DuplicateEntryError ... IntegrityError 1062).",
+  "fix": "امسكوا التكرار واعرضوا رسالة على حقل Customer Group Name."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Customer Group Bug Report","eyebrow":"QA bug report · Selling › Customer Group","h1":"Customer Group: 8 differences from the SRS, the screens work but two Details actions are missing","lede":"Comparison of the Customer Group screens (list, Add, Details) and of the server rules with the SRS, on the test server: 23 checks (12 matched, 11 differ). The list columns, the Add fields, the Parent Customer Group list (only groups, default All Customer Groups), the Credit Limits table and the Accounts table follow the SRS. The differences: the Open › Customers and Customer Group Tree buttons are missing (CG-04), the system group All Customer Groups is editable on the screen (CG-06), the server lacks rules the screen has (CG-01 to CG-03), a silent Save on an untouched form (CG-05), and small gaps (CG-07, CG-08).","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","English (the Customer Group screens)"],["Run date","2026-11-15"],["Method","Playwright browser checks and calls to the create endpoint (not saved as a spec yet)"],["Bug IDs","CG-01 to CG-08 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["List screen: columns, Add button, action bar",3,2,1,0],["Add screen: fields, Name limit, Parent list and default, Price List, Credit Limits table, Save on an untouched form",8,7,1,0],["Details screen: fixed actions, Accounts table, Open Customers / Customer Group Tree, the system group All Customer Groups",4,2,2,0],["Server rules (create endpoint): name lengths, duplicate name, parent that is not a group, negative credit limit, same company twice, default parent",8,1,7,0]],"total":"Total","covNote":"There is no Customer Group test-case sheet yet, so the defects above are not linked to case IDs. The checks were run through browser scripts and requests.","okTitle":"Verified working","ok":["List: columns ID, Customer Group Name, Parent Customer Group and Is Parent Group; Add button; the action bar shows Select All, Edit, Export, Assign, Add Tags, Print and Delete","Add: Customer Group Name stops at 100 characters; Parent Customer Group lists only groups (All Customer Groups) and defaults to it; Default Price List is a searchable dropdown; the Credit Limits table has Company, Credit Limit (stops at 100 characters) and Bypass Credit Limit Check At Sales Order","Details: Assign, Tags, Attachments, Print, Share and Delete are present; the Accounts table is on the Details screen only, as in the SRS","Server: a duplicate name is refused; an empty parent becomes All Customer Groups"],"noTitle":"Not executed, and why","no":["The minimum-length message of Customer Group Name on the screen (saving a short name could have created a group)","Saving a customer group from the screen with valid data, and editing / saving it on the Details screen","Delete confirmation and the warning for a group that has customers (Delete was not clicked on real groups)","The row actions of the Credit Limits and Accounts tables: Setting popup, Edit Row, Delete row, Reset to default","Credit control: the Sales Order and Sales Invoice checks against the Credit Limit and the Bypass checkbox (Examples 1 and 2 of the SRS)","The effect of Default Price List and Default Payment Terms Template on a new customer of the group, and of the Accounts table on postings","Edit popup of the list, Export, Assign, Print and tags"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Selling SRS v1.0, Customer Group","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 is finished. Retesting starts when the developers mark CG-04 and CG-06 as Fixed here (or tell the tester)."],["h","When a fix lands"],["ol",["Repeat the case on the screen and through the create endpoint (CG-01 to CG-03 can only be seen there).","Run the cases listed under Not executed.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","The server checks created 7 test customer groups that were not deleted (nothing is deleted by the tests): \"q\", one with a 101-character name, \"PW CG B 840148\" (under Individual), \"PW CG C 840148\" (credit limit -500), \"PW CG D 840148\", \"PW CG E 840148\" and \"PW CG F 840148\". The existing groups (All Customer Groups, Individual, 123) were only read."]],"obs":["The SRS says an empty Parent Customer Group defaults to \"All Item Groups\" (copied from Item Group); the system uses \"All Customer Groups\".","The list column is \"Is Parent Group\" in the system and \"Is Group\" in the SRS.","The SRS says Company is optional in the Credit Limits table and mandatory in the Edit Row popup; the SRS also says Company is mandatory in the Accounts table.","The Note under the Credit Limits section talks about Item Defaults and Item Groups (copied from Item Group).","The SRS says the Details screen has the Accounts table; the Add screen does not show it (as in the SRS)."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Delivery Note sheet (TC-DNL, TC-DNA, TC-DNW, TC-DNG, TC-DNM, TC-DND), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Customer Group","eyebrow":"تقرير مشاكل الجودة · Selling › Customer Group","h1":"Customer Group: 8 فرق عن الـ SRS، الشاشات شغالة لكن زرارين ناقصين في التفاصيل","lede":"مقارنة شاشات Customer Group (القايمة والإضافة والتفاصيل) وقواعد السيرفر بالـ SRS على السيرفر التجريبي: 23 فحص (12 مطابق و11 مختلف). أعمدة القايمة وحقول الإضافة وقايمة Parent Customer Group (groups بس والافتراضي All Customer Groups) وجدول Credit Limits وجدول Accounts ماشيين على الـ SRS. الفروق: زرارين Open › Customers وCustomer Group Tree ناقصين (CG-04)، والمجموعة بتاعة النظام All Customer Groups ينفع تتعدّل من الشاشة (CG-06)، والسيرفر ناقصه قواعد الشاشة عندها (CG-01 لـ CG-03)، وSave صامت على فورم ماتلمسش (CG-05)، وفجوات صغيرة (CG-07 وCG-08).","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","الإنجليزية (شاشات Customer Group)"],["تاريخ التشغيل","2026-11-15"],["الطريقة","فحوصات متصفح بـ Playwright ونداءات على endpoint الإنشاء (لسه مش محفوظة كملف اختبار)"],["أرقام المشاكل","CG-01 لـ CG-08 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة القايمة: الأعمدة وزر الإضافة وشريط الإجراءات",3,2,1,0],["شاشة الإضافة: الحقول وحد الاسم وقايمة الأب وقيمته الافتراضية والـ Price List وجدول Credit Limits وSave على فورم ماتلمسش",8,7,1,0],["شاشة التفاصيل: الأزرار الثابتة وجدول Accounts وOpen Customers / Customer Group Tree والمجموعة بتاعة النظام All Customer Groups",4,2,2,0],["قواعد السيرفر (endpoint الإنشاء): أطوال الاسم والاسم المكرر والأب اللي مش group وحد الائتمان السالب ونفس الشركة مرتين والأب الافتراضي",8,1,7,0]],"total":"الإجمالي","covNote":"لسه مفيش شيت test cases لـ Customer Group، فالمشاكل فوق مش مربوطة بأرقام حالات. الفحوصات اتعملت بسكريبتات متصفح وطلبات للسيرفر.","okTitle":"اللي اتأكدنا إنه شغال","ok":["القايمة: أعمدة ID وCustomer Group Name وParent Customer Group وIs Parent Group؛ وزر الإضافة؛ وشريط الإجراءات فيه Select All وEdit وExport وAssign وAdd Tags وPrint وDelete","الإضافة: Customer Group Name بيقف عند 100 حرف؛ وParent Customer Group بيعرض groups بس (All Customer Groups) وقيمته الافتراضية دي؛ وDefault Price List dropdown قابل للبحث؛ وجدول Credit Limits فيه Company وCredit Limit (بيقف عند 100 حرف) وBypass Credit Limit Check At Sales Order","التفاصيل: Assign وTags وAttachments وPrint وShare وDelete موجودين؛ وجدول Accounts في شاشة التفاصيل بس زي الـ SRS","السيرفر: الاسم المكرر بيترفض؛ والأب الفاضي بيبقى All Customer Groups"],"noTitle":"اللي ماتنفذش وليه","no":["رسالة الحد الأدنى لـ Customer Group Name في الشاشة (حفظ اسم قصير ممكن كان يعمل group فعلًا)","حفظ customer group من الشاشة ببيانات صحيحة، وتعديلها وحفظها في شاشة التفاصيل","تأكيد الحذف والتحذير لـ group ليها عملاء (ماضغطتش Delete على groups حقيقية)","إجراءات صفوف جدولي Credit Limits وAccounts: نافذة Setting وEdit Row وDelete row وReset to default","التحكم في الائتمان: فحوصات Sales Order وSales Invoice على Credit Limit وخانة Bypass (المثالين 1 و2 في الـ SRS)","تأثير Default Price List وDefault Payment Terms Template على عميل جديد في الـ group، وتأثير جدول Accounts على القيود","نافذة Edit في القايمة والتصدير والإسناد والطباعة والوسوم"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Selling SRS v1.0, Customer Group","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا CG-04 وCG-06 كـ Fixed هنا (أو يبلّغوا الـ tester)."],["h","لما يوصل إصلاح"],["ol",["كرر الحالة في الشاشة وعن طريق endpoint الإنشاء (CG-01 لـ CG-03 مبتبانوش إلا من هناك).","نفّذ الحالات المكتوبة تحت «ماتنفذش».","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","فحوصات السيرفر عملت 7 customer groups تجريبية مامسحتش (الاختبارات مبتمسحش حاجة): «q» وواحدة باسم من 101 حرف و«PW CG B 840148» (تحت Individual) و«PW CG C 840148» (حد ائتمان -500) و«PW CG D 840148» و«PW CG E 840148» و«PW CG F 840148». الـ groups الموجودة (All Customer Groups وIndividual و123) اتقرت بس."]],"obs":["الـ SRS بيقول إن Parent Customer Group الفاضي قيمته الافتراضية «All Item Groups» (منسوخ من Item Group)؛ والنظام بيستخدم «All Customer Groups».","عمود القايمة اسمه «Is Parent Group» في النظام و«Is Group» في الـ SRS.","الـ SRS بيقول إن Company اختياري في جدول Credit Limits وإجباري في نافذة Edit Row؛ وبيقول كمان إنه إجباري في جدول Accounts.","الملاحظة تحت قسم Credit Limits بتتكلم عن Item Defaults وItem Groups (منسوخة من Item Group).","الـ SRS بيقول إن شاشة التفاصيل فيها جدول Accounts؛ وشاشة الإضافة مبتعرضوش (زي الـ SRS)."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Delivery Note (TC-DNL وTC-DNA وTC-DNW وTC-DNG وTC-DNM وTC-DND)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

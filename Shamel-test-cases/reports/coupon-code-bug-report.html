@@ -1,0 +1,638 @@
+<title>Coupon Code Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "CC-01",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts Valid To earlier than (or equal to) Valid From (the screen refuses it)",
+  "area": "Add Coupon Code › Valid From / Valid To",
+  "tc": [
+   "TC-CPA-063",
+   "TC-CPA-064",
+   "TC-CPD-018"
+  ],
+  "srs": "Valid To must be greater than Valid From",
+  "steps": [
+   "Create a Coupon Code (call the create endpoint, or Save from the screen) with Valid From = 2026-11-30 and Valid To = 2026-11-15.",
+   "Repeat with Valid From = Valid To = 2026-11-20."
+  ],
+  "expected": "Both are refused with a message that Valid To must be after Valid From.",
+  "actual": "Both are saved: PWA1651423 (Valid To 15 days before Valid From) and PWB1651423 (same day). A coupon whose end is before its start can never be valid. The Add screen does refuse it: choosing Valid To before Valid From and clicking Save shows \"تاريخ الانتهاء يجب أن ...\" and nothing is saved. Only the server rule is missing.",
+  "code": "Coupon Code  valid_from=2026-11-30  valid_upto=2026-11-15  -> saved as PWA1651423\nCoupon Code  valid_from=2026-11-20  valid_upto=2026-11-20  -> saved as PWB1651423",
+  "shots": [],
+  "fix": "Validate valid_upto > valid_from on the server and on the screen, with a field message on Valid To."
+ },
+ {
+  "id": "CC-02",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "Name, Code and Description minimum / maximum lengths are enforced by the screen only; the server accepts values outside them",
+  "area": "Add Coupon Code › Coupon Name, Coupon Code, Coupon Description",
+  "tc": [
+   "TC-CPA-011",
+   "TC-CPA-013",
+   "TC-CPA-023",
+   "TC-CPA-091"
+  ],
+  "srs": "Coupon Name and Coupon Code: min 2, max 100 characters. Coupon Description: min 3, max 500 characters",
+  "steps": [
+   "Send the create request with a Coupon Name of 1 character, then a Coupon Code of 1 character, then a Coupon Name of 101 characters, then a Description of 2 characters."
+  ],
+  "expected": "Each request is refused with a length message (the screen already does this).",
+  "actual": "All four are saved: coupon named \"x\", coupon with code \"y\" (PWH1651423), a coupon with a 101-character name, and a coupon with a 2-character description (PWL1651423). On the screen the same values are stopped correctly: the fields stop at 100 / 500 characters and show \"يجب ألا يقل عن حرفين\" / \"يجب أن يتكون الوصف من 3 أحرف على الأقل\".",
+  "code": "Coupon Code  coupon_name=\"x\"  -> saved as \"x\"\nCoupon Code  coupon_code=\"y\"  -> saved (PWH1651423)\nCoupon Code  coupon_name=<101 characters>  -> saved\nCoupon Code  description=\"ab\"  -> saved (PWL1651423)",
+  "shots": [],
+  "fix": "Add the same length rules to the Coupon Code validation on the server."
+ },
+ {
+  "id": "CC-03",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A negative Maximum Use is accepted",
+  "area": "Add Coupon Code › Maximum Use",
+  "tc": [
+   "TC-CPA-077"
+  ],
+  "srs": "Maximum Use accepts numbers only (the number of times the coupon can be redeemed)",
+  "steps": [
+   "Send the create request with Maximum Use = -3."
+  ],
+  "expected": "The request is refused.",
+  "actual": "The coupon is saved with Maximum Use -3 (PWK1651423). On the screen the field removes letters (typing \"abc12\" leaves \"12\"), so only the server is open. A value above the integer limit (999999999999999) is refused with a technical truncation message.",
+  "code": "Coupon Code  maximum_use=-3  -> saved as PWK1651423",
+  "shots": [],
+  "fix": "Reject maximum_use below 1 on the server."
+ },
+ {
+  "id": "CC-04",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "also": "Backend",
+  "title": "Valid From, Valid To and Maximum Use are mandatory, but the SRS says they are optional",
+  "area": "Add Coupon Code › Valid From, Valid To, Maximum Use",
+  "tc": [
+   "TC-CPA-059",
+   "TC-CPA-061",
+   "TC-CPA-072"
+  ],
+  "srs": "Valid From: optional. Valid To: optional. Maximum Use: optional",
+  "steps": [
+   "Open Selling › Coupon Codes › Add Coupon Code.",
+   "Click Save with the three fields empty."
+  ],
+  "expected": "No message for these three fields.",
+  "actual": "The three fields carry a red * and Save shows \"تاريخ البداية مطلوب\", \"تاريخ الانتهاء مطلوب\" and \"الحد الأقصى للاستخدام مطلوب\". The server itself accepts a coupon without them (PWF1651423 was saved with none of the three), so the rule exists only on the screen. Either the SRS or the screen is wrong; the list and the details also show them as mandatory.",
+  "code": "Coupon Code without valid_from / valid_upto / maximum_use  -> saved as PWF1651423 (the server accepts)",
+  "shots": [],
+  "fix": "Decide the rule with the SRS owner. If they are mandatory, update the SRS and the server; if optional, remove the required marks and messages from the screen."
+ },
+ {
+  "id": "CC-05",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "also": "Backend",
+  "title": "Customer is mandatory for a Gift coupon, but the SRS says it is optional",
+  "area": "Add Coupon Code › Customer",
+  "tc": [
+   "TC-CPA-045"
+  ],
+  "srs": "Customer: optional; it appears only when Coupon Type = Gift Card",
+  "steps": [
+   "Open Add Coupon Code and set Coupon Type to \"هدية\" (Gift).",
+   "Leave Customer empty and click Save."
+  ],
+  "expected": "The coupon is saved.",
+  "actual": "The screen shows \"العميل مطلوب عندما يكون نوع كود الخصم بطاقة هدية\" and the server refuses the same data with \"يرجى اختيار العميل.\" (a Gift coupon without a customer is refused). This is the standard ERPNext rule, so it is likely that the SRS needs to change. The field appears and disappears with the type as the SRS describes.",
+  "code": "Coupon Code  coupon_type=Gift Card  customer=(empty)  -> refused: يرجى اختيار العميل.",
+  "shots": [],
+  "fix": "Confirm with the SRS owner that Customer is mandatory for a Gift coupon and update the SRS (or change the rule)."
+ },
+ {
+  "id": "CC-06",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The list action bar has no Clear Assignment",
+  "area": "Coupon Codes list › bulk actions",
+  "tc": [
+   "TC-CPL-017",
+   "TC-CPL-033"
+  ],
+  "srs": "Actions: Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete",
+  "steps": [
+   "Open Selling › Coupon Codes.",
+   "Tick the checkbox of one coupon and read the action bar."
+  ],
+  "expected": "Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete.",
+  "actual": "The bar shows تحديد الكل, تعديل, تصدير, اسناد, إضافة وسوم, طباعة and حذف. Clear Assignment is missing.",
+  "code": "bulk bar: تحديد الكل | تعديل | تصدير | اسناد | إضافة وسوم | طباعة | حذف",
+  "shots": [],
+  "fix": "Add the Clear Assignment action."
+ },
+ {
+  "id": "CC-07",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Maximum Use box stops at 10 digits (the SRS limit is 100 characters)",
+  "area": "Add Coupon Code › Maximum Use",
+  "tc": [
+   "TC-CPA-082",
+   "TC-CPA-083"
+  ],
+  "srs": "Maximum Use: numbers only, maximum length 100 characters",
+  "steps": [
+   "Paste 120 digits in Maximum Use."
+  ],
+  "expected": "The field keeps 100 characters.",
+  "actual": "The field keeps 10 digits. The 10-digit cap matches the integer limit of the database, so the SRS limit of 100 cannot be met without changing the field type. Numbers only works (letters are removed).",
+  "shots": [],
+  "fix": "Update the SRS (a realistic maximum such as 9 digits) or change the field type."
+ },
+ {
+  "id": "CC-08",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Pricing Rule list has an extra option \"إضافة جديد\" (Add New)",
+  "area": "Add Coupon Code › Pricing Rule",
+  "tc": [
+   "TC-CPA-051"
+  ],
+  "srs": "Pricing Rule: only rules with Coupon Code Based enabled are listed (single selection)",
+  "steps": [
+   "Open Add Coupon Code and click the Pricing Rule field."
+  ],
+  "expected": "Only coupon-based pricing rules.",
+  "actual": "The filter works (one rule shown, PRLE-0003, out of 3 pricing rules), but an \"إضافة جديد\" option is listed in the same dropdown. The SRS does not describe it.",
+  "shots": [],
+  "fix": "Remove the option, or add it to the SRS with what it does."
+ },
+ {
+  "id": "CC-09",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "A duplicate Coupon Code shows a raw database error",
+  "area": "Add Coupon Code › Coupon Code",
+  "tc": [
+   "TC-CPA-027"
+  ],
+  "srs": "Coupon Code must be unique across the system; an error message is displayed",
+  "steps": [
+   "Save a coupon with the Coupon Code of an existing coupon (for example 1235)."
+  ],
+  "expected": "A clear message such as \"this coupon code already exists\".",
+  "actual": "The coupon is refused (uniqueness works), but the message is the database error (UniqueValidationError ... IntegrityError 1062) instead of a message for the user.",
+  "code": "frappe.exceptions.UniqueValidationError: ('Coupon Code', ..., IntegrityError(1062, ...))",
+  "shots": [],
+  "fix": "Catch the duplicate and show a field message on Coupon Code."
+ },
+ {
+  "id": "CC-10",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Gift type is called \"هدية\" in the list and the dropdown, and \"بطاقة هدية\" in the error message",
+  "area": "Add Coupon Code › Coupon Type",
+  "tc": [
+   "TC-CPA-037",
+   "TC-CPA-041"
+  ],
+  "srs": "Coupon Type values: Promotional, Gift Card",
+  "steps": [
+   "Open the Coupon Type dropdown (options: ترويجي, هدية).",
+   "Save a Gift coupon without a customer and read the message."
+  ],
+  "expected": "The same Arabic name everywhere.",
+  "actual": "The dropdown shows \"هدية\" and the message says \"بطاقة هدية\". The SRS also calls it \"Gift type\" in the list section and \"Gift Card\" in the Add section.",
+  "shots": [],
+  "fix": "Choose one name and use it in the dropdown, the list, the messages and the SRS."
+ },
+ {
+  "id": "CC-11",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Save on an untouched Add form does nothing: no message is shown for the empty mandatory fields",
+  "area": "Add Coupon Code › Save",
+  "tc": [
+   "TC-CPA-014",
+   "TC-CPA-026",
+   "TC-CPA-039",
+   "TC-CPA-053"
+  ],
+  "srs": "If a mandatory field is left empty, an error message appears (Coupon Name, Coupon Code, Coupon Type, Pricing Rule)",
+  "steps": [
+   "Open Selling › Coupon Codes › Add Coupon Code.",
+   "Without typing anything, click Save (tried with a script click and with a normal click, after 8 seconds)."
+  ],
+  "expected": "A message under each empty mandatory field.",
+  "actual": "Nothing happens: no message, no toast, and the form stays as it was. As soon as one field is touched (for example a name is typed) Save shows the messages for all the other empty fields (\"رمز كود الخصم مطلوب\", \"نوع كود الخصم مطلوب\", \"قاعدة التسعير مطلوبة\", ...). The first Save on a form the user has not changed is silent.",
+  "code": "Add form untouched  -> Save -> no message\nAdd form with a name typed  -> Save -> messages for every other empty mandatory field",
+  "shots": [],
+  "fix": "Validate the whole form on Save even when the form is not yet marked as changed."
+ }
+];
+const BUG_AR = {
+ "CC-01": {
+  "t": "السيرفر بيقبل Valid To أقدم من Valid From (أو مساوي له) والشاشة بترفضه",
+  "area": "إضافة Coupon Code › Valid From / Valid To",
+  "srs": "Valid To لازم يكون أكبر من Valid From",
+  "steps": [
+   "اعمل Coupon Code (نادي endpoint الإنشاء، أو Save من الشاشة) بـ Valid From = 2026-11-30 وValid To = 2026-11-15.",
+   "كرر بـ Valid From = Valid To = 2026-11-20."
+  ],
+  "exp": "الاتنين يترفضوا برسالة إن Valid To لازم يكون بعد Valid From.",
+  "act": "الاتنين بيتحفظوا: PWA1651423 (Valid To قبل Valid From بـ 15 يوم) وPWB1651423 (نفس اليوم). كوبون نهايته قبل بدايته مش هيكون ساري أبدًا. شاشة الإضافة بترفضه فعلًا: اختيار Valid To قبل Valid From والضغط على Save بيظهر «تاريخ الانتهاء يجب أن ...» ومفيش حاجة بتتحفظ. الناقص قاعدة السيرفر بس.",
+  "fix": "تحقق إن valid_upto > valid_from في السيرفر وفي الشاشة، برسالة على Valid To."
+ },
+ "CC-02": {
+  "t": "حدود الطول (الأدنى والأقصى) للاسم والكود والوصف بتتفحص في الشاشة بس؛ والسيرفر بيقبل قيم برّه الحدود",
+  "area": "إضافة Coupon Code › الاسم والكود والوصف",
+  "srs": "اسم الكوبون والكود: من 2 لـ 100 حرف. الوصف: من 3 لـ 500 حرف",
+  "steps": [
+   "ابعت طلب الإنشاء باسم من حرف، وبعدين كود من حرف، وبعدين اسم من 101 حرف، وبعدين وصف من حرفين."
+  ],
+  "exp": "كل طلب يترفض برسالة طول (والشاشة بتعمل كده فعلًا).",
+  "act": "الأربعة بيتحفظوا: كوبون اسمه \"x\"، وكوبون كوده \"y\" (PWH1651423)، وكوبون باسم من 101 حرف، وكوبون وصفه حرفين (PWL1651423). في الشاشة نفس القيم بتتمنع صح: الحقول بتقف عند 100 / 500 حرف وبتظهر «يجب ألا يقل عن حرفين» / «يجب أن يتكون الوصف من 3 أحرف على الأقل».",
+  "fix": "ضيفوا نفس قواعد الطول في validation الـ Coupon Code في السيرفر."
+ },
+ "CC-03": {
+  "t": "Maximum Use بالسالب بيتقبل",
+  "area": "إضافة Coupon Code › Maximum Use",
+  "srs": "Maximum Use أرقام بس (عدد مرات استخدام الكوبون)",
+  "steps": [
+   "ابعت طلب الإنشاء بـ Maximum Use = -3."
+  ],
+  "exp": "الطلب يترفض.",
+  "act": "الكوبون بيتحفظ بـ Maximum Use -3 (PWK1651423). في الشاشة الحقل بيشيل الحروف (كتابة \"abc12\" بتسيب \"12\")، فالمشكلة في السيرفر بس. وقيمة فوق حد الـ integer (999999999999999) بتترفض برسالة تقنية عن الاقتطاع.",
+  "fix": "ارفضوا maximum_use أقل من 1 في السيرفر."
+ },
+ "CC-04": {
+  "t": "Valid From وValid To وMaximum Use إجباريين، والـ SRS بيقول اختياريين",
+  "area": "إضافة Coupon Code › Valid From وValid To وMaximum Use",
+  "srs": "Valid From: اختياري. Valid To: اختياري. Maximum Use: اختياري",
+  "steps": [
+   "افتح Selling › Coupon Codes › Add Coupon Code.",
+   "اضغط Save والتلات حقول فاضيين."
+  ],
+  "exp": "مفيش رسالة للتلات حقول دول.",
+  "act": "التلات حقول عليهم * أحمر وSave بيظهر «تاريخ البداية مطلوب» و«تاريخ الانتهاء مطلوب» و«الحد الأقصى للاستخدام مطلوب». والسيرفر نفسه بيقبل كوبون من غيرهم (PWF1651423 اتحفظ من غير التلاتة)، فالقاعدة في الشاشة بس. يا الـ SRS يا الشاشة غلط؛ والقايمة والتفاصيل كمان بيعرضوهم إجباريين.",
+  "fix": "احسموا القاعدة مع صاحب الـ SRS. لو إجباريين حدّثوا الـ SRS والسيرفر؛ ولو اختياريين شيلوا علامات الإجباري والرسايل من الشاشة."
+ },
+ "CC-05": {
+  "t": "Customer إجباري لكوبون الهدية، والـ SRS بيقول اختياري",
+  "area": "إضافة Coupon Code › Customer",
+  "srs": "Customer: اختياري؛ بيظهر لما Coupon Type = Gift Card بس",
+  "steps": [
+   "افتح Add Coupon Code واختار Coupon Type = «هدية».",
+   "سيب Customer فاضي واضغط Save."
+  ],
+  "exp": "الكوبون يتحفظ.",
+  "act": "الشاشة بتظهر «العميل مطلوب عندما يكون نوع كود الخصم بطاقة هدية» والسيرفر بيرفض نفس البيانات بـ «يرجى اختيار العميل.». دي قاعدة ERPNext الأساسية، فالأرجح إن الـ SRS هو اللي يتعدّل. الحقل بيظهر ويختفي مع النوع زي ما الـ SRS بيوصف.",
+  "fix": "أكدوا مع صاحب الـ SRS إن Customer إجباري لكوبون الهدية وحدّثوا الـ SRS (أو غيّروا القاعدة)."
+ },
+ "CC-06": {
+  "t": "شريط إجراءات القايمة مفيهوش Clear Assignment",
+  "area": "قايمة Coupon Codes › الإجراءات الجماعية",
+  "srs": "الإجراءات: Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete",
+  "steps": [
+   "افتح Selling › Coupon Codes.",
+   "علّم الـ checkbox بتاع كوبون واحد واقرأ شريط الإجراءات."
+  ],
+  "exp": "Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete.",
+  "act": "الشريط فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف. Clear Assignment ناقص.",
+  "fix": "ضيفوا إجراء Clear Assignment."
+ },
+ "CC-07": {
+  "t": "حقل Maximum Use بيقف عند 10 أرقام (حد الـ SRS 100 حرف)",
+  "area": "إضافة Coupon Code › Maximum Use",
+  "srs": "Maximum Use: أرقام بس، حد أقصى 100 حرف",
+  "steps": [
+   "الصق 120 رقم في Maximum Use."
+  ],
+  "exp": "الحقل يحتفظ بـ 100 حرف.",
+  "act": "الحقل بيحتفظ بـ 10 أرقام. حد الـ 10 ده بيطابق حد الـ integer في الداتابيز، فحد الـ SRS (100) مينفعش يتحقق من غير تغيير نوع الحقل. «أرقام بس» شغال (الحروف بتتشال).",
+  "fix": "حدّثوا الـ SRS (حد واقعي زي 9 أرقام) أو غيّروا نوع الحقل."
+ },
+ "CC-08": {
+  "t": "قايمة Pricing Rule فيها اختيار زيادة «إضافة جديد»",
+  "area": "إضافة Coupon Code › Pricing Rule",
+  "srs": "Pricing Rule: قواعد التسعير اللي Coupon Code Based مفعّل فيها بس (اختيار واحد)",
+  "steps": [
+   "افتح Add Coupon Code واضغط على حقل Pricing Rule."
+  ],
+  "exp": "قواعد التسعير الخاصة بالكوبونات بس.",
+  "act": "الفلتر شغال (قاعدة واحدة ظاهرة، PRLE-0003، من 3 قواعد تسعير)، لكن فيه اختيار «إضافة جديد» في نفس القايمة. الـ SRS مبيوصفوش.",
+  "fix": "شيلوا الاختيار، أو ضيفوه في الـ SRS مع وصف اللي بيعمله."
+ },
+ "CC-09": {
+  "t": "كود كوبون مكرر بيظهر خطأ الداتابيز الخام",
+  "area": "إضافة Coupon Code › Coupon Code",
+  "srs": "Coupon Code لازم يكون فريد في النظام؛ وبتظهر رسالة خطأ",
+  "steps": [
+   "احفظ كوبون بكود كوبون موجود (مثلًا 1235)."
+  ],
+  "exp": "رسالة واضحة زي «كود الكوبون ده موجود قبل كده».",
+  "act": "الكوبون بيترفض (الفريد شغال)، لكن الرسالة هي خطأ الداتابيز (UniqueValidationError ... IntegrityError 1062) بدل رسالة للمستخدم.",
+  "fix": "امسكوا التكرار واعرضوا رسالة على حقل Coupon Code."
+ },
+ "CC-10": {
+  "t": "نوع الهدية اسمه «هدية» في القايمة والـ dropdown و«بطاقة هدية» في رسالة الخطأ",
+  "area": "إضافة Coupon Code › Coupon Type",
+  "srs": "قيم Coupon Type: Promotional وGift Card",
+  "steps": [
+   "افتح dropdown Coupon Type (الاختيارات: ترويجي وهدية).",
+   "احفظ كوبون هدية من غير عميل واقرأ الرسالة."
+  ],
+  "exp": "نفس الاسم العربي في كل مكان.",
+  "act": "الـ dropdown بيعرض «هدية» والرسالة بتقول «بطاقة هدية». والـ SRS كمان بيسميه «Gift type» في قسم القايمة و«Gift Card» في قسم الإضافة.",
+  "fix": "اختاروا اسم واحد واستخدموه في الـ dropdown والقايمة والرسايل والـ SRS."
+ },
+ "CC-11": {
+  "t": "Save على فورم إضافة لسه ماتلمسش مبيعمل حاجة: مفيش رسايل للحقول الإجبارية الفاضية",
+  "area": "إضافة Coupon Code › Save",
+  "srs": "لو حقل إجباري فاضي بتظهر رسالة خطأ (اسم الكوبون والكود والنوع وقاعدة التسعير)",
+  "steps": [
+   "افتح Selling › Coupon Codes › Add Coupon Code.",
+   "من غير ما تكتب أي حاجة، اضغط Save (اتجرب بضغطة سكريبت وبضغطة عادية، بعد 8 ثواني)."
+  ],
+  "exp": "رسالة تحت كل حقل إجباري فاضي.",
+  "act": "مفيش أي حاجة بتحصل: مفيش رسالة ولا toast والفورم زي ما هو. أول ما أي حقل يتلمس (مثلًا يتكتب اسم) Save بيظهر الرسايل لكل الحقول الفاضية التانية («رمز كود الخصم مطلوب» و«نوع كود الخصم مطلوب» و«قاعدة التسعير مطلوبة» ...). أول Save على فورم المستخدم ماغيّرش فيه حاجة صامت.",
+  "fix": "اعملوا validation للفورم كله عند Save حتى لو الفورم لسه ماتعلّمش إنه اتغيّر."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Coupon Code Bug Report","eyebrow":"QA bug report · Selling › Coupon Code","h1":"Coupon Code: 11 differences from the SRS, none stops a coupon from being added","lede":"Comparison of the Coupon Code screens (list, Add, Details) and of the server rules with the SRS, on the test server: 40 checks (31 matched, 9 differ; some parts are still untested, see Not executed). The screens follow the SRS in most places: list columns, field limits, Customer shown for Gift coupons only, the Pricing Rule list filtered to coupon-based rules, field messages and the Details actions. The differences are in three groups: fields the SRS calls optional that the screen makes mandatory (CC-04, CC-05); rules the screen enforces but the server does not (CC-01 to CC-03: a Valid To before Valid From, short and long names, a negative Maximum Use); and small gaps (CC-06 to CC-11, including a silent Save on an untouched form).","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","Arabic (the Coupon screens)"],["Run date","2026-11-15"],["Method","Shamel/srs-coupon-code.spec.ts (40 checks, browser and server calls)"],["Bug IDs","CC-01 to CC-11 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["List screen: columns, Add button, Type and Valid From, ID link, action bar, Clear Assignment, Edit popup and its dynamic Value",8,7,1,0],["Add screen: fields, Name / Code lengths and duplicates, Type, Customer, Pricing Rule, dates and the date order, Maximum Use, Used, Description, messages, Save",23,16,7,0],["Details screen: data, Used, action buttons, Coupon Conditions, edit and save, name / code editing",7,6,1,0],["Delete confirmation from the list and from the Details screen (Cancel only; nothing is deleted)",2,2,0,0]],"total":"Total","covNote":"24 of the 222 cases of the sheet are linked to a defect above. The spec Shamel/srs-coupon-code.spec.ts checks every statement of the three SRS use cases once and cites the sheet case IDs; it is not a run of all 222 cases (many are variations of the same field). Tests of known differences are marked as expected to fail and report unexpectedly passed when fixed. The server checks of CC-02 / CC-03 only show that the rules are missing on the server.","okTitle":"Verified working","ok":["List: columns Coupon Code ID, name, type and Valid From; Add Coupon Code button; row checkboxes; the action bar shows Select All, Edit, Export, Assign, Add Tags, Print and Delete","Add: Coupon Name and Coupon Code stop at 100 characters; their short-value messages appear (\"يجب ألا يقل عن حرفين\"); Description stops at 500 characters and asks for 3 characters; Used is read only","Coupon Type has Promotional and Gift; Customer shows only for Gift; the Pricing Rule list shows only coupon-based rules (1 of 3)","Maximum Use takes numbers only (letters are removed); Save on an empty form shows a message under every mandatory field","Details: Add / Edit Coupon Conditions, Assign, Tags, Attachments, Print, Share and Delete are all present; the server refuses a duplicate Coupon Code","The server accepts a coupon with no Valid From, Valid To or Maximum Use, which matches the SRS (CC-04 is about the screen)"],"noTitle":"Not executed, and why","no":["The warning for a coupon that is linked to other documents (it needs Yes on Delete for a coupon already used, which was not done on real data)","Using a coupon in a Sales Order (limit reached, dates, Gift customer) and how Used is counted: they belong to the Sales Order part","Print, Share, Attachments, Tags and Assign from the Details screen (the buttons are present; their popups were not opened)","Export, bulk edit and delete of several coupons from the list, search, filter, sort and paging"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Selling SRS v1.0, Coupon Code","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 is finished. Retesting starts when the developers mark CC-01 and CC-04 as Fixed here (or tell the tester). CC-04 and CC-05 first need a decision on the SRS."],["h","When a fix lands"],["ol",["Repeat the case on the screen and through the create endpoint (the server rules CC-01 to CC-03 can only be seen there).","Run the cases listed under Not executed, starting with the delete confirmation.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","The server checks created 9 test coupons that were not deleted (nothing is deleted by the tests): PWA1651423, PWB1651423, PWF1651423, PWH1651423, PWK1651423, PWL1651423, a coupon named \"x\" and a coupon with a 101-character name. The older coupons (Inf Discount, Inf Discountss, كود الخصم, كود الخصم1) were only read."]],"obs":["Name and Code are read only on the Details screen, while the SRS says the details can be viewed and edited. Confirm if this is intended.","The SRS says the minimum length of Maximum Use is 2 characters, which would not allow a coupon that can be used once (the screen saves 1).","The SRS calls the type \"Gift type\" in the list section and \"Gift Card\" in the Add section (see CC-10).","The SRS does not say what happens when a coupon is used after Valid To or at its Maximum Use; these rules belong to the Sales Order and were not checked here."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Coupon Code sheet (TC-CPL, TC-CPA, TC-CPD, TC-CPI), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Coupon Code","eyebrow":"تقرير مشاكل الجودة · Selling › Coupon Code","h1":"Coupon Code: 11 فرق عن الـ SRS، ومفيش واحد بيمنع إضافة كوبون","lede":"مقارنة شاشات Coupon Code (القايمة والإضافة والتفاصيل) وقواعد السيرفر بالـ SRS على السيرفر التجريبي: 40 فحص (31 مطابق و9 مختلف؛ وفيه أجزاء لسه مااتفحصتش، شوف «ماتنفذش»). الشاشات ماشية على الـ SRS في أغلب الحاجات: أعمدة القايمة وحدود الحقول وظهور Customer لكوبون الهدية بس وفلتر قواعد التسعير على الكوبونات ورسايل الحقول وإجراءات التفاصيل. الفروق في تلات مجموعات: حقول الـ SRS بيقول عليها اختيارية والشاشة بتخليها إجبارية (CC-04 وCC-05)؛ وقواعد الشاشة بتطبّقها والسيرفر لأ (CC-01 لـ CC-03: Valid To قبل Valid From وأسماء قصيرة وطويلة وMaximum Use بالسالب)؛ وفجوات صغيرة (CC-06 لـ CC-11، منها Save صامت على فورم ماتلمسش).","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","العربية (شاشات الكوبون)"],["تاريخ التشغيل","2026-11-15"],["الطريقة","Shamel/srs-coupon-code.spec.ts (40 فحص، متصفح ونداءات سيرفر)"],["أرقام المشاكل","CC-01 لـ CC-11 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة القايمة: الأعمدة وزر الإضافة والنوع وValid From ورابط الـ ID وشريط الإجراءات وClear Assignment ونافذة Edit والقيمة الديناميكية",8,7,1,0],["شاشة الإضافة: الحقول وأطوال الاسم والكود والتكرار والنوع وCustomer وPricing Rule والتواريخ وترتيبها وMaximum Use وUsed والوصف والرسايل وSave",23,16,7,0],["شاشة التفاصيل: البيانات وUsed وأزرار الإجراءات وشروط الكوبون والتعديل والحفظ وتعديل الاسم / الكود",7,6,1,0],["تأكيد الحذف من القايمة ومن التفاصيل (Cancel بس؛ مفيش حاجة اتمسحت)",2,2,0,0]],"total":"الإجمالي","covNote":"24 من 222 حالة في الشيت مربوطة بمشكلة فوق. وملف Shamel/srs-coupon-code.spec.ts بيفحص كل جملة في حالات استخدام الـ SRS التلاتة مرة واحدة وبيذكر أرقام حالات الشيت؛ ده مش تشغيل لكل الـ 222 حالة (كتير منهم تنويعات على نفس الحقل). اختبارات الفروق المعروفة معلّمة «متوقع تفشل» وبتبلّغ unexpectedly passed لما تتصلح. فحوصات السيرفر في CC-02 وCC-03 بتثبت إن القواعد ناقصة في السيرفر بس.","okTitle":"اللي اتأكدنا إنه شغال","ok":["القايمة: أعمدة Coupon Code ID والاسم والنوع وValid From؛ وزر Add Coupon Code؛ وcheckbox الصفوف؛ وشريط الإجراءات فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف","الإضافة: اسم الكوبون والكود بيقفوا عند 100 حرف؛ ورسايل القيمة القصيرة بتظهر («يجب ألا يقل عن حرفين»)؛ والوصف بيقف عند 500 حرف وبيطلب 3 أحرف؛ وUsed للقراءة بس","Coupon Type فيه ترويجي وهدية؛ وCustomer بيظهر للهدية بس؛ وقايمة Pricing Rule بتعرض الكوبونات بس (1 من 3)","Maximum Use بياخد أرقام بس (الحروف بتتشال)؛ وSave على فورم فاضي بيظهر رسالة تحت كل حقل إجباري","التفاصيل: Add / Edit Coupon Conditions وAssign وTags وAttachments وPrint وShare وDelete كلهم موجودين؛ والسيرفر بيرفض Coupon Code مكرر","السيرفر بيقبل كوبون من غير Valid From وValid To وMaximum Use، وده مطابق للـ SRS (CC-04 عن الشاشة)"],"noTitle":"اللي ماتنفذش وليه","no":["التحذير لكوبون مرتبط بمستندات تانية (محتاج Yes على Delete لكوبون مستخدم فعلًا، وماعملتهاش على داتا حقيقية)","استخدام الكوبون في Sales Order (الحد الأقصى والتواريخ وعميل الهدية) وإزاي Used بيتحسب: دي تبع جزء Sales Order","الطباعة والمشاركة والمرفقات والوسوم والإسناد من شاشة التفاصيل (الأزرار موجودة؛ نوافذها ماتفتحتش)","التصدير والتعديل الجماعي وحذف أكتر من كوبون من القايمة والبحث والفلتر والترتيب والتقسيم لصفحات"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Selling SRS v1.0, Coupon Code","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا CC-01 وCC-04 كـ Fixed هنا (أو يبلّغوا الـ tester). وCC-04 وCC-05 محتاجين قرار على الـ SRS الأول."],["h","لما يوصل إصلاح"],["ol",["كرر الحالة في الشاشة وعن طريق endpoint الإنشاء (قواعد السيرفر CC-01 لـ CC-03 مبتبانش إلا من هناك).","نفّذ الحالات المكتوبة تحت «ماتنفذش» وابدأ بتأكيد الحذف.","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","فحوصات السيرفر عملت 9 كوبونات تجريبية مامسحتش (الاختبارات مبتمسحش حاجة): PWA1651423 وPWB1651423 وPWF1651423 وPWH1651423 وPWK1651423 وPWL1651423 وكوبون اسمه \"x\" وكوبون باسم من 101 حرف. الكوبونات القديمة (Inf Discount وInf Discountss وكود الخصم وكود الخصم1) اتقرت بس."]],"obs":["الاسم والكود للقراءة بس في شاشة التفاصيل، والـ SRS بيقول إن التفاصيل تتعرض وتتعدّل. أكدوا لو ده مقصود.","الـ SRS بيقول إن أقل طول لـ Maximum Use هو حرفين، وده مش هيسمح بكوبون يتستخدم مرة واحدة (الشاشة بتحفظ 1).","الـ SRS بيسمي النوع «Gift type» في قسم القايمة و«Gift Card» في قسم الإضافة (شوف CC-10).","الـ SRS مبيقولش إيه اللي يحصل لو الكوبون اتستخدم بعد Valid To أو عند Maximum Use؛ القواعد دي تبع Sales Order ومااتفحصتش هنا."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Coupon Code (TC-CPL وTC-CPA وTC-CPD وTC-CPI)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+
