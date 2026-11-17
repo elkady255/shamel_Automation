@@ -1,0 +1,67 @@
+CTRL |text|اختر تسلسل التسمية|max=-1|val=PRLE-.####|chk=false
+CTRL تسلسل التسمية * عنوان قاعدة التسعير * تطبيق ا|text|أدخل عنوان قاعدة التسعير|max=100|val=|chk=false
+CTRL |text|اختر ما تنطبق عليه القاعدة|max=-1|val=كود الصنف|chk=false
+CTRL |text|اختر نوع الميزة|max=-1|val=السعر|chk=false
+CTRL |text|ابحث واختر المستودع|max=-1|val=|chk=false
+CTRL |checkbox||max=-1|val=on|chk=false
+CTRL |checkbox||max=-1|val=on|chk=false
+CTRL |checkbox||max=-1|val=on|chk=false
+CTRL |text|اختر الصنف الذي يحصل على الخصم|max=-1|val=|chk=false
+CTRL |checkbox||max=-1|val=on|chk=false
+CTRL |checkbox||max=-1|val=on|chk=false
+CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+CTRL |text|اختر السعر أو الخصم|max=-1|val=نسبة الخصم|chk=false
+CTRL السعر أو الخصم نسبة الخصم لقائمة الأسعار|text|أدخل رقمًا|max=100|val=|chk=false
+CTRL |text|ابحث واختر قائمة الأسعار|max=-1|val=|chk=false
+CTRL |text|اختر التاريخ|max=-1|val=17-11-2026|chk=false
+CTRL |text|اختر التاريخ|max=-1|val=|chk=false
+CTRL |text|ابحث واختر الشركة|max=-1|val=|chk=false
+CTRL |text|ابحث واختر العملة|max=-1|val=|chk=false
+CTRL |text|اختر نوع الهامش|max=-1|val=|chk=false
+   !! checkbox not found by label البيع
+AFTER SELLING CTRLS ["تسلسل التسمية * عنوان قاعدة التسعير * تطبيق ا|text|أدخل عنوان قاعدة التسعير|max=100|val=|chk=false"]
+AF PLACEHOLDER 
+PRODUCT CTRL |text|اختر تسلسل التسمية|max=-1|val=PRLE-.####|chk=false
+PRODUCT CTRL تسلسل التسمية * عنوان قاعدة التسعير * تطبيق ا|text|أدخل عنوان قاعدة التسعير|max=100|val=|chk=false
+PRODUCT CTRL |text|اختر ما تنطبق عليه القاعدة|max=-1|val=كود الصنف|chk=false
+PRODUCT CTRL |text|اختر نوع الميزة|max=-1|val=المنتج|chk=false
+PRODUCT CTRL |text|ابحث واختر المستودع|max=-1|val=|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL |text|اختر الصنف الذي يحصل على الخصم|max=-1|val=|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+PRODUCT CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+PRODUCT CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+PRODUCT CTRL الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا|max=100|val=|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL |text|ابحث عن صنف واختره|max=-1|val=|chk=false
+PRODUCT CTRL نفس الصنف الصنف المجاني الكمية سعر الصنف المج|text|أدخل رقمًا|max=100|val=|chk=false
+PRODUCT CTRL نفس الصنف الصنف المجاني الكمية سعر الصنف المج|text|أدخل رقمًا|max=100|val=|chk=false
+PRODUCT CTRL |text|ابحث واختر وحدة القياس|max=-1|val=|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL |checkbox||max=-1|val=on|chk=false
+PRODUCT CTRL |text|اختر التاريخ|max=-1|val=17-11-2026|chk=false
+PRODUCT CTRL |text|اختر التاريخ|max=-1|val=|chk=false
+PRODUCT CTRL |text|ابحث واختر الشركة|max=-1|val=|chk=false
+PRODUCT CTRL |text|ابحث واختر العملة|max=-1|val=|chk=false
+PRODUCT CTRL |text|اختر نوع الهامش|max=-1|val=|chk=false
+   !! checkbox not found by label نفس الصنف
+AFTER SAME ITEM: ["|text|اختر تسلسل التسمية","|text|اختر ما تنطبق عليه القاعدة","|text|اختر نوع الميزة","|text|ابحث واختر المستودع","|text|اختر الصنف الذي يحصل على الخصم","|text|ابحث عن صنف واختره","|text|ابحث واختر وحدة القياس","|text|اختر التاريخ","|text|اختر التاريخ","|text|ابحث واختر الشركة","|text|ابحث واختر العملة","|text|اختر نوع الهامش"]
+   !! checkbox not found by label متكرر
+AFTER RECURSIVE: ["|text|اختر تسلسل التسمية","تسلسل التسمية * عنوان قاعدة التسعير * تطبيق ا|text|أدخل عنوان قاعدة التسعير","|text|اختر ما تنطبق عليه القاعدة","|text|اختر نوع الميزة","|text|ابحث واختر المستودع","|checkbox|","|checkbox|","|checkbox|","|text|اختر الصنف الذي يحصل على الخصم","|checkbox|","|checkbox|","الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا","الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا","الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا","الحد الأدنى للكمية (حسب وحدة قياس المخزون) ال|text|أدخل رقمًا","|checkbox|","|text|ابحث عن صنف واختره","نفس الصنف الصنف المجاني الكمية سعر الصنف المج|text|أدخل رقمًا","نفس الصنف الصنف المجاني الكمية سعر الصنف المج|text|أدخل رقمًا","|text|ابحث واختر وحدة القياس","|checkbox|","|checkbox|","|text|اختر التاريخ","|text|اختر التاريخ","|text|ابحث واختر الشركة","|text|ابحث واختر العملة","|text|اختر نوع الهامش"]
+ADV CTRL |checkbox||max=-1|val=on|chk=false
+ADV CTRL تطبيق قواعد تسعير متعددة الحد الأدنى للاقتراح|text|أدخل رقمًا|max=100|val=|chk=false
+ADV CTRL |checkbox||max=-1|val=on|chk=false
+ADV CTRL |checkbox||max=-1|val=on|chk=false
+   !! checkbox not found by label تطبيق قواعد تسعير متعددة
+ADV tick تطبيق قواعد تسعير متعددة=false: ["|checkbox|","تطبيق قواعد تسعير متعددة الحد الأدنى للاقتراح|text|أدخل رقمًا","|checkbox|","|checkbox|"]
+   !! checkbox not found by label التحقق من قاعدة التسعير
+ADV tick التحقق من قاعدة التسعير=false: ["|checkbox|","تطبيق قواعد تسعير متعددة الحد الأدنى للاقتراح|text|أدخل رقمًا","|checkbox|","|checkbox|"]
+   !! checkbox not found by label له أولويه
+ADV tick له أولويه=false: ["|checkbox|","تطبيق قواعد تسعير متعددة الحد الأدنى للاقتراح|text|أدخل رقمًا","|checkbox|","|checkbox|"]

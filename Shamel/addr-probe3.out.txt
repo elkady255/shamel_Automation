@@ -1,0 +1,14 @@
+CUSTOMERS 100 without address: [{"name":"CU-2026-00001","customer_name":"PW Test Customer","customer_primary_address":null},{"name":"CU-2026-00002","customer_name":"PW Packing Customer","customer_primary_address":null},{"name":"CU-2026-00003","customer_name":"_ZATCA Engine Buyer","customer_primary_address":"_ZATCA Engine Buyer-Billing"},{"name":"CU-2026-00004","customer_name":"_ZATCA Engine Bare Buyer","customer_primary_address":null},{"name":"CU-2026-00005","customer_name":"ZATCA Sandbox Buyer","customer_primary_address":"ZATCA Sandbox Buyer-Billing"}]
+first address of customer CU-2026-00001 -> SAVED PW AD P1 176481-الفوترة
+  a1 is_primary=0 billing=0 shipping=0
+second address with primary+billing+shipping -> SAVED PW AD P2 176481-الفوترة
+  after second: a1 primary=0 billing=0 shipping=0 | a2 primary=1 billing=1 shipping=1
+third address with primary only -> SAVED PW AD P3 176481-الفوترة
+  PW AD P1 176481-الفوترة: primary=0 billing=0 shipping=0
+  PW AD P2 176481-الفوترة: primary=0 billing=1 shipping=1
+  PW AD P3 176481-الفوترة: primary=1 billing=0 shipping=0
+link doctype Item (real item) -> SAVED PW AD P4 176481-الفوترة
+company flag + customer link -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.ValidationError: يجب ربط العنوان بشركة. الرجاء إضافة صف للشركة في جدول الروابط.","exc_type":"ValidationError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in 
+phone first -> SAVED PW AD P6 176481-الفوترة
+phone same again -> SAVED PW AD P7 176481-الفوترة
+disabled address -> SAVED PW AD P8 176481-الفوترة

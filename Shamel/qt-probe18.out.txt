@@ -1,0 +1,11 @@
+LOST EMPTY toasts [] | modal 
+LOST OPEN-EMPTY options []
+LOST REASON OPTIONS ["hesitation"]
+MODAL TEXT INPUT COUNT 2
+COMP max=null DET max=100
+LOST 1-char comp/det toasts []
+LOST 1-char => status Open competitors=[] reason=undefined
+LOST valid toasts ["Quotation set as Lost"]
+FINAL status=Lost lost_reasons=[{"name":"8a3ekis2fl","owner":"Administrator","creation":"2026-11-17 12:02:40.108329","modified":"2026-11-17 12:17:29.928158","modified_by":"Administrator","docstatus":1,"idx":1,"lost_reason":"hesitation","parent":"SAL-QTN-2026-01677","parentfield":"lost_reasons","parenttype":"Quotation","doctype":"Quotation Lost Reason Detail"}] competitors=[{"name":"8a302bkobm","owner":"Administrator","creation":"2026-11-17 12:02:40.108329","modified":"2026-11-17 12:17:29.928158","modified_by":"Administrator","docstatus":1,"idx":1,"competitor":"Competitor A","parent":"SAL-QTN-2026-01677","parentfield":"competitors","parenttype":"Quotation","doctype":"Competitor Detail"}] detail=Price too high
+LOST DETAIL BTNS ["Cancel Document","Set as Lost","Update Items","Create"]
+LOST MORE INFO  Linked Records 0 Quotation Details Status Lost Territory KSA Print Settings Letter Head Language ar Print without Amount Group same items Lost Reasons Lost Reason hesitation Competitors Competitor A Detailed Reason Price too high Cancel Document Set as Lost Update Items Create

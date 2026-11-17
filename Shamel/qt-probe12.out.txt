@@ -1,0 +1,44 @@
+CF Quotation|custom_column_break_ccpyx||Column Break|reqd=0|hid=0|dep=|mdep=|opt=|fetch=|def=
+CF Quotation|custom_column_break_ta2va||Column Break|reqd=0|hid=0|dep=|mdep=|opt=|fetch=|def=
+CF Quotation|custom_department|Department|Link|reqd=0|hid=0|dep=|mdep=|opt=Department|fetch=custom_employee.department|def=
+CF Quotation|custom_employee|Employee|Link|reqd=1|hid=0|dep=|mdep=|opt=Employee|fetch=|def=
+CF Quotation|custom_employee_name|Employee Name|Data|reqd=0|hid=0|dep=|mdep=|opt=|fetch=custom_employee.employee_name|def=
+CF Quotation|custom_name_in_contract|Name In Contract|Data|reqd=1|hid=0|dep=|mdep=|opt=|fetch=|def=
+CF Quotation|custom_owner|Owner|Section Break|reqd=0|hid=0|dep=|mdep=|opt=|fetch=|def=
+CF Quotation|custom_pricing_request|Pricing Request|Link|reqd=0|hid=0|dep=|mdep=|opt=Pricing Request|fetch=|def=
+CF Quotation|custom_shamel_opportunity|Opportunity|Link|reqd=0|hid=0|dep=|mdep=|opt=Shamel Opportunity|fetch=|def=
+CF Quotation|print_without_amount|Print Without Amount|Check|reqd=0|hid=0|dep=|mdep=|opt=|fetch=|def=0
+PS base_rounded_total|hidden|1
+PS base_rounded_total|print_hide|1
+PS campaign|fetch_from|
+PS campaign|permlevel|0
+PS company_contact_person|hidden|1
+PS company|in_global_search|1
+PS company|in_list_view|1
+PS company|in_standard_filter|1
+PS disable_rounded_total|default|1
+PS in_words|hidden|1
+PS in_words|print_hide|1
+PS incoterm|hidden|1
+PS null|default_print_format|Standard Quotation
+PS null|field_order|["customer_section", "title", "naming_series", "quotation_to", "party_name", "cu
+PS null|track_changes|1
+PS naming_series|options|SAL-QTN-.YYYY.-
+PS order_type|read_only|1
+PS referral_sales_partner|hidden|1
+PS rounded_total|hidden|1
+PS rounded_total|print_hide|1
+PS scan_barcode|hidden|0
+PS shipping_address_section|hidden|1
+PS source|depends_on|
+PS source|fetch_from|
+PS source|permlevel|0
+PS supplier_quotation|hidden|1
+PS territory|permlevel|1
+PS conversion_factor|precision|9
+PS qty|columns|1
+PS qty|print_hide|1
+PS qty|width|50px
+PS stock_uom_rate|print_hide|1
+PS uom|print_hide|1
+API INSERT FAIL insert Quotation failed: 417 {"exception":"\t\t\t\t\tthis validation.","exc_type":"ValidationError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return frappe.new_doc(doctype

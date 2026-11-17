@@ -1,0 +1,600 @@
+<title>Sales Taxes and Charges Template Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "ST-01",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts a Title of 1 character and of 101 characters",
+  "area": "Add Sales Taxes and Charges Template › Title",
+  "tc": [],
+  "srs": "Title: mandatory, minimum 2 and maximum 100 characters",
+  "steps": [
+   "Send the create request for a Sales Taxes and Charges Template with title \"a\", then with 101 characters (company and one tax row valid)."
+  ],
+  "expected": "Both are refused with a length message.",
+  "actual": "Both are saved (IDs \"a - E\" and a 101-character ID). On the screen the box stops at 100 characters and shows \"يجب أن يتكون العنوان من حرفين على الأقل\". An empty title is correctly refused by the server.",
+  "code": "Sales Taxes and Charges Template  title=\"a\"  -> saved as \"a - E\"\nSales Taxes and Charges Template  title=<101 characters>  -> saved",
+  "shots": [],
+  "fix": "Add the 2 to 100 character rule for Title to the server validation."
+ },
+ {
+  "id": "ST-02",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts a tax row Description of 1 character and of 501 characters",
+  "area": "Tax row › Description",
+  "tc": [],
+  "srs": "Description: optional, minimum 3 and maximum 500 characters; an error message if shorter than the minimum",
+  "steps": [
+   "Send the create request with one tax row whose description is \"a\", then one whose description is 501 characters."
+  ],
+  "expected": "Both are refused with a length message.",
+  "actual": "Both templates are saved. In the Edit Row popup the box stops at 500 characters and shows \"يجب أن يتكون الوصف من 3 أحرف على الأقل\".",
+  "code": "Sales Taxes and Charges  description=\"a\" / <501 characters>  -> template saved",
+  "shots": [],
+  "fix": "Add the 3 to 500 character rule for the tax row Description on the server."
+ },
+ {
+  "id": "ST-03",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A Balance Sheet account can be saved as the Account Head; the SRS allows only Profit & Loss accounts",
+  "area": "Tax row › Account Head",
+  "tc": [],
+  "srs": "Account Head: shows all accounts with report type \"Profit & Loss\"",
+  "steps": [
+   "Send the create request with a tax row whose account_head is a Balance Sheet account of the company (\"01204523609 - يوليوس رمزي - E\")."
+  ],
+  "expected": "The request is refused: only Profit & Loss accounts are allowed.",
+  "actual": "The template is saved. The screen is correct: its Account Head list shows only Profit & Loss accounts of the selected company (the Balance Sheet accounts are not found when searched).",
+  "code": "Sales Taxes and Charges  account_head=\"01204523609 - يوليوس رمزي - E\" (Balance Sheet)  -> saved",
+  "shots": [],
+  "fix": "Check the report type of the Account Head on the server (and refuse a Balance Sheet account), as the screen does."
+ },
+ {
+  "id": "ST-04",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "A tax row without an Account Head is refused with a confusing message",
+  "area": "Tax row › Account Head",
+  "tc": [],
+  "srs": "Account Head: mandatory; if the field is left empty an error message appears",
+  "steps": [
+   "Send the create request with a tax row that has a type and a description but no account_head."
+  ],
+  "expected": "A message that Account Head is required.",
+  "actual": "The request is refused with \"الصف 1: الحساب الضرائب والرسوم None لا ينتمي إلى الشركة Ahmed Ebrahim CO.\" (the account \"None\" does not belong to the company). A missing Type gives the clear \"القيمة مفقودة لـ: النوع\". The screen shows \"الحساب مطلوب\".",
+  "code": "Sales Taxes and Charges  account_head=null  -> 417 \"... الحساب ... None لا ينتمي إلى الشركة ...\"",
+  "shots": [],
+  "fix": "Check for a missing Account Head first and return the \"required\" message."
+ },
+ {
+  "id": "ST-05",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "The message for \"On Previous Row\" on the first row is broken Arabic",
+  "area": "Tax row › Mode",
+  "tc": [],
+  "srs": "Mode \"On Previous Row Amount\" / \"On Previous Row Total\" refers to the row before the current one",
+  "steps": [
+   "Send the create request with the first tax row set to \"On Previous Row Amount\"."
+  ],
+  "expected": "A clear message that the first row cannot use a previous-row type.",
+  "actual": "The request is refused (correct) but the message reads: \"لا يمكن تحديد نوع التهمة باسم ' في الصف السابق المبلغ ' أو ' في السابق صف إجمالي \" ل لصف الأول\" (a word-by-word machine translation that has no meaning). The check for a Reference Row that is not before the current row gives a readable message.",
+  "code": "Sales Taxes and Charges  charge_type=\"On Previous Row Amount\" (row 1)  -> 417 (broken text)",
+  "shots": [],
+  "fix": "Correct the Arabic translation of this validation message."
+ },
+ {
+  "id": "ST-06",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Save on an untouched Add form does nothing: no message is shown for the empty mandatory fields",
+  "area": "Add Sales Taxes and Charges Template › Save",
+  "tc": [],
+  "srs": "A validation error message is displayed for each invalid field (Title and Company are mandatory)",
+  "steps": [
+   "Open Selling › Sales Taxes and Charges Template › Add Sales Taxes and Charges Template.",
+   "Without typing anything, click Save."
+  ],
+  "expected": "A message under Title and under Company.",
+  "actual": "Nothing happens: no message and no toast. After typing one character the same Save shows \"يجب أن يتكون العنوان من حرفين على الأقل\" and \"الشركة مطلوبة\". Same behavior as CC-11, PL-04, IP-07, CG-05 and TR-04.",
+  "code": "Add form untouched  -> Save -> no message",
+  "shots": [],
+  "fix": "Validate the whole form on Save even when the form is not marked as changed."
+ },
+ {
+  "id": "ST-07",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Details screen shows a \"مسودة\" (Draft) badge on a record that has no draft state",
+  "area": "Sales Taxes and Charges Template Details › header",
+  "tc": [],
+  "srs": "Details screen: Connections, the input fields and the fixed page actions (no status)",
+  "steps": [
+   "Open Selling › Sales Taxes and Charges Template and click a template ID (for example \"VAT - E\")."
+  ],
+  "expected": "No Draft badge (this record cannot be submitted).",
+  "actual": "The header shows \"مسودة\" next to the title. The Territory details screen has no such badge.",
+  "code": "Details header: تفاصيل ضرائب ورسوم المبيعات  [مسودة]",
+  "shots": [],
+  "fix": "Do not show the Draft status for a doctype that is not submittable."
+ },
+ {
+  "id": "ST-08",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Setting popup of the tax table has no \"Reset to default\", uses Save / Cancel, and the table has no No. column",
+  "area": "Add / Details › Sales Taxes and Charges › Setting",
+  "tc": [],
+  "srs": "Setting popup: drag and drop, Column width, Add / Remove columns, \"Update\" and \"Reset to default\"; the table columns start with No.",
+  "steps": [
+   "Open a template and click the gear of the tax table.",
+   "Read the table header."
+  ],
+  "expected": "Update and Reset to default; a No. column after the checkbox.",
+  "actual": "The popup has the column list with width, \"إضافة/إزالة حقول\", Cancel and Save. No Reset to default (same as AD-11 and CT-16). The header is: checkbox, النوع, الحساب المحاسبي, معدل الضريبة, صافي المبلغ, المبلغ, الإجمالي; there is no row number.",
+  "code": "popup: تعديل الأعمدة | اسم الحقل | عرض العمود | إضافة/إزالة حقول | إلغاء | حفظ",
+  "shots": [],
+  "fix": "Add the Reset to default button and the No. column."
+ },
+ {
+  "id": "ST-09",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "English labels and a duplicated \"النوع\" in the Edit Row and Add / Remove columns popups",
+  "area": "Tax table › Edit Row, Add / Remove columns",
+  "tc": [],
+  "srs": "Edit Row fields: Mode, Reference Row, Account Head, Description, checkboxes, Cost Center, Project and the currency labels (no ZATCA fields are listed)",
+  "steps": [
+   "Open a template, click the gear of the tax table and \"إضافة/إزالة حقول\".",
+   "Click Edit Row of a row."
+  ],
+  "expected": "Arabic labels with one clear name for each field.",
+  "actual": "The popup lists \"Tax Code\", \"Exemption Reason\" and \"Exemption Reason Code\" in English. \"النوع\" appears twice: once for Mode and once for the ZATCA type. Both popups carry a ZATCA section (type, tax code, exemption reason, charge-fee fields) that the SRS does not mention.",
+  "code": "Add / Remove columns: ... النوع | Tax Code | Exemption Reason | Exemption Reason Code | رمز ضريبة الرسم ...",
+  "shots": [],
+  "fix": "Translate the ZATCA labels, rename one of the two \"النوع\" fields, and add the ZATCA fields to the SRS if they stay."
+ },
+ {
+  "id": "ST-10",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "\"Don't Recompute Tax\" is not shown in Edit Row, and the Amount is shown as \"—\"",
+  "area": "Tax table › Edit Row",
+  "tc": [],
+  "srs": "Don't Recompute Tax: read-only checkbox shown in the popup; Amount (Currency): label field showing the amount",
+  "steps": [
+   "Add a tax row on the Add screen and click its Edit Row."
+  ],
+  "expected": "The Don't Recompute Tax checkbox and an amount formatted like the other labels (0.00 SAR).",
+  "actual": "There is no Don't Recompute Tax checkbox. \"المبلغ (بالعملة)\" shows \"—\" while the Net Amount, Total and the company-currency labels show \"0.00 SAR\".",
+  "code": "Edit Row: صافي المبلغ 0.00 SAR | المبلغ —  | الإجمالي 0.00 SAR",
+  "shots": [],
+  "fix": "Show the Don't Recompute Tax checkbox and format the Amount label like the others."
+ },
+ {
+  "id": "ST-11",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The list action bar has no Clear Assignment",
+  "area": "Sales Taxes and Charges Template list › bulk actions",
+  "tc": [],
+  "srs": "Actions: Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete",
+  "steps": [
+   "Open Selling › Sales Taxes and Charges Template.",
+   "Tick the checkbox of one template and read the action bar."
+  ],
+  "expected": "Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete.",
+  "actual": "The bar shows تحديد الكل, تعديل, تصدير, اسناد, إضافة وسوم, طباعة and حذف. Clear Assignment is missing (same as CC-06, PL-05, IP-08, CG-07, TNC-04, TR-05, AD-08 and CT-17).",
+  "code": "bulk bar: تحديد الكل | تعديل | تصدير | اسناد | إضافة وسوم | طباعة | حذف",
+  "shots": [],
+  "fix": "Add the Clear Assignment action."
+ }
+];
+const BUG_AR = {
+ "ST-01": {
+  "t": "السيرفر بيقبل Title من حرف واحد ومن 101 حرف",
+  "area": "إضافة Sales Taxes and Charges Template › Title",
+  "srs": "Title: إجباري، من 2 لـ 100 حرف",
+  "steps": [
+   "ابعت طلب إنشاء Sales Taxes and Charges Template بـ title «a»، وبعدين بـ 101 حرف (الشركة وصف ضريبة واحد صحيحين)."
+  ],
+  "exp": "الاتنين يترفضوا برسالة طول.",
+  "act": "الاتنين بيتحفظوا (الـ ID «a - E» وID من 101 حرف). في الشاشة الخانة بتقف عند 100 حرف وبتظهر «يجب أن يتكون العنوان من حرفين على الأقل». والـ title الفاضي السيرفر بيرفضه صح.",
+  "fix": "ضيفوا قاعدة 2 لـ 100 حرف للـ Title في validation السيرفر."
+ },
+ "ST-02": {
+  "t": "السيرفر بيقبل Description لصف الضريبة من حرف واحد ومن 501 حرف",
+  "area": "صف الضريبة › Description",
+  "srs": "Description: اختياري، من 3 لـ 500 حرف؛ ورسالة خطأ لو أقل من الحد الأدنى",
+  "steps": [
+   "ابعت طلب الإنشاء بصف ضريبة وصفه «a»، وبعدين بصف وصفه 501 حرف."
+  ],
+  "exp": "الاتنين يترفضوا برسالة طول.",
+  "act": "القالبين بيتحفظوا. في نافذة Edit Row الخانة بتقف عند 500 حرف وبتظهر «يجب أن يتكون الوصف من 3 أحرف على الأقل».",
+  "fix": "ضيفوا قاعدة 3 لـ 500 حرف لوصف صف الضريبة في السيرفر."
+ },
+ "ST-03": {
+  "t": "ينفع تحفظ حساب Balance Sheet كـ Account Head؛ الـ SRS بيسمح بحسابات Profit & Loss بس",
+  "area": "صف الضريبة › Account Head",
+  "srs": "Account Head: بيعرض كل الحسابات اللي نوع تقريرها «Profit & Loss»",
+  "steps": [
+   "ابعت طلب الإنشاء بصف ضريبة account_head فيه حساب Balance Sheet تبع الشركة («01204523609 - يوليوس رمزي - E»)."
+  ],
+  "exp": "الطلب يترفض: حسابات Profit & Loss بس مسموحة.",
+  "act": "القالب بيتحفظ. والشاشة صح: قايمة Account Head فيها حسابات Profit & Loss للشركة المختارة بس (وحسابات Balance Sheet مبتلاقيهاش لما تدوّر عليها).",
+  "fix": "افحصوا نوع تقرير الحساب في السيرفر وارفضوا حساب Balance Sheet زي ما الشاشة بتعمل."
+ },
+ "ST-04": {
+  "t": "صف ضريبة من غير Account Head بيترفض برسالة مش واضحة",
+  "area": "صف الضريبة › Account Head",
+  "srs": "Account Head: إجباري؛ ولو الحقل فاضي بتظهر رسالة خطأ",
+  "steps": [
+   "ابعت طلب الإنشاء بصف ضريبة فيه النوع والوصف وبدون account_head."
+  ],
+  "exp": "رسالة إن Account Head مطلوب.",
+  "act": "الطلب بيترفض برسالة «الصف 1: الحساب الضرائب والرسوم None لا ينتمي إلى الشركة Ahmed Ebrahim CO.» (الحساب «None» مش تابع للشركة). والنوع الناقص ليه رسالة واضحة «القيمة مفقودة لـ: النوع». والشاشة بتظهر «الحساب مطلوب».",
+  "fix": "افحصوا الـ Account Head الناقص الأول وارجعوا رسالة «مطلوب»."
+ },
+ "ST-05": {
+  "t": "رسالة «On Previous Row» في الصف الأول عربي مكسور",
+  "area": "صف الضريبة › Mode",
+  "srs": "نوع «On Previous Row Amount» / «On Previous Row Total» بيشاور على الصف اللي قبل الحالي",
+  "steps": [
+   "ابعت طلب الإنشاء والصف الأول نوعه «On Previous Row Amount»."
+  ],
+  "exp": "رسالة واضحة إن الصف الأول مينفعش يستخدم نوع الصف السابق.",
+  "act": "الطلب بيترفض (صح) لكن الرسالة: «لا يمكن تحديد نوع التهمة باسم ' في الصف السابق المبلغ ' أو ' في السابق صف إجمالي \" ل لصف الأول» (ترجمة كلمة بكلمة معناها ضايع). أما فحص الـ Reference Row اللي مش قبل الصف الحالي فرسالته مقروءة.",
+  "fix": "صلّحوا الترجمة العربية لرسالة الـ validation دي."
+ },
+ "ST-06": {
+  "t": "Save على فورم إضافة لسه ماتلمسش مبيعمل حاجة: مفيش رسالة للحقول الإجبارية الفاضية",
+  "area": "إضافة Sales Taxes and Charges Template › Save",
+  "srs": "بتظهر رسالة تحقق لكل حقل غير صالح (Title وCompany إجباريين)",
+  "steps": [
+   "افتح Selling › Sales Taxes and Charges Template › Add Sales Taxes and Charges Template.",
+   "من غير ما تكتب أي حاجة، اضغط Save."
+  ],
+  "exp": "رسالة تحت Title وتحت Company.",
+  "act": "مفيش أي حاجة بتحصل: مفيش رسالة ولا toast. بعد ما تكتب حرف واحد نفس الـ Save بيظهر «يجب أن يتكون العنوان من حرفين على الأقل» و«الشركة مطلوبة». نفس سلوك CC-11 وPL-04 وIP-07 وCG-05 وTR-04.",
+  "fix": "اعملوا validation للفورم كله عند Save حتى لو الفورم لسه ماتعلّمش إنه اتغيّر."
+ },
+ "ST-07": {
+  "t": "شاشة التفاصيل بتظهر علامة «مسودة» على سجل مفيهوش حالة مسودة",
+  "area": "تفاصيل Sales Taxes and Charges Template › الهيدر",
+  "srs": "شاشة التفاصيل: Connections وحقول الإدخال والأزرار الثابتة (من غير حالة)",
+  "steps": [
+   "افتح Selling › Sales Taxes and Charges Template واضغط على ID قالب (مثلًا «VAT - E»)."
+  ],
+  "exp": "مفيش علامة Draft (السجل ده مينفعش يتعمله Submit).",
+  "act": "الهيدر بيظهر «مسودة» جنب العنوان. أما شاشة تفاصيل Territory فمفيهاش العلامة دي.",
+  "fix": "متظهروش حالة Draft لـ doctype مش قابل للـ Submit."
+ },
+ "ST-08": {
+  "t": "نافذة Setting لجدول الضرائب مفيهاش «Reset to default» وبتستخدم Save / Cancel، والجدول مفيهوش عمود No.",
+  "area": "الإضافة / التفاصيل › Sales Taxes and Charges › Setting",
+  "srs": "نافذة Setting: السحب والإفلات وColumn width وAdd / Remove columns وزرّي «Update» و«Reset to default»؛ وأعمدة الجدول بتبدأ بـ No.",
+  "steps": [
+   "افتح قالب واضغط على ترس جدول الضرائب.",
+   "اقرأ هيدر الجدول."
+  ],
+  "exp": "Update وReset to default؛ وعمود No. بعد الـ checkbox.",
+  "act": "النافذة فيها قايمة الأعمدة بعرضها و«إضافة/إزالة حقول» وإلغاء وحفظ. مفيش Reset to default (زي AD-11 وCT-16). الهيدر: checkbox والنوع والحساب المحاسبي ومعدل الضريبة وصافي المبلغ والمبلغ والإجمالي؛ مفيش رقم صف.",
+  "fix": "ضيفوا زر Reset to default وعمود No."
+ },
+ "ST-09": {
+  "t": "أسماء إنجليزي و«النوع» مكرر في نافذتي Edit Row وإضافة/إزالة حقول",
+  "area": "جدول الضرائب › Edit Row وإضافة/إزالة حقول",
+  "srs": "حقول Edit Row: Mode وReference Row وAccount Head وDescription والـ checkboxes وCost Center وProject وتسميات العملة (مفيش حقول ZATCA في الـ SRS)",
+  "steps": [
+   "افتح قالب واضغط على ترس جدول الضرائب ثم «إضافة/إزالة حقول».",
+   "اضغط Edit Row لصف."
+  ],
+  "exp": "تسميات عربية وكل حقل له اسم واضح واحد.",
+  "act": "النافذة فيها «Tax Code» و«Exemption Reason» و«Exemption Reason Code» بالإنجليزي. و«النوع» ظاهر مرتين: مرة لـ Mode ومرة لنوع ZATCA. والنافذتين فيهم قسم ZATCA (النوع ورمز الضريبة وسبب الإعفاء وحقول رسم الضريبة) والـ SRS مبيذكرهوش.",
+  "fix": "ترجموا تسميات ZATCA وغيّروا اسم واحد من «النوع»، وضيفوا حقول ZATCA للـ SRS لو هتفضل."
+ },
+ "ST-10": {
+  "t": "«Don't Recompute Tax» مش ظاهر في Edit Row، والمبلغ ظاهر «—»",
+  "area": "جدول الضرائب › Edit Row",
+  "srs": "Don't Recompute Tax: checkbox للقراءة بس ظاهر في النافذة؛ وAmount (Currency): label بيعرض المبلغ",
+  "steps": [
+   "ضيف صف ضريبة في شاشة الإضافة واضغط Edit Row بتاعه."
+  ],
+  "exp": "خانة Don't Recompute Tax ومبلغ بنفس تنسيق باقي الـ labels (0.00 SAR).",
+  "act": "مفيش خانة Don't Recompute Tax. و«المبلغ (بالعملة)» بيظهر «—» بينما صافي المبلغ والإجمالي وتسميات عملة الشركة بتظهر «0.00 SAR».",
+  "fix": "اعرضوا خانة Don't Recompute Tax وظبطوا تنسيق المبلغ زي الباقي."
+ },
+ "ST-11": {
+  "t": "شريط إجراءات القايمة مفيهوش Clear Assignment",
+  "area": "قايمة Sales Taxes and Charges Template › الإجراءات الجماعية",
+  "srs": "الإجراءات: Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete",
+  "steps": [
+   "افتح Selling › Sales Taxes and Charges Template.",
+   "علّم الـ checkbox بتاع قالب واحد واقرأ شريط الإجراءات."
+  ],
+  "exp": "Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete.",
+  "act": "الشريط فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف. Clear Assignment ناقص (زي CC-06 وPL-05 وIP-08 وCG-07 وTNC-04 وTR-05 وAD-08 وCT-17).",
+  "fix": "ضيفوا إجراء Clear Assignment."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Sales Taxes and Charges Template Bug Report","eyebrow":"QA bug report · Selling › Sales Taxes and Charges Template","h1":"Sales Taxes and Charges Template: 11 differences from the SRS, mostly missing server rules","lede":"Comparison of the Sales Taxes and Charges Template list, the Add and Details screens and the server rules with the SRS (pages 75 to 86), on the test server: 33 checks (22 matched, 11 differ). This module is the closest to the SRS so far: the screen messages, the Mode values, the Account Head list (Profit & Loss accounts of the selected company only), the automatic Reference Row, the Connections and the fixed page actions all match. The gaps are on the server, which does not enforce the Title length (ST-01), the Description length (ST-02) or the Profit & Loss rule for the Account Head (ST-03), and a few screen details: a silent Save on an untouched form (ST-06), a Draft badge on Details (ST-07), the Setting popup and the missing No. column (ST-08), English ZATCA labels (ST-09) and the missing Don't Recompute Tax (ST-10).","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","Arabic (the template screens)"],["Run date","2026-11-16"],["Method","Playwright browser checks and calls to the create endpoint (not saved as a spec yet)"],["Bug IDs","ST-01 to ST-11 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["List screen: columns, Status, Default and Disabled, Add button, action bar",3,2,1,0],["Add screen: Title limits and messages, Company and Tax Category dropdowns, Default / Disabled, Add Row and Delete row, Mode values, Account Head list, Reference Row, Rate and Amount fields, Description limits, untouched Save, Setting popup, No. column, Edit Row fields and labels",15,11,4,0],["Details screen: fields, fixed actions, Connections, delete confirmation, header status",5,4,1,0],["Server rules (create): Title mandatory and length, Mode and Account Head mandatory, Description length, Balance Sheet account, disabled and default, Tax Category, previous-row rules and their messages",10,5,5,0]],"total":"Total","covNote":"There is no Sales Taxes and Charges Template test-case sheet yet, so the defects above are not linked to case IDs. The checks were run through browser scripts and requests.","okTitle":"Verified working","ok":["List: ID, Status (Enabled / Disabled), Default, Disabled and Company columns; Add button; action bar with Select All, Edit, Export, Assign, Add Tags, Print and Delete; the bulk Edit popup lists Title, Default, Disabled, Company and Tax Category","Add: Title stops at 100 characters and shows \"يجب أن يتكون العنوان من حرفين على الأقل\" under 2; Company is mandatory (\"الشركة مطلوبة\") and a searchable dropdown; Tax Category is a searchable dropdown; Default and Disabled checkboxes exist","Tax table: the Mode list has the five values (Actual, On Net Total, On Previous Row Amount, On Previous Row Total, On Item Quantity); the Account Head list shows only Profit & Loss accounts of the selected company; an empty row shows \"الحساب مطلوب\"; Rate takes numbers only and stops at 100 characters; Add Row and Delete row work","Reference Row appears when the Mode is On Previous Row and is filled with the previous row (\"صف 1\"); Description shows \"يجب أن يتكون الوصف من 3 أحرف على الأقل\" and stops at 500 characters","Edit Row: Mode, Account Head, Is Tax Included In Basic Rate, Considered In Paid Amount, Tax Rate, Account Currency, Net Amount, Total, Tax Amount After Discount, Description, Cost Center, Project and the company-currency labels; Add / Remove columns lists the SRS columns","Details: the fields with their data; Assign, Tags, Attachments, Print, Share and Delete; Connections with Sales Invoice, Sales Order, Delivery Note, POS Profile, Subscription and Tax Rule (38 linked records on \"VAT - E\"); Delete asks for confirmation and Cancel closes it","Server: a missing Title, a missing Mode (Type), an invalid Tax Category and a disabled template that is also the default are refused; the previous-row Mode on the first row and a Reference Row that is not before the current row are refused"],"noTitle":"Not executed, and why","no":["Saving and editing a template from the screen with valid data (Save with all mandatory fields filled was not clicked, to avoid creating records)","Delete \"Yes\" on a template that is linked to transactions and the warning with the linked doctypes as links (Delete was not confirmed on real templates; \"VAT - E\" has 38 linked records)","Column width, drag and drop of columns, Export, Assign, Print, tags and the Edit popup update of the list","Is Tax Withholding Account and Set by Item Tax Template (the SRS shows them only for such rows), the Tax Rate range and a negative rate (the server answered only with the ZATCA rule \"Tax Code S must have a rate of 15%\", so no generic rule could be seen)","The Disabled template being hidden in new transactions, and the Default template being picked automatically in a Sales Invoice for the company"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Selling SRS v1.0, Sales Taxes and Charges Template","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 is finished. Retesting starts when the developers mark ST-01, ST-02, ST-03 and ST-06 as Fixed here (or tell the tester)."],["h","When a fix lands"],["ol",["Repeat the case through the create endpoint (ST-01 to ST-05 can only be seen there) and on the screen (ST-06 to ST-11).","Run the cases listed under Not executed.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","The server checks created 16 test templates that were not deleted (nothing is deleted by the tests): \"PW ST ...\" templates, one \"a - E\", one with a 101-character title, one with a 100-character title and one with no tax rows. While testing, a second default template for the same company switched off the Default flag of \"عنوان قالب ضريبى جديد - E\"; the flag was set back on that template, and the \"PW ST DEF 30930\" templates are no longer default. The existing templates were only read."]],"obs":["The SRS does not say the tax rows are mandatory or that a template Title must be unique: the server saves a template with no tax rows and a second template with the same Title (it gets the ID \"... - E-1\"). Confirm both with the SRS owner.","The server saves a template without a Company by using the default company of the session; the screen shows \"الشركة مطلوبة\". Decide whether the server should refuse it.","Saving a second template as Default for the same company silently clears the Default flag of the first (the system behavior; the SRS does not describe it).","The same Account Head can be added in two rows of one template, and an Actual row can be saved with an amount and a 0 rate.","The list has an extra \"Title\" column that the SRS does not list (ID, Status, Default, Disabled, Company).","Tax Rate 150 and -5 were refused only by the ZATCA rule \"Tax Code S must have a rate of 15%\", so it is not known whether a generic rate range exists for other tax codes.","The SRS says the Mode list starts with \"Empty\"; the screen shows \"فارغ\" as the placeholder instead of an option, which is a sensible choice for a mandatory field."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Delivery Note sheet (TC-DNL, TC-DNA, TC-DNW, TC-DNG, TC-DNM, TC-DND), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Sales Taxes and Charges Template","eyebrow":"تقرير مشاكل الجودة · Selling › Sales Taxes and Charges Template","h1":"Sales Taxes and Charges Template: 11 فرق عن الـ SRS، أغلبها قواعد ناقصة في السيرفر","lede":"مقارنة قايمة Sales Taxes and Charges Template وشاشتي الإضافة والتفاصيل وقواعد السيرفر بالـ SRS (الصفحات 75 لـ 86) على السيرفر التجريبي: 33 فحص (22 مطابق و11 مختلف). الموديول ده الأقرب للـ SRS لحد دلوقتي: رسائل الشاشة وقيم Mode وقايمة Account Head (حسابات Profit & Loss للشركة المختارة بس) والـ Reference Row التلقائي والـ Connections والأزرار الثابتة كلها مطابقة. الفروق في السيرفر اللي مبيطبقش طول Title (ST-01) وطول Description (ST-02) وقاعدة Profit & Loss للـ Account Head (ST-03)، وكام تفصيلة في الشاشة: Save صامت على فورم ماتلمسش (ST-06) وعلامة Draft في التفاصيل (ST-07) ونافذة Setting وعمود No. الناقص (ST-08) وتسميات ZATCA بالإنجليزي (ST-09) وDon't Recompute Tax الناقصة (ST-10).","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","العربية (شاشات القالب)"],["تاريخ التشغيل","2026-11-16"],["الطريقة","فحوصات متصفح بـ Playwright ونداءات على endpoint الإنشاء (لسه مش محفوظة كملف اختبار)"],["أرقام المشاكل","ST-01 لـ ST-11 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة القايمة: الأعمدة وStatus وDefault وDisabled وزر الإضافة وشريط الإجراءات",3,2,1,0],["شاشة الإضافة: حدود Title ورسائله وقوائم Company وTax Category وDefault / Disabled وإضافة وحذف صف وقيم Mode وقايمة Account Head وReference Row وحقلي Rate وAmount وحدود Description وSave على فورم ماتلمسش ونافذة Setting وعمود No. وحقول Edit Row وتسمياتها",15,11,4,0],["شاشة التفاصيل: الحقول والأزرار الثابتة وConnections وتأكيد الحذف وحالة الهيدر",5,4,1,0],["قواعد السيرفر (إنشاء): Title إجباري وطوله وMode وAccount Head إجباريين وطول Description وحساب Balance Sheet وقالب معطّل وافتراضي وTax Category وقواعد الصف السابق ورسائلها",10,5,5,0]],"total":"الإجمالي","covNote":"لسه مفيش شيت test cases لـ Sales Taxes and Charges Template، فالمشاكل فوق مش مربوطة بأرقام حالات. الفحوصات اتعملت بسكريبتات متصفح وطلبات للسيرفر.","okTitle":"اللي اتأكدنا إنه شغال","ok":["القايمة: أعمدة ID وStatus (مفعل / معطل) وDefault وDisabled وCompany؛ وزر الإضافة؛ وشريط الإجراءات فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف؛ ونافذة Edit الجماعية فيها Title وDefault وDisabled وCompany وTax Category","الإضافة: Title بيقف عند 100 حرف وبيظهر «يجب أن يتكون العنوان من حرفين على الأقل» لو أقل من 2؛ وCompany إجباري («الشركة مطلوبة») وdropdown قابل للبحث؛ وTax Category dropdown قابل للبحث؛ وخانتي Default وDisabled موجودتين","جدول الضرائب: قايمة Mode فيها القيم الخمسة (Actual وOn Net Total وOn Previous Row Amount وOn Previous Row Total وOn Item Quantity)؛ وقايمة Account Head فيها حسابات Profit & Loss للشركة المختارة بس؛ والصف الفاضي بيظهر «الحساب مطلوب»؛ وRate أرقام بس وبيقف عند 100 حرف؛ وإضافة وحذف الصف شغالين","Reference Row بيظهر لما الـ Mode يبقى On Previous Row وبيتملي بالصف السابق («صف 1»)؛ وDescription بيظهر «يجب أن يتكون الوصف من 3 أحرف على الأقل» وبيقف عند 500 حرف","Edit Row: Mode وAccount Head وIs Tax Included In Basic Rate وConsidered In Paid Amount وTax Rate وAccount Currency وNet Amount وTotal وTax Amount After Discount وDescription وCost Center وProject وتسميات عملة الشركة؛ وAdd / Remove columns بتعرض أعمدة الـ SRS","التفاصيل: الحقول ببياناتها؛ وAssign وTags وAttachments وPrint وShare وDelete؛ وConnections فيه Sales Invoice وSales Order وDelivery Note وPOS Profile وSubscription وTax Rule (38 سجل مرتبط على «VAT - E»)؛ والحذف بيطلب تأكيد والإلغاء بيقفله","السيرفر: Title ناقص وMode (النوع) ناقص وTax Category مش موجودة وقالب معطّل وافتراضي مع بعض بيترفضوا؛ ونوع الصف السابق في الصف الأول وReference Row مش قبل الصف الحالي بيترفضوا"],"noTitle":"اللي ماتنفذش وليه","no":["حفظ وتعديل قالب من الشاشة ببيانات صحيحة (ماضغطتش Save والحقول الإجبارية مليانة عشان ماعملش سجلات)","«Yes» في حذف قالب مرتبط بمعاملات وتحذير الـ doctypes المرتبطة كلينكات (ماأكدتش الحذف على قوالب حقيقية؛ و«VAT - E» عليه 38 سجل مرتبط)","Column width وسحب الأعمدة والتصدير والإسناد والطباعة والوسوم وتحديث نافذة Edit في القايمة","Is Tax Withholding Account وSet by Item Tax Template (الـ SRS بيعرضوهم لصفوف معينة بس)، ونطاق Tax Rate والمعدل السالب (السيرفر رد بقاعدة ZATCA بس «Tax Code S must have a rate of 15%» فماظهرتش قاعدة عامة)","إن القالب المعطّل مبيتعرضش في المعاملات الجديدة، وإن القالب الافتراضي بيتختار تلقائيًا في فاتورة مبيعات للشركة"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Selling SRS v1.0, Sales Taxes and Charges Template","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا ST-01 وST-02 وST-03 وST-06 كـ Fixed هنا (أو يبلّغوا الـ tester)."],["h","لما يوصل إصلاح"],["ol",["كرر الحالة عن طريق endpoint الإنشاء (ST-01 لـ ST-05 مبتبانوش إلا من هناك) وفي الشاشة (ST-06 لـ ST-11).","نفّذ الحالات المكتوبة تحت «ماتنفذش».","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","فحوصات السيرفر عملت 16 قالب تجريبي مامسحتهمش (الاختبارات مبتمسحش حاجة): قوالب «PW ST ...» وقالب «a - E» وقالب بعنوان 101 حرف وقالب بعنوان 100 حرف وقالب من غير صفوف ضرائب. وأثناء الاختبار قالب افتراضي تاني لنفس الشركة شال علامة Default من «عنوان قالب ضريبى جديد - E»؛ وعلامة Default رجعت للقالب ده، وقوالب «PW ST DEF 30930» بقت مش افتراضية. القوالب الموجودة اتقرت بس."]],"obs":["الـ SRS مبيقولش إن صفوف الضرائب إجبارية ولا إن Title القالب لازم يكون فريد: السيرفر بيحفظ قالب من غير صفوف ضرائب وقالب تاني بنفس الـ Title (بياخد الـ ID «... - E-1»). أكدوا الاتنين مع صاحب الـ SRS.","السيرفر بيحفظ قالب من غير Company ويستخدم شركة الـ session الافتراضية؛ والشاشة بتظهر «الشركة مطلوبة». قرروا هل السيرفر لازم يرفضه.","حفظ قالب تاني كـ Default لنفس الشركة بيشيل علامة Default من الأول من غير ما يقول (سلوك النظام؛ والـ SRS مبيوصفوش).","نفس Account Head ينفع يتضاف في صفين في قالب واحد، وصف Actual ينفع يتحفظ بمبلغ ومعدل 0.","القايمة فيها عمود «Title» زيادة مش في الـ SRS (ID وStatus وDefault وDisabled وCompany).","Tax Rate 150 و-5 اترفضوا بقاعدة ZATCA بس «Tax Code S must have a rate of 15%»، فمش معروف لو في نطاق عام للمعدل لأكواد ضريبة تانية.","الـ SRS بيقول إن قايمة Mode بتبدأ بـ «Empty»؛ والشاشة بتعرض «فارغ» كـ placeholder مش كاختيار، وده منطقي لحقل إجباري."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Delivery Note (TC-DNL وTC-DNA وTC-DNW وTC-DNG وTC-DNM وTC-DND)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

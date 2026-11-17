@@ -1,0 +1,16 @@
+WRAPPERS 3
+WRAPPER 0 BUTTONS ["SPAN|title=|aria=null|cls=id-uom-settings|txt="]
+WRAPPER 0 HEAD البريد الإلكتروني نوع البريد أساسي
+WRAPPER 0 ROW ICONS ["SPAN.id-uom-edit","svg.","SPAN.id-uom-trash","svg."]
+WRAPPER 0 SETTING POPUP تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود البريد الإلكتروني نوع البريد أساسي إضافة/إزالة حقول إلغاء حفظ
+WRAPPER 0 EDIT ROW POPUP تعديل بريد إلكتروني تعديل بريد إلكتروني البريد الإلكتروني * أساسي إلغاء تعديل
+WRAPPER 1 BUTTONS ["SPAN|title=|aria=null|cls=id-uom-settings|txt=","BUTTON|title=|aria=Show popup|cls=cs-toggle|txt=","BUTTON|title=|aria=Show popup|cls=cs-toggle|txt="]
+WRAPPER 1 HEAD الرقم Country Code نوع جهة الاتصال رقم الهاتف الأساسي
+WRAPPER 1 ROW ICONS ["svg.cs-chevron","svg.cs-chevron","SPAN.id-uom-edit","svg.","SPAN.id-uom-trash","svg."]
+WRAPPER 1 SETTING POPUP تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود الرقم Country Code نوع جهة الاتصال رقم الهاتف الأساسي إضافة/إزالة حقول إلغاء حفظ
+WRAPPER 1 EDIT ROW POPUP تعديل رقم تعديل رقم Country Code رقم الهاتف * نوع جهة الاتصال رقم الهاتف الأساسي رقم الجوال الأساسي إلغاء تعديل
+WRAPPER 2 BUTTONS ["SPAN|title=|aria=null|cls=id-uom-settings|txt=","BUTTON|title=|aria=Show popup|cls=cs-toggle|txt=","BUTTON|title=|aria=Show popup|cls=cs-toggle|txt="]
+WRAPPER 2 HEAD نوع المستند المرتبط اسم المستند المرتبط عنوان المستند المرتبط
+WRAPPER 2 ROW ICONS ["svg.cs-chevron","svg.cs-chevron","SPAN.id-uom-edit","svg.","SPAN.id-uom-trash","svg."]
+WRAPPER 2 SETTING POPUP تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود نوع المستند المرتبط اسم المستند المرتبط عنوان المستند المرتبط إضافة/إزالة حقول إلغاء حفظ
+WRAPPER 2 EDIT ROW POPUP تعديل رابط تعديل رابط نوع المستند المرتبط * اسم المستند المرتبط * عنوان المستند المرتبط إلغاء تعديل

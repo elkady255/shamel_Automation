@@ -1,0 +1,11 @@
+A1 EMPTY SAVE msgs []
+A1 URL https://test.hr.azzrk.com/desk/shamel#/selling/quotations/new
+B PARTY ONLY msgs ["Cannot save At least one item is required Failed to save quotation","At least one item is required Failed to save quotation"]
+B URL https://test.hr.azzrk.com/desk/shamel#/selling/quotations/new
+C BLANK ROW msgs ["Cannot save Validation Error in the following fields: items.0.item_code: Input should be a valid string Failed to save quotation","Validation Error in the following fields: items.0.item_code: Input should be a valid string Failed to save quotation"]
+C URL https://test.hr.azzrk.com/desk/shamel#/selling/quotations/new
+D ROW 10,200.00 SAR | inputs ["checkbox:on","text:ميديا موقع 6 شهور - IND182210","number:1","number:10200"]
+D QTY=[0] msgs ["Cannot save Row 1: Quantity must be greater than 0 Failed to save quotation","Row 1: Quantity must be greater than 0 Failed to save quotation"] url=new
+D QTY=[-3] msgs ["Cannot save Row 1: Quantity must be greater than 0Failed to save quotation Confirm","Row 1: Quantity must be greater than 0Failed to save quotation"] url=new
+D QTY=[2.5] msgs ["Message Error: Value missing for Quotation: Name In Contract Error: Value missing for Quotation: Employee","Error: Value missing for Quotation: Name In Contract Error: Value missing for Quotation: Employee"] url=new
+D QTY=[] msgs ["Cannot save Error: Value missing for Quotation: Name In ContractError: Value missing for Quotation: EmployeeFailed to save quotation Confirm","Error: Value missing for Quotation: Name In ContractError: Value missing for Quotation: EmployeeFailed to save quotation"] url=new

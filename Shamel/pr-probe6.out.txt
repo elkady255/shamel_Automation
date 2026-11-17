@@ -1,0 +1,38 @@
+ITEMS [{"name":"111","stock_uom":"Nos"},{"name":"1110","stock_uom":"Abampere"},{"name":"1111","stock_uom":"Nos"}]
+CURRENCY SAR
+P00 valid baseline -> 200 SAVED name=PRLE-0004
+P01 no title -> 417 خطأ: قيمة مفقودة ل قاعدة التسعير: العنوان
+P02 title 1 char -> 200 SAVED name=PRLE-0005
+P03 title 101 chars -> 200 SAVED name=PRLE-0006
+P04 no price_or_product -> 200 SAVED name=PRLE-0007
+P05 no company -> 200 SAVED name=PRLE-0008
+P06 no currency -> 200 SAVED name=PRLE-0009
+P07 Item Code with no rows -> 417 Item Code لم تتم إضافته في الجدول
+P08 row without item -> 200 SAVED name=PRLE-0010
+P09 row without UOM -> 200 SAVED name=PRLE-0011
+P10 row with a UOM the item does not have -> 200 SAVED name=PRLE-0012
+P11 min qty > max qty -> 417 الكمية الادنى لايمكن ان تكون اكبر من الكمية الاعلى
+P12 negative min qty -> 200 SAVED name=PRLE-0013
+P13 min amt > max amt -> 417 مين آمت لا يمكن أن يكون أكبر من ماكس آمت
+P14 valid_upto before valid_from -> 417 <strong>ساري حتى</strong> يجب أن يكون بعد <strong>ساري من</strong>
+P15 discount 150% -> 200 SAVED name=PRLE-0014
+P16 discount -10% -> 200 SAVED name=PRLE-0015
+P17 discount 0% (no benefit) -> 200 SAVED name=PRLE-0016
+P18 Rate with rate 0 -> 200 SAVED name=PRLE-0017
+P19 margin percentage rate 1 digit -> 200 SAVED name=PRLE-0018
+P20 recursive without recurse_for -> 200 SAVED name=PRLE-0019
+P21 Product, no free item, not same item -> 200 SAVED name=PRLE-0020
+P22 has_priority without priority -> 417 الأولوية إلزامية
+P23 priority without has_priority -> 200 SAVED name=PRLE-0021
+P24 validate applied rule, description 2 chars -> 200 SAVED name=PRLE-0022
+P25 validate applied rule, description 501 chars -> 200 SAVED name=PRLE-0023
+P26 threshold 150 -> 200 SAVED name=PRLE-0024
+P27 neither selling nor buying -> 417 يجب اختيار واحد على الأقل من خياري البيع أو الشراء
+P28 applicable_for Customer without customer -> 417 العميل مطلوب
+P29 selling only, applicable_for Supplier -> 417 لا يمكن أن تجد المورد: x
+P30 Transaction with items rows -> 200 SAVED name=PRLE-0025
+P31 invalid warehouse -> 417 لا يمكن أن تجد المستودع: no such warehouse xyz
+P32 duplicate criteria #1 -> 200 SAVED name=PRLE-0026
+P33 duplicate criteria #2 (same criteria) -> 200 SAVED name=PRLE-0027
+P34 same item twice in rows -> 417 مكرر Item Code موجود في الجدول
+P35 mixed conditions on Item Code -> 200 SAVED name=PRLE-0028

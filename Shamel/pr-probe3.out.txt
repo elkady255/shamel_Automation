@@ -1,0 +1,40 @@
+ALL OPEN TEXT مرحباً Administrator ! AN Administrator admin@example.com 67 إضافة قاعدة تسعير التفاصيل الشروط الديناميكية الإعدادات المتقدمة المعلومات الأساسية تسلسل التسمية * عنوان قاعدة التسعير * تطبيق القاعدة على * السعر أو خصم المنتج * المستودع الشروط المختلطة تراكمية بناءً على رمز القسيمة الأصناف إضافة صنف لم تتم إضافة أصناف بعد أضف الأصناف التي تنطبق عليها قاعدة التسعير. الخصم على صنف آخر تطبيق القاعدة على صنف آخر معلومات الطرف البيع الشراء الكمية والمبلغ الحد الأدنى للكمية (حسب وحدة قياس المخزون) الحد الأقصى للكمية (حسب وحدة قياس المخزون) الحد الأدنى للمبلغ الحد الأقصى للمبلغ مخطط خصم السعر السعر أو الخصم نسبة الخصم لقائمة الأسعار إعدادات الفترة ساري من ساري حتى الشركة * العملة * الهامش نوع الهامش إلغاء حفظ
+INPUT search|ابحث عن الصفحات والأنواع...|max=-1|val=|chk=false
+INPUT text|اختر تسلسل التسمية|max=-1|val=PRLE-.####|chk=false
+INPUT text|أدخل عنوان قاعدة التسعير|max=100|val=|chk=false
+INPUT text|اختر ما تنطبق عليه القاعدة|max=-1|val=كود الصنف|chk=false
+INPUT text|اختر نوع الميزة|max=-1|val=السعر|chk=false
+INPUT text|ابحث واختر المستودع|max=-1|val=|chk=false
+INPUT checkbox||max=-1|val=on|chk=false
+INPUT checkbox||max=-1|val=on|chk=false
+INPUT checkbox||max=-1|val=on|chk=false
+INPUT text|اختر الصنف الذي يحصل على الخصم|max=-1|val=|chk=false
+INPUT checkbox||max=-1|val=on|chk=false
+INPUT checkbox||max=-1|val=on|chk=false
+INPUT text|أدخل رقمًا|max=100|val=|chk=false
+INPUT text|أدخل رقمًا|max=100|val=|chk=false
+INPUT text|أدخل رقمًا|max=100|val=|chk=false
+INPUT text|أدخل رقمًا|max=100|val=|chk=false
+INPUT text|اختر السعر أو الخصم|max=-1|val=نسبة الخصم|chk=false
+INPUT text|أدخل رقمًا|max=100|val=|chk=false
+INPUT text|ابحث واختر قائمة الأسعار|max=-1|val=|chk=false
+INPUT text|اختر التاريخ|max=-1|val=17-11-2026|chk=false
+INPUT text|اختر التاريخ|max=-1|val=|chk=false
+INPUT text|ابحث واختر الشركة|max=-1|val=|chk=false
+INPUT text|ابحث واختر العملة|max=-1|val=|chk=false
+INPUT text|اختر نوع الهامش|max=-1|val=|chk=false
+TAB الشروط الديناميكية TEXT مرحباً Administrator ! AN Administrator admin@example.com 67 إضافة قاعدة تسعير التفاصيل الشروط الديناميكية الإعدادات المتقدمة الشروط 1 توسيع إلغاء حفظ
+TAB الشروط الديناميكية INPUT search|ابحث عن الصفحات والأنواع...|max=-1|val=|chk=false
+TAB الشروط الديناميكية INPUT textarea|أدخل تعبير بايثون|max=-1|val=|chk=undefined
+TAB الشروط الديناميكية BTNS ["التفاصيل","الشروط الديناميكية","الإعدادات المتقدمة","توسيع","إلغاء","حفظ"]
+TAB الإعدادات المتقدمة TEXT مرحباً Administrator ! AN Administrator admin@example.com 67 إضافة قاعدة تسعير التفاصيل الشروط الديناميكية الإعدادات المتقدمة الإعدادات المتقدمة تطبيق قواعد تسعير متعددة الحد الأدنى للاقتراح (بالنسبة المئوية) التحقق من قاعدة التسعير له أولويه إلغاء حفظ
+TAB الإعدادات المتقدمة INPUT search|ابحث عن الصفحات والأنواع...|max=-1|val=|chk=false
+TAB الإعدادات المتقدمة INPUT checkbox||max=-1|val=on|chk=false
+TAB الإعدادات المتقدمة INPUT text|أدخل رقمًا|max=100|val=|chk=false
+TAB الإعدادات المتقدمة INPUT checkbox||max=-1|val=on|chk=false
+TAB الإعدادات المتقدمة INPUT checkbox||max=-1|val=on|chk=false
+TAB الإعدادات المتقدمة BTNS ["التفاصيل","الشروط الديناميكية","الإعدادات المتقدمة","الإعدادات المتقدمة","إلغاء","حفظ"]
+APPLY ON OPTIONS ["كود الصنف","مجموعة الأصناف","العلامة التجارية","المعاملة"]
+KIND OPTIONS ["السعر","المنتج"]
+SERIES OPTIONS ["PRLE-.####"]
+NO OPTION مجموعة الصنف

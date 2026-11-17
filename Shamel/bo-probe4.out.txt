@@ -1,0 +1,10 @@
+COMPANY OPTIONS ["Ahmed Ebrahim CO."]
+TABLE HEADERS ["","كود الصنف","الكمية","السعر","الكمية المطلوبة",""]
+ROW INPUTS ["checkbox|checkbox|ph=|max=-1|val=on","cs-input|text|ph=ابحث واختر|max=-1|val=","cd-input |number|ph=|max=100|val=","cd-input |number|ph=|max=100|val="]
+ROW TITLES ["إعدادات","تعديل الصف","حذف الصف"]
+SAVE EMPTY ROW modal  errs ["كود الصنف مطلوب","السعر مطلوب"]
+ITEM OPEN options count=20 ["111","1110","123","1231-RED-L"]
+ROW AFTER ITEM ["checkbox|val=on","text|val=ميديا موقع 6 شهور (IND182210)","number|val=1","number|val=10200"] text السعر مطلوب —
+SAVE NO RATE modal  errs []
+NUM INPUT COUNT 2
+SAVE VALID modal/toasts [] errs [] url https://test.hr.azzrk.com/desk/shamel#/selling/blanket-orders/MFG-BLR-2026-00005

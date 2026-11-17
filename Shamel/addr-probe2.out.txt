@@ -1,0 +1,21 @@
+TYPE OPTS ["Home","Postal","Office","Billing","Shipping"]
+TYPE POP 
+COUNTRY SEARCH ["Saudi Arabia"]
+GOV placeholder count 1
+GOV OPTS count 2 ["Riyadh Region","المنطقة الشرقية"]
+CITY OPTS count 1 ["Riyadh"]
+INPUT VALUES after chain ["","","","","Saudi Arabia","Riyadh Region","","","",""]
+CHECKS [false,false,false,false]
+TAXCAT ["_ZATCA Engine Exempt","_ZATCA Engine Standard","_ZATCA Engine Unlinked","ZATCA Sandbox VAT 15%","ضريبة القيمة المضافة"]
+CHECKBOX COUNT 4
+AFTER COMPANY CHECK rows before 1 after 0 text مرحباً Administrator ! AN Administrator admin@example.com إضافة عنوان غير محفوظة تفاصيل العنوان اسم العنوان * نوع العنوان * سطر العنوان 1 * سطر العنوان 2 الدولة المحافظة المدينة / البلدة الرمز البريدي فاكس فئة الضريبة العنوان الرئيسي عنوان الفواتير المفضل عنوان الشحن المفضل المرجع عنوان شركتك سجل الروابط إضافة رابط عنوان الشركة يمكن ربطه بنوع مستند الشركة فقط. لا توجد مستندات مرتبطة بعد أضف رابطًا لإلحاق هذا العنوان بعميل أو مورّد أو شركة أو أي طرف آخر. إلغاء حفظ
+INPUTS ["أدخل الرمز البريدي= dis=false","أدخل رقم الفاكس= dis=false","ابحث واختر الفئة الضريبية= dis=false"]
+EDIT POPUP تعديل تعديل الحقل * تحديث
+EDIT FIELD OPTS ["سطر العنوان 1","سطر العنوان 2","Building Number","District","Building Number","Area/District","المدينة / البلدة","المقاطعة","الولاية/المقاطعة","الدولة","المحافظة","الرمز البريدي","Short Address","البريد الإلكتروني","الهاتف","فاكس","العنوان الرئيسي","فئة الضريبة","عنوان الفواتير المفضل","عنوان الشحن المفضل","معطل","عنوان شركتك","testing"]
+STATUS VALUES []
+LINK DOCTYPES ["Bank","Company","Customer","Lead","Opportunity","Supplier","Warehouse"]
+LINK NAME ph نوع المستند,المستند
+TABLE HEAD نوع المستند المرتبط اسم المستند المرتبط عنوان المستند المرتبط
+ROW TITLES ["إعدادات الجدول","تعديل الصف","حذف"]
+EDIT ROW POPUP تعديل الصف تعديل الصف نوع المستند المرتبط * اسم المستند المرتبط * عنوان المستند المرتبط حفظ إلغاء
+SETTING POPUP تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود نوع المستند المرتبط اسم المستند المرتبط عنوان المستند المرتبط إضافة/إزالة حقول إلغاء حفظ

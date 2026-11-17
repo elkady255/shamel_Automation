@@ -1,0 +1,10 @@
+URL https://test.hr.azzrk.com/desk/shamel#/selling/quotations
+TEXT Welcome Administrator ! AN Administrator admin@example.com 68 Quotations Quotations Log Add Quotation All Filters Saved Filters Create Filters Last Updates ID Status Customer Name Date Company Grand Total SAL-QTN-2026-01656 Expired امل 20-09-2026 Ahmed Ebrahim CO. 6000 SAL-QTN-2026-01637 Expired امل 16-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01655 Draft امل 30-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01654 Draft امل 29-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01653 Draft امل 28-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01652 Draft امل 27-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01651 Draft امل 26-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01650 Draft امل 25-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01649 Draft امل 24-07-2026 Ahmed Ebrahim CO. 11730 SAL-QTN-2026-01648 Draft امل 23-07-2026 Ahmed Ebrahim CO. 11730 show 10 From 7963 1 2 3 4 5 … 797
+HEADERS ["","ID","Status","Customer Name","Date","Company","Grand Total"]
+BTNS ["Add Quotation","Last Updates","1","2","3","4","5","797"]
+ROWS 10
+BULK (first row) ["Add Quotation","Last Updates","1","2","3","4","5","797","Select All","Edit","Export","Assign","Add Tags","Clear Assignment","Cancel","Print","Delete"]
+DRAFT ROW SAL-QTN-2026-01655 Draft امل 30-07-2026 Ahmed Ebrahim CO. 11730
+BULK (draft) ["Add Quotation","Last Updates","1","2","3","4","5","797","Select All","Edit","Export","Assign","Add Tags","Clear Assignment","Submit","Print","Delete"]
+STATUS WORDS ["Expired","Draft"]
+PAGER ["show 10 From 7963 1 2 3 4 5 … 797","1 2 3 4 5 … 797"]

@@ -1,0 +1,6 @@
+AMENDED DOC amended_from=SAL-QTN-2026-01674 status=Draft docstatus=0 items=1 emp=HR-EMP-01418
+FRESH LOAD badge Welcome Administrator ! AN Administrator admin@example.com 69 Quotation Details Draft Details General Informat
+FRESH BTNS ["Cancel","Save","Submit"]
+FRESH TEXT  Draft Details General Information More Information Linked Records 0 Basic Information Series * Quotation To * Customer * Party Name PW Test Customer Quotation Date Valid Till Company * Has Unit Price Items Amended From SAL-QTN-2026-01674 Currency and Price Li
+HAS AMENDED FROM LABEL true
+OLD CANCELLED BTNS ["Amend"]

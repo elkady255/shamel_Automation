@@ -1,0 +1,29 @@
+UNTOUCHED SAVE مرحباً Administrator ! AN Administrator admin@example.com إضافة قالب ضريبي الضرائب والرسوم على المبيعات عنوان * شركة * افتراضي معطل فئة الضريبة سجل ضرائب ورسوم المبيعات إضافة ضريبة لا توجد بيانات بعد أضف بيانات إلى الجدول لبدء إدارة سجلاتك. إلغاء حفظ
+TITLE 1 CHAR مرحباً Administrator ! AN Administrator admin@example.com إضافة قالب ضريبي غير محفوظة الضرائب والرسوم على المبيعات عنوان * يجب أن يتكون العنوان من حرفين على الأقل شركة * الشركة مطلوبة افتراضي معطل فئة الضريبة سجل ضرائب ورسوم المبيعات إضافة ضريبة لا توجد بيانات بعد أضف بيانات إلى الجدول لبدء إدارة سجلاتك. إلغاء حفظ
+TITLE LEN AFTER 120 TYPED 100
+COMPANY OPTIONS ["_EGS Test Co","_ZATCA Invoice Test Co","Ahmed Ebrahim CO.","Alarrab - العراب","Ather - أثر","Awayed - عوايد","Azzrk - أزرق","Azzrk Influencer Group","Azzrk Marketing Group","Basmah- بصمة","Callva - كولفا","Cold Azzrk - أزرق كولد"]
+TAX CATEGORY OPTIONS ["_ZATCA Engine Exempt","_ZATCA Engine Standard","_ZATCA Engine Unlinked","ZATCA Sandbox VAT 15%","ضريبة القيمة المضافة"]
+AFTER ROW مرحباً Administrator ! AN Administrator admin@example.com 66 إضافة قالب ضريبي غير محفوظة الضرائب والرسوم على المبيعات عنوان * شركة * الشركة مطلوبة افتراضي معطل فئة الضريبة سجل ضرائب ورسوم المبيعات إضافة ضريبة النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي 0.00 SAR 0.00 SAR إلغاء حفظ
+ROW INPUT INPUT|search|ابحث عن الصفحات والأنواع...|max=-1|dis=false|val=|chk=false
+ROW INPUT INPUT|text|أدخل عنوان القالب|max=100|dis=false|val=ab|chk=false
+ROW INPUT INPUT|text|ابحث واختر الشركة|max=-1|dis=false|val=|chk=false
+ROW INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROW INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROW INPUT INPUT|text|ضريبة القيمة المضافة القياسية|max=-1|dis=false|val=|chk=false
+ROW INPUT INPUT|text|فارغ|max=-1|dis=false|val=|chk=false
+ROW INPUT INPUT|text|ابحث واختر|max=-1|dis=false|val=|chk=false
+ROW INPUT INPUT|text||max=100|dis=false|val=|chk=false
+ROW INPUT INPUT|text||max=100|dis=false|val=|chk=false
+WRAPPERS 1
+ROW TITLES []
+MODE OPTIONS ["مبلغ ثابت","على صافي الإجمالي","على مبلغ الصف السابق","على إجمالي الصف السابق","على كمية الصنف"]
+ACCOUNT OPTIONS (20) ["المبيعات (4100 - المبيعات - AIG)","المبيعات (4100 - المبيعات - AMG)","المبيعات (4100 - المبيعات - Alarrab)","المبيعات (4100 - المبيعات - Ather)","المبيعات (4100 - المبيعات - Awayed)","المبيعات (4100 - المبيعات - Azzrk)","المبيعات (4100 - المبيعات - Basma)","المبيعات (4100 - المبيعات - Callva)","المبيعات (4100 - المبيعات - ColdAzz)","المبيعات (4100 - المبيعات - Danah)","المبيعات (4100 - المبيعات - Darb)","المبيعات (4100 - المبيعات - E)","المبيعات (4100 - المبيعات - F)","المبيعات (4100 - المبيعات - Fazaa)","المبيعات (4100 - المبيعات - Ghanaem)"]
+SAVE WITH EMPTY ROW مرحباً Administrator ! AN Administrator admin@example.com 66 إضافة قالب ضريبي غير محفوظة الضرائب والرسوم على المبيعات عنوان * شركة * الشركة مطلوبة افتراضي معطل فئة الضريبة سجل ضرائب ورسوم المبيعات إضافة ضريبة النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي الحساب مطلوب 0.00 SAR 0.00 SAR كل صف ضريبة يحتاج نوعًا وحسابًا. إلغاء حفظ
+NUM FIELDS 2
+RATE AFTER abc 
+RATE AFTER 12.5 12.5
+RATE LEN AFTER 120 100
+SETTING POPUP تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي إضافة/إزالة حقول إلغاء حفظ
+SETTING POPUP BTNS ["","","","","","","","إضافة/إزالة حقول","إلغاء","حفظ"]
+EDIT ROW POPUP إعدادات الضريبة إعدادات الضريبة تفاصيل الضريبة والعملة النوع * الحساب المحاسبي * الضريبة مشمولة في السعر الأساسي تُحتسب ضمن المبلغ المدفوع معدل الضريبة عملة الحساب SAR صافي المبلغ (بالعملة) 0.00 SAR المبلغ (بالعملة) — الإجمالي (بالعملة) 0.00 SAR قيمة الضريبة بعد الخصم 0.00 SAR الوصف ZATCA النوع * رمز الضريبة * سبب الإعفاء * رمز سبب الإعفاء يتم إنشاؤه تلقائيًا المحاسبة والتوزيع مركز التكلفة المشروع تفاصيل العملة الأساسية للشركة صافي المبلغ (بالعملة الأساسية للشركة) 0.00 SAR المبلغ (بالعملة الأساسية للشركة) 0.00 SAR الإجمالي (بالعملة الأساسية للشركة) 0.00 SAR مبلغ الضريبة بعد الخصم (بالعملة الأساسية للشركة) 0.00 SAR إلغاء تعديل
+EDIT ROW INPUTS ["text|اختيار|max=-1|dis=false|val=على صافي الإجمالي","text|ابحث واختر|max=-1|dis=false|val=","checkbox||max=-1|dis=false|val=on","checkbox||max=-1|dis=false|val=on","text||max=100|dis=false|val=1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111","textarea||max=500|dis=false|val=","text|Type or select|max=-1|dis=false|val=الضريبة","text|Type or select|max=-1|dis=false|val=S","text|اختيار|max=-1|dis=false|val=","text|ابحث واختر|max=-1|dis=false|val=","text|ابحث واختر|max=-1|dis=false|val="]

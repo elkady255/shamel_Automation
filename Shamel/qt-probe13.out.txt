@@ -1,0 +1,27 @@
+baseline => OK SAL-QTN-2026-01657 valid_till=undefined total=10200 status=Draft
+lead party => OK SAL-QTN-2026-01658 valid_till=undefined total=10200 status=Draft
+no party => OK SAL-QTN-2026-01659 valid_till=undefined total=10200 status=Draft
+party not found => FAIL 417 Could not find Party: NOPE-123
+party type mismatch (Lead with a Customer id) => FAIL 417 Could not find Party: CU-2026-00001
+quotation_to invalid doctype => FAIL 417 Could not find Party: x
+no company => OK SAL-QTN-2026-01660 valid_till=undefined total=10200 status=Draft
+valid_till before date => FAIL 417 Valid till date cannot be before transaction date
+valid_till equals date => OK SAL-QTN-2026-01661 valid_till=2026-11-17 total=10200 status=Draft
+no valid_till => OK SAL-QTN-2026-01662 valid_till=undefined total=10200 status=Draft
+date in the past (2020) => FAIL 417 Date 01-01-2020 is not in any active Fiscal Year for Ahmed Ebrahim CO.
+date far future => FAIL 417 Date 01-01-2099 is not in any active Fiscal Year for Ahmed Ebrahim CO.
+title 1 char => OK SAL-QTN-2026-01663 valid_till=undefined total=10200 status=Draft
+title 101 chars => OK SAL-QTN-2026-01664 valid_till=undefined total=10200 status=Draft
+title 141 chars => FAIL 417 Quotation SAL-QTN-2026-01665: 'Title' (TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT) will get truncated, as max characters 
+no employee => FAIL 417 Error: Value missing for Quotation: Employee
+no name in contract => FAIL 417 Error: Value missing for Quotation: Name In Contract
+exchange rate 0 => OK SAL-QTN-2026-01665 valid_till=undefined total=10200 status=Draft
+exchange rate negative => OK SAL-QTN-2026-01666 valid_till=undefined total=10200 status=Draft
+plc rate 0 => OK SAL-QTN-2026-01667 valid_till=undefined total=10200 status=Draft
+price list not found => FAIL 417 Could not find Price List: NOPE PL
+currency USD (company SAR) => OK SAL-QTN-2026-01668 valid_till=undefined total=10200 status=Draft
+order type Maintenance => OK SAL-QTN-2026-01669 valid_till=undefined total=10200 status=Draft
+order type Shopping Cart => OK SAL-QTN-2026-01670 valid_till=undefined total=10200 status=Draft
+order type invalid => FAIL 417  Order Type cannot be "Bogus". It should be one of "", "Sales", "Maintenance", "Shopping Cart"
+ignore pricing rule => OK SAL-QTN-2026-01671 valid_till=undefined total=10200 status=Draft
+company other (Azzrk) with its stores => OK SAL-QTN-2026-01672 valid_till=undefined total=10200 status=Draft

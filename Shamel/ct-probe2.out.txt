@@ -1,0 +1,40 @@
+META contact_section|Section Break|req=0|hid=0|opt=fa fa-user
+META first_name|Data|req=0|hid=0|opt=
+META middle_name|Data|req=0|hid=0|opt=
+META last_name|Data|req=0|hid=0|opt=
+META full_name|Data|req=0|hid=1|opt=
+META email_id|Data|req=0|hid=0|opt=Email
+META user|Link|req=0|hid=0|opt=User
+META address|Link|req=0|hid=0|opt=Address
+META sync_with_google_contacts|Check|req=0|hid=0|opt=
+META cb00|Column Break|req=0|hid=0|opt=
+META status|Select|req=0|hid=0|opt=Passive,Open,Replied
+META salutation|Link|req=0|hid=0|opt=Salutation
+META designation|Data|req=0|hid=0|opt=
+META gender|Link|req=0|hid=0|opt=Gender
+META phone|Data|req=0|hid=0|opt=Phone
+META mobile_no|Data|req=0|hid=0|opt=Phone
+META company_name|Data|req=0|hid=0|opt=
+META image|Attach Image|req=0|hid=1|opt=
+META sb_00|Section Break|req=0|hid=0|opt=
+META google_contacts|Link|req=0|hid=0|opt=Google Contacts
+META google_contacts_id|Data|req=0|hid=0|opt=
+META cb_00|Column Break|req=0|hid=0|opt=
+META pulled_from_google_contacts|Check|req=0|hid=0|opt=
+META sb_01|Section Break|req=0|hid=0|opt=
+META email_ids|Table|req=0|hid=0|opt=Contact Email
+META phone_nos|Table|req=0|hid=0|opt=Contact Phone
+META contact_details|Section Break|req=0|hid=0|opt=fa fa-pushpin
+META links|Table|req=0|hid=0|opt=Dynamic Link
+META is_primary_contact|Check|req=0|hid=0|opt=
+META more_info|Section Break|req=0|hid=0|opt=fa fa-file-text
+META department|Data|req=0|hid=0|opt=
+META unsubscribed|Check|req=0|hid=0|opt=
+Contact Email email_id|Data|req=1|opt=Email
+Contact Email is_primary|Check|req=0|opt=
+Contact Phone phone|Data|req=1|opt=Phone
+Contact Phone is_primary_phone|Check|req=0|opt=
+Contact Phone is_primary_mobile_no|Check|req=0|opt=
+KEYS name,owner,creation,modified,modified_by,docstatus,idx,first_name,middle_name,last_name,full_name,email_id,user,address,sync_with_google_contacts,custom_company,status,salutation,designation,gender,phone,mobile_no,company_name,image,google_contacts,google_contacts_id,pulled_from_google_contacts,is_primary_contact,is_billing_contact,is_shipping_contact,is_your_company_contact,disabled,department,unsubscribed
+ROW BUTTONS []
+ROW BUTTONS []

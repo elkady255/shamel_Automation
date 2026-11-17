@@ -1,0 +1,4 @@
+CREATE MENU Sales Order Sales Invoice Auto Repeat
+SET AS LOST 
+UPDATE ITEMS 
+LINKED  Open Details General Information More Information Linked Records 0 Sales Order Sales Invoices Opportunities Auto Repeat Cancel Document Set as Lost Update Items Create

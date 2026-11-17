@@ -1,0 +1,89 @@
+NAMING naming_series:
+META applicability_section|Section Break|req=0|def=undefined|opt=|dep=
+META naming_series|Select|req=0|def=PRLE-.####|opt=PRLE-.####|dep=
+META title|Data|req=1|def=undefined|opt=|dep=
+META disable|Check|req=0|def=0|opt=|dep=
+META apply_on|Select|req=1|def=Item Code|opt=Item Code,Item Group,Brand,Transaction|dep=
+META price_or_product_discount|Select|req=1|def=undefined|opt=Price,Product|dep=
+META warehouse|Link|req=0|def=undefined|opt=Warehouse|dep=eval:doc.apply_on != 'Transaction'
+META column_break_7|Column Break|req=0|def=undefined|opt=|dep=
+META items|Table|req=0|def=undefined|opt=Pricing Rule Item Code|dep=eval:doc.apply_on == 'Item Code'
+META item_groups|Table|req=0|def=undefined|opt=Pricing Rule Item Group|dep=eval:doc.apply_on == 'Item Group'
+META brands|Table|req=0|def=undefined|opt=Pricing Rule Brand|dep=eval:doc.apply_on == 'Brand'
+META mixed_conditions|Check|req=0|def=0|opt=|dep=eval:doc.apply_on != 'Transaction'
+META is_cumulative|Check|req=0|def=0|opt=|dep=eval:doc.apply_on != 'Transaction'
+META coupon_code_based|Check|req=0|def=0|opt=|dep=
+META section_break_18|Section Break|req=0|def=undefined|opt=|dep=eval:doc.apply_on != 'Transaction' && !doc.mixed_conditions
+META apply_rule_on_other|Select|req=0|def=undefined|opt=,Item Code,Item Group,Brand|dep=
+META column_break_17|Column Break|req=0|def=undefined|opt=|dep=
+META other_item_code|Link|req=0|def=undefined|opt=Item|dep=eval:doc.apply_rule_on_other == 'Item Code'
+META other_item_group|Link|req=0|def=undefined|opt=Item Group|dep=eval:doc.apply_rule_on_other == 'Item Group'
+META other_brand|Link|req=0|def=undefined|opt=Brand|dep=eval:doc.apply_rule_on_other == 'Brand'
+META section_break_7|Section Break|req=0|def=undefined|opt=|dep=
+META selling|Check|req=0|def=0|opt=|dep=
+META buying|Check|req=0|def=0|opt=|dep=
+META column_break_11|Column Break|req=0|def=undefined|opt=|dep=
+META applicable_for|Select|req=0|def=undefined|opt=,Customer,Customer Group,Territory,Sales Partner,Campaign,Supplier,Supplier Group|dep=eval: doc.buying || doc.selling
+META customer|Link|req=0|def=undefined|opt=Customer|dep=eval:doc.applicable_for=="Customer"
+META customer_group|Link|req=0|def=undefined|opt=Customer Group|dep=eval:doc.applicable_for=="Customer Group"
+META territory|Link|req=0|def=undefined|opt=Territory|dep=eval:doc.applicable_for=="Territory"
+META sales_partner|Link|req=0|def=undefined|opt=Sales Partner|dep=eval:doc.applicable_for=="Sales Partner"
+META campaign|Link|req=0|def=undefined|opt=UTM Campaign|dep=eval:doc.applicable_for=="Campaign"
+META supplier|Link|req=0|def=undefined|opt=Supplier|dep=eval:doc.applicable_for=="Supplier"
+META supplier_group|Link|req=0|def=undefined|opt=Supplier Group|dep=eval:doc.applicable_for=="Supplier Group"
+META section_break_19|Section Break|req=0|def=undefined|opt=|dep=
+META min_qty|Float|req=0|def=undefined|opt=|dep=
+META max_qty|Float|req=0|def=undefined|opt=|dep=
+META column_break_21|Column Break|req=0|def=undefined|opt=|dep=
+META min_amt|Currency|req=0|def=0|opt=currency|dep=
+META max_amt|Currency|req=0|def=0|opt=currency|dep=
+META product_discount_scheme_section|Section Break|req=0|def=undefined|opt=|dep=eval:doc.price_or_product_discount == 'Product'
+META same_item|Check|req=0|def=0|opt=|dep=eval:!doc.mixed_conditions && doc.apply_on != 'Transaction'
+META free_item|Link|req=0|def=undefined|opt=Item|dep=eval:(!doc.same_item || doc.apply_on == 'Transaction') || doc.mixed_conditions
+META free_qty|Float|req=0|def=0|opt=|dep=
+META free_item_rate|Currency|req=0|def=undefined|opt=|dep=
+META column_break_42|Column Break|req=0|def=undefined|opt=|dep=
+META free_item_uom|Link|req=0|def=undefined|opt=UOM|dep=
+META round_free_qty|Check|req=0|def=0|opt=|dep=
+META dont_enforce_free_item_qty|Check|req=0|def=0|opt=|dep=eval:doc.price_or_product_discount == 'Product'
+META is_recursive|Check|req=0|def=0|opt=|dep=
+META recurse_for|Float|req=0|def=undefined|opt=|dep=is_recursive
+META apply_recursion_over|Float|req=0|def=0|opt=|dep=is_recursive
+META section_break_23|Section Break|req=0|def=undefined|opt=|dep=
+META valid_from|Date|req=0|def=Today|opt=|dep=
+META valid_upto|Date|req=0|def=undefined|opt=|dep=
+META col_break1|Column Break|req=0|def=undefined|opt=|dep=
+META company|Link|req=0|def=undefined|opt=Company|dep=
+META currency|Link|req=1|def=undefined|opt=Currency|dep=
+META margin|Section Break|req=0|def=undefined|opt=|dep=
+META margin_type|Select|req=0|def=Percentage|opt=,Percentage,Amount|dep=
+META column_break_33|Column Break|req=0|def=undefined|opt=|dep=
+META margin_rate_or_amount|Float|req=0|def=0|opt=|dep=eval:doc.margin_type
+META price_discount_scheme_section|Section Break|req=0|def=undefined|opt=|dep=eval:doc.price_or_product_discount == 'Price'
+META rate_or_discount|Select|req=0|def=Discount Percentage|opt=,Rate,Discount Percentage,Discount Amount|dep=
+META apply_discount_on|Select|req=0|def=Grand Total|opt=Grand Total,Net Total|dep=eval:doc.apply_on == 'Transaction' && doc.rate_or_discount != 'Rate'
+META col_break2|Column Break|req=0|def=undefined|opt=|dep=
+META rate|Currency|req=0|def=0|opt=currency|dep=eval:doc.rate_or_discount=="Rate"
+META discount_amount|Currency|req=0|def=0|opt=currency|dep=eval:doc.rate_or_discount=="Discount Amount"
+META discount_percentage|Float|req=0|def=undefined|opt=|dep=eval:doc.rate_or_discount=="Discount Percentage"
+META for_price_list|Link|req=0|def=undefined|opt=Price List|dep=eval:doc.rate_or_discount!="Rate"
+META dynamic_condition_tab|Tab Break|req=0|def=undefined|opt=|dep=
+META condition|Code|req=0|def=undefined|opt=PythonExpression|dep=
+META section_break_13|Tab Break|req=0|def=undefined|opt=|dep=
+META apply_multiple_pricing_rules|Check|req=0|def=0|opt=|dep=
+META apply_discount_on_rate|Check|req=0|def=0|opt=|dep=eval:in_list(['Discount Percentage'], doc.rate_or_discount) && doc.apply_multiple_pricing_rules
+META column_break_66|Column Break|req=0|def=undefined|opt=|dep=
+META threshold_percentage|Percent|req=0|def=undefined|opt=|dep=
+META validate_pricing_rule_section|Section Break|req=0|def=undefined|opt=|dep=
+META validate_applied_rule|Check|req=0|def=0|opt=|dep=eval:doc.price_or_product_discount == 'Price'
+META column_break_texp|Column Break|req=0|def=undefined|opt=|dep=
+META rule_description|Small Text|req=0|def=undefined|opt=|dep=validate_applied_rule
+META priority_section|Section Break|req=0|def=undefined|opt=|dep=
+META has_priority|Check|req=0|def=0|opt=|dep=
+META column_break_sayg|Column Break|req=0|def=undefined|opt=|dep=
+META priority|Select|req=0|def=undefined|opt=,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|dep=has_priority
+META help_section|Tab Break|req=0|def=undefined|opt=Simple|dep=
+META pricing_rule_help|HTML|req=0|def=undefined|opt=|dep=
+META reference_section|Section Break|req=0|def=undefined|opt=|dep=
+META promotional_scheme_id|Data|req=0|def=undefined|opt=|dep=
+META promotional_scheme|Link|req=0|def=undefined|opt=Promotional Scheme|dep=

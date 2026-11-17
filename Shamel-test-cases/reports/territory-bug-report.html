@@ -1,0 +1,454 @@
+<title>Territory Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "TR-01",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts a Territory Name of 1 character and of 101 characters",
+  "area": "Add Territory › Territory Name",
+  "tc": [],
+  "srs": "Territory Name: mandatory, unique, minimum 2, maximum 100 characters",
+  "steps": [
+   "Send the create request with a name of \"z\", then with a name of 101 characters."
+  ],
+  "expected": "Both are refused with a length message.",
+  "actual": "Both are saved: a territory named \"z\" and one with a 101-character name. On the screen the field stops at 100 characters; the minimum-length message of the screen was not tried (saving a short name could have created a territory).",
+  "code": "Territory  territory_name=\"z\"  -> saved\nTerritory  territory_name=<101 characters>  -> saved",
+  "shots": [],
+  "fix": "Add the 2 to 100 character rule to the Territory validation on the server."
+ },
+ {
+  "id": "TR-02",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A territory that is not a group can be chosen as the Parent Territory of another territory",
+  "area": "Add Territory › Parent Territory",
+  "tc": [],
+  "srs": "Parent Territory: displays only the territories with Is Group checked",
+  "steps": [
+   "Send the create request for a territory with Parent Territory = \"Egypt\" (Is Group unchecked)."
+  ],
+  "expected": "The request is refused with a message that the parent must be a group.",
+  "actual": "The territory is saved (\"PW TR B 189264\" under \"Egypt\"). The dropdown of the screen is correct: it lists only the four groups (منقطة تيست 2, منطقة تيست, منقطة جديدة, All Territories).",
+  "code": "Territory  parent_territory=\"Egypt\" (is_group=0)  -> saved",
+  "shots": [],
+  "fix": "Refuse a parent whose Is Group is unchecked on the server."
+ },
+ {
+  "id": "TR-03",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "also": "Backend",
+  "title": "The system territory \"All Territories\" can be edited and shows a Delete button (the SRS says it cannot be edited or deleted)",
+  "area": "Territory Details › All Territories",
+  "tc": [],
+  "srs": "There is a system-defined parent Territory named \"All Territories\" that cannot be edited or deleted",
+  "steps": [
+   "Open Selling › Territories and click \"All Territories\".",
+   "Look at the fields and the top buttons."
+  ],
+  "expected": "Read only fields and no Delete button.",
+  "actual": "Only the name box is disabled. Parent Territory, Is Group and Territory Manager can be changed, and Delete and Save are available. Only the state of the screen was checked: nothing was changed or deleted on the server, to protect the root of the tree (same as CG-06 in Customer Group).",
+  "code": "All Territories: name disabled; parent / Is Group / manager enabled; Delete present",
+  "shots": [],
+  "fix": "Make the screen read only for the system territory and refuse its edit and delete on the server."
+ },
+ {
+  "id": "TR-04",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Save on an untouched Add form does nothing: no message is shown for the empty mandatory field",
+  "area": "Add Territory › Save",
+  "tc": [],
+  "srs": "If the field is left empty an error message appears (Territory Name); a validation message is displayed for each invalid field",
+  "steps": [
+   "Open Selling › Territories › Add Territory.",
+   "Without typing anything, click Save."
+  ],
+  "expected": "A message under Territory Name.",
+  "actual": "Nothing happens: no message and no toast. Same behavior as CC-11, PL-04, IP-07 and CG-05.",
+  "code": "Add form untouched  -> Save -> no message",
+  "shots": [],
+  "fix": "Validate the whole form on Save even when the form is not marked as changed."
+ },
+ {
+  "id": "TR-05",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The list action bar has no Clear Assignment",
+  "area": "Territories list › bulk actions",
+  "tc": [],
+  "srs": "Actions: Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete",
+  "steps": [
+   "Open Selling › Territories.",
+   "Tick the checkbox of one territory and read the action bar."
+  ],
+  "expected": "Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete.",
+  "actual": "The bar shows تحديد الكل, تعديل, تصدير, اسناد, إضافة وسوم, طباعة and حذف. Clear Assignment is missing (same as CC-06, PL-05, IP-08, CG-07 and TNC-04).",
+  "code": "bulk bar: تحديد الكل | تعديل | تصدير | اسناد | إضافة وسوم | طباعة | حذف",
+  "shots": [],
+  "fix": "Add the Clear Assignment action."
+ },
+ {
+  "id": "TR-06",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "A duplicate Territory Name shows a raw database error",
+  "area": "Add Territory › Territory Name",
+  "tc": [],
+  "srs": "Territory Name has a unique value; an error message is displayed",
+  "steps": [
+   "Create a territory named \"Egypt\"."
+  ],
+  "expected": "A message such as \"this territory already exists\".",
+  "actual": "The territory is refused (uniqueness works), but the message is the database error (DuplicateEntryError ... IntegrityError 1062).",
+  "code": "frappe.exceptions.DuplicateEntryError: ('Territory', 'Egypt', IntegrityError(1062, ...))",
+  "shots": [],
+  "fix": "Catch the duplicate and show a field message on Territory Name."
+ }
+];
+const BUG_AR = {
+ "TR-01": {
+  "t": "السيرفر بيقبل اسم Territory من حرف واحد ومن 101 حرف",
+  "area": "إضافة Territory › Territory Name",
+  "srs": "Territory Name: إجباري وفريد ومن 2 لـ 100 حرف",
+  "steps": [
+   "ابعت طلب الإنشاء باسم «z»، وبعدين باسم من 101 حرف."
+  ],
+  "exp": "الاتنين يترفضوا برسالة طول.",
+  "act": "الاتنين بيتحفظوا: territory اسمها «z» وواحدة باسم من 101 حرف. في الشاشة الحقل بيقف عند 100 حرف؛ ورسالة الحد الأدنى في الشاشة ماتجربتش (حفظ اسم قصير ممكن كان يعمل territory فعلًا).",
+  "fix": "ضيفوا قاعدة 2 لـ 100 حرف في validation الـ Territory في السيرفر."
+ },
+ "TR-02": {
+  "t": "ينفع تختار territory مش group كـ Parent Territory لـ territory تانية",
+  "area": "إضافة Territory › Parent Territory",
+  "srs": "Parent Territory: بيعرض الـ territories اللي Is Group متعلّم فيها بس",
+  "steps": [
+   "ابعت طلب إنشاء territory بـ Parent Territory = «Egypt» (Is Group فيها غير متعلّم)."
+  ],
+  "exp": "الطلب يترفض برسالة إن الأب لازم يكون group.",
+  "act": "الـ territory بتتحفظ («PW TR B 189264» تحت «Egypt»). والـ dropdown في الشاشة صح: بيعرض الأربع groups بس (منقطة تيست 2 ومنطقة تيست ومنقطة جديدة وAll Territories).",
+  "fix": "ارفضوا أب Is Group فيه غير متعلّم في السيرفر."
+ },
+ "TR-03": {
+  "t": "الـ territory بتاعة النظام «All Territories» ينفع تتعدّل وفيها زر Delete (الـ SRS بيقول مينفعش تتعدّل ولا تتمسح)",
+  "area": "تفاصيل Territory › All Territories",
+  "srs": "فيه territory أب بتاعة النظام اسمها «All Territories» مينفعش تتعدّل ولا تتمسح",
+  "steps": [
+   "افتح Selling › Territories واضغط على «All Territories».",
+   "بص على الحقول والأزرار اللي فوق."
+  ],
+  "exp": "حقول للقراءة بس ومفيش زر Delete.",
+  "act": "خانة الاسم بس مقفولة. Parent Territory وIs Group وTerritory Manager ينفع تتغيّر، وDelete وSave موجودين. اتفحصت حالة الشاشة بس: ماغيّرتش ولا مسحت حاجة في السيرفر عشان أحمي جذر الشجرة (زي CG-06 في Customer Group).",
+  "fix": "خلّوا الشاشة للقراءة بس للـ territory دي، وارفضوا تعديلها ومسحها في السيرفر."
+ },
+ "TR-04": {
+  "t": "Save على فورم إضافة لسه ماتلمسش مبيعمل حاجة: مفيش رسالة للحقل الإجباري الفاضي",
+  "area": "إضافة Territory › Save",
+  "srs": "لو الحقل فاضي بتظهر رسالة خطأ (Territory Name)؛ وبتظهر رسالة تحقق لكل حقل غير صالح",
+  "steps": [
+   "افتح Selling › Territories › Add Territory.",
+   "من غير ما تكتب أي حاجة، اضغط Save."
+  ],
+  "exp": "رسالة تحت Territory Name.",
+  "act": "مفيش أي حاجة بتحصل: مفيش رسالة ولا toast. نفس سلوك CC-11 وPL-04 وIP-07 وCG-05.",
+  "fix": "اعملوا validation للفورم كله عند Save حتى لو الفورم لسه ماتعلّمش إنه اتغيّر."
+ },
+ "TR-05": {
+  "t": "شريط إجراءات القايمة مفيهوش Clear Assignment",
+  "area": "قايمة Territories › الإجراءات الجماعية",
+  "srs": "الإجراءات: Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete",
+  "steps": [
+   "افتح Selling › Territories.",
+   "علّم الـ checkbox بتاع territory واحدة واقرأ شريط الإجراءات."
+  ],
+  "exp": "Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete.",
+  "act": "الشريط فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف. Clear Assignment ناقص (زي CC-06 وPL-05 وIP-08 وCG-07 وTNC-04).",
+  "fix": "ضيفوا إجراء Clear Assignment."
+ },
+ "TR-06": {
+  "t": "اسم Territory مكرر بيظهر خطأ الداتابيز الخام",
+  "area": "إضافة Territory › Territory Name",
+  "srs": "Territory Name قيمته فريدة؛ وبتظهر رسالة خطأ",
+  "steps": [
+   "اعمل territory باسم «Egypt»."
+  ],
+  "exp": "رسالة زي «الـ territory دي موجودة قبل كده».",
+  "act": "الـ territory بتترفض (التفرد شغال)، لكن الرسالة هي خطأ الداتابيز (DuplicateEntryError ... IntegrityError 1062).",
+  "fix": "امسكوا التكرار واعرضوا رسالة على حقل Territory Name."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Territory Bug Report","eyebrow":"QA bug report · Selling › Territory","h1":"Territory: 6 differences from the SRS, the screens follow it closely","lede":"Comparison of the Territory screens (list, Add, Details) and of the server rules with the SRS, on the test server: 20 checks (13 matched, 7 differ). This is one of the closest modules to its SRS: the list columns, the Parent Territory list (only groups, default All Territories), Territory Manager shown as full name and ID, the Territory Targets table with its five columns and its Edit Row, Delete and Setting actions, and the Territory Tree button all exist. The differences: the system territory All Territories is editable on the screen (TR-03), the server lacks rules the screen has (TR-01, TR-02), a silent Save on an untouched form (TR-04), and small gaps (TR-05, TR-06).","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","Arabic (the Territory screens)"],["Run date","2026-11-16"],["Method","Playwright browser checks and calls to the create endpoint (not saved as a spec yet)"],["Bug IDs","TR-01 to TR-06 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["List screen: columns, Add button, action bar",3,2,1,0],["Add screen: fields, Name limit, Parent list and default, Territory Manager display, Territory Targets table and row actions, Save on an untouched form",7,6,1,0],["Details screen: Territory Tree and fixed actions, the system territory All Territories",3,2,1,0],["Server rules (create endpoint): name lengths, duplicate name, parent that is not a group, default parent, mandatory Fiscal Year and Target Distribution, unknown manager",7,3,4,0]],"total":"Total","covNote":"There is no Territory test-case sheet yet, so the defects above are not linked to case IDs. The checks were run through browser scripts and requests.","okTitle":"Verified working","ok":["List: columns ID, Territory Name, Parent Territory, Territory Manager and Is Group; Add button; the action bar shows Select All, Edit, Export, Assign, Add Tags, Print and Delete","Add: Territory Name stops at 100 characters; Parent Territory lists only groups and defaults to All Territories; Territory Manager is a searchable dropdown that shows \"full name (ID)\"","Territory Targets table: Item Group, Fiscal Year, Target Qty (stops at 100 characters), Target Amount (stops at 100 characters) and Target Distribution, with Setting, Edit Row and Delete row","Details: the Territory Tree button, Assign, Tags, Attachments, Print, Share and Delete are present","Server: a duplicate name is refused; Fiscal Year and Target Distribution are mandatory in a target row; a manager that does not exist is refused; an empty parent becomes All Territories"],"noTitle":"Not executed, and why","no":["The minimum-length message of Territory Name on the screen (saving a short name could have created a territory)","Saving a territory from the screen with valid data, and editing / saving it on the Details screen","The Territory Targets rules on the screen: letters in Target Qty and Target Amount, the minimum of 2 characters, the Setting popup, Edit Row and Delete row","The Territory Tree: that it opens the hierarchy and highlights the territory","Delete confirmation and the warning for a territory linked to other documents (Delete was not clicked on real territories)","Edit popup of the list, Export, Assign, Print and tags"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Selling SRS v1.0, Territory","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 is finished. Retesting starts when the developers mark TR-01, TR-02 and TR-03 as Fixed here (or tell the tester)."],["h","When a fix lands"],["ol",["Repeat the case on the screen and through the create endpoint (TR-01 and TR-02 can only be seen there).","Run the cases listed under Not executed.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","The server checks created 4 test territories that were not deleted (nothing is deleted by the tests): \"z\", one with a 101-character name, \"PW TR B 189264\" (under Egypt) and \"PW TR C 189264\". The existing territories were only read."]],"obs":["The SRS says Target Qty and Target Amount have a minimum length of 2 characters, which would block a target such as 5.","The SRS says a manager, once chosen, shows \"Full name + ID\"; the system shows \"full name (ID)\" in the dropdown and in the box.","The list shows the Territory Manager as an employee ID only; the SRS says it displays the territory manager.","The Is Group column is shown as \"مجموعة\" in the list.","The SRS says the Target Distribution is mandatory in every target row even when the target has no amount."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Delivery Note sheet (TC-DNL, TC-DNA, TC-DNW, TC-DNG, TC-DNM, TC-DND), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Territory","eyebrow":"تقرير مشاكل الجودة · Selling › Territory","h1":"Territory: 6 فرق عن الـ SRS، والشاشات ماشية عليه بشكل قريب","lede":"مقارنة شاشات Territory (القايمة والإضافة والتفاصيل) وقواعد السيرفر بالـ SRS على السيرفر التجريبي: 20 فحص (13 مطابق و7 مختلف). ده من أقرب الموديولات للـ SRS بتاعه: أعمدة القايمة وقايمة Parent Territory (groups بس والافتراضي All Territories) وTerritory Manager بالاسم الكامل والـ ID وجدول Territory Targets بأعمدته الخمسة وإجراءاته (Edit Row وDelete وSetting) وزر Territory Tree كلهم موجودين. الفروق: الـ territory بتاعة النظام All Territories ينفع تتعدّل من الشاشة (TR-03)، والسيرفر ناقصه قواعد الشاشة عندها (TR-01 وTR-02)، وSave صامت على فورم ماتلمسش (TR-04)، وفجوات صغيرة (TR-05 وTR-06).","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","العربية (شاشات Territory)"],["تاريخ التشغيل","2026-11-16"],["الطريقة","فحوصات متصفح بـ Playwright ونداءات على endpoint الإنشاء (لسه مش محفوظة كملف اختبار)"],["أرقام المشاكل","TR-01 لـ TR-06 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة القايمة: الأعمدة وزر الإضافة وشريط الإجراءات",3,2,1,0],["شاشة الإضافة: الحقول وحد الاسم وقايمة الأب وقيمته الافتراضية وعرض Territory Manager وجدول Territory Targets وإجراءات الصف وSave على فورم ماتلمسش",7,6,1,0],["شاشة التفاصيل: Territory Tree والأزرار الثابتة والـ territory بتاعة النظام All Territories",3,2,1,0],["قواعد السيرفر (endpoint الإنشاء): أطوال الاسم والاسم المكرر والأب اللي مش group والأب الافتراضي وإجبارية Fiscal Year وTarget Distribution ومدير مش موجود",7,3,4,0]],"total":"الإجمالي","covNote":"لسه مفيش شيت test cases لـ Territory، فالمشاكل فوق مش مربوطة بأرقام حالات. الفحوصات اتعملت بسكريبتات متصفح وطلبات للسيرفر.","okTitle":"اللي اتأكدنا إنه شغال","ok":["القايمة: أعمدة ID وTerritory Name وParent Territory وTerritory Manager وIs Group؛ وزر الإضافة؛ وشريط الإجراءات فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف","الإضافة: Territory Name بيقف عند 100 حرف؛ وParent Territory بيعرض groups بس والافتراضي All Territories؛ وTerritory Manager dropdown قابل للبحث بيعرض «الاسم الكامل (ID)»","جدول Territory Targets: Item Group وFiscal Year وTarget Qty (بيقف عند 100 حرف) وTarget Amount (بيقف عند 100 حرف) وTarget Distribution، ومعاه Setting وEdit Row وDelete row","التفاصيل: زر Territory Tree وAssign وTags وAttachments وPrint وShare وDelete موجودين","السيرفر: الاسم المكرر بيترفض؛ وFiscal Year وTarget Distribution إجباريين في صف الهدف؛ والمدير غير الموجود بيترفض؛ والأب الفاضي بيبقى All Territories"],"noTitle":"اللي ماتنفذش وليه","no":["رسالة الحد الأدنى لـ Territory Name في الشاشة (حفظ اسم قصير ممكن كان يعمل territory فعلًا)","حفظ territory من الشاشة ببيانات صحيحة، وتعديلها وحفظها في شاشة التفاصيل","قواعد Territory Targets في الشاشة: الحروف في Target Qty وTarget Amount والحد الأدنى حرفين ونافذة Setting وEdit Row وDelete row","Territory Tree: إنه بيفتح التسلسل ويظلّل الـ territory","تأكيد الحذف والتحذير لـ territory مرتبطة بمستندات تانية (ماضغطتش Delete على territories حقيقية)","نافذة Edit في القايمة والتصدير والإسناد والطباعة والوسوم"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Selling SRS v1.0, Territory","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا TR-01 وTR-02 وTR-03 كـ Fixed هنا (أو يبلّغوا الـ tester)."],["h","لما يوصل إصلاح"],["ol",["كرر الحالة في الشاشة وعن طريق endpoint الإنشاء (TR-01 وTR-02 مبتبانوش إلا من هناك).","نفّذ الحالات المكتوبة تحت «ماتنفذش».","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","فحوصات السيرفر عملت 4 territories تجريبية مامسحتش (الاختبارات مبتمسحش حاجة): «z» وواحدة باسم من 101 حرف و«PW TR B 189264» (تحت Egypt) و«PW TR C 189264». الـ territories الموجودة اتقرت بس."]],"obs":["الـ SRS بيحدد لـ Target Qty وTarget Amount حد أدنى حرفين، وده هيمنع هدف زي 5.","الـ SRS بيقول إن المدير بعد اختياره بيظهر «الاسم الكامل + ID»؛ والنظام بيعرض «الاسم الكامل (ID)» في الـ dropdown وفي الخانة.","القايمة بتعرض Territory Manager كـ ID موظف بس؛ والـ SRS بيقول بيعرض مدير المنطقة.","عمود Is Group ظاهر باسم «مجموعة» في القايمة.","الـ SRS بيقول إن Target Distribution إجباري في كل صف هدف حتى لو الهدف ملوش مبلغ."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Delivery Note (TC-DNL وTC-DNA وTC-DNW وTC-DNG وTC-DNM وTC-DND)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

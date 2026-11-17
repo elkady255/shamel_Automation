@@ -1,0 +1,396 @@
+
+=====PAGE 430=====
+ Blanket Order ........................................................................................................................................... 0 Blanket Order List ............................................................................................................................................. 0 Add Blanket Order ........................................................................................................................................... 3 Blanket Order Details ..................................................................................................................................... 10 Blanket Order Blanket Order List Use case ID 1 Use case Name Blanket Order List Descriptions The user is able to view the list of Blanket Orders. Pre conditions
+● Click on Selling from sidebar
+● Click on Blanket Order from sidebar Main Flow - Components
+● Add Blanket Order
+○ Button
+○ For adding a new Blanket Order
+○ When clicked, the user will be redirected to the “ Add Blanket Order ” screen.
+● Blanket Order List
+○ A table contain the following columns:
+■ Checkbox icon
+● Multi selection
+■ Blanket Order ID
+● It displays the Blanket Order ID
+● Clickable
+● When clicked, the user will be redirected to the “ Blanket Order Details ” screen.
+■ Status
+● Displays one of the following values:
+○ Draft
+○ Submitted
+○ Cancelled 
+
+=====PAGE 431=====
+
+■ Order type
+● It displays one of the following values:
+○ Selling
+○ Purchasing
+○ when a Blanket Order is selected , an action bar appears showing the following actions:
+○ Edit
+■ Button
+■ When clicked , a popup appears containing the following ﬁelds.
+● Field
+○ DDL
+○ To select the ﬁeld you want to edit
+○ Link “ Blanket Order ” doctype
+○ Single selection
+○ Mandatory
+● Value
+○ Dynamic ﬁeld
+○ Based on the selected option from the ﬁrst dropdown ﬁeld, the second ﬁeld shall :
+■ Dynamically change it’s input type
+■ Be marked as either mandatory
+■ Or optional
+■ Apply the corresponding validation rules
+● Update (button)
+○ Button
+○ When clicked,
+■ If the Blanket Order status is " Submitted " or " Cancelled ":
+● an error message is displayed informing the user that the Blanket Order cannot be modiﬁed.
+○ Export
+○ Assign to
+○ Clear assignment
+○ Add tags
+○ Print
+○ Submit
+■ It appears only when the Blanket Order status = Draft.
+■ If all required data is entered correctly and completely:
+● The Blanket Order is successfully submitted.
+○ Cancel
+■ It appears only when the Blanket Order status = Submitted
+■ When clicked,
+● The Blanket Order is canceled successfully.
+● And “ Cancel ” button changes to “ Amend ”
+○ Delete
+■ It appears only when the Blanket Order status = Draft / Cancelled 
+
+=====PAGE 432=====
+
+■ When clicked,
+● A conﬁrmation message is displayed to the user whether they want to delete this Blanket Order
+● Upon clicking the “Yes” button:
+○ If the Blanket Order is Amended from other Blanket Order
+■ A warning message appears indicating that this Blanket Order cannot be deleted until the user deletes all doctypes related to it.
+■ The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+○ if the Blanket Order is linked to other transactions,
+■ a message is displayed informing the user that the linked transactions must be deleted before the Blanket Order can be deleted.
+■ The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+○ If the Blanket Order isn’t linked to another doctype
+■ The Blanket Order is deleted successfully. Post Conditions
+● Ability to add and view Blanket Order details.
+● Ability to Edit , Export , Assign to, Clear Assignment , Add Tags , Print , Delete 
+
+=====PAGE 433=====
+ Add Blanket Order Use case ID 2 Use case Name Add Blanket Order Descriptions The user can add a new Blanket Order. Pre conditions
+● Click on Selling from sidebar
+● Click on Blanket Order from sidebar
+● Click on “ Add Blanket Order ” button Main Flow - Components
+● Series
+○ DDL
+○ Displays all series added to Blanket order doctype
+○ Single selection
+○ Mandatory
+○ If the ﬁeld is left empty, an error message will appear.
+● Order Type
+○ DDL
+○ To select the order type
+○ It contains the following values:
+■ Selling
+● When clicked, the “ Customer ” ﬁeld is displayed
+■ Purchasing
+● When clicked, the “ Supplier ” ﬁeld is displayed
+○ Single selection
+○ Mandatory
+● Customer
+○ Searchable DDL
+○ Link “ Customer ” doctype
+○ To select the customer associated with this Blanket Order
+○ It appears only when the “ order type ” is equal to Selling
+○ Single selection
+○ Mandatory
+○ If the ﬁeld is left empty, an error message will appear.
+○ Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Customer name
+○ Label ﬁeld (read only)
+○ Displayed the customer name fetched from the selected customer
+○ Note: It appears only when the Customer ﬁeld is entered.
+● Supplier
+○ Searchable DDL 
+
+=====PAGE 434=====
+
+○ Link “ Supplier ” doctype
+○ It appears only when the “ order type ” is equal to Purchasing
+○ Single selection
+○ Mandatory
+○ If the ﬁeld is left empty, an error message will appear.
+○ Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Supplier name
+○ Label ﬁeld (read only)
+○ Displayed the supplier name fetched from the selected supplier
+○ Note: It appears only when the Supplier ﬁeld is entered.
+● Order No
+○ Text input ﬁeld.
+○ To enter the order No
+○ Optional
+○ Accept letters, numbers and special characters.
+○ Maximum length: 100 characters.
+○ Once the maximum length is reached, further input is prevented.
+● Order Date
+○ Date calendar picker
+○ To select the order date
+○ Optional
+○ Note: It appears only when the order No ﬁeld is entered.
+● From Date
+○ Date calendar picker
+○ To select the start date of the Blanket order
+● To date
+○ Date calendar picker
+○ To select the end date of the Blanket order
+● Company
+○ Searchable DDL
+○ Link “ Company ” doctype
+○ To select the company for which the blanket order will be recorded
+○ Single selection
+○ Mandatory
+○ Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Amended From
+○ Label ﬁeld
+○ Displays the Blanket Order from which this document was amended.
+○ Clickable
+○ When clicked, it navigates the user to the Blanket Order from which this document was amended.
+○ Note: This ﬁeld is displayed only if this Blanket Order is amended from another Blanket Order
+● Items
+○ A table contain the following columns: 
+
+=====PAGE 435=====
+
+■ Checkbox icon
+● Multi selection
+■ No.
+● Displays the ordering of items in the table
+■ Item code
+● Searchable DDL
+● Link “ item ” doctype
+● Single selection
+● Mandatory
+● If the ﬁeld is left empty, an error message will appear.
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Qty
+● Text input ﬁeld.
+● To enter the total quantity agreed upon for the selected item during the validity period of the Blanket Order. .
+● Optional
+● Accept numbers only.
+● Maximum length: 100 characters.
+● Once the maximum length is reached, further input is prevented.
+■ Rate
+● Text input ﬁeld
+● To enter the agreed unit price for the selected item.
+● Accepts numbers only.
+● Mandatory
+● Maximum length: 100 characters.
+● Once the maximum length is reached, further input is prevented.
+● If the ﬁeld is left empty an error message appears.
+■ Ordered Qty
+● Label ﬁeld
+● Displays the total quantity already consumed through Sales Orders or Purchase Orders linked to this Blanket Order.
+● Note: the value is updated automatically by the system.
+■ Setting
+● When clicked, a pop up appears contains the following options :
+○ Rearranging table columns using drag and drop functionality.
+■ Users can click and hold a column header , then drag and drop it into the desired position within the table.
+○ Column width
+■ Text input ﬁeld
+■ For entering or edit the column width
+■ Accepts numbers only
+■ Minimum length: 1 character.
+■ Maximum length: 3 characters. 
+
+=====PAGE 436=====
+
+■ Default value = 3
+○ Add / Remove columns
+■ Button
+■ For adding or removing columns from the table
+■ When clicked, a pop-up appears containing all available table columns with their corresponding checkboxes.
+■ These columns are: Column Name Item Code Quantity Rate Ordered Quantity Item Name Party Item Code Terms and Conditions
+■ Users can show or hide columns by selecting or deselecting the related checkbox.
+○ “Update” button
+■ Button
+■ For save any changes or updates made by the user
+■ When clicked, any modiﬁcations made by the user will be saved
+○ “Reset to default” button
+■ Button
+■ To reset all modiﬁcations to their default values.
+■ When clicked, any modiﬁcations made by the user will be reset to their default values.
+■ Note: when an Item is selected , an action bar appears showing the following actions:
+● Delete row
+○ Button
+○ To delete a speciﬁc row or multiple rows
+○ When clicked, the selected item group(s) will be deleted
+○ Edit Row
+■ Clickable icon
+■ Users can edit and view non displayed ﬁelds in the table.
+■ When clicked , a pop up appears containing the following ﬁelds: 
+
+=====PAGE 437=====
+ Field Name Options Item Code
+● Searchable DDL
+● Link “ item ” doctype
+● Single selection
+● Mandatory
+● If the ﬁeld is left empty, an error message will appear.
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values. Item name
+● Label ﬁeld
+● Displays the item name
+● It’s displayed only when an item is selected Party Item Code
+● Label ﬁeld
+● Displays the supplier part number or customer part number / ref code
+● It’s displayed only when an item is selected Quantity
+● Text input ﬁeld.
+● To enter the total quantity agreed upon for the selected item during the validity period of the Blanket Order. .
+● Optional
+● Accept numbers only.
+● Maximum length: 100 characters.
+● Once the maximum length is reached, further input is prevented. Rate
+● Text input ﬁeld
+● To enter the agreed unit price for the selected item.
+● Accepts numbers only.
+● Mandatory
+● Maximum length: 100 characters.
+● Once the maximum length is 
+
+=====PAGE 438=====
+ reached, further input is prevented.
+● If the ﬁeld is left empty an error message appears. Ordered Qty
+● Label ﬁeld
+● Displays the total quantity already consumed through Sales Orders or Purchase Orders linked to this Blanket Order.
+● Note: the value is updated automatically by the system. Terms and Conditions
+● Text area
+● For adding terms and conditions to this blanket order item.
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered.
+○ Add Row
+■ Button
+■ To add a new row in the table
+■ When clicked, a new row is added to the table.
+● Terms and Conditions
+○ It contains the following ﬁelds:
+■ Terms
+● Searchable DDL
+● Link “ Terms and Condition ” doctype
+● Single selection
+● Optional
+● When a value is selected from the terms DDL, the terms and condition content ﬁeld is automatically ﬁlled based on the selected 
+
+=====PAGE 439=====
+ value.
+● Note:
+○ If no terms and conditions are entered, the terms and conditions section is not displayed on the Quotation Details page
+○ the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Terms and Condition Content
+● Text area
+● For adding detailed terms and condition content.
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered.
+● Note: The terms and condition content is automatically fetched based on the term selected from the DDL
+● Save
+○ Button
+○ When clicked,
+■ If all required data is entered correctly and completely:
+● The Blanket order is successfully saved and not submitted.
+● And added to the Blanket Order List and its status is draft
+■ If incorrect or incomplete data is entered:
+● A validation error message is displayed for each invalid ﬁeld.
+● Submit
+○ It appears only when the Blanket Order status = Draft.
+○ If all required data is entered correctly and completely:
+■ The Blanket Order is successfully submitted.
+● Cancel
+○ It appears only when the Blanket Order status = Submitted
+○ When clicked,
+■ The Blanket Order is canceled successfully.
+■ And “ Cancel ” button changes to “ Amend ”
+● Delete
+○ It appears only when the Blanket Order status = Draft / Cancelled
+○ When clicked,
+■ A conﬁrmation message is displayed to the user whether they want to delete this Blanket Order
+■ Upon clicking the “Yes” button:
+● If the Blanket Order is Amended from other Blanket Order
+○ A warning message appears indicating that this Blanket Order cannot be deleted until the user deletes all doctypes 
+
+=====PAGE 440=====
+ related to it.
+○ The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+● if the Blanket Order is linked to other transactions,
+○ a message is displayed informing the user that the linked transactions must be deleted before the Blanket Order can be deleted.
+○ The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+● If the Blanket Order isn’t linked to another doctype
+○ The Blanket Order is deleted successfully.
+● Amend
+○ Button
+○ It appears only when the Blanket order status = cancelled Post Conditions
+● The new Blanket Orde has been added successfully
+● If invalid or incomplete data is entered, the corresponding error message will be displayed for each ﬁeld. Blanket Order Details Use case ID 3 
+
+=====PAGE 441=====
+ Use case Name Blanket Order Details Descriptions The user can view / edit the Blanket order details. Pre conditions
+● Click on Selling from sidebar
+● Click on Blanket Order from sidebar
+● Click on “ Blanket order ID ” from the table Main Flow - Components
+● Label / Input ﬁelds
+○ Note:
+■ If the Blanket order status is Submitted or Cancelled :
+● The system retrieves and displays the ﬁelds as labels for viewing purposes only. These ﬁelds are read-only and cannot be edited.
+■ If the Blanket order status is Draft :
+● The system retrieves and displays the ﬁelds as input ﬁelds, allowing the user to modify the blanket order data.
+○ The system retrieves and displays the data entered during creation, allowing users to view or update it as needed in addition to the following:
+● Fixed Page Actions
+○ The following action buttons are ﬁxed and consistently displayed at the top of all (Blanket Order details) pages to provide a quick access to common functions:
+○ Create
+■ DDL
+■ It contains the following values:
+● Purchase Order
+○ Button
+○ It’s displayed only when the order type = purchasing and ordered quantity > 0
+○ When clicked, the system navigates the user to “ Add Purchase Order ” screen, and fetches the Blanket order data
+● Sales Order
+○ Button
+○ It’s displayed only when the order type = selling and ordered quantity > 0
+○ When clicked, the system navigates the user to “ Add Sales Order ” screen, and fetches the Blanket order data
+● Quotation (hidden)
+○ Button
+○ When clicked, the system navigates the user to a new “ Add Quotation ” screen, and fetches the Blanket order data.
+○ Assign
+○ Attachment
+○ Tags
+○ Share 
+
+=====PAGE 442=====
+
+○ Print
+● Connections Tab
+○ It contains the following ﬁelds:
+■ Purchase Order
+● Button
+● Link “ Purchase Order ” docktype
+■ Sales Order
+● Button
+● Link “ Sales Order ” docktype
+■ Quotation (Hidden)
+● Button
+● Link “ Quotation ” docktype Post Conditions
+● The Blanket Order details has been successfully modiﬁed and saved
+● Entering incorrect or incomplete data will display the corresponding error message for each ﬁeld. 

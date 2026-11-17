@@ -1,0 +1,8 @@
+DRAFT BTNS ["Linked Records 0","Add Item","Add Tax or Charge","Cancel","Save","Submit"]
+SAVE NO-CHANGE toasts []
+SUBMIT CLICK toasts/dialogs []
+CONFIRM BUTTONS 0
+AFTER SUBMIT toasts ["Quotation submitted successfully"]
+API AFTER SUBMIT docstatus=1 status=Open valid_till=undefined
+SUBMITTED BTNS ["Linked Records 0","Cancel Document","Set as Lost","Update Items","Create"]
+HEADER Welcome Administrator ! AN Administrator admin@example.com 68 Quotation Details 

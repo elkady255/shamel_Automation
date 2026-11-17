@@ -1,0 +1,32 @@
+free customers 200 CUST-2025-00002,CUST-2025-00003,CUST-2025-00004
+baseline -> SAVED PW CT A 663539
+first name 1 char -> SAVED q
+first name 101 -> SAVED FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+last name 1 char -> SAVED PW CT D 663539 z
+last name 101 -> SAVED PW CT E 663539 LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+department 1 char -> SAVED PW CT F 663539
+no first name -> SAVED -1
+duplicate first name -> SAVED PW CT A 663539-1
+email invalid -> REFUSED insert Contact failed: 417 {"exception":"frappe.exceptions.InvalidEmailAddressError: bad-email ليس عنوان بريد إلكتروني صالحًا","exc_type":"InvalidEmailAddressError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 12
+email empty -> REFUSED insert Contact failed: 417 {"exception":"frappe.exceptions.MandatoryError: [Contact, PW CT J 663539]: email_id","exc_type":"MandatoryError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n resp
+email 101 chars -> SAVED PW CT K 663539
+email same as another contact -> SAVED PW CT L 663539
+two primary emails -> REFUSED insert Contact failed: 417 {"exception":"frappe.exceptions.ValidationError: يمكن تعيين <strong>البريد الإلكتروني</strong> واحد فقط على أنه أساسي.","exc_type":"ValidationError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\
+no primary email -> SAVED PW CT N 663539
+phone empty -> REFUSED insert Contact failed: 417 {"exception":"frappe.exceptions.MandatoryError: [Contact, PW CT O 663539]: phone","exc_type":"MandatoryError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n respons
+phone letters -> REFUSED insert Contact failed: 417 {"exception":"frappe.exceptions.InvalidPhoneNumberError: abcdef ليس رقم هاتف صالحًا","exc_type":"InvalidPhoneNumberError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in applicatio
+phone 1 char -> REFUSED insert Contact failed: 409 {"exception":"frappe.exceptions.DuplicateEntryError: رقم الهاتف '1' مستخدم بالفعل في جهة اتصال أخرى","exc_type":"DuplicateEntryError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/f
+phone same as another contact -> REFUSED insert Contact failed: 409 {"exception":"frappe.exceptions.DuplicateEntryError: رقم الهاتف '+2011663539101' مستخدم بالفعل في جهة اتصال أخرى","exc_type":"DuplicateEntryError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n File \\\"
+two primary phones -> REFUSED insert Contact failed: 417 {"exception":"frappe.exceptions.ValidationError: يمكن تعيين <strong>Phone</strong> واحد فقط على أنه أساسي.","exc_type":"ValidationError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121
+no primary phone -> SAVED PW CT T 663539
+gender Other -> REFUSED insert Contact failed: 417 {"exception":"frappe.exceptions.LinkValidationError: لا يمكن أن تجد الجنس: Other","exc_type":"LinkValidationError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n re
+gender Male -> SAVED PW CT V 663539
+phone type via custom? -> SAVED PW CT W 663539
+first contact of customer CUST-2025-00002 -> SAVED PW CT X1 663539-CUST-2025-00002
+  c1 primary=0 billing=0 shipping=0
+second contact with all flags -> SAVED PW CT X2 663539-CUST-2025-00002
+  PW CT X1 663539-CUST-2025-00002: primary=0 billing=0 shipping=0
+  PW CT X2 663539-CUST-2025-00002: primary=1 billing=1 shipping=1
+disable the primary contact -> SAVED
+uncheck primary on the only/other primary -> SAVED
+company flag with customer link -> SAVED PW CT Y 663539-CUST-2025-00002

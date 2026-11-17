@@ -1,0 +1,215 @@
+NAMING naming_series: submittable=1
+META customer_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-user|dep=
+META naming_series|Select|req=1|def=undefined|hid=0|ro=0|opt=SAL-QTN-.YYYY.-|dep=
+META quotation_to|Link|req=1|def=Customer|hid=0|ro=0|opt=DocType|dep=
+META party_name|Dynamic Link|req=0|def=undefined|hid=0|ro=0|opt=quotation_to|dep=
+META customer_name|Data|req=0|def=undefined|hid=1|ro=1|opt=|dep=
+META column_break_7|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META transaction_date|Date|req=1|def=Today|hid=0|ro=0|opt=|dep=
+META valid_till|Date|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META column_break1|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META order_type|Select|req=1|def=Sales|hid=0|ro=0|opt=,Sales,Maintenance,Shopping Cart|dep=
+META company|Link|req=1|def=undefined|hid=0|ro=0|opt=Company|dep=
+META has_unit_price_items|Check|req=0|def=0|hid=1|ro=0|opt=|dep=
+META amended_from|Link|req=0|def=undefined|hid=0|ro=1|opt=Quotation|dep=
+META currency_and_price_list|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-tag|dep=
+META currency|Link|req=1|def=undefined|hid=0|ro=0|opt=Currency|dep=
+META conversion_rate|Float|req=1|def=undefined|hid=0|ro=0|opt=|dep=
+META column_break2|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META selling_price_list|Link|req=1|def=undefined|hid=0|ro=0|opt=Price List|dep=
+META price_list_currency|Link|req=1|def=undefined|hid=0|ro=1|opt=Currency|dep=
+META plc_conversion_rate|Float|req=1|def=undefined|hid=0|ro=0|opt=|dep=
+META ignore_pricing_rule|Check|req=0|def=0|hid=0|ro=0|opt=|dep=
+META items_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-shopping-cart|dep=
+META scan_barcode|Data|req=0|def=undefined|hid=0|ro=0|opt=Barcode|dep=
+META last_scanned_warehouse|Data|req=0|def=undefined|hid=0|ro=0|opt=|dep=eval: doc.last_scanned_warehouse
+META items|Table|req=1|def=undefined|hid=0|ro=0|opt=Quotation Item|dep=
+META sec_break23|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META total_qty|Float|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META total_net_weight|Float|req=0|def=undefined|hid=0|ro=1|opt=|dep=total_net_weight
+META column_break_28|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META base_total|Currency|req=0|def=undefined|hid=0|ro=1|opt=Company:company:default_currency|dep=
+META base_net_total|Currency|req=0|def=undefined|hid=0|ro=1|opt=Company:company:default_currency|dep=
+META column_break_31|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META total|Currency|req=0|def=undefined|hid=0|ro=1|opt=currency|dep=
+META net_total|Currency|req=0|def=undefined|hid=0|ro=1|opt=currency|dep=
+META taxes_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-money|dep=
+META tax_category|Link|req=0|def=undefined|hid=0|ro=0|opt=Tax Category|dep=
+META taxes_and_charges|Link|req=0|def=undefined|hid=0|ro=0|opt=Sales Taxes and Charges Template|dep=
+META column_break_36|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META shipping_rule|Link|req=0|def=undefined|hid=0|ro=0|opt=Shipping Rule|dep=
+META column_break_34|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META incoterm|Link|req=0|def=undefined|hid=0|ro=0|opt=Incoterm|dep=
+META named_place|Data|req=0|def=undefined|hid=0|ro=0|opt=|dep=incoterm
+META section_break_36|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META taxes|Table|req=0|def=undefined|hid=0|ro=0|opt=Sales Taxes and Charges|dep=
+META section_break_39|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META base_total_taxes_and_charges|Currency|req=0|def=undefined|hid=0|ro=1|opt=Company:company:default_currency|dep=
+META column_break_42|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META total_taxes_and_charges|Currency|req=0|def=undefined|hid=0|ro=1|opt=currency|dep=
+META totals|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-money|dep=
+META base_grand_total|Currency|req=0|def=undefined|hid=0|ro=1|opt=Company:company:default_currency|dep=
+META base_rounding_adjustment|Currency|req=0|def=undefined|hid=0|ro=1|opt=Company:company:default_currency|dep=eval:!doc.disable_rounded_total
+META base_rounded_total|Currency|req=0|def=undefined|hid=0|ro=1|opt=Company:company:default_currency|dep=
+META base_in_words|Data|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META column_break3|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META grand_total|Currency|req=0|def=undefined|hid=0|ro=1|opt=currency|dep=
+META rounding_adjustment|Currency|req=0|def=undefined|hid=0|ro=1|opt=currency|dep=eval:!doc.disable_rounded_total
+META rounded_total|Currency|req=0|def=undefined|hid=0|ro=1|opt=currency|dep=
+META disable_rounded_total|Check|req=0|def=0|hid=0|ro=0|opt=|dep=
+META in_words|Data|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META section_break_44|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META apply_discount_on|Select|req=0|def=Grand Total|hid=0|ro=0|opt=,Grand Total,Net Total|dep=
+META base_discount_amount|Currency|req=0|def=undefined|hid=0|ro=1|opt=Company:company:default_currency|dep=
+META coupon_code|Link|req=0|def=undefined|hid=0|ro=0|opt=Coupon Code|dep=
+META column_break_46|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META additional_discount_percentage|Float|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META discount_amount|Currency|req=0|def=undefined|hid=0|ro=0|opt=currency|dep=
+META referral_sales_partner|Link|req=0|def=undefined|hid=0|ro=0|opt=Sales Partner|dep=
+META sec_tax_breakup|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META other_charges_calculation|Text Editor|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META item_wise_tax_details|Table|req=0|def=undefined|hid=1|ro=0|opt=Item Wise Tax Detail|dep=
+META bundle_items_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-suitcase|dep=packed_items
+META packed_items|Table|req=0|def=undefined|hid=0|ro=0|opt=Packed Item|dep=
+META pricing_rule_details|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META pricing_rules|Table|req=0|def=undefined|hid=0|ro=1|opt=Pricing Rule Detail|dep=
+META address_and_contact_tab|Tab Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META billing_address_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-bullhorn|dep=
+META customer_address|Link|req=0|def=undefined|hid=0|ro=0|opt=Address|dep=
+META address_display|Text Editor|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META col_break98|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META contact_person|Link|req=0|def=undefined|hid=0|ro=0|opt=Contact|dep=
+META contact_display|Small Text|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META contact_mobile|Small Text|req=0|def=undefined|hid=0|ro=1|opt=Phone|dep=
+META contact_email|Data|req=0|def=undefined|hid=1|ro=1|opt=Email|dep=
+META shipping_address_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META shipping_address_name|Link|req=0|def=undefined|hid=0|ro=0|opt=Address|dep=
+META column_break_81|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META shipping_address|Text Editor|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META company_address_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META company_address|Link|req=0|def=undefined|hid=0|ro=0|opt=Address|dep=
+META company_address_display|Text Editor|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META column_break_87|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META company_contact_person|Link|req=0|def=undefined|hid=0|ro=0|opt=Contact|dep=
+META terms_tab|Tab Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META payment_schedule_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META payment_terms_template|Link|req=0|def=undefined|hid=0|ro=0|opt=Payment Terms Template|dep=
+META payment_schedule|Table|req=0|def=undefined|hid=0|ro=0|opt=Payment Schedule|dep=
+META terms_section_break|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-legal|dep=
+META tc_name|Link|req=0|def=undefined|hid=0|ro=0|opt=Terms and Conditions|dep=
+META terms|Text Editor|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META more_info_tab|Tab Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META auto_repeat_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META auto_repeat|Link|req=0|def=undefined|hid=0|ro=1|opt=Auto Repeat|dep=
+META update_auto_repeat_reference|Button|req=0|def=undefined|hid=0|ro=0|opt=|dep=eval:doc.auto_repeat
+META print_settings|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META letter_head|Link|req=0|def=undefined|hid=0|ro=0|opt=Letter Head|dep=
+META group_same_items|Check|req=0|def=0|hid=0|ro=0|opt=|dep=
+META column_break_73|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META select_print_heading|Link|req=0|def=undefined|hid=0|ro=0|opt=Print Heading|dep=
+META language|Link|req=0|def=undefined|hid=0|ro=1|opt=Language|dep=
+META lost_reasons_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=eval:(doc.lost_reasons || doc.order_lost_reason)
+META lost_reasons|Table MultiSelect|req=0|def=undefined|hid=0|ro=1|opt=Quotation Lost Reason Detail|dep=
+META competitors|Table MultiSelect|req=0|def=undefined|hid=0|ro=0|opt=Competitor Detail|dep=
+META column_break_117|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META order_lost_reason|Small Text|req=0|def=undefined|hid=0|ro=0|opt=|dep=eval:doc.status=='Lost'
+META utm_analytics_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META utm_source|Link|req=0|def=undefined|hid=0|ro=0|opt=UTM Source|dep=
+META utm_medium|Link|req=0|def=undefined|hid=0|ro=0|opt=UTM Medium|dep=
+META column_break_fozg|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META utm_campaign|Link|req=0|def=undefined|hid=0|ro=0|opt=UTM Campaign|dep=
+META utm_content|Data|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META additional_info_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=fa fa-file-text|dep=
+META status|Select|req=1|def=Draft|hid=0|ro=1|opt=Draft,Open,Replied,Partially Ordered,Ordered,Lost,Cancelled,Expired|dep=
+META customer_group|Link|req=0|def=undefined|hid=1|ro=0|opt=Customer Group|dep=eval:(doc.quotation_to=='Customer' && doc.party_name)
+META territory|Link|req=0|def=undefined|hid=0|ro=0|opt=Territory|dep=
+META title|Data|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META column_break_108|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META opportunity|Link|req=0|def=undefined|hid=0|ro=1|opt=Opportunity|dep=
+META enq_det|Text|req=0|def=undefined|hid=1|ro=1|opt=|dep=
+META supplier_quotation|Link|req=0|def=undefined|hid=0|ro=0|opt=Supplier Quotation|dep=
+META connections_tab|Tab Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+QUOTES 40 [{"name":"SAL-QTN-2025-00006","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00008","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":2900,"transaction_date":"2025-02-16"},{"name":"SAL-QTN-2025-00007","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00031","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-02-19"},{"name":"SAL-QTN-2025-00009","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00093","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":2900,"transaction_date":"2025-02-19"},{"name":"SAL-QTN-2025-00010","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00097","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":5000,"transaction_date":"2025-02-19"},{"name":"SAL-QTN-2025-00011","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00094","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":2900,"transaction_date":"2025-02-19"},{"name":"SAL-QTN-2025-00012","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00098","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-02-19"},{"name":"SAL-QTN-2025-00013","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00108","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-02-20"},{"name":"SAL-QTN-2025-00014","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00119","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":24000,"transaction_date":"2025-02-20"},{"name":"SAL-QTN-2025-00015","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00120","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-02-22"},{"name":"SAL-QTN-2025-00016","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00052","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":1900,"transaction_date":"2025-02-22"},{"name":"SAL-QTN-2025-00017","status":"Cancelled","docstatus":2,"party_name":"CRM-LEAD-2025-00141","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":5000,"transaction_date":"2025-02-23"},{"name":"SAL-QTN-2025-00018","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00141","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":5000,"transaction_date":"2025-02-23"},{"name":"SAL-QTN-2025-00019","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00102","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":1900,"transaction_date":"2025-02-25"},{"name":"SAL-QTN-2025-00020","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00092","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":5000,"transaction_date":"2025-02-25"},{"name":"SAL-QTN-2025-00021","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00144","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-02-25"},{"name":"SAL-QTN-2025-00022","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00160","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-03-01"},{"name":"SAL-QTN-2025-00023","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00172","quotation_to":"Lead","company":"Fadaa - فضاء","grand_total":6200,"transaction_date":"2025-03-01"},{"name":"SAL-QTN-2025-00024","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00180","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-03-02"},{"name":"SAL-QTN-2025-00025","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00188","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":6200,"transaction_date":"2025-03-02"},{"name":"SAL-QTN-2025-00027","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00207","quotation_to":"Lead","company":"Warrqa - ورقة","grand_total":6200,"transaction_date":"2025-03-05"},{"name":"SAL-QTN-2025-00028","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00209","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":5000,"transaction_date":"2025-03-05"},{"name":"SAL-QTN-2025-00029","status":"Draft","docstatus":0,"party_name":"CUST-2025-00002","quotation_to":"Customer","company":"Transition - ترانزيشن","grand_total":3700,"transaction_date":"2025-03-05"},{"name":"SAL-QTN-2025-00030","status":"Draft","docstatus":0,"party_name":"CRM-LEAD-2025-00241","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":1500,"transaction_date":"2025-03-06"},{"name":"SAL-QTN-2025-00031","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00241","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":1500,"transaction_date":"2025-03-06"},{"name":"SAL-QTN-2025-00032","status":"Draft","docstatus":0,"party_name":"CRM-LEAD-2025-00225","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":24000,"transaction_date":"2025-03-06"},{"name":"SAL-QTN-2025-00033","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00241","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":1500,"transaction_date":"2025-03-06"},{"name":"SAL-QTN-2025-00034","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00254","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":1500,"transaction_date":"2025-03-06"},{"name":"SAL-QTN-2025-00035","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00260","quotation_to":"Lead","company":"Transition - ترانزيشن","grand_total":1500,"transaction_date":"2025-03-06"},{"name":"SAL-QTN-2025-00037","status":"Draft","docstatus":0,"party_name":"CRM-LEAD-2025-00328","quotation_to":"Lead","company":"Tak- تاك","grand_total":3600,"transaction_date":"2025-03-10"},{"name":"SAL-QTN-2025-00038","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00375","quotation_to":"Lead","company":"Sahm- سهم","grand_total":6200,"transaction_date":"2025-03-11"},{"name":"SAL-QTN-2025-00039","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00368","quotation_to":"Lead","company":"Basmah- بصمة","grand_total":6000,"transaction_date":"2025-03-11"},{"name":"SAL-QTN-2025-00040","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00386","quotation_to":"Lead","company":"Rawnaq - رونق","grand_total":6200,"transaction_date":"2025-03-11"},{"name":"SAL-QTN-2025-00041","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00390","quotation_to":"Lead","company":"Shark - شارك","grand_total":5000,"transaction_date":"2025-03-11"},{"name":"SAL-QTN-2025-00042","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00392","quotation_to":"Lead","company":"Sumoue - سمو","grand_total":7000,"transaction_date":"2025-03-11"},{"name":"SAL-QTN-2025-00043","status":"Cancelled","docstatus":2,"party_name":"CRM-LEAD-2025-00408","quotation_to":"Lead","company":"Basmah- بصمة","grand_total":5000,"transaction_date":"2025-03-11"},{"name":"SAL-QTN-2025-00044","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00441","quotation_to":"Lead","company":"Azzrk - أزرق","grand_total":6200,"transaction_date":"2025-03-12"},{"name":"SAL-QTN-2025-00045","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00442","quotation_to":"Lead","company":"Darb - درب","grand_total":6500,"transaction_date":"2025-03-12"},{"name":"SAL-QTN-2025-00046","status":"Draft","docstatus":0,"party_name":"CRM-LEAD-2025-00405","quotation_to":"Lead","company":"Shark - شارك","grand_total":12000,"transaction_date":"2025-03-12"},{"name":"SAL-QTN-2025-00047","status":"Expired","docstatus":1,"party_name":"CRM-LEAD-2025-00443","quotation_to":"Lead","company":"One Million - ون مليون","grand_total":6200,"transaction_date":"2025-03-12"},{"name":"SAL-QTN-2025-00049","status":"Draft","docstatus":0,"party_name":"CRM-LEAD-2025-00500","quotation_to":"Lead","company":"Mashourr - مشهور","grand_total":3500,"transaction_date":"2025-03-13"}]
+SELLING_SETTINGS {"allow_zero":1,"price_list":"Standard Selling","cust":"Customer Name"}
+CRM "2"
+ITEMMETA item_code|Link|req=0|hid=0|ro=0|opt=Item
+ITEMMETA item_name|Data|req=1|hid=0|ro=0|opt=
+ITEMMETA customer_item_code|Data|req=0|hid=1|ro=1|opt=
+ITEMMETA col_break1|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA is_free_item|Check|req=0|hid=0|ro=1|opt=
+ITEMMETA is_alternative|Check|req=0|hid=0|ro=0|opt=
+ITEMMETA has_alternative_item|Check|req=0|hid=1|ro=1|opt=
+ITEMMETA section_break_5|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA description|Text Editor|req=0|hid=0|ro=0|opt=
+ITEMMETA item_group|Link|req=0|hid=1|ro=1|opt=Item Group
+ITEMMETA brand|Link|req=0|hid=1|ro=1|opt=Brand
+ITEMMETA image_section|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA image|Attach|req=0|hid=1|ro=0|opt=
+ITEMMETA image_view|Image|req=0|hid=0|ro=0|opt=image
+ITEMMETA quantity_and_rate|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA qty|Float|req=1|hid=0|ro=0|opt=
+ITEMMETA stock_uom|Link|req=0|hid=0|ro=1|opt=UOM
+ITEMMETA col_break2|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA uom|Link|req=1|hid=0|ro=0|opt=UOM
+ITEMMETA conversion_factor|Float|req=1|hid=0|ro=1|opt=
+ITEMMETA stock_qty|Float|req=0|hid=0|ro=1|opt=
+ITEMMETA ordered_qty|Float|req=1|hid=1|ro=1|opt=
+ITEMMETA available_quantity_section|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA actual_qty|Float|req=0|hid=0|ro=1|opt=
+ITEMMETA column_break_ylrv|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA company_total_stock|Float|req=0|hid=0|ro=1|opt=
+ITEMMETA section_break_16|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA price_list_rate|Currency|req=0|hid=0|ro=1|opt=currency
+ITEMMETA base_price_list_rate|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA discount_and_margin|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA margin_type|Select|req=0|hid=0|ro=0|opt=
+Percentage
+Amount
+ITEMMETA margin_rate_or_amount|Float|req=0|hid=0|ro=0|opt=
+ITEMMETA rate_with_margin|Currency|req=0|hid=0|ro=1|opt=currency
+ITEMMETA column_break_18|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA discount_percentage|Percent|req=0|hid=0|ro=0|opt=
+ITEMMETA discount_amount|Currency|req=0|hid=0|ro=0|opt=currency
+ITEMMETA distributed_discount_amount|Currency|req=0|hid=0|ro=0|opt=currency
+ITEMMETA base_rate_with_margin|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA section_break1|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA rate|Currency|req=0|hid=0|ro=0|opt=currency
+ITEMMETA net_rate|Currency|req=0|hid=0|ro=1|opt=currency
+ITEMMETA amount|Currency|req=0|hid=0|ro=1|opt=currency
+ITEMMETA net_amount|Currency|req=0|hid=0|ro=1|opt=currency
+ITEMMETA item_tax_template|Link|req=0|hid=0|ro=0|opt=Item Tax Template
+ITEMMETA col_break3|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA base_rate|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA base_net_rate|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA base_amount|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA base_net_amount|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA pricing_rules|Small Text|req=0|hid=1|ro=1|opt=
+ITEMMETA stock_uom_rate|Currency|req=0|hid=0|ro=1|opt=currency
+ITEMMETA section_break_43|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA valuation_rate|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA column_break_45|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA gross_profit|Currency|req=0|hid=0|ro=1|opt=Company:company:default_currency
+ITEMMETA item_weight_details|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA weight_per_unit|Float|req=0|hid=0|ro=1|opt=
+ITEMMETA total_weight|Float|req=0|hid=0|ro=1|opt=
+ITEMMETA column_break_20|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA weight_uom|Link|req=0|hid=0|ro=1|opt=UOM
+ITEMMETA reference|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA warehouse|Link|req=0|hid=0|ro=0|opt=Warehouse
+ITEMMETA against_blanket_order|Check|req=0|hid=0|ro=0|opt=
+ITEMMETA blanket_order|Link|req=0|hid=0|ro=0|opt=Blanket Order
+ITEMMETA blanket_order_rate|Currency|req=0|hid=0|ro=1|opt=
+ITEMMETA column_break_30|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA prevdoc_doctype|Link|req=0|hid=1|ro=1|opt=DocType
+ITEMMETA prevdoc_docname|Dynamic Link|req=0|hid=0|ro=1|opt=prevdoc_doctype
+ITEMMETA item_balance|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA projected_qty|Float|req=0|hid=0|ro=1|opt=
+ITEMMETA col_break4|Column Break|req=0|hid=0|ro=0|opt=
+ITEMMETA stock_balance|Button|req=0|hid=0|ro=0|opt=
+ITEMMETA item_tax_rate|Code|req=0|hid=1|ro=1|opt=
+ITEMMETA shopping_cart_section|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA additional_notes|Text|req=0|hid=0|ro=0|opt=
+ITEMMETA section_break_61|Section Break|req=0|hid=0|ro=0|opt=
+ITEMMETA page_break|Check|req=0|hid=0|ro=0|opt=
+SIDEBAR Overview Subscription & Billing Reports Inventory Sales Selling Coupon Codes Price Lists Item Prices Customer Groups Terms and Conditions Territories Addresses Pricing Rules Quotations Sales Orders Sales Invoices Contacts Sales Taxes and Charges Blanket Orders Settings Point of Sale Buying Accounting ZATCA Organization Assets General Settings Logs Logout
+LINKS []

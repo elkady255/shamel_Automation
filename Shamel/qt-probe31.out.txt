@@ -1,0 +1,6 @@
+SAVE WITH ITEM BUT NO PARTY toasts []
+API submit SAL-QTN-2026-01703 true OK
+BTN texts ["أصناف حزمة المنتجات","تفاصيل قاعدة التسعير","إلغاء الاعتماد","تحديد كمفقود","تحديث الأصناف","إنشاء"]
+POPUP text inputs 13 ["ابحث عن الصفحات والأنواع...|max=-1","اختر التاريخ|max=-1","اختر التاريخ|max=-1","|max=-1","|max=-1","امسح أو اكتب الباركود|max=100","|max=-1","|max=-1","|max=-1","|max=-1","|max=-1","|max=-1","|max=100"]
+COMPETITORS length after typing 130 chars = 130
+DETAILED length after typing 130 chars = 100

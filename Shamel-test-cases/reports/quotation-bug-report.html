@@ -1,0 +1,980 @@
+<title>Quotation Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "QT-01",
+  "sev": "High",
+  "pri": "P1",
+  "layer": "Frontend",
+  "title": "A Quotation cannot be saved from the Add screen: two mandatory fields (Employee and Name In Contract) are not on the form",
+  "area": "Add Quotation › Save",
+  "tc": [],
+  "srs": "Save: if all required data is entered correctly and completely, the Quotation is saved as Draft",
+  "steps": [
+   "Open Selling › Quotations › Add Quotation.",
+   "Choose the customer \"PW Test Customer\", add the item IND182210 with Quantity 2.5 (every field the screen marks as mandatory is filled).",
+   "Click Save."
+  ],
+  "expected": "The Quotation is saved as a Draft and appears in the list.",
+  "actual": "The save fails with \"Error: Value missing for Quotation: Name In Contract\" and \"Value missing for Quotation: Employee\". The Quotation doctype has two custom mandatory fields, Employee (custom_employee) and Name In Contract (custom_name_in_contract), and no tab of the screen shows them, so the user cannot fill them. The same data saved through the create endpoint works as soon as the two values are sent (SAL-QTN-2026-01657 and the others). The other custom fields (Department, Pricing Request, Opportunity) are also not on the screen.",
+  "code": "Add Quotation (customer + 1 item) -> Save -> \"Value missing for Quotation: Name In Contract / Employee\"\nPOST Quotation + custom_employee=\"HR-EMP-01418\", custom_name_in_contract=\"PW QT\" -> saved",
+  "shots": [],
+  "fix": "Show the Employee and Name In Contract fields on the Details tab (or default them / make them optional), and decide what to do with the other custom fields. Until then no Quotation can be created from the new screen."
+ },
+ {
+  "id": "QT-02",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Save gives no visible feedback: an untouched form does nothing, and a missing Customer shows only a small message at the top of the page",
+  "area": "Add Quotation › Save",
+  "tc": [],
+  "srs": "If incorrect or incomplete data is entered, a validation error message is displayed for each invalid field",
+  "steps": [
+   "Open Add Quotation and click Save without typing anything.",
+   "Then add only an item row (IND182210) and click Save again; the Save button is at the bottom of the page."
+  ],
+  "expected": "A message for each empty mandatory field, visible where the user is looking.",
+  "actual": "The untouched form shows nothing at all (no message, no toast, no red field). With an item added, the only message is a small red \"الطرف مطلوب\" under the Customer box at the top of the page; there is no toast and the page does not scroll to it, so a user who clicked Save at the bottom sees nothing happen. Save on an unchanged Draft also shows nothing. Same behavior as CC-11, PL-04, IP-07, CG-05, TR-04, ST-06 and PR-07.",
+  "code": "Add form untouched -> Save -> nothing\nAdd form + item, no customer -> Save -> inline \"الطرف مطلوب\" only (offscreen)",
+  "shots": [],
+  "fix": "Validate the whole form on Save even when it is not marked as changed, scroll to the first invalid field and show a toast."
+ },
+ {
+  "id": "QT-03",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Setting popup of the Items table lists no columns, and its \"Add / Remove Fields\" popup is empty",
+  "area": "Add / Details › Items › Setting",
+  "tc": [],
+  "srs": "Setting popup: drag and drop of the columns, Column width (default 3), Add / Remove columns with the full column list, \"Update\" and \"Reset to default\" buttons",
+  "steps": [
+   "Open Add Quotation (or the saved Draft SAL-QTN-2026-01655) and click the gear above the Items table.",
+   "Click \"Add/Remove Fields\"."
+  ],
+  "expected": "The columns of the table with their width, the list of all available columns with checkboxes, Update and Reset to default.",
+  "actual": "\"Edit Columns\" shows only the two headings \"Field Name\" and \"Column Width\" with no rows, and \"Add/Remove Fields\" opens an \"Available fields\" popup with no fields (only Cancel and Add). The buttons are Cancel and Save; there is no Reset to default (same as AD-11, CT-16, ST-08 and PR-10). Only the Items table was checked; the Taxes table has the same gear.",
+  "code": "gear -> Edit Columns: Field Name | Column Width | Add/Remove Fields | Cancel | Save (no rows)\nAdd/Remove Fields -> Available fields (empty) | Cancel | Add",
+  "shots": [],
+  "fix": "Load the column list of the child doctype into the popup, and add Reset to default and the \"Update\" label."
+ },
+ {
+  "id": "QT-04",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "The \"Get Items From Opportunity\" action does not exist",
+  "area": "Add Quotation / Details › Fixed Page Actions",
+  "tc": [],
+  "srs": "Get Items From Opportunity: a popup with search by Name, Party and Opportunity Type, a list of Opportunities with status Open or Quotation, and a \"Get Items\" button that adds the items to the table",
+  "steps": [
+   "Open Add Quotation and read the buttons of the page.",
+   "Open a Draft and a submitted Quotation and read the buttons again."
+  ],
+  "expected": "A \"Get Items From Opportunity\" button in the page actions.",
+  "actual": "Add Quotation has only Cancel and Save; a Draft has Cancel, Save and Submit; a submitted Quotation has Cancel Document, Set as Lost, Update Items and Create. The action is not anywhere. (The Linked Records tab does list Opportunities.)",
+  "code": "Add: Cancel | Save    Draft: Cancel | Save | Submit    Submitted: Cancel Document | Set as Lost | Update Items | Create",
+  "shots": [],
+  "fix": "Add the action and its popup, or remove it from the SRS if the Opportunity flow is out of scope."
+ },
+ {
+  "id": "QT-05",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "Create › Sales Order and Create › Sales Invoice do not open the new document",
+  "area": "Quotation Details › Create",
+  "tc": [],
+  "srs": "Create › Sales Order / Sales Invoice: navigates to the Add Sales Order / Add Sales Invoice screen and the items are fetched from the Quotation",
+  "steps": [
+   "Open the submitted Quotation SAL-QTN-2026-01674 (status Open).",
+   "Click Create, then Sales Order. Repeat with Sales Invoice."
+  ],
+  "expected": "The Add Sales Order (Add Sales Invoice) screen opens with the Quotation items.",
+  "actual": "The page stays on the Quotation and a toast says \"Sales Order Prepared from this quotation with 1 item(s). The screen for it is not part of this release yet.\" (the same for Sales Invoice). The sidebar already has \"Sales Orders\" and \"Sales Invoices\".",
+  "code": "Create -> Sales Order  -> toast \"...The screen for it is not part of this release yet.\"",
+  "shots": [],
+  "fix": "Open the Add screens with the prepared items, or hide the two actions until the screens are linked."
+ },
+ {
+  "id": "QT-06",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "After Amend the screen keeps showing the Cancelled Quotation",
+  "area": "Quotation Details › Amend",
+  "tc": [],
+  "srs": "Amend: appears only when the status is Cancelled; the amended Quotation is created as a new Draft with \"Amended From\"",
+  "steps": [
+   "Open a submitted Quotation, click Cancel Document, then click Amend.",
+   "Look at the screen after the toast."
+  ],
+  "expected": "The new Draft (SAL-QTN-2026-01674-1) opens with Save and Submit.",
+  "actual": "The address becomes ...01674-1 and the toast \"Quotation amended successfully\" shows, but the page still shows the old document: status Cancelled and only the Amend button. The new Draft is correct after a reload (status Draft, \"Amended From\" = SAL-QTN-2026-01674, Cancel / Save / Submit).",
+  "code": "Amend -> URL .../SAL-QTN-2026-01674-1, screen still \"Cancelled\" + [Amend]",
+  "shots": [],
+  "fix": "Reload the document data when the route changes after Amend."
+ },
+ {
+  "id": "QT-07",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Address labels (Billing, Shipping and Company) always show \"—\"",
+  "area": "Add / Details › General Information › Addresses",
+  "tc": [],
+  "srs": "Address: read-only label that displays the address description, city / town, state and country of the selected address",
+  "steps": [
+   "Open Add Quotation, choose the customer \"PW Test Customer\" and open General Information.",
+   "Or open the saved Draft SAL-QTN-2026-01655 and open General Information."
+  ],
+  "expected": "The text of the address under \"Address\", \"Shipping Address\" and \"Company Address\".",
+  "actual": "The address name is filled automatically (billing and shipping \"PW AD P2 176481\", company \"54-Billing\"), but the three read-only labels show \"—\". The saved Quotation already has the text in its address_display field. The automatic choice of the customer address follows the SRS (the primary address \"PW AD P2 176481\" is chosen).",
+  "code": "Customer Address Name = \"PW AD P2 176481\" -> Address = \"—\"",
+  "shots": [],
+  "fix": "Fill the three labels from the selected address (and refresh them when the address changes)."
+ },
+ {
+  "id": "QT-08",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server saves a Quotation with no Party, and a row with Quantity 0 while \"Has Unit Price Items\" is off",
+  "area": "Add Quotation › Party and Items › Qty",
+  "tc": [],
+  "srs": "Party: mandatory. Qty: if Has Unit Price Items is unchecked, Qty must be greater than 0",
+  "steps": [
+   "Send the create request with no party_name (everything else valid).",
+   "Send it with an item row of qty 0 and has_unit_price_items = 0."
+  ],
+  "expected": "Both are refused.",
+  "actual": "Both are saved as Drafts (SAL-QTN-2026-01659 and SAL-QTN-2026-01675, total 0). The screen refuses both (\"الطرف مطلوب\" and \"Row 1: Quantity must be greater than 0\"), so only the server rules are missing. A negative quantity is refused with the technical text \"Incorrect value: Grand Total (Company Currency) must be >= 0.0\".",
+  "code": "Quotation  party_name=<empty>  -> saved\nQuotation  items[0].qty=0, has_unit_price_items=0  -> saved, grand_total 0",
+  "shots": [],
+  "fix": "Add the two rules to the server validation and a clear message for a negative quantity."
+ },
+ {
+  "id": "QT-09",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts a UOM the item does not have, a row without a Warehouse and a Warehouse of another company",
+  "area": "Items › UOM and Warehouse",
+  "tc": [],
+  "srs": "UOM: lists the UOMs of the item. Warehouse: mandatory",
+  "steps": [
+   "Send the create request with item IND182210 (UOM \"Subscription\") and uom \"Kg\".",
+   "Send it with no warehouse, then with the warehouse \"Stores - Warrqa\" while the company is \"Ahmed Ebrahim CO.\"."
+  ],
+  "expected": "All three are refused.",
+  "actual": "All three are saved (SAL-QTN-2026-01681, 01682 and 01683). The Edit Row popup marks Warehouse as mandatory and lists only the item UOMs. A missing UOM is refused (\"Value missing for: UOM\").",
+  "code": "items[0].uom=\"Kg\" -> saved\nitems[0].warehouse=<none> -> saved\nitems[0].warehouse=\"Stores - Warrqa\" (company Ahmed Ebrahim CO.) -> saved",
+  "shots": [],
+  "fix": "Check that the UOM belongs to the item, make Warehouse mandatory and check that it belongs to the company."
+ },
+ {
+  "id": "QT-10",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A negative Additional Discount (percentage or amount) is accepted and raises the total",
+  "area": "Additional Discount",
+  "tc": [],
+  "srs": "Additional Discount Percentage and Amount: numbers only (a discount reduces the total)",
+  "steps": [
+   "Send the create request with additional_discount_percentage = -10 on a quotation of 20,400.",
+   "Send another with discount_amount = -50."
+  ],
+  "expected": "Both are refused.",
+  "actual": "Both are saved: the grand total becomes 22,440 (SAL-QTN-2026-01692) and 20,450 (SAL-QTN-2026-01695) instead of going down. A discount above the total (150% or 999,999) is correctly refused.",
+  "code": "additional_discount_percentage=-10 -> grand_total 22,440\ndiscount_amount=-50 -> grand_total 20,450",
+  "shots": [],
+  "fix": "Refuse a negative additional discount (percentage and amount)."
+ },
+ {
+  "id": "QT-11",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "Tax rows with a negative rate or a rate of 500%, and an \"Actual\" row with no amount, are accepted",
+  "area": "Taxes and Charges",
+  "tc": [],
+  "srs": "Tax Rate: optional, numbers only; Type: mandatory",
+  "steps": [
+   "Send the create request with a row On Net Total with rate -5, then 500.",
+   "Send a row of type Actual with no amount."
+  ],
+  "expected": "A negative rate and an impossible rate are refused; an Actual row without an amount is refused.",
+  "actual": "All are saved: -5% lowers the grand total to 19,380 (SAL-QTN-2026-01701), 500% raises it to 122,400 (SAL-QTN-2026-01702) and the Actual row is saved with 0 (SAL-QTN-2026-01703). A row without an Account Head, and \"On Previous Row Amount\" on the first row, are refused correctly.",
+  "code": "taxes[0] On Net Total rate=-5 -> grand 19,380\ntaxes[0] On Net Total rate=500 -> grand 122,400",
+  "shots": [],
+  "fix": "Validate the tax rate (not negative) and the amount of an Actual row."
+ },
+ {
+  "id": "QT-12",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "An Exchange Rate of 0 or a negative value, and a Price List Exchange Rate of 0, are accepted",
+  "area": "Currency and Price List",
+  "tc": [],
+  "srs": "Exchange Rate and Price List Exchange Rate: fetched by the Accounts Settings rule",
+  "steps": [
+   "Send the create request with conversion_rate 0, then -2.",
+   "Send it with plc_conversion_rate 0."
+  ],
+  "expected": "The values are refused.",
+  "actual": "All three are saved (SAL-QTN-2026-01665, 01666, 01667). The screen starts with 1 in both boxes. The currency check (USD with a SAR company and rate 1) is also accepted (SAL-QTN-2026-01668).",
+  "code": "conversion_rate=0 / -2, plc_conversion_rate=0 -> saved",
+  "shots": [],
+  "fix": "Refuse an exchange rate that is not greater than 0."
+ },
+ {
+  "id": "QT-13",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Both",
+  "title": "Items without \"Maintain Stock\" can be added: the dropdown offers one, and the server accepts another",
+  "area": "Items › Item",
+  "tc": [],
+  "srs": "Item: only items with Maintain Stock enabled, Has Variants disabled and Allow Sales enabled are displayed",
+  "steps": [
+   "Open Add Quotation, add a row and search \"Ads\" in the Item box (the item \"Ads - Marketing Ads Spend\" has Maintain Stock off).",
+   "Send the create request with the item \"2121\" (Maintain Stock off)."
+  ],
+  "expected": "Non-stock items are not offered and are refused.",
+  "actual": "\"Ads\" is offered in the dropdown. \"2121\" is not offered, but the server saves it (SAL-QTN-2026-01673). Template items (1111) and items with Allow Sales off (45, Item-123) are correctly excluded or refused.",
+  "code": "Item search \"Ads\" -> \"Marketing Ads Spend - Ads\" (is_stock_item = 0)\nPOST Quotation item 2121 (is_stock_item = 0) -> saved",
+  "shots": [],
+  "fix": "Apply the Maintain Stock filter in the dropdown query and in the server validation, or change the SRS if services are allowed."
+ },
+ {
+  "id": "QT-14",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Items and Taxes and Charges tables have no \"No.\" column",
+  "area": "Items and Taxes and Charges tables",
+  "tc": [],
+  "srs": "Tables: Checkbox, No. (the order of the rows), then the fields",
+  "steps": [
+   "Open Add Quotation, add an item row and a tax row and read the table headers."
+  ],
+  "expected": "A No. column after the checkbox in each table.",
+  "actual": "Items: checkbox, Item Code, Quantity, Rate, Amount. Taxes: checkbox, Type, Account Head, Tax Rate, Net Amount, Amount, Total. The Payment Schedule table does have its number column.",
+  "code": "Items header: [ ] | Item Code | Quantity | Rate | Amount",
+  "shots": [],
+  "fix": "Add the No. column to the two tables."
+ },
+ {
+  "id": "QT-15",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The item Edit Row popup has no Image field and no Stock Balance button",
+  "area": "Items › Edit Row",
+  "tc": [],
+  "srs": "Edit Row fields include Image (upload by drag and drop or browse, JPEG and PNG only, up to 5 MB) and a Stock Balance button that opens the Stock Balance screen",
+  "steps": [
+   "Add an item row and click Edit Row; scroll the popup to the end."
+  ],
+  "expected": "Image upload and the Stock Balance button.",
+  "actual": "The popup has the other fields (Item, Item Group, Item Name, Customer's Item Code, Is Free Item, Is Alternative, Description, Brand, the Qty, UOM, rate and discount fields, Warehouse, Blanket Order, Projected Qty and Shopping Cart) but neither Image nor Stock Balance.",
+  "code": "Edit Row ... Projected Qty | Shopping Cart | Cancel | Save",
+  "shots": [],
+  "fix": "Add the two controls, or remove them from the SRS."
+ },
+ {
+  "id": "QT-16",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "Text length rules are missing on the server: item Description, Terms and Condition content and Title",
+  "area": "Items › Description, Terms, Title",
+  "tc": [],
+  "srs": "Description and Terms and Condition content: optional, minimum 3 and maximum 500 characters; Title (hidden): 2 to 100 characters",
+  "steps": [
+   "Send the create request with an item description of 2 and of 501 characters.",
+   "Send terms of 2, 501 and 5,000 characters, and a title of 1 and of 101 characters."
+  ],
+  "expected": "Values outside the limits are refused.",
+  "actual": "All are saved (SAL-QTN-2026-01684, 01685, 01697, 01698, 01699, 01663 and 01664). On the screen the Terms box stops at 500 characters. A title of 141 characters is refused only by the 140 character limit of the field.",
+  "code": "items[0].description=\"ab\" / <501 chars>, terms=\"ab\" / <5000 chars> -> saved",
+  "shots": [],
+  "fix": "Add the 3 to 500 character rule to the server validation."
+ },
+ {
+  "id": "QT-17",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "An item row without an Item shows a technical message",
+  "area": "Items › Item",
+  "tc": [],
+  "srs": "Item: mandatory; if the field is left empty, an error message appears",
+  "steps": [
+   "Choose a customer, click Add Item and leave the Item empty.",
+   "Click Save."
+  ],
+  "expected": "A message such as \"Item is required\" under the Item box.",
+  "actual": "A toast \"Validation Error in the following fields: items.0.item_code: Input should be a valid string\".",
+  "code": "toast: items.0.item_code: Input should be a valid string",
+  "shots": [],
+  "fix": "Validate the row on the screen and translate this message."
+ },
+ {
+  "id": "QT-18",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "Two requests end in a server error 500 instead of a message",
+  "area": "Add Quotation › server",
+  "tc": [],
+  "srs": "Incorrect data shows an error message for the field",
+  "steps": [
+   "Send the create request with an empty items list.",
+   "Send it with an item quantity of 1e12."
+  ],
+  "expected": "A validation message for each.",
+  "actual": "The first returns 500 \"TypeError: bad operand type for abs(): NoneType\"; the second returns 500 \"MySQLdb.DataError: Out of range value for column total_qty\". (The screen refuses the empty list with \"At least one item is required\".)",
+  "code": "items=[] -> 500 TypeError\nqty=1e12 -> 500 DataError",
+  "shots": [],
+  "fix": "Validate the items list and a maximum for the quantity before the calculation."
+ },
+ {
+  "id": "QT-19",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Lost Reasons dropdown says \"No options found\" until the user types",
+  "area": "Set as Lost › Lost Reasons",
+  "tc": [],
+  "srs": "Lost Reasons: searchable DDL linked to Quotation Lost Reason, mandatory",
+  "steps": [
+   "Open a submitted Quotation and click Set as Lost.",
+   "Click the Lost Reasons box without typing."
+  ],
+  "expected": "The list of the 3 reasons in the system.",
+  "actual": "\"No options found\" is shown and no request is sent. After typing \"hes\" the reason \"hesitation\" appears. The other dropdowns of the screen load their list when opened.",
+  "code": "open box -> \"No options found\"; type \"hes\" -> hesitation",
+  "shots": [],
+  "fix": "Load the reasons when the box is opened."
+ },
+ {
+  "id": "QT-20",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Competitors box does not stop at 100 characters",
+  "area": "Set as Lost › Competitors",
+  "tc": [],
+  "srs": "Competitors: optional, 2 to 100 characters, further input prevented at the maximum",
+  "steps": [
+   "In the Set as Lost popup type 130 characters in Competitors and in Detailed Reason."
+  ],
+  "expected": "Both stop at 100 characters.",
+  "actual": "Detailed Reason stops at 100; Competitors keeps all 130 characters (the box has no length limit).",
+  "code": "Competitors <- 130 chars  -> 130 kept    Detailed Reason <- 130 chars -> 100 kept",
+  "shots": [],
+  "fix": "Set the 100 character limit on the Competitors box."
+ },
+ {
+  "id": "QT-21",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "\"Taxes and Charges Calculation\", \"Bundle Items\" and \"Pricing Rule Detail\" are shown on a new, unsaved Quotation",
+  "area": "Add Quotation › Details",
+  "tc": [],
+  "srs": "Taxes and Charges Calculation: only after taxes are added and the document is saved. Bundle Items: only when an item is a Product Bundle and the user clicks Save",
+  "steps": [
+   "Open Add Quotation and scroll to the end of the Details tab."
+  ],
+  "expected": "The three sections are hidden.",
+  "actual": "All three section headings are shown (empty) on the new form.",
+  "code": "Add form sections: ... Additional Discount | Taxes and Charges Calculation | Bundle Items | Pricing Rule Detail",
+  "shots": [],
+  "fix": "Hide the sections until they have data."
+ },
+ {
+  "id": "QT-22",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "Some labels are not translated or are translated differently in the Arabic screens",
+  "area": "Add Quotation and list Edit popup",
+  "tc": [],
+  "srs": "The screens are bilingual (the same term for the same field)",
+  "steps": [
+   "Open Add Quotation in Arabic and read \"عرض السعر موجّه إلى\" and the Series box.",
+   "In the list select a Draft, click Edit and open the Field list."
+  ],
+  "expected": "The same Arabic wording everywhere.",
+  "actual": "The value of \"عرض السعر موجّه إلى\" shows the English word \"Customer\" while its list shows \"العميل\" and \"العميل المحتمل\"; the Series box shows the raw pattern \"SAL-QTN-.YYYY.-\"; in the list Edit popup the same field is called \"مناقصة لـ\".",
+  "code": "Quotation To = \"Customer\" (list: العميل / العميل المحتمل); Edit popup field: \"مناقصة لـ\"",
+  "shots": [],
+  "fix": "Use one Arabic label per field and translate the option values."
+ },
+ {
+  "id": "QT-23",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "Saving a Quotation creates an Item Price when the item has none in the price list",
+  "area": "Price List › Item Price",
+  "tc": [],
+  "srs": "The rate comes from the selected Price List (the SRS does not mention writing to it)",
+  "steps": [
+   "Save a Quotation (create request) with item \"2121\", which has no price in \"Standard Selling\", and rate 100.",
+   "Open Item Prices for the item."
+  ],
+  "expected": "No change to the price list.",
+  "actual": "An Item Price \"2121 / Standard Selling / 100\" (v09jn3ug67) was created. The Selling Settings option that inserts a missing price is on. A real price list can get prices from any quotation, which affects later sales.",
+  "code": "Quotation item 2121 rate 100 -> Item Price v09jn3ug67 created in Standard Selling",
+  "shots": [],
+  "fix": "Confirm that this is wanted; if not, turn the setting off."
+ }
+];
+const BUG_AR = {
+ "QT-01": {
+  "t": "مينفعش تحفظ Quotation من شاشة الإضافة: حقلين إجباريين (Employee وName In Contract) مش موجودين في الفورم",
+  "area": "إضافة Quotation › Save",
+  "srs": "Save: لو كل البيانات المطلوبة صح ومكتملة، الـ Quotation بتتحفظ Draft",
+  "steps": [
+   "افتح Selling › Quotations › Add Quotation.",
+   "اختار العميل «PW Test Customer» وضيف الصنف IND182210 بكمية 2.5 (كل الحقول اللي الشاشة معلّمة إجباري مليانة).",
+   "اضغط Save."
+  ],
+  "exp": "الـ Quotation بتتحفظ Draft وتظهر في القايمة.",
+  "act": "الحفظ بيفشل بـ «Error: Value missing for Quotation: Name In Contract» و«Value missing for Quotation: Employee». الـ doctype فيه حقلين custom إجباريين: Employee (custom_employee) وName In Contract (custom_name_in_contract)، ومفيش تاب في الشاشة بيعرضهم، فالمستخدم مش قادر يملأهم. نفس البيانات بتتحفظ بنداء الإنشاء أول ما تتبعت القيمتين (SAL-QTN-2026-01657 وغيرها). باقي الحقول الـ custom (Department وPricing Request وOpportunity) كمان مش في الشاشة.",
+  "fix": "اعرضوا حقلي Employee وName In Contract في تاب Details (أو اديهم قيمة افتراضية / خلّوهم اختياريين)، وقرروا هتعملوا إيه في باقي الحقول الـ custom. لحد وقتها مفيش Quotation تتعمل من الشاشة الجديدة."
+ },
+ "QT-02": {
+  "t": "Save مبيدّيش feedback واضح: الفورم اللي ماتلمسش مبيعملش حاجة، والعميل الناقص بيظهر برسالة صغيرة فوق الصفحة بس",
+  "area": "إضافة Quotation › Save",
+  "srs": "لو بيانات غلط أو ناقصة، بتظهر رسالة خطأ لكل حقل غلط",
+  "steps": [
+   "افتح Add Quotation واضغط Save من غير ما تكتب حاجة.",
+   "بعدين ضيف صف صنف بس (IND182210) واضغط Save؛ زرار Save في آخر الصفحة."
+  ],
+  "exp": "رسالة لكل حقل إجباري فاضي، ظاهرة في المكان اللي المستخدم بيبص عليه.",
+  "act": "الفورم اللي ماتلمسش مبيظهرش أي حاجة (لا رسالة ولا toast ولا حقل أحمر). ولما صنف يتضاف، الرسالة الوحيدة «الطرف مطلوب» صغيرة بالأحمر تحت خانة العميل فوق الصفحة؛ ومفيش toast والصفحة مبتنزلش عليها، فمستخدم ضغط Save من تحت مش بيشوف إن حاجة حصلت. Save على Draft مفيهوش تغيير كمان مبيظهرش حاجة. نفس سلوك CC-11 وPL-04 وIP-07 وCG-05 وTR-04 وST-06 وPR-07.",
+  "fix": "اعملوا validation للفورم كله عند Save حتى لو الفورم مش متعلّم إنه اتغيّر، وانزلوا على أول حقل غلط واعرضوا toast."
+ },
+ "QT-03": {
+  "t": "نافذة Setting بتاعة جدول الأصناف مبتعرضش أعمدة، ونافذة «Add / Remove Fields» فاضية",
+  "area": "إضافة / تفاصيل › Items › Setting",
+  "srs": "نافذة Setting: سحب وإفلات الأعمدة، وColumn width (الافتراضي 3)، وAdd / Remove columns بقايمة كل الأعمدة، وأزرار «Update» و«Reset to default»",
+  "steps": [
+   "افتح Add Quotation (أو الـ Draft المحفوظ SAL-QTN-2026-01655) واضغط على الترس فوق جدول الأصناف.",
+   "اضغط «Add/Remove Fields»."
+  ],
+  "exp": "أعمدة الجدول بعرضها، وقايمة كل الأعمدة المتاحة بـ checkboxes، وUpdate وReset to default.",
+  "act": "«Edit Columns» بتعرض عنوانين بس «Field Name» و«Column Width» من غير صفوف، و«Add/Remove Fields» بتفتح نافذة «Available fields» من غير حقول (Cancel وAdd بس). الأزرار Cancel وSave؛ ومفيش Reset to default (زي AD-11 وCT-16 وST-08 وPR-10). اتفحص جدول الأصناف بس؛ وجدول الضرائب ليه نفس الترس.",
+  "fix": "حمّلوا قايمة أعمدة الـ child doctype في النافذة، وضيفوا Reset to default وتسمية «Update»."
+ },
+ "QT-04": {
+  "t": "إجراء «Get Items From Opportunity» مش موجود",
+  "area": "إضافة Quotation / تفاصيل › Fixed Page Actions",
+  "srs": "Get Items From Opportunity: نافذة فيها بحث بـ Name وParty وOpportunity Type، وقايمة Opportunities حالتها Open أو Quotation، وزر «Get Items» بيضيف الأصناف للجدول",
+  "steps": [
+   "افتح Add Quotation واقرا أزرار الصفحة.",
+   "افتح Draft وQuotation معتمدة واقرا الأزرار تاني."
+  ],
+  "exp": "زر «Get Items From Opportunity» في إجراءات الصفحة.",
+  "act": "Add Quotation فيها Cancel وSave بس؛ والـ Draft فيه Cancel وSave وSubmit؛ والمعتمدة فيها Cancel Document وSet as Lost وUpdate Items وCreate. الإجراء مش موجود في أي مكان. (تاب Linked Records بيعرض Opportunities.)",
+  "fix": "ضيفوا الإجراء ونافذته، أو شيلوه من الـ SRS لو مسار Opportunity خارج النطاق."
+ },
+ "QT-05": {
+  "t": "Create › Sales Order وCreate › Sales Invoice مبيفتحوش المستند الجديد",
+  "area": "تفاصيل Quotation › Create",
+  "srs": "Create › Sales Order / Sales Invoice: بيروّح المستخدم لشاشة Add Sales Order / Add Sales Invoice والأصناف بتتنقل من الـ Quotation",
+  "steps": [
+   "افتح الـ Quotation المعتمدة SAL-QTN-2026-01674 (حالتها Open).",
+   "اضغط Create وبعدين Sales Order. كرر بـ Sales Invoice."
+  ],
+  "exp": "شاشة Add Sales Order (Add Sales Invoice) تفتح بأصناف الـ Quotation.",
+  "act": "الصفحة بتفضل على الـ Quotation وبيظهر toast «Sales Order Prepared from this quotation with 1 item(s). The screen for it is not part of this release yet.» (وكذلك Sales Invoice). في الـ sidebar فيه «أوامر البيع» و«فواتير المبيعات» فعلًا.",
+  "fix": "افتحوا شاشتي الإضافة بالأصناف الجاهزة، أو اخفوا الإجراءين لحد ما الشاشات تتربط."
+ },
+ "QT-06": {
+  "t": "بعد Amend الشاشة بتفضل عارضة الـ Quotation الملغية",
+  "area": "تفاصيل Quotation › Amend",
+  "srs": "Amend: بيظهر لما الحالة Cancelled بس؛ والـ Quotation المعدّلة بتتعمل Draft جديدة فيها «Amended From»",
+  "steps": [
+   "افتح Quotation معتمدة واضغط Cancel Document وبعدين Amend.",
+   "بص على الشاشة بعد الـ toast."
+  ],
+  "exp": "الـ Draft الجديدة (SAL-QTN-2026-01674-1) تفتح وفيها Save وSubmit.",
+  "act": "العنوان بيتغير لـ ‎...01674-1 وبيظهر toast «Quotation amended successfully»، لكن الصفحة لسه عارضة المستند القديم: الحالة Cancelled وزرار Amend بس. الـ Draft الجديدة صح بعد ريفريش (الحالة Draft و«Amended From» = SAL-QTN-2026-01674 وCancel / Save / Submit).",
+  "fix": "حمّلوا بيانات المستند تاني لما الـ route يتغير بعد Amend."
+ },
+ "QT-07": {
+  "t": "عناوين Address (الفوترة والشحن والشركة) بتظهر دايمًا «—»",
+  "area": "إضافة / تفاصيل › General Information › العناوين",
+  "srs": "Address: حقل عرض فقط بيعرض وصف العنوان والمدينة والولاية والدولة للعنوان المختار",
+  "steps": [
+   "افتح Add Quotation واختار العميل «PW Test Customer» وافتح General Information.",
+   "أو افتح الـ Draft المحفوظ SAL-QTN-2026-01655 وافتح General Information."
+  ],
+  "exp": "نص العنوان تحت «Address» و«Shipping Address» و«Company Address».",
+  "act": "اسم العنوان بيتملي لوحده (الفوترة والشحن «PW AD P2 176481» والشركة «54-Billing»)، لكن الـ labels التلاتة بتظهر «—». والـ Quotation المحفوظة فيها النص فعلًا في حقل address_display. الاختيار التلقائي لعنوان العميل ماشي زي الـ SRS (بيختار العنوان الأساسي «PW AD P2 176481»).",
+  "fix": "املوا الـ labels التلاتة من العنوان المختار (وحدّثوها لما العنوان يتغير)."
+ },
+ "QT-08": {
+  "t": "السيرفر بيحفظ Quotation من غير Party، وصف بكمية 0 والـ «Has Unit Price Items» مش مفعّل",
+  "area": "إضافة Quotation › Party وItems › Qty",
+  "srs": "Party: إجباري. Qty: لو Has Unit Price Items مش متعلّم، الكمية لازم تكون أكبر من 0",
+  "steps": [
+   "ابعت طلب الإنشاء من غير party_name (باقي البيانات صح).",
+   "ابعته بصف كميته 0 وhas_unit_price_items = 0."
+  ],
+  "exp": "الاتنين يترفضوا.",
+  "act": "الاتنين بيتحفظوا Draft (SAL-QTN-2026-01659 وSAL-QTN-2026-01675 بإجمالي 0). الشاشة بترفض الاتنين («الطرف مطلوب» و«Row 1: Quantity must be greater than 0») فالناقص هو قواعد السيرفر بس. والكمية السالبة بتترفض برسالة تقنية «Incorrect value: Grand Total (Company Currency) must be >= 0.0».",
+  "fix": "ضيفوا القاعدتين في validation السيرفر ورسالة واضحة للكمية السالبة."
+ },
+ "QT-09": {
+  "t": "السيرفر بيقبل UOM مش بتاعة الصنف، وصف من غير Warehouse، وWarehouse تبع شركة تانية",
+  "area": "Items › UOM وWarehouse",
+  "srs": "UOM: بيعرض UOMs الصنف. Warehouse: إجباري",
+  "steps": [
+   "ابعت طلب الإنشاء بالصنف IND182210 (UOM «Subscription») وuom «Kg».",
+   "ابعته من غير warehouse، وبعدين بالمستودع «Stores - Warrqa» والشركة «Ahmed Ebrahim CO.»."
+  ],
+  "exp": "التلاتة يترفضوا.",
+  "act": "التلاتة بيتحفظوا (SAL-QTN-2026-01681 وSAL-QTN-2026-01682 وSAL-QTN-2026-01683). نافذة Edit Row بتعلّم Warehouse إجباري وبتعرض UOMs الصنف بس. والـ UOM الناقصة بتترفض («Value missing for: UOM»).",
+  "fix": "اتأكدوا إن الـ UOM بتاعة الصنف، وخلّوا Warehouse إجباري واتأكدوا إنه تبع الشركة."
+ },
+ "QT-10": {
+  "t": "الخصم الإضافي بالسالب (نسبة أو مبلغ) بيتقبل وبيزوّد الإجمالي",
+  "area": "Additional Discount",
+  "srs": "Additional Discount Percentage وAmount: أرقام بس (الخصم بينقّص الإجمالي)",
+  "steps": [
+   "ابعت طلب الإنشاء بـ additional_discount_percentage = -10 على Quotation إجماليها 20,400.",
+   "ابعت تاني بـ discount_amount = -50."
+  ],
+  "exp": "الاتنين يترفضوا.",
+  "act": "الاتنين بيتحفظوا: الإجمالي بيبقى 22,440 (SAL-QTN-2026-01692) و20,450 (SAL-QTN-2026-01695) بدل ما ينزل. والخصم الأكبر من الإجمالي (150% أو 999,999) بيترفض صح.",
+  "fix": "ارفضوا الخصم الإضافي السالب (النسبة والمبلغ)."
+ },
+ "QT-11": {
+  "t": "صفوف ضرائب بنسبة سالبة أو 500%، وصف «Actual» من غير مبلغ، بتتقبل",
+  "area": "Taxes and Charges",
+  "srs": "Tax Rate: اختياري، أرقام بس؛ Type: إجباري",
+  "steps": [
+   "ابعت طلب الإنشاء بصف On Net Total نسبته -5، وبعدين 500.",
+   "ابعت صف نوعه Actual من غير مبلغ."
+  ],
+  "exp": "النسبة السالبة والمستحيلة تترفض؛ وصف Actual من غير مبلغ يترفض.",
+  "act": "الكل بيتحفظ: -5% بينزّل الإجمالي لـ 19,380 (SAL-QTN-2026-01701) و500% بيرفعه لـ 122,400 (SAL-QTN-2026-01702) وصف Actual بيتحفظ بصفر (SAL-QTN-2026-01703). والصف من غير Account Head، و«On Previous Row Amount» في الصف الأول، بيترفضوا صح.",
+  "fix": "اعملوا validation لنسبة الضريبة (مش سالبة) ولمبلغ صف Actual."
+ },
+ "QT-12": {
+  "t": "Exchange Rate بـ 0 أو بقيمة سالبة، وPrice List Exchange Rate بـ 0، بيتقبلوا",
+  "area": "Currency and Price List",
+  "srs": "Exchange Rate وPrice List Exchange Rate: بيتجابوا بقاعدة Accounts Settings",
+  "steps": [
+   "ابعت طلب الإنشاء بـ conversion_rate = 0، وبعدين -2.",
+   "ابعته بـ plc_conversion_rate = 0."
+  ],
+  "exp": "القيم تترفض.",
+  "act": "التلاتة بيتحفظوا (SAL-QTN-2026-01665 وSAL-QTN-2026-01666 وSAL-QTN-2026-01667). الشاشة بتبدأ بـ 1 في الخانتين. وفحص العملة (USD مع شركة SAR وسعر 1) كمان بيتقبل (SAL-QTN-2026-01668).",
+  "fix": "ارفضوا سعر الصرف اللي مش أكبر من 0."
+ },
+ "QT-13": {
+  "t": "ينفع تضيف أصناف من غير «Maintain Stock»: القايمة بتعرض واحد، والسيرفر بيقبل واحد تاني",
+  "area": "Items › Item",
+  "srs": "Item: بتظهر الأصناف اللي Maintain Stock مفعّل فيها وHas Variants مش مفعّل وAllow Sales مفعّل بس",
+  "steps": [
+   "افتح Add Quotation وضيف صف وابحث «Ads» في خانة Item (الصنف «Ads - Marketing Ads Spend» Maintain Stock مقفول).",
+   "ابعت طلب الإنشاء بالصنف «2121» (Maintain Stock مقفول)."
+  ],
+  "exp": "الأصناف غير المخزنية متظهرش وتترفض.",
+  "act": "«Ads» بيظهر في القايمة. و«2121» مبيظهرش لكن السيرفر بيحفظه (SAL-QTN-2026-01673). أصناف الـ template (1111) والأصناف اللي Allow Sales مقفول فيها (45 وItem-123) بتتشال أو بتترفض صح.",
+  "fix": "طبقوا فلتر Maintain Stock في query القايمة وفي validation السيرفر، أو عدّلوا الـ SRS لو الخدمات مسموحة."
+ },
+ "QT-14": {
+  "t": "جدولا الأصناف والضرائب والرسوم مفيهمش عمود «No.»",
+  "area": "جدولا Items وTaxes and Charges",
+  "srs": "الجداول: Checkbox ثم No. (ترتيب الصفوف) ثم الحقول",
+  "steps": [
+   "افتح Add Quotation وضيف صف صنف وصف ضريبة واقرا عناوين الجداول."
+  ],
+  "exp": "عمود No. بعد الـ checkbox في كل جدول.",
+  "act": "الأصناف: checkbox وItem Code وQuantity وRate وAmount. الضرائب: checkbox وType وAccount Head وTax Rate وNet Amount وAmount وTotal. جدول الدفعات فيه عمود الرقم فعلًا.",
+  "fix": "ضيفوا عمود No. للجدولين."
+ },
+ "QT-15": {
+  "t": "نافذة Edit Row بتاعة الصنف مفيهاش حقل Image ولا زر Stock Balance",
+  "area": "Items › Edit Row",
+  "srs": "حقول Edit Row فيها Image (رفع بالسحب أو التصفح، JPEG وPNG بس، لحد 5 MB) وزر Stock Balance بيفتح شاشة Stock Balance",
+  "steps": [
+   "ضيف صف صنف واضغط Edit Row؛ وانزل لآخر النافذة."
+  ],
+  "exp": "رفع صورة وزر Stock Balance.",
+  "act": "النافذة فيها باقي الحقول (Item وItem Group وItem Name وCustomer's Item Code وIs Free Item وIs Alternative وDescription وBrand وحقول Qty وUOM والسعر والخصم وWarehouse وBlanket Order وProjected Qty وShopping Cart) من غير Image ولا Stock Balance.",
+  "fix": "ضيفوا الاتنين، أو شيلوهم من الـ SRS."
+ },
+ "QT-16": {
+  "t": "قواعد طول النص ناقصة في السيرفر: وصف الصنف ومحتوى الشروط والأحكام وTitle",
+  "area": "Items › Description وTerms وTitle",
+  "srs": "Description ومحتوى Terms and Condition: اختياري، من 3 لـ 500 حرف؛ Title (مخفي): من 2 لـ 100 حرف",
+  "steps": [
+   "ابعت طلب الإنشاء بوصف صنف من حرفين ومن 501 حرف.",
+   "ابعت terms من حرفين و501 و5,000 حرف، وtitle من حرف واحد ومن 101 حرف."
+  ],
+  "exp": "القيم خارج الحدود تترفض.",
+  "act": "الكل بيتحفظ (SAL-QTN-2026-01684 و01685 و01697 و01698 و01699 و01663 و01664). في الشاشة خانة Terms بتقف عند 500 حرف. والـ title من 141 حرف بيترفض من حد الـ 140 حرف للحقل بس.",
+  "fix": "ضيفوا قاعدة 3 لـ 500 حرف في validation السيرفر."
+ },
+ "QT-17": {
+  "t": "صف صنف من غير Item بيظهر رسالة تقنية",
+  "area": "Items › Item",
+  "srs": "Item: إجباري؛ ولو الحقل فاضي بتظهر رسالة خطأ",
+  "steps": [
+   "اختار عميل واضغط Add Item واسيب الـ Item فاضي.",
+   "اضغط Save."
+  ],
+  "exp": "رسالة زي «الصنف مطلوب» تحت خانة Item.",
+  "act": "toast «Validation Error in the following fields: items.0.item_code: Input should be a valid string».",
+  "fix": "اعملوا validation للصف في الشاشة وترجموا الرسالة دي."
+ },
+ "QT-18": {
+  "t": "طلبين بينتهوا بخطأ سيرفر 500 بدل رسالة",
+  "area": "إضافة Quotation › السيرفر",
+  "srs": "البيانات الغلط بتظهر رسالة خطأ للحقل",
+  "steps": [
+   "ابعت طلب الإنشاء بقايمة أصناف فاضية.",
+   "ابعته بكمية صنف 1e12."
+  ],
+  "exp": "رسالة validation لكل واحد.",
+  "act": "الأول بيرجّع 500 «TypeError: bad operand type for abs(): NoneType»؛ والتاني 500 «MySQLdb.DataError: Out of range value for column total_qty». (الشاشة بترفض القايمة الفاضية بـ «At least one item is required».)",
+  "fix": "اعملوا validation لقايمة الأصناف وحد أقصى للكمية قبل الحساب."
+ },
+ "QT-19": {
+  "t": "قايمة Lost Reasons بتقول «No options found» لحد ما المستخدم يكتب",
+  "area": "Set as Lost › Lost Reasons",
+  "srs": "Lost Reasons: searchable DDL على Quotation Lost Reason، إجباري",
+  "steps": [
+   "افتح Quotation معتمدة واضغط Set as Lost.",
+   "اضغط على خانة Lost Reasons من غير ما تكتب."
+  ],
+  "exp": "قايمة الأسباب التلاتة اللي في النظام.",
+  "act": "بتظهر «No options found» ومفيش request بيتبعت. بعد كتابة «hes» بيظهر السبب «hesitation». باقي القوايم في الشاشة بتحمّل قايمتها لما تتفتح.",
+  "fix": "حمّلوا الأسباب لما الخانة تتفتح."
+ },
+ "QT-20": {
+  "t": "خانة Competitors مبتقفش عند 100 حرف",
+  "area": "Set as Lost › Competitors",
+  "srs": "Competitors: اختياري، من 2 لـ 100 حرف، ومنع الإدخال عند الحد الأقصى",
+  "steps": [
+   "في نافذة Set as Lost اكتب 130 حرف في Competitors وفي Detailed Reason."
+  ],
+  "exp": "الاتنين يقفوا عند 100 حرف.",
+  "act": "Detailed Reason بتقف عند 100؛ وCompetitors بتحتفظ بالـ 130 حرف (الخانة مفيهاش حد للطول).",
+  "fix": "حطوا حد 100 حرف لخانة Competitors."
+ },
+ "QT-21": {
+  "t": "«Taxes and Charges Calculation» و«Bundle Items» و«Pricing Rule Detail» ظاهرين في Quotation جديدة لسه ماتحفظتش",
+  "area": "إضافة Quotation › Details",
+  "srs": "Taxes and Charges Calculation: بعد إضافة الضرائب والحفظ بس. Bundle Items: لما صنف يبقى Product Bundle والمستخدم يضغط Save",
+  "steps": [
+   "افتح Add Quotation وانزل لآخر تاب Details."
+  ],
+  "exp": "الأقسام التلاتة مخفية.",
+  "act": "عناوين الأقسام التلاتة ظاهرة (فاضية) في الفورم الجديد.",
+  "fix": "اخفوا الأقسام لحد ما يبقى فيها بيانات."
+ },
+ "QT-22": {
+  "t": "بعض التسميات مش مترجمة أو مترجمة بشكل مختلف في الشاشات العربي",
+  "area": "إضافة Quotation ونافذة Edit في القايمة",
+  "srs": "الشاشات ثنائية اللغة (نفس المصطلح لنفس الحقل)",
+  "steps": [
+   "افتح Add Quotation بالعربي واقرا «عرض السعر موجّه إلى» وخانة Series.",
+   "في القايمة اختار Draft واضغط Edit وافتح قايمة Field."
+  ],
+  "exp": "نفس الصياغة العربية في كل مكان.",
+  "act": "قيمة «عرض السعر موجّه إلى» بتظهر الكلمة الإنجليزي «Customer» بينما قايمتها «العميل» و«العميل المحتمل»؛ وخانة Series بتعرض النمط الخام «SAL-QTN-.YYYY.-»؛ وفي نافذة Edit في القايمة نفس الحقل اسمه «مناقصة لـ».",
+  "fix": "استخدموا تسمية عربي واحدة لكل حقل وترجموا قيم الاختيارات."
+ },
+ "QT-23": {
+  "t": "حفظ Quotation بيعمل Item Price لما الصنف ملوش سعر في قايمة الأسعار",
+  "area": "Price List › Item Price",
+  "srs": "السعر بيتجاب من الـ Price List المختارة (الـ SRS مبيذكرش الكتابة فيها)",
+  "steps": [
+   "احفظ Quotation (بنداء الإنشاء) بالصنف «2121» اللي ملوش سعر في «Standard Selling» وبسعر 100.",
+   "افتح Item Prices للصنف."
+  ],
+  "exp": "مفيش تغيير في قايمة الأسعار.",
+  "act": "اتعمل Item Price «2121 / Standard Selling / 100» (v09jn3ug67). خيار Selling Settings اللي بيضيف السعر الناقص شغال. يعني قايمة أسعار حقيقية ممكن تاخد أسعار من أي Quotation، وده بيأثر على البيع بعد كده.",
+  "fix": "أكدوا إن ده مطلوب؛ ولو لأ اقفلوا الخيار."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Quotation Bug Report","eyebrow":"QA bug report · Selling › Quotation","h1":"Quotation: 23 differences from the SRS, and a new Quotation cannot be saved from the screen","lede":"Comparison of the Quotation list, the Add screen (Details, General Information and More Information tabs), the Details screen with its actions (Submit, Cancel, Amend, Set as Lost, Update Items, Create, Auto Repeat, Linked Records) and the server rules with the SRS (pages 110 to 168), on the test server: 66 checks (43 matched, 23 differ). The most important finding is QT-01: the Quotation doctype has two mandatory custom fields, Employee and Name In Contract, that the new screen does not show, so saving a Quotation from the Add screen fails even when every visible field is filled. Because of it, the Draft, submit, cancel, amend and Set as Lost checks were run on Quotations created through the create endpoint (with the two values) and then driven on the screen. The rest of the screen follows the SRS closely: the list and its action bar (this is the first module where Clear Assignment is present), the defaults (Customer, today, Valid Till = Date + the 2 days of the CRM setting, SAR, Standard Selling), the Customer / Lead choice, the address selection rules, the Set as Lost, Update Items, Create and Auto Repeat popups and the Linked Records tab. The other gaps are the empty Setting popup (QT-03), the missing \"Get Items From Opportunity\" action (QT-04), Create › Sales Order / Sales Invoice that do not open the documents (QT-05), the address labels that show \"—\" (QT-07), and a group of server rules that the screen has but the server does not (QT-08 to QT-13).","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","English at the start; Arabic after the account language changed to Arabic during the run"],["Run date","2026-11-17"],["Method","Playwright browser checks and calls to the create endpoint (not saved as a spec yet)"],["Bug IDs","QT-01 to QT-23 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["List screen: columns, statuses, Add button, action bar (Edit, Export, Assign, Add Tags, Clear Assignment, Print, Submit / Cancel, Delete), the Edit popup and its refusal on submitted and cancelled Quotations",6,6,0,0],["Add screen (Details tab): Series, Quotation To, Party and Party Name, Date, Valid Till, hidden Order Type, Has Unit Price Items, Company, Currency, Exchange Rate and Price List, Ignore Pricing Rule, Barcode, the Items table and Edit Row, Setting, item filter, quantity rules, Taxes and Charges, Totals, Additional Discount, empty sections, Save messages, Save with valid data, Get Items From Opportunity",25,16,9,0],["General Information and More Information tabs: address selection and display, company address, Payment Schedule, Terms, Status, Territory, Print Settings, Lost Reasons, labels",8,6,2,0],["Details screen and actions: Submit, Cancel Document, Amend, Delete confirmation, Set as Lost, Update Items, Auto Repeat, Create menu and its navigation, Linked Records, read-only after Submit",14,10,4,0],["Server rules (create): party, quantity, UOM, warehouse, discounts, taxes, exchange rates, item filter, text lengths, errors 500, refusals, Item Price side effect",13,5,8,0]],"total":"Total","covNote":"There is no Quotation test-case sheet yet, so the defects above are not linked to case IDs. The checks were run through browser scripts and requests.","okTitle":"Verified working","ok":["List: columns ID, Status, Customer Name, Date, Company and Grand Total; statuses Draft, Open, Expired, Cancelled and Lost; the Add Quotation button; the action bar with Select All, Edit, Export, Assign, Add Tags, Clear Assignment, Print, Submit (Draft) or Cancel (submitted) and Delete","List Edit popup: a mandatory Field list with the Quotation fields and an Update button; on a Cancelled Quotation it refuses with \"لا يمكن تعديل عرض سعر تم تقديمه أو إلغاؤه\"","Add, basic information: Series (mandatory, SAL-QTN-.YYYY.-); Quotation To = Customer or Lead (the Party list and the Party Name follow it, and the Party is cleared when it changes); Date = today and the picker works; Valid Till = Date + 2 days (the CRM setting) and follows a new Date; Order Type is hidden; Has Unit Price Items is shown because Selling Settings allows zero quantity; Company is the default company; Currency SAR, Exchange Rate 1 and Price List \"Standard Selling\" with its read-only currency; Ignore Pricing Rule; Barcode stops at 100 characters","Items: Add Item, Item Code, Quantity, Rate and Amount; the item list leaves out template items and items with Allow Sales off; a quantity of 0 or less is refused on the screen (\"Row 1: Quantity must be greater than 0\"); a quantity above the available stock shows a warning; the Edit Row popup has Item, Item Group, Item Name, Customer's Item Code, Is Free Item, Is Alternative, Description, Brand, Qty, UOM, Stock UOM, Conversion Factor, the available quantities, price and margin fields, discounts, tax template, weights, Warehouse (mandatory), Blanket Order, Projected Qty and Shopping Cart","Taxes and Charges: Add Tax or Charge with Type (Actual, On Net Total, On Previous Row Amount, On Previous Row Total, On Item Quantity), Account Head, Tax Rate, Net Amount, Amount and Total; Totals in the selected and company currency; Additional Discount with Apply On, percentage, amount, Coupon Code and Referral Sales Partner","General Information: the customer billing and shipping address is the primary address, the company address is filled, the contact boxes show \"No contact selected\" when empty, Payment Schedule has Payment Term, Due Date, Invoice Portion, Payment Amount and Description, Terms stops at 500 characters; More Information: Status, Territory, Letter Head, Language, Print without Amount, Group same items; the Lost Reasons section with Lost Reason, Competitors and Detailed Reason appears when the status is Lost","Details: a Draft shows Save and Submit; Submit gives \"Quotation submitted successfully\" and the status Open with Cancel Document, Set as Lost, Update Items and Create; the fields become read-only; Cancel Document gives status Cancelled with only Amend; Amend creates a Draft with \"Amended From\"; the delete confirmation (Cancel closes it); the Linked Records tab with Sales Order, Sales Invoices, Opportunities and Auto Repeat","Popups: Set as Lost (Lost Reasons mandatory with the inline message \"Lost Reason is required\", Competitors, Detailed Reason stops at 100, Declare Lost sets the status Lost and shows \"Quotation set as Lost\"); Update Items (Item Code, Quantity, Rate, UOM, Add Item, Update); Auto Repeat (Frequency mandatory, Start Date today, End Date); the Create menu has Sales Order, Sales Invoice and Auto Repeat","Server: a party that does not exist, a party of the wrong type, Valid Till before the Date, a date outside the fiscal year, a price list that does not exist, a template item, an item with Allow Sales off, an additional discount above the total, a payment due date before the posting date, a payment schedule that does not add to the total, a tax row without Account Head, \"On Previous Row Amount\" on the first row, a missing Employee or Name In Contract and an unknown Order Type are refused"],"noTitle":"Not executed, and why","no":["Saving a new Quotation from the screen (blocked by QT-01) and editing a Draft and clicking Save with changed data; Save, edit and Submit were run through the create endpoint and the screen buttons only","Delete \"Yes\" and the warnings for a Quotation that is amended or linked to other documents (Delete was not confirmed on any record)","The Exchange Rate rules of Accounts Settings (fetching rule, no rate found, the role that edits the rate); the Shipping Rule and the Sales Taxes and Charges Template filling the table; the Payment Terms Template filling the schedule; the Terms template filling the content; the contact selection rules (Preferred Billing Contact, Primary, latest), because the test customer has no contact","Bundle Items and Pricing Rule Detail with a Product Bundle item or a Pricing Rule; batch and serial fields; Blanket Order; Has Unit Price Items on the screen; the Valid Till message when it is before the Date on the screen (the server refuses it)","Column width, drag and drop and Add / Remove columns of the tables (the Setting popup is empty, QT-03); Export, Assign, tags, Print and Share; the Auto Repeat Save message; Get Items From Opportunity (the action is missing, QT-04); the automatic Expired status","The result of the Create › Sales Order and Create › Sales Invoice documents (the screens do not open, QT-05)"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Selling SRS v1.0, Quotation","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 is finished. Retesting starts when the developers mark QT-01 to QT-13 as Fixed here (or tell the tester). QT-01 comes first, because the screen tests of the Add flow cannot start before a Quotation can be saved."],["h","When a fix lands"],["ol",["Repeat QT-01 on the screen first, then the Save, edit and Submit checks that were run through the create endpoint.","Repeat the server cases through the create endpoint (QT-08 to QT-13, QT-16, QT-18, QT-23) and the screen cases on the screen.","Run the cases listed under Not executed.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","The checks created 48 test Quotations (titles \"PW QT ...\"): SAL-QTN-2026-01657 to SAL-QTN-2026-01703 and the amended Draft SAL-QTN-2026-01674-1. SAL-QTN-2026-01674 is Cancelled, SAL-QTN-2026-01677 is Lost and SAL-QTN-2026-01703 is submitted (Open); the others are Drafts. One Item Price was created as a side effect (item 2121, Standard Selling, 100, id v09jn3ug67, see QT-23). Nothing was deleted. The existing Quotations were only read; SAL-QTN-2026-01655 and SAL-QTN-2026-01656 were opened without changes."]],"obs":["The SRS says a warning appears when the quantity is LESS than the available quantity; the system warns when the quantity is MORE than the available quantity (\"Row 1: quantity 2.0 for item IND182210 is more than the quantity available (-398.0) in warehouse Stores - E\"). The SRS wording looks inverted, please confirm.","The Delete rule in the SRS contradicts itself: the list says Delete appears only for Draft or Cancelled, the Details screen says only for Submitted. The system shows Delete (the bin icon) for Draft, submitted and Cancelled Quotations alike.","Copy and paste errors in the SRS: Use case 5 says \"view / edit the Delivery Note details\", the More Info Status says \"It displays the Delivery Note status\", and the Get Items popup says \"search by the sales order name\".","Submit and Cancel Document run at once with no confirmation (the SRS does not ask for one). A Lost Quotation still shows Cancel Document, Set as Lost, Update Items and Create.","The SRS says the default Price List is \"Standard Price List\"; the Selling Settings of this server set \"Standard Selling\". Selling Settings also has \"Validate selling price\" on, so a rate below the valuation rate is refused (\"Selling rate ... is lower than its valuation rate\"); the SRS does not mention this rule.","The SRS says the Auto Repeat Save shows \"Auto Repeat created successfully for this document\"; the Save was not clicked to avoid creating Auto Repeat records.","The Quotation list now holds more than 8,000 records and grows while the tests run (7,963 at the start, 8,011 later), so other users are creating Quotations on this server.","The Administrator account language changed from English to Arabic at about 12:29 during the run; the later checks were run on the Arabic screens. The screens and the data matched in both languages."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Delivery Note sheet (TC-DNL, TC-DNA, TC-DNW, TC-DNG, TC-DNM, TC-DND), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Quotation","eyebrow":"تقرير مشاكل الجودة · Selling › Quotation","h1":"Quotation: 23 فرق عن الـ SRS، ومينفعش تحفظ Quotation جديدة من الشاشة","lede":"مقارنة قايمة Quotation وشاشة الإضافة (تابات Details وGeneral Information وMore Information) وشاشة التفاصيل بإجراءاتها (Submit وCancel وAmend وSet as Lost وUpdate Items وCreate وAuto Repeat وLinked Records) وقواعد السيرفر بالـ SRS (الصفحات 110 لـ 168) على السيرفر التجريبي: 66 فحص (43 مطابق و23 مختلف). أهم نتيجة QT-01: الـ doctype فيه حقلين custom إجباريين، Employee وName In Contract، والشاشة الجديدة مبتعرضهمش، فحفظ Quotation من شاشة الإضافة بيفشل حتى لو كل الحقول الظاهرة مليانة. وعشان كده فحوصات الـ Draft والـ submit والـ cancel والـ amend والـ Set as Lost اتعملت على Quotations اتعملت بنداء الإنشاء (بالقيمتين) وبعدين اتشغلت من الشاشة. باقي الشاشة ماشي قريب من الـ SRS: القايمة وشريط إجراءاتها (ودي أول مرة Clear Assignment يبقى موجود في موديول)، والقيم الافتراضية (Customer والنهارده وValid Till = التاريخ + يومين من إعداد CRM وSAR وStandard Selling)، واختيار Customer / Lead، وقواعد اختيار العنوان، ونوافذ Set as Lost وUpdate Items وCreate وAuto Repeat وتاب Linked Records. الفروق التانية: نافذة Setting الفاضية (QT-03)، وإجراء «Get Items From Opportunity» الناقص (QT-04)، وCreate › Sales Order / Sales Invoice اللي مبيفتحوش المستندات (QT-05)، وعناوين Address اللي بتظهر «—» (QT-07)، ومجموعة قواعد سيرفر موجودة في الشاشة وناقصة في السيرفر (QT-08 لـ QT-13).","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","إنجليزي في الأول؛ وعربي بعد ما لغة الحساب اتغيّرت لعربي أثناء الفحص"],["تاريخ التشغيل","2026-11-17"],["الطريقة","فحوصات متصفح بـ Playwright ونداءات على endpoint الإنشاء (لسه مش محفوظة كملف اختبار)"],["أرقام المشاكل","QT-01 لـ QT-23 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة القايمة: الأعمدة والحالات وزر الإضافة وشريط الإجراءات (Edit وExport وAssign وAdd Tags وClear Assignment وPrint وSubmit / Cancel وDelete) ونافذة Edit ورفضها للـ Quotations المعتمدة والملغية",6,6,0,0],["شاشة الإضافة (تاب Details): Series وQuotation To وParty وParty Name وDate وValid Till وOrder Type المخفي وHas Unit Price Items وCompany وCurrency وExchange Rate وPrice List وIgnore Pricing Rule وBarcode وجدول Items وEdit Row وSetting وفلتر الأصناف وقواعد الكمية وTaxes and Charges وTotals وAdditional Discount والأقسام الفاضية ورسائل Save وSave ببيانات صحيحة وGet Items From Opportunity",25,16,9,0],["تابات General Information وMore Information: اختيار العناوين وعرضها وعنوان الشركة وPayment Schedule وTerms وStatus وTerritory وPrint Settings وLost Reasons والتسميات",8,6,2,0],["شاشة التفاصيل والإجراءات: Submit وCancel Document وAmend وتأكيد الحذف وSet as Lost وUpdate Items وAuto Repeat وقايمة Create وتنقلها وLinked Records والـ read-only بعد Submit",14,10,4,0],["قواعد السيرفر (إنشاء): الطرف والكمية وUOM والمستودع والخصومات والضرائب وأسعار الصرف وفلتر الأصناف وأطوال النصوص وأخطاء 500 والرفض وأثر Item Price",13,5,8,0]],"total":"الإجمالي","covNote":"لسه مفيش شيت test cases لـ Quotation، فالمشاكل فوق مش مربوطة بأرقام حالات. الفحوصات اتعملت بسكريبتات متصفح وطلبات للسيرفر.","okTitle":"اللي اتأكدنا إنه شغال","ok":["القايمة: أعمدة ID وStatus وCustomer Name وDate وCompany وGrand Total؛ وحالات Draft وOpen وExpired وCancelled وLost؛ وزر Add Quotation؛ وشريط الإجراءات فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وClear Assignment وطباعة وتقديم (للـ Draft) أو إلغاء (للمعتمدة) وحذف","نافذة Edit في القايمة: قايمة Field إجبارية فيها حقول Quotation وزر تحديث؛ وعلى Quotation ملغية بترفض بـ «لا يمكن تعديل عرض سعر تم تقديمه أو إلغاؤه»","الإضافة، المعلومات الأساسية: Series (إجباري، SAL-QTN-.YYYY.-)؛ وQuotation To = Customer أو Lead (وقايمة Party وParty Name بيتبعوه، والـ Party بتتفضى لما يتغير)؛ وDate = النهارده والـ picker شغال؛ وValid Till = التاريخ + يومين (إعداد CRM) وبيتبع التاريخ الجديد؛ وOrder Type مخفي؛ وHas Unit Price Items ظاهر لأن Selling Settings بيسمح بكمية صفر؛ وCompany هي الشركة الافتراضية؛ وCurrency SAR وExchange Rate 1 وPrice List «Standard Selling» وعملتها للقراءة بس؛ وIgnore Pricing Rule؛ وBarcode بيقف عند 100 حرف","الأصناف: Add Item وItem Code وQuantity وRate وAmount؛ وقايمة الأصناف بتستبعد أصناف الـ template والأصناف اللي Allow Sales مقفول فيها؛ والكمية 0 أو أقل بتترفض في الشاشة («Row 1: Quantity must be greater than 0»)؛ والكمية الأكبر من المتاح بتظهر تحذير؛ ونافذة Edit Row فيها Item وItem Group وItem Name وCustomer's Item Code وIs Free Item وIs Alternative وDescription وBrand وQty وUOM وStock UOM وConversion Factor والكميات المتاحة وحقول السعر والهامش والخصومات وقالب الضريبة والأوزان وWarehouse (إجباري) وBlanket Order وProjected Qty وShopping Cart","Taxes and Charges: Add Tax or Charge بـ Type (Actual وOn Net Total وOn Previous Row Amount وOn Previous Row Total وOn Item Quantity) وAccount Head وTax Rate وNet Amount وAmount وTotal؛ وTotals بالعملة المحددة وعملة الشركة؛ وAdditional Discount بـ Apply On والنسبة والمبلغ وCoupon Code وReferral Sales Partner","General Information: عنوان فوترة وشحن العميل هو العنوان الأساسي، وعنوان الشركة بيتملي، وخانات جهة الاتصال بتعرض «لم يتم اختيار جهة اتصال» لما تبقى فاضية، وPayment Schedule فيه Payment Term وDue Date وInvoice Portion وPayment Amount وDescription، وTerms بتقف عند 500 حرف؛ وMore Information: Status وTerritory وLetter Head وLanguage وPrint without Amount وGroup same items؛ وقسم Lost Reasons بـ Lost Reason وCompetitors وDetailed Reason بيظهر لما الحالة Lost","التفاصيل: الـ Draft فيه Save وSubmit؛ وSubmit بيدي «Quotation submitted successfully» والحالة Open وفيها Cancel Document وSet as Lost وUpdate Items وCreate؛ والحقول بتبقى للقراءة بس؛ وCancel Document بيدي الحالة Cancelled وAmend بس؛ وAmend بيعمل Draft فيها «Amended From»؛ وتأكيد الحذف (الإلغاء بيقفله)؛ وتاب Linked Records فيه Sales Order وSales Invoices وOpportunities وAuto Repeat","النوافذ: Set as Lost (Lost Reasons إجباري برسالة «Lost Reason is required»، وCompetitors، وDetailed Reason بتقف عند 100، وDeclare Lost بيغيّر الحالة لـ Lost ويظهر «Quotation set as Lost»)؛ وUpdate Items (Item Code وQuantity وRate وUOM وAdd Item وUpdate)؛ وAuto Repeat (Frequency إجباري وStart Date النهارده وEnd Date)؛ وقايمة Create فيها Sales Order وSales Invoice وAuto Repeat","السيرفر: طرف مش موجود وطرف من نوع غلط وValid Till قبل Date وتاريخ برا السنة المالية وقايمة أسعار مش موجودة وصنف template وصنف Allow Sales مقفول وخصم إضافي أكبر من الإجمالي وتاريخ استحقاق دفعة قبل تاريخ الترحيل وجدول دفعات مجموعه مش بيساوي الإجمالي وصف ضريبة من غير Account Head و«On Previous Row Amount» في الصف الأول وEmployee أو Name In Contract ناقص وOrder Type مش معروف، كلهم بيترفضوا"],"noTitle":"اللي ماتنفذش وليه","no":["حفظ Quotation جديدة من الشاشة (متوقف بـ QT-01) وتعديل Draft والضغط على Save ببيانات متغيّرة؛ والحفظ والتعديل والـ Submit اتعملوا بنداء الإنشاء وأزرار الشاشة بس","«Yes» في الحذف وتحذيرات Quotation معدّلة أو مرتبطة بمستندات تانية (ماأكدتش الحذف على أي سجل)","قواعد Exchange Rate في Accounts Settings (قاعدة الجلب وحالة عدم وجود سعر والـ role اللي يعدّل السعر)؛ وملء الجدول من Shipping Rule ومن Sales Taxes and Charges Template؛ وملء الجدول من Payment Terms Template؛ وملء المحتوى من قالب Terms؛ وقواعد اختيار جهة الاتصال (Preferred Billing وPrimary وآخر واحدة)، لأن عميل الاختبار ملوش جهة اتصال","Bundle Items وPricing Rule Detail مع صنف Product Bundle أو Pricing Rule؛ وحقول الـ batch والـ serial؛ وBlanket Order؛ وHas Unit Price Items في الشاشة؛ ورسالة Valid Till لما تكون قبل Date في الشاشة (السيرفر بيرفضها)","Column width وسحب الأعمدة وAdd / Remove columns للجداول (نافذة Setting فاضية، QT-03)؛ والتصدير والإسناد والوسوم والطباعة والمشاركة؛ ورسالة Save في Auto Repeat؛ وGet Items From Opportunity (الإجراء مش موجود، QT-04)؛ وحالة Expired التلقائية","نتيجة مستندات Create › Sales Order وCreate › Sales Invoice (الشاشتين مبتفتحش، QT-05)"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Selling SRS v1.0, Quotation","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا QT-01 لـ QT-13 كـ Fixed هنا (أو يبلّغوا الـ tester). QT-01 الأول، لأن فحوصات شاشة الإضافة مينفعش تبدأ قبل ما Quotation تتحفظ."],["h","لما يوصل إصلاح"],["ol",["كرر QT-01 في الشاشة الأول، وبعدين فحوصات Save والتعديل وSubmit اللي اتعملت بنداء الإنشاء.","كرر حالات السيرفر بنداء الإنشاء (QT-08 لـ QT-13 وQT-16 وQT-18 وQT-23) وحالات الشاشة في الشاشة.","نفّذ الحالات المكتوبة تحت «ماتنفذش».","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","الفحوصات عملت 48 Quotation تجريبية (عناوينها «PW QT ...»): من SAL-QTN-2026-01657 لـ SAL-QTN-2026-01703 والـ Draft المعدّلة SAL-QTN-2026-01674-1. SAL-QTN-2026-01674 ملغية وSAL-QTN-2026-01677 Lost وSAL-QTN-2026-01703 معتمدة (Open)؛ والباقي Drafts. واتعمل Item Price واحد كأثر جانبي (الصنف 2121 وStandard Selling وسعر 100 والـ id هو v09jn3ug67، شوف QT-23). مفيش حاجة اتمسحت. الـ Quotations الموجودة اتقرت بس؛ وSAL-QTN-2026-01655 وSAL-QTN-2026-01656 اتفتحوا من غير تغيير."]],"obs":["الـ SRS بيقول إن بيظهر تحذير لما الكمية أقل من الكمية المتاحة؛ والنظام بيحذّر لما الكمية أكبر من المتاحة («Row 1: quantity 2.0 for item IND182210 is more than the quantity available (-398.0) in warehouse Stores - E»). صياغة الـ SRS باين إنها معكوسة، أكدوها.","قاعدة Delete في الـ SRS بتناقض نفسها: القايمة بتقول Delete بيظهر للـ Draft أو Cancelled بس، وشاشة التفاصيل بتقول للـ Submitted بس. والنظام بيعرض Delete (أيقونة السلة) للـ Draft والمعتمدة والملغية كلهم.","أخطاء نسخ ولصق في الـ SRS: Use case 5 بيقول «view / edit the Delivery Note details»، وStatus في More Info بيقول «It displays the Delivery Note status»، ونافذة Get Items بتقول «search by the sales order name».","Submit وCancel Document بينفذوا فورًا من غير تأكيد (الـ SRS مبيطلبش تأكيد). والـ Quotation اللي حالتها Lost لسه بتعرض Cancel Document وSet as Lost وUpdate Items وCreate.","الـ SRS بيقول إن قايمة الأسعار الافتراضية «Standard Price List»؛ وSelling Settings على السيرفر ده مظبوطة على «Standard Selling». وكمان Selling Settings فيها «Validate selling price» شغالة، فالسعر الأقل من valuation rate بيترفض («Selling rate ... is lower than its valuation rate»)؛ والـ SRS مبيذكرش القاعدة دي.","الـ SRS بيقول إن Save في Auto Repeat بيظهر «Auto Repeat created successfully for this document»؛ وماضغطتش Save عشان ماعملش سجلات Auto Repeat.","قايمة Quotation فيها دلوقتي أكتر من 8,000 سجل وبتزيد أثناء الاختبار (7,963 في البداية و8,011 بعد كده)، يعني فيه مستخدمين تانيين بيعملوا Quotations على السيرفر ده.","لغة حساب Administrator اتغيّرت من إنجليزي لعربي حوالين 12:29 أثناء الفحص؛ والفحوصات اللي بعد كده اتعملت على الشاشات العربي. الشاشات والداتا طلعوا زي بعض في اللغتين."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Delivery Note (TC-DNL وTC-DNA وTC-DNW وTC-DNG وTC-DNM وTC-DND)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

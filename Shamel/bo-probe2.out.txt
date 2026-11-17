@@ -1,0 +1,7 @@
+TEXT مرحباً Administrator ! AN Administrator admin@example.com 71 إضافة أمر مفتوح المعلومات الأساسية السلسلة* نوع الطلب* رقم الطلب من تاريخ* إلى تاريخ* الشركة* الأصناف سجل الأصناف إضافة صنف لم تتم إضافة أي أصناف بعد. استخدم «إضافة صنف» لإضافة أول صنف. الشروط والأحكام الشروط محتوى الشروط والأحكام إلغاء حفظ
+BTNS ["المعلومات الأساسية","الأصناف","إضافة صنف","الشروط والأحكام","إلغاء","حفظ"]
+INPUTS ["0|search-inp|search|ph=ابحث عن الصفحات والأنواع...|max=-1|ro=false|val=","1|cs-input|text|ph=اختيار|max=-1|ro=false|val=","2|cs-input|text|ph=اختيار|max=-1|ro=false|val=","3|cd-input|text|ph=|max=100|ro=false|val=","4|flatpickr-|text|ph=اختر التاريخ|max=-1|ro=true|val=","5|flatpickr-|text|ph=اختر التاريخ|max=-1|ro=true|val=","6|cs-input|text|ph=ابحث واختر|max=-1|ro=false|val=","7|cs-input|text|ph=ابحث واختر|max=-1|ro=false|val=","8|cd-input b|textarea|ph=|max=500|ro=false|val="]
+CS COUNT 4
+IDX1 OPTIONS ["بيع","شراء"]
+IDX0 OPTIONS ["MFG-BLR-.YYYY.-"]
+UNTOUCHED SAVE toasts []

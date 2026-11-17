@@ -1,0 +1,2228 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1793256351.778662,
+    "seen": 1794914251.2535326,
+    "ast_hash": "3ac995fbf93552a991ecab9b63f776aa",
+    "semantic_hash": ""
+  },
+  ".cursor/mcp.json": {
+    "mtime": 1792330779.904973,
+    "seen": 1794914251.2535422,
+    "ast_hash": "96bd1ea8c415f9c7b6e089dd17194a96",
+    "semantic_hash": ""
+  },
+  ".github/workflows/playwright.yml": {
+    "mtime": 1791184621.1481607,
+    "seen": 1794914251.253546,
+    "ast_hash": "8eeea4038250dc5028a9d1bf4da54425",
+    "semantic_hash": ""
+  },
+  ".mcp.json": {
+    "mtime": 1792330779.902973,
+    "seen": 1794914251.2535484,
+    "ast_hash": "f75be1c0363b9211ec5b14d439d88b2c",
+    "semantic_hash": ""
+  },
+  ".vscode/launch.json": {
+    "mtime": 1791205402.9761674,
+    "seen": 1794914251.2535503,
+    "ast_hash": "8536c0b1b0a5a6da1637feed7ca91d43",
+    "semantic_hash": ""
+  },
+  ".vscode/settings.json": {
+    "mtime": 1793092935.0769203,
+    "seen": 1794914251.2535524,
+    "ast_hash": "f6f3538a94793c7cb039d2fa2686f42c",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/build_coupon_code_cases.py": {
+    "mtime": 1794133647.050145,
+    "seen": 1794914251.2535543,
+    "ast_hash": "19d78d7a2f03a661d150421217ab8e15",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/build_inventory_settings_cases.py": {
+    "mtime": 1794134454.9916751,
+    "seen": 1794914251.2535565,
+    "ast_hash": "22b7f93d4260f23e522ead731e6da6b7",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/build_price_list_cases.py": {
+    "mtime": 1794735226.8890524,
+    "seen": 1794914251.2535586,
+    "ast_hash": "27b92486522fcabf03041474ee1487f3",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/build_sales_invoice_cases.py": {
+    "mtime": 1794299310.4201958,
+    "seen": 1794914251.2535603,
+    "ast_hash": "81d6498a4f870855d3b8f5c7be58a5bd",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/qa_xlsx.py": {
+    "mtime": 1794134287.9024704,
+    "seen": 1794914251.253562,
+    "ast_hash": "361af613bf036c2b08cec3ea28a8f9fb",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/packing-slip-testcases.json": {
+    "mtime": 1791812374.0987718,
+    "seen": 1794914251.253564,
+    "ast_hash": "00b4f58456b5a4a37eac450ba66e6164",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe.spec.ts": {
+    "mtime": 1794820958.536268,
+    "seen": 1794914251.2535658,
+    "ast_hash": "cd19e773089354dc76c3ebbcf76ac28e",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe2.spec.ts": {
+    "mtime": 1794821094.2564323,
+    "seen": 1794914251.2535672,
+    "ast_hash": "ef3efd5fb0e020c342b5cf4701bfa825",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe3.spec.ts": {
+    "mtime": 1794821149.7900794,
+    "seen": 1794914251.2535691,
+    "ast_hash": "345ee6a864d32cc2c20f173c45f3e09e",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe4.spec.ts": {
+    "mtime": 1794821657.9311116,
+    "seen": 1794914251.2535706,
+    "ast_hash": "0c2504c7f1c027f747ac97f7e75bf409",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe5.spec.ts": {
+    "mtime": 1794821693.8839223,
+    "seen": 1794914251.2535725,
+    "ast_hash": "5842bd6f298b5988e20a2230e11b8bf7",
+    "semantic_hash": ""
+  },
+  "Shamel/auth.setup.ts": {
+    "mtime": 1791372219.2063575,
+    "seen": 1794914251.253574,
+    "ast_hash": "02452a5c8cf6342323ec143b3aae8f2e",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-count.spec.ts": {
+    "mtime": 1794831858.9461427,
+    "seen": 1794914251.2535756,
+    "ast_hash": "72da13ce722e27684c3efa906cd72632",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe.spec.ts": {
+    "mtime": 1794830890.7162519,
+    "seen": 1794914251.2535775,
+    "ast_hash": "8dd45c7bdf68d51c8da1f8c2ff366da9",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe2.spec.ts": {
+    "mtime": 1794830971.0374565,
+    "seen": 1794914251.2535794,
+    "ast_hash": "b6a30eaf9b63b65d53ec81b9f3df0df2",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe3.spec.ts": {
+    "mtime": 1794831527.3381479,
+    "seen": 1794914251.2535808,
+    "ast_hash": "8bf955ef0758d9d635ed28e0b8611cf1",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe4.spec.ts": {
+    "mtime": 1794831656.0012412,
+    "seen": 1794914251.2535834,
+    "ast_hash": "8e5c489172a478b5e1f86f804d86d56a",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe5.spec.ts": {
+    "mtime": 1794831725.0212114,
+    "seen": 1794914251.2535849,
+    "ast_hash": "94f43ad9befd7057ad325d78a1050c38",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe6.spec.ts": {
+    "mtime": 1794831821.9951136,
+    "seen": 1794914251.2535872,
+    "ast_hash": "8ffcff53f4cb5580b9668addd4cdcc04",
+    "semantic_hash": ""
+  },
+  "Shamel/data/recorded-mr.recording.ts": {
+    "mtime": 1791373032.7519214,
+    "seen": 1794914251.2535887,
+    "ast_hash": "d7eb88ff97f570478f5e0fad6cc03127",
+    "semantic_hash": ""
+  },
+  "Shamel/example.spec.ts": {
+    "mtime": 1791184621.1496701,
+    "seen": 1794914251.2535903,
+    "ast_hash": "68aa5c260169df5934d9ad593ece881e",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/api.ts": {
+    "mtime": 1791372230.262241,
+    "seen": 1794914251.253592,
+    "ast_hash": "8aeb643d0a54974f50509a25f9fb2b51",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/dn-data.ts": {
+    "mtime": 1792066439.081064,
+    "seen": 1794914251.253594,
+    "ast_hash": "1b690b4ae9da062037ca1d271f41288e",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/mr-data.ts": {
+    "mtime": 1791368116.2030938,
+    "seen": 1794914251.2535956,
+    "ast_hash": "4b15f0fb640a989ffe697ebe7d8f0752",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/pb-data.ts": {
+    "mtime": 1791965150.5756185,
+    "seen": 1794914251.2535973,
+    "ast_hash": "4b9ea0ba28237131449d9ca6e36506ca",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/ps-data.ts": {
+    "mtime": 1791812618.4543118,
+    "seen": 1794914251.2535992,
+    "ast_hash": "517e076c44a25daf59a3d8ebb95f7508",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/qi-data.ts": {
+    "mtime": 1792584551.1126618,
+    "seen": 1794914251.253601,
+    "ast_hash": "0dc3bc14be4961cd609ad612fa6af34e",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/qt-api.ts": {
+    "mtime": 1794909651.5250385,
+    "seen": 1794914251.2536025,
+    "ast_hash": "7da4073ec83484ce6f1ea8c457b9c07f",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/si-data.ts": {
+    "mtime": 1794304246.5552359,
+    "seen": 1794914251.2536042,
+    "ast_hash": "d32f9550b799fb5b619341e3d49f8c0c",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/sle-data.ts": {
+    "mtime": 1793094102.204433,
+    "seen": 1794914251.2536058,
+    "ast_hash": "36f414e374e8077f4c3c57f383c666ce",
+    "semantic_hash": ""
+  },
+  "Shamel/helpers/sr-data.ts": {
+    "mtime": 1793181310.0076394,
+    "seen": 1794914251.2536077,
+    "ast_hash": "c62038e622ae7902dbacb3f039829b55",
+    "semantic_hash": ""
+  },
+  "Shamel/inventory-items.spec.ts": {
+    "mtime": 1791190698.0173075,
+    "seen": 1794914251.2536094,
+    "ast_hash": "95dc49641b5f1e590dff4b8f9f5e8e2d",
+    "semantic_hash": ""
+  },
+  "Shamel/lcv-cleanup.spec.ts": {
+    "mtime": 1793716639.7683134,
+    "seen": 1794914251.2536116,
+    "ast_hash": "f2cc366be83e6653bb185166a11be3ff",
+    "semantic_hash": ""
+  },
+  "Shamel/lcv-open-probe.spec.ts": {
+    "mtime": 1793173466.3577268,
+    "seen": 1794914251.253613,
+    "ast_hash": "9de500233176f89fd861ec9cae907f0f",
+    "semantic_hash": ""
+  },
+  "Shamel/lcv-probe.spec.ts": {
+    "mtime": 1793519718.989547,
+    "seen": 1794914251.253615,
+    "ast_hash": "988c5328b1daba4e941250871c4817fd",
+    "semantic_hash": ""
+  },
+  "Shamel/lcv-probe2.spec.ts": {
+    "mtime": 1793519777.6937144,
+    "seen": 1794914251.2536166,
+    "ast_hash": "d2d10d59f05d2cb8124cead41c44757a",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/AccountingTab.ts": {
+    "mtime": 1791203508.634647,
+    "seen": 1794914251.2536182,
+    "ast_hash": "c0d139aacc400013788b54d55b97e430",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/DeliveryNotePage.ts": {
+    "mtime": 1792066526.7125626,
+    "seen": 1794914251.2536206,
+    "ast_hash": "4d444a89df8cea9fdbe8bb6335b16bf4",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/ItemFormPage.ts": {
+    "mtime": 1791192445.6949809,
+    "seen": 1794914251.2536228,
+    "ast_hash": "58f676b591131216e5bd7571f9ff3107",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/ItemsListPage.ts": {
+    "mtime": 1791192446.7810192,
+    "seen": 1794914251.2536242,
+    "ast_hash": "40cd57307bb5004900aafe85a235021f",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/MaterialRequestPage.ts": {
+    "mtime": 1791376161.2540429,
+    "seen": 1794914251.253626,
+    "ast_hash": "9ced689d74518bbdb41602d6adad6e7b",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/PackingSlipPage.ts": {
+    "mtime": 1791872858.100837,
+    "seen": 1794914251.253628,
+    "ast_hash": "ad4ea37f9c42e75d43c25eb0b73a7327",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/ProductBundlePage.ts": {
+    "mtime": 1791968083.5007768,
+    "seen": 1794914251.2536297,
+    "ast_hash": "f3389a373d58198feb475c8e896e38c6",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/QualityInspectionPage.ts": {
+    "mtime": 1792586997.3807619,
+    "seen": 1794914251.253631,
+    "ast_hash": "f3fc8a32dfe66adb8b52b26ecd3f1ec3",
+    "semantic_hash": ""
+  },
+  "Shamel/pages/StockReconciliationPage.ts": {
+    "mtime": 1793179453.8231921,
+    "seen": 1794914251.253633,
+    "ast_hash": "fe48fc20926af953a472ea727f787231",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe.spec.ts": {
+    "mtime": 1794901806.814111,
+    "seen": 1794914251.253635,
+    "ast_hash": "002e380d1901cb3c83525cecc68c4ac7",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe2.spec.ts": {
+    "mtime": 1794901881.3531804,
+    "seen": 1794914251.2536366,
+    "ast_hash": "ff16d3a2cf8197786fc2eb8d50457af1",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe3.spec.ts": {
+    "mtime": 1794901931.7014153,
+    "seen": 1794914251.2536385,
+    "ast_hash": "3ff9752429e60fd00f6097230b1aeab0",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe4.spec.ts": {
+    "mtime": 1794902280.704931,
+    "seen": 1794914251.25364,
+    "ast_hash": "c773b74582852fd3bd4ab2d98d0804eb",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe5.spec.ts": {
+    "mtime": 1794902576.7225668,
+    "seen": 1794914251.2536418,
+    "ast_hash": "0b7a54a7cedbcb79524f970c955e7451",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe6.spec.ts": {
+    "mtime": 1794902698.141528,
+    "seen": 1794914251.2536435,
+    "ast_hash": "fdefdcd070916d26b5e5f4d831ad4f81",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe7.spec.ts": {
+    "mtime": 1794902755.4851153,
+    "seen": 1794914251.253645,
+    "ast_hash": "3e2412481b195f0d21151c487fe130bb",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe8.spec.ts": {
+    "mtime": 1794903154.1411872,
+    "seen": 1794914251.2536469,
+    "ast_hash": "e971db1a990ee4386fe13e1c14768eaf",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe9.spec.ts": {
+    "mtime": 1794903206.5882497,
+    "seen": 1794914251.2536483,
+    "ast_hash": "2b0562c5c3577d812dd7d812f043597b",
+    "semantic_hash": ""
+  },
+  "Shamel/ps-seed.spec.ts": {
+    "mtime": 1792066370.399491,
+    "seen": 1794914251.2536504,
+    "ast_hash": "0fcf90ab047dcadfc35cbd75c47182e9",
+    "semantic_hash": ""
+  },
+  "Shamel/qi-probe.spec.ts": {
+    "mtime": 1792650973.417614,
+    "seen": 1794914251.2536523,
+    "ast_hash": "507bb606a9a2cdc877236dbb498de226",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-lang.spec.ts": {
+    "mtime": 1794912392.3436382,
+    "seen": 1794914251.2536538,
+    "ast_hash": "335ef4612c7ca10280e6221c6de7ff89",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe.spec.ts": {
+    "mtime": 1794908441.3227246,
+    "seen": 1794914251.2536554,
+    "ast_hash": "66c612c285c4896b8fd2a2e91631839d",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe10.spec.ts": {
+    "mtime": 1794909102.3140938,
+    "seen": 1794914251.253657,
+    "ast_hash": "5b1ab35094c67e8376efded70b49a5f7",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe11.spec.ts": {
+    "mtime": 1794909518.3829453,
+    "seen": 1794914251.2536588,
+    "ast_hash": "cbc0205694f4a18cc2c66aeee03650bc",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe12.spec.ts": {
+    "mtime": 1794909581.5182896,
+    "seen": 1794914251.2536607,
+    "ast_hash": "663274272bb06a2dc556009ba7a4b646",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe13.spec.ts": {
+    "mtime": 1794909626.7905717,
+    "seen": 1794914251.2536623,
+    "ast_hash": "942ba8ff052b054469a901e213747122",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe14.spec.ts": {
+    "mtime": 1794909747.1032827,
+    "seen": 1794914251.2536643,
+    "ast_hash": "e9892f8120762c76ed8c621e2ba0e151",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe15.spec.ts": {
+    "mtime": 1794909713.466866,
+    "seen": 1794914251.2536657,
+    "ast_hash": "89851f63c3c5cb614794a14e4edb1e26",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe16.spec.ts": {
+    "mtime": 1794909795.2485588,
+    "seen": 1794914251.2536676,
+    "ast_hash": "b51789743336dbb4800702b40baa4758",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe17.spec.ts": {
+    "mtime": 1794909855.7316363,
+    "seen": 1794914251.2536693,
+    "ast_hash": "bf43348f29e7448dfd87831f0a3fa8ab",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe18.spec.ts": {
+    "mtime": 1794910620.050092,
+    "seen": 1794914251.253671,
+    "ast_hash": "d295762d579483d9e21c853789cd4aa8",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe19.spec.ts": {
+    "mtime": 1794910574.2543745,
+    "seen": 1794914251.2536726,
+    "ast_hash": "c4b2db7c61368d0b52717e34d36fafd8",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe2.spec.ts": {
+    "mtime": 1794908482.855931,
+    "seen": 1794914251.2536743,
+    "ast_hash": "23f60537d0419d5cc11c4c8482f965ce",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe20.spec.ts": {
+    "mtime": 1794910682.7502904,
+    "seen": 1794914251.253676,
+    "ast_hash": "663c1e8afce6156aaa3c43aed7a19e91",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe21.spec.ts": {
+    "mtime": 1794910815.4788442,
+    "seen": 1794914251.2536778,
+    "ast_hash": "6285de74bab7f92aa923252ee0ba415c",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe22.spec.ts": {
+    "mtime": 1794910892.4915962,
+    "seen": 1794914251.2536795,
+    "ast_hash": "7fd66efbb36be0df67fe08dd63a60227",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe23.spec.ts": {
+    "mtime": 1794911398.5800178,
+    "seen": 1794914251.2536814,
+    "ast_hash": "7d364420d37de4caa5310649852c92fc",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe24.spec.ts": {
+    "mtime": 1794911334.9508364,
+    "seen": 1794914251.253683,
+    "ast_hash": "1721531b09f359cb729b8402d401f003",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe25.spec.ts": {
+    "mtime": 1794911827.3003688,
+    "seen": 1794914251.253685,
+    "ast_hash": "0cab2b22a03a70a830cadc610814dd1a",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe26.spec.ts": {
+    "mtime": 1794912410.6683621,
+    "seen": 1794914251.2536867,
+    "ast_hash": "4c04419a822e1b67b1f306a3efc741a3",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe27.spec.ts": {
+    "mtime": 1794912779.3270764,
+    "seen": 1794914251.2536883,
+    "ast_hash": "3a935f45c5c7a63d519feb00ded5ff8d",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe28.spec.ts": {
+    "mtime": 1794912940.857553,
+    "seen": 1794914251.2536898,
+    "ast_hash": "0b8aae0da63c33aab835e7a4064b87ab",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe29.spec.ts": {
+    "mtime": 1794913081.3268733,
+    "seen": 1794914251.2536914,
+    "ast_hash": "0d35bd0fc98fabac459b48d79d1d6f27",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe3.spec.ts": {
+    "mtime": 1794908522.627107,
+    "seen": 1794914251.2536933,
+    "ast_hash": "e8c9bb506517a70e4195e45e7651850e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe30.spec.ts": {
+    "mtime": 1794913675.254294,
+    "seen": 1794914251.253696,
+    "ast_hash": "eec997f6c81117a6c590d74c3d4c31cc",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe31.spec.ts": {
+    "mtime": 1794913739.712535,
+    "seen": 1794914251.253698,
+    "ast_hash": "7986b26be9061043dea81077a6954ccf",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe32.spec.ts": {
+    "mtime": 1794913807.7589734,
+    "seen": 1794914251.2536998,
+    "ast_hash": "099c834167baed135359c924ba12796b",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe4.spec.ts": {
+    "mtime": 1794908562.9222493,
+    "seen": 1794914251.2537014,
+    "ast_hash": "b350a2d161cb52c1da2e82312583a2a8",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe5.spec.ts": {
+    "mtime": 1794908609.0422156,
+    "seen": 1794914251.253703,
+    "ast_hash": "86c58f412675f2ff7281bf195cdc0376",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe6.spec.ts": {
+    "mtime": 1794908634.1820264,
+    "seen": 1794914251.253705,
+    "ast_hash": "f2f6304accf659c0c6ff203e968ba92f",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe7.spec.ts": {
+    "mtime": 1794908675.035237,
+    "seen": 1794914251.2537065,
+    "ast_hash": "fc7bbc15627af3c88e8a154ae3c3e650",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe8.spec.ts": {
+    "mtime": 1794908731.8797247,
+    "seen": 1794914251.2537084,
+    "ast_hash": "75f17140b80dfd79714d24ff8a67cd40",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe9.spec.ts": {
+    "mtime": 1794909039.93463,
+    "seen": 1794914251.25371,
+    "ast_hash": "3d50312bd53d40c542009d540001ea2f",
+    "semantic_hash": ""
+  },
+  "Shamel/render-check.cjs": {
+    "mtime": 1793716995.2490199,
+    "seen": 1794914251.2537117,
+    "ast_hash": "fda56ee806232479ec3e8cadeaa9a236",
+    "semantic_hash": ""
+  },
+  "Shamel/se-probe.spec.ts": {
+    "mtime": 1792676723.7403388,
+    "seen": 1794914251.2537134,
+    "ast_hash": "2ea00c37d15c02f0f12653b1b70aa2f5",
+    "semantic_hash": ""
+  },
+  "Shamel/se-probe2.spec.ts": {
+    "mtime": 1793186123.7240453,
+    "seen": 1794914251.253715,
+    "ast_hash": "f7b02476f1ada44171ce9502ea2da32b",
+    "semantic_hash": ""
+  },
+  "Shamel/set-language-en.spec.ts": {
+    "mtime": 1794300866.619295,
+    "seen": 1794914251.2537167,
+    "ast_hash": "ce4c79bb8fb0dc6673b00b342667c955",
+    "semantic_hash": ""
+  },
+  "Shamel/si-probe.spec.ts": {
+    "mtime": 1794140458.7812767,
+    "seen": 1794914251.2537186,
+    "ast_hash": "374565b9bc3d4bf33a958456cffb933f",
+    "semantic_hash": ""
+  },
+  "Shamel/sle-probe.spec.ts": {
+    "mtime": 1793093495.3378718,
+    "seen": 1794914251.2537203,
+    "ast_hash": "e460081dd663361ec27b36f1f90c17a8",
+    "semantic_hash": ""
+  },
+  "Shamel/sr-probe.spec.ts": {
+    "mtime": 1793181974.9634326,
+    "seen": 1794914251.2537222,
+    "ast_hash": "8c1bcaf46e2e5aa77b6af369b341e661",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-accounting.spec.ts": {
+    "mtime": 1791207596.2864528,
+    "seen": 1794914251.2537239,
+    "ast_hash": "4363aaa3f41e3ae54460a90e238722aa",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-add-item.spec.ts": {
+    "mtime": 1791207596.2839484,
+    "seen": 1794914251.2537255,
+    "ast_hash": "449c6ae2377a2dcb6963457bda439e53",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-coupon-code.spec.ts": {
+    "mtime": 1794735063.7696798,
+    "seen": 1794914251.253727,
+    "ast_hash": "c3daedf7871b666adf0883ed50fc213c",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-delivery-note-add.spec.ts": {
+    "mtime": 1792072022.5787382,
+    "seen": 1794914251.2537289,
+    "ast_hash": "0f0412c9efa5a156428424b74438d889",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-delivery-note-list.spec.ts": {
+    "mtime": 1792072000.222147,
+    "seen": 1794914251.2537303,
+    "ast_hash": "4134b03b9ddcc375df4ed3b4d48fc5de",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-delivery-note-tabs.spec.ts": {
+    "mtime": 1792309036.5812893,
+    "seen": 1794914251.2537322,
+    "ast_hash": "99387199fcf90f8c7e1067a9a4a78cce",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-delivery-note-workflow.spec.ts": {
+    "mtime": 1792070127.8169491,
+    "seen": 1794914251.2537339,
+    "ast_hash": "c4857e575384a132dd75853e9e239051",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-item-details.spec.ts": {
+    "mtime": 1791207596.2849483,
+    "seen": 1794914251.2537355,
+    "ast_hash": "2b9ab3fe1e5dc561bfa23fa03a397f6a",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-item-tracking-lock.spec.ts": {
+    "mtime": 1794408051.7197065,
+    "seen": 1794914251.2537372,
+    "ast_hash": "3ee701c3c784c0086de6f97287ab7bb6",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-items-list.spec.ts": {
+    "mtime": 1791207596.2822378,
+    "seen": 1794914251.2537386,
+    "ast_hash": "f0219799fe89e2ddfee90102f65e89de",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-landed-cost-add-api.spec.ts": {
+    "mtime": 1793716586.2910626,
+    "seen": 1794914251.2537408,
+    "ast_hash": "f71bc120d0650988b8cf081a0ae6d934",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-landed-cost-add.spec.ts": {
+    "mtime": 1793716422.9586518,
+    "seen": 1794914251.2537422,
+    "ast_hash": "da9c311ba4d59b447434600f95040f75",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-material-request.spec.ts": {
+    "mtime": 1791376182.373954,
+    "seen": 1794914251.2537441,
+    "ast_hash": "342f9335675cd7c314c178221616209a",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-packing-slip.spec.ts": {
+    "mtime": 1791875237.097404,
+    "seen": 1794914251.2537456,
+    "ast_hash": "44b45494ee385d0c1cca92459ac5e88a",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-product-bundle-2.spec.ts": {
+    "mtime": 1791978197.5866952,
+    "seen": 1794914251.2537472,
+    "ast_hash": "ff579c78c9832cb110cc44dd10a8ad10",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-product-bundle.spec.ts": {
+    "mtime": 1791971161.5443716,
+    "seen": 1794914251.253749,
+    "ast_hash": "14896eef3f5172d2057b387d2e33fe20",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-quality-inspection-add.spec.ts": {
+    "mtime": 1792590091.5177982,
+    "seen": 1794914251.2537506,
+    "ast_hash": "4b461fbe69128c7b01f44cd836905438",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-quality-inspection-list.spec.ts": {
+    "mtime": 1792675978.6598532,
+    "seen": 1794914251.2537525,
+    "ast_hash": "991c99374f844f6f2322971fefbc1ec5",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-quality-inspection-params.spec.ts": {
+    "mtime": 1792585051.0487397,
+    "seen": 1794914251.2537541,
+    "ast_hash": "696b9ecf7dfece8344f5397f8884cb81",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-sales-invoice-business.spec.ts": {
+    "mtime": 1794308281.4395268,
+    "seen": 1794914251.2537558,
+    "ast_hash": "55d632c935d8c0062cbe37768d4b61dc",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-sales-invoice-payments.spec.ts": {
+    "mtime": 1794304887.259308,
+    "seen": 1794914251.2537575,
+    "ast_hash": "8b21318bb269edb15dfc7b63126492e0",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-sales-invoice-remaining.spec.ts": {
+    "mtime": 1794314556.0142844,
+    "seen": 1794914251.253759,
+    "ast_hash": "ee34574d6209d4749cf6d2d8ddb82dc7",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-sales-invoice-tabs.spec.ts": {
+    "mtime": 1794306456.9939408,
+    "seen": 1794914251.2537608,
+    "ast_hash": "7efc02fd0032d70f0ad50d6481443e57",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-sales-invoice-ui.spec.ts": {
+    "mtime": 1794302569.165002,
+    "seen": 1794914251.2537625,
+    "ast_hash": "ebfff25fe80921e139faac41bcac675d",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-stock-ledger.spec.ts": {
+    "mtime": 1793094148.8310874,
+    "seen": 1794914251.2537642,
+    "ast_hash": "69eac2a1a43c580035168ed667ea9af1",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-stock-reconciliation-add.spec.ts": {
+    "mtime": 1793179505.1179302,
+    "seen": 1794914251.2537658,
+    "ast_hash": "b042f1c694aa674bbcdd4ba3675a4254",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-stock-reconciliation-details.spec.ts": {
+    "mtime": 1793181310.9107876,
+    "seen": 1794914251.2537677,
+    "ast_hash": "ebe721968338849d73462ef3e2724ae0",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-stock-reconciliation-list.spec.ts": {
+    "mtime": 1793185570.8669338,
+    "seen": 1794914251.2537692,
+    "ast_hash": "93f26f53c84aebfa74264d9e53d14196",
+    "semantic_hash": ""
+  },
+  "Shamel/srs-stock-reconciliation-workflow.spec.ts": {
+    "mtime": 1793185508.9350362,
+    "seen": 1794914251.253771,
+    "ast_hash": "c40088f39d0028d856bb7b7103fd4980",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe.spec.ts": {
+    "mtime": 1794837894.2334692,
+    "seen": 1794914251.2537725,
+    "ast_hash": "b443581e142fbf896c0b0a694a77c291",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe2.spec.ts": {
+    "mtime": 1794838064.8051212,
+    "seen": 1794914251.2537744,
+    "ast_hash": "c10f59cf114d5d685fafb8335153da19",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe3.spec.ts": {
+    "mtime": 1794838106.1042123,
+    "seen": 1794914251.2537758,
+    "ast_hash": "8d349eacc4be7871dc895cef5af76cf6",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe4.spec.ts": {
+    "mtime": 1794838426.1073372,
+    "seen": 1794914251.2537777,
+    "ast_hash": "ec32ee5a11a41e5914fbcdaa737cfb98",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe5.spec.ts": {
+    "mtime": 1794838475.819357,
+    "seen": 1794914251.2537794,
+    "ast_hash": "1c5a6dca9a40da9f478d0ed6f176fc7a",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe6.spec.ts": {
+    "mtime": 1794838816.418448,
+    "seen": 1794914251.2537813,
+    "ast_hash": "0192fbeced2d6bb71d3d48d2adf4f014",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe7.spec.ts": {
+    "mtime": 1794839186.7463605,
+    "seen": 1794914251.253783,
+    "ast_hash": "1ab5104f946d13dd146d274369c56d16",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe8.spec.ts": {
+    "mtime": 1794839284.9819915,
+    "seen": 1794914251.253785,
+    "ast_hash": "2ff605d16c59ca1d105c93d1adb09fec",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe9.spec.ts": {
+    "mtime": 1794839687.2575316,
+    "seen": 1794914251.2537866,
+    "ast_hash": "30ddb5a63c8a1565dccd2d2e50bfdc8d",
+    "semantic_hash": ""
+  },
+  "Shamel/var-add.spec.ts": {
+    "mtime": 1793523252.339717,
+    "seen": 1794914251.2537887,
+    "ast_hash": "9ccd935b08acdf7b4219e4644dc6a404",
+    "semantic_hash": ""
+  },
+  "Shamel/var-check.spec.ts": {
+    "mtime": 1793716422.9641626,
+    "seen": 1794914251.2537904,
+    "ast_hash": "d709cbefaa522fea259823af69941d30",
+    "semantic_hash": ""
+  },
+  "Shamel/var-create.spec.ts": {
+    "mtime": 1793523541.510511,
+    "seen": 1794914251.253792,
+    "ast_hash": "dc6a158676c3797b51fadb1526d3af4c",
+    "semantic_hash": ""
+  },
+  "Shamel/var-multi.spec.ts": {
+    "mtime": 1793524315.730056,
+    "seen": 1794914251.2537937,
+    "ast_hash": "c28dc15e49a4e86c58ad2452bc083547",
+    "semantic_hash": ""
+  },
+  "Shamel/var-probe.spec.ts": {
+    "mtime": 1793523152.4310572,
+    "seen": 1794914251.2537956,
+    "ast_hash": "2962b6ea9401e820a177f5dbea0a204e",
+    "semantic_hash": ""
+  },
+  "Shamel/var-recorded.spec.ts": {
+    "mtime": 1793524266.7405097,
+    "seen": 1794914251.253797,
+    "ast_hash": "aa622e92521214516cc5071612fd8955",
+    "semantic_hash": ""
+  },
+  "e2e.config.ts": {
+    "mtime": 1792330925.3144736,
+    "seen": 1794914251.253799,
+    "ast_hash": "681e1fd12923a3c37b73262ed33fdf81",
+    "semantic_hash": ""
+  },
+  "eslint.config.mjs": {
+    "mtime": 1791368116.2030938,
+    "seen": 1794914251.2538006,
+    "ast_hash": "210fde502f5f3a3c405f973874c75900",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1792330908.7135653,
+    "seen": 1794914251.2538025,
+    "ast_hash": "52a39cf19a9d4660954097936812e20b",
+    "semantic_hash": ""
+  },
+  "playwright-claude-automation/package.json": {
+    "mtime": 1791185565.534804,
+    "seen": 1794914251.2538042,
+    "ast_hash": "b319b00a84ce9fedcc93c608f4345783",
+    "semantic_hash": ""
+  },
+  "playwright.config.ts": {
+    "mtime": 1791192758.3373704,
+    "seen": 1794914251.2538059,
+    "ast_hash": "0a6eb5f9c740c93a613fbd8ce29a4543",
+    "semantic_hash": ""
+  },
+  "playwright/.mcp-output/page-2026-10-15T09-55-03-752Z.yml": {
+    "mtime": 1792058103.7552733,
+    "seen": 1794914251.2538073,
+    "ast_hash": "3e6813a94a1f6b3fe46f7e5d7ddf0cc7",
+    "semantic_hash": ""
+  },
+  "playwright/.mcp-output/page-2026-10-15T09-56-16-198Z.yml": {
+    "mtime": 1792058176.2192836,
+    "seen": 1794914251.2538092,
+    "ast_hash": "d45bbf5a5f351634860bf563e85cd1c3",
+    "semantic_hash": ""
+  },
+  "playwright/.mcp-output/page-2026-10-15T09-58-35-872Z.yml": {
+    "mtime": 1792058315.8989334,
+    "seen": 1794914251.2538106,
+    "ast_hash": "27b53e0b98dd0dd5010ce6a71e4cbb8c",
+    "semantic_hash": ""
+  },
+  "test-results-uc1.json": {
+    "mtime": 1791194080.1843596,
+    "seen": 1794914251.2538126,
+    "ast_hash": "b8d0c581402867bbe0090de2e88270ce",
+    "semantic_hash": ""
+  },
+  "tests/auth.setup.e2e.ts": {
+    "mtime": 1792330925.4282641,
+    "seen": 1794914251.2538142,
+    "ast_hash": "6af835c77ee061ca5f270198e7056e47",
+    "semantic_hash": ""
+  },
+  "tests/example.e2e.ts": {
+    "mtime": 1792331151.90046,
+    "seen": 1794914251.253816,
+    "ast_hash": "9e3078eb54c16baa7ae0d614835d55d5",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1791187295.3960266,
+    "seen": 1794914251.2538173,
+    "ast_hash": "fc7977bd99a7514496803b4b53b4900b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/SKILL.md": {
+    "mtime": 1792330779.8924203,
+    "seen": 1794914251.2538192,
+    "ast_hash": "7b07e08243f68417a644318c4bde6fd1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/agent.md": {
+    "mtime": 1792330779.8934188,
+    "seen": 1794914251.2538207,
+    "ast_hash": "fa26f7ffb2358e9a7cd79f33656ab025",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/bug-bash.md": {
+    "mtime": 1792330779.8934188,
+    "seen": 1794914251.2538223,
+    "ast_hash": "4536696a2c4bc3fee0981a9fa82221d4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/debugging.md": {
+    "mtime": 1792330779.8949242,
+    "seen": 1794914251.253824,
+    "ast_hash": "45f7f1d223e85979201e8a380774fd13",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/explore.md": {
+    "mtime": 1792330779.8959272,
+    "seen": 1794914251.2538254,
+    "ast_hash": "08b4d89f3089a3af245e5d7892fc311a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/mcp.md": {
+    "mtime": 1792330779.8964305,
+    "seen": 1794914251.2538273,
+    "ast_hash": "da08c91ba9ed6950bf29d8b770025103",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/running.md": {
+    "mtime": 1792330779.8974392,
+    "seen": 1794914251.253829,
+    "ast_hash": "5950ae897af6489ebeb4842e88000b1b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/setup.md": {
+    "mtime": 1792330779.8984385,
+    "seen": 1794914251.253831,
+    "ast_hash": "5f762a7e00ce4cdd60792ccf041a96b6",
+    "semantic_hash": ""
+  },
+  ".agents/skills/e2e/references/writing-tests.md": {
+    "mtime": 1792330779.898941,
+    "seen": 1794914251.2538328,
+    "ast_hash": "1a84ca35da1b1b5857f056b71489ab18",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/SKILL.md": {
+    "mtime": 1791185317.125047,
+    "seen": 1794914251.2538342,
+    "ast_hash": "0821c515eb1c0d2c50b50a6715aafab1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/element-attributes.md": {
+    "mtime": 1791185316.9893382,
+    "seen": 1794914251.2538357,
+    "ast_hash": "8b8ffc48e38a5b4a04baec18a2732cd7",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/playwright-tests.md": {
+    "mtime": 1791185317.0459676,
+    "seen": 1794914251.2538378,
+    "ast_hash": "99970dceff6228941c8f994e7dd71d27",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/pr-attachments.md": {
+    "mtime": 1791185317.0514884,
+    "seen": 1794914251.2538397,
+    "ast_hash": "1177e18d35661616471a5dbc56d915b8",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/request-mocking.md": {
+    "mtime": 1791185317.0884428,
+    "seen": 1794914251.2538435,
+    "ast_hash": "3b74af1fc908062c9c7f2cef04be6a24",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/running-code.md": {
+    "mtime": 1791185317.109511,
+    "seen": 1794914251.2538452,
+    "ast_hash": "a051719484d5330b826a5664fa1fbb32",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/session-management.md": {
+    "mtime": 1791185317.1155372,
+    "seen": 1794914251.2538471,
+    "ast_hash": "911dd3af00bd5e8c8fa4515970d90dc1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/storage-state.md": {
+    "mtime": 1791185317.151128,
+    "seen": 1794914251.2538488,
+    "ast_hash": "128ea37ea2ddc5022920718d0f9ab96d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/test-generation.md": {
+    "mtime": 1791185317.1591759,
+    "seen": 1794914251.2538507,
+    "ast_hash": "b15132f278666e69e42fbe607056651b",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/tracing.md": {
+    "mtime": 1791185317.1677177,
+    "seen": 1794914251.2538521,
+    "ast_hash": "ef8d17a2e59f58c77800ddde72f7ce51",
+    "semantic_hash": ""
+  },
+  ".agents/skills/playwright-cli/references/video-recording.md": {
+    "mtime": 1791185317.1752675,
+    "seen": 1794914251.253854,
+    "ast_hash": "839208845060c048ac8e23f114e11aab",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/SKILL.md": {
+    "mtime": 1792330779.8924203,
+    "seen": 1794914251.2538555,
+    "ast_hash": "7b07e08243f68417a644318c4bde6fd1",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/agent.md": {
+    "mtime": 1792330779.8934188,
+    "seen": 1794914251.2538574,
+    "ast_hash": "fa26f7ffb2358e9a7cd79f33656ab025",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/bug-bash.md": {
+    "mtime": 1792330779.8934188,
+    "seen": 1794914251.253859,
+    "ast_hash": "4536696a2c4bc3fee0981a9fa82221d4",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/debugging.md": {
+    "mtime": 1792330779.8949242,
+    "seen": 1794914251.2538607,
+    "ast_hash": "45f7f1d223e85979201e8a380774fd13",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/explore.md": {
+    "mtime": 1792330779.8959272,
+    "seen": 1794914251.2538624,
+    "ast_hash": "08b4d89f3089a3af245e5d7892fc311a",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/mcp.md": {
+    "mtime": 1792330779.8964305,
+    "seen": 1794914251.2538643,
+    "ast_hash": "da08c91ba9ed6950bf29d8b770025103",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/running.md": {
+    "mtime": 1792330779.8974392,
+    "seen": 1794914251.2538657,
+    "ast_hash": "5950ae897af6489ebeb4842e88000b1b",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/setup.md": {
+    "mtime": 1792330779.8984385,
+    "seen": 1794914251.2538676,
+    "ast_hash": "5f762a7e00ce4cdd60792ccf041a96b6",
+    "semantic_hash": ""
+  },
+  ".claude/skills/e2e/references/writing-tests.md": {
+    "mtime": 1792330779.898941,
+    "seen": 1794914251.253869,
+    "ast_hash": "1a84ca35da1b1b5857f056b71489ab18",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/SKILL.md": {
+    "mtime": 1791185317.125047,
+    "seen": 1794914251.2538705,
+    "ast_hash": "0821c515eb1c0d2c50b50a6715aafab1",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/element-attributes.md": {
+    "mtime": 1791185316.9893382,
+    "seen": 1794914251.2538724,
+    "ast_hash": "8b8ffc48e38a5b4a04baec18a2732cd7",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/playwright-tests.md": {
+    "mtime": 1791185317.0459676,
+    "seen": 1794914251.2538738,
+    "ast_hash": "99970dceff6228941c8f994e7dd71d27",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/pr-attachments.md": {
+    "mtime": 1791185317.0514884,
+    "seen": 1794914251.2538757,
+    "ast_hash": "1177e18d35661616471a5dbc56d915b8",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/request-mocking.md": {
+    "mtime": 1791185317.0884428,
+    "seen": 1794914251.2538772,
+    "ast_hash": "3b74af1fc908062c9c7f2cef04be6a24",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/running-code.md": {
+    "mtime": 1791185317.109511,
+    "seen": 1794914251.253879,
+    "ast_hash": "a051719484d5330b826a5664fa1fbb32",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/session-management.md": {
+    "mtime": 1791185317.1155372,
+    "seen": 1794914251.2538805,
+    "ast_hash": "911dd3af00bd5e8c8fa4515970d90dc1",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/storage-state.md": {
+    "mtime": 1791185317.151128,
+    "seen": 1794914251.2538822,
+    "ast_hash": "128ea37ea2ddc5022920718d0f9ab96d",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/test-generation.md": {
+    "mtime": 1791185317.1591759,
+    "seen": 1794914251.2538838,
+    "ast_hash": "b15132f278666e69e42fbe607056651b",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/tracing.md": {
+    "mtime": 1791185317.1677177,
+    "seen": 1794914251.2538855,
+    "ast_hash": "ef8d17a2e59f58c77800ddde72f7ce51",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-cli/references/video-recording.md": {
+    "mtime": 1791185317.1752675,
+    "seen": 1794914251.253887,
+    "ast_hash": "839208845060c048ac8e23f114e11aab",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-tester/SKILL.md": {
+    "mtime": 1791190087.891465,
+    "seen": 1794914251.2538888,
+    "ast_hash": "7da96cbf89b83a57e92099f14f58a3c4",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-tester/references/auth-api-mocking.md": {
+    "mtime": 1791190087.8959825,
+    "seen": 1794914251.2538903,
+    "ast_hash": "bc88921b3fdfda05fbafa632d83f3654",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-tester/references/debugging.md": {
+    "mtime": 1791190087.8989806,
+    "seen": 1794914251.2538922,
+    "ast_hash": "b49b2bc341752dc755b20fde042601aa",
+    "semantic_hash": ""
+  },
+  ".claude/skills/playwright-tester/references/page-objects-and-fixtures.md": {
+    "mtime": 1791190087.9045315,
+    "seen": 1794914251.2538939,
+    "ast_hash": "ccb84f7123451bbf724c892be1f8c1ff",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1793256351.765097,
+    "seen": 1794914251.2538955,
+    "ast_hash": "67d88e9d0760c3ba54c75dfd9551c1c5",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/NOTES-test-data.md": {
+    "mtime": 1791467145.3843625,
+    "seen": 1794914251.2538972,
+    "ast_hash": "4dc31b5e16e299dbaa580f92841d4dcf",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/NOTES-testcase-format.md": {
+    "mtime": 1791467145.381047,
+    "seen": 1794914251.2538989,
+    "ast_hash": "4c0eb135b28fc7a826908f5ff0c4ee53",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Inventory-Settings.txt": {
+    "mtime": 1794134240.441237,
+    "seen": 1794914251.2539003,
+    "ast_hash": "edc6ddd5bbdc157167e6337cdffee1c7",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Address.txt": {
+    "mtime": 1794820800.5055902,
+    "seen": 1794914251.2539022,
+    "ast_hash": "63da52630e474995e77f4ef94e34a7d1",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Contact.txt": {
+    "mtime": 1794830875.569023,
+    "seen": 1794914251.2539036,
+    "ast_hash": "d6e7735317999a949f1f3ddd12695238",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Coupon-Code.txt": {
+    "mtime": 1794133494.0426738,
+    "seen": 1794914251.2539053,
+    "ast_hash": "7c2f30ba7256ed631a703540eb8d08fb",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Customer-Groups.txt": {
+    "mtime": 1794748547.7851896,
+    "seen": 1794914251.253907,
+    "ast_hash": "b7f629f58b736352f30392c6fd6c62a5",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Item-Price.txt": {
+    "mtime": 1794740237.2733915,
+    "seen": 1794914251.2539086,
+    "ast_hash": "62d264817116a6b3b15bc9964c462dc8",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Price-List.txt": {
+    "mtime": 1794734285.0447643,
+    "seen": 1794914251.2539105,
+    "ast_hash": "007d63ca8f0ab919ed4bf45e5bf62ca8",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Pricing-Rule.txt": {
+    "mtime": 1794901793.721715,
+    "seen": 1794914251.2539122,
+    "ast_hash": "6e110250992381bb0e4774132e2d1c9b",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Quotation.txt": {
+    "mtime": 1794908413.380345,
+    "seen": 1794914251.253914,
+    "ast_hash": "6dcdbbbd6736d206eee2b2db70adc68a",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Sales-Invoice.txt": {
+    "mtime": 1794298914.978451,
+    "seen": 1794914251.2539158,
+    "ast_hash": "95f58e5a2d276127ca0c9699b19b1703",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Sales-Taxes-Template.txt": {
+    "mtime": 1794837871.673586,
+    "seen": 1794914251.2539175,
+    "ast_hash": "ec956f393bf324526f7de165857beb86",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Terms-and-Conditions.txt": {
+    "mtime": 1794751734.3001063,
+    "seen": 1794914251.2539191,
+    "ast_hash": "2d3352f32b9683ce42a352693edccc7f",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Selling-Territory.txt": {
+    "mtime": 1794817035.3197107,
+    "seen": 1794914251.253921,
+    "ast_hash": "60416add4bbc41ec2f7edb5bef00c37e",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/address-bug-report.html": {
+    "mtime": 1794821820.7163103,
+    "seen": 1794914251.2539225,
+    "ast_hash": "4ed9234ac5a78547d8efeaf5a59f2e0f",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/contact-bug-report.html": {
+    "mtime": 1794831991.0882335,
+    "seen": 1794914251.2539244,
+    "ast_hash": "a344925e24fc16245a4ce493f3592cfd",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/coupon-code-bug-report.html": {
+    "mtime": 1794735129.288487,
+    "seen": 1794914251.253926,
+    "ast_hash": "2b61f9f7f0ceadb14532855ab56fcf50",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/customer-group-bug-report.html": {
+    "mtime": 1794748919.5295978,
+    "seen": 1794914251.2539277,
+    "ast_hash": "d69e0bc21119dc4a591cc53f84bfd0df",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/delivery-note-bug-report.html": {
+    "mtime": 1792311666.5272946,
+    "seen": 1794914251.2539294,
+    "ast_hash": "d7bd5acaadda214637c054b91c4e2e80",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/item-price-bug-report.html": {
+    "mtime": 1794740533.407772,
+    "seen": 1794914251.253931,
+    "ast_hash": "5aaf3ee8357bb8aeefc31379dd9268e1",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/landed-cost-voucher-bug-report.html": {
+    "mtime": 1793716982.8244774,
+    "seen": 1794914251.2539327,
+    "ast_hash": "aab3e6b2fb265b8008715f823476dab3",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/packing-slip-bug-report.html": {
+    "mtime": 1791876165.681605,
+    "seen": 1794914251.2539344,
+    "ast_hash": "d42c8a135cbc32e315596b7d22789a0f",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/price-list-bug-report.html": {
+    "mtime": 1794736205.0567641,
+    "seen": 1794914251.2539358,
+    "ast_hash": "7dd5fb113fa1393c4f3cc34071b75d3a",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/pricing-rule-bug-report.html": {
+    "mtime": 1794903361.4417725,
+    "seen": 1794914251.2539375,
+    "ast_hash": "f91cee009a43beafdb80bd324de27070",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/product-bundle-bug-report.html": {
+    "mtime": 1791978405.326661,
+    "seen": 1794914251.2539392,
+    "ast_hash": "9e44c27c00b73638dfb8d46ccb04afc5",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/quotation-bug-report.html": {
+    "mtime": 1794914127.2154467,
+    "seen": 1794914251.2539408,
+    "ast_hash": "15365d70aca267b25974291e0bb60240",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/sales-invoice-bug-report.html": {
+    "mtime": 1794314871.4449668,
+    "seen": 1794914251.2539423,
+    "ast_hash": "cd6dd2669d952282bc2e21ae8e64c0ad",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/sales-taxes-template-bug-report.html": {
+    "mtime": 1794839858.7092738,
+    "seen": 1794914251.2539444,
+    "ast_hash": "b9f48fd00ee5c884c3dd314591fd7943",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/stock-reconciliation-bug-report.html": {
+    "mtime": 1793186406.5861268,
+    "seen": 1794914251.2539458,
+    "ast_hash": "95a04b3db034186810a1e01f236ecb35",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/terms-and-conditions-bug-report.html": {
+    "mtime": 1794752130.9609928,
+    "seen": 1794914251.2539475,
+    "ast_hash": "1f2b6a07f9dbacf5d284208ecbc09346",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/reports/territory-bug-report.html": {
+    "mtime": 1794817261.6731763,
+    "seen": 1794914251.2539492,
+    "ast_hash": "84eb073f519b76000ea67c991249de97",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe.out.txt": {
+    "mtime": 1794820967.9632876,
+    "seen": 1794914251.2539508,
+    "ast_hash": "5da0d1dfdc85ff13c6adcf1bcf38f458",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe2.out.txt": {
+    "mtime": 1794821117.3234847,
+    "seen": 1794914251.2539525,
+    "ast_hash": "fbe5af28f90c8888573a41ce4e5d3b51",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe3.out.txt": {
+    "mtime": 1794821181.6623464,
+    "seen": 1794914251.2539544,
+    "ast_hash": "09d3861ba7a367691e6409e1f4bee6d8",
+    "semantic_hash": ""
+  },
+  "Shamel/addr-probe4.out.txt": {
+    "mtime": 1794821681.8249862,
+    "seen": 1794914251.2539558,
+    "ast_hash": "95314a70b6080fba32397c73d2674de2",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe.out.txt": {
+    "mtime": 1794830951.78644,
+    "seen": 1794914251.2539577,
+    "ast_hash": "4a6fd0732abacbb3cd1d40a66214b0af",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe2.out.txt": {
+    "mtime": 1794831398.119277,
+    "seen": 1794914251.2539594,
+    "ast_hash": "011eb1ce64d65f2a3652351835e3afb1",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe3.out.txt": {
+    "mtime": 1794831578.5088189,
+    "seen": 1794914251.2539608,
+    "ast_hash": "17c71178e3e15a4c951cc792fc7389b3",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe4.out.txt": {
+    "mtime": 1794831689.3254514,
+    "seen": 1794914251.2539625,
+    "ast_hash": "17c9b5a5e42ae7acc1fb106371a327af",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe5.out.txt": {
+    "mtime": 1794831750.4062915,
+    "seen": 1794914251.253964,
+    "ast_hash": "1b59d980d621c9a84003a6ef5020f4e8",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-probe6.out.txt": {
+    "mtime": 1794831851.5392432,
+    "seen": 1794914251.2539659,
+    "ast_hash": "a25945d338c41cf8d66d9c252b959b10",
+    "semantic_hash": ""
+  },
+  "Shamel/data/not-an-image.txt": {
+    "mtime": 1791192081.3971958,
+    "seen": 1794914251.2539673,
+    "ast_hash": "127f0d7149dc5b63774e6ae279d9bdcc",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe.out.txt": {
+    "mtime": 1794901871.5025175,
+    "seen": 1794914251.253969,
+    "ast_hash": "938b549d88fb54fb3cc220830570283a",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe2.out.txt": {
+    "mtime": 1794901906.0098023,
+    "seen": 1794914251.2539704,
+    "ast_hash": "c45db6f3d024515d9a8e35045dcd7b8b",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe3.out.txt": {
+    "mtime": 1794902259.7813115,
+    "seen": 1794914251.2539723,
+    "ast_hash": "702acf2c59d5077f7afec032abc1c93d",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe4.out.txt": {
+    "mtime": 1794902354.233453,
+    "seen": 1794914251.2539737,
+    "ast_hash": "d6ce479ad0a37feaf5dd335f8806b7aa",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe5.out.txt": {
+    "mtime": 1794902433.440115,
+    "seen": 1794914251.2539754,
+    "ast_hash": "13506a83dd211019b77fcffce876dad9",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe5b.out.txt": {
+    "mtime": 1794902564.2767322,
+    "seen": 1794914251.2539768,
+    "ast_hash": "ef514c65b1951b1f3936b218cabe479e",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe5c.out.txt": {
+    "mtime": 1794902671.6998332,
+    "seen": 1794914251.2539787,
+    "ast_hash": "40e75dcba0b4ea1c224e4a4346d39580",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe6.out.txt": {
+    "mtime": 1794902715.1277204,
+    "seen": 1794914251.2539802,
+    "ast_hash": "4a4517ab79fb0433c3ae4e0c3abb2a56",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe7.out.txt": {
+    "mtime": 1794903138.2054994,
+    "seen": 1794914251.2539816,
+    "ast_hash": "71e0779c1d81cfe28e4364fe404349cc",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe8.out.txt": {
+    "mtime": 1794903191.565594,
+    "seen": 1794914251.2539835,
+    "ast_hash": "d336a22741de4eed51d11660b9fb7d40",
+    "semantic_hash": ""
+  },
+  "Shamel/pr-probe9.out.txt": {
+    "mtime": 1794903240.4135013,
+    "seen": 1794914251.253985,
+    "ast_hash": "a7d5366abe7f0301a69bcaaa643c77d9",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe.out.txt": {
+    "mtime": 1794908471.308653,
+    "seen": 1794914251.2539868,
+    "ast_hash": "7fa972b90bb351cc40dc759b3da4fdad",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe10.out.txt": {
+    "mtime": 1794909159.1710193,
+    "seen": 1794914251.2539883,
+    "ast_hash": "469c77c2e95fd1dd31b37299b26d5f2b",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe11.out.txt": {
+    "mtime": 1794909569.4235628,
+    "seen": 1794914251.25399,
+    "ast_hash": "577418d5cea232138afdb7bd0709fd78",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe12.out.txt": {
+    "mtime": 1794909593.573819,
+    "seen": 1794914251.2539918,
+    "ast_hash": "8ccec4f121f4f33e51d17d1ecfb7e530",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe13.out.txt": {
+    "mtime": 1794909662.9246964,
+    "seen": 1794914251.2539935,
+    "ast_hash": "3c459960e44032fd68cf356dd4a9a868",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe14.out.txt": {
+    "mtime": 1794909768.5716329,
+    "seen": 1794914251.253995,
+    "ast_hash": "3c56fc29343e8ae41d4de62c9ca4ac5e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe15.out.txt": {
+    "mtime": 1794909723.4350429,
+    "seen": 1794914251.2539968,
+    "ast_hash": "46a921244e81349ce57212aa7fa9b918",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe16.out.txt": {
+    "mtime": 1794909842.4169464,
+    "seen": 1794914251.2539983,
+    "ast_hash": "9844a68881e38b69c9012741fe550e87",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe17.out.txt": {
+    "mtime": 1794909921.4966378,
+    "seen": 1794914251.2540002,
+    "ast_hash": "de4d786587c8d2d70efb17944c55931f",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe18.out.txt": {
+    "mtime": 1794910666.0295439,
+    "seen": 1794914251.2540016,
+    "ast_hash": "da5410e33a83051b25b2c63fe5d34851",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe19.out.txt": {
+    "mtime": 1794910612.115575,
+    "seen": 1794914251.2540035,
+    "ast_hash": "5699c5768ce64e0d9a58639072150505",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe2.out.txt": {
+    "mtime": 1794908512.533657,
+    "seen": 1794914251.254005,
+    "ast_hash": "0f0452db206a8f3d36e115e0ed234bf2",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe20.out.txt": {
+    "mtime": 1794910796.9203548,
+    "seen": 1794914251.2540069,
+    "ast_hash": "fef2d2a7f9738c27e80bfc08a478b12a",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe21.out.txt": {
+    "mtime": 1794910860.0358365,
+    "seen": 1794914251.2540083,
+    "ast_hash": "918f64cff6f33ff945ddf6bd991f27a2",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe22.out.txt": {
+    "mtime": 1794910925.9138072,
+    "seen": 1794914251.2540102,
+    "ast_hash": "98c3eda8df3bad755b5da101f4a0a418",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe23.out.txt": {
+    "mtime": 1794911421.6208434,
+    "seen": 1794914251.2540116,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe24.out.txt": {
+    "mtime": 1794911389.7886975,
+    "seen": 1794914251.2540133,
+    "ast_hash": "aa960306994b169220b3cbe8a6d99ced",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe25.out.txt": {
+    "mtime": 1794911919.1695218,
+    "seen": 1794914251.2540147,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe26.out.txt": {
+    "mtime": 1794912440.8178985,
+    "seen": 1794914251.2540164,
+    "ast_hash": "6cdca3103ddc13ca52d98c4ac5744b8c",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe27.out.txt": {
+    "mtime": 1794912867.802121,
+    "seen": 1794914251.2540183,
+    "ast_hash": "148b135f949fd82eebc9cdc6b1fd238b",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe28.out.txt": {
+    "mtime": 1794912987.015087,
+    "seen": 1794914251.2540197,
+    "ast_hash": "3a24cd43baecbbb882f5edd50cd79e17",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe29.out.txt": {
+    "mtime": 1794913110.0250516,
+    "seen": 1794914251.2540216,
+    "ast_hash": "87f9d20fc13a87dd8a0e17c807c7012c",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe3.out.txt": {
+    "mtime": 1794908550.3404882,
+    "seen": 1794914251.254023,
+    "ast_hash": "ea1fff0f290da663526ca20f5ab51cb9",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe30.out.txt": {
+    "mtime": 1794913696.5402882,
+    "seen": 1794914251.2540247,
+    "ast_hash": "26113f05db513fc054bbbc944f250a02",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe31.out.txt": {
+    "mtime": 1794913792.3668199,
+    "seen": 1794914251.2540264,
+    "ast_hash": "17652bb43d1c84244c2978bf8aa11512",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe32.out.txt": {
+    "mtime": 1794913840.4992096,
+    "seen": 1794914251.254028,
+    "ast_hash": "b3f907abf6dc4e86951d0225ab22c237",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe4.out.txt": {
+    "mtime": 1794908589.6315925,
+    "seen": 1794914251.2540295,
+    "ast_hash": "8b5b13462903f148b762cb1a4c3aa4bf",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe5.out.txt": {
+    "mtime": 1794908621.9575615,
+    "seen": 1794914251.2540314,
+    "ast_hash": "c7b9d21f96ab156bd7811cd4915f531e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe6.out.txt": {
+    "mtime": 1794908663.4973042,
+    "seen": 1794914251.254033,
+    "ast_hash": "154a4b0d3bd8a27feb710d90e60e8bf7",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe7.out.txt": {
+    "mtime": 1794908712.4393675,
+    "seen": 1794914251.2540348,
+    "ast_hash": "1a50ac247aaa60ec96b9ed9f01c76890",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe8.out.txt": {
+    "mtime": 1794908776.1256723,
+    "seen": 1794914251.2540364,
+    "ast_hash": "3e10f0fdbf9e7ee90b69447d4cdac42a",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-probe9.out.txt": {
+    "mtime": 1794909080.4836864,
+    "seen": 1794914251.254038,
+    "ast_hash": "8cab9b19740ad2a545a26dd24350bbd9",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe.out.txt": {
+    "mtime": 1794837955.5082207,
+    "seen": 1794914251.2540398,
+    "ast_hash": "292ec23d878775eead068d0a1e036dc5",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe2.out.txt": {
+    "mtime": 1794838091.321663,
+    "seen": 1794914251.2540414,
+    "ast_hash": "0880e5965cc42d63a02abd9650c2ac35",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe3.out.txt": {
+    "mtime": 1794838356.5861337,
+    "seen": 1794914251.2540429,
+    "ast_hash": "a39e90f6034fecb86fad341d88420d22",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe4.out.txt": {
+    "mtime": 1794838409.8821137,
+    "seen": 1794914251.2540448,
+    "ast_hash": "cbdc411d1318b0ae4026c56e599e1a35",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe4b.out.txt": {
+    "mtime": 1794838435.747043,
+    "seen": 1794914251.2540462,
+    "ast_hash": "548d407676bacd1106b62f49cd0f3bd0",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe5.out.txt": {
+    "mtime": 1794838516.6529417,
+    "seen": 1794914251.254048,
+    "ast_hash": "60d8e66a9cec8232d87001c0a8f44b51",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe6.out.txt": {
+    "mtime": 1794839169.597071,
+    "seen": 1794914251.2540495,
+    "ast_hash": "7a9c1179d5d702400b41dcf237a42053",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe7.out.txt": {
+    "mtime": 1794839257.2223008,
+    "seen": 1794914251.2540514,
+    "ast_hash": "e4ae0baa60b4ab0e3acce079454d937a",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe8.out.txt": {
+    "mtime": 1794839607.3106198,
+    "seen": 1794914251.2540529,
+    "ast_hash": "db7ba137a7d8df79d1454a264d1870b1",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe9.out.txt": {
+    "mtime": 1794839644.8136396,
+    "seen": 1794914251.2540543,
+    "ast_hash": "041a5527decc25c7b5309eef95fb2e3e",
+    "semantic_hash": ""
+  },
+  "Shamel/st-probe9b.out.txt": {
+    "mtime": 1794839707.4049194,
+    "seen": 1794914251.2540562,
+    "ast_hash": "f13e240090bf3d958bee0382fbe25b12",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_Bin_Test_Cases_EN_e038332a.md": {
+    "mtime": 1794914159.9564428,
+    "seen": 1794914251.2540576,
+    "ast_hash": "45fe9b2629efe9c842bf71a0eb135bdf",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_CouponCode_Test_Cases_EN_844a0f32.md": {
+    "mtime": 1794914160.0155692,
+    "seen": 1794914251.2540596,
+    "ast_hash": "b5354f983cdf1497cbef47b6cceedd64",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_DeliveryNote_Test_Cases_EN_3e0d4ea7.md": {
+    "mtime": 1794914160.1621864,
+    "seen": 1794914251.2540612,
+    "ast_hash": "011d47e71049b72b596f5488d7403278",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_DeliveryTrip_Test_Cases_EN_5894dc1c.md": {
+    "mtime": 1794914160.2133088,
+    "seen": 1794914251.254063,
+    "ast_hash": "229cc06cad6a28a1a1134fae8a29dbeb",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_InventorySettings_Test_Cases_EN_be972fc5.md": {
+    "mtime": 1794914160.2922363,
+    "seen": 1794914251.2540643,
+    "ast_hash": "7078c6e1bfc467d7c39b0cdf37ad5c14",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_LandedCostVoucher_Test_Cases_EN_f77f34a9.md": {
+    "mtime": 1794914160.358253,
+    "seen": 1794914251.2540662,
+    "ast_hash": "d47512100d5a2b3e57a93d07361171ed",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_PackingSlip_Test_Cases_EN_894e0af2.md": {
+    "mtime": 1794914160.4088464,
+    "seen": 1794914251.254068,
+    "ast_hash": "5b13f0f0e04511993d32df14082bf5fc",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_PriceList_Test_Cases_EN_64f357e9.md": {
+    "mtime": 1794914160.4490457,
+    "seen": 1794914251.2540696,
+    "ast_hash": "4470a83e54b792baa1d62d0186bd6ddd",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_ProductBundle_Test_Cases_EN_ef86fb34.md": {
+    "mtime": 1794914160.485699,
+    "seen": 1794914251.2540712,
+    "ast_hash": "fd432a8b4960cf0350f6ed993bcb808c",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_PurchaseReceipt_Test_Cases_EN_246e7c69.md": {
+    "mtime": 1794914160.5997577,
+    "seen": 1794914251.254073,
+    "ast_hash": "e71cfb22434ae30890dd6445356ec14d",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_QualityInspection_Test_Cases_EN_423d8cff.md": {
+    "mtime": 1794914160.656691,
+    "seen": 1794914251.2540746,
+    "ast_hash": "692559ff294b8db33030f03ae118c7c7",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_RepostItemValuation_Test_Cases_EN_d1fe0f28.md": {
+    "mtime": 1794914160.6877866,
+    "seen": 1794914251.2540762,
+    "ast_hash": "4efb125245c2cdf7b1435cbe8d859ccc",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_SalesInvoice_Test_Cases_EN_43a47400.md": {
+    "mtime": 1794914160.8051658,
+    "seen": 1794914251.254078,
+    "ast_hash": "5e4bae4a8a41701e1ad3785a63218899",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_Shipment_Test_Cases_EN_cdb0fcfc.md": {
+    "mtime": 1794914160.8995152,
+    "seen": 1794914251.2540796,
+    "ast_hash": "1383186571620a54ea2c3d00d08ce585",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_ShippingRule_Test_Cases_EN_2e009b83.md": {
+    "mtime": 1794914160.9521296,
+    "seen": 1794914251.2540812,
+    "ast_hash": "ceb7d03662b1c154601f830b321782a5",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_StockEntry_Test_Cases_EN_3d614c44.md": {
+    "mtime": 1794914161.1141562,
+    "seen": 1794914251.254083,
+    "ast_hash": "1f0710f8465444e29aa4223155119b91",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_StockLedgerEntry_Test_Cases_EN_56bcaba2.md": {
+    "mtime": 1794914161.1554308,
+    "seen": 1794914251.2540846,
+    "ast_hash": "11b8f1e5a944a45c64a9a74a7a366d8b",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_StockReconciliation_Test_Cases_EN_91ea715c.md": {
+    "mtime": 1794914161.2376757,
+    "seen": 1794914251.2540863,
+    "ast_hash": "6f887f5e2b8c6e2d128bd8afbde15f3d",
+    "semantic_hash": ""
+  },
+  "graphify-out/converted/SHAMEL_StockReservationEntry_Test_Cases_EN_21a77220.md": {
+    "mtime": 1794914161.2932367,
+    "seen": 1794914251.2540877,
+    "ast_hash": "463a5b42ee51115fbd4d18e61e3dcb3f",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-Azzrk-Shamel-Inventory(Stock)-V.1.0.pdf": {
+    "mtime": 1791467665.673643,
+    "seen": 1794914251.254089,
+    "ast_hash": "1b56b14ed5e096940f80cf77c18b6a72",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-Azzrk-Shamel-Selling-V.1.0.pdf": {
+    "mtime": 1794133351.4796014,
+    "seen": 1794914251.254091,
+    "ast_hash": "e6bbc3f4b1a711e18cdef7fe9ac5ea08",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-Azzrk-Shamel-inventory-Settings-V.1.0.pdf": {
+    "mtime": 1794134132.5825615,
+    "seen": 1794914251.2540927,
+    "ast_hash": "8ac29f1a9ea20215fe694c5717f994d3",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Bin-extract.pdf": {
+    "mtime": 1793102972.7790856,
+    "seen": 1794914251.2540944,
+    "ast_hash": "7d72f205c3b4bb53ece04e1b93aca0b4",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Landed-Cost-Voucher-extract.pdf": {
+    "mtime": 1793107391.6899664,
+    "seen": 1794914251.2540958,
+    "ast_hash": "41ad6730769a4da727fde8228366d2af",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Repost-Item-Valuation-extract.pdf": {
+    "mtime": 1793104709.8677237,
+    "seen": 1794914251.2540977,
+    "ast_hash": "954fa9813e7047d466b0c254c2ed6423",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Stock-Entry.pdf": {
+    "mtime": 1792657951.4547162,
+    "seen": 1794914251.2540991,
+    "ast_hash": "e44e6e91224a9b9b91ac6197c0fdfc5b",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Stock-Ledger-Entry-extract.pdf": {
+    "mtime": 1793093074.6862688,
+    "seen": 1794914251.254101,
+    "ast_hash": "6f104037a94d2e85d22978ed5f11f2f2",
+    "semantic_hash": ""
+  },
+  "Shamel-test-cases/SRS-modules/SRS-Stock-Reconciliation-extract.pdf": {
+    "mtime": 1793174301.264779,
+    "seen": 1794914251.2541027,
+    "ast_hash": "d175fe4af9d2ecdb956bf2fd880539cf",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-add.png": {
+    "mtime": 1794831571.4566958,
+    "seen": 1794914251.2541044,
+    "ast_hash": "1ef0c10e1a0388e5b11870e09f165d58",
+    "semantic_hash": ""
+  },
+  "Shamel/ct-val.png": {
+    "mtime": 1794831578.4669826,
+    "seen": 1794914251.254106,
+    "ast_hash": "eb43cf4ee1162319c6ec4a84e1212aae",
+    "semantic_hash": ""
+  },
+  "Shamel/data/too-large-6mb.png": {
+    "mtime": 1791192081.4312227,
+    "seen": 1794914251.2541077,
+    "ast_hash": "8210dc69dbbca536e7432be955c650b5",
+    "semantic_hash": ""
+  },
+  "Shamel/data/valid-image.png": {
+    "mtime": 1791190686.403901,
+    "seen": 1794914251.2541091,
+    "ast_hash": "7c8bb8bc9e750002d4b809f38c8cb624",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-additem.png": {
+    "mtime": 1794908589.7454493,
+    "seen": 1794914251.254111,
+    "ast_hash": "14bd1fedbdb6235be8e0f62d59beae17",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-addremove.png": {
+    "mtime": 1794909080.5976207,
+    "seen": 1794914251.2541127,
+    "ast_hash": "79bb3eae664d242389b8daec8e80b421",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-amend.png": {
+    "mtime": 1794910860.1255417,
+    "seen": 1794914251.2541144,
+    "ast_hash": "685e61f08fc6c1a651e293ee0e93807e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-amended-fresh.png": {
+    "mtime": 1794910916.9996727,
+    "seen": 1794914251.254116,
+    "ast_hash": "d595c03d886d68f40f11655b3ae1680b",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-autorepeat-empty.png": {
+    "mtime": 1794910742.004753,
+    "seen": 1794914251.2541177,
+    "ast_hash": "5bc229d7b410458805264a98f7ad19a5",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-autorepeat.png": {
+    "mtime": 1794910739.7706783,
+    "seen": 1794914251.2541194,
+    "ast_hash": "bf724199a92b31965b38c7e35212203b",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-cancel-click.png": {
+    "mtime": 1794910841.8457453,
+    "seen": 1794914251.254121,
+    "ast_hash": "3030b7cf950de81b806b160e68873761",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-create-SalesInvoice.png": {
+    "mtime": 1794910780.4366393,
+    "seen": 1794914251.2541225,
+    "ast_hash": "735878ce55c480b7477298f6f1451cac",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-create-SalesOrder.png": {
+    "mtime": 1794910762.422891,
+    "seen": 1794914251.2541244,
+    "ast_hash": "8b86abd5092cc43cbf6e5a855a5ee036",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-create-menu.png": {
+    "mtime": 1794909878.708355,
+    "seen": 1794914251.2541258,
+    "ast_hash": "5184ee9607cc626e536169c3537a7efc",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-datepicker.png": {
+    "mtime": 1794911290.6265128,
+    "seen": 1794914251.2541375,
+    "ast_hash": "407e1fa04e6de8045bd17fa878ffe4d6",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-delete-submitted.png": {
+    "mtime": 1794910795.245157,
+    "seen": 1794914251.2541392,
+    "ast_hash": "ba4e5c18c3b958584bf2fa98db703198",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-detail-CANCELLED.png": {
+    "mtime": 1794909159.3020656,
+    "seen": 1794914251.2541409,
+    "ast_hash": "f7a5bbb0bde9db75087619a19acc718a",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-detail-DRAFT.png": {
+    "mtime": 1794909128.0386713,
+    "seen": 1794914251.2541425,
+    "ast_hash": "6bc31c316a94767781534348fdffed42",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-detail-SUBMITTED.png": {
+    "mtime": 1794909146.5368962,
+    "seen": 1794914251.2541442,
+    "ast_hash": "58c4b08e81abd92986f8efcc4c7e30d5",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-editrow.png": {
+    "mtime": 1794908712.614729,
+    "seen": 1794914251.2541459,
+    "ast_hash": "a17bdc2a666e8044b18dad9c3e2e0508",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-general-ar.png": {
+    "mtime": 1794912987.3807833,
+    "seen": 1794914251.2541475,
+    "ast_hash": "66bf89f0449cf7a1b764b37990c305d5",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-general-saved.png": {
+    "mtime": 1794913058.1073363,
+    "seen": 1794914251.2541494,
+    "ast_hash": "ac59b06de68f9ce7455aba0d648811ff",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-linked.png": {
+    "mtime": 1794909921.593914,
+    "seen": 1794914251.2541509,
+    "ast_hash": "dbdb243cbc261c9756a37ad229a50cb6",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-list-edit.png": {
+    "mtime": 1794913694.9026785,
+    "seen": 1794914251.2541528,
+    "ast_hash": "74400bcf84edf7381d435724000acf6c",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-lost-empty.png": {
+    "mtime": 1794910640.9379213,
+    "seen": 1794914251.2541544,
+    "ast_hash": "a8213c8ad5f633980f661f1aa7dc3f5c",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-lost.png": {
+    "mtime": 1794909892.788719,
+    "seen": 1794914251.254156,
+    "ast_hash": "57485bd8001a11b95c9e519273394a7d",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-new.png": {
+    "mtime": 1794908550.450459,
+    "seen": 1794914251.2541578,
+    "ast_hash": "6bb25c227455d87e530e3aedde4f0e51",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-row.png": {
+    "mtime": 1794908663.4744935,
+    "seen": 1794914251.2541595,
+    "ast_hash": "d72ec9d381b1a6d3c9c10caecdff1336",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-save-blankrow.png": {
+    "mtime": 1794909252.2425666,
+    "seen": 1794914251.2541611,
+    "ast_hash": "ae8c45c167d8bdcb9035d5377e5d1ff4",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-save-empty.png": {
+    "mtime": 1794909205.6955311,
+    "seen": 1794914251.254163,
+    "ast_hash": "0a818b0c9d9ca374c82fd0616079944c",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-save-noparty-top.png": {
+    "mtime": 1794913841.146582,
+    "seen": 1794914251.2541645,
+    "ast_hash": "c3433bf5486ce1d93a41b53ae8a6afb2",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-save-noparty.png": {
+    "mtime": 1794913772.625311,
+    "seen": 1794914251.2541661,
+    "ast_hash": "07343d520b1ce4083dd87f60a469a33c",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-save-party.png": {
+    "mtime": 1794909225.8543766,
+    "seen": 1794914251.2541678,
+    "ast_hash": "dd5c97e5c1404f358c95edbe0fee4d71",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-save-qty.png": {
+    "mtime": 1794909569.542196,
+    "seen": 1794914251.2541692,
+    "ast_hash": "4eb50a743e57f5f1af96f640b9fde779",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-setting-saved.png": {
+    "mtime": 1794913109.9938438,
+    "seen": 1794914251.254171,
+    "ast_hash": "dffc14473f4c4004679102dbabfb06ae",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-setting.png": {
+    "mtime": 1794908772.6163108,
+    "seen": 1794914251.2541723,
+    "ast_hash": "5f49077aff817125ec8c9c5c73ce8f4e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-submit-click.png": {
+    "mtime": 1794909830.5232751,
+    "seen": 1794914251.2541742,
+    "ast_hash": "aed2f323f9e68e658723f032d46a56de",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-submitted.png": {
+    "mtime": 1794909842.5291102,
+    "seen": 1794914251.254176,
+    "ast_hash": "a64cdd4e79c472fa02290fd3c0262f7e",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-taxes-ar.png": {
+    "mtime": 1794912867.9436858,
+    "seen": 1794914251.2541776,
+    "ast_hash": "733cdd7ff97323d4b2c0862dc67cb8d1",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-updateitems.png": {
+    "mtime": 1794909907.0746212,
+    "seen": 1794914251.2541792,
+    "ast_hash": "382b588fddbc85aedfb01b2b1dcb56c0",
+    "semantic_hash": ""
+  },
+  "Shamel/qt-validtill.png": {
+    "mtime": 1794912849.6795669,
+    "seen": 1794914251.2541811,
+    "ast_hash": "804162e6841778770df33f2b3ebbf1fc",
+    "semantic_hash": ""
+  },
+  "playwright/.mcp-output/packing-slip-via-mcp.png": {
+    "mtime": 1792058328.083531,
+    "seen": 1794914251.2541826,
+    "ast_hash": "1bd7920bab367374597e2798f7066cc8",
+    "semantic_hash": ""
+  },
+  "package-lock.json": {
+    "mtime": 1792330908.9453382,
+    "seen": 1794914251.2541845,
+    "ast_hash": "444d4eb8b34cddfe0f0c5aeae61890ea",
+    "semantic_hash": ""
+  }
+}

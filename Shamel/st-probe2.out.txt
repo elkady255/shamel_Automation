@@ -1,0 +1,6 @@
+URL https://test.hr.azzrk.com/desk/shamel#/selling/sales-tax-templates
+LIST TEXT مرحباً Administrator ! AN Administrator admin@example.com الضرائب والرسوم على المبيعات سجل ضرائب ورسوم المبيعات إضافة قالب ضريبي كل الفلاتر الفلاتر المحفوظه إنشاء فلتر آخر التحديثات رقم المعرف الحالة افتراضي معطل شركة عنوان Warrqa - Warrqa مفعل Warrqa - ورقة Warrqa عنوان قالب ضريبى جديد - E مفعل Ahmed Ebrahim CO. عنوان قالب ضريبى جديد VAT - E مفعل Ahmed Ebrahim CO. VAT تجربة - E مفعل Warrqa - ورقة تجربة Jordan Tax - Infugram JOR مفعل Infugram JOR - انفوجرام الاردن Jordan Tax 6+526 - E معطل Ahmed Ebrahim CO. 6+526 عرض 10 من 6 1
+BTNS ["إضافة قالب ضريبي","آخر التحديثات","1"]
+HEADERS ["","رقم المعرف","الحالة","افتراضي","معطل","شركة","عنوان"]
+ROWS 6
+BULK ["إضافة قالب ضريبي","آخر التحديثات","1","تحديد الكل","تعديل","تصدير","اسناد","إضافة وسوم","طباعة","حذف"]

@@ -1,0 +1,40 @@
+TICK Selling: {"added":["[cbX]","اختر الطرف الذي تنطبق عليه القاعدة="],"removed":[],"cb":"5->5"}
+AF CANDIDATES ["ابحث واختر المستودع","اختر الطرف الذي تنطبق عليه القاعدة","ابحث واختر قائمة الأسعار","ابحث واختر الشركة","ابحث واختر العملة"]
+SELLING OPTIONS ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+TICK Buying: {"added":[],"removed":[],"cb":"5->5"}
+SELLING+BUYING OPTIONS ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+TICK Selling off: {"added":[],"removed":[],"cb":"5->5"}
+BUYING OPTIONS ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+   !! option "المورد" not found: ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+AF=المورد: {"added":[],"removed":[],"cb":"5->5"}
+   !! option "مجموعة الموردين" not found: ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+AF=مجموعة الموردين: {"added":[],"removed":[],"cb":"5->5"}
+TICK Selling on again: {"added":[],"removed":[],"cb":"5->5"}
+   !! option "العميل" not found: ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+AF=العميل: {"added":[],"removed":[],"cb":"5->5"}
+   !! option "الإقليم" not found: ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+AF=الإقليم: {"added":[],"removed":[],"cb":"5->5"}
+   !! option "مجموعة العملاء" not found: ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+AF=مجموعة العملاء: {"added":[],"removed":[],"cb":"5->5"}
+   !! option "شريك المبيعات" not found: ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+AF=شريك المبيعات: {"added":[],"removed":[],"cb":"5->5"}
+   !! option "الحملة" not found: ["All Warehouses - AIG","All Warehouses - Alarrab","All Warehouses - AMG","All Warehouses - Ather","All Warehouses - Awayed","All Warehouses - Azzrk","All Warehouses - Basma","All Warehouses - Callva","All Warehouses - ColdAzz","All Warehouses - Danah","All Warehouses - Darb","All Warehouses - E","All Warehouses - EGST","All Warehouses - F","All Warehouses - Fazaa","All Warehouses - Ghanaem","All Warehouses - Infugram","All Warehouses - Infugram JOR","All Warehouses - Khatwa","All Warehouses - kllaket"]
+AF=الحملة: {"added":[],"removed":[],"cb":"5->5"}
+TICK Buying off: {"added":[],"removed":[],"cb":"5->5"}
+TICK Selling off 2: {"added":[],"removed":["[cbX]","اختر الطرف الذي تنطبق عليه القاعدة="],"cb":"5->5"}
+NONE CHECKED: AF still present = true
+TICK Mixed conditions: {"added":["[cbX]"],"removed":[],"cb":"5->5"}
+TICK Mixed off: {"added":[],"removed":["[cbX]"],"cb":"5->5"}
+TICK Cumulative: {"added":["[cbX]"],"removed":[],"cb":"5->5"}
+TICK Coupon code: {"added":[],"removed":[],"cb":"5->5"}
+PRODUCT BASE ["اختر تسلسل التسمية=PRLE-.####","أدخل عنوان قاعدة التسعير=","اختر ما تنطبق عليه القاعدة=كود الصنف","اختر نوع الميزة=المنتج","ابحث واختر المستودع=","[cb]","[cb]","[cb]","اختر الصنف الذي يحصل على الخصم=","[cb]","[cb]","أدخل رقمًا=","أدخل رقمًا=","أدخل رقمًا=","أدخل رقمًا=","[cb]","ابحث عن صنف واختره=","أدخل رقمًا=","أدخل رقمًا=","ابحث واختر وحدة القياس=","[cb]","[cb]","اختر التاريخ=17-11-2026","اختر التاريخ=","ابحث واختر الشركة=","ابحث واختر العملة=","اختر نوع الهامش="]
+TICK Same item: {"added":["[cbX]"],"removed":["ابحث عن صنف واختره="],"cb":"8->8"}
+TICK Same item off: {"added":["ابحث عن صنف واختره="],"removed":["[cbX]"],"cb":"8->8"}
+TICK Is recursive: {"added":["[cbX]"],"removed":[],"cb":"8->8"}
+TICK Round enforce: {"added":[],"removed":[],"cb":"8->8"}
+ADV BASE ["[cb]","أدخل رقمًا=","[cb]","[cb]"]
+TICK Apply multiple: {"added":["[cbX]"],"removed":[],"cb":"3->4"}
+TICK Validate applied rule (after apply multiple added a cb): {"added":["اكتب وصفًا للغرض من قاعدة التسعير="],"removed":[],"cb":"4->4"}
+TICK Has priority: {"added":["اختر الأولوية="],"removed":[],"cb":"4->4"}
+ADV placeholders ["اختر الأولوية"]
+PRIORITY OPTIONS ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]

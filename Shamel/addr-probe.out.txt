@@ -1,0 +1,21 @@
+baseline -> SAVED PW AD A 963626-الفوترة
+title 1 char -> SAVED q-الفوترة
+title 101 -> SAVED TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT-الفوترة
+line1 1 char -> SAVED PW AD B 963626-الفوترة
+line1 101 -> SAVED PW AD C 963626-الفوترة
+no type -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.MandatoryError: [Address, PW AD D 963626-Data Import]: address_type","exc_type":"MandatoryError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in app
+type Other -> SAVED PW AD E 963626-أخرى
+no line1 -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.MandatoryError: [Address, PW AD F 963626-الفوترة]: address_line1","exc_type":"MandatoryError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in applic
+no country -> SAVED PW AD G 963626-الفوترة
+no city -> SAVED PW AD H 963626-الفوترة
+no title -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.ValidationError: عنوان العنوان إلزامي.","exc_type":"ValidationError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n response = frapp
+pincode 1 char -> SAVED PW AD I 963626-الفوترة
+fax 1 char -> SAVED PW AD J 963626-الفوترة
+email invalid -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.InvalidEmailAddressError: not-an-email ليس عنوان بريد إلكتروني صالحًا","exc_type":"InvalidEmailAddressError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line
+phone letters -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.InvalidPhoneNumberError: abcdef ليس رقم هاتف صالحًا","exc_type":"InvalidPhoneNumberError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in applicatio
+link doctype Item -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.LinkValidationError: لا يمكن أن تجد صف #1: اسم المستند المرتبط: x","exc_type":"LinkValidationError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in 
+link missing name -> REFUSED insert Address failed: 404 {"exc_type":"DoesNotExistError","_server_messages":"[\"{\\\"message\\\":\\\"العميل None غير موجود\\\",\\\"as_table\\\":false,\\\"title\\\":\\\"رسالة\\\",\\\"indicator\\\":\\\"red\\\",\\\"raise_exception\\\":1,\\\"__frappe_exc_id\\\":
+duplicate title -> SAVED PW AD A 963626-Billing-1
+governorate field -> REFUSED insert Address failed: 417 {"exception":"frappe.exceptions.LinkValidationError: لا يمكن أن تجد المحافظة: zzz","exc_type":"LinkValidationError","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n r
+ADDRESS KEYS name,owner,creation,modified,modified_by,docstatus,idx,address_title,address_type,address_line1,address_line2,building_number,district,custom_building_number,custom_area,city,county,state,country,governorate,pincode,short_address,email_id,phone,fax,is_primary,tax_category,is_primary_address,is_shipping_address,disabled,is_your_company_address,test
+LINKDT []

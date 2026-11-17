@@ -1,0 +1,1746 @@
+
+=====PAGE 110=====
+ Quotation .................................................................................................................................................. 0 Quotation List .................................................................................................................................................... 0 Add Quotation ................................................................................................................................................... 3 Details Tab ................................................................................................................................................... 3 General Info Tab ...................................................................................................................................... 40 More Info Tab ........................................................................................................................................... 52 Quotation Details ........................................................................................................................................... 55 Quotation Quotation List Use case ID 1 Use case Name Quotation List Descriptions The user is able to view the list of Quotations. Pre conditions
+● Click on Selling from sidebar
+● Click on Quotation from sidebar Main Flow - Components
+● Add Quotation
+○ Button
+○ For adding a new Quotation
+○ When clicked, the user will be redirected to the “ Add Quotation ” screen.
+● Quotation List
+○ A table contain the following columns:
+■ Checkbox icon
+● Multi selection
+■ Quotation ID
+● It displays the Quotation ID
+● Clickable
+● When clicked, the user will be redirected to the “ Quotation Details ” screen.
+■ Status 
+
+=====PAGE 111=====
+
+● Displays one of the following values:
+○ Draft
+○ Open
+○ Replied
+○ Partially Ordered
+○ Ordered
+○ Lost
+○ Cancelled
+○ Expired
+■ Customer Name
+● It displays the customer name
+■ Date
+● It displays the Quotation Date
+■ Company
+● It displays the company
+■ Grand Total
+● It displays the Grand Total
+○ when a Quotation is selected , an action bar appears showing the following actions:
+○ Edit
+■ Button
+■ When clicked , a popup appears containing the following ﬁelds.
+● Field
+○ DDL
+○ To select the ﬁeld you want to edit
+○ Link “ Quotation ” doctype
+○ Single selection
+○ Mandatory
+● Value
+○ Dynamic ﬁeld
+○ Based on the selected option from the ﬁrst dropdown ﬁeld, the second ﬁeld shall :
+■ Dynamically change it’s input type
+■ Be marked as either mandatory
+■ Or optional
+■ Apply the corresponding validation rules
+● Update (button)
+○ Button
+○ When clicked,
+■ If the Quotation status is " Submitted " or " Cancelled ":
+● an error message is displayed informing the user that the Quotation cannot be modiﬁed.
+○ Export
+○ Assign to
+○ Clear assignment
+○ Add tags 
+
+=====PAGE 112=====
+
+○ Print
+○ Submit
+■ It appears only when the Quotation status = draft.
+■ If all required data is entered correctly and completely:
+● The Quotation is successfully submitted
+○ Cancel
+■ It appears only when the Quotation status = Submitted
+■ When clicked,
+● The Quotation is canceled successfully.
+○ Delete
+■ It appears only when the Quotation status = Draft / Cancelled
+■ When clicked,
+● A conﬁrmation message is displayed to the user whether they want to delete this Quotation
+● Upon clicking the “Yes” button:
+○ If the Quotation is Amended from other Quotation
+■ A warning message appears indicating that this Quotation cannot be deleted until the user deletes all doctypes related to it.
+■ The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+○ if the Quotation is linked to other transactions,
+■ a message is displayed informing the user that the linked transactions must be deleted before the Quotation can be deleted.
+■ The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+○ If the Quotation isn’t linked to another doctype
+■ The Quotation is deleted successfully. Post Conditions
+● Ability to add and view Quotation details.
+● Ability to Edit , Export , Assign to, Clear Assignment , Add Tags , Print , Delete 
+
+=====PAGE 113=====
+ Add Quotation Details Tab Use case ID 2 Use case Name Add Quotation Descriptions The user can add a new Quotation. Pre conditions
+● Click on Selling from sidebar
+● Click on Quotation from sidebar
+● Click on “ Add Quotation ” button Main Flow - Components
+● Series
+○ DDL
+○ Displays all series added to Quotation doctype
+○ Mandatory.
+○ Single selection
+○ If the ﬁeld is left empty an error message appears.
+● Quotation To
+○ DDL
+○ To select the party for whom the quotation is created
+○ It contains the following values:
+■ Customer
+■ Lead
+○ Single selection
+○ Mandatory
+○ If the ﬁeld is left empty an error message appears.
+● Party
+○ Searchable DDL
+○ Note: Link “ Doctype ” based on the selected value in the Quotation To ﬁeld, allowing the user to select the party receiving the quotation
+○ Single selection
+○ Mandatory
+○ If the ﬁeld is left empty, an error message will appear.
+○ Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+○ Note:
+■ Party = Customer when the Quotation To ﬁeld is set to Customer
+■ Party = Lead when the Quotation To ﬁeld is set to Lead
+● Party Name
+○ Label ﬁeld (read only)
+○ It displays the customer name based on the selected party 
+
+=====PAGE 114=====
+
+● Date
+○ Date calendar picker
+○ To select the Quotation creation date
+● Valid Till
+○ Date calendar picker
+○ To select the quotation expiration date
+○ Note:
+■ The system automatically calculates the Valid Till date based on the selected Date and the value conﬁgured in the “ Default Quotation Validity Days " ﬁeld in CRM Settings .
+■ The Valid Till date is calculated by adding the conﬁgured number of validity days to the selected date.
+■ Example: If the Date is 01/07/2026 and the Default Quotation Validity Days in CRM Settings is set to 20 , the system will automatically set the Valid Till date to 21/07/2026 .
+● Order Type (hidden)
+○ DDL
+○ To select the the business purpose of the quotation
+○ It contains the following values:
+■ Empty
+■ Sales
+■ Maintenance
+■ Shopping Cart
+○ Single selection
+○ Optional
+● Has Unit Price Item
+○ Checkbox
+○ When checked,
+■ The system allows users to create a quotation and add items to the Items table without entering the quantity ( Qty = 0 ).
+○ Note: it appears only when the “ Allow Quotation With Zero Quantity ” checked from Selling Settings
+● Company
+○ Searchable DDL
+○ Link “ Company ” doctype
+○ Single selection
+○ Mandatory
+○ If the ﬁeld is left empty, an error message will appear.
+○ Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Amended From
+○ Label ﬁeld
+○ Displays the Quotation from which this document was amended.
+○ Clickable
+○ When clicked, it navigates the user to the Quotation from which this document was amended.
+○ Note: This ﬁeld is displayed only if this quotation is amended from another 
+
+=====PAGE 115=====
+ quotation.
+● Currency and Price List
+○ It contains the following ﬁelds:
+■ Currency
+● Searchable DDL
+● Link “ Currency ” doctype
+● To select the document currency
+● Single selection
+● Mandatory
+● If the ﬁeld is left empty, an error message will appear.
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Note: it’s fetched from the Company “ Default Currency ”
+■ Exchange Rate
+● The behavior of the Exchange Rate ﬁeld depends on the Exchange Rate conﬁguration in Accounts Settings
+● Case 1:
+○ Exchange Rate Fetching Rule is conﬁgured
+■ If an Exchange Rate Fetching Rule is deﬁned in Accounts Settings, the system shall automatically fetch the exchange rate based on the conﬁgured rule and populate the Exchange Rate ﬁeld.
+■ In this case Exchange Rate ﬁeld is Label Field (read only)
+■ Note:
+● only users with the appropriate Role to edit the Exchange Rate( Conﬁgured in Accounts Settings ) shall be allowed to modify its value
+● Any manually entered Exchange Rate by an authorized user shall override the automatically fetched Exchange Rate and shall be considered the eﬀective value for the transaction.
+● Case 2:
+○ No Exchange Rate Found
+■ If no exchange rate is found based on the conﬁgured fetching rule, the system shall evaluate the Action if No Exchange Rate Found ﬁeld in Accounts Settings.
+● Prompt User to Add Exchange Rate:
+○ The system shall prompt the user to create a new Exchange Rate record before proceeding.
+○ Once the Exchange Rate is created, the system shall populate the Exchange Rate ﬁeld. 
+
+=====PAGE 116=====
+
+○ The Exchange Rate ﬁeld shall remain read-only
+○ Note:
+■ only users with the appropriate Role to edit the Exchange Rate( Conﬁgured in Accounts Settings ) shall be allowed to modify its value
+■ Any manually entered Exchange Rate by an authorized user shall override the automatically fetched Exchange Rate and shall be considered the eﬀective value for the transaction.
+● Use API to Get Exchange Rate
+○ The system shall automatically create and retrieve the Exchange Rate using the conﬁgured external API.
+○ After the Exchange Rate is successfully created, the system shall populate the Exchange Rate ﬁeld.
+○ The Exchange Rate ﬁeld shall remain read-only .
+○ Note:
+■ only users with the appropriate Role to edit the Exchange Rate( Conﬁgured in Accounts Settings ) shall be allowed to modify its value
+■ Any manually entered Exchange Rate by an authorized user shall override the automatically fetched Exchange Rate and shall be considered the eﬀective value for the transaction.
+■ Price List
+● Searchable DDL
+● Link “ Price List ” doctype
+● Single selection
+● Mandatory
+● If the ﬁeld is left empty, an error message will appear.
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Note: it’s set by default as “ Standard Price List ” in selling settings 
+
+=====PAGE 117=====
+
+■ Price List Currency
+● Label ﬁeld (read only)
+● Fetched from Price list’s “ Currency” ﬁeld
+■ Price List Exchange Rate
+● The behavior of the Price List Exchange Rate ﬁeld depends on the Exchange Rate conﬁguration in Accounts Settings
+● Case 1:
+○ Exchange Rate Fetching Rule is conﬁgured
+■ Exchange Rate Fetching Rule is deﬁned in Accounts Settings, the system shall automatically fetch the exchange rate based on the conﬁgured rule and populate the Exchange Rate ﬁeld.
+■ In this case Exchange Rate ﬁeld is Label Field (read only)
+■ Note:
+● only users with the appropriate Role to edit the Exchange Rate( Conﬁgured in Accounts Settings ) shall be allowed to modify its value
+● Any manually entered Exchange Rate by an authorized user shall override the automatically fetched Exchange Rate and shall be considered the eﬀective value for the transaction.
+● Case 2:
+○ No Exchange Rate Found
+■ If no exchange rate is found based on the conﬁgured fetching rule, the system shall evaluate the Action if No Exchange Rate Found ﬁeld in Accounts Settings.
+● Prompt User to Add Exchange Rate:
+○ The system shall prompt the user to create a new Exchange Rate record before proceeding.
+○ Once the Exchange Rate is created, the system shall populate the Exchange Rate ﬁeld.
+○ The Exchange Rate ﬁeld shall remain read-only
+○ Note:
+■ only users with the appropriate Role to edit the Exchange Rate( Conﬁgured in Accounts Settings ) shall be allowed to modify its value
+■ Any manually entered Exchange Rate by an authorized user shall override 
+
+=====PAGE 118=====
+ the automatically fetched Exchange Rate and shall be considered the eﬀective value for the transaction.
+● Use API to Get Exchange Rate
+○ The system shall automatically create and retrieve the Exchange Rate using the conﬁgured external API.
+○ After the Exchange Rate is successfully created, the system shall populate the Exchange Rate ﬁeld.
+○ The Exchange Rate ﬁeld shall remain read-only .
+○ Note:
+■ only users with the appropriate Role to edit the Exchange Rate( Conﬁgured in Accounts Settings ) shall be allowed to modify its value
+■ Any manually entered Exchange Rate by an authorized user shall override the automatically fetched Exchange Rate and shall be considered the eﬀective value for the transaction.
+■ Ignore Pricing Rule
+● Checkbox
+○ When checked, the system ignores any previously deﬁned pricing rules.
+● Scan Barcode
+○ Text input ﬁeld
+○ Allows the user to enter or scan a barcode.
+○ optional.
+○ Accepts letters,numbers and special characters.
+○ Minimum length: 2 characters.
+○ Maximum length: 100 characters.
+○ Once the maximum limit is reached, further input will be prevented.
+○ Note:
+■ When a scan barcode option is selected, the system opens a device camera to scan a barcode and automatically populates the ﬁeld with the scanned value.
+■ If the user enters a barcode manually at a slow typing speed, the entered value is automatically cleared
+● Items
+○ A table contain the following columns:
+■ Checkbox icon 
+
+=====PAGE 119=====
+
+● Multi selection
+■ No.
+● Displays the ordering of items in the table
+■ Item
+● Searchable DDL
+● Link “ item ” doctype
+● To select the item included in the quotation
+● Only items with “ Maintain Stock ” enabled , “ Has Variants ” disabled and “ Allow Sales ” enabled are displayed.
+● Single selection
+● Mandatory
+● If the ﬁeld is left empty, an error message will appear.
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Qty
+● Text input ﬁeld.
+● To enter the requested Qty
+● Mandatory.
+● Accept numbers only.
+● Maximum length: 100 characters.
+● Once the maximum length is reached, further input is prevented.
+● If the ﬁeld is left empty an error message appears.
+● Note: Qty = Actual Qty in the selected warehouse - Reserved Qty in that warehouse
+● Note: If a quantity less than the available quantity in the selected warehouse is entered, a warning message is displayed indicating that the entered quantity is less than the available quantity in the selected warehouse.
+● Note:
+○ If “ Has Unit Price Item ” is checked,
+■ Qty can be equal to 0
+○ If “ Has Unit Price Item ” is unchecked,
+■ Qty must be greater than 0
+■ Rate
+● Text input ﬁeld
+● Displays automatically the unit price of the item in the document currency
+● Can be edited.
+● Accepts numbers only.
+■ Amount
+● Label ﬁeld
+● Displays the total amount of the item calculated in the document currency.
+■ Setting
+● When clicked, a pop up appears contains the following options :
+○ Rearranging table columns using drag and drop 
+
+=====PAGE 120=====
+ functionality.
+■ Users can click and hold a column header , then drag and drop it into the desired position within the table.
+○ Column width
+■ Text input ﬁeld
+■ For entering or edit the column width
+■ Accepts numbers only
+■ Minimum length: 1 character.
+■ Maximum length: 3 characters.
+■ Default value = 3
+○ Add / Remove columns
+■ Button
+■ For adding or removing columns from the table
+■ When clicked, a pop-up appears containing all available table columns with their corresponding checkboxes.
+■ These columns are: Column Name Item Code Quantity Rate Amount Item Name Is Free Item Description Stock UOM UOM UOM Conversion Factor Qty as per Stock UOM Qty (Warehouse) Qty (Company) Price List Rate Price List Rate (Company Currency) Discount (%) on Price List Rate with Margin 
+
+=====PAGE 121=====
+ Discount Amount Distributed Discount Amount Net Rate Net Amount Item Tax Template Rate (Company Currency) Net Rate (Company Currency) Amount (Company Currency) Net Amount (Company Currency) Rate of Stock UOM Valuation Rate Gross Proﬁt Weight Per Unit Total Weight Weight UOM Warehouse
+■ Users can show or hide columns by selecting or deselecting the related checkbox.
+○ “Update” button
+■ Button
+■ For save any changes or updates made by the user
+■ When clicked, any modiﬁcations made by the user will be saved
+○ “Reset to default” button
+■ Button
+■ To reset all modiﬁcations to their default values.
+■ When clicked, any modiﬁcations made by the user will be reset to their default values.
+■ Note: when a row is selected , an action bar appears showing the following actions:
+● Delete row
+○ Button
+○ To delete a speciﬁc row or multiple rows
+○ When clicked, the selected row(s) will be deleted
+○ Edit Row
+■ Clickable icon 
+
+=====PAGE 122=====
+
+■ Users can edit and view non displayed ﬁelds in the table.
+■ When clicked , a pop up appears containing the following ﬁelds: Field Name Options Item
+● Searchable DDL
+● Link “ item ” doctype
+● Only items with “Maintain Stock” enabled are displayed.
+● Single selection
+● Mandatory Item Group
+● Label ﬁeld
+● Displays the item group associated with the selected item
+● It’s displayed only when an item is selected Item Name
+● Label ﬁeld
+● Displays the item name
+● It’s displayed only when an item is selected Customer’s Item Code
+● Label ﬁeld
+● Displays the Customer’s Item Code
+● It’s displayed only when an item is selected Is Free Item
+● Checkbox icon (read only) Is Alternative
+● Checkbox
+● Indicates that the item is an alternative to the originally requested item. Description
+● Text area
+● For adding a description to this quotation
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters. 
+
+=====PAGE 123=====
+
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered. Brand name
+● Label ﬁeld
+● Displays the brand name
+● It’s displayed only when an item is selected Image
+● For adding an image
+● The user can upload an image using drag and drop or by clicking to browse ﬁles.
+● Optional
+● Accepts JPEG and PNG formats only.
+● File size must not exceed 5 MB.
+● If a non-image ﬁle is uploaded, an error message appears.
+● if the uploaded image exceeds 5 MB, an error message appears. Qty
+● Text input ﬁeld.
+● To enter the requested Qty
+● Mandatory.
+● Accept numbers only. UOM
+● Searchable DDL
+● Link “ UOM ” doctype
+● To select the UOM for the requested Qty
+● Single selection
+● Optional Stock UOM
+● Label ﬁeld
+● Displays the default UOM of the selected item 
+
+=====PAGE 124=====
+ UOM Conversion Factor
+● Label ﬁeld
+● Displays the conversion factor between the UOM of the requested Qty and the default UOM. Qty as Per Stock UOM
+● Label ﬁeld (read only)
+● Displays the item quantity converted to the item's Stock UOM (Stock Unit of Measure) based on the selected UOM conversion factor. Available Qty (Warehouse)
+● Label ﬁeld
+● Displays the actual quantity of the selected warehouse Available Qty (Company)
+● Label ﬁeld
+● Displays the actual quantity of the company Available Batch Qty at From Warehouse
+● Label ﬁeld
+● Displays the total available quantity across all batches of this item in the selected warehouse. Price List rate (Currency)
+● Label ﬁeld
+● Displays the item's selling price retrieved from the selected Price List before applying any pricing rules Price List rate (Company Currency)
+● Label ﬁeld
+● Displays the item's selling price retrieved from the selected Price List in company’s base currency before applying any pricing rules Margin Type
+● DDL
+● Used to select the proﬁt margin 
+
+=====PAGE 125=====
+ calculation method
+● Single selection
+● Optional
+● It displays the following values:
+○ Percentage
+○ Amount Margin Rate or Amount
+● Text input ﬁeld.
+● To enter the proﬁt margin value
+● optional.
+● Accept numbers and special characters only. Rate with margin
+● Label ﬁeld
+● Displays the price after applying the proﬁt margin and before applying any pricing rules
+● Note: Rate With Margin = Price List Rate + Margin Rate Discount (%) on price list rate with margin
+● Label ﬁeld
+● Displays the discount percentage applied to the price list after the proﬁt margin has been added
+● Note: It displays only when, “ Ignore Pricing Rule = 0 ” Discount Amount
+● Label ﬁeld
+● Displays the actual discount amount
+● Note: It displays only when, “ Ignore Pricing Rule = 0 ” Distributed Discount Amount
+● Label ﬁeld
+● When an additional discount is applied at the document level, the system distributes the total discount across all items and displays this item's allocated share of the discount. 
+
+=====PAGE 126=====
+ Rate with Margin (Company Currency)
+● Label ﬁeld
+● Displays the item price after applying the proﬁt margin in the company's base currency Rate
+● Label ﬁeld
+● Displays the unit price of the item in the document currency Amount
+● Label ﬁeld
+● Displays the total amount of the item calculated in the document currency. Rate (Company Currency)
+● Label ﬁeld
+● Displays the unit price of the item in the company’s base currency after applying all pricing rules and discounts. Amount (Company Currency)
+● Label ﬁeld
+● Displays the total amount of the item calculated in the company’s base currency. Pricing Rules
+● Label ﬁeld
+● Displays the names of the pricing rules applied to this item Rate of Stock UOM
+● Label ﬁeld
+● Displays the price of Stock UOM Net Rate
+● Label ﬁeld
+● Displays the unit price of the item in the document currency after applying all pricing rules, discounts and tax templates. Net Amount
+● Label ﬁeld
+● Displays the total amount of the 
+
+=====PAGE 127=====
+ item calculated in the document currency after applying all pricing rules, discounts and tax templates.
+● Note: Net Amount = Net Rate * Qty Item Tax template
+● Label ﬁeld
+● Displays the taxes applied to this item. Net Rate (Company Currency)
+● Label ﬁeld
+● Displays the unit price of the item in the company’s base currency after applying all pricing rules, discounts and tax templates. Net Amount (Company Currency)
+● Label ﬁeld
+● Displays the total amount of the item calculated in the company’s base currency after applying all pricing rules, discounts and tax templates. Valuation Rate
+● Label ﬁeld (read only) Gross Proﬁt
+● Label ﬁeld (read only) Weight per unit
+● Label ﬁeld
+● Displays the weight per item unit Weight UOM
+● Label ﬁeld
+● Displays the weight of the UOM itself Total weight
+● Label ﬁeld
+● Displays the total weight of the item
+● Note: Total Weight = Weight per 
+
+=====PAGE 128=====
+ Unit * Qty Warehouse
+● Searchable DDL
+● Link “ Warehouse ” doctype
+● To select the warehouse from which the item will be issued or delivered
+● Single selection
+● Mandatory Against Blanket Order
+● Checkbox
+● Indicates that the item is created against an existing Blanket Order. Blanket Order
+● Searchable DDL
+● Link “ Blanket Order ” doctype
+● Speciﬁes the Blanket Order referenced by this item.
+● Single selection Blanket Order Rate
+● Label ﬁeld (read only)
+● Displays the agreed unit price from the linked Blanket Order. Against Docname
+● Label ﬁeld (read only)
+● Displays the source document name referenced by this item. Projected Qty
+● Label ﬁeld (read only)
+● Displays the projected available quantity after considering current stock, incoming stock, and reserved quantities. Stock Balance
+● Button
+● When clicked, it navigates the 
+
+=====PAGE 129=====
+ user to the “ Stock Balance ” screen. Shopping Cart
+● Text area
+● Stores additional notes related to the shopping cart quotation.
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered.
+○ Add Row
+■ Button
+■ To add a new row in the table
+■ When clicked, a new row is added to the table.
+● Total Quantity
+○ Label ﬁeld (read only)
+○ Displays the total quantity of items.
+● Total Currency
+○ Label ﬁeld (read only)
+○ Displays the total amount of the item’s quantity in the selected currency
+● Total Company’s base Currency
+○ Label ﬁeld (read only)
+○ Displays the total amount of the item’s quantity in the company’s base currency
+● Total Net weight
+○ Label ﬁeld (read only)
+○ Displays the total net weight
+● Net Total Currency
+○ Label ﬁeld (read only)
+○ Displays the net total currency
+● Net Total Company’s base Currency
+○ Label ﬁeld (read only)
+○ Displays the net total company’s base currency
+● Taxes And Charges
+○ It contains the following ﬁelds: 
+
+=====PAGE 130=====
+
+■ Tax category
+● Label ﬁeld (read only)
+● It’s fetched from the selected Sales Taxes and Charges Template
+■ Shipping Rule
+● Searchable DDL
+● Link “ Shipping Rule ” doctype
+● To select a shipping rule
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Sales Taxes and Charges Template
+● Searchable DDL
+● Link “ Sales Taxes and Charges Template ” doctype
+● Note: when a Sales Taxes and Charges Template is selected, the system shall automatically populate the Sales Taxes and Charges table with the values deﬁned in the selected template.
+● Single selection
+● Optional
+● Note:
+○ the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Sales Taxes and Charges
+● A table contain the following columns:
+○ Checkbox icon
+■ Multi selection
+○ No.
+■ Displays the ordering of items in the table
+○ Type
+■ DDL
+■ To select the sales taxes type
+■ It contains the following values:
+● Actual
+● On Net Total
+● On Previous Row Amount
+● On Previous Row Total
+● On Item Quantity
+■ Single selection
+■ Mandatory
+■ If the ﬁeld is left empty, an error message will appear.
+○ Account Head
+■ Searchable DDL
+■ Link “ Accounts ” doctype
+■ It displays accounts belonging to company selected 
+
+=====PAGE 131=====
+ in the transaction
+■ To select an account head
+■ Single selection
+■ Mandatory
+■ If the ﬁeld is left empty, an error message will appear.
+■ Note:
+● the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+○ Tax Rate
+■ Text input ﬁeld.
+■ To enter the tax rate
+■ optional .
+■ Accept numbers only.
+■ Maximum length: 100 characters.
+■ Once the maximum length is reached, further input is prevented.
+○ Net Amount Currency
+■ Label ﬁeld
+■ Displays the net amount currency
+○ Amount Currency
+■ Label ﬁeld
+■ Displays the amount currency
+○ Total Currency
+■ Label ﬁeld
+■ Displays the total currency
+○ Setting
+■ When clicked, a pop up appears contains the following options :
+● Rearranging table columns using drag and drop functionality.
+○ Users can click and hold a column header , then drag and drop it into the desired position within the table.
+● Column width
+○ Text input ﬁeld
+○ For entering or edit the column width
+○ Accepts numbers only
+○ Minimum length: 1 character.
+○ Maximum length: 3 characters.
+○ Default value = 3
+● Add / Remove columns
+○ Button
+○ For adding or removing columns from the table 
+
+=====PAGE 132=====
+
+○ When clicked, a pop-up appears containing all available table columns with their corresponding checkboxes.
+○ These columns are: Column Name Type Account Head Tax Rate Net Amount (currency) Amount (currency) Total (currency) Reference Row # Description Is this Tax included in Basic Rate? Considered In Paid Amount Is Tax Withholding Account Cost Center Project Account Currency Tax Amount After Discount Amount (USD) Net Amount (company currency) Amount (company currency) Total (company currency) Tax Amount After Discount Amount (company currency)
+○ Users can show or hide columns by selecting or deselecting the related checkbox.
+● “Update” button
+○ Button
+○ For save any changes or updates made by the user 
+
+=====PAGE 133=====
+
+○ When clicked, any modiﬁcations made by the user will be saved
+● “Reset to default” button
+○ Button
+○ To reset all modiﬁcations to their default values.
+○ When clicked, any modiﬁcations made by the user will be reset to their default values.
+■ Note: when an Item is selected , an action bar appears showing the following actions:
+● Delete row
+○ Button
+○ To delete a speciﬁc row or multiple rows
+○ When clicked, the selected item group(s) will be deleted
+○ Edit Row
+■ Clickable icon
+■ Users can edit and view non displayed ﬁelds in the table.
+■ When clicked , a pop up appears containing the following ﬁelds: Field Name Options Type
+● DDL
+● To select the sales taxes type
+● It contains the following values:
+○ Actual
+○ On Net Total
+○ On Previous Row Amount
+○ On Previous Row Total
+○ On Item Quantity
+● Single selection
+● Mandatory Reference Row
+● Text input ﬁeld
+● Used to enter the reference row
+● Note: This ﬁeld appears only when more than one tax is added and the tax type is set to On Previous Row Amount or On Previous Row Total. The system automatically populates the 
+
+=====PAGE 134=====
+ Reference Row ﬁeld with the row number immediately preceding the current row. Account Head
+● Searchable DDL
+● Link “ Accounts ” doctype
+● To select an account head
+● Single selection
+● Mandatory Description
+● Text area
+● For adding a description Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered. Is this Tax Included In Basic Rate ?
+● Checkbox
+● If checked, this tax amount will be considered as already included in Print Rate / Print Amount Considered In Paid Amount
+● Checkbox
+● If checked, this tax amount will be considered as already included in the paid Amount in Paid Entry Set by Item Tax Template
+● Checkbox icon (read only)
+● It appears only in case this tax set be item tax template Is tax withholding Account
+● Checkbox icon (read only)
+● It appears only in case this tax is 
+
+=====PAGE 135=====
+ tax withholding Account Cost Center
+● Searchable DDL
+● Link " Cost Center ” doctype
+● Used to specify the department or business unit that will bear the expense or receive the revenue.
+● Single selection
+● Optional Project
+● Searchable DDL
+● Link " Project ” doctype
+● Used to link the transaction to a speciﬁc project.
+● Single selection
+● Optional Tax Rate
+● Text input ﬁeld.
+● To enter the tax rate
+● optional .
+● Accept numbers only. Account Currency
+● Label ﬁeld
+● Displays the Account Currency Net Amount (Currency)
+● Label ﬁeld
+● Displays the Net Amount Currency Amount (Currency)
+● Label ﬁeld
+● Displays the Amount Currency Total (Currency)
+● Label ﬁeld
+● Displays the Total Currency Tax Amount After Discount Amount
+● Label ﬁeld
+● Displays the tax Amount After Discount Amount Net Amount (Company’s base currency)
+● Label ﬁeld
+● Displays the Net Amount (Company’s base currency) Amount (Company’s base currency)
+● Label ﬁeld 
+
+=====PAGE 136=====
+
+● Displays the Amount (Company’s base currency) Total (Company’s base currency)
+● Label ﬁeld
+● Displays the Total (Company’s base currency) Tax Amount After Discount Amount (company’s base currency)
+● Label ﬁeld
+● Displays the tax Amount After Discount Amount (Company’s base currency) Don’t Recompute Tax
+● Checkbox icon (read only)
+● It displays that the system will not automatically recompute the tax amount for this row during tax recalculations.
+○ Add Row
+■ Button
+■ To add a new row in the table
+■ When clicked, a new row is added to the table.
+■ Total Taxes and Charges (Company’s base Currency)
+● Label ﬁeld (read only)
+● It displays total taxes and charges in company’s base currency
+■ Total Taxes and Charges ( Currency )
+● Label ﬁeld (read only)
+● It displays total taxes and charges in currency
+● Totals ( Currency )
+○ It contains the following ﬁelds:
+■ Grand Total ( Currency )
+● Label ﬁeld
+● It displays the grand total in the selected Currency
+■ Rounding Adjustment ( Currency )
+● Label ﬁeld
+● It displays the rounding adjustment in the selected Currency
+■ Rounded Total ( Currency )
+● Label ﬁeld
+● It displays the rounded total in the selected Currency
+● Totals (Company’s base Currency)
+○ It contains the following ﬁelds:
+■ Grand Total (Company’s base Currency)
+● Label ﬁeld
+● It displays the grand total in the selected Company’s base Currency
+■ Rounding Adjustment (Company’s base Currency) 
+
+=====PAGE 137=====
+
+● Label ﬁeld
+● It displays the rounding adjustment in the selected Company’s base Currency
+● 
+■ Rounded Total (Company’s base Currency)
+● Label ﬁeld
+● It displays the rounded total in the selected Company’s base Currency
+● Additional Discount
+○ It contains the following ﬁelds:
+■ Apply Additional Discount On
+● DDL
+● To apply additional discount
+● It contains the following values:
+○ Grand Total
+○ Net Total
+● Single selection
+● Optional
+■ Additional Discount Percentage
+● Text input ﬁeld
+● To enter the Additional Discount Percentage
+● optional .
+● Accept numbers only.
+● When a number is entered, it is calculated as a percentage.
+● Maximum length: 100 characters.
+● Once the maximum length is reached, further input is prevented.
+■ Additional Discount Amount (Company’s base Currency)
+● Label ﬁeld
+● It displays the additional discount amount in company’s base currency
+■ Additional Discount Amount ( Currency )
+● Text input ﬁeld
+● To enter the Additional Discount amount using the selected currency
+● optional .
+● Accept numbers only.
+● Maximum length: 100 characters.
+● Once the maximum length is reached, further input is prevented.
+■ Coupon Code
+● Searchable DDL
+● Link “ Coupon Code ” doctype
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Referral Sales Partner 
+
+=====PAGE 138=====
+
+● Searchable DDL
+● Link “ Sales Partner ” doctype
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Taxes and Charges Calculation
+○ Note:
+■ This section is a read-only section that displays the calculated taxes and charges in a tabular format
+■ This section is displayed only after Sales Taxes and Charges have been added to the items and the document has been saved.
+○ A table contain the following columns:
+■ Item
+● Label ﬁeld (read only)
+● Displays the item code or item name for which the tax breakdown is calculated.
+■ Taxable Amount
+● Label ﬁeld (read only)
+● Displays the taxable amount of the item before applying the tax
+● This is the amount on which the tax is calculated.
+■ Account Head Description
+● Label ﬁeld (read only)
+● Displays the value of the tax or charge allocated to the corresponding item.
+● Note: When taxes and charges with diﬀerent Account Heads are added, the system automatically creates a separate column for each Account Head to display its calculated amount for every item.
+○ Note: The system automatically generates this table based on the conﬁgured Taxes and Charges , showing the applicable taxable amount, and calculated tax amount for every item. The table is read-only and maintained by the system
+● Bundle Items
+○ Note: This table is displayed only when the item in the Quotation Items table contains a Product Bundle and the user clicks the Save button.
+○ A table contain the following columns:
+■ Checkbox icon
+● Multi selection
+■ No.
+● Displays the ordering of items in the table
+■ Parent Item
+● Label ﬁeld (read only)
+● It displays the parent item of the Product bundle
+■ Item Code
+● Label ﬁeld (read only)
+● It displays the item code of the Product bundle
+■ Description 
+
+=====PAGE 139=====
+
+● Text area
+● For adding a description Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered.
+■ Qty
+● Label ﬁeld
+● Displays the Qty of the item
+■ Rate
+● Label ﬁeld
+● Displays the unit price of the item
+■ Setting
+● When clicked, a pop up appears contains the following options :
+○ Rearranging table columns using drag and drop functionality.
+■ Users can click and hold a column header , then drag and drop it into the desired position within the table.
+○ Column width
+■ Text input ﬁeld
+■ For entering or edit the column width
+■ Accepts numbers only
+■ Minimum length: 1 character.
+■ Maximum length: 3 characters.
+■ Default value = 3
+○ Add / Remove columns
+■ Button
+■ For adding or removing columns from the table
+■ When clicked, a pop-up appears containing all available table columns with their corresponding checkboxes.
+■ These columns are: Column Name Parent Item Item Code Description Qty 
+
+=====PAGE 140=====
+ Rate Item Name Supplier delivers to Customer (Hidden) From Warehouse Conversion Factor UOM Pick Serial / Batch No Use Serial No / Batch Fields Serial and Batch Bundle Serial No Batch No Actual Batch Quantity Actual Qty Incoming Rate
+■ Users can show or hide columns by selecting or deselecting the related checkbox.
+○ “Update” button
+■ Button
+■ For save any changes or updates made by the user
+■ When clicked, any modiﬁcations made by the user will be saved
+○ “Reset to default” button
+■ Button
+■ To reset all modiﬁcations to their default values.
+■ When clicked, any modiﬁcations made by the user will be reset to their default values.
+● Note: when a row is selected , an action bar appears showing the following actions:
+○ Delete row
+■ Button
+■ To delete a speciﬁc row or multiple rows
+■ When clicked, the selected item group(s) will be deleted
+■ Edit Row
+● Clickable icon
+● Users can edit and view non displayed ﬁelds in the table.
+● When clicked , a pop up appears containing the following ﬁelds: 
+
+=====PAGE 141=====
+ Field Name Options Parent Item
+● Label ﬁeld (read only)
+● Displays the parent product bundle to which this item belongs. Item Code
+● Label ﬁeld (read only)
+● Displays the item code of the bundled component Item Name
+● Label ﬁeld (read only)
+● Displays the name of the bundled item. Suppliers delivers to customer
+● Checkbox icon (read only)
+● Indicates that the supplier will deliver the bundled item directly to the customer. Description
+● Text area
+● For adding a description Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered. From Warehouse
+● Searchable DDL
+● Link " Warehouse ” doctype
+● To select the source warehouse of the bundled item
+● Single selection 
+
+=====PAGE 142=====
+
+● Optional To Warehouse
+● Searchable DDL
+● Link " Warehouse ” doctype
+● To select the destination warehouse when applicable
+● Single selection
+● Optional Conversion Factor
+● Label ﬁeld (read only)
+● It displays conversion factor between the selected UOM and the Stock UOM Qty
+● Label ﬁeld (read only)
+● It displays the quantity of the bundled item Rate
+● Label ﬁeld (read only)
+● Displays the unit price of the bundled item when applicable. UOM
+● Label ﬁeld (read only)
+● It displays the UOM of the bundled item Pick Serial / batch No
+● Button
+● Appears only when the “Activate Serial / Batch No for item” checkbox is enabled from Inventory settings
+● When clicked, the available Serial Numbers and Batches are automatically selected based on the picking method deﬁned in Inventory Settings, such as FIFO, LIFO, or Expiry. Serial and Batch Bundle
+● Searchable DDL
+● Link " Serial and Batch Bundle ” 
+
+=====PAGE 143=====
+ doctype
+● To select serial and batch bundle related to this item
+● Single selection
+● Optional Use Serial No / Batch Fields
+● Checkbox
+● When checked:
+○ the " Pick Serial and Batch No " button and the " Serial and Batch Bundle " ﬁeld are hidden
+○ The " Serial No " and " Batch No " ﬁelds are displayed to allow manual entry of Serial Numbers and Batches. Serial No
+● Text area
+● To enter serial numbers manually
+● It appears only when “ Use Serial No / Batch No ” is checked
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered.
+● When a Serial Number is entered and the Enter key is pressed, a new line is created to allow entry of another Serial Number. Batch No
+● Searchable DDL
+● Link " Batch No ” doctype
+● To select Batch No related to this item and the selected 
+
+=====PAGE 144=====
+ warehouse.
+● Single selection
+● Optional Actual Batch Qty
+● Label ﬁeld (read only)
+● Displays the total available quantity of the selected item across all batches in the selected warehouse Actual Qty
+● Label ﬁeld (read only)
+● Displays the current available stock quantity of the item in the selected warehouse. Projected Qty
+● Label ﬁeld (read only)
+● Displays the projected available quantity after considering all future stock transactions. Ordered Qty
+● Label ﬁeld (read only)
+● Displays the quantity currently ordered through Purchase Orders and not yet received. Packed Qty
+● Label ﬁeld (read only)
+● Displays the quantity that has already been packed for this item. Requested Qty
+● Label ﬁeld (read only)
+● Displays the quantity requested through Material Requests. Incoming Rate
+● Label ﬁeld (read only)
+● Displays the incoming valuation rate of the item used for stock valuation. Picked Qty
+● Label ﬁeld (read only)
+● Displays the quantity that has already been picked for fulﬁllment. 
+
+=====PAGE 145=====
+
+● Pricing Rule Detail
+○ Note: this table stores the pricing rule details applied to a speciﬁc item during price calculation. The system automatically creates and updates these records when a pricing rule is evaluated. This section is read-only and maintained by the system.
+○ A table contain the following columns:
+■ Checkbox icon
+● Multi selection
+■ No.
+● Displays the ordering of items in the table
+■ Pricing Rule
+● Label ﬁeld (read only)
+● Displays the pricing rule that has been applied to the item.
+■ Item Code
+● Label ﬁeld (read only)
+● Displays the item code to which the pricing rule is applied.
+■ Setting
+● When clicked, a pop up appears contains the following options :
+○ Rearranging table columns using drag and drop functionality.
+■ Users can click and hold a column header , then drag and drop it into the desired position within the table.
+○ Column width
+■ Text input ﬁeld
+■ For entering or edit the column width
+■ Accepts numbers only
+■ Minimum length: 1 character.
+■ Maximum length: 3 characters.
+■ Default value = 3
+○ Add / Remove columns
+■ Button
+■ For adding or removing columns from the table
+■ When clicked, a pop-up appears containing all available table columns with their corresponding checkboxes.
+■ These columns are: Column Name Pricing Rule Item Code Margin Type 
+
+=====PAGE 146=====
+ Rate or Discount Child Docname Rule Applied
+■ Users can show or hide columns by selecting or deselecting the related checkbox.
+○ “Update” button
+■ Button
+■ For save any changes or updates made by the user
+■ When clicked, any modiﬁcations made by the user will be saved
+○ “Reset to default” button
+■ Button
+■ To reset all modiﬁcations to their default values.
+■ When clicked, any modiﬁcations made by the user will be reset to their default values.
+● Note: when a row is selected , an action bar appears showing the following actions:
+○ Delete row
+■ Button
+■ To delete a speciﬁc row or multiple rows
+■ When clicked, the selected item group(s) will be deleted
+■ Edit Row
+● Clickable icon
+● Users can only view non displayed ﬁelds in the table.
+● When clicked , a pop up appears containing the following ﬁelds: Field Name Options Pricing Rule
+● Label ﬁeld (read only)
+● Displays the pricing rule that has been applied to the item Item Code
+● Label ﬁeld (read only)
+● Displays the item code to which the pricing rule is applied. Margin Type
+● Label ﬁeld (read only)
+● Displays the method used to calculate the margin Rate or Discount
+● Label ﬁeld (read only) 
+
+=====PAGE 147=====
+
+● Displays the calculated selling rate or discount value resulting from the applied pricing rule. Child Docname
+● Label ﬁeld (read only)
+● Stores the internal reference to the child document or transaction row associated with the applied pricing rule. This ﬁeld is maintained by the system. Rule Applied
+● Checkbox icon (read only)
+● Indicates whether this pricing rule has been successfully applied during price calculation.
+● Fixed Page Actions
+○ It contains the following:
+■ Get Items From opportunity
+● Button
+● When clicked, a pop up appears containing the following ﬁelds:
+○ Search
+○ The user can search by the following:
+■ Name
+● Text input ﬁeld
+● Users can search by the sales order name or any part of it.
+● Max length : 100 characters
+● Once the maximum limit is reached, further input will be prevented.
+■ Party
+● Searchable DDL
+● Link “ Customer ” doctype
+● Single selection
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Opportunity Type
+● Searchable DDL
+● Link “ Opportunity Type ” doctype
+● Single selection 
+
+=====PAGE 148=====
+
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+○ opportunity list
+■ It contains only opportunities whose status is equal to “ Open ” or “ Quotation ”
+■ A table contain the following columns:
+● Checkbox icon
+○ Multi selection
+● No.
+○ Displays the ordering of items in the table
+● Name
+○ Label ﬁeld
+○ It displays the opportunity name
+○ Clickable
+○ When clicked, it navigates the user to “Opportunity Details” screen
+● Party (read-only)
+○ Label ﬁeld
+○ It displays the party name
+● Opportunity Type
+○ Label ﬁeld (read only)
+○ It displays the opportunity type
+○ Get Items
+■ Button
+■ When an opportunity(s) is selected and the user clicks the “ Get Items ” button, the opportunity items are successfully fetched and indeed to the items table.
+■ Save
+● Button
+● When clicked,
+○ If all required data is entered correctly and completely:
+■ The Quotation is successfully saved and not submitted.
+■ And added to the Quotation List and its status is draft
+○ If incorrect or incomplete data is entered:
+■ A validation error message is displayed for each invalid ﬁeld.
+■ Submit
+● Button
+● Appears only after clicking on the save button
+● When clicked,
+○ The Quotation is successfully submitted 
+
+=====PAGE 149=====
+
+○ And added to the Quotation List and its status is Submitted (open)
+● Note: once the document is submitted, it becomes read only and cannot be edited.
+■ Cancel
+● It appears only when the Quotation status = Submitted
+● When clicked,
+○ The Quotation was canceled successfully.
+○ And it’s status changes to “ Canceled ”
+■ Amend
+● Button
+● It appears only when the Quotation status = cancelled
+■ Delete
+● It appears only when the Quotation status = Submitted
+● When clicked,
+○ A conﬁrmation message is displayed to the user whether they want to delete this Quotation
+○ Upon clicking the “Yes” button:
+■ If the Quotation is Amended from other Quotation
+● A warning message appears indicating that this Quotation cannot be deleted until the user deletes all doctypes related to it.
+● The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+■ if the Quotation is linked to other transactions,
+● a message is displayed informing the user that the linked transactions must be deleted before the Quotation can be deleted.
+● The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+■ If the Quotation isn’t linked to another doctype
+● The Quotation is deleted successfully. Post Conditions
+● The new Quotation has been added successfully
+● If invalid or incomplete data is entered, the corresponding error message will be displayed for each ﬁeld. General Info Tab Use case ID 3 
+
+=====PAGE 150=====
+ Use case Name General Info Tab Descriptions The user can continue the creation process and enter the General Info Pre conditions
+● Click on Selling from sidebar
+● Click on Quotation from sidebar
+● Click on Add Quotation
+● Click on General Info Tab Main Flow - Components
+● Billing Address
+○ It contains the following ﬁelds:
+■ Customer Address Name
+● Searchable DDL
+● Link “ Address ” doctype
+● Displays all addresses associated with the customer in the Quotation
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Important Note:
+○ The system automatically fetches the customer's Preferred Billing Address.
+○ If no Preferred Billing Address is available,
+■ The system fetches the Primary Address .
+○ If no Primary Address exists,
+■ The system fetches the latest created address .
+○ The user can overwrite the automatically selected address by choosing another one.
+■ Address
+● Label ﬁeld (read only)
+● It displays the address of the selected customer
+● It displays the following data:
+○ Address Description
+○ City / town
+○ State
+○ Country
+■ Contact Person
+● Searchable DDL
+● Link “ Contact ” doctype
+● Note: it’s ﬁltered to show only contacts that belong to the “ Customer ” or “ Lead ”
+● Single selection 
+
+=====PAGE 151=====
+
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Important Note:
+○ The system automatically fetches the customer's Preferred Billing Contact.
+○ If no Preferred Billing Contact is available,
+■ The system fetches the Primary Contact .
+○ If no Primary Contact exists,
+■ The system fetches the latest created Contact .
+○ The user can overwrite the automatically selected contact by choosing another one.
+■ Contact (Hidden)
+● Label ﬁeld (read only)
+● It displays the contact name of the selected contact person
+■ (Contact Details)
+● Label ﬁeld (read only)
+● It displays all contact numbers and Emails ID of the selected contact person
+● Note:
+○ UI must clearly tell which:
+■ Number is the primary phone
+■ Email ID is the primary Email
+● Shipping Address
+○ It contains the following ﬁelds:
+■ Shipping Address
+● Searchable DDL
+● Link “ Address ” doctype
+● Displays all addresses associated with the customer in the Quotation to select the customer shipping address.
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Important Note:
+○ The system automatically fetches the customer's Preferred ٍ Shipping Address.
+○ If no Preferred Shipping Address is available,
+■ The system fetches the Primary Address .
+○ If no Primary Address exists,
+■ The system fetches the latest created address .
+○ The user can overwrite the automatically selected address by choosing another one.
+■ Shipping Address
+● Label ﬁeld (read only) 
+
+=====PAGE 152=====
+
+● It displays the shipping address of the selected shipping address
+● It displays the following data:
+○ Address Description
+○ City / town
+○ State
+○ Country
+● Company Address
+○ It contains the following ﬁelds:
+■ Company Address Name
+● Searchable DDL
+● Link “ Address ” doctype
+● Displays all company addresses to select the company address name.
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Note:
+○ Company primary address is fetched
+○ If Company primary address is not found
+■ The latest company address is fetched.
+■ Company Address
+● Label ﬁeld (read only)
+● It displays the company address of the selected Company Address Name
+● It displays the following data:
+○ Address Description
+○ City / town
+○ State
+○ Country
+■ Contact Person
+● Searchable DDL
+● Link “ Contact ” doctype
+● Note: it’s ﬁltered to show only contacts that belong to the selected company and the “ Is Your Company Contact ” checked.
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Important Note:
+○ The system automatically fetches the company’s Preferred Billing Contact.
+○ If no Preferred Billing Contact is available,
+■ The system fetches the Primary Contact .
+○ If no Primary Contact exists, 
+
+=====PAGE 153=====
+
+■ The system fetches the latest created Contact .
+○ The user can overwrite the automatically selected contact by choosing another one.
+■ (Contact Details)
+● Label ﬁeld (read only)
+● It displays all contact numbers and Emails ID of the selected Contact Person
+● Note:
+○ UI must clearly tell which:
+■ Number is the primary phone
+■ Email ID is the primary Email
+● Payment Terms Template
+○ Searchable DDL
+○ Link “ Payment Terms Template ” doctype
+○ Single selection
+○ Optional
+○ When a value is selected from the Payment Terms Template DDL, the Payment Schedule ﬁeld is automatically ﬁlled based on the selected value.
+● Payment Schedule
+○ A table contain the following columns:
+■ Checkbox icon
+● Multi selection
+■ No.
+● Displays the ordering of items in the table
+■ Payment Term
+● Searchable DDL
+● Link “ Payment Term ” doctype
+● Single selection
+● Optional
+● When a value is selected from the Payment Terms Template DDL, the Payment Schedule ﬁeld is automatically ﬁlled based on the selected value.
+■ Description
+● Text area
+● For adding a description
+● It’s fetched from the selected Payment Term
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered
+■ Due Date
+● Date calendar picker
+● To select the payment Due date 
+
+=====PAGE 154=====
+
+● It’s fetched based on the “Due Date Based On” ﬁeld from the selected payment term
+● Mandatory
+● If the ﬁeld is left empty an error message appears.
+■ Invoice Portion
+● Text input ﬁeld
+● For entering the percentage of the total invoice amount assigned to this payment term
+● It’s fetched from the selected Payment Term
+● Optional
+● Accepts numbers only.
+● The entered numbers are treated as percentages
+● Minimum length: 1 character.
+● Maximum length: 100 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+■ Payment Amount
+● Text input ﬁeld
+● For entering the payment amount
+● Optional
+● Accepts integers and decimal numbers only.
+● Minimum length: 1 character.
+● Maximum length: 100 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+■ Setting
+● When clicked, a pop up appears contains the following options :
+○ Rearranging table columns using drag and drop functionality.
+■ Users can click and hold a column header , then drag and drop it into the desired position within the table.
+○ Column width
+■ Text input ﬁeld
+■ For entering or edit the column width
+■ Accepts numbers only
+■ Minimum length: 1 character.
+■ Maximum length: 3 characters.
+■ Default value = 3
+○ Add / Remove columns
+■ Button
+■ For adding or removing columns from the table
+■ When clicked, a pop-up appears containing all available table columns with their corresponding checkboxes. 
+
+=====PAGE 155=====
+
+■ These columns are: Column Name Payment Term Description Due Date Invoice Portion Payment Amount (EGP) Mode of Payment Due Date Based On Credit Days Credit Months Discount Date Discount Discount Type Discount Validity Based On Discount Validity Outstanding (EGP) Paid Amount (EGP) Discounted Amount
+■ Users can show or hide columns by selecting or deselecting the related checkbox.
+○ “Update” button
+■ Button
+■ For save any changes or updates made by the user
+■ When clicked, any modiﬁcations made by the user will be saved
+○ “Reset to default” button
+■ Button
+■ To reset all modiﬁcations to their default values.
+■ When clicked, any modiﬁcations made by the user will be reset to their default values.
+● Note: when a row is selected , an action bar appears showing the following actions: 
+
+=====PAGE 156=====
+
+○ Delete row
+■ Button
+■ To delete a speciﬁc row or multiple rows
+■ When clicked, the selected item group(s) will be deleted
+■ Edit Row
+● Clickable icon
+● Users can edit and view non displayed ﬁelds in the table.
+● When clicked , a pop up appears containing the following ﬁelds: Field Name Options Payment Term
+● Searchable DDL
+● Link “ Payment Term ” doctype
+● Single selection
+● Optional
+● When a value is selected from the Payment Terms Template DDL, the Payment Schedule ﬁeld is automatically ﬁlled based on the selected value. Description
+● Text area
+● For adding a description
+● It’s fetched from the selected Payment Term
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 3 characters.
+● Maximum length: 500 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length.
+● An error message will appear if invalid data is entered Due Date
+● Date calendar picker
+● To select the payment Due date
+● It’s fetched based on the “Due Date Based On” ﬁeld from the 
+
+=====PAGE 157=====
+ selected payment term
+● Mandatory
+● If the ﬁeld is left empty an error message appears. Invoice Portion
+● Text input ﬁeld
+● For entering the percentage of the total invoice amount assigned to this payment term
+● It’s fetched from the selected Payment Term
+● Optional
+● Accepts numbers only.
+● The entered numbers are treated as percentages
+● Minimum length: 1 character.
+● Maximum length: 100 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length. Mode of Payment
+● Searchable DDL
+● Link “ Mode of Payment ” doctype
+● To select the default mode of payment for this payment term
+● It’s fetched from the selected Payment Term
+● Single selection
+● Optional
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values. Due Date Based On
+● Label ﬁeld (read only)
+● It’s fetched from the selected Payment Term
+● It display one of the following values: 
+
+=====PAGE 158=====
+
+○ Day(s) after invoice date
+○ Day(s) after the end of the invoice month
+○ Month(s) after the end of the invoice month Credit Days
+● Label ﬁeld (read only)
+● It display the number of credit days before the payment becomes due
+● It’s fetched from the selected Payment Term Credit Months
+● Label ﬁeld (read only)
+● It display the number of credit months before the payment becomes due
+● It’s fetched from the selected Payment Term Discount Date
+● Date calendar picker
+● To select the discount date
+● Mandatory
+● If the ﬁeld is left empty an error message appears.
+● Note: it appears only after entering a value in Discount ﬁeld Discount
+● Text input ﬁeld
+● For entering the discount value applicable for early payment
+● It’s fetched from the selected Payment Term
+● Optional
+● Accepts numbers only.
+● Minimum length: 1 character.
+● Maximum length: 100 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length 
+
+=====PAGE 159=====
+ Discount Type
+● DDL
+● To select whether the early payment discount is calculated as a percentage or a ﬁxed amount
+● It’s fetched from the selected Payment Term
+● It contains the following values:
+○ Percentage
+○ Amount
+● Single selection
+● Optional Discount Validity Based On
+● Label ﬁeld (read only)
+● Displays the basis used to calculate the early payment discount validity period
+● It’s fetched from the selected Payment Term
+● It display one of the following values:
+○ Day(s) after invoice date
+○ Day(s) after the end of the invoice month
+○ Month(s) after the end of the invoice month Discount Validity
+● Label ﬁeld (read only)
+● It’s fetched from the selected Payment Term
+● Displays the validity period during which the early payment discount can be applied Payment Amount
+● Text input ﬁeld
+● For entering the payment amount
+● Optional
+● Accepts integers and decimal numbers only.
+● Minimum length: 1 character.
+● Maximum length: 100 characters.
+● Once the maximum limit is reached, further input will be prevented. 
+
+=====PAGE 160=====
+
+● An error message will appear if the entered text is less than the minimum length. Outstanding
+● Label ﬁeld
+● Displays the outstanding Paid Amount
+● Label ﬁeld (read only)
+● Displays the Paid Amount Discounted Amount
+● Label ﬁeld
+● Displays the Discounted Amount Payment Amount (Company’s base currency)
+● Text input ﬁeld
+● For entering the payment amount (Company Currency)
+● Optional
+● Accepts integers and decimal numbers only.
+● Minimum length: 1 character.
+● Maximum length: 100 characters.
+● Once the maximum limit is reached, further input will be prevented.
+● An error message will appear if the entered text is less than the minimum length. Outstanding (Company’s base currency)
+● Label ﬁeld (read only)
+● Displays the Outstanding (Company’s base currency) Paid Amount (company’s base currency)
+● Label ﬁeld (read only)
+● Displays the Paid Amount (company’s base currency)
+■ Add Row
+● Button
+● To add a new row in the table
+● When clicked, a new row is added to the table.
+● Terms
+○ Searchable DDL
+○ Link “ Terms and Condition ” doctype
+○ Single selection
+○ Optional 
+
+=====PAGE 161=====
+
+○ When a value is selected from the terms DDL, the terms and condition content ﬁeld is automatically ﬁlled based on the selected value.
+○ Note:
+■ If no terms and conditions are entered, the terms and conditions section is not displayed on the Quotation Details page
+■ the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Terms and Condition Content
+○ Text area
+○ For adding detailed terms and condition content.
+○ Optional
+○ Accepts letters, numbers, and special characters.
+○ Minimum length: 3 characters.
+○ Maximum length: 500 characters.
+○ Once the maximum limit is reached, further input will be prevented.
+○ An error message will appear if the entered text is less than the minimum length.
+○ An error message will appear if invalid data is entered.
+○ Note: The terms and condition content is automatically fetched based on the term selected from the DDL Post Conditions
+● The General Info Details is successfully saved.
+● If invalid or incomplete data is entered, the corresponding error message will be displayed for each ﬁeld. More Info Tab Use case ID 4 Use case Name More Info Tab 
+
+=====PAGE 162=====
+ Descriptions The user can continue the creation process and enter the General Info Pre conditions
+● Click on Selling from sidebar
+● Click on Quotation from sidebar
+● Click on Add Quotation
+● Click on More Info Tab Main Flow - Components
+● Status
+○ Label ﬁeld
+○ It displays the Delivery Note status
+○ It shows one of the following values:
+■ Draft
+■ Open
+■ Replied
+■ Partially Ordered
+■ Ordered
+■ Lost
+■ Cancelled
+■ Expired
+● Auto repeat (Hidden)
+○ Label ﬁeld (read only)
+○ References the Auto Repeat conﬁguration associated with the quotation. This ﬁeld is used when the quotation is generated automatically on a recurring schedule.
+○ Clickable
+○ When clicked, it navigates the user to the Auto Repeat reference document.
+● Print Settings
+○ It contains the following ﬁelds:
+■ Letter Head
+● Searchable DDL
+● Link “ Letter Head ” doctype
+● Single selection
+● optional,
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+■ Language
+● Label ﬁeld
+● It displays the language selected in the print settings.
+■ Print without Amount
+● Checkbox
+● If checked, the printing will be generated without amounts.
+■ Group same items
+● Checkbox
+● To group the same items and sums Qty and amounts during printing. 
+
+=====PAGE 163=====
+
+● UTM Analytics (Hidden)
+○ It contains the following ﬁelds:
+■ Source
+● Searchable DDL
+● Link “ UTM Source ” doctype
+● Single selection
+● optional,
+● Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+● Lost Reasons
+○ It appears only when the status = Lost
+○ It contains the following ﬁelds:
+■ Lost reasons
+● Label ﬁeld (read only)
+● Displays the predeﬁned reasons explaining why the quotation was marked as lost
+■ Competitors
+● Text input ﬁeld
+● Allows users to enter competitors.
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 2 characters.
+● Maximum length: 100 characters.
+■ Detailed Reason
+● Text input ﬁeld
+● Allows users to enter additional comments or explanations describing why the quotation was marked as lost.
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 2 characters.
+● Maximum length: 100 characters.
+● Additional Info
+○ It contains the following ﬁelds:
+■ Territory
+● Label ﬁeld (read only)
+● It’s fetched from lead or customer
+■ Title (Hidden)
+● Text input ﬁeld
+● Allows users to specify a descriptive title for the quotation.
+● Optional
+● Accepts letters, numbers, and special characters.
+● Minimum length: 2 characters.
+● Maximum length: 100 characters.
+■ Opportunity (Hidden)
+● Label ﬁeld (read only)
+● References the CRM Opportunity from which the quotation is 
+
+=====PAGE 164=====
+ created. Post Conditions
+● The More Info Details is successfully saved.
+● If invalid or incomplete data is entered, the corresponding error message will be displayed for each ﬁeld. Quotation Details Use case ID 5 Use case Name Quotation Details Descriptions The user can view / edit the Delivery Note details. 
+
+=====PAGE 165=====
+ Pre conditions
+● Click on Selling from sidebar
+● Click on Quotation from sidebar
+● Click on “ Quotation ID ” from the table Main Flow - Components
+● Label / Input ﬁelds
+○ Note:
+■ If the Quotation status is Submitted or Cancelled :
+● The system retrieves and displays the ﬁelds as labels for viewing purposes only. These ﬁelds are read-only and cannot be edited.
+■ If the Quotation status is Draft :
+● The system retrieves and displays the ﬁelds as input ﬁelds, allowing the user to modify the quotation data.
+○ The system retrieves and displays the data entered during creation, allowing users to view or update it as needed in addition to the following:
+● Fixed Page Actions
+○ The following action buttons are ﬁxed and consistently displayed at the top of all (Quotation details) pages to provide a quick access to common functions:
+■ Set as Lost
+● Button
+● It appears only after Submitting
+● When checked, a pop up appears containing the following ﬁelds:
+○ Lost Reasons
+■ Searchable DDL
+■ Link “ Quotation Lost Reason ” doctype
+■ Single selection
+■ Mandatory
+■ If the ﬁeld is left empty an error message appears.
+■ Note: the ﬁeld shall be implemented as a searchable DDL (autocomplete), allowing the user to search and select from a predeﬁned list of values.
+○ Competitors
+■ Text input ﬁeld
+■ Allows users to enter competitors.
+■ Optional
+■ Accepts letters, numbers, and special characters.
+■ Minimum length: 2 characters.
+■ Maximum length: 100 characters.
+○ Detailed Reason
+■ Text input ﬁeld
+■ Allows users to enter additional comments or explanations describing why the quotation was marked as lost.
+■ Optional
+■ Accepts letters, numbers, and special characters.
+■ Minimum length: 2 characters. 
+
+=====PAGE 166=====
+
+■ Maximum length: 100 characters.
+○ Declare Lost
+■ Button
+■ When clicked,
+● If all required data is entered correctly and completely:
+○ The Quotation is successfully set as Lost
+○ And its status changes to Lost
+● If incorrect or incomplete data is entered:
+○ A validation error message is displayed for each invalid ﬁeld.
+■ Create
+● DDL
+● It appears only after Submitting
+● It contains the following actions:
+○ Sales Order
+■ Button
+■ When clicked it navigates the user to the “Add Sales order” screen and items are fetched from the Quotation to the sales order.
+○ Sales Invoice
+■ Button
+■ When clicked it navigates the user to the “Add Sales invoice” screen and items are fetched from the Quotation to the sales invoice.
+○ Auto Repeat
+■ Button
+■ When clicked, a pop up appears containing the following ﬁelds:
+● Frequency
+○ DDL
+○ It contains the following values:
+■ Daily
+■ Weekly
+■ Monthly
+■ Quarterly
+■ Half-yearly
+■ Yearly
+○ Mandatory
+○ Single selection
+○ If the ﬁeld is left empty an error message appears.
+● Start Date
+○ Date calendar picker
+○ To select the start date
+○ Mandatory 
+
+=====PAGE 167=====
+
+○ If the ﬁeld is left empty an error message appears.
+○ Default value is ( today’s date )
+● End Date
+○ Date calendar picker
+○ To select the end date
+○ Optional
+● Save
+○ Button
+○ To save the process
+○ When clicked, an " Auto Repeat created successfully for this document " message is displayed,
+○ And the created Auto Repeat reference is populated in the Auto Repeat ﬁeld.
+■ Update Items
+● Button
+● It appears only after Submitting
+● When clicked, a pop up appears containing the Items table to update it as needed.
+■ Assign
+■ Attachment
+■ Tags
+■ Share
+■ Print
+■ Submit
+● It appears only when the Quotation status = draft.
+● If all required data is entered correctly and completely:
+○ The Quotation is successfully submitted (open)
+■ Cancel
+● It appears only when the Quotation status = Submitted
+● When clicked,
+○ The Quotation is canceled successfully.
+■ Delete
+● It appears only when the Quotation status = Submitted
+● When clicked,
+○ A conﬁrmation message is displayed to the user whether they want to delete this Quotation
+○ Upon clicking the “Yes” button:
+■ If the Quotation is Amended from other Quotation
+● A warning message appears indicating that this Quotation cannot be deleted until the user deletes all doctypes related to it.
+● The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype. 
+
+=====PAGE 168=====
+
+■ if the Quotation is linked to other transactions,
+● a message is displayed informing the user that the linked transactions must be deleted before the Quotation can be deleted.
+● The warning message displays the linked doctypes as hyperlinks; they are redirected to the corresponding doctype.
+■ If the Quotation isn’t linked to another doctype
+● The Quotation is deleted successfully.
+● Connections Tab
+○ It contains the following:
+■ Sales Order
+● Button
+● Link “ Sales Order ” docktype
+■ Sales Invoice
+● Button
+● Link “ Sales Invoice ” docktype
+■ Opportunity
+● Button
+● Link “ Opportunity ” docktype
+■ Auto Repeat
+● Button
+● Link “ Auto Repeat ” docktype Post Conditions
+● The Quotation details has been successfully modiﬁed and saved
+● Entering incorrect or incomplete data will display the corresponding error message for each ﬁeld. 
+
+

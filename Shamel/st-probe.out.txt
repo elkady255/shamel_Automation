@@ -1,0 +1,38 @@
+LINKS []
+ALL []
+META title|Data|req=1|opt=
+META is_default|Check|req=0|opt=
+META disabled|Check|req=0|opt=
+META column_break_3|Column Break|req=0|opt=
+META company|Link|req=1|opt=Company
+META tax_category|Link|req=0|opt=Tax Category
+META section_break_5|Section Break|req=0|opt=
+META taxes|Table|req=0|opt=Sales Taxes and Charges
+CHILD charge_type|Select|req=1|opt=,Actual,On Net Total,On Previous Row Amount,On Previous Row Total,On Item Quantity
+CHILD row_id|Data|req=0|opt=
+CHILD account_head|Link|req=1|opt=Account
+CHILD col_break_1|Column Break|req=0|opt=
+CHILD description|Small Text|req=1|opt=
+CHILD included_in_print_rate|Check|req=0|opt=
+CHILD included_in_paid_amount|Check|req=0|opt=
+CHILD set_by_item_tax_template|Check|req=0|opt=
+CHILD is_tax_withholding_account|Check|req=0|opt=
+CHILD accounting_dimensions_section|Section Break|req=0|opt=
+CHILD cost_center|Link|req=0|opt=Cost Center
+CHILD dimension_col_break|Column Break|req=0|opt=
+CHILD project|Link|req=0|opt=Project
+CHILD section_break_8|Section Break|req=0|opt=
+CHILD rate|Float|req=0|opt=
+CHILD section_break_9|Section Break|req=0|opt=
+CHILD account_currency|Link|req=0|opt=Currency
+CHILD net_amount|Currency|req=0|opt=currency
+CHILD tax_amount|Currency|req=0|opt=currency
+CHILD total|Currency|req=0|opt=currency
+CHILD tax_amount_after_discount_amount|Currency|req=0|opt=currency
+CHILD column_break_13|Column Break|req=0|opt=
+CHILD base_net_amount|Currency|req=0|opt=Company:company:default_currency
+CHILD base_tax_amount|Currency|req=0|opt=Company:company:default_currency
+CHILD base_total|Currency|req=0|opt=Company:company:default_currency
+CHILD base_tax_amount_after_discount_amount|Currency|req=0|opt=Company:company:default_currency
+CHILD dont_recompute_tax|Check|req=0|opt=
+TEMPLATES [{"name":"6+526 - E","title":"6+526","company":"Ahmed Ebrahim CO.","is_default":0,"disabled":1,"tax_category":"ضريبة القيمة المضافة"},{"name":"Jordan Tax - Infugram JOR","title":"Jordan Tax","company":"Infugram JOR - انفوجرام الاردن","is_default":0,"disabled":0,"tax_category":"ضريبة القيمة المضافة"},{"name":"VAT - E","title":"VAT","company":"Ahmed Ebrahim CO.","is_default":0,"disabled":0,"tax_category":""},{"name":"warrqa - Warrqa","title":"warrqa","company":"Warrqa - ورقة","is_default":0,"disabled":1,"tax_category":"ضريبة القيمة المضافة"},{"name":"تجربة - E","title":"تجربة","company":"Warrqa - ورقة","is_default":0,"disabled":0,"tax_category":""},{"name":"عنوان قالب ضريبى جديد - E","title":"عنوان قالب ضريبى جديد","company":"Ahmed Ebrahim CO.","is_default":1,"disabled":0,"tax_category":"ضريبة القيمة المضافة"}]

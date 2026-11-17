@@ -1,0 +1,2 @@
+ERROR-LIKE ELEMENTS ["required:*","required:*","required:*","cd-error:الطرف مطلوب","required:*","required:*","required:*","delete_items tc-btn tc-btn--da:حذف","delete_items tc-btn tc-btn--da:حذف","delete_items tc-btn tc-btn--da:حذف"]
+RED TEXTS ["تسجيل الخروج","غير محفوظة","*","*","*","الطرف مطلوب","*","*","*","حذف","حذف","حذف"]

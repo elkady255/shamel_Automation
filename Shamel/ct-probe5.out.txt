@@ -1,0 +1,8 @@
+PW CT F1 730935-CUST-2025-00003: primary=1 billing=1 shipping=1
+PW CT F2 730935-CUST-2025-00003: primary=1 billing=0 shipping=0
+PW CT F3 730935-CUST-2025-00003: primary=0 billing=1 shipping=1
+first contact of another customer: primary=0
+OVERFLOW ["DIV.id-uom-table-wrapper sw=1258 cw=1030","DIV.id-uom-table-wrapper sw=1305 cw=1030"]
+GEARS 26
+TITLES ["رجوع","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","","جهة الاتصال تابعة لشركتك","جهة الاتصال الرئيسية","جهة اتصال الفوترة","جهة اتصال الشحن","معطل","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق"]
+GEAR candidates 26

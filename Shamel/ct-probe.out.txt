@@ -1,0 +1,57 @@
+LIST URL https://test.hr.azzrk.com/desk/shamel#/selling/contacts
+LIST TEXT مرحباً Administrator ! AN Administrator admin@example.com جهات الاتصال سجل جهات الاتصال إضافة جهة اتصال كل الفلاتر الفلاتر المحفوظه إنشاء فلتر آخر التحديثات رقم المعرف الاسم البريد الإلكتروني الهاتف عفاف فضل محمد ندا-1 عفاف فضل محمد ندا Afafreda@Danahagency.Com 11-28 11 Hamada.Dev33@Gmail.Com Hamada-1 Hamada Hamada.Dev1@Gmail.Com Hamada Hamada Hamada.Dev@Gmail.Com ندا محمد ابراهيم ندا محمد ابراهيم NadaIbrahim@One1million.Com Mm Mm Mo3tz3adel@Gmail.Com Nada-6 Nada Nadahamed864@Gmail.Com I965 Tester I965 Tester I965zwfk2g0v@Maxxspace.Com Zz Test965 Zz Test965 Zztest965@Mailinator.Com I962 Traceprobe I962 Traceprobe Support@Sallamaat.Com عرض 10 من 244593 1 2 3 4 5 … 24460
+BULK ["إضافة جهة اتصال","آخر التحديثات","1","2","3","4","5","24460","تحديد الكل","تعديل","تصدير","اسناد","إضافة وسوم","طباعة","حذف"]
+ADD TEXT مرحباً Administrator ! AN Administrator admin@example.com إضافة جهة اتصال البيانات الأساسية الاسم الأول * اسم العائلة الاسم الكامل الشركة الجنس اختر الجنس بيانات التواصل البريد الإلكتروني إضافة بريد الكتروني لا توجد بيانات بعد أضف بيانات إلى الجدول لبدء إدارة سجلاتك. أرقام الاتصال إضافة رقم اتصال لا توجد بيانات بعد أضف بيانات إلى الجدول لبدء إدارة سجلاتك. المرجع والارتباطات جهة الاتصال تابعة لشركتك جهة الاتصال الرئيسية جهة اتصال الفوترة جهة اتصال الشحن معطل الارتباطات إضافة رابط لا توجد بيانات بعد أضف بيانات إلى الجدول لبدء إدارة سجلاتك. إلغاء حفظ
+ADD INPUT INPUT|search|ابحث عن الصفحات والأنواع...|max=-1|dis=false|val=|chk=false
+ADD INPUT INPUT|text|أدخل الاسم الأول|max=100|dis=false|val=|chk=false
+ADD INPUT INPUT|text|أدخل اسم العائلة|max=100|dis=false|val=|chk=false
+ADD INPUT INPUT|text||max=-1|dis=true|val=|chk=false
+ADD INPUT INPUT|text|ابحث واختر الشركة|max=-1|dis=false|val=|chk=false
+ADD INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ADD INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ADD INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ADD INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ADD INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ADD BTNS ["إضافة بريد الكتروني","إضافة رقم اتصال","إضافة رابط"]
+AFTER ROWS مرحباً Administrator ! AN Administrator admin@example.com إضافة جهة اتصال غير محفوظة البيانات الأساسية الاسم الأول * اسم العائلة الاسم الكامل الشركة الجنس اختر الجنس بيانات التواصل البريد الإلكتروني إضافة بريد الكتروني البريد الإلكتروني نوع البريد أساسي أرقام الاتصال إضافة رقم اتصال الرقم Country Code نوع جهة الاتصال رقم الهاتف الأساسي المرجع والارتباطات جهة الاتصال تابعة لشركتك جهة الاتصال الرئيسية جهة اتصال الفوترة جهة اتصال الشحن معطل الارتباطات إضافة رابط نوع المستند المرتبط اسم المستند المرتبط عنوان المستند المرتبط إلغاء حفظ
+ROWS INPUT INPUT|search|ابحث عن الصفحات والأنواع...|max=-1|dis=false|val=|chk=false
+ROWS INPUT INPUT|text|أدخل الاسم الأول|max=100|dis=false|val=|chk=false
+ROWS INPUT INPUT|text|أدخل اسم العائلة|max=100|dis=false|val=|chk=false
+ROWS INPUT INPUT|text||max=-1|dis=true|val=|chk=false
+ROWS INPUT INPUT|text|ابحث واختر الشركة|max=-1|dis=false|val=|chk=false
+ROWS INPUT INPUT|email|أدخل البريد الإلكتروني|max=100|dis=false|val=|chk=false
+ROWS INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROWS INPUT INPUT|text|أدخل رقم الهاتف|max=100|dis=false|val=|chk=false
+ROWS INPUT INPUT|text|الكود|max=-1|dis=false|val=|chk=false
+ROWS INPUT INPUT|text|اختر نوع جهة الاتصال|max=-1|dis=false|val=|chk=false
+ROWS INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROWS INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROWS INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROWS INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROWS INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROWS INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ROWS INPUT INPUT|text|اختر نوع المستند|max=-1|dis=false|val=|chk=false
+ROWS INPUT INPUT|text|اختر المستند|max=-1|dis=false|val=|chk=false
+ROWS INPUT INPUT|text||max=-1|dis=true|val=|chk=false
+TITLES ["رجوع","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","","جهة الاتصال تابعة لشركتك","جهة الاتصال الرئيسية","جهة اتصال الفوترة","جهة اتصال الشحن","معطل","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق"]
+UNTOUCHED SAVE مرحباً Administrator ! AN Administrator admin@example.com 66 إضافة جهة اتصال غير محفوظة البيانات الأساسية الاسم الأول * الاسم الأول مطلوب اسم العائلة الاسم الكامل الشركة الجنس اختر الجنس بيانات التواصل البريد الإلكتروني إضافة بريد الكتروني البريد الإلكتروني نوع البريد أساسي البريد الإلكتروني مطلوب في كل صف أرقام الاتصال إضافة رقم اتصال الرقم Country Code نوع جهة الاتصال رقم الهاتف الأساسي هذا الحقل مطلوب. من فضلك أدخل رقم الجوال. المرجع والارتباطات جهة الاتصال تابعة لشركتك جهة الاتصال الرئيسية جهة اتصال الفوترة جهة اتصال الشحن معطل الارتباطات إضافة رابط نوع المستند المرتبط اسم المستند المرتبط عنوان المستند المرتبط نوع المستند واسم المستند مطلوبان في كل صف إلغاء حفظ
+CONTACTS [{"name":"ُ","first_name":"ُ","email_id":"","mobile_no":"+966593347268","status":"Passive"},{"name":"‎ ابو نايف","first_name":"‎ ابو نايف","email_id":"","mobile_no":"+966 56 030 8877","status":"Passive"},{"name":"‎ ابو همام سليمان","first_name":"‎ ابو همام سليمان","email_id":"","mobile_no":"531876460","status":"Passive"},{"name":"‎ تركي ‎","first_name":"‎ تركي ‎","email_id":"","mobile_no":"534038898","status":"Passive"},{"name":"‎ سيد قليل","first_name":"‎ سيد قليل","email_id":"","mobile_no":"0509464664","status":"Passive"}]
+DET TEXT مرحباً Administrator ! AN Administrator admin@example.com تفاصيل جهة الاتصال البيانات الأساسية الاسم الأول * اسم العائلة الاسم الكامل الشركة الجنس اختر الجنس بيانات التواصل البريد الإلكتروني إضافة بريد الكتروني لا توجد بيانات بعد أضف بيانات إلى الجدول لبدء إدارة سجلاتك. أرقام الاتصال إضافة رقم اتصال الرقم Country Code نوع جهة الاتصال رقم الهاتف الأساسي المرجع والارتباطات جهة الاتصال تابعة لشركتك جهة الاتصال الرئيسية جهة اتصال الفوترة جهة اتصال الشحن معطل الارتباطات إضافة رابط نوع المستند المرتبط اسم المستند المرتبط عنوان المستند المرتبط إلغاء حفظ
+DET INPUT INPUT|search|ابحث عن الصفحات والأنواع...|max=-1|dis=false|val=|chk=false
+DET INPUT INPUT|text|أدخل الاسم الأول|max=100|dis=false|val=ُ|chk=false
+DET INPUT INPUT|text|أدخل اسم العائلة|max=100|dis=false|val=|chk=false
+DET INPUT INPUT|text||max=-1|dis=true|val=ُ|chk=false
+DET INPUT INPUT|text|ابحث واختر الشركة|max=-1|dis=false|val=|chk=false
+DET INPUT INPUT|text|أدخل رقم الهاتف|max=100|dis=false|val=+966593347268|chk=false
+DET INPUT INPUT|text|الكود|max=-1|dis=false|val=|chk=false
+DET INPUT INPUT|text|اختر نوع جهة الاتصال|max=-1|dis=false|val=افتراضي|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|text|اختر نوع المستند|max=-1|dis=false|val=عميل محتمل|chk=false
+DET INPUT INPUT|text|اختر المستند|max=-1|dis=false|val=CRM-LEAD-2025-02089|chk=false
+DET INPUT INPUT|text||max=-1|dis=true|val=ُ|chk=false
+DET TITLES ["رجوع","تعيين إلى","الوسوم","المرفقات","طباعة","مشاركة","حذف","المزيد من الإجراءات","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","","جهة الاتصال تابعة لشركتك","جهة الاتصال الرئيسية","جهة اتصال الفوترة","جهة اتصال الشحن","معطل","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق"]

@@ -1,0 +1,20 @@
+ROW ["{0svg,3chk}","عنوان قالب ضريبى جديد - E{0svg,0chk}","مفعل{0svg,0chk}","{1svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","عنوان قالب ضريبى جديد{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST DEF 30930b - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST DEF 30930b{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST DEF 30930 - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST DEF 30930{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST 30929 - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST 30929{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST 30928 - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST 30928{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST 30927 - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST 30927{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST 30926 - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST 30926{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST 30918 - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST 30918{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST DUP 30915 - E-1{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST DUP 30915{0svg,0chk}"]
+ROW ["{0svg,3chk}","PW ST DUP 30915 - E{0svg,0chk}","مفعل{0svg,0chk}","{0svg,0chk}","{0svg,0chk}","Ahmed Ebrahim CO.{0svg,0chk}","PW ST DUP 30915{0svg,0chk}"]
+DISABLED CELL HTML <span data-v-841fd8cc=""></span>
+DEFAULT CELL HTML <span data-v-841fd8cc=""></span>
+WARRQA DET مرحباً Administrator ! AN Administrator admin@example.com تفاصيل ضرائب ورسوم المبيعات مسودة التفاصيل السجلات المرتبطة 0 الضرائب والرسوم على المبيعات عنوان * شركة * افتراضي معطل فئة الضريبة سجل ضرائب ورسوم المبيعات إضافة ضريبة النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي 0.00 SAR 0.00 SAR إلغاء حفظ
+WARRQA CHECKS [false,false]
+ACCOUNTS (company chosen) 20 ["المبيعات (4100 - المبيعات - E)","4524 (4524 - E)","حملات اعلانية - فيزا (5110 - حملات اعلانية - فيزا - E)","تصوير (5111 - تصوير - E)","فويس اوفر (5112 - فويس اوفر - E)","هدايا وايفنت (5113 - هدايا وايفنت - E)","مصروفات تسويق عامة (5114 - مصروفات تسويق عامة - E)","رواتب وعمولات (5210 - رواتب وعمولات - E)","سلف عاملين (5211 - سلف عاملين - E)","ايجارات (5212 - ايجارات - E)","تجهيزات المقر الجديد (5213 - تجهيزات المقر الجديد - E)","رسوم ادارية وحكومية وتأمينات (5214 - رسوم ادارية وحكومية وتأمينات - E)"]
+SEARCH 01204523609 -> []
+SEARCH 1 - s -> []
+SEARCH يوليوس -> []
+ADD/REMOVE COLUMNS تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي إضافة/إزالة حقول إلغاء حفظ
+DELETE CONFIRM no dialog

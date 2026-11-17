@@ -1,0 +1,7 @@
+ROW ITEM VALUE 111
+SETTING POPUP Overview Subscription & Billing Reports Inventory Sales Selling Coupon Codes Price Lists Item Prices
+SETTING OVERLAYS ["Edit Columns Edit Columns Field Name Column Width Add/Remove Fields Cancel Save","Edit Columns Edit Columns","Edit Columns","Cancel Save"]
+SETTING INPUTS []
+EDIT INPUTS []
+EDIT BUTTONS []
+EDIT LABELS(rich) 0 selects

@@ -1,0 +1,637 @@
+<title>Pricing Rule Bug Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "PR-01",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts a Title of 1 character and of 101 characters",
+  "area": "Add Pricing Rule › Title",
+  "tc": [],
+  "srs": "Title: mandatory, minimum 2 and maximum 100 characters",
+  "steps": [
+   "Send the create request for a Pricing Rule with title \"a\", then with 101 characters (all other data valid, rule disabled)."
+  ],
+  "expected": "Both are refused with a length message.",
+  "actual": "Both are saved (PRLE-0005 and PRLE-0006). On the screen the box stops at 100 characters and shows \"يجب أن يتكون عنوان قاعدة التسعير من حرفين على الأقل\". An empty title is correctly refused by the server.",
+  "code": "Pricing Rule  title=\"a\"  -> saved as PRLE-0005\nPricing Rule  title=<101 characters>  -> saved as PRLE-0006",
+  "shots": [],
+  "fix": "Add the 2 to 100 character rule for Title to the server validation."
+ },
+ {
+  "id": "PR-02",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A row of \"Apply Rule on Item Code\" can be saved without an Item Code",
+  "area": "Apply Rule on Item Code › Item Code",
+  "tc": [],
+  "srs": "Item code: mandatory; if the field is left empty an error message appears",
+  "steps": [
+   "Send the create request with Apply On = Item Code and one row that has a UOM but no item_code."
+  ],
+  "expected": "The request is refused: Item Code is required.",
+  "actual": "The rule is saved (PRLE-0010) with an empty item in the row, so the rule applies to no item. The Edit Row popup marks \"كود الصنف\" as mandatory. (A rule with no rows at all is correctly refused: \"Item Code لم تتم إضافته في الجدول\".)",
+  "code": "Pricing Rule Item Code  item_code=null, uom=\"Nos\"  -> saved as PRLE-0010",
+  "shots": [],
+  "fix": "Make Item Code mandatory in the row on the server (the same for the Item Group and Brand tables)."
+ },
+ {
+  "id": "PR-03",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A row can be saved without a UOM, or with a UOM that the item does not have",
+  "area": "Apply Rule on Item Code › UOM",
+  "tc": [],
+  "srs": "UOM: mandatory, and it lists only the UOMs defined for the selected item",
+  "steps": [
+   "Send the create request with a row (item \"111\") that has no uom.",
+   "Send it again with the uom \"Kg\" (item 111 has only \"Nos\")."
+  ],
+  "expected": "Both are refused.",
+  "actual": "Both are saved (PRLE-0011 and PRLE-0012). On the screen the UOM box is disabled until an item is chosen and then lists only \"Nos\".",
+  "code": "Pricing Rule Item Code  item_code=\"111\", uom=null  -> saved\nPricing Rule Item Code  item_code=\"111\", uom=\"Kg\"  -> saved",
+  "shots": [],
+  "fix": "Make UOM mandatory and check that it belongs to the item, on the server."
+ },
+ {
+  "id": "PR-04",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "Two Pricing Rules with exactly the same criteria are accepted",
+  "area": "Add Pricing Rule › Save",
+  "tc": [],
+  "srs": "It is not allowed to create more than one Pricing Rule with the same criteria",
+  "steps": [
+   "Create a rule for item \"111\" (Nos), Min Qty 3, 7% discount, Selling.",
+   "Create a second rule with the same item, quantity, discount and party."
+  ],
+  "expected": "The second one is refused with a message that the rule exists.",
+  "actual": "Both are saved (PRLE-0026 and PRLE-0027). Putting the same item twice in one rule is refused (\"Item Code مكرر\"), so only the check across rules is missing.",
+  "code": "Pricing Rule  item=111/Nos, min_qty=3, discount=7  (twice)  -> saved, saved",
+  "shots": [],
+  "fix": "Add the \"same criteria\" check to the Pricing Rule validation (and decide which fields define the criteria)."
+ },
+ {
+  "id": "PR-05",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A discount of 150%, of -10% or of 0%, and a negative Min Qty, are accepted",
+  "area": "Price Discount Scheme, Qty and Amount",
+  "tc": [],
+  "srs": "Numbers only (the screen keeps only digits); a rule must give a benefit",
+  "steps": [
+   "Send the create request with Discount Percentage 150, then -10, then 0.",
+   "Send it with Min Qty -5."
+  ],
+  "expected": "The values that cannot be a valid discount or quantity are refused.",
+  "actual": "All four are saved (PRLE-0014, PRLE-0015, PRLE-0016, PRLE-0013). On the screen the number boxes drop the minus sign and stop at 100 characters, so the screen cannot send these values. A Min Qty bigger than Max Qty, a Min Amount bigger than Max Amount and a Valid Up To before Valid From are refused correctly.",
+  "code": "Pricing Rule  discount_percentage=150 / -10 / 0, min_qty=-5  -> saved",
+  "shots": [],
+  "fix": "Validate the range of the discount (0 to 100) and refuse a negative quantity or amount on the server."
+ },
+ {
+  "id": "PR-06",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Backend",
+  "title": "The server accepts a Rule Description of 2 characters and of 501 characters",
+  "area": "Advanced Settings › Rule Description",
+  "tc": [],
+  "srs": "Rule Description: optional, minimum 3 and maximum 500 characters",
+  "steps": [
+   "Send the create request with Validate Applied Rule checked and rule_description \"ab\", then 501 characters."
+  ],
+  "expected": "Both are refused with a length message.",
+  "actual": "Both are saved (PRLE-0022 and PRLE-0023). The limits on the screen were not checked.",
+  "code": "Pricing Rule  validate_applied_rule=1, rule_description=\"ab\" / <501 characters>  -> saved",
+  "shots": [],
+  "fix": "Add the 3 to 500 character rule for Rule Description to the server validation."
+ },
+ {
+  "id": "PR-07",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Save on an untouched Add form does nothing: no message is shown for the empty mandatory fields",
+  "area": "Add Pricing Rule › Save",
+  "tc": [],
+  "srs": "A validation error message is displayed for each invalid field (Title, Company and Currency are mandatory)",
+  "steps": [
+   "Open Selling › Pricing Rule › Add Pricing Rule.",
+   "Without typing anything, click Save."
+  ],
+  "expected": "A message under Title, Company and Currency, and one for the empty items table.",
+  "actual": "Nothing happens: no message and no toast. After typing one character in Title the same Save shows the Title message, \"الشركة مطلوبة\", \"العملة مطلوبة\" and \"أضف صفًا واحدًا على الأقل إلى الجدول\". Same behavior as CC-11, PL-04, IP-07, CG-05, TR-04 and ST-06.",
+  "code": "Add form untouched  -> Save -> no message",
+  "shots": [],
+  "fix": "Validate the whole form on Save even when the form is not marked as changed."
+ },
+ {
+  "id": "PR-08",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "\"Show in POS Offers\" does not exist",
+  "area": "Add Pricing Rule › Details",
+  "tc": [],
+  "srs": "Show in POS Offers: checkbox shown when Apply On is Item Code, the item table has exactly one row, Mixed Conditions, Is Cumulative, Coupon Code Based and Apply Multiple Pricing Rules are unchecked and Selling is checked; checking it with a failed condition shows an error message",
+  "steps": [
+   "Open Add Pricing Rule, keep Apply On = Item Code, add one item row, check Selling, and leave the other options unchecked.",
+   "Look for the checkbox in the form and read the Pricing Rule doctype fields."
+  ],
+  "expected": "The \"Show in POS Offers\" checkbox appears.",
+  "actual": "No such checkbox appears and the Pricing Rule doctype has no field for it, so a rule cannot be shown in the POS Offers tab.",
+  "code": "conditions met: Apply On=Item Code, 1 row, Selling=1  -> no Show in POS Offers",
+  "shots": [],
+  "fix": "Add the field with its visibility rule and the validation message, or remove it from the SRS if POS is out of scope."
+ },
+ {
+  "id": "PR-09",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "\"Discount On Other Item\" is shown when the rule is a Product rule and when Apply On is Transaction",
+  "area": "Add Pricing Rule › Discount On Other Item",
+  "tc": [],
+  "srs": "Discount On Other Item: appears only when Price or Product Discount = Price",
+  "steps": [
+   "Open Add Pricing Rule and set \"السعر أو خصم المنتج\" to \"المنتج\".",
+   "Then set \"تطبيق القاعدة على\" to \"المعاملة\"."
+  ],
+  "expected": "The section \"الخصم على صنف آخر\" is hidden.",
+  "actual": "The section (\"الخصم على صنف آخر\" with \"تطبيق القاعدة على صنف آخر\") stays visible in both cases.",
+  "code": "Price or Product = Product  ->  section still shown",
+  "shots": [],
+  "fix": "Hide the section when the type is Product."
+ },
+ {
+  "id": "PR-10",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The Setting popup of the items table has no \"Reset to default\", uses Save / Cancel, and the table has no No. column",
+  "area": "Add / Details › Apply Rule on Item Code › Setting",
+  "tc": [],
+  "srs": "Setting popup: drag and drop, Column width, Add / Remove columns, \"Update\" and \"Reset to default\"; the table columns start with No.",
+  "steps": [
+   "Open Add Pricing Rule, add an item row and click the gear of the table.",
+   "Read the table header."
+  ],
+  "expected": "Update and Reset to default; a No. column after the checkbox.",
+  "actual": "The popup has the column list with width, \"إضافة/إزالة حقول\", Cancel and Save. No Reset to default (same as AD-11, CT-16 and ST-08). The header is only \"كود الصنف\" and \"وحدة القياس\"; there is no row number.",
+  "code": "popup: تعديل الأعمدة | اسم الحقل | عرض العمود | إضافة/إزالة حقول | إلغاء | حفظ",
+  "shots": [],
+  "fix": "Add the Reset to default button and the No. column."
+ },
+ {
+  "id": "PR-11",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "\"Territory\" is shown as \"النطاق\" in the Applicable For list",
+  "area": "Add Pricing Rule › Party Information › Applicable For",
+  "tc": [],
+  "srs": "Applicable For (Selling): Customer, Customer Group, Territory, Sales Partner, Campaign",
+  "steps": [
+   "Open Add Pricing Rule, open \"معلومات الطرف\", check \"البيع\" and open the Applicable For list."
+  ],
+  "expected": "The same Arabic name as the Territory module (\"المنطقة\").",
+  "actual": "The list is العميل, مجموعة العملاء, النطاق, شريك المبيعات, الحملة. The Territory module and its sidebar entry say \"المناطق\".",
+  "code": "Applicable For: العميل | مجموعة العملاء | النطاق | شريك المبيعات | الحملة",
+  "shots": [],
+  "fix": "Use the same Arabic term for Territory everywhere."
+ },
+ {
+  "id": "PR-12",
+  "sev": "Low",
+  "pri": "P4",
+  "layer": "Frontend",
+  "title": "The list action bar has no Clear Assignment",
+  "area": "Pricing Rule list › bulk actions",
+  "tc": [],
+  "srs": "Actions: Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete",
+  "steps": [
+   "Open Selling › Pricing Rule.",
+   "Tick the checkbox of one rule and read the action bar."
+  ],
+  "expected": "Edit, Export, Assign to, Clear assignment, Add tags, Print, Delete.",
+  "actual": "The bar shows تحديد الكل, تعديل, تصدير, اسناد, إضافة وسوم, طباعة and حذف. Clear Assignment is missing (same as CC-06, PL-05, IP-08, CG-07, TNC-04, TR-05, AD-08, CT-17 and ST-11).",
+  "code": "bulk bar: تحديد الكل | تعديل | تصدير | اسناد | إضافة وسوم | طباعة | حذف",
+  "shots": [],
+  "fix": "Add the Clear Assignment action."
+ }
+];
+const BUG_AR = {
+ "PR-01": {
+  "t": "السيرفر بيقبل Title من حرف واحد ومن 101 حرف",
+  "area": "إضافة Pricing Rule › Title",
+  "srs": "Title: إجباري، من 2 لـ 100 حرف",
+  "steps": [
+   "ابعت طلب إنشاء Pricing Rule بـ title «a»، وبعدين بـ 101 حرف (باقي البيانات صحيحة والقاعدة معطّلة)."
+  ],
+  "exp": "الاتنين يترفضوا برسالة طول.",
+  "act": "الاتنين بيتحفظوا (PRLE-0005 وPRLE-0006). في الشاشة الخانة بتقف عند 100 حرف وبتظهر «يجب أن يتكون عنوان قاعدة التسعير من حرفين على الأقل». والـ title الفاضي السيرفر بيرفضه صح.",
+  "fix": "ضيفوا قاعدة 2 لـ 100 حرف للـ Title في validation السيرفر."
+ },
+ "PR-02": {
+  "t": "ينفع تحفظ صف في «Apply Rule on Item Code» من غير Item Code",
+  "area": "Apply Rule on Item Code › Item Code",
+  "srs": "Item code: إجباري؛ ولو الحقل فاضي بتظهر رسالة خطأ",
+  "steps": [
+   "ابعت طلب الإنشاء بـ Apply On = Item Code وصف واحد فيه UOM من غير item_code."
+  ],
+  "exp": "الطلب يترفض: Item Code مطلوب.",
+  "act": "القاعدة بتتحفظ (PRLE-0010) والصنف في الصف فاضي، يعني القاعدة مبتتطبقش على أي صنف. ونافذة Edit Row بتعلّم «كود الصنف» إجباري. (قاعدة من غير صفوف خالص بتترفض صح: «Item Code لم تتم إضافته في الجدول».)",
+  "fix": "خلّوا Item Code إجباري في الصف في السيرفر (وكذلك جدولي Item Group وBrand)."
+ },
+ "PR-03": {
+  "t": "ينفع تحفظ صف من غير UOM، أو بـ UOM مش بتاعة الصنف",
+  "area": "Apply Rule on Item Code › UOM",
+  "srs": "UOM: إجباري، وبيعرض UOMs المعرّفة للصنف المختار بس",
+  "steps": [
+   "ابعت طلب الإنشاء بصف (الصنف «111») من غير uom.",
+   "ابعته تاني بـ uom «Kg» (الصنف 111 ليه «Nos» بس)."
+  ],
+  "exp": "الاتنين يترفضوا.",
+  "act": "الاتنين بيتحفظوا (PRLE-0011 وPRLE-0012). في الشاشة خانة UOM مقفولة لحد ما تختار صنف وبعدين مبتعرضش غير «Nos».",
+  "fix": "خلّوا UOM إجباري وافحصوا إنها تابعة للصنف، في السيرفر."
+ },
+ "PR-04": {
+  "t": "قاعدتين تسعير بنفس المعايير بالظبط بيتقبلوا",
+  "area": "إضافة Pricing Rule › Save",
+  "srs": "مينفعش إنشاء أكتر من Pricing Rule بنفس المعايير",
+  "steps": [
+   "اعمل قاعدة للصنف «111» (Nos) وMin Qty 3 وخصم 7% وSelling.",
+   "اعمل قاعدة تانية بنفس الصنف والكمية والخصم والطرف."
+  ],
+  "exp": "التانية تترفض برسالة إن القاعدة موجودة.",
+  "act": "الاتنين بيتحفظوا (PRLE-0026 وPRLE-0027). ولو حطيت نفس الصنف مرتين في قاعدة واحدة بيترفض («Item Code مكرر»)، فالناقص هو الفحص بين القواعد بس.",
+  "fix": "ضيفوا فحص «نفس المعايير» في validation الـ Pricing Rule (وحددوا أنهي حقول بتعرّف المعايير)."
+ },
+ "PR-05": {
+  "t": "خصم 150% أو -10% أو 0%، وMin Qty بالسالب، بيتقبلوا",
+  "area": "Price Discount Scheme وQty and Amount",
+  "srs": "أرقام بس (الشاشة بتسيب الأرقام بس)؛ والقاعدة لازم تدي فايدة",
+  "steps": [
+   "ابعت طلب الإنشاء بـ Discount Percentage 150، وبعدين -10، وبعدين 0.",
+   "ابعته بـ Min Qty -5."
+  ],
+  "exp": "القيم اللي مينفعش تبقى خصم أو كمية صحيحة تترفض.",
+  "act": "الأربعة بيتحفظوا (PRLE-0014 وPRLE-0015 وPRLE-0016 وPRLE-0013). في الشاشة خانات الأرقام بتشيل علامة الناقص وبتقف عند 100 حرف، فالشاشة مينفعش تبعت القيم دي. وMin Qty أكبر من Max Qty وMin Amount أكبر من Max Amount وValid Up To قبل Valid From بيترفضوا صح.",
+  "fix": "اعملوا validation لنطاق الخصم (0 لـ 100) وارفضوا الكمية أو المبلغ بالسالب في السيرفر."
+ },
+ "PR-06": {
+  "t": "السيرفر بيقبل Rule Description من حرفين ومن 501 حرف",
+  "area": "Advanced Settings › Rule Description",
+  "srs": "Rule Description: اختياري، من 3 لـ 500 حرف",
+  "steps": [
+   "ابعت طلب الإنشاء بـ Validate Applied Rule مفعّل وrule_description «ab»، وبعدين 501 حرف."
+  ],
+  "exp": "الاتنين يترفضوا برسالة طول.",
+  "act": "الاتنين بيتحفظوا (PRLE-0022 وPRLE-0023). حدود الشاشة ماتفحصتش.",
+  "fix": "ضيفوا قاعدة 3 لـ 500 حرف لـ Rule Description في validation السيرفر."
+ },
+ "PR-07": {
+  "t": "Save على فورم إضافة لسه ماتلمسش مبيعمل حاجة: مفيش رسالة للحقول الإجبارية الفاضية",
+  "area": "إضافة Pricing Rule › Save",
+  "srs": "بتظهر رسالة تحقق لكل حقل غير صالح (Title وCompany وCurrency إجباريين)",
+  "steps": [
+   "افتح Selling › Pricing Rule › Add Pricing Rule.",
+   "من غير ما تكتب أي حاجة، اضغط Save."
+  ],
+  "exp": "رسالة تحت Title وCompany وCurrency، ورسالة لجدول الأصناف الفاضي.",
+  "act": "مفيش أي حاجة بتحصل: مفيش رسالة ولا toast. بعد ما تكتب حرف واحد في Title نفس الـ Save بيظهر رسالة Title و«الشركة مطلوبة» و«العملة مطلوبة» و«أضف صفًا واحدًا على الأقل إلى الجدول». نفس سلوك CC-11 وPL-04 وIP-07 وCG-05 وTR-04 وST-06.",
+  "fix": "اعملوا validation للفورم كله عند Save حتى لو الفورم لسه ماتعلّمش إنه اتغيّر."
+ },
+ "PR-08": {
+  "t": "«Show in POS Offers» مش موجود",
+  "area": "إضافة Pricing Rule › التفاصيل",
+  "srs": "Show in POS Offers: checkbox بيظهر لما Apply On يبقى Item Code وجدول الأصناف فيه صف واحد بالظبط وMixed Conditions وIs Cumulative وCoupon Code Based وApply Multiple Pricing Rules مش مفعّلين وSelling مفعّل؛ ولو اتفعّل وشرط مش متحقق بتظهر رسالة خطأ",
+  "steps": [
+   "افتح Add Pricing Rule وسيب Apply On = Item Code وضيف صف صنف واحد وفعّل Selling وسيب الباقي.",
+   "دوّر على الـ checkbox في الفورم واقرأ حقول doctype الـ Pricing Rule."
+  ],
+  "exp": "checkbox «Show in POS Offers» بيظهر.",
+  "act": "مفيش الـ checkbox ده، والـ doctype مفيهوش حقل ليه، فمفيش طريقة تظهر قاعدة في تبويب POS Offers.",
+  "fix": "ضيفوا الحقل بقاعدة ظهوره ورسالة الـ validation، أو شيلوه من الـ SRS لو الـ POS برّه النطاق."
+ },
+ "PR-09": {
+  "t": "«Discount On Other Item» بيظهر لما القاعدة تبقى Product ولما Apply On يبقى Transaction",
+  "area": "إضافة Pricing Rule › Discount On Other Item",
+  "srs": "Discount On Other Item: بيظهر لما Price or Product Discount = Price بس",
+  "steps": [
+   "افتح Add Pricing Rule وغيّر «السعر أو خصم المنتج» لـ «المنتج».",
+   "وبعدين غيّر «تطبيق القاعدة على» لـ «المعاملة»."
+  ],
+  "exp": "قسم «الخصم على صنف آخر» يختفي.",
+  "act": "القسم («الخصم على صنف آخر» و«تطبيق القاعدة على صنف آخر») فاضل ظاهر في الحالتين.",
+  "fix": "اخفوا القسم لما النوع يبقى Product."
+ },
+ "PR-10": {
+  "t": "نافذة Setting لجدول الأصناف مفيهاش «Reset to default» وبتستخدم Save / Cancel، والجدول مفيهوش عمود No.",
+  "area": "الإضافة / التفاصيل › Apply Rule on Item Code › Setting",
+  "srs": "نافذة Setting: السحب والإفلات وColumn width وAdd / Remove columns وزرّي «Update» و«Reset to default»؛ وأعمدة الجدول بتبدأ بـ No.",
+  "steps": [
+   "افتح Add Pricing Rule وضيف صف صنف واضغط على ترس الجدول.",
+   "اقرأ هيدر الجدول."
+  ],
+  "exp": "Update وReset to default؛ وعمود No. بعد الـ checkbox.",
+  "act": "النافذة فيها قايمة الأعمدة بعرضها و«إضافة/إزالة حقول» وإلغاء وحفظ. مفيش Reset to default (زي AD-11 وCT-16 وST-08). الهيدر «كود الصنف» و«وحدة القياس» بس؛ مفيش رقم صف.",
+  "fix": "ضيفوا زر Reset to default وعمود No."
+ },
+ "PR-11": {
+  "t": "«Territory» ظاهرة «النطاق» في قايمة Applicable For",
+  "area": "إضافة Pricing Rule › Party Information › Applicable For",
+  "srs": "Applicable For (Selling): Customer وCustomer Group وTerritory وSales Partner وCampaign",
+  "steps": [
+   "افتح Add Pricing Rule وافتح «معلومات الطرف» وفعّل «البيع» وافتح قايمة Applicable For."
+  ],
+  "exp": "نفس الاسم العربي بتاع موديول Territory («المنطقة»).",
+  "act": "القايمة: العميل ومجموعة العملاء والنطاق وشريك المبيعات والحملة. وموديول Territory وعنصره في السايدبار «المناطق».",
+  "fix": "استخدموا نفس المصطلح العربي لـ Territory في كل حتة."
+ },
+ "PR-12": {
+  "t": "شريط إجراءات القايمة مفيهوش Clear Assignment",
+  "area": "قايمة Pricing Rule › الإجراءات الجماعية",
+  "srs": "الإجراءات: Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete",
+  "steps": [
+   "افتح Selling › Pricing Rule.",
+   "علّم الـ checkbox بتاع قاعدة واحدة واقرأ شريط الإجراءات."
+  ],
+  "exp": "Edit وExport وAssign to وClear assignment وAdd tags وPrint وDelete.",
+  "act": "الشريط فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف. Clear Assignment ناقص (زي CC-06 وPL-05 وIP-08 وCG-07 وTNC-04 وTR-05 وAD-08 وCT-17 وST-11).",
+  "fix": "ضيفوا إجراء Clear Assignment."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Pricing Rule Bug Report","eyebrow":"QA bug report · Selling › Pricing Rule","h1":"Pricing Rule: 12 differences from the SRS, the screen is close and the server rules are missing","lede":"Comparison of the Pricing Rule list, the Add screen (Details, Dynamic Conditions and Advanced Settings tabs), the Details screen and the server rules with the SRS (pages 87 to 109), on the test server: 46 checks (34 matched, 12 differ). The screen follows the SRS closely: the defaults (Item Code, Price, naming series, Valid From today), the tables that change with Apply On, the Product and Price schemes, Selling / Buying with Applicable For, Margin, Recursive, Validate Applied Rule and Priority all show and hide the right fields. The gaps are mostly on the server: it saves a Title of 1 or 101 characters (PR-01), a row without an item or with a wrong UOM (PR-02, PR-03), two rules with the same criteria (PR-04) and a discount of 150% or -10% (PR-05); and the \"Show in POS Offers\" checkbox does not exist (PR-08). All test rules were created disabled so that they cannot change a real sale.","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","Arabic (the Pricing Rule screens)"],["Run date","2026-11-17"],["Method","Playwright browser checks and calls to the create endpoint (not saved as a spec yet)"],["Bug IDs","PR-01 to PR-12 (this module only)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["List screen: columns, Add button, action bar",3,2,1,0],["Add screen: naming series, Title limits and messages, Apply On and Price / Product values and defaults, Warehouse and the Mixed / Cumulative / Coupon options, the three item tables and their UOM, Party Information and Applicable For, Qty and Amount fields, Product Discount Scheme, Period Settings, Margin, Price Discount Scheme, Dynamic Conditions, Advanced Settings and Priority, Save messages, untouched Save, Show in POS Offers, Discount On Other Item, Setting popup, Territory label",25,20,5,0],["Details screen: data, fixed page actions, delete confirmation",3,3,0,0],["Server rules (create): Title mandatory and length, empty items table, item, UOM, duplicate item, same criteria, quantity / amount / date ranges, discount range, priority, Applicable For, warehouse, Selling / Buying, Rule Description length",15,9,6,0]],"total":"Total","covNote":"There is no Pricing Rule test-case sheet yet, so the defects above are not linked to case IDs. The checks were run through browser scripts and requests.","okTitle":"Verified working","ok":["List: columns ID, Title and Apply On; Add button; action bar with Select All, Edit, Export, Assign, Add Tags, Print and Delete","Add, basic information: Naming Series has the default PRLE-.####; Title stops at 100 characters and shows \"يجب أن يتكون عنوان قاعدة التسعير من حرفين على الأقل\"; Apply On has Item Code (default), Item Group, Brand and Transaction; Price or Product has Price (default) and Product","Apply On = Item Group or Brand shows the matching table; Transaction hides Warehouse, Mixed Conditions, Is Cumulative and Coupon Code Based and shows \"Apply Discount On\"; the items table has Item Code and UOM, the UOM is empty until an item is chosen and lists only the item UOMs, and Edit Row marks both as mandatory","Party Information: checking Selling shows Applicable For with Customer, Customer Group, Territory, Sales Partner and Campaign; Selling and Buying together show all seven; Buying alone shows Supplier and Supplier Group; unchecking both hides it; each choice shows its own searchable field","Qty and Amount: four number boxes that drop letters and the minus sign and stop at 100 characters; Product Discount Scheme: Same Item hides Free Item, Is Recursive shows the two recursion fields, Round Free Item is hidden; Price Discount Scheme: Rate hides For Price List and shows Rate, Discount Amount shows the amount box, Discount Percentage is the default","Period Settings: Valid From is today, Valid Up To is empty, Company and Currency are mandatory (\"الشركة مطلوبة\", \"العملة مطلوبة\"); Margin: Margin Type is empty and shows the value box after Percentage or Amount; an empty items table shows \"أضف صفًا واحدًا على الأقل إلى الجدول\"","Dynamic Conditions tab: the condition editor with an Expand button; Advanced Settings tab: Apply Multiple Pricing Rules shows Apply Discount On Discounted Rate, Validate Applied Rule shows Rule Description, Has Priority shows Priority (0 to 20), Threshold is a number box","Details: the saved data, Assign, Tags, Attachments, Print, Share and Delete, and the delete confirmation (Cancel closes it)","Server: a missing Title, a rule with no items, a repeated item in the table, Min Qty above Max Qty, Min Amount above Max Amount, Valid Up To before Valid From, Has Priority without a Priority, Applicable For without its party, a warehouse that does not exist and neither Selling nor Buying are refused"],"noTitle":"Not executed, and why","no":["Saving and editing a rule from the screen with valid data (Save with all mandatory fields filled was not clicked, to avoid creating records)","Delete \"Yes\" and the warning for a rule linked to transactions (Delete was not confirmed on real rules)","The limits of Rule Description and the minimum-length messages of the number boxes on the screen; the tables for Item Group and Brand in detail (their UOM lists); Column width, drag and drop and Add / Remove columns in the tables; Export, Assign, Print, tags and the list Edit popup","The behavior of a rule in a real transaction (discount, free item, margin, priority, coupon, cumulative and mixed conditions) and the Dynamic Condition code evaluation","The Pricing Rule created by a Promotional Scheme and the Product Discount Scheme in a Sales Invoice"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Selling SRS v1.0, Pricing Rule","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 is finished. Retesting starts when the developers mark PR-01 to PR-05, PR-07 and PR-08 as Fixed here (or tell the tester)."],["h","When a fix lands"],["ol",["Repeat the case through the create endpoint (PR-01 to PR-06 can only be seen there) and on the screen (PR-07 to PR-12).","Run the cases listed under Not executed.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","The server checks created 25 test rules, PRLE-0004 to PRLE-0028 (\"PW PR ...\"), that were not deleted (nothing is deleted by the tests). All of them are disabled, so none of them applies to a sale. The 3 existing rules (PRLE-0001 to PRLE-0003) were only read."]],"obs":["The server fills a missing Price or Product, Company and Currency with defaults (Price, the session company, SAR), so saving without them works; the screen shows the mandatory messages for Company and Currency.","The server also fills Margin Type with \"Percentage\" when it is not sent, while the SRS and the screen start with an empty Margin Type.","The SRS says Priority contains \"Empty - 0 - 1 ... 20\"; the screen list is 0 to 20 with no empty choice.","The SRS asks for a minimum of 2 characters in Margin Rate, Discount Percentage, Rate and Discount Amount; one-digit values like 5 are normal for these fields, so confirm the rule.","Saving with neither Selling nor Buying is refused by the system (\"يجب اختيار واحد على الأقل من خياري البيع أو الشراء\"); the SRS does not mention this rule.","A rule with Apply On = Transaction can still be saved with rows in the item table, and a Product rule can be saved with no free item and Same Item unchecked; the SRS does not forbid either.","The list shows only 3 rules; the SRS Apply On column shows the values Item code, Item group, Brand and Transaction (the screen shows the Arabic names)."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Delivery Note sheet (TC-DNL, TC-DNA, TC-DNW, TC-DNG, TC-DNM, TC-DND), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مشاكل Pricing Rule","eyebrow":"تقرير مشاكل الجودة · Selling › Pricing Rule","h1":"Pricing Rule: 12 فرق عن الـ SRS، الشاشة قريبة والناقص قواعد السيرفر","lede":"مقارنة قايمة Pricing Rule وشاشة الإضافة (تابات Details وDynamic Conditions وAdvanced Settings) وشاشة التفاصيل وقواعد السيرفر بالـ SRS (الصفحات 87 لـ 109) على السيرفر التجريبي: 46 فحص (34 مطابق و12 مختلف). الشاشة ماشية قريب جدًا من الـ SRS: القيم الافتراضية (Item Code وPrice وسلسلة التسمية وValid From النهارده) والجداول اللي بتتغير مع Apply On ومخططي Product وPrice وSelling / Buying مع Applicable For وMargin وRecursive وValidate Applied Rule وPriority كلها بتظهر وتخفي الحقول الصح. الفروق أغلبها في السيرفر: بيحفظ Title من 1 أو 101 حرف (PR-01) وصف من غير صنف أو بـ UOM غلط (PR-02 وPR-03) وقاعدتين بنفس المعايير (PR-04) وخصم 150% أو -10% (PR-05)؛ و checkbox «Show in POS Offers» مش موجود (PR-08). كل قواعد الاختبار اتعملت معطّلة عشان مايأثروش على أي بيع حقيقي.","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","العربية (شاشات Pricing Rule)"],["تاريخ التشغيل","2026-11-17"],["الطريقة","فحوصات متصفح بـ Playwright ونداءات على endpoint الإنشاء (لسه مش محفوظة كملف اختبار)"],["أرقام المشاكل","PR-01 لـ PR-12 (الموديول ده بس)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة القايمة: الأعمدة وزر الإضافة وشريط الإجراءات",3,2,1,0],["شاشة الإضافة: سلسلة التسمية وحدود Title ورسائله وقيم Apply On وPrice / Product وقيمها الافتراضية وWarehouse وخيارات Mixed / Cumulative / Coupon والجداول التلاتة وUOM وParty Information وApplicable For وحقول Qty and Amount ومخطط Product ومخطط Price وPeriod Settings وMargin وDynamic Conditions وAdvanced Settings وPriority ورسائل Save وSave على فورم ماتلمسش وShow in POS Offers وDiscount On Other Item ونافذة Setting وتسمية Territory",25,20,5,0],["شاشة التفاصيل: البيانات والأزرار الثابتة وتأكيد الحذف",3,3,0,0],["قواعد السيرفر (إنشاء): Title إجباري وطوله وجدول الأصناف الفاضي والصنف وUOM والصنف المكرر ونفس المعايير ونطاقات الكمية والمبلغ والتاريخ ونطاق الخصم وPriority وApplicable For وWarehouse وSelling / Buying وطول Rule Description",15,9,6,0]],"total":"الإجمالي","covNote":"لسه مفيش شيت test cases لـ Pricing Rule، فالمشاكل فوق مش مربوطة بأرقام حالات. الفحوصات اتعملت بسكريبتات متصفح وطلبات للسيرفر.","okTitle":"اللي اتأكدنا إنه شغال","ok":["القايمة: أعمدة ID وTitle وApply On؛ وزر الإضافة؛ وشريط الإجراءات فيه تحديد الكل وتعديل وتصدير واسناد وإضافة وسوم وطباعة وحذف","الإضافة، المعلومات الأساسية: Naming Series الافتراضي PRLE-.####؛ وTitle بيقف عند 100 حرف وبيظهر «يجب أن يتكون عنوان قاعدة التسعير من حرفين على الأقل»؛ وApply On فيه Item Code (الافتراضي) وItem Group وBrand وTransaction؛ وPrice or Product فيه Price (الافتراضي) وProduct","Apply On = Item Group أو Brand بيظهر الجدول المناسب؛ وTransaction بيخفي Warehouse وMixed Conditions وIs Cumulative وCoupon Code Based وبيظهر «Apply Discount On»؛ وجدول الأصناف فيه Item Code وUOM، والـ UOM فاضي لحد ما تختار صنف وبيعرض UOMs الصنف بس، وEdit Row بيعلّم الاتنين إجباري","Party Information: تفعيل Selling بيظهر Applicable For فيه Customer وCustomer Group وTerritory وSales Partner وCampaign؛ وSelling مع Buying بيظهروا السبعة؛ وBuying لوحده بيظهر Supplier وSupplier Group؛ وإلغاء الاتنين بيخفيه؛ وكل اختيار بيظهر حقله القابل للبحث","Qty and Amount: أربع خانات أرقام بتشيل الحروف وعلامة الناقص وبتقف عند 100 حرف؛ ومخطط Product: Same Item بيخفي Free Item وIs Recursive بيظهر حقلي التكرار وRound Free Item مخفي؛ ومخطط Price: Rate بيخفي For Price List وبيظهر Rate وDiscount Amount بيظهر خانة المبلغ وDiscount Percentage هو الافتراضي","Period Settings: Valid From النهارده وValid Up To فاضي وCompany وCurrency إجباريين («الشركة مطلوبة» و«العملة مطلوبة»)؛ وMargin: نوع الهامش فاضي وبيظهر خانة القيمة بعد Percentage أو Amount؛ وجدول الأصناف الفاضي بيظهر «أضف صفًا واحدًا على الأقل إلى الجدول»","تاب Dynamic Conditions: محرر الشرط مع زر Expand؛ وتاب Advanced Settings: Apply Multiple Pricing Rules بيظهر Apply Discount On Discounted Rate وValidate Applied Rule بيظهر Rule Description وHas Priority بيظهر Priority (من 0 لـ 20) وThreshold خانة رقم","التفاصيل: البيانات المحفوظة وAssign وTags وAttachments وPrint وShare وDelete وتأكيد الحذف (الإلغاء بيقفله)","السيرفر: Title ناقص وقاعدة من غير أصناف وصنف متكرر في الجدول وMin Qty أكبر من Max Qty وMin Amount أكبر من Max Amount وValid Up To قبل Valid From وHas Priority من غير Priority وApplicable For من غير الطرف ومستودع مش موجود وSelling وBuying الاتنين مش مفعّلين، كلهم بيترفضوا"],"noTitle":"اللي ماتنفذش وليه","no":["حفظ وتعديل قاعدة من الشاشة ببيانات صحيحة (ماضغطتش Save والحقول الإجبارية مليانة عشان ماعملش سجلات)","«Yes» في الحذف وتحذير قاعدة مرتبطة بمعاملات (ماأكدتش الحذف على قواعد حقيقية)","حدود Rule Description ورسائل الحد الأدنى لخانات الأرقام في الشاشة؛ وجدولي Item Group وBrand بالتفصيل (قوايم UOM)؛ وColumn width وسحب الأعمدة وAdd / Remove columns في الجداول؛ والتصدير والإسناد والطباعة والوسوم ونافذة Edit في القايمة","سلوك القاعدة في معاملة حقيقية (الخصم والصنف المجاني والهامش والأولوية والكوبون والتراكمي والشروط المختلطة) وتنفيذ كود Dynamic Condition","الـ Pricing Rule اللي بتتعمل من Promotional Scheme ومخطط Product في فاتورة مبيعات"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Selling SRS v1.0, Pricing Rule","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا PR-01 لـ PR-05 وPR-07 وPR-08 كـ Fixed هنا (أو يبلّغوا الـ tester)."],["h","لما يوصل إصلاح"],["ol",["كرر الحالة عن طريق endpoint الإنشاء (PR-01 لـ PR-06 مبتبانوش إلا من هناك) وفي الشاشة (PR-07 لـ PR-12).","نفّذ الحالات المكتوبة تحت «ماتنفذش».","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","فحوصات السيرفر عملت 25 قاعدة تجريبية، من PRLE-0004 لـ PRLE-0028 («PW PR ...»)، مامسحتهاش (الاختبارات مبتمسحش حاجة). كلها معطّلة، فمفيش واحدة منها بتتطبق على أي بيع. القواعد الموجودة (PRLE-0001 لـ PRLE-0003) اتقرت بس."]],"obs":["السيرفر بيملي Price or Product وCompany وCurrency لو ناقصين بقيم افتراضية (Price وشركة الـ session وSAR)، فالحفظ من غيرهم بيشتغل؛ والشاشة بتظهر رسائل الإجباري لـ Company وCurrency.","السيرفر كمان بيملي Margin Type بـ «Percentage» لو ماتبعتش، بينما الـ SRS والشاشة بيبدأوا بـ Margin Type فاضي.","الـ SRS بيقول إن Priority فيها «Empty - 0 - 1 ... 20»؛ وقايمة الشاشة من 0 لـ 20 من غير اختيار فاضي.","الـ SRS بيطلب حد أدنى حرفين في Margin Rate وDiscount Percentage وRate وDiscount Amount؛ والقيم من رقم واحد زي 5 عادية للحقول دي، فأكدوا القاعدة.","الحفظ من غير Selling ولا Buying بيترفض من النظام («يجب اختيار واحد على الأقل من خياري البيع أو الشراء»)؛ والـ SRS مبيذكرش القاعدة دي.","قاعدة Apply On = Transaction ينفع تتحفظ وفي جدول الأصناف صفوف، وقاعدة Product ينفع تتحفظ من غير صنف مجاني وSame Item مش مفعّل؛ والـ SRS مبيمنعش الاتنين.","القايمة فيها 3 قواعد بس؛ وعمود Apply On في الـ SRS بقيمه Item code وItem group وBrand وTransaction (والشاشة بتعرض الأسماء بالعربي)."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Delivery Note (TC-DNL وTC-DNA وTC-DNW وTC-DNG وTC-DNM وTC-DND)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

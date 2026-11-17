@@ -1,0 +1,33 @@
+ROW ["[chk=false]","Warrqa - Warrqa","مفعل","","","Warrqa - ورقة","Warrqa"]
+ROW ["[chk=false]","عنوان قالب ضريبى جديد - E","مفعل","","","Ahmed Ebrahim CO.","عنوان قالب ضريبى جديد"]
+ROW ["[chk=false]","VAT - E","مفعل","","","Ahmed Ebrahim CO.","VAT"]
+ROW ["[chk=false]","تجربة - E","مفعل","","","Warrqa - ورقة","تجربة"]
+ROW ["[chk=false]","Jordan Tax - Infugram JOR","مفعل","","","Infugram JOR - انفوجرام الاردن","Jordan Tax"]
+ROW ["[chk=false]","6+526 - E","معطل","","","Ahmed Ebrahim CO.","6+526"]
+ADD URL https://test.hr.azzrk.com/desk/shamel#/selling/sales-tax-templates/new
+ADD TEXT مرحباً Administrator ! AN Administrator admin@example.com إضافة قالب ضريبي الضرائب والرسوم على المبيعات عنوان * شركة * افتراضي معطل فئة الضريبة سجل ضرائب ورسوم المبيعات إضافة ضريبة لا توجد بيانات بعد أضف بيانات إلى الجدول لبدء إدارة سجلاتك. إلغاء حفظ
+ADD INPUT INPUT|search|ابحث عن الصفحات والأنواع...|max=-1|dis=false|val=|chk=false
+ADD INPUT INPUT|text|أدخل عنوان القالب|max=100|dis=false|val=|chk=false
+ADD INPUT INPUT|text|ابحث واختر الشركة|max=-1|dis=false|val=|chk=false
+ADD INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ADD INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+ADD INPUT INPUT|text|ضريبة القيمة المضافة القياسية|max=-1|dis=false|val=|chk=false
+ADD BTNS ["إضافة ضريبة","إلغاء","حفظ"]
+DET URL https://test.hr.azzrk.com/desk/shamel#/selling/sales-tax-templates/VAT%20-%20E
+DET TEXT مرحباً Administrator ! AN Administrator admin@example.com تفاصيل ضرائب ورسوم المبيعات مسودة التفاصيل السجلات المرتبطة 38 الضرائب والرسوم على المبيعات عنوان * شركة * افتراضي معطل فئة الضريبة سجل ضرائب ورسوم المبيعات إضافة ضريبة النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي 0.00 SAR 0.00 SAR إلغاء حفظ
+DET INPUT INPUT|search|ابحث عن الصفحات والأنواع...|max=-1|dis=false|val=|chk=false
+DET INPUT INPUT|text|أدخل عنوان القالب|max=100|dis=false|val=VAT|chk=false
+DET INPUT INPUT|text|ابحث واختر الشركة|max=-1|dis=false|val=Ahmed Ebrahim CO.|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|checkbox||max=-1|dis=false|val=on|chk=false
+DET INPUT INPUT|text|ضريبة القيمة المضافة القياسية|max=-1|dis=false|val=|chk=false
+DET INPUT INPUT|text|فارغ|max=-1|dis=false|val=على صافي الإجمالي|chk=false
+DET INPUT INPUT|text|ابحث واختر|max=-1|dis=false|val=5317 - ديون معدومة - E|chk=false
+DET INPUT INPUT|text||max=100|dis=false|val=0|chk=false
+DET INPUT INPUT|text||max=100|dis=false|val=0|chk=false
+DET BTNS ["التفاصيل","السجلات المرتبطة 38","إضافة ضريبة","إلغاء","حفظ"]
+DET TITLES ["رجوع","تعيين إلى","الوسوم","المرفقات","طباعة","مشاركة","حذف","المزيد من الإجراءات","افتراضي","معطل","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح","فتح"]
+DET WRAPPERS 1
+TABLE HEAD النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي 0.00 SAR 0.00 SAR
+SETTING POPUP تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي إضافة/إزالة حقول إلغاء حفظ
+EDIT ROW POPUP إعدادات الضريبة إعدادات الضريبة تفاصيل الضريبة والعملة النوع * الحساب المحاسبي * الضريبة مشمولة في السعر الأساسي تُحتسب ضمن المبلغ المدفوع معدل الضريبة عملة الحساب SAR صافي المبلغ (بالعملة) 0.00 SAR المبلغ (بالعملة) 0 الإجمالي (بالعملة) 0.00 SAR قيمة الضريبة بعد الخصم 0.00 SAR الوصف ZATCA النوع * رمز الضريبة * سبب الإعفاء * رمز سبب الإعفاء يتم إنشاؤه تلقائيًا المحاسبة والتوزيع مركز التكلفة المشروع تفاصيل العملة الأساسية للشركة صافي المبلغ (بالعملة الأساسية للشركة) 0.00 SAR المبلغ (بالعملة الأساسية للشركة) 0.00 SAR الإجمالي (بالعملة الأساسية للشركة) 0.00 SAR مبلغ الضريبة بعد الخصم (بالعملة الأساسية للشركة) 0.00 SAR إلغاء تعديل

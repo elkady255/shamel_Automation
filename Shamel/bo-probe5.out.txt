@@ -1,0 +1,12 @@
+DRAFT TEXT تفاصيل السجلات المرتبطة 0 المعلومات الأساسية السلسلة* نوع الطلب* العميل* اسم العميل PW Test Customer رقم الطلب من تاريخ* إلى تاريخ* الشركة* الأصناف سجل الأصناف إضافة صنف كود الصنف الكمية السعر الكمية المطلوبة 0 الشروط والأحكام الشروط محتوى الشروط والأحكام إلغاء حفظ اعتماد حذف
+DRAFT BTNS ["إنشاء","التفاصيل","السجلات المرتبطة 0","المعلومات الأساسية","الأصناف","إضافة صنف","الشروط والأحكام","إلغاء","حفظ","اعتماد","حذف"]
+DRAFT TITLES ["رجوع","تعيين إلى","الوسوم","المرفقات","طباعة","مشاركة","إعدادات","تعديل الصف","حذف الصف"]
+DRAFT TABS []
+SETTING popup تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود إضافة/إزالة حقول إلغاء حفظ
+EDIT ROW تعديل الصف كود الصنف * اسم الصنف ميديا موقع 6 شهور كود صنف الطرف — الكمية السعر * الكمية المطلوبة 0 الشروط والأحكام إلغاء حفظ
+EDIT ROW INPUTS ["cs-input|text|max=-1|ro=false|val=IND182210","cd-input |number|max=100|ro=false|val=10","cd-input |number|max=100|ro=false|val=150","cs-input|text|max=-1|ro=false|val=","cd-input |textarea|max=500|ro=false|val=","cs-input|text|max=-1|ro=false|val=IND182210","cd-input|number|max=-1|ro=false|val=10","cd-input|number|max=-1|ro=false|val=150","cd-input |textarea|max=500|ro=false|val="]
+SUBMIT toasts ["تم اعتماد الأمر المفتوح بنجاح"]
+API after submit docstatus=1
+SUBMITTED BTNS ["إنشاء","التفاصيل","السجلات المرتبطة 0","المعلومات الأساسية","الأصناف","الشروط والأحكام","إلغاء المستند"]
+SUBMITTED header مرحباً Administrator ! AN Administrator admin@example.com 71 MFG-BLR-2026-00005 معتمد إنشاء التفاصيل السجلات المرتبطة 0 
+SUBMITTED editable inputs 3

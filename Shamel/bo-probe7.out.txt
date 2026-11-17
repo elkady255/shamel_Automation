@@ -1,0 +1,43 @@
+baseline => OK MFG-BLR-2026-00006 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+selling without customer => OK MFG-BLR-2026-00007 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+purchasing without supplier => OK MFG-BLR-2026-00008 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+purchasing with supplier Facebook => OK MFG-BLR-2026-00009 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+selling with supplier only => OK MFG-BLR-2026-00010 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+customer not found => FAIL 417 لا يمكن أن تجد العميل: NOPE
+no type => FAIL 417 خطأ: قيمة مفقودة ل أمر بطانية: نوع الطلب
+invalid type => FAIL 417  نوع الطلب لا يمكن أن يكون {}. يجب أن تكون واحدة من "Data Import", "البيع", "المشتريات"
+from after to => FAIL 417 (من تاريخ) لا يمكن أن يكون أكبر (الي التاريخ)
+from equals to => OK MFG-BLR-2026-00011 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+no from_date => FAIL 417 خطأ: قيمة مفقودة ل أمر بطانية: من تاريخ
+no to_date => FAIL 417 خطأ: قيمة مفقودة ل أمر بطانية: إلى تاريخ
+dates in 2019 => OK MFG-BLR-2026-00012 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+dates far future 2099 => OK MFG-BLR-2026-00013 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+no company => OK MFG-BLR-2026-00014 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+no items => FAIL 417 خطأ: البيانات مفقودة في الجدول صنف
+row without item_code => FAIL 417 خطأ: صنف أمر بطانية الصف #1: القيمة مفقودة لـ: كود الصنف
+item not found => FAIL 417 لا يمكن أن تجد صف #1: كود الصنف: NOPE-ITEM
+rate missing => FAIL 417 خطأ: صنف أمر بطانية الصف #1: القيمة مفقودة لـ: السعر
+rate 0 => OK MFG-BLR-2026-00015 rows=1 r1={"q":10,"rate":0,"n":"ميديا موقع 6 شهور"}
+rate negative => OK MFG-BLR-2026-00016 rows=1 r1={"q":10,"rate":-5,"n":"ميديا موقع 6 شهور"}
+qty missing => OK MFG-BLR-2026-00017 rows=1 r1={"q":0,"rate":150,"n":"ميديا موقع 6 شهور"}
+qty 0 => OK MFG-BLR-2026-00018 rows=1 r1={"q":0,"rate":150,"n":"ميديا موقع 6 شهور"}
+qty negative => FAIL 417 الصف 1: لا يمكن أن تكون الكمية سالبة.
+qty decimal 2.5 => OK MFG-BLR-2026-00019 rows=1 r1={"q":2.5,"rate":150,"n":"ميديا موقع 6 شهور"}
+qty huge 1e15 => FAIL 500 MySQLdb.DataError: (1264, "Out of range value for column 'qty' at row 1")
+duplicate item twice => FAIL 417 ملاحظة: تمت إضافة العنصر IND182210 عدة مرات
+non-stock item 2121 => OK MFG-BLR-2026-00020 rows=1 r1={"q":10,"rate":150,"n":"2121"}
+template item 1111 => OK MFG-BLR-2026-00021 rows=1 r1={"q":10,"rate":150,"n":"1111"}
+non-sales item 45 (selling) => OK MFG-BLR-2026-00022 rows=1 r1={"q":10,"rate":150,"n":"te"}
+order_no 100 chars => OK MFG-BLR-2026-00023 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+order_no 101 chars => OK MFG-BLR-2026-00024 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+order_no 141 chars => FAIL 417 أمر بطانية MFG-BLR-2026-00025: 'رقم الطلب' (NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN) سيتم اقتطاعه،
+order_date without order_no => OK MFG-BLR-2026-00025 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+order_date after from_date => OK MFG-BLR-2026-00026 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+terms 2 chars => OK MFG-BLR-2026-00027 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+terms 501 chars => OK MFG-BLR-2026-00028 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+terms 5000 chars => OK MFG-BLR-2026-00029 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+row terms 2 chars => OK MFG-BLR-2026-00030 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+row terms 501 chars => OK MFG-BLR-2026-00031 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+tc_name not found => FAIL 417 لا يمكن أن تجد الشروط: NOPE
+tc_name PW Terms => OK MFG-BLR-2026-00032 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}
+company not matching customer? => OK MFG-BLR-2026-00033 rows=1 r1={"q":10,"rate":150,"n":"ميديا موقع 6 شهور"}

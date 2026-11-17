@@ -1,0 +1,7 @@
+ROWS 2
+AFTER SELECT TITLES []
+AFTER SELECT TEXT النوع الحساب المحاسبي معدل الضريبة صافي المبلغ المبلغ الإجمالي 0.00 SAR 0.00 SAR 0.00 SAR 0.00 SAR
+PAGE TITLES AFTER SELECT ["رجوع","افتراضي","معطل","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق"]
+PAGE BTNS ["تحديد الكل","حذف","إضافة ضريبة","إلغاء","حفظ"]
+ROWS AFTER DELETE 1
+HEADER SELECT TITLES []

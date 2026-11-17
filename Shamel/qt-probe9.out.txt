@@ -1,0 +1,25 @@
+WARN Row 1: quantity 1.0 for item 111 is more than the quantity available (0.0) in warehouse Stores - E. | Row 1: quantity 1.0 for item 111 is more than the quantity available (0.0) in warehouse Stores - E.
+MODAL HTML <div id="body"><div class="content page-container" id="page-shamel" data-page-route="shamel" style=""><div id="shamel-app" data-v-app="" data-aria-hidden="true" aria-hidden="true"><div id="page-shamel" class="emp-root shamel-app-wrapper" dir="ltr"><aside data-v-85432a20="" class="emp-sidebar" is-collapsed="false"><div data-v-85432a20="" class="emp-sidebar__header"><img data-v-85432a20="" src="/assets/shamel/icons/sideIcon.svg" class="emp-brand__logo" alt="Sidebar logo"><div data-v-85432a20="" class="emp-brand"><img data-v-85432a20="" src="/assets/shamel/icons/EN-logo.svg" class="emp-brand__logo-full text-sidebar" alt="Logo"></div></div><nav data-v-85432a20="" class="emp-sidebar__nav"><button data-v-85432a20="" type="button" class="emp-nav-item header-nav-item" data-id="home"><span data-v-85432a20="" class="emp-nav-item__icon" aria-hidden="true"><img data-v-85432a20="" src="/assets/shamel/icons/gridIcon.svg" alt="Home icon"></span><span data-v-85432a20="" class="emp-nav-item__label text-sidebar">Overview</span></button><button data-v-85432a20="" type="button" class="emp-nav-item header-nav-item" data-id="subscription"><span data-v-85432a20="" class="emp-nav-item__icon" aria-hidden="true"><span data-v-85432a20="">
+<svg/>
+</span></span><span data-v-85432a20="" class="emp-nav-item__label text-sidebar">Subscription &amp; Billing</span></button><div data-v-85432a20="" class="emp-inventory-section"><button data-v-85432a20="" type="button" class="emp-nav-item emp-inventory-header header-nav-item" aria-expanded="false" aria-controls="sidebar-group-reports"><span data-v-85432a20="" class="emp-nav-item__icon" aria-hidden="true">
+<svg/>
+    </span><span data-v-85432a20="" class="emp-nav-item__label text-sidebar">Reports</span><span data-v-85432a20="" class="emp-nav-item__arrow" aria-hidden="true">
+        <svg/>
+
+    </span></button><!----></div><div data-v-85432a20="" class="emp-inventory-section"><button data-v-85432a20="" type="button" class="emp-nav-item emp-inventory-header header-nav-item" aria-expanded="false" aria-controls="sidebar-group-inventory"><span data-v-85432a20="" class="emp-nav-item__icon" aria-hidden="true">
+<svg/>
+    </span><span data-v-85432a20="" class="emp-nav-item__label text-sidebar">Inventory</span><span data-v-85432a20="" class="emp-nav-item__arrow" aria-hidden="true">
+        <svg/>
+
+    </span></button><!----></div><div data-v-85432a20="" class="emp-nav-group" data-group="sales"><button data-v-85432a20="" type="button" class="emp-nav-item emp-nav-group-trigger header-nav-item" data-id="sales" aria-expanded="false" aria-controls="sidebar-group-sales"><span data-v-85432a20="" class="emp-nav-item__icon" aria-hidden="true">
+<svg/>
+    </span><span data-v-85432a20="" class="emp-nav-item__label text-sidebar">Sales</span><span data-v-85432a20="" class="emp-nav-item__arrow" aria-hidden="true">
+        <svg/>
+
+    </span></button><!----></div><div data-v-85432a20="" class="emp-nav-group is-open" data-group="selling"><button data-v-85432a20="" type="button" class="emp-nav-item emp-nav-group-trigger header-nav-item is-active" data-id="selling" aria-expanded="true" aria-controls="sidebar-group-selling" aria-current="page"><span data-v-85432a20="" class="emp-nav-item__icon" aria-hidden="true">
+<svg/>
+    </span><span data-v-85432a20="" class="emp-nav-item__label text-sidebar">Selling</span><span data-v-85432a20="" class="emp-nav-item__arrow" aria-hidden="true">
+        <svg/>
+
+    </span></button><div data-v-85432a20="" id="sidebar
+ADD/REMOVE TEXT Add/Remove Fields

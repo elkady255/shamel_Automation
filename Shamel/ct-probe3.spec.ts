@@ -1,0 +1,50 @@
+import { test, type Page } from '@playwright/test';
+import * as fs from 'fs';
+
+test.describe.configure({ timeout: 150_000 });
+test.use({ viewport: { width: 1400, height: 1800 } });
+const main = (p: Page) => p.getByRole('main');
+const clean = (s: string) => s.replace(/\s+/g, ' ').trim();
+const press = (l: any) => l.evaluate((e: any) => e.click());
+const OUT = 'C:/Playwright_Automation/Shamel/ct-probe3.out.txt';
+const log = (s: string) => fs.appendFileSync(OUT, s + '\n');
+const opts = async (p: Page) => (await p.locator('.cs-option').locator('visible=true').allInnerTexts()).map(clean);
+
+test('shots', async ({ page }) => {
+  fs.writeFileSync(OUT, '');
+  await page.goto('about:blank');
+  await page.goto('/desk/shamel#/selling/contacts/new', { timeout: 100_000 });
+  await page.waitForTimeout(6000);
+  await press(main(page).getByRole('button', { name: /إضافة بريد/ }));
+  await press(main(page).getByRole('button', { name: /إضافة رقم/ }));
+  await press(main(page).getByRole('button', { name: /إضافة رابط/ }));
+  await page.waitForTimeout(1000);
+  await page.screenshot({ path: 'C:/Playwright_Automation/Shamel/ct-add.png' });
+  // gender dropdown
+  await page.getByText('اختر الجنس').first().click({ timeout: 5000 }).catch((e) => log('gender click fail'));
+  await page.waitForTimeout(800);
+  log('GENDER ' + JSON.stringify(await opts(page)));
+  await page.keyboard.press('Escape');
+  await page.getByPlaceholder('اختر نوع جهة الاتصال').click({ force: true, timeout: 5000 }).catch(() => log('type click fail'));
+  await page.waitForTimeout(800);
+  log('PHONE TYPE ' + JSON.stringify(await opts(page)));
+  await page.keyboard.press('Escape');
+  await page.getByPlaceholder('الكود', { exact: true }).click({ force: true, timeout: 5000 }).catch(() => log('cc click fail'));
+  await page.waitForTimeout(1000);
+  const cc = await opts(page); log('CC ' + cc.length + ' ' + JSON.stringify(cc.slice(0, 3)));
+  await page.keyboard.press('Escape');
+  await page.getByPlaceholder('اختر نوع المستند').click({ force: true, timeout: 5000 }).catch(() => log('dt click fail'));
+  await page.waitForTimeout(1000);
+  log('LINK DOCTYPES ' + JSON.stringify(await opts(page)));
+  await page.keyboard.press('Escape');
+  await page.getByPlaceholder('أدخل الاسم الأول').fill('q');
+  await page.getByPlaceholder('أدخل اسم العائلة').fill('z');
+  await page.getByPlaceholder('أدخل البريد الإلكتروني').fill('bad-email');
+  await page.getByPlaceholder('أدخل رقم الهاتف').fill('1');
+  await press(page.getByRole('button', { name: 'حفظ', exact: true }));
+  await page.waitForTimeout(2500);
+  log('VALIDATION ' + clean(await main(page).innerText()).slice(0, 1800));
+  await page.screenshot({ path: 'C:/Playwright_Automation/Shamel/ct-val.png' });
+  await page.getByPlaceholder('أدخل الاسم الأول').fill('T'.repeat(120));
+  log('FIRST NAME len ' + (await page.getByPlaceholder('أدخل الاسم الأول').inputValue()).length);
+});

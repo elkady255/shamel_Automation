@@ -1,0 +1,15 @@
+QUOTATION TO OPTIONS ["العميل","العميل المحتمل"]
+AFTER LEAD text  التسلسل * عرض السعر موجّه إلى * العميل المحتمل * اسم العميل يتم إنشاؤه تلقائيًا تاريخ عرض السعر صالح حتى الشركة * يحتوي على أصناف بسعر وحدة العملة وق
+LEAD OPTIONS ["mohamed hamed - qj51uba4oq","ahmed magdy - uspe72ojrc","ahmed magdy - ugdmrab4b1","ahmed magdy - u497bdura0"] count=15
+LEAD selected party value=mohamed hamed - qj51uba4oq | text  التسلسل * عرض السعر موجّه إلى * العميل المحتمل * اسم العميل mohamed hamed تاريخ عرض السعر صالح حتى الشركة * يحتوي على أصناف بسعر وحدة العمل
+SWITCH BACK party value=""
+SERIES OPTIONS ["SAL-QTN-.YYYY.-"]
+COMPANY OPTIONS count=20 ["Ahmed Ebrahim CO.","Warrqa - ورقة","Transition - ترانزيشن","Fadaa - فضاء"]
+DATE INPUT COUNT 2
+OPEN CALENDAR DAYS 30
+AFTER PICK 25 => date/valid_till ["25-11-2026","27-11-2026"]
+AFTER VALID TILL 3 => ["25-11-2026","03-11-2026"] text:  الشركة * يحتوي على أصناف بسعر وحدة العملة وقائمة الأسعار العملة * سعر الصرف قائ
+TAX TABLE TH ["","النوع","الحساب","نسبة الضريبة","صافي المبلغ","قيمة الضريبة","الإجمالي",""]
+TAX ROW INPUTS ["checkbox|checkbox|ph=|val=on","cs-input|text|ph=Type or select|val=على الإجمالي الصافي","cs-input|text|ph=ابحث واختر|val=","cd-input q|number|ph=|val=0"]
+TAX TYPE OPTIONS ["فعلي","على الإجمالي الصافي","على مبلغ الصف السابق","على إجمالي الصف السابق","على كمية الصنف"]
+IDX6 (template?) OPTIONS count=2 ["s","test data"]

@@ -1,0 +1,27 @@
+BS ACCOUNTS [{"name":"01204523609 - يوليوس رمزي - E","report_type":"Balance Sheet","root_type":"Asset","is_group":0},{"name":"1 - s - E","report_type":"Balance Sheet","root_type":"Equity","is_group":0}]
+PL ACCOUNTS [{"name":"4100 - المبيعات - E","report_type":"Profit and Loss","root_type":"Income","is_group":0},{"name":"4524 - E","report_type":"Profit and Loss","root_type":"Expense","is_group":0}]
+S01 no title -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S02 title 1 char -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S03 title 101 chars -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S04 title 100 chars -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S05 no company -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S06 no rows -> 200 SAVED name=PW ST 4929 - E
+S07 dup title #1 -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S08 dup title #2 -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S09 balance sheet account head -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S10 no charge type -> 417 خطأ: <strong>الضرائب والرسوم على المبيعات</strong> الصف #1: القيمة مفقودة لـ: النوع
+S11 no account head -> 417 الصف 1: الحساب الضرائب والرسوم <strong>None</strong> لا ينتمي إلى الشركة <strong>Ahmed Ebrahim CO.</strong>
+S12 no description -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S13 rate 150 -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 150.0%.
+S14 rate negative -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not -5.0%.
+S15 prev row amount on row 1 -> 417 لا يمكن تحديد نوع التهمة باسم ' في الصف السابق المبلغ ' أو ' في السابق صف إجمالي " ل لصف الأول
+S16 prev row total row_id 5 invalid -> 417 لا يمكن أن يشير رقم الصف أكبر من أو يساوي رقم الصف الحالي لهذا النوع المسؤول
+S17 actual with tax_amount -> 200 SAVED name=PW ST 4940 - E
+S18 description 1 char -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S19 description 501 chars -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S20 same account twice -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S21 default #1 -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S22 default #2 same company -> 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+S23 disabled and default -> 417 يجب ألا يكون النموذج المعطل هو النموذج الافتراضي
+S24 tax category invalid -> 417 لا يمكن أن تجد فئة الضريبة: does not exist xyz
+DEFAULTS NOW {"data":[{"name":"عنوان قالب ضريبى جديد - E","title":"عنوان قالب ضريبى جديد","company":"Ahmed Ebrahim CO.","is_default":1,"disabled":0}]}

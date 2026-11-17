@@ -1,0 +1,43 @@
+baseline IND => OK SAL-QTN-2026-01674 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+qty 0 => OK SAL-QTN-2026-01675 total=0 grand=0 disc=0 rows=1 r1={"q":0,"rate":10200,"amt":0,"uom":"Subscription","wh":"Stores - E","dp":0}
+qty 0 + has_unit_price_items => OK SAL-QTN-2026-01676 total=0 grand=0 disc=0 rows=1 r1={"q":0,"rate":10200,"amt":0,"uom":"Subscription","wh":"Stores - E","dp":0}
+qty negative => FAIL 417 Incorrect value:Grand Total (Company Currency) must be &gt;= 0.0
+qty decimal 2.5 => OK SAL-QTN-2026-01677 total=25500 grand=25500 disc=0 rows=1 r1={"q":2.5,"rate":10200,"amt":25500,"uom":"Subscription","wh":"Stores - E","dp":0}
+qty 0.0001 => OK SAL-QTN-2026-01678 total=0 grand=0 disc=0 rows=1 r1={"q":0,"rate":10200,"amt":0,"uom":"Subscription","wh":"Stores - E","dp":0}
+qty huge 1e12 => FAIL 500 MySQLdb.DataError: (1264, "Out of range value for column 'total_qty' at row 1")
+rate 0 => OK SAL-QTN-2026-01679 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+rate negative => FAIL 417 Incorrect value:Grand Total (Company Currency) must be &gt;= 0.0
+no items => FAIL 500 TypeError: bad operand type for abs(): 'NoneType'
+template item 1111 => FAIL 417 Item 1111 is a template, please select one of its variants
+duplicate item twice => OK SAL-QTN-2026-01680 total=30600 grand=30600 disc=0 rows=2 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+uom Kg not of item => OK SAL-QTN-2026-01681 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Kg","wh":"Stores - E","dp":0}
+uom missing => FAIL 417 Error: Quotation Item Row #1: Value missing for: UOM
+warehouse missing => OK SAL-QTN-2026-01682 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+warehouse other company => OK SAL-QTN-2026-01683 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - Warrqa","dp":0}
+row desc 2 chars => OK SAL-QTN-2026-01684 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+row desc 501 chars => OK SAL-QTN-2026-01685 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+row discount 150% => OK SAL-QTN-2026-01686 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+row discount -10% => OK SAL-QTN-2026-01687 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":-10}
+row discount 10% => OK SAL-QTN-2026-01688 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+row discount amount > rate => OK SAL-QTN-2026-01689 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+margin percentage 20 => OK SAL-QTN-2026-01690 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+margin amount negative => OK SAL-QTN-2026-01691 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+add disc % 150 => FAIL 417 Additional Discount Amount (SAR 30,600.00) cannot exceed the total before such discount (SAR 20,400.00)
+add disc % -10 => OK SAL-QTN-2026-01692 total=20400 grand=22440 disc=-2040 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+add disc % 10 Grand Total => OK SAL-QTN-2026-01693 total=20400 grand=18360 disc=2040 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+add disc % 10 Net Total => OK SAL-QTN-2026-01694 total=20400 grand=18360 disc=2040 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+add disc amount > total => FAIL 417 Additional Discount Amount (SAR 999,999.00) cannot exceed the total before such discount (SAR 20,400.00)
+add disc amount negative => OK SAL-QTN-2026-01695 total=20400 grand=20450 disc=-50 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+tax template (a - E) => OK SAL-QTN-2026-01696 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+terms 2 chars => OK SAL-QTN-2026-01697 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+terms 501 chars => OK SAL-QTN-2026-01698 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+terms 5000 chars => OK SAL-QTN-2026-01699 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+payment due before date => FAIL 417 Row 1: Due Date in the Payment Terms table cannot be before Posting Date
+payment portion 60 only => FAIL 417 Total Payment Amount in Payment Schedule must be equal to Grand / Rounded Total
+payment portion 150 => FAIL 417 Total Payment Amount in Payment Schedule must be equal to Grand / Rounded Total
+payment amount > total => OK SAL-QTN-2026-01700 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+tax row no account => FAIL 417 Error: Sales Taxes and Charges Row #1: Value missing for: Account Head
+tax row rate negative => OK SAL-QTN-2026-01701 total=20400 grand=19380 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+tax row rate 500 => OK SAL-QTN-2026-01702 total=20400 grand=122400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}
+tax prev row no ref => FAIL 417 Cannot select charge type as 'On Previous Row Amount' or 'On Previous Row Total' for first row
+tax actual no amount => OK SAL-QTN-2026-01703 total=20400 grand=20400 disc=0 rows=1 r1={"q":2,"rate":10200,"amt":20400,"uom":"Subscription","wh":"Stores - E","dp":0}

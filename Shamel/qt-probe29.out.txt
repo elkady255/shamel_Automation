@@ -1,0 +1,3 @@
+GEAR COUNT 1
+POPUP TEXT تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود إضافة/إزالة حقول إلغاء حفظ
+ROW COLUMN HEADERS (items) []

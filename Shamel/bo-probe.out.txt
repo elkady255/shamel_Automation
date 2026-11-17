@@ -1,0 +1,36 @@
+DOCTYPE Blanket Order naming=naming_series: submittable=1
+META naming_series|Select|req=1|def=undefined|hid=0|ro=0|opt=MFG-BLR-.YYYY.-|dep=
+META blanket_order_type|Select|req=1|def=undefined|hid=0|ro=0|opt=,Selling,Purchasing|dep=
+META customer|Link|req=0|def=undefined|hid=0|ro=0|opt=Customer|dep=eval:doc.blanket_order_type == "Selling"
+META customer_name|Data|req=0|def=undefined|hid=0|ro=1|opt=|dep=eval:doc.blanket_order_type == "Selling"
+META supplier|Link|req=0|def=undefined|hid=0|ro=0|opt=Supplier|dep=eval:doc.blanket_order_type == "Purchasing"
+META supplier_name|Data|req=0|def=undefined|hid=0|ro=1|opt=|dep=eval:doc.blanket_order_type == "Purchasing"
+META column_break_8|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META order_no|Data|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META order_date|Date|req=0|def=undefined|hid=0|ro=0|opt=|dep=eval:doc.order_no
+META from_date|Date|req=1|def=undefined|hid=0|ro=0|opt=|dep=
+META to_date|Date|req=1|def=undefined|hid=0|ro=0|opt=|dep=
+META company|Link|req=1|def=undefined|hid=0|ro=0|opt=Company|dep=
+META section_break_12|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META items|Table|req=1|def=undefined|hid=0|ro=0|opt=Blanket Order Item|dep=
+META amended_from|Link|req=0|def=undefined|hid=0|ro=1|opt=Blanket Order|dep=
+META terms_and_conditions_section|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META tc_name|Link|req=0|def=undefined|hid=0|ro=0|opt=Terms and Conditions|dep=
+META terms|Text Editor|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+DOCTYPE Blanket Order Item naming=undefined submittable=0
+META item_code|Link|req=1|def=undefined|hid=0|ro=0|opt=Item|dep=
+META item_name|Data|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META party_item_code|Data|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META column_break_3|Column Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META qty|Float|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META rate|Currency|req=1|def=undefined|hid=0|ro=0|opt=|dep=
+META ordered_qty|Float|req=0|def=undefined|hid=0|ro=1|opt=|dep=
+META section_break_7|Section Break|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+META terms_and_conditions|Text|req=0|def=undefined|hid=0|ro=0|opt=|dep=
+ROWS 4 [{"name":"MFG-BLR-2026-00001","blanket_order_type":"Purchasing","docstatus":1,"customer":"","supplier":"Facebook","company":"Infugram JOR - انفوجرام الاردن","from_date":"2026-07-26","to_date":"2026-07-26","order_no":null},{"name":"MFG-BLR-2026-00002","blanket_order_type":"Selling","docstatus":2,"customer":"CUST-2025-00002","supplier":"","company":"Infugram JOR - انفوجرام الاردن","from_date":"2026-07-26","to_date":"2026-07-26","order_no":null},{"name":"MFG-BLR-2026-00003","blanket_order_type":"Selling","docstatus":1,"customer":"CUST-2025-00002","supplier":"","company":"Warrqa - ورقة","from_date":"2026-07-26","to_date":"2026-07-26","order_no":null},{"name":"MFG-BLR-2026-00004","blanket_order_type":"Selling","docstatus":2,"customer":"CU-2026-00001","supplier":null,"company":"Alarrab - العراب","from_date":"2026-11-14","to_date":"2026-11-27","order_no":"1236521021"}]
+LANG ar
+URL https://test.hr.azzrk.com/desk/shamel#/selling/blanket-orders
+TEXT مرحباً Administrator ! AN Administrator admin@example.com 71 الأوامر المفتوحة سجل الأوامر المفتوحة إضافة أمر مفتوح كل الفلاتر الفلاتر المحفوظه إنشاء فلتر آخر التحديثات رقم المعرف الحالة نوع الطلب MFG-BLR-2026-00004 ملغي بيع MFG-BLR-2026-00003 معتمد بيع MFG-BLR-2026-00002 ملغي بيع MFG-BLR-2026-00001 معتمد شراء عرض 10 من 4 1
+HEADERS ["","رقم المعرف","الحالة","نوع الطلب"]
+BTNS ["إضافة أمر مفتوح","آخر التحديثات","1"]
+BULK ["إضافة أمر مفتوح","آخر التحديثات","1","تحديد الكل","تعديل","تصدير","اسناد","إضافة وسوم","تعديل الأمر","طباعة","حذف"]

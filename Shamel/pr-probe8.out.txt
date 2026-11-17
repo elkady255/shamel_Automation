@@ -1,0 +1,11 @@
+NEW TABLE TITLES ["رجوع","تحديد الكل","تحديد الكل","حذف","المزيد","إغلاق","إعدادات الجدول","تعديل الصف","حذف"]
+TABLE HTML <section data-v-0fe2e0b7="" data-v-f72c6089="" class="dn-accordion is-open"><div data-v-0fe2e0b7="" class="dn-accordion-header"><button data-v-0fe2e0b7="" type="button" class="dn-accordion-toggle" aria-expanded="true"><span data-v-0fe2e0b7="" class="dn-accordion-icon"></span><span data-v-0fe2e0b7="" class="dn-accordion-title">المعلومات الأساسية</span></button></div><div data-v-0fe2e0b7="" class="dn-accordion-body"><!----><div data-v-f72c6089="" class="pr-grid"><div data-v-f72c6089="" class="pr-field"><label data-v-f72c6089="" class="cd-label">تسلسل التسمية <span data-v-f72c6089="" class="required">*</span></label><div dir="ltr" class="creatable-select"><div data-v-29b1decf="" class="cs-control"><input data-v-29b1decf="" type="text" aria-expanded="false" aria-controls="radix-vue-combobox-content-v-0" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false" class="cs-input" placeholder="اختر تسلسل التسمية" value="PRLE-.####"><button data-v-29b1decf="" type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="radix-vue-combobox-content-v-0" data-state="closed" aria-disabled="false" class="cs-toggle"></button></div><!----></div><!----></div><div data-v-f72c6089="" class="pr-field"><label data-v-f72c6089="" class="cd-label">عنوان قاعدة التسعير <span data-v-f72c6089="" class="required">*</span></label><input data-v-f72c6089="" class="cd-input" type="text" placeholder="أدخل عنوان قاعدة التسعير" maxleng
+ROW INPUTS ["ابحث عن صنف واختره|val=","اختر الصنف أولاً|val="]
+ITEM INPUT COUNT 1
+ITEM OPTIONS 20 ["111","1110","1111"]
+AFTER ITEM PICK ["ابحث عن صنف واختره|val=111","ابحث واختر وحدة القياس|val="]
+UOM OPTIONS ["Nos"]
+SETTING ["تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود كود الصنف وحدة القياس إضافة/إزالة حقول إلغاء حفظ"]
+SETTING BTNS ["","","إضافة/إزالة حقول","إلغاء","حفظ"]
+ADD/REMOVE ["تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود كود الصنف وحدة القياس إضافة/إزالة حقول إلغاء حفظ","الحقول المتاحة الحقول المتاحة كود الصنف وحدة القياس إلغاء إضافة"]
+EDIT ROW ["تعديل الصف تعديل الصف كود الصنف * وحدة القياس * حفظ إلغاء"]
