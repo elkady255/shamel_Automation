@@ -1,0 +1,15 @@
+NEW checks ["0:n","1:n","2:Y"]
+NEW dates ["18-11-2026:ro",":ro"]
+EMPTY SAVE modal []
+EMPTY SAVE errs []
+CUSTOMER picked: ["ابحث عن الصفحات والأنواع...=","ابحث واختر=Ahmed Ebrahim CO.","اختر التسلسل=SAL-ORD-.YYYY.-","ابحث واختر=PW Test Customer - CU-2026-00001","اختر التاريخ=18-11-2026","اختر التاريخ=","ابحث واختر=101 - Main X - E","ابحث واختر=","ابحث واختر=SAR","number=1","ابحث واختر=Standard Selling","number=1","امسح أو اكتب الباركود=","ابحث واختر="]
+NO ITEMS SAVE modal ["تعذّر الحفظ أضف صنفًا واحدًا على الأقل إلى أمر البيع"]
+errs []
+ADD ITEM ROW inputs ["checkbox::on","text:ابحث واختر:","hidden:اختر التاريخ:","text:اختر التاريخ:","hidden::","number::1","number::0"]
+ITEM OPTIONS ["ميديا موقع 6 شهور - IND182210"]
+ROW after item -333 334 0.00 SAR | ["checkbox:on","text:ميديا موقع 6 شهور - IND182210","hidden:","text:","hidden:","number:1","number:0"]
+SUMMARY ملخص البنود إجمالي الكمية 1 الإجمالي (SAR) 0.00 SAR الإجمالي بعملة الشركة 0.00 SAR إجمالي الوزن الصافي 10 صافي الإجمالي (SAR) 0.00 SAR صافي الإجمالي بعملة الشركة الأساسية 0.00 SAR الضرائب والرسوم فئة الضريبة يتم
+SAVE url https://test.hr.azzrk.com/desk/shamel#/selling/sales-orders/new
+SAVE modal ["تعذّر الحفظ الرجاء إدخال تاريخ التسليم تعذّر حفظ أمر البيع"]
+SAVE errs []
+SAVE toasts []

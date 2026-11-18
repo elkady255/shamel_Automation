@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\so4-dump.spec.ts:9:5 › so form dump
+  2 passed (34.5s)

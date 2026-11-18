@@ -1,0 +1,41 @@
+import { test, type Page } from '@playwright/test';
+import * as fs from 'fs';
+test.describe.configure({ timeout: 290_000 });
+test.use({ viewport: { width: 1500, height: 1900 } });
+const LOAD = { timeout: 100_000 };
+const main = (p: Page) => p.getByRole('main');
+const clean = (s: string) => (s || '').replace(/\s+/g, ' ').trim();
+const press = (l: any) => l.evaluate((e: any) => e.click());
+const OUT = 'C:/Playwright_Automation/Shamel/so3-probe4.out.txt';
+const log = (s: string) => fs.appendFileSync(OUT, s + '\n');
+const pops = (p: Page) => p.evaluate(() => [...document.querySelectorAll('.cd-action-menu,.base-modal,.modal.show,.qr-overlay,[class*=overlay]')].filter((e: any) => e.offsetWidth > 0).map((e: any) => e.className.slice(0, 30) + ' :: ' + e.innerText.replace(/\s+/g, ' ').slice(0, 700)));
+const go = async (p: Page, n: string) => { await p.goto('about:blank'); await p.goto('/desk/shamel#/selling/sales-orders/' + n, LOAD); await p.waitForTimeout(8000); };
+const checks = (p: Page) => main(p).locator('input[type=checkbox]').evaluateAll((els: any) => els.filter((e: any) => e.offsetParent !== null).map((e: any, i: number) => i + ':' + (e.checked ? 'Y' : 'n') + (e.disabled ? 'D' : '')));
+test('so ui', async ({ page }) => {
+  fs.writeFileSync(OUT, '');
+  await go(page, 'SAL-ORD-2026-03114');
+  log('03114 checks ' + JSON.stringify(await checks(page)));
+  log('03114 text ' + clean(await main(page).innerText()).slice(200, 1500));
+  log('03114 date inputs ' + JSON.stringify(await main(page).locator('input.flatpickr-input').evaluateAll((e: any) => e.filter((x: any) => x.offsetParent).map((x: any) => x.value + (x.readOnly ? ':ro' : '')))));
+  await go(page, 'SAL-ORD-2026-03112');
+  log('03112 checks ' + JSON.stringify(await checks(page)));
+  // submit 03114 via UI
+  await go(page, 'SAL-ORD-2026-03114');
+  await press(main(page).getByRole('button', { name: 'اعتماد', exact: true })); await page.waitForTimeout(2500);
+  log('SUBMIT POPUP ' + JSON.stringify(await pops(page)));
+  await page.screenshot({ path: 'so3-submit-pop.png' });
+  const yes = page.locator('.base-modal button, .modal.show button').filter({ hasText: /^(نعم|اعتماد|تأكيد|موافق)$/ }); log('YES count ' + await yes.count());
+  if (await yes.count()) { await press(yes.first()); await page.waitForTimeout(6000); }
+  log('AFTER SUBMIT BTNS ' + JSON.stringify((await main(page).getByRole('button').allInnerTexts()).map(clean).filter(Boolean).slice(0, 8)));
+  log('AFTER SUBMIT STATUS ' + clean(await main(page).innerText()).slice(100, 260));
+  await press(main(page).getByRole('button', { name: 'إنشاء', exact: true })); await page.waitForTimeout(1500);
+  log('CREATE MENU ' + JSON.stringify(await pops(page)));
+  await page.keyboard.press('Escape');
+  await go(page, 'SAL-ORD-2026-03114');
+  await press(main(page).getByRole('button', { name: 'تحديث الأصناف', exact: true })); await page.waitForTimeout(3000);
+  log('UPDATE ITEMS ' + JSON.stringify(await pops(page))); await page.screenshot({ path: 'so3-update-items.png', fullPage: true });
+  await go(page, 'SAL-ORD-2026-03114');
+  await press(main(page).getByRole('button', { name: 'تعليق', exact: true })); await page.waitForTimeout(2500);
+  log('HOLD POPUP ' + JSON.stringify(await pops(page))); await page.screenshot({ path: 'so3-hold.png' });
+  log('HOLD INPUTS ' + JSON.stringify(await page.evaluate(() => [...document.querySelectorAll('textarea,input')].filter((e: any) => e.offsetParent && e.closest('.base-modal,.modal,.qr-overlay,[class*=overlay]')).map((e: any) => e.tagName + ':' + e.placeholder))));
+});

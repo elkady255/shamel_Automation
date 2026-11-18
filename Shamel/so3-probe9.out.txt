@@ -1,0 +1,7 @@
+START  تحديث الأصناف إنشاء التف BTNS ["إلغاء المستند","استئناف","إغلاق","تحديث الأصناف","إنشاء","التفاصيل"]
+HOLD reason shown on page: none
+RESUME -> status حديث الأصناف إنشاء التفاص
+CLOSE -> status فاصيل المعلومات العامة مع BTNS ["إلغاء المستند","إعادة فتح","التفاصيل","المعلومات العامة","معلومات إضافية","السجلات المرتبطة 1"]
+REOPEN -> status حديث الأصناف إنشاء التفاص
+UPDATE ITEMS INPUTS ["hidden:2026-11-25:RO","text:25-11-2026:RO","hidden:2026-11-25","number:1","number:10200"]
+UPDATE ITEMS number inputs 2

@@ -1,0 +1,28 @@
+CANCEL DIALOG []
+cancel confirm btns 0
+AFTER CANCEL BTNS ["تعديل","التفاصيل","المعلومات العامة","معلومات إضافية","السجلات المرتبطة 1"] toasts ["تم إلغاء إدخالات حجز المخزون","تم إلغاء أمر البيع بنجاح"]
+AMEND -> url https://test.hr.azzrk.com/desk/shamel#/selling/sales-orders/SAL-ORD-2026-03115-1
+AMEND page صناف من عرض السعر التفاصيل المعلومات العامة معلومات إضافية السجلات المرتبطة 0 المعلومات الأساسية الشركة * التسلسل * العميل * اسم العميل PW Test Customer التاريخ * الرقم الضريبي يتم إنشاؤه تلقائيًا تاريخ التسليم تخطي إشعار التسليم معدّل من SAL-ORD-2026-03115 مركز التكلفة المشروع العملة وقائمة الأسعار العملة * سعر الصرف 
+AMEND BTNS ["اعتماد","إضافة الأصناف من عرض السعر","التفاصيل","المعلومات العامة","معلومات إضافية","السجلات المرتبطة 0"]
+CUSTOMER 00002 name/taxid ["Ahmed Ebrahim CO.","SAL-ORD-.YYYY.-","PW Packing Customer - CU-2026-00002","18-11-2026","on","101 - Main X - E","SAR","1","Standard Selling","1"]
+GENERAL INFO TEXT ومات العامة معلومات إضافية عنوان الفوترة اسم عنوان العميل العنوان PW Shipping Two street 1، مدينة الرياض، Saudi Arabia جهة الاتصال تفاصيل الاتصال 0500000001 الهاتف الرئيسي pw.contact@example.com البريد الرئيسي عنوان الشحن عنوان الشحن عنوان الشحن PW Shipping Two street 1، مدينة الرياض، Saudi Arabia عنوان الشركة اسم عنوان الشركة عنوان الشركة dfghdfghghfdhdfgh, sdfghdfghdfgdfgh، مدينة الرياض، 1، Saudi Arabia جهة اتصال الشركة تفاصيل الاتصال لم يتم اختيار جهة اتصال بيانات وشروط الدفع قالب شروط الدفع سجل الدفعات إضافة دفعة لم تتم إضافة أي دفعات بعد. الشروط والأحكام الشروط محتوى الشروط والأحكام إلغاء حفظ
+GENERAL INFO INPUTS ["ابحث عن الصفحا=","ابحث واختر=PW Shipping Two - PW Shipping ","ابحث واختر=PWContact - PWContact-CU-2026-","ابحث واختر=PW Shipping Two - PW Shipping ","ابحث واختر=54 - 54-Billing","ابحث واختر=","ابحث واختر=","ابحث واختر=","textarea="]
+GI dropdown count 18
+  dd0 [] = Ahmed Ebrahim CO.
+  dd1 [] = PW Packing Customer - CU-2026-00002
+  dd2 [] = 101 - Main X - E
+  dd3 [] = 
+  dd4 [] = SAR
+  dd5 [] = Standard Selling
+  dd6 [] = 
+  dd7 [] = 
+  dd8 [] = 
+  dd9 [] = 
+  dd10 [] = PW Shipping Two - PW Shipping Two-Billing
+  dd11 [] = PWContact - PWContact-CU-2026-00002
+  dd12 [] = PW Shipping Two - PW Shipping Two-Billing
+  dd13 [] = 54 - 54-Billing
+  dd14 [] = 
+  dd15 [] = 
+  dd16 [] = 
+  dd17 [] = 

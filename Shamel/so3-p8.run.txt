@@ -1,0 +1,40 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\so3-probe8.spec.ts:15:5 › so hold/close
+  1) [chromium] › Shamel\so3-probe8.spec.ts:15:5 › so hold/close ───────────────────────────────────
+
+    Test timeout of 295000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 295000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').getByRole('button', { name: 'تعليق', exact: true })
+
+
+       6 | const main = (p: Page) => p.getByRole('main');
+       7 | const clean = (s: string) => (s || '').replace(/\s+/g, ' ').trim();
+    >  8 | const press = (l: any) => l.evaluate((e: any) => e.click());
+         |                             ^
+       9 | const OUT = 'C:/Playwright_Automation/Shamel/so3-probe8.out.txt';
+      10 | const log = (s: string) => fs.appendFileSync(OUT, s + '\n');
+      11 | const ov = (p: Page) => p.evaluate(() => [...document.querySelectorAll('.so-overlay,.qr-overlay,.base-modal,.modal.show,[class*=confirm]')].filter((e: any) => e.offsetWidth > 150).map((e: any) => e.innerText.replace(/\s+/g, ' ').slice(0, 400)));
+        at press (C:\Playwright_Automation\Shamel\so3-probe8.spec.ts:8:29)
+        at C:\Playwright_Automation\Shamel\so3-probe8.spec.ts:29:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\so3-probe8-so-hold-close-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\so3-probe8-so-hold-close-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\so3-probe8-so-hold-close-chromium\error-context.md
+
+
+  Slow test file: [chromium] › Shamel\so3-probe8.spec.ts (5.2m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 failed
+    [chromium] › Shamel\so3-probe8.spec.ts:15:5 › so hold/close ────────────────────────────────────
+  1 passed (5.3m)

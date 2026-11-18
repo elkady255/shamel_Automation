@@ -1,0 +1,5 @@
+ROW now ["checkbox:on","text:ميديا موقع 6 شهور - IND182210","hidden:2026-11-28","text:28-11-2026","hidden:2026-11-28","number:1","number:10200"]
+HEADER date ["18-11-2026","28-11-2026","28-11-2026"]
+SAVE @0.5s []
+SAVE @5s [] url https://test.hr.azzrk.com/desk/shamel#/selling/sales-orders/new
+MODAL []

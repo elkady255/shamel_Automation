@@ -1,0 +1,33 @@
+import { test, type Page } from '@playwright/test';
+import * as fs from 'fs';
+test.describe.configure({ timeout: 295_000 });
+test.use({ viewport: { width: 1500, height: 1900 } });
+const LOAD = { timeout: 100_000 };
+const main = (p: Page) => p.getByRole('main');
+const clean = (s: string) => (s || '').replace(/\s+/g, ' ').trim();
+const press = (l: any) => l.evaluate((e: any) => e.click());
+const OUT = 'C:/Playwright_Automation/Shamel/so3-probe6.out.txt';
+const log = (s: string) => fs.appendFileSync(OUT, s + '\n');
+const layers = (p: Page) => p.evaluate(() => [...document.querySelectorAll('[class*=modal],[class*=overlay],[class*=popup],[class*=popover]')].filter((e: any) => e.offsetWidth > 200 && e.offsetHeight > 100 && !/profile|fade$/.test(e.className)).map((e: any) => e.className.slice(0, 25) + ' :: ' + e.innerText.replace(/\s+/g, ' ').slice(0, 1500) + ' || INPUTS ' + [...e.querySelectorAll('input,textarea,select')].map((i: any) => i.type + ':' + (i.placeholder || '').slice(0, 15) + ':' + String(i.value).slice(0, 12) + (i.disabled || i.readOnly ? ':RO' : '')).join(',')));
+test('so ui popups', async ({ page }) => {
+  fs.writeFileSync(OUT, '');
+  await page.goto('about:blank'); await page.goto('/desk/shamel#/selling/sales-orders/new', LOAD); await page.waitForTimeout(9000);
+  const pickText = async (idx: number, q: string, opt: string) => { const f = main(page).getByPlaceholder('ابحث واختر').nth(idx); await f.click(); if (q) await f.fill(q); await page.waitForTimeout(1500); await press(page.locator('.cs-option:visible').filter({ hasText: opt }).first()); await page.waitForTimeout(1500); };
+  await pickText(1, 'PW Test', 'PW Test');
+  // get items from quotation
+  await press(main(page).getByRole('button', { name: 'إضافة الأصناف من عرض السعر', exact: true })); await page.waitForTimeout(4000);
+  log('GET QT ' + JSON.stringify(await layers(page))); await page.screenshot({ path: 'Shamel/so3-p6-getqt.png' });
+  await page.evaluate(() => document.querySelectorAll('[class*=modal] button,[class*=overlay] button').forEach((b: any) => { if (/إلغاء|إغلاق/.test(b.innerText + b.title)) b.click(); })); await page.keyboard.press('Escape'); await page.waitForTimeout(800);
+  await press(main(page).getByRole('button', { name: 'إضافة صنف', exact: true })); await page.waitForTimeout(2000);
+  const row = main(page).locator('table tbody tr').first();
+  const ic = row.getByPlaceholder('ابحث واختر').first(); await ic.click(); await ic.fill('IND182210'); await page.waitForTimeout(2000); await press(page.locator('.cs-option:visible').first()); await page.waitForTimeout(3000);
+  log('ITEM TABLE HEAD ' + JSON.stringify((await main(page).locator('table').first().locator('thead th').allInnerTexts()).map(clean)));
+  await press(main(page).locator('[title="إعدادات"]').first()); await page.waitForTimeout(2000);
+  log('GEAR ' + JSON.stringify(await layers(page))); await page.screenshot({ path: 'Shamel/so3-p6-gear.png' });
+  await page.keyboard.press('Escape'); await page.waitForTimeout(600);
+  await page.evaluate(() => document.querySelectorAll('[class*=overlay] button,[class*=modal] button').forEach((b: any) => { if (/إلغاء|إغلاق/.test(b.innerText + b.title)) b.click(); })); await page.waitForTimeout(600);
+  await press(row.locator('input[type=checkbox]').first()); await page.waitForTimeout(800);
+  log('ROW BAR ' + JSON.stringify(await main(page).locator('[title]').evaluateAll((els: any[]) => els.filter((e) => e.offsetParent).map((e) => e.title).filter((t: string) => /صف|حذف|تعديل/.test(t)))));
+  await press(main(page).locator('[title="تعديل الصف"]').first()); await page.waitForTimeout(3500);
+  log('EDITROW ' + JSON.stringify(await layers(page))); await page.screenshot({ path: 'Shamel/so3-p6-edit.png', fullPage: true });
+});

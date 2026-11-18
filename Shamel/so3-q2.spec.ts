@@ -1,0 +1,24 @@
+import { test } from '@playwright/test';
+import * as fs from 'fs';
+import { ctx } from './helpers/qt-api';
+test('q2', async () => {
+  const c = await ctx(); const out: string[] = [];
+  const g = async (dt: string, f: any, fields: string[], lim = 5, ob?: string) => JSON.stringify((await (await c.get('/api/resource/' + dt, { params: { filters: JSON.stringify(f), fields: JSON.stringify(fields), limit_page_length: String(lim), ...(ob ? { order_by: ob } : {}) } })).json()).data ?? 'ERR');
+  out.push('BIN ' + await g('Bin', [['item_code', '=', 'IND182210'], ['warehouse', '=', 'Stores - E']], ['actual_qty', 'reserved_qty', 'projected_qty', 'reserved_qty_for_sub_contract']));
+  out.push('SRE ' + await g('Stock Reservation Entry', [['item_code', '=', 'IND182210'], ['warehouse', '=', 'Stores - E'], ['docstatus', '=', 1]], ['name', 'reserved_qty', 'delivered_qty', 'status'], 3));
+  out.push('OPEN QT count ' + await g('Quotation', [['status', '=', 'Open'], ['docstatus', '=', 1]], ['count(name) as c'], 1));
+  out.push('QT any ' + await g('Quotation', [['docstatus', '=', 1]], ['status', 'count(name) as c'].slice(0, 2), 20).then(s => s));
+  out.push('ITEM filters: fixedasset ' + await g('Item', [['is_fixed_asset', '=', 1], ['disabled', '=', 0]], ['name', 'item_name'], 3));
+  out.push('ITEM hasvar ' + await g('Item', [['has_variants', '=', 1], ['disabled', '=', 0]], ['name', 'item_name'], 3));
+  out.push('ITEM noSales ' + await g('Item', [['is_sales_item', '=', 0], ['disabled', '=', 0]], ['name', 'item_name'], 3));
+  out.push('ITEM nonstock ' + await g('Item', [['is_stock_item', '=', 0], ['disabled', '=', 0], ['is_sales_item', '=', 1], ['is_fixed_asset', '=', 0], ['has_variants', '=', 0]], ['name', 'item_name'], 3));
+  out.push('ITEM bundle ' + await g('Product Bundle', [['disabled', '=', 0]], ['name'], 3));
+  out.push('PTT ' + await g('Payment Terms Template', [], ['name'], 5));
+  out.push('STT ' + await g('Sales Taxes and Charges Template', [['disabled', '=', 0]], ['name', 'is_default'], 5));
+  out.push('SHIPRULE ' + await g('Shipping Rule', [], ['name', 'shipping_rule_type'], 3));
+  out.push('CUST addr ' + await g('Dynamic Link', [['link_doctype', '=', 'Customer'], ['link_name', 'in', ['CU-2026-00001', 'CU-2026-00002']], ['parenttype', '=', 'Address']], ['parent', 'link_name'], 20));
+  out.push('CONTACT ' + await g('Dynamic Link', [['link_doctype', '=', 'Customer'], ['link_name', '=', 'CU-2026-00002'], ['parenttype', '=', 'Contact']], ['parent'], 5));
+  out.push('COUPON ' + await g('Coupon Code', [], ['name', 'coupon_code', 'pricing_rule', 'valid_upto', 'maximum_use', 'used'], 4));
+  out.push('SYSDEFAULT stock res ' + JSON.stringify((await (await c.get('/api/resource/Stock Settings/Stock Settings')).json()).data?.enable_stock_reservation));
+  fs.writeFileSync('C:/Playwright_Automation/Shamel/so3-q2.out.txt', out.join('\n'));
+});

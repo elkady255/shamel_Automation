@@ -1,0 +1,54 @@
+MISSING customer => REFUSED(417) خطأ: قيمة مفقودة ل أمر بيع: العميل
+MISSING company => SAVED SAL-ORD-2026-03116 total=10200 qty=1
+MISSING transaction_date => SAVED SAL-ORD-2026-03117 total=10200 qty=1
+MISSING delivery_date => SAVED SAL-ORD-2026-03118 total=10200 qty=1
+MISSING custom_employee => REFUSED(417) خطأ: قيمة مفقودة ل أمر بيع: الموظف
+MISSING custom_name_in_contract => REFUSED(417) خطأ: قيمة مفقودة ل أمر بيع: Name In Contract
+MISSING custom_brief => REFUSED(417) خطأ: قيمة مفقودة ل أمر بيع: Brief
+MISSING custom_contract_end_date => REFUSED(417) خطأ: قيمة مفقودة ل أمر بيع: تاريخ نهاية العقد
+MISSING custom_contract_start_date => SAVED SAL-ORD-2026-03119 total=10200 qty=1
+MISSING custom_account_type => SAVED SAL-ORD-2026-03120 total=10200 qty=1
+NO ITEMS => REFUSED(500) TypeError: bad operand type for abs(): 'NoneType'
+ROW no delivery_date => SAVED SAL-ORD-2026-03121 total=10200 qty=1
+DELIVERY before order date => SAVED SAL-ORD-2026-03122 total=10200 qty=1
+ROW delivery before header => SAVED SAL-ORD-2026-03123 total=10200 qty=1
+QTY 0 => REFUSED(417) الصف # 1: كمية البند IND182210 لا يمكن أن يكون صفرا
+QTY -1 => REFUSED(417) Incorrect value:Grand Total must be &gt;= 0.0
+QTY 1e-7 => SAVED SAL-ORD-2026-03124 total=0 qty=0
+QTY 1000000000000000 => REFUSED(500) MySQLdb.DataError: (1264, "Out of range value for column 'total_qty' at row 1")
+QTY 2.5 => SAVED SAL-ORD-2026-03125 total=25500 qty=2.5
+RATE -5 => REFUSED(417) Incorrect value:Grand Total must be &gt;= 0.0
+RATE 0 => SAVED SAL-ORD-2026-03126 total=10200 qty=1
+RATE 1000000000000000 => REFUSED(500) MySQLdb.DataError: (1264, "Out of range value for column 'base_total' at row 1")
+RATE 0.001 => SAVED SAL-ORD-2026-03127 total=10200 qty=1
+GROUP WH => SAVED SAL-ORD-2026-03128 total=10200 qty=1
+WRONG UOM => SAVED SAL-ORD-2026-03129 total=10200 qty=1
+DUP ROWS => SAVED SAL-ORD-2026-03130 total=20400 qty=2
+FIXED ASSET item => SAVED SAL-ORD-2026-03131 total=10200 qty=1
+HAS VARIANTS item => REFUSED(417) Item 1111 is a template, please select one of its variants
+NOT SALES item => REFUSED(417) Item Price added for Item-123 in Price List - Standard Selling || العنصر Item-123 غير مُصنّف كعنصر sales . يمكنك تفعيله كعنصر sales من قائمة العناصر الرئيسية.
+DISC pct 150 => REFUSED(417) Additional Discount Amount (ريال سعودي 15,300.00) cannot exceed the total before such discount (ريال سعودي 10,200.00)
+DISC pct -10 => SAVED SAL-ORD-2026-03132 total=11220 qty=1
+DISC amt > total => REFUSED(417) Additional Discount Amount (ريال سعودي 999,999.00) cannot exceed the total before such discount (ريال سعودي 10,200.00)
+DISC amt -500 => SAVED SAL-ORD-2026-03133 total=10700 qty=1
+DISC on Net Total 10% => SAVED SAL-ORD-2026-03134 total=9180 qty=1
+PO 1 char => SAVED SAL-ORD-2026-03135 total=10200 qty=1
+PO 101 chars => SAVED SAL-ORD-2026-03136 total=10200 qty=1
+PO 100 chars => SAVED SAL-ORD-2026-03137 total=10200 qty=1
+PO date only => SAVED SAL-ORD-2026-03138 total=10200 qty=1
+TERMS 2 chars => SAVED SAL-ORD-2026-03139 total=10200 qty=1
+TERMS 501 chars => SAVED SAL-ORD-2026-03140 total=10200 qty=1
+DESC 2 chars => SAVED SAL-ORD-2026-03141 total=10200 qty=1
+DESC 501 chars => SAVED SAL-ORD-2026-03142 total=10200 qty=1
+ORDER TYPE Maintenance => SAVED SAL-ORD-2026-03143 total=10200 qty=1
+ORDER TYPE bad => REFUSED(417)  نوع الطلب لا يمكن أن يكون {}. يجب أن تكون واحدة من "Data Import", "المبيعات", "الصيانة", "سلة التسوق"
+CURRENCY USD no rate => SAVED SAL-ORD-2026-03144 total=10200 qty=1
+CURRENCY USD rate 0 => SAVED SAL-ORD-2026-03145 total=10200 qty=1
+CONVERSION negative => SAVED SAL-ORD-2026-03146 total=10200 qty=1
+Skip DN + row delivery blank => SAVED SAL-ORD-2026-03147 total=10200 qty=1
+TAX no account => REFUSED(417) خطأ: الضرائب والرسوم على المبيعات الصف #1: القيمة مفقودة لـ: الحساب المحاسبي
+TAX rate 250 => SAVED SAL-ORD-2026-03148 total=35700 qty=1
+TAX rate -5 => SAVED SAL-ORD-2026-03149 total=9690 qty=1
+TAX prevrow no ref => REFUSED(417) لا يمكن تحديد نوع التهمة باسم ' في الصف السابق المبلغ ' أو ' في السابق صف إجمالي " ل لصف الأول
+TAX desc 2 chars => SAVED SAL-ORD-2026-03150 total=10710 qty=1
+TAX Actual 0 => SAVED SAL-ORD-2026-03151 total=10200 qty=1

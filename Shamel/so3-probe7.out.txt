@@ -1,0 +1,13 @@
+ITEM SEARCH 2121 => []
+ITEM SEARCH 1111 => []
+ITEM SEARCH Test Asset => []
+ITEM SEARCH asdasd => []
+ITEM SEARCH Item-123 => []
+ITEM SEARCH Ads => ["Marketing Ads Spend - Ads","Ads - tefsdft"]
+ITEM SEARCH BR-1 => ["Branding Pac (1 Month) - BR-1"]
+ITEM SEARCH STO-ITEM-2026-00077 => ["صنف BUNDEL - STO-ITEM-2026-00077"]
+GEAR FIELDS ["base-modal base-modal--sc :: تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود إضافة/إزالة حقول إلغاء حفظ || INPUTS ","base-modal base-modal--sc :: الحقول المتاحة الحقول المتاحة إلغاء إضافة || INPUTS "]
+TABLES 2
+TAX HEAD ["","النوع","الحساب","نسبة الضريبة","صافي المبلغ","المبلغ","الإجمالي",""]
+TAX ROW ["checkbox::on","text:Type or select:على الإجمالي الصافي","text:ابحث واختر:","number::0"]
+TAX EDIT ["qr-overlay :: تعديل الصف النوع * الحساب * الوصف هل الضريبة مضمّنة في السعر الأساسي؟ هل الضريبة مضمّنة في السعر الأساسي؟ محتسبة في المبلغ المدفوع محتسبة في المبلغ المدفوع محددة بقالب ضريبة الصنف — حساب استقطاع ضريبي — مركز التكلفة المشروع نسبة الضريبة عملة الحساب — صافي المبلغ — المبلغ — الإجمالي — قيمة الضريبة بعد الخصم — صافي المبلغ بعملة الشركة — المبلغ بعملة الشركة — الإجمالي بعملة الشركة — قيمة الضريبة بعد الخصم بعملة الشركة — عدم إعادة حساب الضريبة — إلغاء حفظ || INPUTS text:Type or select:على الإجمالي,text:ابحث واختر:,textarea::,checkbox::on,checkbox::on,text:ابحث واختر:,text:ابحث واختر:,number::0"]

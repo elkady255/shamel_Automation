@@ -1,0 +1,910 @@
+<title>Sales Order Comparison Report</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "SO-01",
+  "sev": "High",
+  "pri": "P1",
+  "layer": "Frontend",
+  "title": "A Sales Order cannot be saved from the screen: four fields the server requires are not on the Add or Details screen, and Save then does nothing",
+  "area": "Add Sales Order › Details",
+  "tc": [],
+  "srs": "Add Sales Order (pages 173 to 214): a Sales Order is saved with Save when the required fields are filled; the SRS lists no Employee, Name In Contract, Brief or Contract End Date field.",
+  "steps": [
+   "Open Selling › Sales Orders › Add Sales Order.",
+   "Choose the customer \"PW Test Customer\", add the item IND182210 (rate 10200) and set the delivery date.",
+   "Press Save and wait 5 seconds.",
+   "Compare with the create call that adds Employee, Name In Contract, Brief and Contract End Date (the call saves SAL-ORD-2026-03112)."
+  ],
+  "expected": "Either the screen shows the four fields and saves the order, or the field names the screen cannot fill are not mandatory.",
+  "actual": "No message, no marked field and no new document: the page stays on /sales-orders/new. The server refuses the save without Employee (\"قيمة مفقودة ل أمر بيع: الموظف\"), Name In Contract, Brief and Contract End Date (they are mandatory custom fields of this server, together with Account Type and Contract Start Date), and none of them is on the screen. The same silent failure happened when the order was started from Blanket Order MFG-BLR-2026-00030. So no Sales Order can be created from the new screen; the test orders had to be created through the API.",
+  "code": "API without custom_employee -> 417 \"خطأ: قيمة مفقودة ل أمر بيع: الموظف\"; without custom_name_in_contract -> \"Name In Contract\"; without custom_brief -> \"Brief\"; without custom_contract_end_date -> \"تاريخ نهاية العقد\"\nUI: all visible fields filled -> Save -> no modal, no toast, URL unchanged",
+  "shots": [],
+  "fix": "Add the contract fields (Account Type, Contract Start / End Date, Name In Contract, Employee, Brief) to the screen, or make them optional; and always show the server message when a save fails (see SO-04)."
+ },
+ {
+  "id": "SO-02",
+  "sev": "High",
+  "pri": "P1",
+  "layer": "Frontend",
+  "title": "Create › Sales Invoice, Create › Delivery Note and Create › Payment do not open the next document: a message says their screen \"is not part of this version\"",
+  "area": "Details › Create",
+  "tc": [],
+  "srs": "Create (page 236): Delivery Note navigates to \"Add Delivery Note\" with the items fetched from the Sales Order; Sales Invoice navigates to \"Add Sales Invoice\" with the items; Payment navigates to \"Add Payment\".",
+  "steps": [
+   "Open a submitted Sales Order (SAL-ORD-2026-03115, \"Skip Delivery Note\" off).",
+   "Press Create and choose Sales Invoice; repeat for Delivery Note and Payment."
+  ],
+  "expected": "The Add Sales Invoice / Add Delivery Note / Add Payment screen opens with the Sales Order items.",
+  "actual": "A popup says \"تم تجهيزه من أمر البيع هذا بـ 1 صنف. شاشته ليست جزءًا من هذا الإصدار بعد\" (it was prepared from this order with 1 item; its screen is not part of this version yet). For Payment it says 0 items. The Sales Invoice and Delivery Note screens do exist in this system (Selling › Sales Invoices, Inventory), so the order-to-delivery-to-invoice chain cannot be followed from the Sales Order screen. The Purchase Order popup does work.",
+  "code": "Create › فاتورة المبيعات / إذن التسليم / الدفع -> popup \"شاشته ليست جزءًا من هذا الإصدار بعد\"; url stays /sales-orders/SAL-ORD-2026-03115",
+  "shots": [],
+  "fix": "Open the existing Add Sales Invoice / Add Delivery Note screens with the items of the Sales Order (as the Sales Invoice screen already does with Get Items From), and a Payment screen with the order as reference."
+ },
+ {
+  "id": "SO-03",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Backend",
+  "title": "Create › Material Request fails with \"Price list Standard Buying disabled or does not exist\"",
+  "area": "Details › Create › Material Request",
+  "tc": [],
+  "srs": "Create › Material Request (page 236): navigates to Add Material Request with the items of the Sales Order.",
+  "steps": [
+   "Open the submitted Sales Order SAL-ORD-2026-03115.",
+   "Press Create › Material Request."
+  ],
+  "expected": "The Material Request opens with the items.",
+  "actual": "A popup titled \"تعذّر تجهيز المستند\" says \"قائمة الأسعار Standard Buying تعطيل أو لا وجود لها\" and nothing opens. Making a Material Request from a Sales Order should not depend on a buying price list. Please check whether the price list was removed on purpose.",
+  "code": "Create › طلب المواد -> \"قائمة الأسعار Standard Buying تعطيل أو لا وجود لها\"",
+  "shots": [],
+  "fix": "Do not require the buying price list for this action, or restore / enable the \"Standard Buying\" price list."
+ },
+ {
+  "id": "SO-04",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "Save on an empty form shows no message and marks no field",
+  "area": "Add Sales Order › Save",
+  "tc": [],
+  "srs": "Company, Series, Customer, Date and Currency (pages 173 to 175): \"If the field is left empty, an error message will appear\". Save (page 213): \"A validation error message is displayed for each invalid field\".",
+  "steps": [
+   "Open Add Sales Order and clear nothing, choose nothing.",
+   "Press Save and watch the screen for 3 seconds."
+  ],
+  "expected": "A message (or a red mark and text) on the empty required field, here Customer.",
+  "actual": "Nothing appears: no popup, no inline error, no red border. (With a customer and an item but no delivery date the popup \"تعذّر الحفظ: الرجاء إدخال تاريخ التسليم\" does appear, and with no items \"أضف صنفًا واحدًا على الأقل\", so only the empty-customer case is silent.)",
+  "code": "Empty form -> Save -> .cd-error count 0, modal count 0 (0.4 s and 3 s after the click)",
+  "shots": [],
+  "fix": "Validate the required fields on the screen and show one message per field, as the Sales Invoice screen does."
+ },
+ {
+  "id": "SO-05",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "Delete is offered for submitted orders: the Details header icon and the list action bar both show it",
+  "area": "Details header and List action bar",
+  "tc": [],
+  "srs": "List (page 171) and Details (page 238): \"Delete appears only when the sales order status = Draft / Cancelled\".",
+  "steps": [
+   "Open the submitted order SAL-ORD-2026-03114 and press the Delete icon at the top (Yes was NOT pressed).",
+   "On the list, tick SAL-ORD-2026-03114 (Confirmed) and read the action bar."
+  ],
+  "expected": "No Delete on a Confirmed / Completed / On Hold / Closed order.",
+  "actual": "The Details header shows the Delete icon on every order and it opens \"حذف: هل أنت متأكد؟\". The list action bar of the Confirmed order shows \"حذف\" next to Cancel. The same problem was reported for Sales Invoice (SI-03).",
+  "code": "Details SAL-ORD-2026-03114: Delete icon -> confirmation dialog (cancelled)\nList bar of a Confirmed order: تحديد الكل | تعديل | اسناد | إضافة وسوم | تصدير | إلغاء التعيين | إلغاء | طباعة | حذف",
+  "shots": [],
+  "fix": "Hide Delete unless the status is Draft or Cancelled, in the header and in the bulk bar."
+ },
+ {
+  "id": "SO-06",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Backend",
+  "title": "A negative Additional Discount (percentage or amount) is accepted and raises the order total",
+  "area": "Add Sales Order › Additional Discount",
+  "tc": [],
+  "srs": "Additional Discount (page 202): numbers only; \"Additional Discount Amount cannot exceed the total\" is the only limit; a discount should reduce the total.",
+  "steps": [
+   "Create an order with one item of 10200 through the create call.",
+   "Send additional_discount_percentage = -10, then discount_amount = -500."
+  ],
+  "expected": "A refusal (\"discount cannot be negative\").",
+  "actual": "Both are saved: -10 % gives a grand total of 11220 (discount_amount -1020) and -500 gives 10700. A discount above the total (999999 and 150 %) is refused correctly. Same as Sales Invoice SI-19.",
+  "code": "additional_discount_percentage: -10 -> SAL-ORD-2026-03132 grand_total 11220\ndiscount_amount: -500 -> SAL-ORD-2026-03133 grand_total 10700",
+  "shots": [],
+  "fix": "Refuse a negative discount percentage and amount."
+ },
+ {
+  "id": "SO-07",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Backend",
+  "title": "The server accepts a group warehouse and a UOM that the item does not have",
+  "area": "Add Sales Order › Items",
+  "tc": [],
+  "srs": "Set Source Warehouse (page 179): only child warehouses (Is Group = 0). UOM (page 186): \"Displays only the UOMs defined for this item in its UOM table\".",
+  "steps": [
+   "Create an order through the create call with warehouse \"All Warehouses - E\" (a group).",
+   "Create another with uom \"Nos\" for IND182210, which only has \"Subscription\"."
+  ],
+  "expected": "Both refused.",
+  "actual": "Both are saved (SAL-ORD-2026-03128 with the group warehouse, SAL-ORD-2026-03129 with UOM Nos, conversion factor 1). The screen limits both lists, so only a call outside the screen can do it. Same as Sales Invoice SI-18.",
+  "code": "warehouse \"All Warehouses - E\" -> saved SAL-ORD-2026-03128\nuom \"Nos\" -> saved SAL-ORD-2026-03129 (conversion_factor 1, stock_qty 1)",
+  "shots": [],
+  "fix": "Validate on the server that the warehouse is not a group and that the UOM is in the item UOM table."
+ },
+ {
+  "id": "SO-08",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "Creating an order from a Blanket Order: the agreed rate is not used, no delivery date is filled and the total quantity (10.5) does not match the row (10)",
+  "area": "Add Sales Order › from Blanket Order (/new?blanket_order=...)",
+  "tc": [],
+  "srs": "Against Blanket Order, Blanket Order and Blanket Order Rate (page 191 to 192): the row shows the agreed unit price of the Blanket Order. Delivery Date is mandatory per row (page 179).",
+  "steps": [
+   "Open /desk/shamel#/selling/sales-orders/new?blanket_order=MFG-BLR-2026-00030 (item IND182210, quantity 10, agreed rate 150).",
+   "Read the item row and the Items summary."
+  ],
+  "expected": "Rate 150 (the Blanket Order rate), a delivery date, and a total quantity of 10.",
+  "actual": "The row shows rate 10200 (the price list price) instead of 150, the delivery dates are empty, and the summary shows \"إجمالي الكمية 10.5\" for a row of quantity 10. The order could not be saved (see SO-01). This was checked on 2026-11-17 and 2026-11-18.",
+  "code": "Row inputs: qty 10, rate 10200; summary: إجمالي الكمية 10.5, الإجمالي 102,000.00 SAR",
+  "shots": [],
+  "fix": "Take the rate and the delivery date from the Blanket Order and make the total quantity equal the sum of the row quantities."
+ },
+ {
+  "id": "SO-09",
+  "sev": "Medium",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The reason given for Hold is not shown anywhere on the Details screen",
+  "area": "Details › Hold",
+  "tc": [],
+  "srs": "Hold (page 235 to 236): \"The Reason For Hold is added to the document Activities\".",
+  "steps": [
+   "Open the submitted order SAL-ORD-2026-03114, press Hold, write a reason and press Submit.",
+   "Read the Details page after the status becomes On Hold (all tabs)."
+  ],
+  "expected": "The reason appears in an Activities (comments) section.",
+  "actual": "The status changes to On Hold and Resume appears, but no tab shows the reason or any Activities section. The server did save it as a comment (\"Reason for hold: ...\"), so the data exists and the screen just does not show it.",
+  "code": "Comment on SAL-ORD-2026-03114: \"Reason for hold: ...\" (found through the API); no Activities block on the page",
+  "shots": [],
+  "fix": "Add an Activities / comments section to the Details screen that lists the hold reason."
+ },
+ {
+  "id": "SO-10",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "An order with 100 % delivered shows Delivery Status \"No Delivery Required\"",
+  "area": "List and Details › Delivery Status",
+  "tc": [],
+  "srs": "Delivery Status (page 170): To Deliver, Fully Delivered, Partly Delivered or No Delivery Required; Completed is shown when Billing Status = Fully Billed and Delivery Status = Delivered.",
+  "steps": [
+   "Open the list and read SAL-ORD-2026-03111 (Skip Delivery Note on).",
+   "Open its More Information tab."
+  ],
+  "expected": "\"Fully Delivered\" (the record says Fully Delivered and 100 %).",
+  "actual": "The list and the More Information tab show \"بدون تسليم\" (No Delivery Required) next to \"% Delivered 100\". The record itself has delivery_status \"Fully Delivered\" and per_delivered 100.",
+  "code": "SAL-ORD-2026-03111: delivery_status (API) = Fully Delivered, per_delivered 100; screen = بدون تسليم, 100%",
+  "shots": [],
+  "fix": "Show the stored delivery status, or show \"No Delivery Required\" only when the percentage is 0 and Skip Delivery Note is on."
+ },
+ {
+  "id": "SO-11",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Advance Payment Status is displayed although the SRS marks it Hidden",
+  "area": "More Information › Status",
+  "tc": [],
+  "srs": "Advance Payment Status (Hidden) (page 228).",
+  "steps": [
+   "Open any order and read the Order Status section of More Information."
+  ],
+  "expected": "The field is not shown.",
+  "actual": "\"حالة الدفعة المقدمة\" is shown with \"غير مطلوبة\" / \"يتم إنشاؤه تلقائيًا\". Either the SRS label or the screen should change.",
+  "code": "More Information › حالة الدفعة المقدمة: غير مطلوبة",
+  "shots": [],
+  "fix": "Hide it, or remove the word Hidden from the SRS."
+ },
+ {
+  "id": "SO-12",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Setting popup of the Items table is empty and has no \"Reset to default\"; the button is named Save instead of Update",
+  "area": "Add Sales Order › Items › Setting (gear)",
+  "tc": [],
+  "srs": "Setting (page 180 to 183): drag-and-drop columns, column width, Add / Remove columns, \"Update\" and \"Reset to default\".",
+  "steps": [
+   "Open Add Sales Order, add an item and press the gear above the Items table.",
+   "Press \"إضافة/إزالة حقول\"."
+  ],
+  "expected": "The columns with their widths, a list of the available columns with checkboxes, Update and Reset to default.",
+  "actual": "The popup \"تعديل الأعمدة\" has only the headings \"اسم الحقل\" and \"عرض العمود\" and the buttons Cancel and Save; the \"الحقول المتاحة\" popup has no fields at all. There is no Reset to default. Same as Sales Invoice SI-17.",
+  "code": "Gear popup text: تعديل الأعمدة | اسم الحقل | عرض العمود | إضافة/إزالة حقول | إلغاء | حفظ\nAvailable fields popup: الحقول المتاحة | إلغاء | إضافة (no checkboxes)",
+  "shots": [],
+  "fix": "Fill the popup with the table columns of the SRS list, add Reset to default and name the save button Update."
+ },
+ {
+  "id": "SO-13",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The tables have no \"No.\" column and the list has no Delivery Date column",
+  "area": "Add Sales Order › Items and Taxes; List",
+  "tc": [],
+  "srs": "Items and Sales Taxes and Charges (pages 179 and 195): a \"No.\" column; list (page 170): a Delivery Date column.",
+  "steps": [
+   "Add an item and a tax row on Add Sales Order and read both table headers; read the list header."
+  ],
+  "expected": "A No. column in both tables and a Delivery Date column in the list.",
+  "actual": "Items header: كود الصنف | تاريخ التسليم | الكمية | الكمية المتاحة | كمية العجز | السعر | المبلغ. Taxes header: النوع | الحساب | نسبة الضريبة | صافي المبلغ | المبلغ | الإجمالي. List: ID, Status, Delivery Status, Billing Status, Availability Status, Customer Name, Date, Grand Total, % Billed, % Delivered, with a Date column but no Delivery Date.",
+  "code": "Items thead: [\"\",\"كود الصنف\",\"تاريخ التسليم\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"\"]",
+  "shots": [],
+  "fix": "Add the No. column to the tables and the Delivery Date column to the list."
+ },
+ {
+  "id": "SO-14",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "Raw technical errors for an empty order, huge numbers and negative amounts; a tiny quantity is saved as 0",
+  "area": "Server messages",
+  "tc": [],
+  "srs": "Qty (page 179): numbers only, maximum 100 characters; \"a validation error message is displayed for each invalid field\".",
+  "steps": [
+   "Through the create call send: no items; quantity 1000000000000000; rate 1000000000000000; quantity -1; rate -5; quantity 0.0000001."
+  ],
+  "expected": "Readable messages and no saved order with a total of 0.",
+  "actual": "No items: 500 \"TypeError: bad operand type for abs(): 'NoneType'\". Quantity 1e15: 500 \"MySQLdb.DataError: Out of range value for column 'total_qty'\". Rate 1e15: the same for 'base_total'. Quantity -1 and rate -5: 417 \"Incorrect value: Grand Total must be >= 0.0\" (English, and it does not say which field). Quantity 0.0000001 is saved as a draft with quantity 0 and total 0 (SAL-ORD-2026-03124). Same family as Sales Invoice SI-24 and SI-25.",
+  "code": "items [] -> 500 TypeError\nqty 1e15 -> 500 MySQLdb.DataError (1264) total_qty\nqty -1 -> 417 \"Incorrect value:Grand Total must be >= 0.0\"\nqty 1e-7 -> saved SAL-ORD-2026-03124, qty 0, total 0",
+  "shots": [],
+  "fix": "Validate range and sign first and return one clear message per field; refuse a quantity that rounds to 0."
+ },
+ {
+  "id": "SO-15",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server does not enforce the text length rules of the SRS",
+  "area": "Server rules: Customer PO, Terms, item and tax description",
+  "tc": [],
+  "srs": "Customer Purchase Order min 2 / max 100 (page 234); Terms and Condition Content, item Description and tax Description min 3 / max 500 (pages 199, 204, 226).",
+  "steps": [
+   "Through the create call send po_no of 1 and of 101 characters; terms of 2 and 501 characters; an item description of 2 and of 501 characters; a tax description of 2 characters."
+  ],
+  "expected": "Each outside value refused.",
+  "actual": "All are saved (SAL-ORD-2026-03135, 03136, 03139, 03140, 03141, 03142, 03150). The screen limits some of them (Customer PO has maxlength 100) but the server does not.",
+  "code": "po_no \"a\" and \"a\"*101, terms \"ab\" and 501 chars, item description \"ab\" and 501 chars, tax description \"ab\": all saved",
+  "shots": [],
+  "fix": "Apply the min and max lengths on the server for these fields."
+ },
+ {
+  "id": "SO-16",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A negative tax rate and a tax rate of 250 are accepted",
+  "area": "Add Sales Order › Taxes and Charges",
+  "tc": [],
+  "srs": "Tax Rate (page 196): numbers only, maximum 100 characters.",
+  "steps": [
+   "Create an order of 10200 with a tax row \"On Net Total\" at rate -5, and another at rate 250."
+  ],
+  "expected": "A refusal of a negative rate (and a question to the business about rates above 100).",
+  "actual": "Rate -5 is saved and lowers the total to 9690 (SAL-ORD-2026-03149); rate 250 is saved and gives 35700 (03148). A missing account and \"On Previous Row Amount\" on the first row are refused correctly.",
+  "code": "rate -5 -> grand_total 9690; rate 250 -> grand_total 35700",
+  "shots": [],
+  "fix": "Refuse a negative tax rate; confirm the maximum for the rate."
+ },
+ {
+  "id": "SO-17",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "The server accepts a fixed-asset item and Order Type \"Maintenance\"; the screen hides both",
+  "area": "Add Sales Order › Items, Order Type",
+  "tc": [],
+  "srs": "Item Code (page 179): only items with Is Fixed Asset disabled, Has Variants disabled and Allow Sales enabled; Order Type (Hidden) has the single value Sales (page 173).",
+  "steps": [
+   "Create an order with item \"2121\" (fixed asset) and another with order_type \"Maintenance\"."
+  ],
+  "expected": "Both refused.",
+  "actual": "Both are saved (SAL-ORD-2026-03131 and 03143). A template item (1111) and an item with Allow Sales off (Item-123) are refused. The item dropdown on the screen is correct: it hides the fixed asset, the template and the not-for-sale items. The reverse of Sales Invoice SI-26.",
+  "code": "item 2121 -> saved SAL-ORD-2026-03131; order_type Maintenance -> saved SAL-ORD-2026-03143",
+  "shots": [],
+  "fix": "Apply the SRS item filter and the single Order Type value on the server as well."
+ },
+ {
+  "id": "SO-18",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Backend",
+  "title": "A delivery date earlier than the order date is accepted",
+  "area": "Add Sales Order › Delivery Date",
+  "tc": [],
+  "srs": "Delivery Date (pages 174 and 179): mandatory per row; the SRS does not say what happens when it is before the order date.",
+  "steps": [
+   "Create an order dated today with delivery_date 3 days ago (header and row)."
+  ],
+  "expected": "A message, or a business answer that it is allowed.",
+  "actual": "Saved as SAL-ORD-2026-03122 and 03123. Please decide the rule and add it to the SRS.",
+  "code": "transaction_date today, delivery_date today-3 -> saved",
+  "shots": [],
+  "fix": "Refuse a delivery date before the order date (or write down that it is allowed)."
+ },
+ {
+  "id": "SO-19",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Skip Delivery Note starts off on the screen although Selling Settings turns it on by default",
+  "area": "Add Sales Order › Skip Delivery Note",
+  "tc": [],
+  "srs": "Skip Delivery Note (page 174): \"it's unchecked by default\".",
+  "steps": [
+   "Read Selling Settings › Auto Skip Delivery Note in Sales Order (value 1).",
+   "Open Add Sales Order and read the switch; then create an order through the API without the field."
+  ],
+  "expected": "The screen and the server agree.",
+  "actual": "The screen starts with the switch off (the SRS value), but the server sets skip_delivery_note = 1 for a new order created without the field (SAL-ORD-2026-03112, 03113), because of the setting. An order saved from the screen therefore asks for delivery dates and has Create › Delivery Note, an API order does not.",
+  "code": "custom_auto_skip_delivery_note_in_sales_order = 1; new screen: switch off; API default: skip_delivery_note = 1",
+  "shots": [],
+  "fix": "Decide the default and make the screen and the server follow the same one."
+ },
+ {
+  "id": "SO-20",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "After \"Get Items From Quotation\" the totals show \"—\" until the order is saved",
+  "area": "Add Sales Order › Get Items From Quotation",
+  "tc": [],
+  "srs": "Get Items (page 213): the items are fetched into the items table; totals show the item amounts (page 194).",
+  "steps": [
+   "Open Add Sales Order, press \"إضافة الأصناف من عرض السعر\", tick SAL-QTN-2026-01703 and press the add button."
+  ],
+  "expected": "Total quantity and totals filled.",
+  "actual": "The row arrives with quantity 2 and rate 10200 (row amount 20,400) but \"إجمالي الكمية\", \"الإجمالي\" and the net totals show \"—\". The popup lists open quotations of every customer and lead (12 rows) and the customer already chosen does not filter them. Same as Sales Invoice SI-22.",
+  "code": "Summary after Get Items: إجمالي الكمية — | الإجمالي (SAR) — | row amount 20,400.00",
+  "shots": [],
+  "fix": "Recalculate the totals after Get Items and filter the popup by the chosen customer when one is set."
+ },
+ {
+  "id": "SO-21",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Mixed Arabic / English text: \"% Delivered\", \"In Words\", \"Type or select\", \"تُفوتر بالكامل\"",
+  "area": "List, Totals, Taxes table",
+  "tc": [],
+  "srs": "The screens are used in Arabic.",
+  "steps": [
+   "Read the list header, the In Words fields of Totals on an Arabic document, the tax \"Type\" field and the Billing Status of a completed order."
+  ],
+  "expected": "Arabic text everywhere.",
+  "actual": "The list header shows \"% Delivered\" in English; \"الإجمالي كتابةً\" shows \"SAR Five Hundred only.\" in English; the tax Type field and the Margin Type placeholder show \"Type or select\"; Billing Status \"Fully Billed\" is shown as \"تُفوتر بالكامل\" (a verb, not a status).",
+  "code": "List thead: ... | نسبة الفوترة | % Delivered\nIn Words: SAR Five Hundred only.\nBilling Status Fully Billed: تُفوتر بالكامل",
+  "shots": [],
+  "fix": "Review these translations and the in-words language."
+ }
+];
+const BUG_AR = {
+ "SO-01": {
+  "t": "مينفعش يتحفظ Sales Order من الشاشة: أربع خانات السيرفر بيطلبها مش موجودة في شاشة الإضافة ولا التفاصيل، وزر Save مبيعملش حاجة",
+  "area": "Add Sales Order › Details",
+  "srs": "Add Sales Order (الصفحات 173 لـ 214): الأمر بيتحفظ بـ Save لما الحقول المطلوبة تتملي؛ والـ SRS مفيهوش حقول Employee ولا Name In Contract ولا Brief ولا Contract End Date.",
+  "steps": [
+   "افتح Selling › Sales Orders › Add Sales Order.",
+   "اختار العميل «PW Test Customer» وضيف الصنف IND182210 (سعر 10200) وحدد تاريخ التسليم.",
+   "دوس Save واستنى 5 ثواني.",
+   "قارن بنداء الإنشاء اللي بيضيف Employee وName In Contract وBrief وContract End Date (النداء حفظ SAL-ORD-2026-03112)."
+  ],
+  "exp": "يا إما الشاشة تعرض الحقول الأربعة وتحفظ الأمر، يا إما الحقول اللي الشاشة مش بتملاها تبقى مش إجبارية.",
+  "act": "مفيش رسالة ولا حقل متعلّم ولا مستند جديد: الصفحة بتفضل على /sales-orders/new. السيرفر بيرفض الحفظ من غير Employee («قيمة مفقودة ل أمر بيع: الموظف») وName In Contract وBrief وContract End Date (دول custom fields إجبارية في السيرفر ده، ومعاهم Account Type وContract Start Date)، ومفيش واحد فيهم في الشاشة. نفس الصمت حصل لما بدأت الأمر من Blanket Order MFG-BLR-2026-00030. يعني مفيش Sales Order بيتعمل من الشاشة الجديدة؛ وأوامر الاختبار اتعملت بالـ API.",
+  "fix": "ضيفوا حقول العقد (Account Type وContract Start / End Date وName In Contract وEmployee وBrief) للشاشة، أو خلوها اختيارية؛ ودايما اعرضوا رسالة السيرفر لما الحفظ يفشل (شوف SO-04)."
+ },
+ "SO-02": {
+  "t": "Create › Sales Invoice وCreate › Delivery Note وCreate › Payment مبيفتحوش المستند الجاي: رسالة بتقول إن شاشتهم «مش جزء من الإصدار ده»",
+  "area": "Details › Create",
+  "srs": "Create (صفحة 236): Delivery Note بيودّي لـ «Add Delivery Note» والأصناف بتتنقل من الـ Sales Order؛ وSales Invoice بيودّي لـ «Add Sales Invoice» بالأصناف؛ وPayment بيودّي لـ «Add Payment».",
+  "steps": [
+   "افتح Sales Order معتمد (SAL-ORD-2026-03115، و«Skip Delivery Note» مقفول).",
+   "دوس Create واختار Sales Invoice؛ وكرر مع Delivery Note وPayment."
+  ],
+  "exp": "شاشة Add Sales Invoice / Add Delivery Note / Add Payment بتفتح بأصناف الأمر.",
+  "act": "بتظهر رسالة «تم تجهيزه من أمر البيع هذا بـ 1 صنف. شاشته ليست جزءًا من هذا الإصدار بعد». وPayment بيقول 0 صنف. شاشتي Sales Invoice وDelivery Note موجودتين في النظام (Selling › Sales Invoices وInventory)، فسلسلة الأمر ← التسليم ← الفاتورة مينفعش تتمشى من شاشة الـ Sales Order. نافذة Purchase Order شغالة.",
+  "fix": "افتحوا شاشتي Add Sales Invoice وAdd Delivery Note الموجودتين بأصناف الـ Sales Order (زي ما شاشة Sales Invoice بتعمل بـ Get Items From)، وشاشة Payment بالأمر كمرجع."
+ },
+ "SO-03": {
+  "t": "Create › Material Request بيفشل بـ «Price list Standard Buying disabled or does not exist»",
+  "area": "Details › Create › Material Request",
+  "srs": "Create › Material Request (صفحة 236): بيودّي لـ Add Material Request بأصناف الـ Sales Order.",
+  "steps": [
+   "افتح الـ Sales Order المعتمد SAL-ORD-2026-03115.",
+   "دوس Create › Material Request."
+  ],
+  "exp": "الـ Material Request بيفتح بالأصناف.",
+  "act": "نافذة «تعذّر تجهيز المستند» بتقول «قائمة الأسعار Standard Buying تعطيل أو لا وجود لها» ومفيش حاجة بتفتح. عمل Material Request من Sales Order مفروض ميعتمدش على قايمة أسعار شراء. اتأكدوا لو القايمة اتشالت قصد.",
+  "fix": "متشترطوش قايمة أسعار الشراء في الإجراء ده، أو رجّعوا/فعّلوا قايمة «Standard Buying»."
+ },
+ "SO-04": {
+  "t": "Save على فورم فاضي مبيطلعش أي رسالة ومبيعلّمش أي حقل",
+  "area": "Add Sales Order › Save",
+  "srs": "Company وSeries وCustomer وDate وCurrency (الصفحات 173 لـ 175): «If the field is left empty, an error message will appear». Save (صفحة 213): «A validation error message is displayed for each invalid field».",
+  "steps": [
+   "افتح Add Sales Order من غير ما تغيّر أو تختار حاجة.",
+   "دوس Save وراقب الشاشة 3 ثواني."
+  ],
+  "exp": "رسالة (أو علامة حمرا ونص) على الحقل المطلوب الفاضي، هنا Customer.",
+  "act": "مفيش حاجة بتظهر: لا نافذة ولا رسالة تحت الحقل ولا حد أحمر. (لما يبقى فيه عميل وصنف من غير تاريخ تسليم بتظهر نافذة «تعذّر الحفظ: الرجاء إدخال تاريخ التسليم»، ومن غير أصناف «أضف صنفًا واحدًا على الأقل»، فحالة العميل الفاضي بس هي الصامتة.)",
+  "fix": "اعملوا validation للحقول المطلوبة في الشاشة واعرضوا رسالة لكل حقل، زي شاشة Sales Invoice."
+ },
+ "SO-05": {
+  "t": "زر Delete ظاهر للأوامر المعتمدة: أيقونة الحذف في رأس التفاصيل وشريط إجراءات القايمة",
+  "area": "رأس Details وشريط إجراءات القايمة",
+  "srs": "القايمة (صفحة 171) والتفاصيل (صفحة 238): «Delete appears only when the sales order status = Draft / Cancelled».",
+  "steps": [
+   "افتح الأمر المعتمد SAL-ORD-2026-03114 ودوس أيقونة Delete فوق (ماضغطتش Yes).",
+   "في القايمة علّم SAL-ORD-2026-03114 (Confirmed) واقرا شريط الإجراءات."
+  ],
+  "exp": "مفيش Delete على أمر Confirmed / Completed / On Hold / Closed.",
+  "act": "رأس التفاصيل فيه أيقونة Delete على كل الأوامر وبتفتح «حذف: هل أنت متأكد؟». وشريط القايمة للأمر Confirmed فيه «حذف» جنب «إلغاء». نفس المشكلة اتبلّغت في Sales Invoice (SI-03).",
+  "fix": "خبّوا Delete إلا لو الحالة Draft أو Cancelled، في الرأس وفي الشريط الجماعي."
+ },
+ "SO-06": {
+  "t": "Additional Discount سالب (نسبة أو مبلغ) بيتقبل وبيزوّد إجمالي الأمر",
+  "area": "Add Sales Order › Additional Discount",
+  "srs": "Additional Discount (صفحة 202): أرقام بس؛ والحد الوحيد «Additional Discount Amount cannot exceed the total»؛ والخصم المفروض يقلل الإجمالي.",
+  "steps": [
+   "اعمل أمر بصنف واحد بـ 10200 بنداء الإنشاء.",
+   "ابعت additional_discount_percentage = -10 وبعدين discount_amount = -500."
+  ],
+  "exp": "رفض («الخصم لا يمكن أن يكون سالب»).",
+  "act": "الاتنين بيتحفظوا: -10٪ بيدي إجمالي 11220 (discount_amount -1020) و-500 بيدي 10700. وخصم أكبر من الإجمالي (999999 و150٪) بيترفض صح. زي Sales Invoice SI-19.",
+  "fix": "ارفضوا نسبة ومبلغ الخصم السالب."
+ },
+ "SO-07": {
+  "t": "السيرفر بيقبل مستودع مجمّع وUOM مش للصنف",
+  "area": "Add Sales Order › Items",
+  "srs": "Set Source Warehouse (صفحة 179): المستودعات الفرعية بس (Is Group = 0). UOM (صفحة 186): «Displays only the UOMs defined for this item in its UOM table».",
+  "steps": [
+   "اعمل أمر بنداء الإنشاء بمستودع «All Warehouses - E» (مجمّع).",
+   "واعمل تاني بـ uom «Nos» للصنف IND182210 وهو ماعندوش غير «Subscription»."
+  ],
+  "exp": "الاتنين بيترفضوا.",
+  "act": "الاتنين بيتحفظوا (SAL-ORD-2026-03128 بالمستودع المجمّع، وSAL-ORD-2026-03129 بـ UOM Nos وعامل تحويل 1). الشاشة بتحدد القايمتين، فبس نداء من برا الشاشة يعدّيهم. زي Sales Invoice SI-18.",
+  "fix": "تحققوا في السيرفر إن المستودع مش مجمّع وإن الـ UOM في جدول UOM بتاع الصنف."
+ },
+ "SO-08": {
+  "t": "عمل أمر من Blanket Order: السعر المتفق عليه مش بيتاخد، وتاريخ التسليم فاضي، وإجمالي الكمية (10.5) مش بيساوي الصف (10)",
+  "area": "Add Sales Order › من Blanket Order (/new?blanket_order=...)",
+  "srs": "Against Blanket Order وBlanket Order وBlanket Order Rate (الصفحات 191 لـ 192): الصف بيعرض السعر المتفق عليه من الـ Blanket Order. وDelivery Date إجباري لكل صف (صفحة 179).",
+  "steps": [
+   "افتح /desk/shamel#/selling/sales-orders/new?blanket_order=MFG-BLR-2026-00030 (الصنف IND182210 كمية 10 وسعر متفق عليه 150).",
+   "اقرا صف الصنف وملخص البنود."
+  ],
+  "exp": "سعر 150 (سعر الـ Blanket Order) وتاريخ تسليم وإجمالي كمية 10.",
+  "act": "الصف بيعرض سعر 10200 (من قايمة الأسعار) بدل 150، وتواريخ التسليم فاضية، والملخص بيعرض «إجمالي الكمية 10.5» لصف كميته 10. والأمر ماقدرش يتحفظ (شوف SO-01). اتفحصت في 2026-11-17 و2026-11-18.",
+  "fix": "خدوا السعر وتاريخ التسليم من الـ Blanket Order واخلوا إجمالي الكمية يساوي مجموع كميات الصفوف."
+ },
+ "SO-09": {
+  "t": "سبب الـ Hold مش ظاهر في أي مكان في شاشة التفاصيل",
+  "area": "Details › Hold",
+  "srs": "Hold (صفحة 235 لـ 236): «The Reason For Hold is added to the document Activities».",
+  "steps": [
+   "افتح الأمر المعتمد SAL-ORD-2026-03114 ودوس Hold واكتب سبب ودوس Submit.",
+   "اقرا صفحة التفاصيل بعد ما الحالة تبقى On Hold (كل التابات)."
+  ],
+  "exp": "السبب بيظهر في قسم Activities (تعليقات).",
+  "act": "الحالة بتتغير لـ On Hold وبيظهر Resume، لكن مفيش تاب بيعرض السبب ولا فيه قسم Activities. السيرفر حفظه فعلا كتعليق («Reason for hold: ...»)، يعني الداتا موجودة والشاشة بس مش بتعرضها.",
+  "fix": "ضيفوا قسم Activities / تعليقات في شاشة التفاصيل يعرض سبب الـ Hold."
+ },
+ "SO-10": {
+  "t": "أمر متسلّم 100٪ بيعرض Delivery Status «بدون تسليم» (No Delivery Required)",
+  "area": "القايمة والتفاصيل › Delivery Status",
+  "srs": "Delivery Status (صفحة 170): To Deliver أو Fully Delivered أو Partly Delivered أو No Delivery Required؛ وCompleted بتظهر لما Billing Status = Fully Billed وDelivery Status = Delivered.",
+  "steps": [
+   "افتح القايمة واقرا SAL-ORD-2026-03111 (Skip Delivery Note شغال).",
+   "افتح تاب More Information بتاعه."
+  ],
+  "exp": "«Fully Delivered» (السجل نفسه Fully Delivered و100٪).",
+  "act": "القايمة وتاب More Information بيعرضوا «بدون تسليم» جنب «% Delivered 100». والسجل فيه delivery_status = Fully Delivered وper_delivered 100.",
+  "fix": "اعرضوا الحالة المتخزنة، أو اعرضوا «No Delivery Required» بس لما النسبة 0 وSkip Delivery Note شغال."
+ },
+ "SO-11": {
+  "t": "Advance Payment Status ظاهر مع إن الـ SRS كاتبه Hidden",
+  "area": "More Information › Status",
+  "srs": "Advance Payment Status (Hidden) (صفحة 228).",
+  "steps": [
+   "افتح أي أمر واقرا قسم حالة الطلب في More Information."
+  ],
+  "exp": "الحقل مش ظاهر.",
+  "act": "«حالة الدفعة المقدمة» ظاهر بـ «غير مطلوبة» / «يتم إنشاؤه تلقائيًا». يا إما كلمة Hidden في الـ SRS تتغير يا إما الشاشة.",
+  "fix": "خبّوه، أو شيلوا كلمة Hidden من الـ SRS."
+ },
+ "SO-12": {
+  "t": "نافذة Setting بتاعة جدول Items فاضية ومفيهاش «Reset to default»؛ والزر اسمه Save بدل Update",
+  "area": "Add Sales Order › Items › Setting (الترس)",
+  "srs": "Setting (صفحة 180 لـ 183): سحب وإفلات الأعمدة وعرض العمود وAdd / Remove columns وزر «Update» وزر «Reset to default».",
+  "steps": [
+   "افتح Add Sales Order وضيف صنف ودوس الترس فوق جدول Items.",
+   "دوس «إضافة/إزالة حقول»."
+  ],
+  "exp": "الأعمدة بعروضها وقايمة الأعمدة المتاحة بـ checkboxes وUpdate وReset to default.",
+  "act": "نافذة «تعديل الأعمدة» فيها العناوين «اسم الحقل» و«عرض العمود» وزرين إلغاء وحفظ بس؛ ونافذة «الحقول المتاحة» مفيهاش أي حقول. ومفيش Reset to default. زي Sales Invoice SI-17.",
+  "fix": "املوا النافذة بأعمدة الجدول من قايمة الـ SRS وضيفوا Reset to default وسمّوا زر الحفظ Update."
+ },
+ "SO-13": {
+  "t": "الجداول مفيهاش عمود «No.» والقايمة مفيهاش عمود Delivery Date",
+  "area": "Add Sales Order › Items وTaxes؛ القايمة",
+  "srs": "Items وSales Taxes and Charges (الصفحات 179 و195): عمود «No.»؛ والقايمة (صفحة 170): عمود Delivery Date.",
+  "steps": [
+   "ضيف صنف وصف ضريبة في Add Sales Order واقرا عنوان الجدولين؛ واقرا عنوان القايمة."
+  ],
+  "exp": "عمود No. في الجدولين وعمود Delivery Date في القايمة.",
+  "act": "عنوان Items: كود الصنف | تاريخ التسليم | الكمية | الكمية المتاحة | كمية العجز | السعر | المبلغ. وعنوان Taxes: النوع | الحساب | نسبة الضريبة | صافي المبلغ | المبلغ | الإجمالي. والقايمة: ID وStatus وDelivery Status وBilling Status وAvailability Status وCustomer Name وDate وGrand Total و% Billed و% Delivered، فيها Date لكن مفيهاش Delivery Date.",
+  "fix": "ضيفوا عمود No. للجداول وعمود Delivery Date للقايمة."
+ },
+ "SO-14": {
+  "t": "أخطاء تقنية خام لأمر من غير أصناف وأرقام كبيرة ومبالغ سالبة؛ وكمية صغيرة جدا بتتحفظ 0",
+  "area": "رسايل السيرفر",
+  "srs": "Qty (صفحة 179): أرقام بس، أقصى 100 حرف؛ و«a validation error message is displayed for each invalid field».",
+  "steps": [
+   "بنداء الإنشاء ابعت: من غير أصناف؛ كمية 1000000000000000؛ سعر 1000000000000000؛ كمية -1؛ سعر -5؛ كمية 0.0000001."
+  ],
+  "exp": "رسايل مفهومة ومفيش أمر بإجمالي 0 بيتحفظ.",
+  "act": "من غير أصناف: 500 «TypeError: bad operand type for abs(): 'NoneType'». كمية 1e15: 500 «MySQLdb.DataError: Out of range value for column 'total_qty'». سعر 1e15: نفس الشيء لـ 'base_total'. كمية -1 وسعر -5: 417 «Incorrect value: Grand Total must be >= 0.0» (إنجليزي ومبيقولش أنهي حقل). وكمية 0.0000001 بتتحفظ Draft بكمية 0 وإجمالي 0 (SAL-ORD-2026-03124). نفس عيلة Sales Invoice SI-24 وSI-25.",
+  "fix": "تحققوا من المدى والإشارة الأول وارجعوا رسالة واضحة لكل حقل؛ وارفضوا كمية بتتقرّب لـ 0."
+ },
+ "SO-15": {
+  "t": "السيرفر مبيطبقش قواعد أطوال النصوص اللي في الـ SRS",
+  "area": "قواعد السيرفر: Customer PO وTerms ووصف الصنف ووصف الضريبة",
+  "srs": "Customer Purchase Order أقل 2 / أقصى 100 (صفحة 234)؛ وTerms and Condition Content ووصف الصنف ووصف الضريبة أقل 3 / أقصى 500 (الصفحات 199 و204 و226).",
+  "steps": [
+   "بنداء الإنشاء ابعت po_no من حرف واحد ومن 101 حرف؛ وterms من حرفين ومن 501 حرف؛ ووصف صنف من حرفين ومن 501 حرف؛ ووصف ضريبة من حرفين."
+  ],
+  "exp": "كل قيمة برا الحدود بتترفض.",
+  "act": "الكل بيتحفظ (SAL-ORD-2026-03135 و03136 و03139 و03140 و03141 و03142 و03150). الشاشة بتحدد بعضهم (Customer PO فيه maxlength 100) لكن السيرفر لأ.",
+  "fix": "طبقوا الحد الأدنى والأقصى في السيرفر للحقول دي."
+ },
+ "SO-16": {
+  "t": "نسبة ضريبة سالبة ونسبة 250 بيتقبلوا",
+  "area": "Add Sales Order › Taxes and Charges",
+  "srs": "Tax Rate (صفحة 196): أرقام بس، أقصى 100 حرف.",
+  "steps": [
+   "اعمل أمر بـ 10200 وصف ضريبة «On Net Total» بنسبة -5، وتاني بنسبة 250."
+  ],
+  "exp": "رفض النسبة السالبة (وسؤال للـ business عن النسب فوق 100).",
+  "act": "-5 بيتحفظ وبيقلل الإجمالي لـ 9690 (SAL-ORD-2026-03149)؛ و250 بيتحفظ وبيدي 35700 (03148). وغياب الحساب و«On Previous Row Amount» في الصف الأول بيترفضوا صح.",
+  "fix": "ارفضوا نسبة الضريبة السالبة؛ وأكدوا الحد الأقصى للنسبة."
+ },
+ "SO-17": {
+  "t": "السيرفر بيقبل صنف أصل ثابت وOrder Type «Maintenance» والشاشة مخبياهم",
+  "area": "Add Sales Order › Items وOrder Type",
+  "srs": "Item Code (صفحة 179): الأصناف اللي Is Fixed Asset مقفول وHas Variants مقفول وAllow Sales شغال بس؛ وOrder Type (Hidden) قيمته الوحيدة Sales (صفحة 173).",
+  "steps": [
+   "اعمل أمر بالصنف «2121» (أصل ثابت) وتاني بـ order_type «Maintenance»."
+  ],
+  "exp": "الاتنين بيترفضوا.",
+  "act": "الاتنين بيتحفظوا (SAL-ORD-2026-03131 و03143). وصنف template (1111) وصنف Allow Sales مقفول (Item-123) بيترفضوا. وقايمة الأصناف في الشاشة صح: بتخبي الأصل الثابت والـ template وأصناف مش للبيع. عكس Sales Invoice SI-26.",
+  "fix": "طبقوا فلتر الأصناف في الـ SRS وقيمة Order Type الوحيدة في السيرفر كمان."
+ },
+ "SO-18": {
+  "t": "تاريخ تسليم قبل تاريخ الأمر بيتقبل",
+  "area": "Add Sales Order › Delivery Date",
+  "srs": "Delivery Date (الصفحات 174 و179): إجباري لكل صف؛ والـ SRS مش بيقول إيه يحصل لو قبل تاريخ الأمر.",
+  "steps": [
+   "اعمل أمر بتاريخ النهارده وdelivery_date من 3 أيام فاتوا (في الرأس والصف)."
+  ],
+  "exp": "رسالة، أو رد من الـ business إنه مسموح.",
+  "act": "بيتحفظ SAL-ORD-2026-03122 و03123. حددوا القاعدة وضيفوها للـ SRS.",
+  "fix": "ارفضوا تاريخ تسليم قبل تاريخ الأمر (أو اكتبوا إنه مسموح)."
+ },
+ "SO-19": {
+  "t": "Skip Delivery Note بيبدأ مقفول في الشاشة مع إن Selling Settings مشغّلاه افتراضيا",
+  "area": "Add Sales Order › Skip Delivery Note",
+  "srs": "Skip Delivery Note (صفحة 174): «it's unchecked by default».",
+  "steps": [
+   "اقرا Selling Settings › Auto Skip Delivery Note in Sales Order (القيمة 1).",
+   "افتح Add Sales Order واقرا المفتاح؛ وبعدين اعمل أمر بالـ API من غير الحقل."
+  ],
+  "exp": "الشاشة والسيرفر متفقين.",
+  "act": "الشاشة بتبدأ والمفتاح مقفول (قيمة الـ SRS)، لكن السيرفر بيحط skip_delivery_note = 1 لأمر جديد معمول من غير الحقل (SAL-ORD-2026-03112 و03113) بسبب الإعداد. فأمر متحفظ من الشاشة بيطلب تواريخ تسليم وفيه Create › Delivery Note، وأمر الـ API لأ.",
+  "fix": "قرروا القيمة الافتراضية واخلوا الشاشة والسيرفر يمشوا بنفس القيمة."
+ },
+ "SO-20": {
+  "t": "بعد «إضافة الأصناف من عرض السعر» الإجماليات بتفضل «—» لحد ما الأمر يتحفظ",
+  "area": "Add Sales Order › Get Items From Quotation",
+  "srs": "Get Items (صفحة 213): الأصناف بتتنقل لجدول الأصناف؛ والإجماليات بتعرض مبالغ الأصناف (صفحة 194).",
+  "steps": [
+   "افتح Add Sales Order ودوس «إضافة الأصناف من عرض السعر» وعلّم SAL-QTN-2026-01703 ودوس زر الإضافة."
+  ],
+  "exp": "إجمالي الكمية والإجماليات متملية.",
+  "act": "الصف بيوصل بكمية 2 وسعر 10200 (مبلغ الصف 20,400) لكن «إجمالي الكمية» و«الإجمالي» والصافي بيعرضوا «—». والنافذة بتعرض عروض الأسعار المفتوحة لكل العملاء والـ leads (12 صف) والعميل المختار مبيفلترهاش. زي Sales Invoice SI-22.",
+  "fix": "احسبوا الإجماليات بعد Get Items وفلتروا النافذة بالعميل المختار لو موجود."
+ },
+ "SO-21": {
+  "t": "نصوص عربي / إنجليزي مخلوطة: «% Delivered» و«In Words» و«Type or select» و«تُفوتر بالكامل»",
+  "area": "القايمة والإجماليات وجدول الضرايب",
+  "srs": "الشاشات بتتستخدم بالعربي.",
+  "steps": [
+   "اقرا عنوان القايمة وخانات In Words في الإجماليات في مستند عربي وخانة النوع في الضريبة وحالة الفوترة لأمر مكتمل."
+  ],
+  "exp": "عربي في كل مكان.",
+  "act": "عنوان القايمة بيعرض «% Delivered» بالإنجليزي؛ و«الإجمالي كتابةً» بيعرض «SAR Five Hundred only.» بالإنجليزي؛ وخانة نوع الضريبة وplaceholder خانة Margin Type بيعرضوا «Type or select»؛ وBilling Status «Fully Billed» معروضة «تُفوتر بالكامل» (فعل مش حالة).",
+  "fix": "راجعوا الترجمات دي ولغة الـ in-words."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Sales Order SRS Comparison Report","eyebrow":"QA bug report · Selling › Sales Order (full SRS comparison)","h1":"Sales Order: 21 differences from the SRS; the screen cannot save an order and Create does not open the invoice or delivery screens","lede":"Full comparison of the Sales Order list, the Add screen (Details, General Information and More Information tabs), the Details screen with its actions (Submit, Cancel Document, Amend, Hold, Resume, Close, Re-open, Update Items, Create) and the server rules with the SRS (pages 169 to 240), on the test server: 82 checks (61 matched, 21 differ). Hold, Resume, Close, Re-open, Cancel and Amend work, the Update Items popup only allows quantity, rate and delivery date, the bulk Edit refuses a submitted order, the item dropdown follows the SRS filter, the Purchase Order popup works and the totals, discount and tax calculations are right. The two important problems are SO-01 (no order can be saved from the screen: the four contract fields the server requires are not on the screen and Save shows nothing) and SO-02 (Create › Sales Invoice, Delivery Note and Payment only say their screen \"is not part of this version\"). Also important: Create › Material Request fails on a missing buying price list (SO-03), an empty Save shows no message (SO-04), Delete is offered for submitted orders (SO-05), and the server accepts a negative additional discount (SO-06) and a group warehouse or foreign UOM (SO-07).","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop)"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","Arabic interface (account language: ar)"],["Run date","2026-11-18"],["Method","Playwright browser checks and calls to the standard API (not saved as a spec yet)"],["Bug IDs","SO-01 to SO-21"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["List screen: columns, statuses, delivery / billing / availability status, progress, action bar (Edit, Assign, Add Tags, Export, Clear Assignment, Submit / Cancel, Print, Delete), bulk Edit refusal on a submitted order",8,6,2,0],["Add screen (Details tab): company, series, customer, dates, Skip Delivery Note, currency and price list, barcode, Items table (add, edit, delete, item filter, available / shortage qty), Edit Row, Setting, Get Items From Quotation, taxes, totals, additional discount, Save messages, Blanket Order link",25,18,7,0],["General Information and More Information tabs: addresses, contacts, payment terms, terms, status, billing and delivery progress, loyalty points, print settings, territory, customer purchase order",13,12,1,0],["Details screen and actions: Submit, Cancel Document, Amend, Hold (reason rules), Resume, Close, Re-open, Update Items, Create (Sales Invoice, Delivery Note, Material Request, Purchase Order, Payment), read-only after Submit, Amended From",15,12,3,0],["Server rules (create): party, items, quantity, rate, dates, discounts, taxes, warehouse, UOM, item filter, order type, text lengths, exchange rate, contract fields",18,11,7,0],["Messages, labels and translation",3,2,1,0]],"total":"Total","covNote":"No Sales Order test-case workbook exists yet, so the defects are not linked to case IDs. The checks were run through browser scripts and requests.","okTitle":"Verified working","ok":["List: ID, Status, Delivery Status, Billing Status, Availability Status, Customer Name, Date, Grand Total, % Billed and % Delivered; the Add Sales Order button; the action bar (Select All, Edit, Assign, Add Tags, Export, Clear Assignment, Cancel for a submitted order and Submit for a Draft, Print); the bulk Edit popup of a submitted order refuses with \"لا يمكن تعديل أمر بيع معتمد أو مكتمل أو ملغي\" and the popup of a Draft has the Field / Value / Update controls","Statuses on the list and Details: Draft (مسودة), Confirmed (مؤكد), Completed (مكتمل), On Hold (معلق), Closed (مغلق), Cancelled (ملغي); Availability Status Available, Backorder (طلب مؤجل) and Not Applicable; Available Qty = actual quantity minus reserved quantity (Bin Stores - E: actual 16, reserved 353, shown negative)","Add screen: Company, Series, Customer, Customer Name and Tax ID (filled by the customer), Date (read-only, today), Delivery Date, Skip Delivery Note, Amended From (shown on an amended order), Cost Center, Project, Currency, Exchange Rate, Price List, Price List Currency, Ignore Pricing Rule, Scan Barcode, Set Source Warehouse, Reserve Stock (Stock Reservation is on), Items, Taxes and Charges with Tax Category, Shipping Rule and Template, Totals, Additional Discount and Coupon Code; Order Type is hidden","Items: Item Code dropdown hides fixed assets (2121, Test Asset), template items (1111) and items with Allow Sales off (Item-123, asdasd) and shows services and bundles (Ads, BR-1, STO-ITEM-2026-00077); Available Qty and Shortage Qty are shown; Edit Row has Item, Item Group, Item Name, Brand, Image, Delivery Date, Ensure Delivery by Serial No, Reserve Stock, Description, Qty, UOM and conversion fields, Price List Rate, Margin, Discounts, Rate, Amount, Item Tax Template, Pricing Rules, Net Rate, Billed Amount, Valuation Rate, Gross Profit, Supplier Delivers to Customer, Weights, Against Blanket Order, Quotation, stock levels and Cost Center / Project; the tax Edit Row has Type, Account Head, Description, Included in Basic Rate, Considered in Paid Amount, Cost Center, Project, Tax Rate and the amounts","Save messages with a customer: no items gives \"أضف صنفًا واحدًا على الأقل إلى أمر البيع\"; a missing delivery date gives \"الرجاء إدخال تاريخ التسليم\"; with an item the row quantity is filled with 1","Get Items From Quotation: a popup with Search by name and Customer and a table of open quotations; the chosen quotation (SAL-QTN-2026-01703) adds its item with quantity 2 and rate 10200 and sets the customer","General Information: Billing Address with the address text, Contact Person with the primary phone and primary email labelled, Shipping Address, Company Address (primary), Payment Terms Template, Payment Schedule and Terms and Conditions; More Information: Status, Delivery Status, % Delivered, Availability Status, % Billed, % Picked, Billing Status, Returned Qty, Territory, Customer Purchase Order and date, Loyalty Points and Loyalty Amount (shown, as this SRS has them), Letter Head, Language, Print without Amount, Group Same Items; Commission, Sales Team, Auto Repeat and UTM are hidden","Details by status: a Draft has Submit and Get Items From Quotation; a submitted order has Cancel Document, Hold, Close, Update Items and Create and is read-only; Cancel cancels the stock reservations and shows \"تم إلغاء أمر البيع بنجاح\" and the button becomes Amend (\"تعديل\"); Amend opens a new Draft (SAL-ORD-2026-03115-1) with \"معدّل من SAL-ORD-2026-03115\"; an On Hold order shows Resume and a Closed order shows Re-open; the Linked Records tab is present","Hold: the popup asks \"سبب التعليق\" (mandatory, counter x / 500) and refuses an empty reason (\"سبب التعليق مطلوب\") and a 2-character reason (\"يجب ألا يقل عن 3 أحرف\"); Resume, Close and Re-open work; Update Items allows only the quantity, rate and delivery date of existing rows","Create menu: Delivery Note appears only when Skip Delivery Note is off; the Purchase Order popup has a Supplier field, a table with Item Code, Item Name, Pending Quantity, UOM and a mandatory Supplier per row, Cancel and Create","Server: customer, employee, name in contract, brief and contract end date are mandatory; quantity 0 is refused (\"كمية البند IND182210 لا يمكن أن يكون صفرا\"); a template item and an item that is not for sale are refused; discount 150 % and a discount above the total are refused; discount 10 % on Net Total gives 9180; a tax row without account and \"On Previous Row Amount\" on the first row are refused; an unknown Order Type is refused; the exchange rate is fetched by the server (3.75 for USD) and a rate of 0 or -1 is replaced; duplicate item rows are allowed (Selling Settings allows multiple items); below-valuation prices are refused (validate selling price is on)"],"noTitle":"Not executed, and why","no":["Delete \"Yes\" and the warnings for an order that is amended or linked to other documents (the Delete dialog was opened on a submitted order and cancelled; Delete was never confirmed on any record)","Creating a Delivery Note, Sales Invoice, Payment or Material Request from the order (SO-02 and SO-03 block it), and so the Delivered, Billed, Completed and \"Fully Billed\" progress was checked only on existing orders (SAL-ORD-2026-03109, 03110, 03111, 02786, 02788)","The tables that appear after Save: Taxes and Charges Calculation (per item and per account) and Bundle Items (an order cannot be saved from the screen, SO-01; the create call returned the order, but its tables were not read)","Saving the Update Items popup, the shortage rule (Selling Settings has \"Sales Order item shortage\" on Ignore and was not changed; Warn and Block were not checked), serial and batch, the Reserve Stock effect on a new order, Ensure Delivery by Serial No, Supplier Delivers to Customer with a Purchase Order","Preferred, Primary and latest address and contact selection (the test customers have no preferred address or contact set, so the rule could not be shown), the Payment Terms Template filling the schedule on the screen, the Terms template filling the content, Incoterm and Named Place (hidden), Shipping Rule, Sales Taxes template filling the tax rows","The Hold reason limit of 500 characters by real typing (the field was filled by script), Exchange Rate rules of Accounts Settings (fetching rule, no rate found, the role that edits the rate), the Price List Exchange Rate popup \"No exchange rate was found for AFN to SAR\" on an old order (data, same as SI-05)","Permissions, closed accounting period, credit limit, Auto Repeat, Sales Partner commission and Sales Team (hidden), Loyalty Points earned or redeemed on an order, UTM, Print output"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Selling SRS v1.0, Sales Order","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 1 of the Sales Order is finished. Retesting starts when the developers mark SO-01 to SO-09 as Fixed here (or tell the tester). SO-01 comes first because no order can be created from the screen until it is fixed, and SO-02 comes next because the delivery and invoice chain depends on it."],["h","When a fix lands"],["ol",["Repeat SO-01 and SO-04: create an order from the screen with a customer, an item and a delivery date, and press Save on an empty form.","Repeat SO-02 and SO-03 from a submitted order (Skip Delivery Note off), then run the delivery, billing and Completed scenarios and the Taxes and Charges Calculation and Bundle Items tables.","Repeat SO-05 to SO-09 and the server cases through the create call (SO-06, SO-07, SO-14 to SO-18).","Run the cases listed under Not executed.","Update each bug status in the feedback box below."]],["h","Test data and records left in the system"],["p","The checks created Sales Orders for the customer \"PW Test Customer\" (CU-2026-00001) through the API: SAL-ORD-2026-03112 to SAL-ORD-2026-03151 (Drafts, except: 03114 submitted, which went through Hold, Resume, Close and Re-open and is open; 03115 cancelled; 03115-1 a Draft made by Amend). Nothing was deleted. The existing orders (SAL-ORD-2026-03111, 02797, 02777, 02814 and 02815) were only opened or read."]],"obs":["Fields on the screen or the server that are not in the SRS: the contract fields (Account Type, Contract Start Date, Contract End Date, Name In Contract, Employee, Brief, Customer Account) which are mandatory on the server (SO-01), Territories, Order Created by Customer Owner and Retained Customer. They look intentional but the SRS should describe them.","Loyalty Points and Loyalty Amount are shown in More Information (the SRS has them) but a Sales Order has no Loyalty Program redemption; the number is always 0 in the orders read.","Available Qty is negative on the screen (for example -398) because the item has more reserved quantity than stock, which follows the SRS formula (actual minus reserved). The reservations come from the many test orders with Reserve Stock on by default; with Reserve Stock on, the Stock Reservation Entry is created at submit and cancelled by Cancel.","Amend and the cancelled order: Amend saves the new Draft at once (SAL-ORD-2026-03115-1) instead of opening an unsaved copy, as the Sales Invoice screen also does (SI-13). The SRS only says the button changes to Amend.","SRS wording problems: the Get Items From Quotation popup describes \"opportunity\" and \"Opportunity Details\" (copy and paste from another document) and a Name search by \"sales order name\"; Edit Row Item says \"Maintain Stock enabled\" while the table says \"Is Fixed Asset disabled\"; Qty is described as \"Actual Qty minus Reserved Qty\" (that is Available Qty) and the quantity warning is inverted; the Hold popup button is named \"Submit\" (the screen names it Submit too); the Details tab Delivery Date is \"shown only when Skip Delivery Note = 0\" but row delivery dates are mandatory in both cases; Territory is \"Multi selection\" for a single customer territory; the \"Bundle Items\" note says Quotation; Delete is described under List and Details with different rules for an amended and a linked order.","The status \"Confirmed\" of the SRS is shown for every submitted order that is still open (To Deliver, To Bill, To Deliver and Bill); the system stores the ERPNext statuses and the screen maps them, so please confirm whether the original status should be kept visible as the SRS Delivery Status and Billing Status columns suggest.","Submit and Cancel run at once with no confirmation (the SRS does not ask for one). The Sales Order screen is read-only after Submit and Update Items is the only way to change a submitted order."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Delivery Note sheet (TC-DNL, TC-DNA, TC-DNW, TC-DNG, TC-DNM, TC-DND), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"تقرير مقارنة Sales Order بالـ SRS","eyebrow":"تقرير مشاكل الجودة · Selling › Sales Order (مقارنة كاملة بالـ SRS)","h1":"Sales Order: 21 فرق عن الـ SRS؛ والشاشة مبتحفظش أمر، وقايمة Create مبتفتحش شاشتي الفاتورة والتسليم","lede":"مقارنة كاملة لقايمة Sales Order وشاشة الإضافة (تابات Details وGeneral Information وMore Information) وشاشة التفاصيل بإجراءاتها (Submit وCancel Document وAmend وHold وResume وClose وRe-open وUpdate Items وCreate) وقواعد السيرفر بالـ SRS (الصفحات 169 لـ 240) على السيرفر التجريبي: 82 فحص (61 مطابق و21 مختلف). Hold وResume وClose وRe-open وCancel وAmend شغالين، ونافذة Update Items بتسمح بالكمية والسعر وتاريخ التسليم بس، وEdit الجماعي بيرفض أمر معتمد، وقايمة الأصناف ماشية بفلتر الـ SRS، ونافذة Purchase Order شغالة، وحسابات الإجماليات والخصم والضريبة صح. أهم مشكلتين SO-01 (مفيش أمر بيتحفظ من الشاشة: حقول العقد الأربعة اللي السيرفر بيطلبها مش في الشاشة وSave مبيعرضش حاجة) وSO-02 (Create › Sales Invoice وDelivery Note وPayment بيقولوا بس إن شاشتهم «مش جزء من الإصدار»). ومن المهم كمان: Create › Material Request بيفشل لغياب قايمة أسعار الشراء (SO-03)، وSave على فورم فاضي مبيعرضش رسالة (SO-04)، وDelete ظاهر للأوامر المعتمدة (SO-05)، والسيرفر بيقبل Additional Discount سالب (SO-06) ومستودع مجمّع وUOM غريب (SO-07).","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر)"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","واجهة عربي (لغة الحساب: ar)"],["تاريخ التشغيل","2026-11-18"],["الطريقة","فحوصات متصفح بـ Playwright ونداءات على الـ API العادي (لسه مش محفوظة كملف اختبار)"],["أرقام المشاكل","SO-01 لـ SO-21"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة القايمة: الأعمدة والحالات وحالات التسليم والفوترة والتوفر والنسب وشريط الإجراءات (تعديل واسناد ووسوم وتصدير وClear Assignment واعتماد / إلغاء وطباعة وحذف) ورفض Edit الجماعي لأمر معتمد",8,6,2,0],["شاشة الإضافة (تاب Details): الشركة والـ series والعميل والتواريخ وSkip Delivery Note والعملة وقايمة الأسعار والباركود وجدول Items (إضافة وتعديل وحذف وفلتر الأصناف والمتاح والعجز) وEdit Row وSetting وGet Items From Quotation والضرايب والإجماليات وAdditional Discount ورسايل Save ورابط Blanket Order",25,18,7,0],["تابات General Information وMore Information: العناوين وجهات الاتصال وشروط الدفع والـ terms والحالة وتقدم التسليم والفوترة ونقاط الولاء وإعدادات الطباعة والمنطقة وأمر شراء العميل",13,12,1,0],["شاشة التفاصيل والإجراءات: Submit وCancel Document وAmend وHold (قواعد السبب) وResume وClose وRe-open وUpdate Items وCreate (Sales Invoice وDelivery Note وMaterial Request وPurchase Order وPayment) والـ read-only بعد Submit وAmended From",15,12,3,0],["قواعد السيرفر (إنشاء): الطرف والأصناف والكمية والسعر والتواريخ والخصومات والضرايب والمستودع والـ UOM وفلتر الأصناف وOrder Type وأطوال النصوص وسعر الصرف وحقول العقد",18,11,7,0],["الرسائل والتسميات والترجمة",3,2,1,0]],"total":"الإجمالي","covNote":"مفيش شيت test cases لـ Sales Order لسه، فالمشاكل مش مربوطة بأرقام حالات. الفحوصات اتعملت بسكريبتات متصفح وطلبات للسيرفر.","okTitle":"اللي اتأكدنا إنه شغال","ok":["القايمة: ID وStatus وDelivery Status وBilling Status وAvailability Status وCustomer Name وDate وGrand Total و% Billed و% Delivered؛ وزر Add Sales Order؛ وشريط الإجراءات (تحديد الكل وتعديل واسناد وإضافة وسوم وتصدير وClear Assignment وإلغاء للأمر المعتمد واعتماد للـ Draft وطباعة)؛ ونافذة Edit الجماعية لأمر معتمد بترفض بـ «لا يمكن تعديل أمر بيع معتمد أو مكتمل أو ملغي» ونافذة الـ Draft فيها Field وValue وUpdate","الحالات في القايمة والتفاصيل: Draft (مسودة) وConfirmed (مؤكد) وCompleted (مكتمل) وOn Hold (معلق) وClosed (مغلق) وCancelled (ملغي)؛ وAvailability Status Available وBackorder (طلب مؤجل) وNot Applicable؛ وAvailable Qty = الكمية الفعلية ناقص المحجوزة (Bin Stores - E: الفعلي 16 والمحجوز 353، بيظهر بالسالب)","شاشة الإضافة: Company وSeries وCustomer وCustomer Name وTax ID (بيتملوا بالعميل) وDate (للقراءة بس، النهارده) وDelivery Date وSkip Delivery Note وAmended From (بيظهر على أمر معدّل) وCost Center وProject وCurrency وExchange Rate وPrice List وPrice List Currency وIgnore Pricing Rule وScan Barcode وSet Source Warehouse وReserve Stock (Stock Reservation شغال) وItems وTaxes and Charges بـ Tax Category وShipping Rule وTemplate وTotals وAdditional Discount وCoupon Code؛ وOrder Type مخفي","Items: قايمة Item Code بتخبي الأصول الثابتة (2121 وTest Asset) وأصناف الـ template (1111) وأصناف Allow Sales مقفول (Item-123 وasdasd) وبتعرض الخدمات والـ bundles (Ads وBR-1 وSTO-ITEM-2026-00077)؛ وAvailable Qty وShortage Qty ظاهرين؛ وEdit Row فيه Item وItem Group وItem Name وBrand وImage وDelivery Date وEnsure Delivery by Serial No وReserve Stock وDescription وQty وحقول UOM والتحويل وPrice List Rate وMargin والخصومات وRate وAmount وItem Tax Template وPricing Rules وNet Rate وBilled Amount وValuation Rate وGross Profit وSupplier Delivers to Customer والأوزان وAgainst Blanket Order وQuotation ومستويات المخزون وCost Center / Project؛ وEdit Row للضريبة فيه Type وAccount Head وDescription وIncluded in Basic Rate وConsidered in Paid Amount وCost Center وProject وTax Rate والمبالغ","رسايل Save مع عميل: من غير أصناف «أضف صنفًا واحدًا على الأقل إلى أمر البيع»؛ وتاريخ تسليم ناقص «الرجاء إدخال تاريخ التسليم»؛ ومع صنف كمية الصف بتتملي بـ 1","Get Items From Quotation: نافذة فيها Search بالاسم وCustomer وجدول عروض الأسعار المفتوحة؛ وعرض السعر المختار (SAL-QTN-2026-01703) بيضيف صنفه بكمية 2 وسعر 10200 وبيحدد العميل","General Information: Billing Address بنص العنوان وContact Person بالتليفون الرئيسي والإيميل الرئيسي موضّحين وShipping Address وCompany Address (الرئيسي) وPayment Terms Template وPayment Schedule وTerms and Conditions؛ وMore Information: Status وDelivery Status و% Delivered وAvailability Status و% Billed و% Picked وBilling Status وReturned Qty وTerritory وCustomer Purchase Order وتاريخه وLoyalty Points وLoyalty Amount (ظاهرين، والـ SRS فيه الحاجتين دول) وLetter Head وLanguage وPrint without Amount وGroup Same Items؛ وCommission وSales Team وAuto Repeat وUTM مخفيين","التفاصيل بالحالة: الـ Draft فيه Submit وGet Items From Quotation؛ والمعتمد فيه Cancel Document وHold وClose وUpdate Items وCreate وللقراءة بس؛ وCancel بيلغي حجوزات المخزون وبيعرض «تم إلغاء أمر البيع بنجاح» والزر بيبقى Amend («تعديل»)؛ وAmend بيفتح Draft جديد (SAL-ORD-2026-03115-1) بـ «معدّل من SAL-ORD-2026-03115»؛ والأمر On Hold بيعرض Resume والمغلق بيعرض Re-open؛ وتاب Linked Records موجود","Hold: النافذة بتطلب «سبب التعليق» (إجباري وعداد x / 500) وبترفض سبب فاضي («سبب التعليق مطلوب») وسبب من حرفين («يجب ألا يقل عن 3 أحرف»)؛ وResume وClose وRe-open شغالين؛ وUpdate Items بيسمح بالكمية والسعر وتاريخ التسليم للصفوف الموجودة بس","قايمة Create: Delivery Note بيظهر لما Skip Delivery Note مقفول بس؛ ونافذة Purchase Order فيها Supplier وجدول بـ Item Code وItem Name وPending Quantity وUOM وSupplier إجباري لكل صف وإلغاء وإنشاء","السيرفر: العميل وEmployee وName in Contract وBrief وContract End Date إجباريين؛ والكمية 0 بتترفض («كمية البند IND182210 لا يمكن أن يكون صفرا»)؛ وصنف template وصنف مش للبيع بيترفضوا؛ وخصم 150٪ وخصم أكبر من الإجمالي بيترفضوا؛ وخصم 10٪ على Net Total بيدي 9180؛ وصف ضريبة من غير حساب و«On Previous Row Amount» في الصف الأول بيترفضوا؛ وOrder Type مجهول بيترفض؛ وسعر الصرف بيتجاب من السيرفر (3.75 للدولار) وسعر 0 أو -1 بيتبدّل؛ وصفوف الصنف المكررة مسموحة (Selling Settings بتسمح بأصناف متعددة)؛ والسعر الأقل من الـ valuation بيترفض (validate selling price شغال)"],"noTitle":"اللي ماتنفذش وليه","no":["«Yes» في الحذف وتحذيرات أمر معدّل أو مرتبط بمستندات تانية (نافذة Delete اتفتحت على أمر معتمد واتلغت؛ ومااكدتش الحذف على أي سجل)","عمل Delivery Note أو Sales Invoice أو Payment أو Material Request من الأمر (SO-02 وSO-03 بيمنعوه)، فتقدم Delivered وBilled وCompleted وFully Billed اتفحص على أوامر موجودة بس (SAL-ORD-2026-03109 و03110 و03111 و02786 و02788)","الجداول اللي بتظهر بعد Save: Taxes and Charges Calculation (لكل صنف ولكل حساب) وBundle Items (الأمر مبيتحفظش من الشاشة، SO-01؛ ونداء الإنشاء رجّع الأمر لكن جداوله ماتقراتش)","حفظ نافذة Update Items وقاعدة العجز (Selling Settings «Sales Order item shortage» على Ignore وماغيّرتوش؛ Warn وBlock ماتفحصوش) وserial وbatch وأثر Reserve Stock على أمر جديد وEnsure Delivery by Serial No وSupplier Delivers to Customer مع Purchase Order","اختيار العنوان وجهة الاتصال (Preferred وPrimary وآخر واحدة: عملاء الاختبار ملهمش preferred فالقاعدة ماظهرتش) وملء جدول شروط الدفع من Payment Terms Template في الشاشة وملء الـ terms من القالب وIncoterm وNamed Place (مخفيين) وShipping Rule وملء صفوف الضرايب من قالب الضرايب","حد 500 حرف لسبب Hold بالكتابة الحقيقية (الحقل اتملا بسكريبت) وقواعد Exchange Rate في Accounts Settings (قاعدة الجلب وحالة عدم وجود سعر والـ role اللي يعدّل السعر) ونافذة Price List Exchange Rate «No exchange rate was found for AFN to SAR» على أمر قديم (داتا، زي SI-05)","الصلاحيات والفترة المحاسبية المقفولة وحد الائتمان وAuto Repeat وعمولة Sales Partner وSales Team (مخفيين) ونقاط الولاء المكسوبة أو المستبدلة على أمر وUTM ومخرجات الطباعة"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Selling SRS v1.0, Sales Order","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة الأولى لـ Sales Order خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا SO-01 لـ SO-09 كـ Fixed هنا (أو يبلّغوا الـ tester). SO-01 الأول لأن مفيش أمر بيتعمل من الشاشة قبل ما يتصلح، وبعده SO-02 لأن سلسلة التسليم والفوترة معتمدة عليه."],["h","لما يوصل إصلاح"],["ol",["كرر SO-01 وSO-04: اعمل أمر من الشاشة بعميل وصنف وتاريخ تسليم، ودوس Save على فورم فاضي.","كرر SO-02 وSO-03 من أمر معتمد (Skip Delivery Note مقفول)، وبعدين شغّل سيناريوهات التسليم والفوترة وCompleted وجداول Taxes and Charges Calculation وBundle Items.","كرر SO-05 لـ SO-09 وحالات السيرفر بنداء الإنشاء (SO-06 وSO-07 وSO-14 لـ SO-18).","نفّذ الحالات المكتوبة تحت «ماتنفذش».","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]],["h","داتا الاختبار والسجلات اللي فضلت في النظام"],["p","الفحوصات عملت Sales Orders للعميل «PW Test Customer» (CU-2026-00001) بالـ API: من SAL-ORD-2026-03112 لـ SAL-ORD-2026-03151 (Drafts، ما عدا: 03114 معتمد وعدّى على Hold وResume وClose وRe-open وهو مفتوح؛ و03115 ملغي؛ و03115-1 Draft اتعمل بـ Amend). مفيش حاجة اتمسحت. والأوامر الموجودة (SAL-ORD-2026-03111 و02797 و02777 و02814 و02815) اتفتحت أو اتقرت بس."]],"obs":["حقول في الشاشة أو السيرفر مش في الـ SRS: حقول العقد (Account Type وContract Start Date وContract End Date وName In Contract وEmployee وBrief وCustomer Account) وهي إجبارية في السيرفر (SO-01) وTerritories وOrder Created by Customer Owner وRetained Customer. باين إنها مقصودة لكن لازم الـ SRS يوصفها.","Loyalty Points وLoyalty Amount ظاهرين في More Information (والـ SRS فيه الحاجتين) لكن Sales Order مفيهوش استبدال Loyalty Program؛ والرقم دايما 0 في الأوامر اللي اتقرت.","Available Qty بالسالب في الشاشة (مثلا -398) لأن الصنف محجوز منه أكتر من الموجود، وده بيطابق معادلة الـ SRS (الفعلي ناقص المحجوز). الحجوزات جاية من أوامر الاختبار الكتير وReserve Stock شغال افتراضيا؛ ومع Reserve Stock شغال الـ Stock Reservation Entry بيتعمل عند Submit وبيتلغي بـ Cancel.","Amend والأمر الملغي: Amend بيحفظ الـ Draft الجديد على طول (SAL-ORD-2026-03115-1) بدل ما يفتح نسخة غير محفوظة، زي شاشة Sales Invoice (SI-13). والـ SRS بيقول بس إن الزر بيتغير لـ Amend.","مشاكل صياغة في الـ SRS: نافذة Get Items From Quotation بتوصف «opportunity» و«Opportunity Details» (نسخ ولصق من مستند تاني) وSearch بـ «sales order name»؛ وEdit Row Item بيقول «Maintain Stock enabled» والجدول بيقول «Is Fixed Asset disabled»؛ وQty موصوفة «Actual Qty minus Reserved Qty» (دي Available Qty) وتحذير الكمية معكوس؛ وزر نافذة Hold اسمه «Submit»؛ وDelivery Date في تاب Details «shown only when Skip Delivery Note = 0» لكن تواريخ تسليم الصفوف إجبارية في الحالتين؛ وTerritory «Multi selection» لمنطقة عميل واحدة؛ وملاحظة «Bundle Items» بتقول Quotation؛ وDelete موصوف في القايمة والتفاصيل بقواعد مختلفة لأمر معدّل ومرتبط.","حالة «Confirmed» في الـ SRS بتظهر لكل أمر معتمد لسه مفتوح (To Deliver وTo Bill وTo Deliver and Bill)؛ والنظام بيخزن حالات ERPNext والشاشة بتترجمها، فأكدوا لو الحالة الأصلية المفروض تفضل ظاهرة زي ما عمودي Delivery Status وBilling Status في الـ SRS بيوحوا.","Submit وCancel بيشتغلوا على طول من غير تأكيد (والـ SRS مبيطلبش تأكيد). وشاشة Sales Order للقراءة بس بعد Submit وUpdate Items هو الطريقة الوحيدة لتعديل أمر معتمد."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Delivery Note (TC-DNL وTC-DNA وTC-DNW وTC-DNG وTC-DNM وTC-DND)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

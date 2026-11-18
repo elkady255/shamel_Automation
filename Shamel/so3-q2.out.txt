@@ -1,0 +1,16 @@
+BIN [{"actual_qty":16,"reserved_qty":353,"projected_qty":73,"reserved_qty_for_sub_contract":0}]
+SRE [{"name":"MAT-SRE-2026-00318","reserved_qty":1,"delivered_qty":0,"status":"Reserved"}]
+OPEN QT count "ERR"
+QT any "ERR"
+ITEM filters: fixedasset [{"name":"2121","item_name":"2121"},{"name":"STO-ITEM-2026-00335","item_name":"صنف جديد"},{"name":"Test Asset","item_name":"Infinix Mobile"}]
+ITEM hasvar [{"name":"1111","item_name":"1111"},{"name":"1231","item_name":"1231"},{"name":"1321","item_name":"1321"}]
+ITEM noSales [{"name":"45","item_name":"te"},{"name":"asdasd","item_name":"TEST-HP"},{"name":"Item-123","item_name":"Item-123"}]
+ITEM nonstock [{"name":"Ads","item_name":"Marketing Ads Spend"},{"name":"BR-1","item_name":"Branding Pac (1 Month)"},{"name":"Callva CS Rep - 1","item_name":"Callva CS Rep ممثل خدمة العملاء"}]
+ITEM bundle [{"name":"Ads"},{"name":"BR-1"},{"name":"STO-ITEM-2026-00077"}]
+PTT [{"name":"test"}]
+STT [{"name":"a - E","is_default":0},{"name":"Jordan Tax - Infugram JOR","is_default":0},{"name":"PW ST 30914 - E","is_default":0},{"name":"PW ST 30915 - E","is_default":0},{"name":"PW ST 30918 - E","is_default":0}]
+SHIPRULE [{"name":"s","shipping_rule_type":"Selling"},{"name":"test data","shipping_rule_type":"Selling"},{"name":"قاعدة شحن للتيست","shipping_rule_type":"Buying"}]
+CUST addr [{"name":"ucdj9v1qfe"},{"name":"uchlcm839c"},{"name":"ucmdm0icam"},{"name":"udff3p7hnl"},{"name":"udidor653b"},{"name":"udpi4s0fb2"},{"name":"uifsnbt04r"},{"name":"uij05q8bta"},{"name":"uin2hpp08c"},{"name":"uj37te9hbv"},{"name":"uj5knr0qkh"},{"name":"uj8m02p2ue"},{"name":"okg0ok3cvl"},{"name":"okm3i9uhsu"}]
+CONTACT [{"name":"olc2a8baa7"}]
+COUPON [{"name":"Inf Discount","coupon_code":"INFDISCO","pricing_rule":"PRLE-0001","valid_upto":"2026-07-17","maximum_use":1,"used":4},{"name":"Inf Discountss","coupon_code":"99A9001195","pricing_rule":"PRLE-0001","valid_upto":"2026-07-31","maximum_use":5,"used":1},{"name":"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN","coupon_code":"PWI1651423","pricing_rule":"PRLE-0003","valid_upto":"2026-11-30","maximum_use":5,"used":0},{"name":"PW CC 3289626354","coupon_code":"PWCC3289626354","pricing_rule":"PRLE-0003","valid_upto":"2026-12-31","maximum_use":5,"used":0}]
+SYSDEFAULT stock res 1

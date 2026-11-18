@@ -1,0 +1,5 @@
+ADDR []
+ADDR []
+CONTACT []
+CUSTOMER {"loyalty":"Golden Program","group":"Individual","terr":"KSA"}
+COMPANY ADDR [{"name":"fghfhdfgh-Personal","is_your_company_address":0,"is_primary_address":1,"creation":"2026-04-30 18:55:04.736261","address_title":"fghfhdfgh"},{"name":"fghfhdfgh-Personal-1","is_your_company_address":0,"is_primary_address":0,"creation":"2026-04-30 18:56:26.470459","address_title":"fghfhdfgh"},{"name":"fghfhdfgh-Personal-10","is_your_company_address":0,"is_primary_address":0,"creation":"2026-05-13 19:27:33.742611","address_title":"fghfhdfgh"},{"name":"fghfhdfgh-Personal-2","is_your_company_address":0,"is_primary_address":0,"creation":"2026-04-30 18:57:07.303159","address_title":"fghfhdfgh"},{"name":"fghfhdfgh-Personal-3","is_your_company_address":0,"is_primary_address":0,"creation":"2026-04-30 18:57:24.691514","address_title":"fghfhdfgh"}]
