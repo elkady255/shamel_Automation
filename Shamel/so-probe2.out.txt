@@ -1,0 +1,6 @@
+ROW — — 102,000.00 SAR | inputs ["checkbox:on","text:IND182210","hidden:","text:","hidden:","number:10","number:10200"]
+WARN []
+DELIVERY DATE ["17-11-2026","28-11-2026","28-11-2026"]
+AFTER SAVE url https://test.hr.azzrk.com/desk/shamel#/selling/sales-orders/new?blanket_order=MFG-BLR-2026-00030
+MSG []
+INLINE ERRS []
