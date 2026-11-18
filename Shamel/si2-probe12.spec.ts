@@ -1,0 +1,36 @@
+import { test, type Page } from '@playwright/test';
+import * as fs from 'fs';
+test.describe.configure({ timeout: 290_000 });
+test.use({ viewport: { width: 1600, height: 1500 } });
+const LOAD = { timeout: 100_000 };
+const main = (p: Page) => p.getByRole('main');
+const clean = (s: string) => (s || '').replace(/\s+/g, ' ').trim();
+const press = (l: any) => l.evaluate((e: any) => e.click());
+const OUT = 'C:/Playwright_Automation/Shamel/si2-probe12.out.txt';
+const log = (s: string) => fs.appendFileSync(OUT, s + '\n');
+const rows = (p: Page) => p.evaluate(() => document.querySelectorAll('.base-modal table tbody tr').length);
+test('si get items from SO', async ({ page }) => {
+  fs.writeFileSync(OUT, '');
+  page.on('response', async (r) => { if (/\/api\//.test(r.url()) && (r.request().method() !== 'GET' || r.status() >= 400) && !/session_default|getpage|get_count|notification|recalculate/.test(r.url())) { let b = ''; try { b = clean(await r.text()).slice(0, 300); } catch { /* */ } log('API ' + r.request().method() + ' ' + r.status() + ' ' + r.url().split('/api/')[1]?.slice(0, 100) + ' => ' + b); } });
+  await page.goto('about:blank'); await page.goto('/desk/shamel#/selling/sales-invoices/new', LOAD); await page.waitForTimeout(9000);
+  const pickText = async (idx: number, q: string, opt: string) => { const f = main(page).getByPlaceholder('ابحث واختر').nth(idx); await f.click(); if (q) await f.fill(q); await page.waitForTimeout(1500); await press(page.locator('.cs-option:visible').filter({ hasText: opt }).first()); await page.waitForTimeout(1500); };
+  await pickText(0, 'Ahmed', 'Ahmed Ebrahim'); await pickText(1, 'PW Packing', 'PW Packing');
+  await press(main(page).getByRole('button', { name: 'جلب الأصناف من' }).first()); await page.waitForTimeout(1000);
+  await press(page.locator('.cd-action-menu *').filter({ hasText: /^أمر المبيعات$/ }).first()); await page.waitForTimeout(4000);
+  log('ROWS before scroll ' + await rows(page));
+  await page.evaluate(() => { document.querySelectorAll('.base-modal *').forEach((e: any) => { if (e.scrollHeight > e.clientHeight + 20) e.scrollTop = e.scrollHeight; }); });
+  await page.waitForTimeout(3000);
+  log('ROWS after scroll ' + await rows(page));
+  // select first row and Get Items
+  const cb = page.locator('.base-modal table tbody tr').first().locator('input[type=checkbox]');
+  await press(cb); await page.waitForTimeout(600);
+  log('MODAL BUTTONS ' + JSON.stringify((await page.locator('.base-modal button').allInnerTexts()).map(clean)));
+  await press(page.locator('.base-modal button').filter({ hasText: 'جلب الأصناف' }).last()); await page.waitForTimeout(5000);
+  log('TABLE ' + clean(await main(page).locator('table.si-table').first().innerText().catch(() => 'NO TABLE')));
+  log('ROW INPUTS ' + JSON.stringify(await main(page).locator('table.si-table tbody tr').evaluateAll((trs: any[]) => trs.map((tr) => [...tr.querySelectorAll('input')].map((i: any) => i.type + '=' + String(i.value).slice(0, 25)).join(',')))));
+  log('SUMMARY ' + (clean(await main(page).innerText()).match(/إجمالي الكمية.{0,200}/)?.[0]));
+  log('FORM INPUTS ' + JSON.stringify(await main(page).locator('input:visible').evaluateAll((els: any[]) => els.map((e) => (e.placeholder || e.type).slice(0, 14) + '=' + String(e.value).slice(0, 22)).filter((x) => !/checkbox/.test(x)).slice(0, 22))));
+  await press(main(page).getByRole('button', { name: 'حفظ', exact: true })); await page.waitForTimeout(6000);
+  log('AFTER SAVE ' + page.url());
+  log('MODALS ' + JSON.stringify(await page.evaluate(() => [...document.querySelectorAll('.modal,.shamel-confirm-overlay')].filter((e: any) => e.offsetWidth > 0).map((e: any) => e.innerText.replace(/\s+/g, ' ').slice(0, 400)))));
+});

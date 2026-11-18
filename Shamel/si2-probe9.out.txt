@@ -1,0 +1,16 @@
+SUMMARY إجمالي الكمية 1 إجمالي المبلغ بالعملة 10.00 SAR إجمالي المبلغ بعملة الشركة الأساسية 10.00 SAR إجمالي الوزن الصافي 2 صافي الإجمالي بالعملة 10.00 SAR صافي الإجمالي بعملة الشركة الأساسية 10.00 SAR الضرائب والرسوم فئة الضريبة يتم إنشاؤه تلقائيًا قاعدة الشحن قالب الضرائب والرسوم إجمالي الضرائب والرسوم (بالعملة) 0.00 SAR إجمالي الضرائب والرسوم (العملة الأساسية للشركة) 0.00 SAR سجل الضرائب والرسوم إضافة ضريبة أو رسم 
+API POST 200 method/shamel.api.routes.selling.transactions.sales_invoice.create_sales_invoice => {"message":{"status":200,"message":"Sales Invoice created successfully","doc":{"name":"ACC-SINV-2026-02789","owner":"Administrator","creation":"2026-11-18 10:28:26.362562","modified":"2026-11-18 10:28:26.362562","modified_by":"Administrator","docstatus":0,"idx":0,"title":null,"naming_series":"ACC-SI
+API POST 200 method/shamel.api.routes.common.assign.get_details_of_assigned_users => {"message":[]}
+AFTER SAVE URL https://test.hr.azzrk.com/desk/shamel#/selling/sales-invoices/ACC-SINV-2026-02789
+MODALS []
+BTN ["جلب الأصناف من","إنشاء فحص جودة","عرض","اعتماد","التفاصيل","المعلومات العامة","معلومات إضافية","السجلات المرتبطة 0","المعلومات الأساسية","الأبعاد المحاسبية","العملة وقائمة الأسعار","تفاصيل الأصناف","إضافة صنف","الملخص المالي","الضرائب والرسوم","إضافة ضريبة أو رسم","الإجماليات","الخصم الإضافي","فواتير الدفعات المقدمة المرجعية","إضافة صف","أصناف حزمة المنتجات","إلغاء","حفظ"]
+NAME ACC-SINV-2026-02789
+API POST 200 method/shamel.api.routes.selling.transactions.sales_invoice.submit_sales_invoice => {"message":{"status":200,"message":"Sales Invoice submitted successfully","doc":{"name":"ACC-SINV-2026-02789","owner":"Administrator","creation":"2026-11-18 10:28:26.362562","modified":"2026-11-18 10:28:32.578816","modified_by":"Administrator","docstatus":1,"idx":0,"title":null,"naming_series":"ACC-
+API POST 200 method/shamel.api.routes.common.assign.get_details_of_assigned_users => {"message":[]}
+AFTER SUBMIT CLICK MODALS []
+AFTER SUBMIT URL https://test.hr.azzrk.com/desk/shamel#/selling/sales-invoices/ACC-SINV-2026-02789 MODALS []
+BTN2 ["إنشاء فحص جودة","عرض","إلغاء المستند","إنشاء","التفاصيل","المعلومات العامة","معلومات إضافية","السجلات المرتبطة 0","المعلومات الأساسية","الأبعاد المحاسبية","العملة وقائمة الأسعار","تفاصيل الأصناف","الملخص المالي","الضرائب والرسوم","الإجماليات","الخصم الإضافي","فواتير الدفعات المقدمة المرجعية","أصناف حزمة المنتجات"]
+HEAD2 مرحباً Administrator ! AN Administrator admin@example.com 72 ACC-SINV-2026-02789 Unpaid إنشاء فحص جودة عرض إلغاء المستند إنشاء التفاصيل المعلومات العامة معلومات إضافية السجلات المرتبطة 0 المعلومات الأساسية شركة * الرقم الضريبي للشركة 311660887200003 السلسلة * نوع الفاتورة * العميل * اسم العميل PW
+CREATE MENU ["مرتجع / إشعار دائن إذن التسليم دفعة جدول الصيانة"]
+VIEW MENU ["عرض دفتر الأستاذ المحاسبي عرض دفتر أستاذ المخزون"]
+QC []

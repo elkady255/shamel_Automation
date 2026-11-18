@@ -1,0 +1,3 @@
+ORIG {"ds":1,"st":"Unpaid","wh":"Stores - E","cc":"101 - Main X - E","due":"2026-11-18","ia":"4100 - المبيعات - E","ea":"","own":"Administrator","upd":0,"itype":"Sales Invoice","debit_to":"1210 - العملاء - E"}
+RETURN {"ds":0,"st":"Draft","is_return":1,"against":"ACC-SINV-2026-02789","wh":"All Warehouses - E","qty":-1,"rate":10,"upos":1,"itype":"Credit Note","due":"2026-11-18","cc":"101 - Main X - E"}
+DN {"ds":0,"st":"Draft","wh":"Stores - E","cust":"CU-2026-00002"}

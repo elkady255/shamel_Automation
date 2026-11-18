@@ -1,0 +1,58 @@
+cust CU-2026-00002 item STO-ITEM-2026-00074
+00 base => ACCEPTED ACC-SINV-2026-02758 gt=200 out=200 due=2026-11-18
+01 no customer => REJECTED 417 خطأ: قيمة مفقودة ل فاتورة مبيعات: العميل
+02 qty 0 => REJECTED 417 الصف # 1: كمية البند STO-ITEM-2026-00074 لا يمكن أن يكون صفرا
+03 qty -3 (not return) => REJECTED 417 Incorrect value:Grand Total (Company Currency must be &gt;= 0.0
+04 rate -50 => REJECTED 417 Incorrect value:Grand Total (Company Currency must be &gt;= 0.0
+05 rate 0 => ACCEPTED ACC-SINV-2026-02759 gt=20 out=20 due=2026-11-18
+06 qty 1e15 => REJECTED 500 MySQLdb.DataError: (1264, "Out of range value for column 'total_qty' at row 1")
+07 qty 0.000001 => ACCEPTED ACC-SINV-2026-02760 gt=0 out=0 due=2026-11-18
+08 due before posting => REJECTED 417 لا يمكن أن يكون تاريخ الاستحقاق قبل Posting Date
+09 posting_date invalid => ACCEPTED ACC-SINV-2026-02761 gt=200 out=200 due=2026-11-18
+10 posting_date year 1900 => REJECTED 417 لا يمكن أن يكون تاريخ الاستحقاق قبل Posting Date
+11 posting_date future 2099 => ACCEPTED ACC-SINV-2026-02762 gt=200 out=200 due=2099-01-02
+12 no items => REJECTED 500 TypeError: bad operand type for abs(): 'NoneType'
+13 no company => ACCEPTED ACC-SINV-2026-02763 gt=200 out=200 due=2026-11-18
+14 discount % 150 => REJECTED 417 Additional Discount Amount (ريال سعودي 300.00) cannot exceed the total before such discount (ريال سعودي 200.00)
+15 discount % -10 => ACCEPTED ACC-SINV-2026-02764 gt=220 out=220 due=2026-11-18
+16 discount amount 99999 => REJECTED 417 Additional Discount Amount (ريال سعودي 99,999.00) cannot exceed the total before such discount (ريال سعودي 200.00)
+17 discount amount -50 => ACCEPTED ACC-SINV-2026-02765 gt=250 out=250 due=2026-11-18
+18 item discount % 120 => ACCEPTED ACC-SINV-2026-02766 gt=200 out=200 due=2026-11-18
+19 item discount % -20 => ACCEPTED ACC-SINV-2026-02767 gt=200 out=200 due=2026-11-18
+20 exchange rate 0 => ACCEPTED ACC-SINV-2026-02768 gt=200 out=200 due=2026-11-18
+21 exchange rate -2 => ACCEPTED ACC-SINV-2026-02769 gt=200 out=200 due=2026-11-18
+22 plc rate 0 => ACCEPTED ACC-SINV-2026-02770 gt=200 out=200 due=2026-11-18
+23 customer_po 150 chars => REJECTED 417 فاتورة مبيعات ACC-SINV-2026-02771: 'طلب شراء الزبون' (PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP) سيتم اقتطاعه، حيث أن الحد الأقصى المسموح به هو 140
+24 po_no 1 char => ACCEPTED ACC-SINV-2026-02771 gt=200 out=200 due=2026-11-18
+25 item description 600 chars => ACCEPTED ACC-SINV-2026-02772 gt=200 out=200 due=2026-11-18
+26 item description 1 char => ACCEPTED ACC-SINV-2026-02773 gt=200 out=200 due=2026-11-18
+27 terms 600 => ACCEPTED ACC-SINV-2026-02774 gt=200 out=200 due=2026-11-18
+28 barcode 150 => REJECTED 417 بند فاتورة مبيعات، الصف 1: 'الباركود' (BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB) سيتم اقتطاعه، حيث أن الحد الأقصى المسموح به هو 140
+29 wrong company warehouse => REJECTED 417 لا يمكن أن تجد صف #1: المستودع: _EGS Test Co
+30 group warehouse => ACCEPTED ACC-SINV-2026-02775 gt=200 out=200 due=2026-11-18
+31 UOM not defined for item => ACCEPTED ACC-SINV-2026-02776 gt=200 out=200 due=2026-11-18
+32 item not for sale? => REJECTED 417 لا يمكن أن تجد صف #1: صنف: NOPE-ITEM
+33 is_return no return_against, qty + => REJECTED 417 For an item STO-ITEM-2026-00074, quantity must be negative number
+34 is_return qty -2 no against => ACCEPTED ACC-SINV-2026-02777 gt=-200 out=-200 due=2026-11-18
+35 debit note (rate adj) no against => ACCEPTED ACC-SINV-2026-02778 gt=200 out=200 due=2026-11-18
+36 update_stock 1 qty 999999 => ACCEPTED ACC-SINV-2026-02779 gt=99999900 out=99999900 due=2026-11-18
+37 update_stock 1 qty 1 => ACCEPTED ACC-SINV-2026-02780 gt=100 out=100 due=2026-11-18
+38 write off 50 => ACCEPTED ACC-SINV-2026-02781 gt=200 out=150 due=2026-11-18
+39 write off 900 => ACCEPTED ACC-SINV-2026-02782 gt=200 out=-700 due=2026-11-18
+40 write off -5 => ACCEPTED ACC-SINV-2026-02783 gt=200 out=205 due=2026-11-18
+41 loyalty redeem pts 5 no program => REJECTED 417 ليس لديك ما يكفي من نقاط الولاء لاستردادها
+42 tax rate -5 => REJECTED 417 لا يمكن أن تجد صف #1: الحساب المحاسبي: 2301 - ضريبة القيمة المضافة - E
+43 tax rate 500 => REJECTED 417 لا يمكن أن تجد صف #1: الحساب المحاسبي: 2301 - ضريبة القيمة المضافة - E
+44 tax no account => REJECTED 417 Row #1: Tax Code 'S' must have a rate of 15.0%, not 5.0%.
+45 tax prev row w/o ref => REJECTED 417 لا يمكن أن تجد صف #1: الحساب المحاسبي: 2301 - ضريبة القيمة المضافة - E
+46 tax description 1 char => REJECTED 417 لا يمكن أن تجد صف #1: الحساب المحاسبي: 2301 - ضريبة القيمة المضافة - E
+47 payment term portion 50 only => REJECTED 417 يجب أن يكون إجمالي مبلغ الدفع في جدول الدفع مساويا للمجموع الكبير / المستدير
+48 payment term portion 60+60 => REJECTED 417 تم العثور على صفوف ذات تواريخ استحقاق مكررة في صفوف أخرى: 2026-11-18 في الحقل 2
+49 payment term negative => REJECTED 417 تم العثور على صفوف ذات تواريخ استحقاق مكررة في صفوف أخرى: 2026-11-18 في الحقل 2
+50 sales team 150% => REJECTED 417 مجموع النسبة المئوية المخصصة ل فريق المبيعات يجب أن يكون 100
+51 commission rate 150 => REJECTED 417 Commission Rate (%) يجب أن تكون القيمة بين 0 و 100
+52 payments row negative => ACCEPTED ACC-SINV-2026-02784 gt=200 out=200 due=2026-11-18
+53 duplicate item rows => ACCEPTED ACC-SINV-2026-02785 gt=400 out=400 due=2026-11-18
+54 name in field customer_name 300 => ACCEPTED ACC-SINV-2026-02786 gt=200 out=200 due=2026-11-18
+55 remarks 5000 => ACCEPTED ACC-SINV-2026-02787 gt=200 out=200 due=2026-11-18
+56 weight/total weight => ACCEPTED ACC-SINV-2026-02788 gt=200 out=200 due=2026-11-18

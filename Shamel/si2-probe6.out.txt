@@ -1,0 +1,7 @@
+ITEM OPTIONS ["PW-PS-ITEM-A - STO-ITEM-2026-00074","PW-PS-ITEM-B - STO-ITEM-2026-00075","PW-PS-ITEM-C - STO-ITEM-2026-00076"]
+ROW INPUTS ["checkbox::on","text:ابحث واختر:PW-PS-ITEM-A - STO-ITEM-2026-00074","number::1","number::10","text:ابحث واختر:Stores - Stores - E"]
+ROW TEXT 1,376 -1,375 10.00 SAR
+WARN []
+BTN titles ["|Show popup|cs-toggle","|Show popup|cs-toggle"]
+POPUP1 
+POPUP1 INPUTS []

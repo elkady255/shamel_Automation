@@ -1,0 +1,142 @@
+CF custom_account_type|Account Type|Select|reqd=0|hid=0|opt=
+New Account
+Upsell
+Project
+Domain & Subs|dep=
+CF custom_attachments|Attachments|Section Break|reqd=0|hid=0|opt=|dep=
+CF custom_brief|Brief|Tab Break|reqd=0|hid=0|opt=|dep=
+CF custom_cashier_name|Cashier Name|Data|reqd=0|hid=0|opt=|dep=eval:doc.is_pos
+CF custom_column_break_1xtlq||Column Break|reqd=0|hid=0|opt=|dep=
+CF custom_column_break_4jig0||Column Break|reqd=0|hid=0|opt=|dep=
+CF custom_column_break_5smke||Column Break|reqd=0|hid=0|opt=|dep=
+CF custom_column_break_cdrjd||Column Break|reqd=0|hid=0|opt=|dep=
+CF custom_column_break_pzysj||Column Break|reqd=0|hid=0|opt=|dep=
+CF custom_confirmation_message|Confirmation message|Attach|reqd=0|hid=0|opt=|dep=
+CF custom_contract_end_date|Contract End Date|Date|reqd=0|hid=0|opt=|dep=
+CF custom_contract_file|Contract file|Attach|reqd=0|hid=0|opt=|dep=
+CF custom_contract_start_date|Contract Start Date|Date|reqd=0|hid=0|opt=|dep=
+CF custom_customer_account|Customer Account|Link|reqd=0|hid=0|opt=Customer Account|dep=eval:doc.custom_account_type == "Upsell" || doc.custom_account_type == "Project" || doc.custom_account_type == "Domain & Subs"
+CF custom_department|Department|Link|reqd=0|hid=0|opt=Department|dep=
+CF custom_employee|Employee|Link|reqd=0|hid=0|opt=Employee|dep=
+CF custom_employee_name|Employee Name|Data|reqd=0|hid=0|opt=|dep=
+CF custom_is_double|Is Double|Check|reqd=0|hid=0|opt=|dep=eval:doc.custom_account_type=="New Account" && doc.custom_department && doc.custom_department.includes("Customer")
+CF custom_is_triple|Is Triple|Check|reqd=0|hid=0|opt=|dep=eval:doc.custom_account_type=="New Account" && doc.custom_department && doc.custom_department.includes("Customer")
+CF custom_lead|Lead|Link|reqd=0|hid=0|opt=Shamel Lead|dep=
+CF custom_name_in_contract|Name In Contract|Data|reqd=0|hid=0|opt=|dep=
+CF custom_new_store|New Store For Active Customer|Check|reqd=0|hid=0|opt=|dep=
+CF custom_order_created_by_customer_owner|First Order By Customer Owner|Check|reqd=0|hid=0|opt=|dep=
+CF custom_owner|Owner|Section Break|reqd=0|hid=0|opt=|dep=
+CF custom_paid_amount_2|Paid Amount|Currency|reqd=0|hid=0|opt=|dep=
+CF custom_project_name|Project Name|Data|reqd=0|hid=0|opt=|dep=eval:doc.custom_account_type == "Project"
+CF custom_receipt_file_1|Receipt file 1|Attach|reqd=0|hid=0|opt=|dep=
+CF custom_receipt_file_2|Receipt file 2|Attach|reqd=0|hid=0|opt=|dep=eval:doc.custom_receipt_file_2
+CF custom_receipt_file_3|Receipt file 3|Attach|reqd=0|hid=0|opt=|dep=eval:doc.custom_receipt_file_3
+CF custom_receipt_file_4|Receipt file 4|Attach|reqd=0|hid=0|opt=|dep=eval:doc.custom_receipt_file_4
+CF custom_receipt_file_5|Receipt file 5|Attach|reqd=0|hid=0|opt=|dep=eval:doc.custom_receipt_file_5
+CF custom_receipt_file_6|Receipt file 6|Attach|reqd=0|hid=0|opt=|dep=eval:doc.custom_receipt_file_6
+CF custom_restore_redeemed_loyalty_points|Restore Redeemed Loyalty Points|Check|reqd=0|hid=0|opt=|dep=eval:doc.is_return == 1 && doc.redeem_loyalty_points == 1
+CF custom_retained_customer|Retained Customer|Check|reqd=0|hid=0|opt=|dep=
+CF custom_return_against_additional_references|Return Against Additional References|Table MultiSelect|reqd=0|hid=0|opt=ZATCA Return Against Reference|dep=eval:doc.is_return || doc.is_debit_note
+CF custom_return_reason|Return/Debit Reason|Data|reqd=0|hid=0|opt=|dep=eval:doc.is_return || doc.is_debit_note
+CF custom_sales_brief|Sales Brief|Small Text|reqd=0|hid=0|opt=|dep=
+CF custom_sales_order_id|Sales order ID|Link|reqd=0|hid=0|opt=Sales Order|dep=eval:doc.custom_sales_order_id
+CF custom_section_break_becvo||Section Break|reqd=0|hid=0|opt=|dep=
+CF custom_section_break_etmnk||Section Break|reqd=0|hid=0|opt=|dep=
+CF custom_shamel_opportunity|Opportunity|Link|reqd=0|hid=0|opt=Shamel Opportunity|dep=
+CF custom_territories|Territories|Table MultiSelect|reqd=0|hid=0|opt=Territory Item|dep=
+CF custom_upsell_duration|Upsell Duration|Select|reqd=0|hid=0|opt=
+1
+2
+3
+4
+5
+6
+8
+12|dep=eval:doc.custom_account_type == "Upsell"
+CF custom_upsell_type|Upsell Type|Select|reqd=0|hid=0|opt=
+SEO Upsell
+Media Upsell|dep=eval:doc.custom_account_type == "Upsell"
+CF custom_zatca_allowance_reason|Allowance Reason|Select|reqd=0|hid=0|opt=
+Bonus for works ahead of schedule
+Other bonus
+Manufacturer'|dep=eval:doc.discount_amount || doc.additional_discount_percentage
+CF custom_zatca_api_payload|Exact API Payload|Code|reqd=0|hid=0|opt=JSON|dep=
+CF custom_zatca_attempts|ZATCA Attempts|Int|reqd=0|hid=1|opt=|dep=
+CF custom_zatca_buyer_identification_id|Buyer Identification ID|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_cleared_xml|Cleared XML & QR (Standard Invoice)|Code|reqd=0|hid=0|opt=XML|dep=
+CF custom_zatca_discount_reason|ZATCA Discount Reason|Autocomplete|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_discount_reason_code|Allowance Reason Code|Data|reqd=0|hid=0|opt=|dep=eval:doc.discount_amount || doc.additional_discount_percentage
+CF custom_zatca_document_subtype_code|Document Subtype Code|Select|reqd=0|hid=0|opt=
+01
+02|dep=
+CF custom_zatca_document_type_code|Document Type Code|Select|reqd=0|hid=0|opt=
+388
+381
+383
+386|dep=
+CF custom_zatca_export_invoice|Export Invoice|Check|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_http_status|HTTP Status|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_icv|ICV|Int|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_invoice_hash|Invoice Hash|Small Text|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_last_attempt|Last Attempt|Datetime|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_local_validation_status|Local Validation Status|Select|reqd=0|hid=0|opt=Not Validated
+Passed
+Failed|dep=
+CF custom_zatca_next_attempt|ZATCA Next Attempt|Datetime|reqd=0|hid=1|opt=|dep=
+CF custom_zatca_nominal_supply|Nominal Supply|Check|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_payment_means|Payment Means|Data|reqd=0|hid=1|opt=|dep=
+CF custom_zatca_phase1_qr|Phase 1 QR (tags 1-5)|Small Text|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_phase1_xml|Phase 1 Invoice XML (unsigned)|Code|reqd=0|hid=0|opt=XML|dep=
+CF custom_zatca_pih|PIH|Small Text|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_resolved_branch|Resolved Branch|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_resolved_egs|Resolved EGS|Link|reqd=0|hid=0|opt=EGS|dep=
+CF custom_zatca_response_messages|Info, Warnings & Error Messages|Small Text|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_self_billed_invoice|Self-Billed Invoice|Check|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_additional_street|Additional Street|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_building_number|Building Number|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_city|City|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_country_code|Country Code|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_district|District|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_identification_id|Seller Identification ID|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_name|Seller Name|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_postal_code|Postal Code|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_seller_street|Street|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_status|ZATCA Status|Select|reqd=0|hid=0|opt=
+Pending
+Reported
+Reported with Warnings
+Accepted
+Accepted w|dep=eval:doc.custom_zatca_status
+CF custom_zatca_submission_status|Submission Status|Select|reqd=0|hid=0|opt=Not Submitted
+Queued
+Processing
+Retry Scheduled
+Completed
+Te|dep=
+CF custom_zatca_submitted_xml|Submitted XML|Code|reqd=0|hid=0|opt=XML|dep=
+CF custom_zatca_summary_invoice|Summary Invoice|Check|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_supply_end_date|Supply End Date|Date|reqd=0|hid=0|opt=|dep=eval:doc.custom_zatca_summary_invoice
+CF custom_zatca_supply_start_date|Supply Start Date|Date|reqd=0|hid=0|opt=|dep=eval:doc.custom_zatca_summary_invoice
+CF custom_zatca_third_party_issued|Third-Party Issued|Check|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_transaction_type_code|Transaction Type Code|Data|reqd=0|hid=0|opt=|dep=
+CF custom_zatca_uuid|UUID|Data|reqd=0|hid=0|opt=|dep=
+CF invoice_type|Invoice Type|Select|reqd=1|hid=0|opt=Sales Invoice
+Prepayment Invoice
+Credit Note
+Debit Note|dep=
+CF prepayment_reference_invoices|Prepayment Reference Invoices|Table|reqd=0|hid=0|opt=Sales Invoice Prepayment Reference|dep=eval:doc.invoice_type=='Sales Invoice'
+CF print_without_amount|Print Without Amount|Check|reqd=0|hid=0|opt=|dep=
+CF restore_redeemed_loyalty_points|Restore Redeemed Loyalty Points|Check|reqd=0|hid=0|opt=|dep=
+CF sales_invoice|Sales Invoice|Link|reqd=0|hid=0|opt=Sales Invoice|dep=
+CF zatca_identifiers_column_break|null|Column Break|reqd=0|hid=0|opt=|dep=
+CF zatca_identifiers_section|Identifiers|Section Break|reqd=0|hid=0|opt=|dep=
+CF zatca_payload_section|Submitted Payload|Section Break|reqd=0|hid=0|opt=|dep=
+CF zatca_phase1_section|Phase 1 (Generation — No EGS)|Section Break|reqd=0|hid=0|opt=|dep=
+CF zatca_seller_buyer_column_break|null|Column Break|reqd=0|hid=0|opt=|dep=
+CF zatca_seller_buyer_section|Seller / Buyer|Section Break|reqd=0|hid=0|opt=|dep=
+CF zatca_submission_column_break|null|Column Break|reqd=0|hid=0|opt=|dep=
+CF zatca_submission_section|ZATCA Submission|Section Break|reqd=0|hid=0|opt=|dep=
+CF zatca_tab|ZATCA|Tab Break|reqd=0|hid=0|opt=|dep=
+CF zatca_transaction_type_column_break|null|Column Break|reqd=0|hid=0|opt=|dep=
+CF zatca_transaction_type_section|Transaction Type|Section Break|reqd=0|hid=0|opt=|dep=
+KEYS {"docstatus":1,"invoice_type":"Sales Invoice","customer":"CUST-2025-00114","customer_name":"عبدالله ","custom_name_in_contract":"عبدالله محمد الحرابي","custom_sales_order_id":"SAL-ORD-2025-00097","custom_account_type":"New Account","custom_contract_start_date":"2025-04-10","custom_contract_end_date":"2025-07-12","custom_order_created_by_customer_owner":1,"custom_retained_customer":0,"custom_new_store":0,"custom_is_double":0,"custom_is_triple":0,"custom_employee":"HR-EMP-01099","custom_employee_name":"احمد عماد الموجي زهران الموجي ","custom_department":"Sales - One Million","custom_contract_file":"/private/files/��عبد الله محمد الحرابي (4)� (1).pdf","custom_confirmation_message":"/private/files/WhatsApp Image 2025-04-10 at 9.34.05 AM.jpeg","custom_receipt_file_1":"/private/files/Transaction-Receipt (10).pdf","custom_receipt_file_2":"/private/files/Transaction-Receipt (12).pdf","custom_paid_amount_2":0,"ignore_tax_withholding_threshold":0,"override_tax_withholding_entries":0,"custom_zatca_discount_reason":"Discount","custom_restore_redeemed_loyalty_points":0,"status":"Overdue","is_internal_customer":0,"custom_zatca_third_party_issued":0,"custom_zatca_nominal_supply":0,"custom_zatca_export_invoice":0,"custom_zatca_summary_invoice":0,"custom_zatca_self_billed_invoice":0,"custom_zatca_icv":0,"custom_zatca_local_validation_status":"Not Validated","custom_zatca_submission_status":"Not Submitted","custom_zatca_attempts":0}

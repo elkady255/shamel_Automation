@@ -1,0 +1,12 @@
+ROWS before scroll 50
+ROWS after scroll 50
+MODAL BUTTONS ["","","إلغاء","جلب الأصناف"]
+API POST 200 method/shamel.api.routes.selling.transactions.sales_invoice.get_items_from_documents => {"message":{"status":200,"message":"items fetched successfully","data":{"customer":"CU-2026-00002","items":[{"name":null,"owner":"Administrator","creation":null,"modified":null,"modified_by":null,"docstatus":0,"idx":1,"barcode":null,"has_item_scanned":0,"item_code":"STO-ITEM-2026-00074","item_name":
+TABLE كود الصنف الكمية الكمية المتاحة كمية العجز السعر المبلغ المستودع — — 500.00 SAR
+ROW INPUTS ["checkbox=on,text=STO-ITEM-2026-00074,number=5,number=100,text=Stores - Stores - E"]
+SUMMARY إجمالي الكمية — إجمالي المبلغ بالعملة — إجمالي المبلغ بعملة الشركة الأساسية — إجمالي الوزن الصافي — صافي الإجمالي بالعملة — صافي الإجمالي بعملة الشركة الأساسية — الضرائب والرسوم فئة الضريبة يتم إنشاؤه تلقائيًا قاع
+FORM INPUTS ["ابحث عن الصفحا=","ابحث واختر=Ahmed Ebrahim CO.","اختر التسلسل=ACC-SINV-.YYYY.-","Type or select=فاتورة المبيعات","ابحث واختر=PW Packing Customer - ","اختر التاريخ=18-11-2026","time=10:47:44","اختر التاريخ=18-11-2026","ابحث واختر=","ابحث واختر=","ابحث واختر=SAR","ابحث واختر=Standard Selling","امسح أو اكتب ا=","ابحث واختر=STO-ITEM-2026-00074","number=5","number=100","ابحث واختر=Stores - Stores - E","ابحث واختر=","ابحث واختر=","اختيار=","number=","number="]
+API POST 200 method/shamel.api.routes.selling.transactions.sales_invoice.create_sales_invoice => {"message":{"status":200,"message":"Sales Invoice created successfully","doc":{"name":"ACC-SINV-2026-02812","owner":"Administrator","creation":"2026-11-18 10:48:14.881782","modified":"2026-11-18 10:48:14.881782","modified_by":"Administrator","docstatus":0,"idx":0,"title":null,"naming_series":"ACC-SI
+API POST 200 method/shamel.api.routes.common.assign.get_details_of_assigned_users => {"message":[]}
+AFTER SAVE https://test.hr.azzrk.com/desk/shamel#/selling/sales-invoices/ACC-SINV-2026-02812
+MODALS ["رسالة تعذر العثور على سعر الصرف من AFN إلى SAR لتاريخ المفتاح 2026-11-18. يرجى إنشاء سجل صرف العملات يدويا تعذر العثور على سعر الصرف من AFN إلى SAR لتاريخ المفتاح 2026-11-18. يرجى إنشاء سجل صرف العملات يدويا"]

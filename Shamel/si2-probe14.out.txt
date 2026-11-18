@@ -1,0 +1,4 @@
+ROW before: qty=1 rate=10
+rate -50: qty=2 rate=-50 amount="1,373 -1,371 -100.00 SAR" summary=إجمالي الكمية 2 
+API POST 417 method/shamel.api.routes.selling.transactions.sales_invoice.create_sales_invoice => {"field_errors":[{"field":"items.0.rate","message":"يجب أن تكون القيمة أكبر من أو تساوي 0.0"}],"exception":"frappe.exceptions.ValidationError: خطأ في التحقق في الحقول التالية:<br>items.0.rate: يجب أن تكون القيمة أكبر من أو تساوي 0.0","exc_type":"ValidationError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n File \\\"apps/shamel/shamel/api/routes/selling/transactions/
+   SAVE -> url=/selling/sales-invoices/new modals=["تعذّر الحفظ خطأ في التحقق في الحقول التالية: items.0.rate: يجب أن تكون القيمة أكبر من أو تساوي 0.0 تعذر حفظ فاتورة المبيعات"] errs=[]

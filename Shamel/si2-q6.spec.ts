@@ -1,0 +1,26 @@
+import { test } from '@playwright/test';
+import * as fs from 'fs';
+import { api } from './helpers/api';
+import { ctx } from './helpers/qt-api';
+const OUT = 'C:/Playwright_Automation/Shamel/si2-q6.out.txt';
+const log = (s: string) => fs.appendFileSync(OUT, s + '\n');
+const R = 'shamel.api.routes.selling.transactions.sales_invoice.';
+test('q6 option sources', async () => {
+  fs.writeFileSync(OUT, '');
+  const c = await ctx();
+  const g = async (m: string, qs: string) => { const r = await c.get(`/api/method/${R}${m}?${qs}`); const b = await r.json(); return b.message ?? b; };
+  const wh = await g('get_warehouse_options', 'search_text=&company=' + encodeURIComponent('Ahmed Ebrahim CO.') + '&page=1&page_size=200');
+  const names = (wh.data || []).map((x: any) => x.name); log('WAREHOUSE OPTIONS ' + names.length + ' ' + JSON.stringify(names.slice(0, 40)));
+  const whDocs = await api.list('Warehouse', [['company', '=', 'Ahmed Ebrahim CO.']], ['name', 'is_group', 'disabled'], 300);
+  const grp = new Set(whDocs.filter((w: any) => w.is_group).map((w: any) => w.name)); const dis = new Set(whDocs.filter((w: any) => w.disabled).map((w: any) => w.name));
+  log('GROUP WAREHOUSES IN OPTIONS ' + JSON.stringify(names.filter((n: string) => grp.has(n)))); log('DISABLED WAREHOUSES IN OPTIONS ' + JSON.stringify(names.filter((n: string) => dis.has(n))));
+  const other = await g('get_warehouse_options', 'search_text=&company=' + encodeURIComponent('_EGS Test Co') + '&page=1&page_size=50'); log('OTHER COMPANY WH ' + JSON.stringify((other.data || []).map((x: any) => x.name).slice(0, 10)));
+  const it = await g('get_item_options', 'search_text=&page=1&page_size=200'); const inames = (it.data || []).map((x: any) => x.name); log('ITEM OPTIONS ' + inames.length);
+  const docs = await api.list('Item', [['name', 'in', inames]], ['name', 'disabled', 'has_variants', 'is_fixed_asset', 'is_sales_item', 'is_stock_item'], 500);
+  const bad: any = { disabled: [], has_variants: [], is_fixed_asset: [], not_sales: [] };
+  docs.forEach((d: any) => { if (d.disabled) bad.disabled.push(d.name); if (d.has_variants) bad.has_variants.push(d.name); if (d.is_fixed_asset) bad.is_fixed_asset.push(d.name); if (!d.is_sales_item) bad.not_sales.push(d.name); });
+  log('ITEMS IN DROPDOWN THAT SHOULD NOT BE: ' + JSON.stringify(bad));
+  log('NON-STOCK ITEMS IN DROPDOWN: ' + docs.filter((d: any) => !d.is_stock_item).length);
+  const sr = await g('get_series_options', ''); log('SERIES ' + JSON.stringify(sr).slice(0, 300));
+  const co = await g('get_customer_options', 'search_text=&page=1&page_size=5'); log('CUSTOMER OPTS ' + JSON.stringify(co).slice(0, 200));
+});

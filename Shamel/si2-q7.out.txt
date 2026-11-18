@@ -1,0 +1,8 @@
+SI-06 VAT - E template -> ACCEPTED ACC-SINV-2026-02814 tax=0
+a - E template -> ACCEPTED ACC-SINV-2026-02815 tax=0 gt=200
+bundle BR-1 -> ACCEPTED ACC-SINV-2026-02816 packed=0 gt=200
+fixed asset item 2121 -> REFUSED الصف #1: يجب عليك تحديد أصل للعنصر 2121.
+write off, no account -> ACCEPTED
+loyalty redeem 5 pts -> REFUSED ليس لديك ما يكفي من نقاط الولاء لاستردادها
+set_posting_time=1 past date -> ACCEPTED posting=2026-11-10
+po_no 1 char -> ACCEPTED

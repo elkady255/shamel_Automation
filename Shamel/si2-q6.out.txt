@@ -1,0 +1,9 @@
+WAREHOUSE OPTIONS 7 ["Finished Goods - E","Goods In Transit - E","Stores - E","WH-11 - E","WH-12 - E","WH-14 - E","Work In Progress - E"]
+GROUP WAREHOUSES IN OPTIONS []
+DISABLED WAREHOUSES IN OPTIONS []
+OTHER COMPANY WH ["Finished Goods - EGST","Goods In Transit - EGST","Stores - EGST","Work In Progress - EGST"]
+ITEM OPTIONS 20
+ITEMS IN DROPDOWN THAT SHOULD NOT BE: {"disabled":[],"has_variants":[],"is_fixed_asset":["2121"],"not_sales":[]}
+NON-STOCK ITEMS IN DROPDOWN: 1
+SERIES {"exception":"frappe.exceptions.ValidationError: فشل الحصول على طريقة للأمر shamel.api.routes.selling.transactions.sales_invoice.get_series_options مع module 'shamel.api.routes.selling.transactions.sales_invoice' has no attribute 'get_series_options'","exc_type":"ValidationError","exc":"[\"Traceback
+CUSTOMER OPTS {"exception":"frappe.exceptions.ValidationError: فشل الحصول على طريقة للأمر shamel.api.routes.selling.transactions.sales_invoice.get_customer_options مع module 'shamel.api.routes.selling.transactions.

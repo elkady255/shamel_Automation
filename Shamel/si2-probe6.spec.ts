@@ -1,0 +1,31 @@
+import { test, type Page } from '@playwright/test';
+import * as fs from 'fs';
+test.describe.configure({ timeout: 290_000 });
+test.use({ viewport: { width: 1600, height: 1700 } });
+const LOAD = { timeout: 100_000 };
+const main = (p: Page) => p.getByRole('main');
+const clean = (s: string) => (s || '').replace(/\s+/g, ' ').trim();
+const press = (l: any) => l.evaluate((e: any) => e.click());
+const OUT = 'C:/Playwright_Automation/Shamel/si2-probe6.out.txt';
+const log = (s: string) => fs.appendFileSync(OUT, s + '\n');
+test('si row popups', async ({ page }) => {
+  fs.writeFileSync(OUT, '');
+  await page.goto('about:blank'); await page.goto('/desk/shamel#/selling/sales-invoices/new', LOAD); await page.waitForTimeout(9000);
+  const pickText = async (idx: number, q: string, opt: string) => { const f = main(page).getByPlaceholder('ابحث واختر').nth(idx); await f.click(); if (q) await f.fill(q); await page.waitForTimeout(1500); await press(page.locator('.cs-option:visible').filter({ hasText: opt }).first()); await page.waitForTimeout(1500); };
+  await pickText(0, 'Ahmed', 'Ahmed Ebrahim'); await pickText(1, 'PW Packing', 'PW Packing');
+  await press(main(page).getByRole('button', { name: 'إضافة صنف', exact: true })); await page.waitForTimeout(2000);
+  // choose item
+  const row = main(page).locator('table tbody tr').first();
+  const itemIn = row.locator('input[placeholder="ابحث واختر"]').first(); await itemIn.click(); await itemIn.fill('PW-PS'); await page.waitForTimeout(2000);
+  log('ITEM OPTIONS ' + JSON.stringify((await page.locator('.cs-option:visible').allInnerTexts()).map(clean).slice(0, 8)));
+  await press(page.locator('.cs-option:visible').first()); await page.waitForTimeout(2500);
+  log('ROW INPUTS ' + JSON.stringify(await row.locator('input').evaluateAll((els: any[]) => els.map((e) => e.type + ':' + (e.placeholder || '') + ':' + e.value + (e.readOnly ? '(ro)' : '')))));
+  log('ROW TEXT ' + clean(await row.innerText()));
+  const warns = await page.locator('[class*=warn]:visible,[class*=toast]:visible,[class*=alert]:visible').allInnerTexts(); log('WARN ' + JSON.stringify(warns.map(clean)));
+  const btns = row.locator('button[title], button');
+  log('BTN titles ' + JSON.stringify(await row.locator('button').evaluateAll((els: any[]) => els.map((e) => e.title + '|' + e.getAttribute('aria-label') + '|' + e.className))));
+  await press(row.locator('button').first()); await page.waitForTimeout(2500);
+  log('POPUP1 ' + clean((await page.locator('[class*=modal]:visible,[role=dialog]:visible').allInnerTexts()).join(' | ')).slice(0, 3500));
+  log('POPUP1 INPUTS ' + JSON.stringify(await page.locator('[class*=modal] input:visible,[class*=modal] textarea:visible,[class*=modal] select:visible,[role=dialog] input:visible').evaluateAll((els: any[]) => els.map((e) => e.type + ':' + (e.placeholder || '') + ':' + String(e.value).slice(0, 15) + (e.readOnly || e.disabled ? '(ro)' : '')))));
+  await page.screenshot({ path: 'Shamel/si2-p6-popup1.png', fullPage: true });
+});

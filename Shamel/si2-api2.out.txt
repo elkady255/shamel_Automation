@@ -1,0 +1,41 @@
+L1 submit direct invoice (no SO/DN): ACC-SINV-2026-02791: status=Unpaid gt=200 out=200 ds=1
+L2 partial pay 40 -> ACC-PAY-2026-03053 | ACC-SINV-2026-02791: status=Partly Paid gt=200 out=160 ds=1
+L2b pay 500 > outstanding -> ERR insert Payment Entry failed: 417 {"exception":"frappe.exceptions.ValidationError: الصف # 1: المبلغ المخصص لا يمكن أن يكون أكبر من المبلغ المستحق.","exc_type":"ValidationError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last): | ACC-SINV-2026-02791: status=Partly Paid gt=200 out=160 ds=1
+L3 pay rest -> ACC-PAY-2026-03054 | ACC-SINV-2026-02791: status=Paid gt=200 out=0 ds=1
+L4 cancel paid invoice -> REFUSED frappe.client.cancel failed: 417 {"exception":"frappe.exceptions.LinkExistsError: لا يمكن حذف أو إلغاء لأن فاتورة مبيعات <a href=\"https://test.hr.azzrk.com/desk/sales-invoice/ACC-SINV-2026-02791\">ACC-SINV-2026-02791</a> مرتبط مع سند دفع <a href=\"h
+L5 invoice b ACC-SINV-2026-02792
+L5a return qty 1 of 2 -> SUBMITTED ACC-SINV-2026-02793: status=Return gt=-100 out=-100 ds=1
+   original after: ACC-SINV-2026-02792: status=Unpaid gt=200 out=200 ds=1
+L5b return qty 2 (more than remaining 1) -> CREATE REFUSED We can see Credit Note is made against ACC-SINV-2026-02792. If you want ACC-SINV-2026-02792's outstanding to be updated, uncheck the 'تحديث رائع للذات' checkbox.You can use دفع المصالحة to reconcile against ACC-SINV-2026-02792 later. || الصف # 1: لا 
+L5c return qty 1 (rest) -> SUBMITTED ACC-SINV-2026-02794: status=Return gt=-100 out=-100 ds=1
+   original after: ACC-SINV-2026-02792: status=Unpaid gt=200 out=200 ds=1
+L5d return again (over-return) qty 1 -> CREATE REFUSED We can see Credit Note is made against ACC-SINV-2026-02792. If you want ACC-SINV-2026-02792's outstanding to be updated, uncheck the 'تحديث رائع للذات' checkbox.You can use دفع المصالحة to reconcile against ACC-SINV-2026-02792 later. || الصف # 1: لا 
+L6 return with higher rate 150 -> CREATE REFUSED We can see Credit Note is made against ACC-SINV-2026-02795. If you want ACC-SINV-2026-02795's outstanding to be updated, uncheck the 'تحديث رائع للذات' checkbox.You can use دفع المصالحة to reconcile against ACC-SINV-2026-02795 later. || الصف # 1: لا 
+L6b return with lower rate 50 -> SUBMITTED ACC-SINV-2026-02796: status=Return gt=-50 out=-50 ds=1
+L7 edit submitted po_no -> ACCEPTED
+L7b edit submitted posting_date -> REFUSED  غير مسموح بتغيير تاريخ الترحيل بعد الإرسال من 2026-11-18 إلى 2026-10-01
+L7c edit submitted item qty -> REFUSED Row #1: غير مسموح بتغيير الكمية بعد الإرسال من 2.0 إلى 99.0
+L8 past due invoice -> ACC-SINV-2026-02797: status=Overdue gt=200 out=200 ds=1
+L8b posting_date past, set_posting_time=0 -> REFUSED لا يمكن أن يكون تاريخ الاستحقاق قبل Posting Date
+L9 debit note vs b2 -> ACCEPTED ACC-SINV-2026-02798
+L10 cancel ok
+L11 rate 5 below valuation 10 (draft) -> ACCEPTED ACC-SINV-2026-02800 gt=10 tax=0 disc=0 cr=1
+L11b submit below valuation -> SUBMITTED
+L12 tax 15% net total -> ACCEPTED ACC-SINV-2026-02802 gt=230 tax=30 disc=0 cr=1
+L12b tax rate -5 -> REFUSED Row #1: Tax Code 'S' must have a rate of 15.0%, not -5.0%.
+L12c tax rate 500 -> REFUSED Row #1: Tax Code 'S' must have a rate of 15.0%, not 500.0%.
+L12d tax prev row no ref -> REFUSED لا يمكن تحديد نوع التهمة باسم ' في الصف السابق المبلغ ' أو ' في السابق صف إجمالي " ل لصف الأول
+L12e tax desc 1 char -> ACCEPTED ACC-SINV-2026-02803 gt=230 tax=30 disc=0 cr=1
+L12f tax desc 600 chars -> ACCEPTED ACC-SINV-2026-02804 gt=230 tax=30 disc=0 cr=1
+L13 additional discount 10% on grand total -> ACCEPTED ACC-SINV-2026-02805 gt=180 tax=0 disc=20 cr=1
+L13b discount amount 30 on net total -> ACCEPTED ACC-SINV-2026-02806 gt=170 tax=0 disc=30 cr=1
+PTT test [[null,100,0,"Day(s) after invoice date"]]
+L14 payment terms template -> ACCEPTED ACC-SINV-2026-02807 gt=200 tax=0 disc=0 cr=1
+   sched [["2026-11-18",100,200]] due 2026-11-18
+L15 sales team 100% -> ACCEPTED ACC-SINV-2026-02808 gt=200 tax=0 disc=0 cr=1
+   team [[100,200]]
+  submit fail frappe.client.submit failed: 417 {"exception":"erpnext.controllers.accounts_controller.InvalidQtyError: الصف # 1: كمية البند <strong>STO-ITEM-2026-00074</strong> لا يمكن أن يكون صفرا","exc_type":"InvalidQtyError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\
+L16 qty 0.000001 submit -> REFUSED
+L17 currency USD, rate 0 -> ACCEPTED ACC-SINV-2026-02810 gt=200 tax=0 disc=0 cr=3.75
+L17b currency USD, rate -3 -> REFUSED Incorrect value:Grand Total (Company Currency must be &gt;= 0.0
+L17c currency USD, no rate -> ACCEPTED ACC-SINV-2026-02811 gt=200 tax=0 disc=0 cr=3.75
