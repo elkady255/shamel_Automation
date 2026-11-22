@@ -1,0 +1,13 @@
+OK   prefilled -> {"company":"","series":"ACC-SINV-.YYYY.-","type":"فاتورة المبيعات","currency":"","pl":"Standard Selling"}
+OK   company -> {"picked":"Ahmed Ebrahim CO.","n":1,"val":"Ahmed Ebrahim CO."}
+OK   customer -> {"picked":"PW Test Customer - CU-2026-00001","n":1,"val":"PW Test Customer - CU-2026-00001"}
+OK   dates -> {"posting":"22-11-2026","due":"22-11-2026"}
+OK   add item row -> 1
+OK   item -> "ميديا موقع 6 شهور - IND182210"
+OK   qty -> "1"
+OK   rate -> "10500"
+OK   row inputs -> ["checkbox:on","text:ميديا موقع 6 شهور - IND182210","number:1","number:10500","text:Stores - Stores - E"]
+OK   totals -> " | إجمالي الكمية | 1 | إجمالي المبلغ بالعملة | 10,500.00 SAR | إجمالي المبلغ بعملة الشركة الأساسية | 10,500.00 SAR | إجمالي الوزن الصافي | 10 | صافي الإجمالي بالعملة | 10,500.00 SAR | صافي الإجمالي بعملة الشركة الأساسية | 10,500.00 SAR | الضرائب والرسوم | فئة "
+SAVE @0.8s ["تم حفظ فاتورة المبيعات بنجاح"]
+SAVE @13s ["اعتماد","يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","لم تتم إضافة ضرائب بعد. اختر قالبًا أو أضف صفًا.","يتم إنشاؤه تلقائيًا"] url https://test.hr.azzrk.com/desk/shamel#/selling/sales-invoices/ACC-SINV-2026-02820
+MODAL []

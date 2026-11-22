@@ -3,3 +3,4 @@ Running 2 tests using 1 worker
 
 [1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
 [2/2] [chromium] › Shamel\so5-fill.spec.ts:12:5 › so fill whole form
+  2 passed (2.0m)

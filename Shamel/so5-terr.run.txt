@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\so5-terr.spec.ts:8:5 › terr
+  2 passed (30.2s)

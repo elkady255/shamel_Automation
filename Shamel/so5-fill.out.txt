@@ -1,0 +1,59 @@
+OK   customer -> {"picked":"PW Test Customer - CU-2026-00001","n":1,"val":"PW Test Customer - CU-2026-00001"}
+OK   series (default) -> "SAL-ORD-.YYYY.-"
+OK   date -> "18-11-2026"
+OK   delivery date -> "28-11-2026"
+OK   skip DN toggle -> true
+OK   cost center -> {"picked":"101 - Main X - E","n":1,"val":"101 - Main X - E"}
+OK   project -> {"picked":"ss - PROJ-0001","n":1,"val":"ss - PROJ-0001"}
+OK   currency -> {"picked":"EGP","n":6,"val":"EGP"}
+OK   exchange rate -> "1"
+OK   price list -> {"picked":"Standard Selling","n":5,"val":"Standard Selling"}
+OK   ignore pricing rule -> true
+OK   source warehouse -> {"picked":"Finished Goods - Finished Goods - E","n":7,"val":"Finished Goods - Finished Goods - E"}
+OK   reserve stock -> false
+OK   barcode field -> "0000000000"
+OK   add item row -> 1
+OK   item code -> "ميديا موقع 6 شهور - IND182210"
+OK   qty -> "3"
+OK   rate -> "10500"
+OK   row inputs -> ["checkbox:on","text:ميديا موقع 6 شهور - IND182210","hidden:","text:","hidden:","number:3","number:10500"]
+OK   row edit popup open -> "تعديل الصف | الصنف | الصنف * | مجموعة الصنف | Services | اسم الصنف | ميديا موقع 6 شهور | العلامة التجارية | — | صورة | — | تاريخ التسليم * | ضمان التسليم بالأرقام التسلسلية المنتجة | ضمان التسليم بالأرقام التسلسلية المنتجة | حجز المخزون | حجز المخزون | الوصف | الكمية والسعر | الكمية * | الكمية المتاحة | 2 | كمية العجز | 1 | وحدة القياس * | وحدة المخزون | Subscription | معامل تحويل الوحدة | 1 | الكمية بوحدة المخزون | 3 | الكمية المحجوزة (بوحدة المخزون) | 0 | التسعير | سعر قائمة الأسعار | 0 | سعر قائمة الأسعار بعملة الشركة | 0 | نوع الهامش | نسبة أو قيمة الهامش | السعر بعد الهامش | 0 | قيمة الخصم الموزّعة | 0 | السعر بعد الهامش بعملة الشركة | 0 | السعر | 10,500 | المبلغ | 31,500 | قالب ضريبة الصنف | — | السعر بعملة الشركة | 10,500 | المبلغ بعملة الشركة | 31,500 | قواعد التسعير | — | سعر وحدة المخزون | 10,500 | صنف مجاني | لا | صافي السعر | 10,500 | صافي المبلغ | 31,500 | صافي السعر بعملة الشركة | 10,500 | صافي المبلغ بعملة الشركة | 31,500 | المبلغ المفوتر | 0 | سعر التقييم | 0 | إجمالي الربح | 31,500 | المستودع والمورد | المورد يسلّم للعميل | المورد يسلّم للعميل | مستودع المصدر | وزن الوحدة | 10 | وحدة الوزن | Acre | الوزن الإجمالي | 30 | المراجع | مقابل أمر شامل | مقابل أمر شامل | أمر شامل | سعر الأمر الشامل | 0 | عرض السعر | — | صنف عرض السعر | — | مستويات المخزون | الكمية (المستودع) | 0 | الكمية (الشركة) | 0 | الكمية المتوقعة | 0 | الكمية المطلوبة | 0 | الكمية المخططة للإنتاج | 0 | الكمية المطلوب توفيرها | 0 | كمية أمر التشغيل | 0 | الكمية المسلّمة | 0 | الكمية المرتجعة | 0 "
+OK   row edit popup controls -> ["0~text~ابحث واختر~IND182210~","1~text~اختر التاريخ~~","2~checkbox~~on~ضمان التسليم بالأرقام التسلسلي","3~checkbox~~on~حجز المخزون","4~textarea~~تسويق بالحملات الإعل~الصنف *","5~number~~3~الكمية *","6~text~ابحث واختر~Subscription~","7~text~Type or select~~","8~number~~0~سعر قائمة الأسعار","9~checkbox~~on~المورد يسلّم للعميل","10~text~ابحث واختر~Finished Goods - Fin~","11~checkbox~~on~مقابل أمر شامل","12~text~ابحث واختر~~","13~text~ابحث واختر~101 - Main X - E~","14~text~ابحث واختر~~","15~checkbox~~on~فاصل صفحة"]
+OK   popup description -> "وصف تفصيلي للصنف - اختبار"
+OK   popup margin type -> {"o":["لا يوجد","نسبة مئوية","المبلغ"],"v":"لا يوجد"}
+OK   popup page break toggle -> true
+OK   popup supplier delivers toggle -> true
+OK   popup project -> {"n":1,"v":"ss - PROJ-0001"}
+OK   popup state -> ["0:text:IND182210","1:text:","2:checkbox:false","3:checkbox:false","4:textarea:وصف تفصيلي للصنف - اختبار","5:number:3","6:text:Subscription","7:text:لا يوجد","8:number:0","9:checkbox:true","10:text:","11:checkbox:false","12:text:","13:text:101 - Main X - E","14:text:ss - PROJ-0001","15:checkbox:true"]
+  popup buttons ["إلغاء","حفظ"]
+OK   row edit popup close
+OK   shipping rule -> {"picked":"s","n":2,"val":"s"}
+OK   tax template -> {"picked":"a - E","n":18,"val":"a - E"}
+OK   tax rows after template -> 1
+OK   apply discount on -> {"picked":"الإجمالي الكلي","n":2,"val":"الإجمالي الكلي"}
+OK   discount % -> "5"
+OK   discount amount -> ""
+OK   totals text -> " | إجمالي الكمية | 3 | الإجمالي (EGP) | 31,500.00 EGP | الإجمالي بعملة الشركة | 31,500.00 SAR | إجمالي الوزن الصافي | 30 | صافي الإجمالي (EGP) | 31,500.00 EGP | صافي الإجمالي بعملة الشركة الأساسية | 31,500.00 SAR | الضرائب والرسوم | فئة الضريبة | يتم إنشاؤه تلقائيًا | قاعدة الشحن | قالب الضرائب والرسوم | إجمالي الضرائب والرسوم (EGP) | 4,733.00 EGP | إجمالي الضرائب والرسوم بعملة الشركة الأساسية | 4,733.00 SAR | سجل الضرائب والرسوم | إضافة ضريبة أو رسم | \tالنوع\tالحساب\tنسبة الضريبة\tصافي المبلغ\tالمبلغ\tالإجمالي\t | \t | \t | \t\t | 31,500.00 EGP | \t | 4,725.00 EGP | \t | 36,225.00 EGP | \t | الإجماليات | العملة المحددة | الإجمالي الكلي (العملة) | 36,233.00 EGP | تسوية التقريب (العملة) | 0.00 EGP | الإجم"
+OK   billing address -> {"picked":"PW AD P7 176481 - PW AD P7 176481-الفوترة","n":10,"val":"PW AD P7 176481 - PW AD P7 176481-الفوترة"}
+FAIL billing contact :: no options
+OK   shipping address -> {"picked":"PW AD P7 176481 - PW AD P7 176481-الفوترة","n":10,"val":"PW AD P7 176481 - PW AD P7 176481-الفوترة"}
+OK   company address -> {"picked":"54 - 54-Billing","n":1,"val":"54 - 54-Billing"}
+OK   payment terms template -> {"picked":"test","n":1,"val":"test"}
+OK   payment rows (from template) -> ["checkbox::on ; text:ابحث واختر: ; hidden:اختر التاريخ:2026-11-18 ; text:اختر التاريخ:18-11-2026 ; hidden::2026-11-18 ; number::100 ; number::34413.75 ; text::"]
+OK   payment due dates -> {"n":1,"filled":[]}
+OK   payment rows after -> ["on ;  ; 2026-11-18 ; 18-11-2026 ; 2026-11-18 ; 100 ; 34413.75 ; "]
+OK   terms template -> {"picked":"dsfsdfsdf","n":6,"val":"dsfsdfsdf"}
+OK   terms text -> "شروط اختبار: الدفع خلال 30 يوم"
+  territory html after click: <label  class="cd-label">المنطقة</label><div   class="msc"><div   class="custom-select-input variant-secondary"><div  class="select-head"><span  class="selected-value">ابحث واختر</span><div  class="icon">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_9283_18287)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.7044 15.7044C12.5169 15.8919 12.2626 15.9972 11.9974 15.9972C11.7322 15.9972 11.4779 15.8919 11.2904 15.7044L5.63341 10.0474C5.5379 9.95517 5.46172 9.84482 5.40931 9.72282C5.3569 9.60081 5.32932 9.46959 5.32816 9.33681C5.32701 9.20404 5.35231 9.07236 5.40259 8.94946C5.45287 8.82656 5.52713 8.71491 5.62102 8.62102C5.71491 8.52713 5.82656 8.45287 5.94946 8.40259C6.07236 8.35231 6.20404 8.32701 6.33681 8.32816C6.46959 8.32932 6.60081 8.3569 6.72282 8.40931C6.84482 8.46172 6.95517 8.5379 7.04741 8.63341L11
+FAIL territory :: no options after clicking the field
+OK   customer PO -> "PO-TEST-001"
+OK   customer PO date -> "10-11-2026"
+OK   letter head -> {"picked":"Basma","n":19,"val":"Basma"}
+OK   print without amount -> true
+OK   group same items -> true
+SAVE @0.8s ["يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا"]
+SAVE @7s ["يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","يتم إنشاؤه تلقائيًا","تعذّر الحفظ"] url https://test.hr.azzrk.com/desk/shamel#/selling/sales-orders/new
+MODAL ["تعذّر الحفظ خطأ: قيمة مفقودة ل أمر بيع: Name In Contract خطأ: قيمة مفقودة ل أمر بيع: تاريخ نهاية العقد خطأ: قيمة مفقودة ل أمر بيع: الموظف خطأ: قيمة مفقودة ل أمر بيع: Brief تعذّر حفظ أمر البيع"]
