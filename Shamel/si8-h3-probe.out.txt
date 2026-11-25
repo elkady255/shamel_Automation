@@ -1,0 +1,1 @@
+<td data-v-841fd8cc="" class=""><span data-v-841fd8cc="" class="status-chip chip-gray status-chip--fixed">مسودة</span></td>

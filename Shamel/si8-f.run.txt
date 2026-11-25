@@ -1,0 +1,161 @@
+
+Running 6 tests using 1 worker
+
+[1/6] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/6] [chromium] › Shamel\si8-f-lifecycle.spec.ts:28:5 › F01 save a full invoice and reopen it: every value is kept
+  1) [chromium] › Shamel\si8-f-lifecycle.spec.ts:28:5 › F01 save a full invoice and reopen it: every value is kept 
+
+    Error: F01-6 all entered values are kept after save and reload ["ا:العميل: \"PW Test Customer - CU-2026-00001\" -> \"CU-2026-00001\"","ا:وقت الترحيل: \"11:28:26\" -> \"11:29:38\"","ا:المشروع: \"ss - PROJ-0001\" -> \"PROJ-0001\"","ا:اسم عنوان العميل: \"PW AD P2 176481 - PW AD P2 176481-الفوترة\" -> \"PW AD P2 176481-الفوترة\"","ا:تفاصيل الاتصال: \"PW AD P2 176481 - PW AD P2 176481-الفوترة\" -> \"PW AD P2 176481-الفوترة\"","ا:عنوان الشحن: \"PW AD P2 176481 - PW AD P2 176481-الفوترة\" -> \"PW AD P2 176481-الفوترة\"","ا:اسم عنوان الشركة: \"54 - 54-Billing\" -> \"54-Billing\"","ا:تفاصيل الاتصال#2: \"54 - 54-Billing\" -> \"54-Billing\""]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-f-lifecycle.spec.ts:42:7
+
+    Error: F01-9 Credit Status and Refund Status show Not Applicable on a draft غير منطبق / غير منطبق
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-f-lifecycle.spec.ts:47:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-f-lifecycle-F01-save-a-d4dae-open-it-every-value-is-kept-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-f-lifecycle-F01-save-a-d4dae-open-it-every-value-is-kept-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-f-lifecycle-F01-save-a-d4dae-open-it-every-value-is-kept-chromium\error-context.md
+
+
+[3/6] [chromium] › Shamel\si8-f-lifecycle.spec.ts:55:5 › F02 submit, read-only after submit, statuses
+[4/6] [chromium] › Shamel\si8-f-lifecycle.spec.ts:94:5 › F03 Create menu of a submitted invoice
+  2) [chromium] › Shamel\si8-f-lifecycle.spec.ts:94:5 › F03 Create menu of a submitted invoice ─────
+
+    Error: F03-2 Create has Return / Credit Note ["عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-f-lifecycle.spec.ts:100:7
+
+    Error: F03-3 Create has Delivery Note ["عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-f-lifecycle.spec.ts:101:7
+
+    Error: F03-4 Create has Payment ["عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-f-lifecycle.spec.ts:102:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-f-lifecycle-F03-Create-menu-of-a-submitted-invoice-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-f-lifecycle-F03-Create-menu-of-a-submitted-invoice-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-f-lifecycle-F03-Create-menu-of-a-submitted-invoice-chromium\error-context.md
+
+
+[5/6] [chromium] › Shamel\si8-f-lifecycle.spec.ts:108:5 › F04 cancel, amend and delete rules
+[6/6] [chromium] › Shamel\si8-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted)
+  3) [chromium] › Shamel\si8-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+
+    Error: F05-3 a confirmation message asks whether to delete 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-f-lifecycle.spec.ts:140:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-f-lifecycle-F05-delete-cdbe8--cancelled-nothing-deleted--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-f-lifecycle-F05-delete-cdbe8--cancelled-nothing-deleted--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-f-lifecycle-F05-delete-cdbe8--cancelled-nothing-deleted--chromium\error-context.md
+
+
+  3 failed
+    [chromium] › Shamel\si8-f-lifecycle.spec.ts:28:5 › F01 save a full invoice and reopen it: every value is kept 
+    [chromium] › Shamel\si8-f-lifecycle.spec.ts:94:5 › F03 Create menu of a submitted invoice ──────
+    [chromium] › Shamel\si8-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+  3 passed (5.9m)

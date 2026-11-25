@@ -1,0 +1,79 @@
+{"id":"A01","text":"company at open","ok":null,"detail":""}
+{"id":"A01-1","text":"series default is ACC-SINV-.YYYY.-","ok":true,"detail":"ACC-SINV-.YYYY.-","known":""}
+{"id":"A01-2","text":"posting date defaults to the current date","ok":true,"detail":"23-11-2026","known":""}
+{"id":"A01-3","text":"due date has a default","ok":true,"detail":"23-11-2026","known":""}
+{"id":"A01-4","text":"posting time has a default","ok":true,"detail":"11:54:41","known":""}
+{"id":"A01-5","text":"price list defaults to Standard Selling","ok":true,"detail":"Standard Selling","known":""}
+{"id":"A01-6","text":"currency at open","ok":null,"detail":""}
+{"id":"A01-7","text":"switch defaults","ok":null,"detail":"{\"تعديل تاريخ ووقت الترحيل\":\"off\",\"فاتورة موحدة\":\"off disabled\",\"مرتجع (إشعار دائن)\":\"off disabled\",\"احتساب ضريبة الخصم والتحصيل\":\"off\",\"قيد تعديل السعر (إشعار مدين)\":\"off\",\"تجاهل قاعدة التسعير\":\"off\",\"الحساب نقدي أو غير تجاري\":\"off\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\":\"off\"}"}
+{"id":"A01-8","text":"Is Consolidated and Is Return are read-only","ok":true,"detail":"{\"تعديل تاريخ ووقت الترحيل\":\"off\",\"فاتورة موحدة\":\"off disabled\",\"مرتجع (إشعار دائن)\":\"off disabled\",\"احتساب ضريبة الخصم والتحصيل\":\"off\",\"قيد تعديل السعر (إشعار مدين)\":\"off\",\"تجاهل قاعدة التسعير\":\"off\",\"الحساب نقدي أو غير تجاري\":\"off\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\":\"off\"}","known":""}
+{"id":"A01-9","text":"Include payment (POS), POS Profile, Is Created Using POS and POS Closing Entry are not shown on a normal new invoice","ok":true,"detail":"","known":""}
+{"id":"A01-10","text":"all switches on Details tab","ok":null,"detail":"[\"تعديل تاريخ ووقت الترحيل\",\"فاتورة موحدة\",\"مرتجع (إشعار دائن)\",\"احتساب ضريبة الخصم والتحصيل\",\"قيد تعديل السعر (إشعار مدين)\",\"فاتورة صادرة عن طرف ثالث\",\"توريد اسمي\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"تجاهل قاعدة التسعير\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\",\"الحساب نقدي أو غير تجاري\",\"تخصيص الدفعة المقدمة تلقائيًا (الوارد أولاً يُصرف أولاً)\",\"تضمين الدفعات المخصصة مقابل أمر البيع المرجعي فقط\",\"استرداد نقاط الولاء\",\"عدم إنشاء نقاط ولاء\",\"شطب المبلغ المتبقي\",\"الطباعة بدون المبالغ\",\"تجميع الأصناف المتشابهة\"]"}
+{"id":"A01-11","text":"Update Outstanding for Self is shown and checked by default","ok":false,"detail":"[\"تعديل تاريخ ووقت الترحيل\",\"فاتورة موحدة\",\"مرتجع (إشعار دائن)\",\"احتساب ضريبة الخصم والتحصيل\",\"قيد تعديل السعر (إشعار مدين)\",\"فاتورة صادرة عن طرف ثالث\",\"توريد اسمي\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"تجاهل قاعدة التسعير\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\",\"الحساب نقدي أو غير تجاري\",\"تخصيص الدفعة المقدمة تلقائيًا (الوارد أولاً يُصرف أولاً)\",\"تضمين الدفعات المخصصة م","known":""}
+{"id":"A01-12","text":"Update Stock is hidden while \"Allow Update Stock In Sales Invoice\" is off","ok":true,"detail":"","known":""}
+{"id":"A01-13","text":"Source Invoice is hidden until Is Rate Adjustment Entry is checked","ok":true,"detail":"","known":""}
+{"id":"A01-14","text":"Amended From is hidden on a new invoice","ok":true,"detail":"","known":""}
+{"id":"A02-1","text":"posting date is disabled while the switch is off","ok":true,"detail":"","known":""}
+{"id":"A02-2","text":"posting time is disabled while the switch is off","ok":true,"detail":"","known":""}
+{"id":"A02-3","text":"posting date is enabled after the switch is on","ok":true,"detail":"","known":""}
+{"id":"A02-4","text":"posting time is enabled after the switch is on","ok":true,"detail":"","known":""}
+{"id":"A02-5","text":"posting date after picking day 5","ok":null,"detail":"05-11-2026"}
+{"id":"A02-6","text":"posting date is disabled again after the switch is off","ok":true,"detail":"","known":""}
+{"id":"A03-1","text":"empty save messages","ok":null,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: شركة مطلوب\",\"ERR: العميل مطلوب\",\"ERR: أضف صنفًا واحدًا على الأقل\"]"}
+{"id":"A03-2","text":"empty Save does not create a document","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new","known":""}
+{"id":"A03-3","text":"empty Save shows an error message","ok":true,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: شركة مطلوب\",\"ERR: العميل مطلوب\",\"ERR: أضف صنفًا واحدًا على الأقل\"]","known":""}
+{"id":"A04-1","text":"company only: messages","ok":null,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: العميل مطلوب\",\"ERR: أضف صنفًا واحدًا على الأقل\"]"}
+{"id":"A04-2","text":"Save without a customer is refused","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new","known":""}
+{"id":"A04-3","text":"company + customer, no items: messages","ok":null,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: أضف صنفًا واحدًا على الأقل\"]"}
+{"id":"A04-4","text":"Save without items is refused","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new","known":""}
+{"id":"A04-5","text":"item with no qty: messages","ok":null,"detail":"[\"TOAST: تم حفظ فاتورة المبيعات بنجاح\"]"}
+{"id":"A05-1","text":"company options","ok":null,"detail":"[\"Ahmed Ebrahim CO.\"]"}
+{"id":"A05-2","text":"Company Tax ID is fetched from the company","ok":true,"detail":"311660887200003","known":""}
+{"id":"A05-3","text":"customer options","ok":null,"detail":"[\"PW Test Customer - CU-2026-00001\"]"}
+{"id":"A05-4","text":"Customer Name is fetched","ok":true,"detail":"PW Test Customer","known":""}
+{"id":"A05-5","text":"customer tax id","ok":null,"detail":"يتم إنشاؤه تلقائيًا"}
+{"id":"A05-6","text":"currency after customer","ok":null,"detail":"SAR"}
+{"id":"A05-7","text":"Currency is fetched from the company default currency (SAR)","ok":true,"detail":"SAR","known":""}
+{"id":"A05-8","text":"price list currency","ok":null,"detail":"SAR"}
+{"id":"A05-9","text":"exchange rates","ok":null,"detail":"1 / 1"}
+{"id":"A05-10","text":"billing address name","ok":null,"detail":"PW AD P2 176481 - PW AD P2 176481-الفوترة"}
+{"id":"A05-11","text":"billing address text","ok":null,"detail":"Street 1، Riyadh، Saudi Arabia"}
+{"id":"A05-12","text":"billing contact","ok":null,"detail":""}
+{"id":"A05-13","text":"shipping address name","ok":null,"detail":"PW AD P2 176481 - PW AD P2 176481-الفوترة"}
+{"id":"A05-14","text":"company address name","ok":null,"detail":"54 - 54-Billing"}
+{"id":"A05-15","text":"company contact","ok":null,"detail":""}
+{"id":"A05-16","text":"loyalty program","ok":null,"detail":"Golden Program"}
+{"id":"A05-17","text":"cash/bank account","ok":null,"detail":""}
+{"id":"A05-18","text":"customer group","ok":null,"detail":"يتم إنشاؤه تلقائيًا"}
+{"id":"A05-19","text":"territory","ok":null,"detail":"المنطقة ابحث واختر"}
+{"id":"A06-1","text":"currency options","ok":null,"detail":"[\"EGP\",\"EUR\",\"JOD\",\"KWD\",\"SAR\",\"USD\"]"}
+{"id":"A06-2","text":"price list options","ok":null,"detail":"[\"Standard Selling\",\"Standard Selling KW\",\"x\",\"قائمة اسعار جديدة\",\"قائمة اسعار جديدة للتيست مع ال SRS\"]"}
+{"id":"A06-3","text":"after USD: currency, rate, plist rate","ok":null,"detail":"USD | 3.75 | 1"}
+{"id":"A06-4","text":"Exchange Rate is fetched when the currency differs from the company currency","ok":true,"detail":"3.75","known":""}
+{"id":"A06-5","text":"Exchange Rate field is read-only (rule configured)","ok":true,"detail":"","known":""}
+{"id":"A06-6","text":"back to SAR","ok":null,"detail":"1"}
+{"id":"A07-1","text":"series options","ok":null,"detail":"[\"ACC-SINV-.YYYY.-\",\"ACC-SINV-RET-.YYYY.-\"]"}
+{"id":"A07-2","text":"invoice type options","ok":null,"detail":"[\"فاتورة المبيعات\",\"فاتورة دفعة مقدمة\"]"}
+{"id":"A07-3","text":"company options","ok":null,"detail":"[\"_EGS Test Co\",\"_ZATCA Invoice Test Co\",\"Ahmed Ebrahim CO.\",\"Alarrab - العراب\",\"Ather - أثر\",\"Awayed - عوايد\",\"Azzrk - أزرق\",\"Azzrk Influencer Group\",\"Azzrk Marketing Group\",\"Basmah- بصمة\",\"Callva - كولفا\",\"Cold Azzrk - أزرق كولد\",\"Danah - دانه\",\"Darb - درب\",\"Fadaa - فضاء\",\"Fazaa - فزعة\",\"Ghanaem - غنائم\",\"Infugram - إنفوجرام\",\"Infugram JOR - انفوجرام الاردن\",\"Khatwa - خطوة\",\"Klaket - كلاكيت\",\"Knoz - كنوز\",\"Kon - كون\",\"Kon Kuwait - كون الكويت\",\"Madar Solutions\",\"Mardoud - مردود\",\"Mashourr - مشهور\",\"Mersal - مرسال\",\"Naqodk - نقودك\",\"One Million - ون مليون\",\"Phlog - فلوج\",\"Rawnaq - رونق\",\"Revenue X - ريفينيو اكس\",\"Rihal - رحال\",\"Roaya - رؤية\",\"Sadaa - صدي\",\"Sahm- سهم\",\"Sallamat - سلامات\",\"Sanad - سند\",\"shamel\",\"Shara - شارة\",\"Shark - شارك\",\"Sirrah - سيرة\",\"Sumoue - سمو\",\"Taif - طيف\",\"Tak- تاك\",\"Talaa Travel - طلعه\",\"Talaaie - طلائع\",\"Talab - طلب\",\"Tatheer gulf - تاثير الخليج\",\"TBE\",\"Theme - ثيم التطور\",\"Toollify - توليفاي\",\"Transition - ترانزيشن\",\"Trujena - تروجينا\",\"Vision - ڤيجن\",\"Warrqa - ورقة\",\"Zad - زاد\",\"Zakham - زخم\",\"Zyla - زيلا\"]"}
+{"id":"A07-4","text":"cost center options","ok":null,"detail":"[]"}
+{"id":"A07-5","text":"project options","ok":null,"detail":"[]"}
+{"id":"A07-6","text":"shipping rule options","ok":null,"detail":"[]"}
+{"id":"A07-7","text":"tax template options","ok":null,"detail":"[]"}
+{"id":"A07-8","text":"coupon options count","ok":null,"detail":"20"}
+{"id":"A07-9","text":"discount account options","ok":null,"detail":"[]"}
+{"id":"A07-10","text":"apply discount on options","ok":null,"detail":"[\"الإجمالي\",\"الإجمالي الصافي\"]"}
+{"id":"A01","text":"company at open","ok":null,"detail":""}
+{"id":"A01-1","text":"series default is ACC-SINV-.YYYY.-","ok":true,"detail":"ACC-SINV-.YYYY.-","known":""}
+{"id":"A01-2","text":"posting date defaults to the current date","ok":true,"detail":"23-11-2026","known":""}
+{"id":"A01-3","text":"due date has a default","ok":true,"detail":"23-11-2026","known":""}
+{"id":"A01-4","text":"posting time has a default","ok":true,"detail":"12:28:27","known":""}
+{"id":"A01-5","text":"price list defaults to Standard Selling","ok":true,"detail":"Standard Selling","known":""}
+{"id":"A01-6","text":"currency at open","ok":null,"detail":""}
+{"id":"A01-7","text":"switch defaults","ok":null,"detail":"{\"تعديل تاريخ ووقت الترحيل\":\"off\",\"فاتورة موحدة\":\"off disabled\",\"مرتجع (إشعار دائن)\":\"off disabled\",\"احتساب ضريبة الخصم والتحصيل\":\"off\",\"قيد تعديل السعر (إشعار مدين)\":\"off\",\"تجاهل قاعدة التسعير\":\"off\",\"الحساب نقدي أو غير تجاري\":\"off\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\":\"off\"}"}
+{"id":"A01-8","text":"Is Consolidated and Is Return are read-only","ok":true,"detail":"{\"تعديل تاريخ ووقت الترحيل\":\"off\",\"فاتورة موحدة\":\"off disabled\",\"مرتجع (إشعار دائن)\":\"off disabled\",\"احتساب ضريبة الخصم والتحصيل\":\"off\",\"قيد تعديل السعر (إشعار مدين)\":\"off\",\"تجاهل قاعدة التسعير\":\"off\",\"الحساب نقدي أو غير تجاري\":\"off\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\":\"off\"}","known":""}
+{"id":"A01-9","text":"Include payment (POS), POS Profile, Is Created Using POS and POS Closing Entry are not shown on a normal new invoice","ok":true,"detail":"","known":""}
+{"id":"A01-10","text":"all switches on Details tab","ok":null,"detail":"[\"تعديل تاريخ ووقت الترحيل\",\"فاتورة موحدة\",\"مرتجع (إشعار دائن)\",\"احتساب ضريبة الخصم والتحصيل\",\"قيد تعديل السعر (إشعار مدين)\",\"فاتورة صادرة عن طرف ثالث\",\"توريد اسمي\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"تجاهل قاعدة التسعير\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\",\"الحساب نقدي أو غير تجاري\",\"تخصيص الدفعة المقدمة تلقائيًا (الوارد أولاً يُصرف أولاً)\",\"تضمين الدفعات المخصصة مقابل أمر البيع المرجعي فقط\",\"استرداد نقاط الولاء\",\"عدم إنشاء نقاط ولاء\",\"شطب المبلغ المتبقي\",\"الطباعة بدون المبالغ\",\"تجميع الأصناف المتشابهة\"]"}
+{"id":"A01-11","text":"Update Outstanding for Self on a normal invoice (shown only on returns, see I01-11)","ok":null,"detail":"false"}
+{"id":"A01-12","text":"Update Stock is hidden while \"Allow Update Stock In Sales Invoice\" is off","ok":true,"detail":"","known":""}
+{"id":"A01-13","text":"Source Invoice is hidden until Is Rate Adjustment Entry is checked","ok":true,"detail":"","known":""}
+{"id":"A01-14","text":"Amended From is hidden on a new invoice","ok":true,"detail":"","known":""}

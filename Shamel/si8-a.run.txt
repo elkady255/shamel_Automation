@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\si8-a-header.spec.ts:56:5 › A04 mandatory fields one by one
+  2 passed (52.6s)

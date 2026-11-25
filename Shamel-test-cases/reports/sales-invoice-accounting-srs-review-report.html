@@ -1,0 +1,725 @@
+<title>Sales Invoice Accounting SRS Review</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of bug rows that expand in place; summary and coverage first. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef1f5; --fg: #17202b; --muted: #5b6776; --line: #d8dee6;
+  --accent: #0b6e69; --accent-fg: #ffffff;
+  --crit: #b4232c; --crit-bg: #fbe9ea; --high: #b5560a; --high-bg: #fdf0e2; --med: #8a6d00; --med-bg: #fbf4d9; --low: #3d6a8f; --low-bg: #e6eef6;
+  --ok: #1f7a46; --ok-bg: #e4f4ea; --code-bg: #0f1722; --code-fg: #d7e2f0;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1c2632; --fg: #e5ebf2; --muted: #98a5b5; --line: #2a3644;
+  --accent: #4cc2ba; --accent-fg: #07201e;
+  --crit: #ff8b92; --crit-bg: #3a1a1e; --high: #ffb066; --high-bg: #3a2714; --med: #e9cd5b; --med-bg: #342d12; --low: #86b6e0; --low-bg: #172a3b;
+  --ok: #6fd69b; --ok-bg: #143324; --code-bg: #0a1017; --code-fg: #d7e2f0; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 0 56px; }
+.wrap { max-width: 1040px; margin-inline: auto; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 600; }
+.mono { font-family: var(--mono); }
+.eyebrow { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+header.top { padding-block: 32px 20px; display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.86rem; }
+.meta b { color: var(--fg); font-weight: 500; }
+.lede { max-width: 68ch; margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-block: 8px 28px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; }
+.stat .n { font: 600 1.7rem/1.1 var(--sans); font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 0.82rem; }
+.stat.crit .n { color: var(--crit); } .stat.high .n { color: var(--high); } .stat.med .n { color: var(--med); } .stat.low .n { color: var(--low); } .stat.ok .n { color: var(--ok); }
+section { margin-block: 0 36px; display: grid; gap: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: start; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num, th.num { text-align: end; font-variant-numeric: tabular-nums; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; }
+select, input, textarea, button { font: inherit; color: var(--fg); }
+select, input[type=search], input[type=text], textarea { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; min-width: 0; }
+textarea { width: 100%; min-height: 78px; resize: vertical; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); padding: 7px 12px; }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font-weight: 500; }
+button:disabled { opacity: 0.55; cursor: default; }
+.count { color: var(--muted); font-size: 0.85rem; margin-inline-start: auto; }
+.bugs { display: grid; gap: 10px; margin-top: 12px; }
+details.bug { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; border-inline-start-width: 4px; }
+details.bug[data-sev="Critical"] { border-inline-start-color: var(--crit); } details.bug[data-sev="High"] { border-inline-start-color: var(--high); }
+details.bug[data-sev="Medium"] { border-inline-start-color: var(--med); } details.bug[data-sev="Low"] { border-inline-start-color: var(--low); }
+summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary .id { font: 500 0.85rem var(--mono); }
+summary .t { font-weight: 500; min-width: 0; }
+summary .chips { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.72rem/1 var(--mono); padding: 4px 7px; border-radius: 4px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.chip.Critical { background: var(--crit-bg); color: var(--crit); } .chip.High { background: var(--high-bg); color: var(--high); }
+.chip.Medium { background: var(--med-bg); color: var(--med); } .chip.Low { background: var(--low-bg); color: var(--low); }
+.chip.st { background: var(--surface-2); color: var(--fg); }
+.chip.st.Fixed, .chip.st.RetestPassed { background: var(--ok-bg); color: var(--ok); }
+.chip.st.Reopened { background: var(--crit-bg); color: var(--crit); }
+.body { padding: 4px 16px 16px; display: grid; gap: 16px; border-top: 1px solid var(--line); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.field > .eyebrow { display: block; margin-bottom: 5px; }
+.field p, .field ol, .field ul { margin: 0; } .field ol, .field ul { padding-inline-start: 20px; }
+.field li { margin-block: 2px; }
+pre { margin: 0; background: var(--code-bg); color: var(--code-fg); border-radius: 6px; padding: 11px 13px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+figure { margin: 0; display: grid; gap: 4px; min-width: 0; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; cursor: zoom-in; display: block; }
+figcaption { color: var(--muted); font-size: 0.8rem; }
+.fb { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; display: grid; gap: 10px; }
+.fb .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.fb label { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); }
+.fb .note { font-size: 0.8rem; color: var(--muted); }
+.fb .last { font-size: 0.8rem; color: var(--muted); }
+.pass { color: var(--ok); font-weight: 500; } .fail { color: var(--crit); font-weight: 500; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: grid; place-items: center; z-index: 20; padding: 16px; cursor: zoom-out; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+.small { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 560px) { summary { grid-template-columns: 1fr; } summary .chips { grid-column: 1; } h1 { font-size: 1.4rem; } }
+@media (prefers-reduced-motion: no-preference) { details.bug { transition: border-color .15s; } }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lang { font-weight: 500; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+pre.ltr { text-align: left; }
+.sp { display: block; margin-top: 10px; }
+</style>
+
+<div class="wrap" id="wrap">
+  <header class="top">
+    <div class="topline"><span class="eyebrow" id="eyebrow"></span><button type="button" id="langBtn" class="lang" aria-label="Language"></button></div>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="meta" id="meta"></div>
+  </header>
+  <div class="stats" id="stats"></div>
+  <section aria-labelledby="cov"><h2 id="cov"></h2><div id="covBody" style="display:grid;gap:12px"></div></section>
+  <section aria-labelledby="bl">
+    <h2 id="bl"></h2>
+    <div class="bar" role="search">
+      <input type="search" id="q" aria-label="Search">
+      <select id="fSev" aria-label="Severity"></select>
+      <select id="fLayer" aria-label="Layer"></select>
+      <select id="fStatus" aria-label="Status"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="bugs" id="bugs"></div>
+  </section>
+  <section aria-labelledby="rt"><h2 id="rt"></h2><div class="panel field" id="rtBody"></div></section>
+  <section aria-labelledby="ob"><h2 id="ob"></h2><div class="panel field"><ul id="obs"></ul></div></section>
+  <section aria-labelledby="rd"><h2 id="rd"></h2><div class="panel field small" id="rdBody"></div></section>
+</div>
+
+<script>
+const SHOTS = {};
+const STATUSES = ['New','In Progress','Fixed','Retest Passed','Reopened','Not a Bug','Cannot Reproduce','Deferred'];
+const BUGS = [
+ {
+  "id": "SI-33",
+  "sev": "High",
+  "pri": "P1",
+  "layer": "Frontend / Backend",
+  "title": "The Additional Discount (percentage or amount) fails with a server error, the totals never change, and two mandatory fields that are not in the SRS appear",
+  "area": "Add Sales Invoice › Details › Additional Discount",
+  "tc": [],
+  "srs": "Additional Discount (Add Sales Invoice, page 39 to 40): Apply Additional Discount On (Grand Total / Net Total), Additional Discount Percentage, Additional Discount Amount (Currency) are optional; the total is recalculated; the invoice is saved with Save.",
+  "steps": [
+   "Open Accounting › Sales Invoices › Add Sales Invoice.",
+   "Choose the company, the customer \"PW Test Customer\" and add item IND182210 with rate 1000.",
+   "In Additional Discount choose \"الإجمالي الصافي\" (Net Total) or \"الإجمالي\" (Grand Total).",
+   "Type 10 in \"نسبة الخصم الإضافي\" and press Tab (or type 250 in \"مبلغ الخصم الإضافي (العملة)\").",
+   "Press Save."
+  ],
+  "expected": "The discount amount is calculated, the Grand Total drops (1,000 to 900), and Save creates the invoice.",
+  "actual": "A popup \"خطأ في الخادم: TypeError: can't multiply sequence by non-int of type 'float' (Possible source of error: shamel (app))\" opens at once when the percentage or the amount is typed, before Save. The discount amount stays empty and the Grand Total does not change. Two extra mandatory fields appear, \"حساب الخصم *\" (Discount Account) and \"سبب الخصم *\" (Discount Reason); they are not in the SRS list of the Additional Discount block, and Save then stops with \"تعذّر الحفظ: سبب الخصم مطلوب\". The same happens for the percentage and for the amount, and for both Apply On values. An invoice with an additional discount cannot be created from the screen. (Checked on 2026-11-23, spec srs-si-acc-c-discount.spec.ts.)",
+  "code": "Type 10 in Additional Discount Percentage -> MODAL \"خطأ في الخادم TypeError: can't multiply sequence by non-int of type 'float' Possible source of error: shamel (app)\"\nGrand Total 1,000.00 (unchanged); amount field empty\nSave -> \"تعذّر الحفظ | يرجى ملء الحقول الإلزامية | سبب الخصم مطلوب\"",
+  "shots": [],
+  "fix": "Convert the typed percentage / amount to a number before the calculation on the server, and show the discount amount and the new total. Remove the Discount Account and Discount Reason requirement from the header (or add them to the SRS)."
+ },
+ {
+  "id": "SI-34",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "Delete is offered in the header of a Submitted invoice",
+  "area": "Sales Invoice Details › header",
+  "tc": [],
+  "srs": "Delete (Sales Invoice Details, page 4 and 53): it appears only when the Sales Invoice status = Draft / Cancelled.",
+  "steps": [
+   "Open a submitted invoice (ACC-SINV-2026-02830, status \"غير مدفوعة\").",
+   "Read the icons at the top of the page."
+  ],
+  "expected": "No Delete icon on a Submitted invoice (only Cancel).",
+  "actual": "The header shows the Delete icon (title \"حذف\") next to Assign, Tags, Attachments, Print and Share. It opens the confirmation \"هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء\" (the Yes button was not pressed). The list action bar also still offers Delete for a Submitted invoice (the old SI-03 is still open).",
+  "code": "ACC-SINV-2026-02830 (Unpaid): header buttons = [رجوع, تعيين إلى, الوسوم, المرفقات, طباعة, مشاركة, السجلات, حذف, ...]\nList: select a Submitted invoice -> bar = [..., إلغاء, طباعة, حذف, إغلاق]",
+  "shots": [],
+  "fix": "Show Delete in the header and in the list bar only for Draft and Cancelled invoices."
+ },
+ {
+  "id": "SI-35",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Frontend",
+  "title": "The Amount of an item row (and in Edit Row) does not follow a change of the Rate",
+  "area": "Add Sales Invoice › Items",
+  "tc": [],
+  "srs": "Amount (Items table): label that displays the total amount of the item in the document currency (Qty x Rate).",
+  "steps": [
+   "Add item IND182210 with quantity 4 (the rate comes from the price list, 10,200).",
+   "Change Rate to 12000 and press Tab.",
+   "Read the Amount of the row, the \"إجمالي المبلغ بالعملة\" summary, and Edit Row."
+  ],
+  "expected": "Amount = 4 x 12,000 = 48,000 in the row and in Edit Row.",
+  "actual": "The Rate shows 12000 and the summary total shows 48,000.00, but the row Amount stays 40,800.00 and Edit Row shows Amount 40,800. After Save and reload the row shows 48,000.00. The Amount refreshes only when the Quantity is changed.",
+  "code": "Rate 12000, Qty 4: row = \"-337 341 40,800.00 SAR\"; summary = 48,000.00 SAR; saved row = 48,000.00 SAR",
+  "shots": [],
+  "fix": "Recalculate the row Amount (and Net Amount) when the Rate changes."
+ },
+ {
+  "id": "SI-36",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Edit Row: a description of 2 characters shows the message \"Item code is required\"",
+  "area": "Add Sales Invoice › Items › Edit Row",
+  "tc": [],
+  "srs": "Description (Edit Row, page 19): minimum length 3 characters; an error message appears if the entered text is less than the minimum length.",
+  "steps": [
+   "Add an item and press Edit Row.",
+   "Type \"ab\" in Description and press Tab."
+  ],
+  "expected": "A message that the text is shorter than 3 characters.",
+  "actual": "A popup \"رسالة: كود الصنف مطلوب\" (Item code is required) opens although the item code is filled (IND182210). The maximum of 500 characters works.",
+  "code": "Edit Row > Description \"ab\" > Tab -> popup \"رسالة | كود الصنف مطلوب\"",
+  "shots": [],
+  "fix": "Show the minimum-length message for the description field."
+ },
+ {
+  "id": "SI-37",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Edit Row shows fields the SRS marks Hidden and lacks the Asset and Serial and Batch Bundle fields",
+  "area": "Add Sales Invoice › Items › Edit Row",
+  "tc": [],
+  "srs": "Edit Row (pages 18 to 31): Barcode, Has Item Scanned and Grant Commission are marked in red (hidden); Asset, Finance Book (when Asset is set) and Serial and Batch Bundle are listed.",
+  "steps": [
+   "Add item IND182210 and press Edit Row.",
+   "Read the labels of the popup."
+  ],
+  "expected": "No Barcode and no Grant Commission; an Asset field and a Serial and Batch Bundle field.",
+  "actual": "The popup shows \"الباركود 234324324325\" and \"منح العمولة: نعم\". It has no Asset field, no Finance Book and no Serial and Batch Bundle field (only \"Use Serial No / Batch Fields\", Serial No and Batch No). It also shows e-invoicing fields that are not in the SRS (tax code, tax %, exemption reason, discount reason, charge amount). This is the remaining part of the old SI-31.",
+  "code": "Edit Row labels include: الباركود, منح العمولة, رمز الضريبة, نسبة الضريبة (%), سبب الإعفاء, سبب الخصم, مبلغ الرسوم; no: الأصل, دفتر التمويل, حزمة الرقم التسلسلي والدفعة",
+  "shots": [],
+  "fix": "Hide Barcode and Grant Commission, add Asset / Finance Book and Serial and Batch Bundle, and describe the e-invoicing fields in the SRS."
+ },
+ {
+  "id": "SI-38",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The Create menu offers \"Maintenance Schedule\", which the SRS marks Hidden",
+  "area": "Sales Invoice Details › Create",
+  "tc": [],
+  "srs": "Create (page 90 to 92): Return / Credit Note, Delivery Note, Payment; \"Maintenance Schedule\" is marked in red (hidden).",
+  "steps": [
+   "Open a submitted invoice and press Create."
+  ],
+  "expected": "Return / Credit Note, Delivery Note, Payment only.",
+  "actual": "The menu lists \"مرتجع / إشعار دائن\", \"إذن التسليم\", \"دفعة\" and \"جدول الصيانة\".",
+  "code": "Create menu: مرتجع / إشعار دائن | إذن التسليم | دفعة | جدول الصيانة",
+  "shots": [],
+  "fix": "Hide Maintenance Schedule (or confirm with the SRS owner that it is in scope)."
+ },
+ {
+  "id": "SI-39",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend / Translation",
+  "title": "English text and a wrong translation in messages: Create › Return, Cancel Document and In Words",
+  "area": "Details › Create, Cancel, Totals",
+  "tc": [],
+  "srs": "The screens are used in Arabic.",
+  "steps": [
+   "Press Create › Return on a submitted invoice.",
+   "Cancel a submitted invoice.",
+   "Read \"الإجمالي كتابةً\" of an invoice."
+  ],
+  "expected": "Arabic messages with correct wording.",
+  "actual": "(1) Create › Return shows an English popup: \"We can see Credit Note is made against ACC-SINV-2026-02830. If you want ACC-SINV-2026-02830's outstanding to be updated, uncheck the 'تحديث رائع للذات' checkbox. You can use دفع المصالحة to reconcile ...\" (the checkbox is named \"تحديث المستحقات على الفاتورة نفسها\" on the screen). (2) Cancel Document shows the toast \"Sales Invoice cancelled successfully\" in English. (3) In Words is \"ريال سعودي تسعمائة و تسعة و تسعون و تسعة و تسعون Halala فقط.\" (Halala in English).",
+  "code": "Popup: \"... uncheck the 'تحديث رائع للذات' checkbox ... You can use دفع المصالحة ...\"\nToast: Sales Invoice cancelled successfully\nIn Words: ... Halala فقط.",
+  "shots": [],
+  "fix": "Translate these messages and use the same label names as the screen."
+ },
+ {
+  "id": "SI-40",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "The shortage warning is not shown when the quantity is entered; it appears only at Submit",
+  "area": "Add Sales Invoice › Items › Qty",
+  "tc": [],
+  "srs": "Shortage Qty (page 14): when Shortage Qty > 0 the system behaves as Selling Settings says (Ignore, Warn or Block); a warning message is shown when the quantity is entered (the SRS wording \"less than the available quantity\" is reversed).",
+  "steps": [
+   "Selling Settings: \"Action if Sales Invoice item shortage\" = Warn.",
+   "Add item IND182210 (available -337) and enter quantity 999999.",
+   "Press Save, then Submit."
+  ],
+  "expected": "A warning about the shortage while the quantity is entered (and the user may continue).",
+  "actual": "The Shortage Qty cell shows 1,000,336 but no message is shown when typing or on Save (the invoice is saved with a grand total of 10.5 billion). The warning \"مخزون غير كافٍ للصنف IND182210 ... هل ترغب في الاعتماد على أي حال؟\" appears only when Submit is pressed.",
+  "code": "Qty 999999 -> row \"-337 1,000,336 10,499,989,500.00 SAR\", no message; Save -> ACC-SINV-2026-02823 draft; Submit -> dialog \"مخزون غير كافٍ ... هل ترغب في الاعتماد على أي حال؟\"",
+  "shots": [],
+  "fix": "Show the shortage warning in the row when the quantity is entered, as the SRS says, and keep the Submit confirmation."
+ },
+ {
+  "id": "SI-41",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "Customer Group and Territory are not filled from the customer",
+  "area": "Add Sales Invoice › More Information › Additional Info",
+  "tc": [],
+  "srs": "Customer Group (page 88): fetched from the customer details. Territory (page 87): displays the sales territory associated with the selected customer.",
+  "steps": [
+   "Add Sales Invoice and choose the customer CU-2026-00001 (Customer Group \"Individual\", Territory \"KSA\").",
+   "Open the \"معلومات إضافية\" tab."
+  ],
+  "expected": "Customer Group = Individual; Territory = KSA.",
+  "actual": "\"مجموعة العملاء\" shows the placeholder \"يتم إنشاؤه تلقائيًا\" and \"المنطقة\" shows \"ابحث واختر\" with no value.",
+  "code": "API Customer CU-2026-00001: customer_group=Individual, territory=KSA; screen: مجموعة العملاء = \"يتم إنشاؤه تلقائيًا\", المنطقة = \"ابحث واختر\"",
+  "shots": [],
+  "fix": "Fill both fields from the customer when it is chosen."
+ },
+ {
+  "id": "SI-42",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "After a currency with no exchange rate, the Exchange Rate field keeps the previous currency's rate",
+  "area": "Add Sales Invoice › Details › Currency and Price List",
+  "tc": [],
+  "srs": "Exchange Rate (page 8 to 9, Case 2): if no rate is found the user is prompted to create an Exchange Rate record; the field is then populated from the new record.",
+  "steps": [
+   "Choose the customer and set Currency = USD (rate 3.75).",
+   "Change Currency to EUR (no EUR to SAR rate exists on the server)."
+  ],
+  "expected": "The prompt to create the rate, and an empty (or unchanged-by-currency) Exchange Rate field that cannot be mistaken for the EUR rate.",
+  "actual": "The popup \"لم يتم العثور على سعر صرف من EUR إلى SAR بتاريخ 2026-11-23. يرجى إنشاء سجل صرف عملات\" is shown (correct), but the Exchange Rate field still shows 3.75, the USD rate. USD (3.75), EGP (0.0787), KWD (12.259) and JOD (5.29) are fetched correctly.",
+  "code": "Currency EUR -> Exchange Rate = 3.75 (value of USD) + popup \"لم يتم العثور على سعر صرف من EUR إلى SAR\"",
+  "shots": [],
+  "fix": "Clear the Exchange Rate field when no rate is found and the user must create it."
+ },
+ {
+  "id": "SI-43",
+  "sev": "High",
+  "pri": "P1",
+  "layer": "Backend",
+  "title": "Saving Selling Settings and creating a Sales Order fail with server error 500 \"unexpected keyword argument for_update\" (subscription entitlement check)",
+  "area": "Server › Selling Settings, Sales Order",
+  "tc": [],
+  "srs": "Allow Update Stock In Sales Invoice (Selling Settings) decides whether Update Stock appears on the invoice (page 12).",
+  "steps": [
+   "Log in through the API as Administrator.",
+   "PUT /api/resource/Selling Settings/Selling Settings {\"custom_allow_update_stock_in_sales_invoice\": 1}, or call frappe.client.set_value for the same field.",
+   "POST /api/resource/Sales Order with a customer, an item and the four contract fields."
+  ],
+  "expected": "The setting is saved and the Sales Order is created (a Sales Order was created through the API on 2026-11-18).",
+  "actual": "Both Selling Settings calls and the Sales Order insert return 500 \"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'\". The traceback ends in shamel/api/services/subscription/enforcement.py (enforce_document), entitlement.py (is_enforced, _get_payload, _load_payload) and shamel/api/repositories/subscription/subscription.py (get_latest_applied). The latest Sales Order in the system is SAL-ORD-2026-03115-1 from 2026-11-18, so the problem started after that date. Effects: no Sales Order can be created through the API (43 of the 50 earlier Sales Invoice automation tests stopped at this step), the Update Stock scenarios could not be tested because the setting cannot be saved, and the screen path was not re-checked. Sales Invoice, Payment Entry and Quotation inserts still work.",
+  "code": "PUT /api/resource/Selling Settings/Selling Settings -> 500 TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'\nPOST /api/resource/Sales Order -> same 500\nTraceback: enforcement.py:30 enforce_document > entitlement.py:54 is_enforced > entitlement.py:200 _get_payload > entitlement.py:207 _load_payload > subscription.py:26 get_latest_applied",
+  "shots": [],
+  "fix": "Fix get_latest_applied (the for_update argument is not accepted by this Frappe version), or make the entitlement check skip documents it cannot read, then re-run the Sales Order and Update Stock scenarios."
+ },
+ {
+  "id": "SI-44",
+  "sev": "Low",
+  "pri": "P3",
+  "layer": "Frontend",
+  "title": "After a Draft invoice is edited, Outstanding Amount keeps the old value until the page is reloaded",
+  "area": "Sales Invoice Details › Draft › Totals",
+  "tc": [],
+  "srs": "Outstanding Amount: displays the remaining amount the customer must pay (page 39).",
+  "steps": [
+   "Open a saved Draft invoice (quantity 2, rate 1000, Outstanding 2,000).",
+   "Change quantity to 3 and rate to 1200, add the tax template and press Save.",
+   "Compare Outstanding Amount before and after reloading."
+  ],
+  "expected": "Outstanding Amount follows the new Grand Total (4,140).",
+  "actual": "After the edit and Save the screen still shows 2,000.00 SAR; after a reload it shows 4,140.00 SAR. Every other value (quantity, rate, taxes, Customer PO, terms, payment terms) was kept and the database has the right totals.",
+  "code": "Edit draft ACC-SINV-2026-02885: Outstanding before reload 2,000.00 SAR, after reload 4,140.00 SAR (Grand Total 4,140)",
+  "shots": [],
+  "fix": "Refresh the totals block (including Outstanding Amount) after Save."
+ },
+ {
+  "id": "SI-45",
+  "sev": "Medium",
+  "pri": "P2",
+  "layer": "Backend / Frontend",
+  "title": "Delete is offered on a Cancelled invoice but it can never be deleted: its own ledger entries block it, and the warning appears after about 8 seconds",
+  "area": "Sales Invoice Details › Delete",
+  "tc": [],
+  "srs": "Delete (page 4): appears when the status is Draft / Cancelled; after Yes, if the invoice is not linked to another doctype it is deleted successfully; if it is linked, a message names the linked doctypes as hyperlinks.",
+  "steps": [
+   "Submit and cancel an invoice (no payment, no amended copy).",
+   "Press Delete and confirm.",
+   "Wait about 8 seconds."
+  ],
+  "expected": "The cancelled invoice is deleted.",
+  "actual": "Nothing visible happens for about 8 seconds, then the popup \"لا يمكن الحذف هذا السجل مرتبط بالمستندات التالية. يجب حذفها أولاً. GL الدخول (4): 3f54510a27 ... إدخال بيانات دفتر المدفوعات (2): 8jo6cr8v7i ...\" opens. The linked records are the invoice's own GL Entries (4) and Payment Ledger Entries (2) created by the cancellation, shown as raw ids that the user cannot delete, so a Cancelled invoice can never be deleted from the screen. With an amended copy the same popup also lists the amended invoice ACC-SINV-2026-02887-1; after that draft is deleted the original is still blocked. A Draft is deleted at once (\"تم الحذف بنجاح\"), and the REST delete of a Submitted invoice is refused (417). The Accounts Settings option \"Delete Accounting and Payment Ledger Entries on Transaction Cancellation\" is off; the effect of turning it on was not tested because changing it was not allowed.",
+  "code": "Delete ACC-SINV-2026-02888 (Cancelled, no amended copy) -> after ~8 s: \"لا يمكن الحذف هذا السجل مرتبط بالمستندات التالية ... GL الدخول (4) ... إدخال بيانات دفتر المدفوعات (2)\"; the invoice still exists (API 200)",
+  "shots": [],
+  "fix": "Either delete (or hide) the ledger entries of a cancelled invoice when it is deleted, or do not offer Delete on a Cancelled invoice; show the answer at once and name only documents the user can open."
+ },
+ {
+  "id": "SI-46",
+  "sev": "High",
+  "pri": "P1",
+  "layer": "Backend",
+  "title": "\"Get Advance Received\" fails with a server error and loads no advances",
+  "area": "Add / Details › General Information › Advance Payment",
+  "tc": [],
+  "srs": "Get Advance Received (page 60): retrieves the unallocated advance payments of the customer, populates the Advances table and reduces the outstanding amount when the invoice is submitted; shown for Draft only.",
+  "steps": [
+   "Create an advance Payment Entry (Receive, 300) for a customer with no invoice.",
+   "Create a Draft invoice for that customer and open \"المعلومات العامة\".",
+   "Turn off \"تضمين الدفعات المخصصة مقابل أمر البيع المرجعي فقط\" (it is on by default) and press \"جلب الدفعات المقدمة المستلمة\"."
+  ],
+  "expected": "The advance (ACC-PAY-2026-03066, 300) appears in the Advances table.",
+  "actual": "Two popups open: \"خطأ في الخادم: TypeError: unsupported operand type(s) for -: 'NoneType' and 'int' (Possible source of error: shamel (app))\" and \"تعذّر تحميل الدفعات المقدمة\". The table stays empty. With the default switch on, the button only says \"لا توجد دفعات مقدمة لهذا العميل\". The advance is still applied automatically when the invoice is saved and submitted (Outstanding 700, status Partially Paid) because \"Allocate Advance Automatically (FIFO)\" is on, so the button is the only broken part.",
+  "code": "Get Advance Received (customer with advance ACC-PAY-2026-03066, only-allocated switch off) -> popup \"TypeError: unsupported operand type(s) for -: 'NoneType' and 'int'\" + \"تعذّر تحميل الدفعات المقدمة\"",
+  "shots": [],
+  "fix": "Handle the missing value (an advance without a reference row or an exchange rate) in the Get Advance Received endpoint of the shamel app."
+ }
+];
+const BUG_AR = {
+ "SI-33": {
+  "t": "الخصم الإضافي (نسبة أو مبلغ) بيفشل بخطأ سيرفر، والإجماليات مبتتغيرش، وبيظهر حقلين إجباريين مش في الـ SRS",
+  "area": "Add Sales Invoice › التفاصيل › Additional Discount",
+  "srs": "Additional Discount (Add Sales Invoice، صفحة 39 لـ 40): Apply Additional Discount On (Grand Total / Net Total) ونسبة الخصم ومبلغ الخصم اختياريين؛ والإجمالي بيتعاد حسابه؛ والفاتورة بتتحفظ بـ Save.",
+  "steps": [
+   "افتح Accounting › Sales Invoices › Add Sales Invoice.",
+   "اختار الشركة والعميل «PW Test Customer» وضيف الصنف IND182210 بسعر 1000.",
+   "في Additional Discount اختار «الإجمالي الصافي» (Net Total) أو «الإجمالي» (Grand Total).",
+   "اكتب 10 في «نسبة الخصم الإضافي» ودوس Tab (أو اكتب 250 في «مبلغ الخصم الإضافي (العملة)»).",
+   "دوس Save."
+  ],
+  "exp": "مبلغ الخصم يتحسب، والإجمالي الكلي ينزل (من 1,000 لـ 900)، والـ Save بيعمل الفاتورة.",
+  "act": "نافذة «خطأ في الخادم: TypeError: can't multiply sequence by non-int of type 'float' (Possible source of error: shamel (app))» بتفتح فورًا لما تكتب النسبة أو المبلغ، قبل Save. مبلغ الخصم بيفضل فاضي والإجمالي الكلي مبيتغيرش. وبيظهر حقلين إجباريين زيادة: «حساب الخصم *» (Discount Account) و«سبب الخصم *» (Discount Reason) ومش موجودين في قايمة بلوك الخصم الإضافي في الـ SRS، والـ Save بيقف بـ «تعذّر الحفظ: سبب الخصم مطلوب». نفس الحاجة بتحصل للنسبة وللمبلغ ولقيمتي Apply On. يعني مفيش فاتورة بخصم إضافي بتتعمل من الشاشة. (اتفحص في 2026-11-23، سبيك srs-si-acc-c-discount.spec.ts.)",
+  "fix": "حوّلوا النسبة / المبلغ المكتوب لرقم قبل الحساب في السيرفر، واعرضوا مبلغ الخصم والإجمالي الجديد. وشيلوا اشتراط Discount Account وDiscount Reason من الهيدر (أو ضيفوهم للـ SRS)."
+ },
+ "SI-34": {
+  "t": "زر Delete ظاهر في هيدر الفاتورة المعتمدة",
+  "area": "Sales Invoice Details › الهيدر",
+  "srs": "Delete (Sales Invoice Details، صفحة 4 و53): بيظهر بس لما حالة الفاتورة Draft / Cancelled.",
+  "steps": [
+   "افتح فاتورة معتمدة (ACC-SINV-2026-02830، حالة «غير مدفوعة»).",
+   "اقرا الأيقونات اللي فوق الصفحة."
+  ],
+  "exp": "مفيش أيقونة Delete على فاتورة معتمدة (Cancel بس).",
+  "act": "الهيدر بيعرض أيقونة Delete (title «حذف») جنب Assign والـ Tags والمرفقات والطباعة والمشاركة. وبتفتح تأكيد «هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء» (زر Yes ماتضغطش). وشريط القايمة لسه بيعرض Delete للفاتورة المعتمدة (SI-03 القديمة لسه مفتوحة).",
+  "fix": "اعرضوا Delete في الهيدر وفي شريط القايمة للفواتير Draft وCancelled بس."
+ },
+ "SI-35": {
+  "t": "مبلغ صف الصنف (وفي Edit Row) مبيتحدّثش لما السعر يتغير",
+  "area": "Add Sales Invoice › الأصناف",
+  "srs": "Amount (جدول Items): خانة بتعرض إجمالي مبلغ الصنف بعملة المستند (Qty × Rate).",
+  "steps": [
+   "ضيف الصنف IND182210 بكمية 4 (السعر من قايمة الأسعار 10,200).",
+   "غيّر Rate لـ 12000 ودوس Tab.",
+   "اقرا Amount الصف وملخص «إجمالي المبلغ بالعملة» وEdit Row."
+  ],
+  "exp": "Amount = 4 × 12,000 = 48,000 في الصف وفي Edit Row.",
+  "act": "الـ Rate بيعرض 12000 وملخص الإجمالي 48,000.00، لكن Amount الصف بيفضل 40,800.00 وEdit Row بيعرض 40,800. بعد Save وإعادة فتح الصف بيعرض 48,000.00. الـ Amount بيتحدّث بس لما الكمية تتغير.",
+  "fix": "أعيدوا حساب Amount (وNet Amount) الصف لما Rate يتغير."
+ },
+ "SI-36": {
+  "t": "Edit Row: وصف من حرفين بيعرض رسالة «كود الصنف مطلوب»",
+  "area": "Add Sales Invoice › الأصناف › Edit Row",
+  "srs": "Description (Edit Row، صفحة 19): أقل طول 3 حروف؛ ورسالة خطأ لو النص أقل من الحد الأدنى.",
+  "steps": [
+   "ضيف صنف ودوس Edit Row.",
+   "اكتب «ab» في Description ودوس Tab."
+  ],
+  "exp": "رسالة إن النص أقل من 3 حروف.",
+  "act": "نافذة «رسالة: كود الصنف مطلوب» بتفتح مع إن كود الصنف متملي (IND182210). والحد الأقصى 500 حرف شغال.",
+  "fix": "اعرضوا رسالة الحد الأدنى لخانة الوصف."
+ },
+ "SI-37": {
+  "t": "Edit Row بيعرض حقول الـ SRS محددها Hidden وناقصه حقول Asset وSerial and Batch Bundle",
+  "area": "Add Sales Invoice › الأصناف › Edit Row",
+  "srs": "Edit Row (صفحات 18 لـ 31): Barcode وHas Item Scanned وGrant Commission متعلّمين بالأحمر (مخفيين)؛ وAsset وFinance Book (لما Asset يتملي) وSerial and Batch Bundle مذكورين.",
+  "steps": [
+   "ضيف الصنف IND182210 ودوس Edit Row.",
+   "اقرا Labels النافذة."
+  ],
+  "exp": "مفيش Barcode ولا Grant Commission؛ وفيه حقل Asset وحقل Serial and Batch Bundle.",
+  "act": "النافذة بتعرض «الباركود 234324324325» و«منح العمولة: نعم». ومفيهاش حقل Asset ولا Finance Book ولا Serial and Batch Bundle (بس «Use Serial No / Batch Fields» وSerial No وBatch No). وبتعرض حقول فوترة إلكترونية مش في الـ SRS (رمز الضريبة ونسبتها وسبب الإعفاء وسبب الخصم ومبلغ الرسوم). ده الجزء الباقي من SI-31 القديمة.",
+  "fix": "اخفوا Barcode وGrant Commission، وضيفوا Asset / Finance Book وSerial and Batch Bundle، ووصفوا حقول الفوترة الإلكترونية في الـ SRS."
+ },
+ "SI-38": {
+  "t": "قايمة Create بتعرض «Maintenance Schedule» والـ SRS محددها Hidden",
+  "area": "Sales Invoice Details › Create",
+  "srs": "Create (صفحات 90 لـ 92): Return / Credit Note وDelivery Note وPayment؛ و«Maintenance Schedule» متعلّم بالأحمر (مخفي).",
+  "steps": [
+   "افتح فاتورة معتمدة ودوس Create."
+  ],
+  "exp": "Return / Credit Note وDelivery Note وPayment بس.",
+  "act": "القايمة بتعرض «مرتجع / إشعار دائن» و«إذن التسليم» و«دفعة» و«جدول الصيانة».",
+  "fix": "اخفوا Maintenance Schedule (أو أكدوا مع صاحب الـ SRS إنه في النطاق)."
+ },
+ "SI-39": {
+  "t": "نصوص إنجليزي وترجمة غلط في الرسائل: Create › Return وCancel Document والإجمالي كتابةً",
+  "area": "Details › Create وCancel والإجماليات",
+  "srs": "الشاشات بتتستخدم بالعربي.",
+  "steps": [
+   "دوس Create › Return على فاتورة معتمدة.",
+   "الغي فاتورة معتمدة.",
+   "اقرا «الإجمالي كتابةً» لفاتورة."
+  ],
+  "exp": "رسايل عربي بصياغة صح.",
+  "act": "(1) Create › Return بيعرض نافذة إنجليزي: «We can see Credit Note is made against ACC-SINV-2026-02830. If you want ... uncheck the 'تحديث رائع للذات' checkbox. You can use دفع المصالحة to reconcile ...» (الـ checkbox اسمه على الشاشة «تحديث المستحقات على الفاتورة نفسها»). (2) Cancel Document بيعرض toast «Sales Invoice cancelled successfully» بالإنجليزي. (3) الإجمالي كتابةً «ريال سعودي تسعمائة و تسعة و تسعون و تسعة و تسعون Halala فقط.» (Halala بالإنجليزي).",
+  "fix": "ترجموا الرسائل دي واستخدموا نفس أسماء الخانات اللي على الشاشة."
+ },
+ "SI-40": {
+  "t": "تحذير العجز مبيظهرش لما الكمية تتكتب؛ بيظهر عند Submit بس",
+  "area": "Add Sales Invoice › الأصناف › Qty",
+  "srs": "Shortage Qty (صفحة 14): لما Shortage Qty > 0 السيستم بيتصرف حسب Selling Settings (Ignore أو Warn أو Block)؛ ورسالة تحذير بتظهر لما الكمية تتكتب (صياغة الـ SRS «أقل من الكمية المتاحة» معكوسة).",
+  "steps": [
+   "Selling Settings: «Action if Sales Invoice item shortage» = Warn.",
+   "ضيف الصنف IND182210 (المتاح -337) واكتب كمية 999999.",
+   "دوس Save وبعدين Submit."
+  ],
+  "exp": "تحذير بالعجز وقت كتابة الكمية (ويقدر يكمل).",
+  "act": "خانة Shortage Qty بتعرض 1,000,336 لكن مفيش رسالة وقت الكتابة ولا عند Save (الفاتورة اتحفظت بإجمالي 10.5 مليار). وتحذير «مخزون غير كافٍ للصنف IND182210 ... هل ترغب في الاعتماد على أي حال؟» بيظهر لما تدوس Submit بس.",
+  "fix": "اعرضوا تحذير العجز في الصف لما الكمية تتكتب زي ما الـ SRS بيقول، وسيبوا تأكيد Submit."
+ },
+ "SI-41": {
+  "t": "Customer Group وTerritory مبيتملوش من العميل",
+  "area": "Add Sales Invoice › معلومات إضافية › Additional Info",
+  "srs": "Customer Group (صفحة 88): بيتجاب من بيانات العميل. Territory (صفحة 87): بيعرض منطقة المبيعات الخاصة بالعميل المختار.",
+  "steps": [
+   "افتح Add Sales Invoice واختار العميل CU-2026-00001 (Customer Group «Individual» وTerritory «KSA»).",
+   "افتح تاب «معلومات إضافية»."
+  ],
+  "exp": "Customer Group = Individual؛ Territory = KSA.",
+  "act": "«مجموعة العملاء» بتعرض الـ placeholder «يتم إنشاؤه تلقائيًا» و«المنطقة» بتعرض «ابحث واختر» من غير قيمة.",
+  "fix": "املوا الخانتين من العميل لما يتختار."
+ },
+ "SI-42": {
+  "t": "بعد عملة ملهاش سعر صرف، خانة Exchange Rate بتفضل بسعر العملة اللي قبلها",
+  "area": "Add Sales Invoice › التفاصيل › العملة وقايمة الأسعار",
+  "srs": "Exchange Rate (صفحات 8 لـ 9، Case 2): لو مفيش سعر السيستم بيطلب من المستخدم يعمل سجل Exchange Rate؛ والخانة بتتملي بعدها من السجل الجديد.",
+  "steps": [
+   "اختار العميل واضبط Currency = USD (سعر 3.75).",
+   "غيّر Currency لـ EUR (مفيش سعر EUR لـ SAR على السيرفر)."
+  ],
+  "exp": "الطلب بإنشاء السعر، وخانة Exchange Rate فاضية (أو متتلخبطش بسعر عملة تانية).",
+  "act": "نافذة «لم يتم العثور على سعر صرف من EUR إلى SAR بتاريخ 2026-11-23. يرجى إنشاء سجل صرف عملات» بتظهر (صح)، لكن خانة Exchange Rate بتفضل 3.75 وده سعر USD. وUSD (3.75) وEGP (0.0787) وKWD (12.259) وJOD (5.29) بتتجاب صح.",
+  "fix": "فضّوا خانة Exchange Rate لما السعر مش موجود والمستخدم لازم ينشئه."
+ },
+ "SI-43": {
+  "t": "حفظ Selling Settings وإنشاء Sales Order بيفشلوا بخطأ سيرفر 500 «unexpected keyword argument for_update» (فحص الاشتراك)",
+  "area": "السيرفر › Selling Settings وSales Order",
+  "srs": "Allow Update Stock In Sales Invoice (Selling Settings) بيحدد هل Update Stock يظهر على الفاتورة (صفحة 12).",
+  "steps": [
+   "سجّل دخول بالـ API كـ Administrator.",
+   "PUT /api/resource/Selling Settings/Selling Settings {\"custom_allow_update_stock_in_sales_invoice\": 1} أو نادي frappe.client.set_value لنفس الخانة.",
+   "POST /api/resource/Sales Order بعميل وصنف وحقول العقد الأربعة."
+  ],
+  "exp": "الإعداد يتحفظ والـ Sales Order يتعمل (Sales Order اتعمل بالـ API في 2026-11-18).",
+  "act": "نداءات Selling Settings وإنشاء Sales Order بترجّع 500 «TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'». والـ traceback بينتهي في shamel/api/services/subscription/enforcement.py (enforce_document) ثم entitlement.py (is_enforced وـ_get_payload وـ_load_payload) ثم shamel/api/repositories/subscription/subscription.py (get_latest_applied). آخر Sales Order في السيستم SAL-ORD-2026-03115-1 من 2026-11-18، يعني المشكلة بدأت بعد التاريخ ده. الأثر: مفيش Sales Order بيتعمل بالـ API (43 من 50 اختبار آلي قديم لـ Sales Invoice وقفوا عند الخطوة دي)، وسيناريوهات Update Stock ماتجرّبتش لأن الإعداد مش بيتحفظ، ومسار الشاشة ماتعادش فحصه. وإدراج Sales Invoice وPayment Entry وQuotation لسه شغال.",
+  "fix": "صلّحوا get_latest_applied (الـ for_update مش مقبول في نسخة Frappe دي) أو خلّوا فحص الاشتراك يتخطى المستندات اللي مايقدرش يقراها، وبعدين أعيدوا سيناريوهات Sales Order وUpdate Stock."
+ },
+ "SI-44": {
+  "t": "بعد تعديل فاتورة Draft، Outstanding Amount بيفضل بالقيمة القديمة لحد ما الصفحة تتعمل reload",
+  "area": "Sales Invoice Details › Draft › الإجماليات",
+  "srs": "Outstanding Amount: بيعرض المتبقي على العميل (صفحة 39).",
+  "steps": [
+   "افتح فاتورة Draft محفوظة (كمية 2 وسعر 1000 وOutstanding 2,000).",
+   "غيّر الكمية لـ 3 والسعر لـ 1200 وضيف قالب الضرايب ودوس Save.",
+   "قارن Outstanding Amount قبل وبعد reload."
+  ],
+  "exp": "Outstanding Amount يتبع الإجمالي الجديد (4,140).",
+  "act": "بعد التعديل وSave الشاشة لسه بتعرض 2,000.00 SAR؛ وبعد reload بتعرض 4,140.00 SAR. وكل القيم التانية (الكمية والسعر والضرايب وPO وشروط الدفع) اتحفظت وقاعدة البيانات فيها الإجماليات الصح.",
+  "fix": "حدّثوا بلوك الإجماليات (ومعاه Outstanding Amount) بعد Save."
+ },
+ "SI-45": {
+  "t": "Delete ظاهر على فاتورة ملغية لكنها مبتتمسحش أبدًا: قيود الـ ledger بتاعتها بتمنع، والتحذير بيظهر بعد حوالي 8 ثواني",
+  "area": "Sales Invoice Details › Delete",
+  "srs": "Delete (صفحة 4): بيظهر لما الحالة Draft / Cancelled؛ وبعد Yes لو الفاتورة مش مربوطة بمستند تاني بتتمسح؛ ولو مربوطة بتظهر رسالة بأسماء المستندات كروابط.",
+  "steps": [
+   "اعتمد وألغي فاتورة (من غير دفعة ولا نسخة معدّلة).",
+   "دوس Delete وأكد.",
+   "استنى حوالي 8 ثواني."
+  ],
+  "exp": "الفاتورة الملغية تتمسح.",
+  "act": "مفيش حاجة بتحصل قدام المستخدم لمدة حوالي 8 ثواني، وبعدين بتفتح نافذة «لا يمكن الحذف هذا السجل مرتبط بالمستندات التالية. يجب حذفها أولاً. GL الدخول (4): 3f54510a27 ... إدخال بيانات دفتر المدفوعات (2): 8jo6cr8v7i ...». والسجلات المرتبطة هي GL Entries (4) وPayment Ledger Entries (2) الناتجة عن الإلغاء، معروضة كـ ids خام والمستخدم مش قادر يمسحها، فالفاتورة الملغية مبتتمسحش من الشاشة أبدًا. ومع نسخة معدّلة نفس النافذة بتعرض كمان الفاتورة المعدّلة ACC-SINV-2026-02887-1؛ وبعد مسح الـ draft دي الأصل لسه ممنوع. أما الـ Draft فبيتمسح فورًا («تم الحذف بنجاح»)، والـ REST delete لفاتورة معتمدة بيترفض (417). خيار Accounts Settings «Delete Accounting and Payment Ledger Entries on Transaction Cancellation» مقفول؛ وأثر تفعيله ماتجرّبش لأن تغييره مكانش مسموح.",
+  "fix": "يا إما تمسحوا (أو تخفوا) قيود الـ ledger بتاعة الفاتورة الملغية لما تتمسح، يا إما متعرضوش Delete على الفاتورة الملغية؛ واعرضوا الرد فورًا وسمّوا مستندات يقدر المستخدم يفتحها بس."
+ },
+ "SI-46": {
+  "t": "«Get Advance Received» بيفشل بخطأ سيرفر ومبيجيبش دفعات",
+  "area": "Add / Details › General Information › Advance Payment",
+  "srs": "Get Advance Received (صفحة 60): بيجيب الدفعات المقدمة غير المخصصة للعميل ويملا جدول Advances ويقلل المتبقي لما الفاتورة تتعتمد؛ وظاهر للـ Draft بس.",
+  "steps": [
+   "اعمل Payment Entry دفعة مقدمة (Receive, 300) لعميل من غير فاتورة.",
+   "اعمل فاتورة Draft للعميل ده وافتح «المعلومات العامة».",
+   "اقفل «تضمين الدفعات المخصصة مقابل أمر البيع المرجعي فقط» (مفعّل افتراضيًا) ودوس «جلب الدفعات المقدمة المستلمة»."
+  ],
+  "exp": "الدفعة المقدمة (ACC-PAY-2026-03066، 300) تظهر في جدول Advances.",
+  "act": "بتفتح نافذتين: «خطأ في الخادم: TypeError: unsupported operand type(s) for -: 'NoneType' and 'int' (Possible source of error: shamel (app))» و«تعذّر تحميل الدفعات المقدمة». والجدول بيفضل فاضي. ومع المفتاح المفعّل افتراضيًا الزرار بيقول «لا توجد دفعات مقدمة لهذا العميل» بس. والدفعة المقدمة بتتطبق لوحدها لما الفاتورة تتحفظ وتتعتمد (Outstanding 700 وحالة «مدفوعة جزئيًا») لأن «تخصيص الدفعة المقدمة تلقائيًا (FIFO)» مفعّل، فالزرار هو الجزء الوحيد المكسور.",
+  "fix": "عالجوا القيمة الناقصة (دفعة من غير reference row أو سعر صرف) في endpoint الخاص بـ Get Advance Received في تطبيق shamel."
+ }
+};
+const SHOT_AR = {};
+const TC_AR = {};
+
+const T = {"en":{"dir":"ltr","lang":"en","btn":"عربي","title":"Sales Invoice Add Screen Review (Accounting SRS)","eyebrow":"QA bug report · Accounting › Sales Invoice (Accounting SRS V1.0)","h1":"Sales Invoice: the invoice is added from the screen and its lifecycle works, but the Additional Discount fails with a server error (14 new problems)","lede":"A new review of the Sales Invoice against the Accounting SRS V1.0 (route /accounting/sales-invoices), done in a headed browser after clearing the saved session: the Add screen with its three tabs, the Items table and Edit Row, taxes, totals and discount, the General Information and More Information tabs, Save, Submit, Cancel, Amend, Delete, the Create menu, Get Items From, the list screen, POS fields, and the server rules. 259 automated checks: 229 matched, 30 differ. An invoice can be added from the screen (Save created ACC-SINV-2026-02820 and later ones) and every value entered on the three tabs is kept after reload. The important problem is SI-33: typing an Additional Discount (percentage or amount) raises a server error (TypeError) and the totals never change, so no invoice with a discount can be created. Other problems: Delete is offered on a Submitted invoice (SI-34), the row Amount does not follow a Rate change (SI-35), and several smaller screen and translation differences (SI-36 to SI-42). SI-43 is a server error when Selling Settings is saved through the API, which blocked the Update Stock scenarios. A second round covered editing a Draft, real deletion of my own test invoices, partial and full payment, Overdue, credit notes, refund, advances and UnReconcile: they work, except Delete of a Cancelled invoice (SI-45) and the Get Advance Received button (SI-46); SI-43 now has its root cause (a subscription entitlement check fails with for_update when Selling Settings is saved or a Sales Order is created). Of the 32 earlier findings, 12 are fixed, 13 are still open, and 7 changed or could not be retested (see the observations).","meta":[["Environment","test.hr.azzrk.com"],["Browser","Chromium (desktop, headed), saved login cleared first"],["User","Administrator"],["Company","Ahmed Ebrahim CO."],["Language","Arabic interface (account language: ar)"],["Run date","2026-11-23"],["Method","Playwright specs srs-si-acc-*.spec.ts (UI) and the standard create call for server rules; invoices created are drafts or submitted/cancelled test invoices, nothing deleted"],["Bug IDs","SI-33 to SI-46 (previous report: SI-01 to SI-32)"]],"stats":["Bugs reported","Critical","High","Medium","Low","Backend first","Frontend first","Fixed or retested"],"cov":"Test coverage","covHead":["Area","Automated checks","Passed","Defect found","Not completed"],"covRows":[["Add screen, Details tab: defaults, posting date / time switch, mandatory fields, customer and company auto fill, currency and exchange rate, dropdown contents",24,24,0,0],["Items table, Edit Row and Setting popups: item filter, qty and rate rules, amounts, availability, delete row, columns, Edit Row fields",64,57,7,0],["Taxes, Additional Discount, totals, rounding, shipping rule, tax modes",15,10,5,0],["General Information tab: payments, advances, write off, loyalty, addresses, payment terms, terms",9,8,1,0],["Details: Save and reload, Submit, statuses, Cancel, Amend, Delete dialog, Create menu, Return, Debit Note",39,35,4,0],["Get Items From popups and the list screen: columns, statuses, bulk action bar, bulk Edit",53,52,1,0],["Edit a Draft, delete rules, bulk Edit",16,14,2,0],["Payments, Overdue, credit note, refund, advances, UnReconcile",22,21,1,0],["Server rules through the standard create call",17,8,9,0]],"total":"Total","covNote":"Test-case workbook SHAMEL_SalesInvoice_Test_Cases_EN_executed.xlsx (546 cases, with Execution Status, Evidence and Bug columns): 138 passed, 15 failed, 26 observed, 35 passed on 2026-11-10 but not re-run (SI-43), 51 blocked (SI-43) and 281 not executed yet. The 546 cases of SHAMEL_SalesInvoice_Test_Cases_EN.xlsx were used as the base; these automated checks cover the High-priority cases of the header, items, taxes, general information, details and list groups and map to the TC-SIH, SII, SIT, SIG, SIM, SIF, SID and SIL groups. The defects are not linked to single case IDs yet.","okTitle":"Verified working","ok":["Add screen: Company, Series, Customer; Company Tax ID, Customer Name, Currency (SAR) and billing / shipping / company addresses are filled automatically; Posting Date and Posting Time stay disabled until \"Edit Posting Date and Time\" is on; Is Consolidated and Is Return are read-only; Source Invoice appears when Is Rate Adjustment Entry (Debit Note) is checked","An empty Save shows \"تعذّر الحفظ\" and marks the Company, the Customer and \"add at least one item\" on the fields; quantity 0 is refused with \"الكمية يجب أن تكون أكبر من صفر\"; exchange rates for USD, EGP, KWD and JOD are fetched and EUR shows the \"create an exchange rate\" message","Items: the Item Code dropdown hides fixed assets, template items and items that are not for sale; amount follows the quantity; rows can be added and deleted; the Setting popup lists the columns and has \"Reset to default\"; Edit Row shows the SRS fields (see SI-37 for the exceptions)","Taxes: 18 tax templates fill the table and the grand total equals net + taxes (15 percent); the 5 Mode values exist; a tax row without an account is refused; the shipping rule adds its charge","General Information and More Information: payment terms template adds a 100 percent row with a due date; terms content is fetched and limited to 500 characters; Redeem Loyalty Points shows Loyalty Points, Loyalty Amount, Redemption Account and Cost Center (SI-12 fixed); advance switches take their default from Selling Settings; print settings, Customer PO and its date","Save creates ACC-SINV-2026-02820 and later invoices with every value kept after reload; Submit asks to confirm the shortage and gives \"غير مدفوعة / بدون رصيد / بدون استرداد\"; a submitted invoice is read-only; Cancel Document gives \"ملغي\"; Amend creates \"<id>-1\" with Amended From; the Delete icon asks \"هل أنت متأكد؟\" (not confirmed)","Create menu: Return / Credit Note (negative quantity, Update Billed Amount switches), Delivery Note and Payment (opens the Add Payment Entry screen); Get Items From opens the Sales Order, Quotation and Delivery Note popups and the quotation items arrive with totals; the list has the SRS columns and statuses and the bulk bar follows the status (except Delete, SI-34); bulk Edit refuses a submitted invoice; POS fields are read-only on a POS-created invoice","Edit and delete: a saved Draft can be edited in every tab and every change is kept (3 x 1,200, taxes, PO, terms, payment terms); the form Cancel button discards unsaved edits; a Draft is deleted after \"هل أنت متأكد؟\" with the toast \"تم الحذف بنجاح\"; a submitted invoice cannot be deleted through the API (417)","Payments and statuses: a partial payment gives \"مدفوعة جزئيًا\" (Paid 400, Outstanding 600) and the Actions menu; the full payment gives \"مدفوعة بالكامل\" and Create › Payment disappears; a past due date gives \"متأخرة\"; a partial return gives Credit \"دائن جزئيًا\" (500) and the return shows \"مرتجع\"; the full return gives \"دائن بالكامل\"; the refund payment shows \"مسترد بالكامل\" (800) on the return; an advance is allocated on Save (Outstanding 700, Partially Paid) and UnReconcile restores 1,000"],"noTitle":"Not executed, and why","no":["Update Stock, Source Warehouse and Create Quality Inspection after a stock update: the setting \"Allow Update Stock In Sales Invoice\" cannot be saved (SI-43). Deleting a Cancelled invoice with \"Delete ledger entries on cancellation\" turned on: changing that Accounts Setting was not allowed","A full new POS invoice from the POS screens (it needs a POS Opening Entry of this user and is a separate module), the \"Is Created Using POS\" and \"POS Closing Entry\" fields","Loyalty earn / redeem effects (loyalty is off in Accounts Settings), Return with a redeemed-points invoice; serial and batch items; Product Bundle Items table; most field-limit, tax-mode, payment-schedule and barcode cases listed as \"Not executed\" in the workbook","Get Items From lists with Sales Orders in \"To Bill / Partially Billed\" and Delivery Notes in \"To Bill\" (no such documents for the test customer), the 50-document limit of the old SI-16, permissions, closed periods"],"bugs":"Bugs","search":"Search id, title, test case","allSev":"All severities","allLayer":"Backend and Frontend","allStatus":"All statuses","of":"of","sev":{"Critical":"Critical","High":"High","Medium":"Medium","Low":"Low"},"status":{"New":"New","In Progress":"In Progress","Fixed":"Fixed","Retest Passed":"Retest Passed","Reopened":"Reopened","Not a Bug":"Not a Bug","Cannot Reproduce":"Cannot Reproduce","Deferred":"Deferred"},"f":{"tc":"Test case","srs":"SRS reference","steps":"Steps to reproduce","exp":"Expected result","act":"Actual result","code":"Backend evidence (request and response)","shots":"Screenshots","fix":"Suggested fix"},"srsPrefix":"Accounting SRS V1.0, Sales Invoice","fb":{"title":"Developer feedback","status":"Status","as":"Assigned to","build":"Build","cm":"Comment","save":"Save feedback","devName":"Developer name","buildPh":"Fixed in build / commit","cmPh":"Root cause, fix notes, or questions for the tester","last":"Last update","by":"by","none":"No feedback yet","saving":"Saving…","err":"Could not save. Try again.","ok":"Saved for everyone who opens this report. The tester sees it and retests.","ro":"You can read feedback here. Ask the report owner for contributor access to write.","na":"Feedback storage is not available in this view."},"none":"No bugs match these filters.","rt":"Retest plan: where we stopped","rtBody":[["p","Round 3 of the Sales Invoice is finished. Retesting starts when the developers mark SI-33 as Fixed here (or tell the tester); SI-33 comes first because an invoice with an Additional Discount cannot be created from the screen. SI-34 and SI-35 come next."],["h","When a fix arrives"],["ol",["Repeat SI-33: choose Apply On, type a percentage and then an amount, check the totals and Save; no popup and no extra mandatory fields.","Repeat SI-34, SI-35 and SI-36 on the screen; SI-37 to SI-42 are quick screen checks.","Run the specs srs-si-acc-*.spec.ts again with --project=chromium --workers=1 --headed; the checks marked as known bugs turn green when fixed.","After SI-43 is fixed run the Update Stock scenarios and the settings-dependent cases listed under \"Not tested\".","Update the status of each problem in the feedback box below."]]],"obs":["Status of the 32 earlier findings after this run. FIXED: SI-04 (Print without Amount and Group same items exist), SI-05 (the default price list is Standard Selling in SAR), SI-06 (tax template VAT - E is accepted), SI-08 (a due date before the posting date is refused), SI-10 (Get Items From opens), SI-12 (Loyalty Redemption fields exist), SI-17 (Setting popup lists columns and has Reset), SI-21 (Create › Payment opens the Add Payment Entry screen), SI-22 (totals after Get Items), SI-26 (fixed assets are not offered), SI-27 (header status badge in Arabic), SI-28 (cancelled invoices show No Credit / No Refund).","STILL OPEN: SI-01 and SI-09 (write off 900 on a 500 invoice and a negative write off are accepted), SI-03 (Delete in the list bar for a Submitted invoice, plus the header, see SI-34), SI-13 and SI-14 (Create › Return saves a draft at once, ACC-SINV-2026-02834, with the group warehouse \"All Warehouses - E\"), SI-18 (group warehouse and a UOM the item does not have are accepted), SI-19 (a negative additional discount is accepted by the create call), SI-23 (item description of 600 characters accepted; Customer PO limit is 140 not 100), SI-24 (raw MySQLdb error for quantity 1e15 and raw \"Incorrect value\" text for a negative rate), SI-25 (quantity 0.0000001 saved as 0), SI-29 (View Stock Ledger is shown on invoices without stock update), SI-30 (no \"No.\" column in the Items table; the list heading is now \"اسم العميل\"), SI-31 (no Asset field, see SI-37).","CHANGED / NOT CONFIRMED: SI-02 is by design now (Sales Order and Delivery Note are not required), SI-11 is withdrawn (the new SRS marks Hold, Resume, Close and Re-open as Hidden), SI-15 (Edit Row now opens without the error; the description message is wrong, SI-36), SI-07 (status names were not retested), SI-16 (only 7 documents listed, the 50 limit could not be tested), SI-20 (the test item is a service, so the valuation check cannot be shown), SI-32 (translation issues remain, see SI-39).","SRS notes: the new SRS marks several fields in red; this review treats red as Hidden (Hold group, Commission, Sales Team, Auto Repeat, UTM, Barcode, Has Item Scanned, Grant Commission, Maintenance Schedule). \"Update Outstanding for Self\" is shown only on returns (it appears with Is Return checked, ON by default), while the SRS lists it for every invoice; the quantity warning text in the SRS is reversed; Terms content has a 500 limit but some saved Terms templates are longer and then Save fails with \"terms: يجب ألا يتجاوز النص 500 حرفاً\". The screen also has fields that are not in the SRS (Invoice Type, e-invoicing switches, Discount Account / Reason).","Test data: the user then allowed deleting only my own test invoices; the only invoices deleted were my own test drafts ACC-SINV-2026-02887 and 02887-1 (the delete tests). The rest stays: drafts ACC-SINV-2026-02821 to 02831 and 02834 to 02846 (including three created by the screen with discount, write off, large quantity), submitted ACC-SINV-2026-02830 and 02832, cancelled ACC-SINV-2026-02833 with its amended draft 02833-1. Selling Settings were not changed (the value of \"Allow Update Stock In Sales Invoice\" is still 0)."],"obsTitle":"Observations that need an SRS decision","rd":"How to read this report","rdBody":["Severity: Critical blocks a core flow with no workaround. High breaks an SRS rule that changes data or what the user can do. Medium is wrong behaviour with a workaround. Low is cosmetic or minor. Priority P1 to P4 is the suggested fix order. Layer says where the fix most likely lives; Backend and Frontend both appear when the evidence points to a contract mismatch between them.","Test names in the spec start with the test case ID from the Delivery Note sheet (TC-DNL, TC-DNA, TC-DNW, TC-DNG, TC-DNM, TC-DND), so a failing check maps straight back to the sheet."]},"ar":{"dir":"rtl","lang":"ar","btn":"English","title":"مراجعة شاشة إضافة فاتورة المبيعات (Accounting SRS)","eyebrow":"تقرير مشاكل QA · Accounting › Sales Invoice (Accounting SRS V1.0)","h1":"Sales Invoice: الفاتورة بتتضاف من الشاشة ودورة حياتها شغالة، لكن الخصم الإضافي بيفشل بخطأ سيرفر (14 مشكلة جديدة)","lede":"مراجعة جديدة لـ Sales Invoice مقابل Accounting SRS V1.0 (الـ route /accounting/sales-invoices)، في متصفح ظاهر بعد مسح الـ session المحفوظ: شاشة الإضافة بتاباتها التلاتة وجدول الأصناف وEdit Row والضرايب والإجماليات والخصم وتابي General Information وMore Information وSave وSubmit وCancel وAmend وDelete وقايمة Create وGet Items From وشاشة القايمة وحقول POS وقواعد السيرفر. 259 فحص آلي: 229 مطابق و30 مختلف. الفاتورة بتتضاف من الشاشة (Save عمل ACC-SINV-2026-02820 وغيرها) وكل قيمة اتكتبت في التابات التلاتة بتفضل بعد إعادة الفتح. المشكلة المهمة SI-33: كتابة خصم إضافي (نسبة أو مبلغ) بتطلّع خطأ سيرفر (TypeError) والإجماليات مبتتغيرش، فمفيش فاتورة بخصم بتتعمل. مشاكل تانية: Delete ظاهر على فاتورة معتمدة (SI-34)، ومبلغ الصف مبيتحدّثش لما السعر يتغير (SI-35)، وفروقات أصغر في الشاشة والترجمة (SI-36 لـ SI-42). SI-43 خطأ سيرفر لما Selling Settings بتتحفظ بالـ API وده منع سيناريوهات Update Stock. جولة تانية غطّت تعديل Draft ومسح فواتير اختبار بتاعتي فعلًا والدفع الجزئي والكامل والمتأخرة والائتمان والاسترداد والدفعات المقدمة وإلغاء التسوية: وكلها شغالة ما عدا Delete لفاتورة ملغية (SI-45) وزرار Get Advance Received (SI-46)؛ وSI-43 بقى له سبب جذري (فحص اشتراك بيفشل بـ for_update لما Selling Settings تتحفظ أو Sales Order يتعمل). من الـ 32 مشكلة القديمة، 12 اتصلحت و13 لسه مفتوحة و7 اتغيرت أو مااتعادش اختبارها (شوف الملاحظات).","meta":[["البيئة","test.hr.azzrk.com"],["المتصفح","Chromium (كمبيوتر، ظاهر)، والـ login المحفوظ اتمسح الأول"],["المستخدم","Administrator"],["الشركة","Ahmed Ebrahim CO."],["اللغة","واجهة عربي (لغة الحساب: ar)"],["تاريخ التشغيل","2026-11-23"],["الطريقة","سبيكات Playwright باسم srs-si-acc-*.spec.ts (واجهة) ونداء الإنشاء العادي لقواعد السيرفر؛ الفواتير المتعملة drafts أو فواتير اختبار معتمدة/ملغية، ومفيش حاجة اتمسحت"],["أرقام المشاكل","SI-33 لـ SI-46 (التقرير السابق: SI-01 لـ SI-32)"]],"stats":["إجمالي المشاكل","حرجة","عالية","متوسطة","منخفضة","الإصلاح غالبًا في Backend","الإصلاح غالبًا في Frontend","تم إصلاحها أو إعادة اختبارها"],"cov":"تغطية الاختبار","covHead":["المنطقة","عدد الفحوصات الآلية","نجح","فيه عيب","لم يكتمل"],"covRows":[["شاشة الإضافة، تاب Details: القيم الافتراضية وسويتش تاريخ ووقت الترحيل والحقول الإجبارية والتعبئة من العميل والشركة والعملة وسعر الصرف ومحتوى القوايم",24,24,0,0],["جدول الأصناف ونوافذ Edit Row وSetting: فلتر الأصناف وقواعد الكمية والسعر والمبالغ والمتاح وحذف الصف والأعمدة وحقول Edit Row",64,57,7,0],["الضرايب والخصم الإضافي والإجماليات والتقريب وقاعدة الشحن وأنواع الضريبة",15,10,5,0],["تاب General Information: المدفوعات والدفعات المقدمة والشطب والولاء والعناوين وشروط الدفع والشروط",9,8,1,0],["Details: Save وإعادة الفتح وSubmit والحالات وCancel وAmend ونافذة Delete وقايمة Create وReturn وDebit Note",39,35,4,0],["نوافذ Get Items From وشاشة القايمة: الأعمدة والحالات وشريط الإجراءات وEdit الجماعي",53,52,1,0],["تعديل Draft وقواعد Delete والـ Edit الجماعي",16,14,2,0],["الدفعات والمتأخرة والائتمان والاسترداد والدفعات المقدمة وإلغاء التسوية",22,21,1,0],["قواعد السيرفر بنداء الإنشاء العادي",17,8,9,0]],"total":"الإجمالي","covNote":"ملف الحالات SHAMEL_SalesInvoice_Test_Cases_EN_executed.xlsx (546 حالة، وفيه أعمدة Execution Status وEvidence وBug): 138 نجحت و15 فشلت و26 متراقبة و35 نجحت في 2026-11-10 ومااتعادش تشغيلها (SI-43) و51 موقوفة (SI-43) و281 لسه ماتنفذتش. الـ 546 حالة في SHAMEL_SalesInvoice_Test_Cases_EN.xlsx اتاستخدمت كأساس؛ والفحوصات الآلية دي بتغطي الحالات High للهيدر والأصناف والضرايب والمعلومات العامة والتفاصيل والقايمة وبتقابل مجموعات TC-SIH وSII وSIT وSIG وSIM وSIF وSID وSIL. والمشاكل لسه مش مربوطة بأرقام حالات فردية.","okTitle":"اللي اتأكدنا إنه شغال","ok":["شاشة الإضافة: الشركة والسلسلة والعميل؛ والرقم الضريبي للشركة واسم العميل والعملة (SAR) وعناوين الفوترة والشحن والشركة بتتملي تلقائي؛ وتاريخ ووقت الترحيل بيفضلوا مقفولين لحد ما يتفعّل «تعديل تاريخ ووقت الترحيل»؛ وفاتورة موحدة ومرتجع قراءة فقط؛ وفاتورة المصدر بتظهر لما Is Rate Adjustment Entry (Debit Note) يتعلّم","Save على فورم فاضي بيعرض «تعذّر الحفظ» وبيعلّم الشركة والعميل و«أضف صنفًا واحدًا على الأقل» على الخانات؛ والكمية 0 بتترفض بـ «الكمية يجب أن تكون أكبر من صفر»؛ وأسعار الصرف لـ USD وEGP وKWD وJOD بتتجاب وEUR بيعرض رسالة «أنشئ سعر صرف»","الأصناف: قايمة Item Code بتخبي الأصول الثابتة وأصناف الـ template والأصناف اللي مش للبيع؛ والمبلغ بيتبع الكمية؛ والصفوف بتتضاف وبتتحذف؛ ونافذة Setting بتعرض الأعمدة وفيها «إعادة تعيين إلى الافتراضي»؛ وEdit Row بيعرض حقول الـ SRS (شوف SI-37 للاستثناءات)","الضرايب: 18 قالب ضريبة بيملوا الجدول والإجمالي الكلي = الصافي + الضرايب (15٪)؛ والـ 5 قيم لـ Mode موجودة؛ وصف ضريبة من غير حساب بيترفض؛ وقاعدة الشحن بتضيف رسمها","General Information وMore Information: قالب شروط الدفع بيضيف صف 100٪ بتاريخ استحقاق؛ ومحتوى الشروط بيتجاب ومحدود بـ 500 حرف؛ وRedeem Loyalty Points بيعرض Loyalty Points وLoyalty Amount وRedemption Account وCost Center (SI-12 اتصلحت)؛ ومفاتيح الدفعة المقدمة بتاخد افتراضيها من Selling Settings؛ وإعدادات الطباعة وCustomer PO وتاريخه","Save بيعمل ACC-SINV-2026-02820 وفواتير بعده وكل القيم بتفضل بعد إعادة الفتح؛ وSubmit بيطلب تأكيد العجز وبيدي «غير مدفوعة / بدون رصيد / بدون استرداد»؛ والفاتورة المعتمدة قراءة فقط؛ وCancel Document بيدي «ملغي»؛ وAmend بيعمل «<id>-1» وفيه Amended From؛ وأيقونة Delete بتسأل «هل أنت متأكد؟» (ماتأكدتش)","قايمة Create: Return / Credit Note (كمية بالسالب ومفاتيح Update Billed Amount) وDelivery Note وPayment (بيفتح شاشة Add Payment Entry)؛ وGet Items From بيفتح نوافذ Sales Order وQuotation وDelivery Note وأصناف عرض السعر بتوصل بالإجماليات؛ والقايمة فيها أعمدة وحالات الـ SRS وشريط الإجراءات بيتبع الحالة (ما عدا Delete، SI-34)؛ والـ Edit الجماعي بيرفض فاتورة معتمدة؛ وحقول POS قراءة فقط على فاتورة طالعة من POS","تعديل ومسح: فاتورة Draft محفوظة بتتعدّل في كل تاب وكل تغيير بيتحفظ (3 × 1,200 والضرايب وPO والشروط وشروط الدفع)؛ وزرار «إلغاء» في الفورم بيتجاهل التعديلات غير المحفوظة؛ والـ Draft بيتمسح بعد «هل أنت متأكد؟» وtoast «تم الحذف بنجاح»؛ وفاتورة معتمدة مبتتمسحش بالـ API (417)","الدفعات والحالات: الدفع الجزئي بيدي «مدفوعة جزئيًا» (المدفوع 400 والمتبقي 600) وقايمة الإجراءات؛ والدفع الكامل بيدي «مدفوعة بالكامل» وCreate › Payment بيختفي؛ وتاريخ استحقاق فات بيدي «متأخرة»؛ ومرتجع جزئي بيدي ائتمان «دائن جزئيًا» (500) والمرتجع بيعرض «مرتجع»؛ والمرتجع الكامل بيدي «دائن بالكامل»؛ ودفعة الاسترداد بتدي «مسترد بالكامل» (800) على المرتجع؛ والدفعة المقدمة بتتخصص عند Save (المتبقي 700 ومدفوعة جزئيًا) وإلغاء التسوية بيرجّع 1,000"],"noTitle":"اللي ماتنفذش وليه","no":["Update Stock وSource Warehouse وCreate Quality Inspection بعد تحديث المخزون: إعداد «Allow Update Stock In Sales Invoice» مش بيتحفظ (SI-43). ومسح فاتورة ملغية بعد تفعيل «مسح قيود الـ ledger عند الإلغاء»: تغيير إعداد Accounts Settings ده مكانش مسموح","فاتورة POS جديدة كاملة من شاشات POS (محتاجة POS Opening Entry لنفس المستخدم وده موديول منفصل)، وحقلي «Is Created Using POS» وPOS Closing Entry","أثر الولاء (earn / redeem، والولاء مقفول في Accounts Settings) والمرتجع لفاتورة استردت نقاط؛ وأصناف serial وbatch؛ وجدول Product Bundle Items؛ ومعظم حالات حدود الحقول وأنواع الضريبة وجدول شروط الدفع والباركود المعلّمة «Not executed» في الملف","قوايم Get Items From بأوامر بيع «To Bill / Partially Billed» وإذونات تسليم «To Bill» (مفيش مستندات بالشكل ده للعميل التجريبي)، وحد الـ 50 مستند في SI-16 القديمة، والصلاحيات والفترات المقفولة"],"bugs":"المشاكل","search":"ابحث بالرقم أو العنوان أو رقم الحالة","allSev":"كل درجات الخطورة","allLayer":"Backend وFrontend","allStatus":"كل الحالات","of":"من","sev":{"Critical":"حرجة","High":"عالية","Medium":"متوسطة","Low":"منخفضة"},"status":{"New":"جديدة","In Progress":"جاري العمل","Fixed":"تم الإصلاح","Retest Passed":"نجحت إعادة الاختبار","Reopened":"أُعيد فتحها","Not a Bug":"ليست مشكلة","Cannot Reproduce":"لا يمكن إعادة الإنتاج","Deferred":"مؤجلة"},"f":{"tc":"رقم حالة الاختبار","srs":"مرجع الـ SRS","steps":"خطوات إعادة الإنتاج","exp":"النتيجة المتوقعة","act":"النتيجة الفعلية","code":"دليل الباك إند (الطلب والرد)","shots":"لقطات الشاشة","fix":"الحل المقترح"},"srsPrefix":"Accounting SRS V1.0, Sales Invoice","fb":{"title":"رد المطور","status":"الحالة","as":"المسؤول","build":"الإصدار","cm":"تعليق","save":"حفظ الرد","devName":"اسم المطور","buildPh":"اتصلحت في إصدار / commit","cmPh":"سبب المشكلة، أو ملاحظات الإصلاح، أو أسئلة للتيستر","last":"آخر تحديث","by":"بواسطة","none":"لا يوجد رد بعد","saving":"جاري الحفظ…","err":"تعذّر الحفظ. جرّب تاني.","ok":"الرد بيتحفظ لكل من يفتح التقرير. التيستر هيشوفه ويعيد الاختبار.","ro":"تقدر تقرأ الردود هنا. اطلب من صاحب التقرير صلاحية Contributor عشان تكتب.","na":"تخزين الردود غير متاح في هذا العرض."},"none":"مفيش مشاكل بتطابق الفلاتر دي.","rt":"خطة إعادة الاختبار: واقفين فين","rtBody":[["p","الجولة التالتة لـ Sales Invoice خلصت. إعادة الاختبار تبدأ لما المطورين يعلّموا SI-33 كـ Fixed هنا (أو يبلّغوا الـ tester)؛ SI-33 الأول لأن فاتورة بخصم إضافي مبتتعملش من الشاشة، وبعده SI-34 وSI-35."],["h","لما يوصل إصلاح"],["ol",["كرر SI-33: اختار Apply On واكتب نسبة وبعدين مبلغ، وراجع الإجماليات وSave؛ لازم مفيش نافذة ولا حقول إجبارية زيادة.","كرر SI-34 وSI-35 وSI-36 على الشاشة؛ وSI-37 لـ SI-42 فحوصات شاشة سريعة.","شغّل سبيكات srs-si-acc-*.spec.ts تاني بـ --project=chromium --workers=1 --headed؛ والفحوصات المعلّمة known bugs بتبقى خضرا لما تتصلح.","بعد إصلاح SI-43 شغّل سيناريوهات Update Stock والحالات المعتمدة على الإعدادات المكتوبة تحت «ماتنفذش».","حدّث حالة كل مشكلة في صندوق الـ feedback تحت."]]],"obs":["حالة المشاكل الـ 32 القديمة بعد التشغيل ده. اتصلحت: SI-04 (Print without Amount وGroup same items موجودين)، وSI-05 (قايمة الأسعار الافتراضية Standard Selling بالـ SAR)، وSI-06 (قالب VAT - E بيتقبل)، وSI-08 (تاريخ استحقاق قبل الترحيل بيترفض)، وSI-10 (Get Items From بيفتح)، وSI-12 (حقول Loyalty Redemption موجودة)، وSI-17 (نافذة Setting بتعرض الأعمدة وفيها Reset)، وSI-21 (Create › Payment بيفتح شاشة Add Payment Entry)، وSI-22 (الإجماليات بعد Get Items)، وSI-26 (الأصول الثابتة مبتتعرضش)، وSI-27 (شارة الحالة في الهيدر بالعربي)، وSI-28 (الفواتير الملغية بتعرض No Credit / No Refund).","لسه مفتوحة: SI-01 وSI-09 (شطب 900 على فاتورة 500 وشطب بالسالب بيتقبلوا)، وSI-03 (Delete في شريط القايمة لفاتورة معتمدة، ومعاه الهيدر شوف SI-34)، وSI-13 وSI-14 (Create › Return بيحفظ draft فورًا، ACC-SINV-2026-02834، بمستودع المجموعة «All Warehouses - E»)، وSI-18 (مستودع مجموعة وUOM مش للصنف بيتقبلوا)، وSI-19 (خصم إضافي بالسالب بيتقبل في نداء الإنشاء)، وSI-23 (وصف صنف 600 حرف بيتقبل؛ وحد Customer PO هو 140 مش 100)، وSI-24 (خطأ MySQLdb خام لكمية 1e15 ونص «Incorrect value» خام لسعر بالسالب)، وSI-25 (كمية 0.0000001 بتتحفظ 0)، وSI-29 (View Stock Ledger ظاهر لفواتير من غير تحديث مخزون)، وSI-30 (مفيش عمود «No.» في جدول الأصناف؛ وعنوان عمود القايمة بقى «اسم العميل»)، وSI-31 (مفيش حقل Asset، شوف SI-37).","اتغيرت / مش مؤكدة: SI-02 بقت مقصودة (Sales Order وDelivery Note مش إجباريين)، وSI-11 اتسحبت (الـ SRS الجديد محدد Hold وResume وClose وRe-open Hidden)، وSI-15 (Edit Row بيفتح دلوقتي من غير الخطأ؛ ورسالة الوصف غلط، SI-36)، وSI-07 (أسماء الحالات ماتعادش اختبارها)، وSI-16 (بيعرض 7 مستندات بس فحد الـ 50 ماتجرّبش)، وSI-20 (الصنف التجريبي خدمة فمقارنة التقييم مش بتظهر)، وSI-32 (مشاكل الترجمة لسه، شوف SI-39).","ملاحظات على الـ SRS: الـ SRS الجديد معلّم حقول كتير بالأحمر؛ والمراجعة دي اعتبرت الأحمر Hidden (مجموعة Hold وCommission وSales Team وAuto Repeat وUTM وBarcode وHas Item Scanned وGrant Commission وMaintenance Schedule). وخانة «Update Outstanding for Self» بتظهر في المرتجع بس (بتظهر مع Is Return وON افتراضي) والـ SRS بيذكرها لكل فاتورة؛ ونص تحذير الكمية في الـ SRS معكوس؛ ومحتوى Terms حده 500 لكن في قوالب Terms محفوظة أطول وبعدين Save بيفشل بـ «terms: يجب ألا يتجاوز النص 500 حرفاً». والشاشة فيها حقول مش في الـ SRS (Invoice Type ومفاتيح الفوترة الإلكترونية وDiscount Account / Reason).","داتا الاختبار: المستخدم سمح بعد كده بمسح فواتير الاختبار بتاعتي بس، واللي اتمسح فعلًا هو drafts الاختبار بتاعتي ACC-SINV-2026-02887 و02887-1 (اختبارات الحذف). والباقي فضل: drafts ACC-SINV-2026-02821 لـ 02831 و02834 لـ 02846 (منهم تلاتة اتعملوا من الشاشة بخصم وشطب وكمية كبيرة)، ومعتمدين ACC-SINV-2026-02830 و02832، وملغية ACC-SINV-2026-02833 ومعاها draft المعدّل 02833-1. وSelling Settings ماتغيرتش (قيمة «Allow Update Stock In Sales Invoice» لسه 0)."],"obsTitle":"ملاحظات محتاجة قرار من الـ SRS","rd":"إزاي تقرأ التقرير","rdBody":["درجة الخطورة: «حرجة» يعني بتوقف عملية أساسية وملهاش حل بديل. «عالية» يعني بتكسر قاعدة في الـ SRS بتغيّر البيانات أو اللي المستخدم يقدر يعمله. «متوسطة» يعني سلوك غلط وفيه حل بديل. «منخفضة» يعني شكلي أو بسيط. الأولوية P1 لـ P4 هي ترتيب الإصلاح المقترح. «الطبقة» بتقول الإصلاح غالبًا فين؛ بتظهر Backend وFrontend مع بعض لما الدليل بيشاور على عدم توافق بينهم.","أسماء الاختبارات في الملف بتبدأ برقم حالة الاختبار من شيت Delivery Note (TC-DNL وTC-DNA وTC-DNW وTC-DNG وTC-DNM وTC-DND)، فأي فحص بيفشل بنرجع بيه للشيت علطول."]}};
+
+let LANG = 'en';
+try { const s = localStorage.getItem('ps-report-lang'); if (s === 'ar' || s === 'en') LANG = s; } catch (e) {}
+const L = () => T[LANG];
+const $ = (s, r=document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) { if (k === 'class') e.className = v; else if (k === 'text') e.textContent = v; else e.setAttribute(k, v); }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function field(label, ...content) { return h('div', {class:'field'}, h('span', {class:'eyebrow', text:label}), ...content); }
+function textOf(b, key) { const a = BUG_AR[b.id]; if (LANG === 'ar' && a) { const m = {title:'t', area:'area', srs:'srs', steps:'steps', expected:'exp', actual:'act', fix:'fix'}[key]; if (a[m] != null) return a[m]; } return b[key]; }
+const feedback = new Map();
+let dbRef = null, canWrite = true, who = 'Developer';
+const statusOf = (id) => (feedback.get(id) || {}).status || 'New';
+
+function renderStatic() {
+  const t = L();
+  document.documentElement.lang = t.lang; document.title = t.title;
+  $('#wrap').dir = t.dir;
+  $('#eyebrow').textContent = t.eyebrow; $('#h1').textContent = t.h1; $('#lede').textContent = t.lede;
+  $('#langBtn').textContent = t.btn;
+  const meta = $('#meta'); meta.textContent = '';
+  t.meta.forEach(([k, v]) => meta.append(h('span', {}, k + ' ', h('b', {class: v.includes('/') || v.includes('.') ? 'ltr' : '', text:v}))));
+  $('#cov').textContent = t.cov;
+  const cb = $('#covBody'); cb.textContent = '';
+  const sum = (i) => t.covRows.reduce((s, r) => s + r[i], 0);
+  const tbl = h('table', {}, h('thead', {}, h('tr', {}, t.covHead.map((c, i) => h('th', {class: i ? 'num' : '', text:c})))),
+    h('tbody', {}, t.covRows.map(r => h('tr', {}, h('td', {text:r[0]}), h('td', {class:'num', text:String(r[1])}), h('td', {class:'num pass', text:String(r[2])}), h('td', {class:'num fail', text:String(r[3])}), h('td', {class:'num', text:String(r[4])}))),
+      h('tr', {}, h('td', {}, h('b', {text:t.total})), h('td', {class:'num'}, h('b', {text:String(sum(1))})), h('td', {class:'num pass'}, h('b', {text:String(sum(2))})), h('td', {class:'num fail'}, h('b', {text:String(sum(3))})), h('td', {class:'num'}, h('b', {text:String(sum(4))})))));
+  cb.append(h('div', {class:'panel tablewrap'}, tbl), h('p', {class:'small', text:t.covNote}),
+    h('div', {class:'grid2'}, h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.okTitle}), h('ul', {}, t.ok.map(x => h('li', {text:x})))),
+                              h('div', {class:'panel field'}, h('span', {class:'eyebrow', text:t.noTitle}), h('ul', {}, t.no.map(x => h('li', {text:x}))))));
+  $('#bl').textContent = t.bugs;
+  $('#q').placeholder = t.search;
+  const keep = [$('#fSev').value, $('#fLayer').value, $('#fStatus').value];
+  const fs = $('#fSev'); fs.textContent = ''; fs.append(h('option', {value:'', text:t.allSev}), ...['Critical','High','Medium','Low'].map(s => h('option', {value:s, text:t.sev[s]})));
+  const fl = $('#fLayer'); fl.textContent = ''; fl.append(h('option', {value:'', text:t.allLayer}), h('option', {value:'Backend', text:'Backend'}), h('option', {value:'Frontend', text:'Frontend'}));
+  const ft = $('#fStatus'); ft.textContent = ''; ft.append(h('option', {value:'', text:t.allStatus}), ...STATUSES.map(s => h('option', {value:s, text:t.status[s]})));
+  fs.value = keep[0] || ''; fl.value = keep[1] || ''; ft.value = keep[2] || '';
+  $('#rt').textContent = t.rt;
+  const rb = $('#rtBody'); rb.textContent = '';
+  t.rtBody.forEach(([k, v]) => { if (k === 'p') rb.append(h('p', {text:v})); else if (k === 'h') rb.append(h('span', {class:'eyebrow sp', text:v})); else rb.append(h('ol', {}, v.map(x => h('li', {text:x})))); });
+  $('#ob').textContent = t.obsTitle; const ol = $('#obs'); ol.textContent = ''; t.obs.forEach(o => ol.append(h('li', {text:o})));
+  $('#rd').textContent = t.rd; const rd = $('#rdBody'); rd.textContent = ''; t.rdBody.forEach(p => rd.append(h('p', {text:p})));
+}
+function renderStats() {
+  const t = L(), n = (f) => BUGS.filter(f).length;
+  const st = $('#stats'); st.textContent = '';
+  const add = (cls, num, label) => st.append(h('div', {class:'stat ' + cls}, h('span', {class:'n', text:String(num)}), h('span', {class:'l', text:label})));
+  add('', BUGS.length, t.stats[0]); add('crit', n(b => b.sev === 'Critical'), t.stats[1]); add('high', n(b => b.sev === 'High'), t.stats[2]);
+  add('med', n(b => b.sev === 'Medium'), t.stats[3]); add('low', n(b => b.sev === 'Low'), t.stats[4]);
+  add('', n(b => b.layer === 'Backend'), t.stats[5]); add('', n(b => b.layer === 'Frontend'), t.stats[6]);
+  add('ok', BUGS.filter(b => ['Fixed','Retest Passed'].includes(statusOf(b.id))).length, t.stats[7]);
+}
+function bugEl(b) {
+  const t = L(), fb = feedback.get(b.id) || {}, st = statusOf(b.id);
+  const d = h('details', {class:'bug', 'data-sev':b.sev, id:b.id});
+  d.append(h('summary', {}, h('span', {class:'id', text:b.id}), h('span', {class:'t', text:textOf(b, 'title')}),
+    h('span', {class:'chip st ' + st.replace(/ /g,''), text:t.status[st]}),
+    h('span', {class:'chips'}, h('span', {class:'chip ' + b.sev, text:t.sev[b.sev]}), h('span', {class:'chip', text:b.pri}),
+      h('span', {class:'chip', text:b.layer + (b.also ? ' + ' + b.also : '')}), h('span', {class:'chip', text:textOf(b, 'area')}))));
+  const body = h('div', {class:'body'});
+  const tcs = b.tc.map(x => (LANG === 'ar' && TC_AR[x]) || x).join(' · ');
+  body.append(h('div', {class:'grid2'}, field(t.f.tc, h('p', {class:'mono ltr', text:tcs})), field(t.f.srs, h('p', {text:t.srsPrefix + ': ' + textOf(b, 'srs')}))));
+  body.append(field(t.f.steps, h('ol', {}, textOf(b, 'steps').map(s => h('li', {text:s})))));
+  body.append(h('div', {class:'grid2'}, field(t.f.exp, h('p', {text:textOf(b, 'expected')})), field(t.f.act, h('p', {text:textOf(b, 'actual')}))));
+  if (b.code) body.append(field(t.f.code, h('pre', {class:'ltr', text:b.code})));
+  if (b.shots) body.append(field(t.f.shots, h('div', {class:'shots'}, b.shots.map(([k, cap]) => SHOTS[k] ? h('figure', {}, h('img', {src:SHOTS[k], alt:cap, loading:'lazy'}), h('figcaption', {text: LANG === 'ar' && SHOT_AR[k] ? SHOT_AR[k] : cap})) : null))));
+  if (b.fix) body.append(field(t.f.fix, h('p', {text:textOf(b, 'fix')})));
+  const sel = h('select', {id:'st-' + b.id}, STATUSES.map(s => h('option', {value:s, text:t.status[s]}))); sel.value = st;
+  const who_ = h('input', {type:'text', id:'as-' + b.id, placeholder:t.fb.devName}); who_.value = fb.assignee || '';
+  const ver = h('input', {type:'text', id:'vr-' + b.id, placeholder:t.fb.buildPh}); ver.value = fb.build || '';
+  const cm = h('textarea', {id:'cm-' + b.id, placeholder:t.fb.cmPh}); cm.value = fb.comment || '';
+  const save = h('button', {class:'primary', type:'button', text:t.fb.save});
+  const msg = h('span', {class:'last', text: fb.updatedAt ? t.fb.last + ' ' + new Date(fb.updatedAt).toLocaleString(LANG === 'ar' ? 'ar-EG' : undefined) + (fb.by ? ' ' + t.fb.by + ' ' + fb.by : '') : t.fb.none});
+  const dis = !dbRef || !canWrite;
+  [sel, who_, ver, cm, save].forEach(x => x.disabled = dis);
+  save.addEventListener('click', async () => {
+    save.disabled = true; msg.textContent = t.fb.saving;
+    try { await dbRef.collection('bugs').doc(b.id).set({ status:sel.value, assignee:who_.value.trim(), build:ver.value.trim(), comment:cm.value.trim(), by:who, updatedAt:new Date().toISOString() }); }
+    catch (e) { msg.textContent = t.fb.err; save.disabled = false; }
+  });
+  body.append(h('div', {class:'fb'}, h('span', {class:'eyebrow', text:t.fb.title}),
+    h('div', {class:'row'}, h('label', {}, t.fb.status, sel), h('label', {}, t.fb.as, who_), h('label', {}, t.fb.build, ver)),
+    h('label', {}, t.fb.cm, cm), h('div', {class:'row'}, save, msg),
+    h('span', {class:'note', text: dbRef ? (canWrite ? t.fb.ok : t.fb.ro) : t.fb.na})));
+  d.append(body); return d;
+}
+function visible(b) {
+  const q = $('#q').value.trim().toLowerCase(), sev = $('#fSev').value, layer = $('#fLayer').value, st = $('#fStatus').value;
+  if (sev && b.sev !== sev) return false;
+  if (layer && b.layer !== layer && b.also !== layer) return false;
+  if (st && statusOf(b.id) !== st) return false;
+  if (q && !(b.id + ' ' + b.title + ' ' + (BUG_AR[b.id] ? BUG_AR[b.id].t : '') + ' ' + b.tc.join(' ') + ' ' + b.area).toLowerCase().includes(q)) return false;
+  return true;
+}
+function renderBugs() {
+  const open = new Set([...document.querySelectorAll('details.bug[open]')].map(x => x.id));
+  const focusId = document.activeElement && document.activeElement.id;
+  const list = BUGS.filter(visible), wrap = $('#bugs'); wrap.textContent = '';
+  for (const b of list) { const el = bugEl(b); if (open.has(b.id)) el.open = true; wrap.append(el); }
+  if (!list.length) wrap.append(h('p', {class:'small', text:L().none}));
+  $('#count').textContent = list.length + ' ' + L().of + ' ' + BUGS.length;
+  if (focusId) { const f = document.getElementById(focusId); if (f) f.focus(); }
+  renderStats();
+}
+function setLang(l) { LANG = l; try { localStorage.setItem('ps-report-lang', l); } catch (e) {} renderStatic(); renderBugs(); }
+function init() {
+  $('#langBtn').addEventListener('click', () => setLang(LANG === 'en' ? 'ar' : 'en'));
+  ['q','fSev','fLayer','fStatus'].forEach(id => $('#' + id).addEventListener('input', renderBugs));
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
+      const lb = h('div', {class:'lightbox', role:'dialog', 'aria-label':'Screenshot'}, h('img', {src:e.target.src, alt:e.target.alt}));
+      lb.addEventListener('click', () => lb.remove()); document.body.append(lb);
+    }
+  });
+  renderStatic(); renderBugs();
+  if (location.hash.length > 1) { const t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+}
+init();
+(async () => {
+  try {
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db) return;
+    dbRef = db;
+    if (user) { try { const me = await user.me(); if (me && me.name) who = me.name; } catch (e) {} const w = user.can && user.can('data.write'); if (w === false) canWrite = false; }
+    db.collection('bugs').onSnapshot((snap) => { feedback.clear(); snap.docs.forEach(d => feedback.set(d.id, d.data())); renderBugs(); }, () => { renderBugs(); });
+    renderBugs();
+  } catch (e) { /* feedback stays unavailable; the report still reads fine */ }
+})();
+</script>
+
+
+
+

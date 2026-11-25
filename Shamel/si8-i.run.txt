@@ -1,0 +1,41 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\si8-i-flows.spec.ts:11:5 › I01 Create > Return / Credit Note
+[3/4] [chromium] › Shamel\si8-i-flows.spec.ts:34:5 › I02 Debit Note (Is Rate Adjustment Entry)
+[4/4] [chromium] › Shamel\si8-i-flows.spec.ts:45:5 › I03 Update Stock appears only when the setting is on (setting restored)
+  1) [chromium] › Shamel\si8-i-flows.spec.ts:45:5 › I03 Update Stock appears only when the setting is on (setting restored) 
+
+    Error: I03-3 Update Stock switch is shown when the setting is on []
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-i-flows.spec.ts:54:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-i-flows-I03-Update-Sto-49474-ing-is-on-setting-restored--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-i-flows-I03-Update-Sto-49474-ing-is-on-setting-restored--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-i-flows-I03-Update-Sto-49474-ing-is-on-setting-restored--chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\si8-i-flows.spec.ts:45:5 › I03 Update Stock appears only when the setting is on (setting restored) 
+  3 passed (1.6m)

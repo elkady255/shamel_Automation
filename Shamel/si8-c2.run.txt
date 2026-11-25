@@ -1,0 +1,7 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\si8-c2-probe.spec.ts:7:7 › C2 additional discount on Grand Total
+[3/3] [chromium] › Shamel\si8-c2-probe.spec.ts:7:7 › C2 additional discount on Net Total
+  3 passed (2.0m)

@@ -1,0 +1,1129 @@
+
+Running 50 tests using 1 worker
+
+[1/50] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:19:5 › TC-SIB-001 full flow: Sales Order, Delivery Note, Sales Invoice and a full payment
+  1) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:19:5 › TC-SIB-001 full flow: Sales Order, Delivery Note, Sales Invoice and a full payment 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:21:14
+
+    Error Context: test-results\srs-sales-invoice-business-787a4--Invoice-and-a-full-payment-chromium\error-context.md
+
+
+[3/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:35:5 › TC-SID-013 submit posts the receivable and the income in the General Ledger
+  2) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:35:5 › TC-SID-013 submit posts the receivable and the income in the General Ledger 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:36:14
+
+    Error Context: test-results\srs-sales-invoice-business-e94bd-ncome-in-the-General-Ledger-chromium\error-context.md
+
+
+[4/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:45:5 › TC-SIT-051 taxes from the template are added to the Grand Total
+  3) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:45:5 › TC-SIT-051 taxes from the template are added to the Grand Total 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:46:14
+
+    Error Context: test-results\srs-sales-invoice-business-80b1b-re-added-to-the-Grand-Total-chromium\error-context.md
+
+
+[5/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:65:5 › TC-SIT-036 additional discount on Net Total reduces the Grand Total
+  4) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:65:5 › TC-SIT-036 additional discount on Net Total reduces the Grand Total 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:66:17
+
+    Error Context: test-results\srs-sales-invoice-business-8cedd-tal-reduces-the-Grand-Total-chromium\error-context.md
+
+
+[6/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:72:5 › TC-SIG-070 a Payment Terms Template builds a Payment Schedule that adds up to the Grand Total
+  5) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:72:5 › TC-SIG-070 a Payment Terms Template builds a Payment Schedule that adds up to the Grand Total 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:73:17
+
+    Error Context: test-results\srs-sales-invoice-business-1edec--adds-up-to-the-Grand-Total-chromium\error-context.md
+
+
+[7/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:81:5 › TC-SIL-007 a partial payment makes the invoice partially paid
+  6) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:81:5 › TC-SIL-007 a partial payment makes the invoice partially paid 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:82:14
+
+    Error Context: test-results\srs-sales-invoice-business-c958b--the-invoice-partially-paid-chromium\error-context.md
+
+
+[8/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:90:5 › TC-SIG-009 a payment larger than the outstanding amount is rejected
+  7) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:90:5 › TC-SIG-009 a payment larger than the outstanding amount is rejected 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:91:14
+
+    Error Context: test-results\srs-sales-invoice-business-43deb-standing-amount-is-rejected-chromium\error-context.md
+
+
+[9/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:97:5 › TC-SIL-009 an unpaid invoice with a past due date is Overdue
+  8) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:97:5 › TC-SIL-009 an unpaid invoice with a past due date is Overdue 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:98:33
+
+    Error Context: test-results\srs-sales-invoice-business-41678--a-past-due-date-is-Overdue-chromium\error-context.md
+
+
+[10/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:108:5 › TC-SID-018 cancelling an unpaid invoice reverses the ledger and reopens the Sales Order
+  9) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:108:5 › TC-SID-018 cancelling an unpaid invoice reverses the ledger and reopens the Sales Order 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:109:14
+
+    Error Context: test-results\srs-sales-invoice-business-4c59f-and-reopens-the-Sales-Order-chromium\error-context.md
+
+
+[11/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:121:5 › TC-SID-021 an invoice with a payment cannot be cancelled until the payment is cancelled
+  10) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:121:5 › TC-SID-021 an invoice with a payment cannot be cancelled until the payment is cancelled 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:122:14
+
+    Error Context: test-results\srs-sales-invoice-business-ab177-il-the-payment-is-cancelled-chromium\error-context.md
+
+
+[12/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:133:5 › TC-SID-025 a cancelled invoice can be amended and the amended invoice submitted
+  11) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:133:5 › TC-SID-025 a cancelled invoice can be amended and the amended invoice submitted 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:134:14
+
+    Error Context: test-results\srs-sales-invoice-business-748eb-e-amended-invoice-submitted-chromium\error-context.md
+
+
+[13/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:143:5 › TC-SIF-012 billing part of the order leaves it To Bill and billing the rest completes it
+  12) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:143:5 › TC-SIF-012 billing part of the order leaves it To Bill and billing the rest completes it 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:144:14
+
+    Error Context: test-results\srs-sales-invoice-business-2cc76-lling-the-rest-completes-it-chromium\error-context.md
+
+
+[14/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:156:5 › TC-SIF-014 an invoice for more than was delivered is rejected
+  13) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:156:5 › TC-SIF-014 an invoice for more than was delivered is rejected 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:157:33
+
+    Error Context: test-results\srs-sales-invoice-business-c2846-n-was-delivered-is-rejected-chromium\error-context.md
+
+
+[15/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:163:5 › TC-SID-063 a partial return creates a credit note against the invoice
+  14) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:163:5 › TC-SID-063 a partial return creates a credit note against the invoice 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:164:14
+
+    Error Context: test-results\srs-sales-invoice-business-271e1-it-note-against-the-invoice-chromium\error-context.md
+
+
+[16/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:174:5 › TC-SID-066 a return for more than the invoice quantity is rejected
+  15) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:174:5 › TC-SID-066 a return for more than the invoice quantity is rejected 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:175:14
+
+    Error Context: test-results\srs-sales-invoice-business-1ba84-nvoice-quantity-is-rejected-chromium\error-context.md
+
+
+[17/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:181:5 › TC-SID-067 after a full return no further return is allowed
+  16) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:181:5 › TC-SID-067 after a full return no further return is allowed 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:182:14
+
+    Error Context: test-results\srs-sales-invoice-business-9078e-o-further-return-is-allowed-chromium\error-context.md
+
+
+[18/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:190:5 › TC-SIH-049 a currency without an exchange rate is rejected
+  17) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:190:5 › TC-SIH-049 a currency without an exchange rate is rejected 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:191:17
+
+    Error Context: test-results\srs-sales-invoice-business-95ee3-n-exchange-rate-is-rejected-chromium\error-context.md
+
+
+[19/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:197:5 › TC-SIH-015 a Payment Due Date before the Posting Date is rejected
+  18) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:197:5 › TC-SIH-015 a Payment Due Date before the Posting Date is rejected 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:198:17
+
+    Error Context: test-results\srs-sales-invoice-business-2e3fd-he-Posting-Date-is-rejected-chromium\error-context.md
+
+
+[20/50] [chromium] › Shamel\srs-sales-invoice-business.spec.ts:205:5 › TC-SIH-001 an invoice made without a Sales Order is either rejected naming the Sales Order or accepted and recorded
+  19) [chromium] › Shamel\srs-sales-invoice-business.spec.ts:205:5 › TC-SIH-001 an invoice made without a Sales Order is either rejected naming the Sales Order or accepted and recorded 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-business.spec.ts:206:33
+
+    Error Context: test-results\srs-sales-invoice-business-1c6d7-er-or-accepted-and-recorded-chromium\error-context.md
+
+
+[21/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:15:5 › TC-SIG-020 an advance payment is allocated automatically and reduces the outstanding amount
+  20) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:15:5 › TC-SIG-020 an advance payment is allocated automatically and reduces the outstanding amount 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:18:17
+
+    Error Context: test-results\srs-sales-invoice-payments-1ef3b-uces-the-outstanding-amount-chromium\error-context.md
+
+
+[22/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:28:5 › TC-SIG-024 an advance larger than the invoice is only allocated up to the Grand Total
+  21) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:28:5 › TC-SIG-024 an advance larger than the invoice is only allocated up to the Grand Total 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:31:67
+
+    Error Context: test-results\srs-sales-invoice-payments-df281-cated-up-to-the-Grand-Total-chromium\error-context.md
+
+
+[23/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:37:5 › TC-SIG-029 an advance of another customer is not allocated
+  22) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:37:5 › TC-SIG-029 an advance of another customer is not allocated 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:39:67
+
+    Error Context: test-results\srs-sales-invoice-payments-d67c0-r-customer-is-not-allocated-chromium\error-context.md
+
+
+[24/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:44:5 › TC-SIG-027 with automatic allocation off the Advances table stays empty until it is filled by the user
+  23) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:44:5 › TC-SIG-027 with automatic allocation off the Advances table stays empty until it is filled by the user 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:47:67
+
+    Error Context: test-results\srs-sales-invoice-payments-a656f-il-it-is-filled-by-the-user-chromium\error-context.md
+
+
+[25/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:52:5 › TC-SIG-032 an invoice that used an advance cannot be cancelled until the advance is un-linked
+  24) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:52:5 › TC-SIG-032 an invoice that used an advance cannot be cancelled until the advance is un-linked 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:55:81
+
+    Error Context: test-results\srs-sales-invoice-payments-be0ac-il-the-advance-is-un-linked-chromium\error-context.md
+
+
+[26/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:63:5 › TC-SIG-035 a write off amount reduces the outstanding amount and is posted to the write off account
+  25) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:63:5 › TC-SIG-035 a write off amount reduces the outstanding amount and is posted to the write off account 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:65:17
+
+    Error Context: test-results\srs-sales-invoice-payments-949e5-ed-to-the-write-off-account-chromium\error-context.md
+
+
+[27/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:74:5 › TC-SIG-037 a write off larger than the invoice is rejected
+[28/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:85:5 › TC-SIG-038 writing off the whole invoice makes it fully paid
+  26) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:85:5 › TC-SIG-038 writing off the whole invoice makes it fully paid 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:87:17
+
+    Error Context: test-results\srs-sales-invoice-payments-df4d6-invoice-makes-it-fully-paid-chromium\error-context.md
+
+
+[29/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:93:5 › TC-SID-068 a payment can be un-reconciled from the invoice without cancelling it
+  27) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:93:5 › TC-SID-068 a payment can be un-reconciled from the invoice without cancelling it 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:94:14
+
+    Error Context: test-results\srs-sales-invoice-payments-1ee0d-voice-without-cancelling-it-chromium\error-context.md
+
+
+[30/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:107:5 › TC-SID-064 a refund of a credit note settles the return invoice
+  28) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:107:5 › TC-SID-064 a refund of a credit note settles the return invoice 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:108:14
+
+    Error Context: test-results\srs-sales-invoice-payments-122d6--settles-the-return-invoice-chromium\error-context.md
+
+
+[31/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:122:5 › TC-SID-065 with Update Outstanding for Self checked the return keeps its own outstanding and the original is unchanged
+  29) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:122:5 › TC-SID-065 with Update Outstanding for Self checked the return keeps its own outstanding and the original is unchanged 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:123:14
+
+    Error Context: test-results\srs-sales-invoice-payments-a71e1-d-the-original-is-unchanged-chromium\error-context.md
+
+
+[32/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:132:5 › TC-SID-066 with Update Outstanding for Self unchecked the return reduces the outstanding of the original invoice
+  30) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:132:5 › TC-SID-066 with Update Outstanding for Self unchecked the return reduces the outstanding of the original invoice 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:133:14
+
+    Error Context: test-results\srs-sales-invoice-payments-c5183-ing-of-the-original-invoice-chromium\error-context.md
+
+
+[33/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:141:5 › TC-SID-070 an invoice with a submitted return can still be cancelled only after the return is cancelled
+  31) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:141:5 › TC-SID-070 an invoice with a submitted return can still be cancelled only after the return is cancelled 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:142:14
+
+    Error Context: test-results\srs-sales-invoice-payments-31b37-ter-the-return-is-cancelled-chromium\error-context.md
+
+
+[34/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:153:5 › TC-SID-010 a submitted invoice cannot be edited
+  32) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:153:5 › TC-SID-010 a submitted invoice cannot be edited 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:154:14
+
+    Error Context: test-results\srs-sales-invoice-payments-e9cfb-ed-invoice-cannot-be-edited-chromium\error-context.md
+
+
+[35/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:161:5 › TC-SID-031 a submitted invoice cannot be deleted
+  33) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:161:5 › TC-SID-031 a submitted invoice cannot be deleted 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:162:14
+
+    Error Context: test-results\srs-sales-invoice-payments-107ea-d-invoice-cannot-be-deleted-chromium\error-context.md
+
+
+[36/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:169:5 › TC-SID-011 an invoice cannot be submitted twice
+  34) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:169:5 › TC-SID-011 an invoice cannot be submitted twice 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:170:14
+
+    Error Context: test-results\srs-sales-invoice-payments-ef743-e-cannot-be-submitted-twice-chromium\error-context.md
+
+
+[37/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:177:5 › TC-SIT-029 the Rounded Total follows the Grand Total
+  35) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:177:5 › TC-SIT-029 the Rounded Total follows the Grand Total 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:178:17
+
+    Error Context: test-results\srs-sales-invoice-payments-b23ad-tal-follows-the-Grand-Total-chromium\error-context.md
+
+
+[38/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:193:5 › TC-SII-020 selling in Box (12 Nos) deducts 24 stock units for 2 boxes
+  36) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:193:5 › TC-SII-020 selling in Box (12 Nos) deducts 24 stock units for 2 boxes 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:206:14
+
+    Error Context: test-results\srs-sales-invoice-payments-6a95f--24-stock-units-for-2-boxes-chromium\error-context.md
+
+
+[39/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:220:5 › TC-SII-079 a Product Bundle deducts its components from stock and lists them in the Bundle Items table
+  37) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:220:5 › TC-SII-079 a Product Bundle deducts its components from stock and lists them in the Bundle Items table 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:228:14
+
+    Error Context: test-results\srs-sales-invoice-payments-498d8-m-in-the-Bundle-Items-table-chromium\error-context.md
+
+
+[40/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:243:5 › TC-SIG-060 the billing address and the contact are fetched from the customer
+  38) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:243:5 › TC-SIG-060 the billing address and the contact are fetched from the customer 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:244:17
+
+    Error Context: test-results\srs-sales-invoice-payments-54921-e-fetched-from-the-customer-chromium\error-context.md
+
+
+[41/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:249:5 › TC-SIG-066 a customer without an address still gets an invoice
+  39) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:249:5 › TC-SIG-066 a customer without an address still gets an invoice 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:250:17
+
+    Error Context: test-results\srs-sales-invoice-payments-4826b-dress-still-gets-an-invoice-chromium\error-context.md
+
+
+[42/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:255:5 › TC-SIG-054 invoicing a customer with a Loyalty Program earns loyalty points on submit
+  40) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:255:5 › TC-SIG-054 invoicing a customer with a Loyalty Program earns loyalty points on submit 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:258:17
+
+    Error Context: test-results\srs-sales-invoice-payments-2293c-ns-loyalty-points-on-submit-chromium\error-context.md
+
+
+[43/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:270:5 › TC-SIG-055 cancelling the invoice cancels the loyalty points it earned
+  41) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:270:5 › TC-SIG-055 cancelling the invoice cancels the loyalty points it earned 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:272:31
+
+    Error Context: test-results\srs-sales-invoice-payments-d885d-he-loyalty-points-it-earned-chromium\error-context.md
+
+
+[44/50] [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:280:5 › TC-SIG-056 loyalty points can be redeemed on a later invoice
+  42) [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:280:5 › TC-SIG-056 loyalty points can be redeemed on a later invoice 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at draftFor (c:\Playwright_Automation\Shamel\helpers\si-data.ts:125:14)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-payments.spec.ts:282:20
+
+    Error Context: test-results\srs-sales-invoice-payments-94980-redeemed-on-a-later-invoice-chromium\error-context.md
+
+
+[45/50] [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:40:5 › TC-SID-040 a submitted invoice has Hold and Close actions
+[46/50] [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:51:5 › TC-SIM-012 Customer Purchase Order stops at 100 characters
+  43) [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:51:5 › TC-SIM-012 Customer Purchase Order stops at 100 characters 
+
+    Test timeout of 170000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 170000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').getByRole('button', { name: 'More Information', exact: true })
+
+
+      15 | const LOAD = { timeout: 100_000 };
+      16 | const main = (page: Page) => page.getByRole('main');
+    > 17 | const press = (button: Locator) => button.evaluate((e) => (e as HTMLElement).click());
+         |                                           ^
+      18 |
+      19 | async function open(page: Page, hash: string) {
+      20 |   await page.goto('about:blank');
+        at press (c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:17:43)
+        at tab (c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:24:57)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:53:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-sales-invoice-remainin-c8120-der-stops-at-100-characters-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-sales-invoice-remainin-c8120-der-stops-at-100-characters-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-sales-invoice-remainin-c8120-der-stops-at-100-characters-chromium\error-context.md
+
+
+[47/50] [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:60:5 › TC-SIM-013 Customer Purchase Order of 1 character shows a minimum length message
+  44) [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:60:5 › TC-SIM-013 Customer Purchase Order of 1 character shows a minimum length message 
+
+    Test timeout of 170000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 170000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').getByRole('button', { name: 'More Information', exact: true })
+
+
+      15 | const LOAD = { timeout: 100_000 };
+      16 | const main = (page: Page) => page.getByRole('main');
+    > 17 | const press = (button: Locator) => button.evaluate((e) => (e as HTMLElement).click());
+         |                                           ^
+      18 |
+      19 | async function open(page: Page, hash: string) {
+      20 |   await page.goto('about:blank');
+        at press (c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:17:43)
+        at tab (c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:24:57)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:62:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-sales-invoice-remainin-f334a-ws-a-minimum-length-message-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-sales-invoice-remainin-f334a-ws-a-minimum-length-message-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-sales-invoice-remainin-f334a-ws-a-minimum-length-message-chromium\error-context.md
+
+
+[48/50] [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:77:5 › TC-SIT-034 Additional Discount Percentage above 100 is refused
+  45) [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:77:5 › TC-SIT-034 Additional Discount Percentage above 100 is refused 
+
+    Error: insert Sales Order failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return fr
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at Object.insertAndSubmit (c:\Playwright_Automation\Shamel\helpers\api.ts:56:24)
+        at invoice (c:\Playwright_Automation\Shamel\helpers\si-data.ts:56:33)
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:78:17
+
+    Error Context: test-results\srs-sales-invoice-remainin-281fb-entage-above-100-is-refused-chromium\error-context.md
+
+
+[49/50] [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:85:5 › TC-SIG-036 a negative Write Off Amount is refused
+[50/50] [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:94:5 › TC-SIF-003 the Get Items From menu shows Sales Order, Quotation and Delivery Note
+  46) [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:94:5 › TC-SIF-003 the Get Items From menu shows Sales Order, Quotation and Delivery Note 
+
+    Test timeout of 170000ms exceeded.
+
+    Error: locator.click: Test timeout of 170000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').getByRole('button', { name: /^Get Items From/ })
+
+
+       96 |   test.fail(true, 'Known issue: the Get Items From menu never becomes visible');
+       97 |   await open(page, '/new');
+    >  98 |   await page.getByRole('main').getByRole('button', { name: /^Get Items From/ }).click();
+          |                                                                                 ^
+       99 |   await page.waitForTimeout(1500);
+      100 |   const shown = await page.locator('button.cd-action-item').evaluateAll((els) => els.filter((e) => e.getBoundingClientRect().width > 0).map((e) => (e as HTMLElement).innerText.trim()));
+      101 |   observe('visible options after the click: ' + (shown.join(', ') || 'none'));
+        at c:\Playwright_Automation\Shamel\srs-sales-invoice-remaining.spec.ts:98:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-sales-invoice-remainin-f9acf-Quotation-and-Delivery-Note-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-sales-invoice-remainin-f9acf-Quotation-and-Delivery-Note-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-sales-invoice-remainin-f9acf-Quotation-and-Delivery-Note-chromium\error-context.md
+
+
+  46 failed
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:19:5 › TC-SIB-001 full flow: Sales Order, Delivery Note, Sales Invoice and a full payment 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:35:5 › TC-SID-013 submit posts the receivable and the income in the General Ledger 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:45:5 › TC-SIT-051 taxes from the template are added to the Grand Total 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:65:5 › TC-SIT-036 additional discount on Net Total reduces the Grand Total 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:72:5 › TC-SIG-070 a Payment Terms Template builds a Payment Schedule that adds up to the Grand Total 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:81:5 › TC-SIL-007 a partial payment makes the invoice partially paid 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:90:5 › TC-SIG-009 a payment larger than the outstanding amount is rejected 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:97:5 › TC-SIL-009 an unpaid invoice with a past due date is Overdue 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:108:5 › TC-SID-018 cancelling an unpaid invoice reverses the ledger and reopens the Sales Order 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:121:5 › TC-SID-021 an invoice with a payment cannot be cancelled until the payment is cancelled 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:133:5 › TC-SID-025 a cancelled invoice can be amended and the amended invoice submitted 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:143:5 › TC-SIF-012 billing part of the order leaves it To Bill and billing the rest completes it 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:156:5 › TC-SIF-014 an invoice for more than was delivered is rejected 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:163:5 › TC-SID-063 a partial return creates a credit note against the invoice 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:174:5 › TC-SID-066 a return for more than the invoice quantity is rejected 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:181:5 › TC-SID-067 after a full return no further return is allowed 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:190:5 › TC-SIH-049 a currency without an exchange rate is rejected 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:197:5 › TC-SIH-015 a Payment Due Date before the Posting Date is rejected 
+    [chromium] › Shamel\srs-sales-invoice-business.spec.ts:205:5 › TC-SIH-001 an invoice made without a Sales Order is either rejected naming the Sales Order or accepted and recorded 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:15:5 › TC-SIG-020 an advance payment is allocated automatically and reduces the outstanding amount 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:28:5 › TC-SIG-024 an advance larger than the invoice is only allocated up to the Grand Total 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:37:5 › TC-SIG-029 an advance of another customer is not allocated 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:44:5 › TC-SIG-027 with automatic allocation off the Advances table stays empty until it is filled by the user 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:52:5 › TC-SIG-032 an invoice that used an advance cannot be cancelled until the advance is un-linked 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:63:5 › TC-SIG-035 a write off amount reduces the outstanding amount and is posted to the write off account 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:85:5 › TC-SIG-038 writing off the whole invoice makes it fully paid 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:93:5 › TC-SID-068 a payment can be un-reconciled from the invoice without cancelling it 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:107:5 › TC-SID-064 a refund of a credit note settles the return invoice 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:122:5 › TC-SID-065 with Update Outstanding for Self checked the return keeps its own outstanding and the original is unchanged 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:132:5 › TC-SID-066 with Update Outstanding for Self unchecked the return reduces the outstanding of the original invoice 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:141:5 › TC-SID-070 an invoice with a submitted return can still be cancelled only after the return is cancelled 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:153:5 › TC-SID-010 a submitted invoice cannot be edited 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:161:5 › TC-SID-031 a submitted invoice cannot be deleted 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:169:5 › TC-SID-011 an invoice cannot be submitted twice 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:177:5 › TC-SIT-029 the Rounded Total follows the Grand Total 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:193:5 › TC-SII-020 selling in Box (12 Nos) deducts 24 stock units for 2 boxes 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:220:5 › TC-SII-079 a Product Bundle deducts its components from stock and lists them in the Bundle Items table 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:243:5 › TC-SIG-060 the billing address and the contact are fetched from the customer 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:249:5 › TC-SIG-066 a customer without an address still gets an invoice 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:255:5 › TC-SIG-054 invoicing a customer with a Loyalty Program earns loyalty points on submit 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:270:5 › TC-SIG-055 cancelling the invoice cancels the loyalty points it earned 
+    [chromium] › Shamel\srs-sales-invoice-payments.spec.ts:280:5 › TC-SIG-056 loyalty points can be redeemed on a later invoice 
+    [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:51:5 › TC-SIM-012 Customer Purchase Order stops at 100 characters 
+    [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:60:5 › TC-SIM-013 Customer Purchase Order of 1 character shows a minimum length message 
+    [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:77:5 › TC-SIT-034 Additional Discount Percentage above 100 is refused 
+    [chromium] › Shamel\srs-sales-invoice-remaining.spec.ts:94:5 › TC-SIF-003 the Get Items From menu shows Sales Order, Quotation and Delivery Note 
+  4 passed (11.2m)

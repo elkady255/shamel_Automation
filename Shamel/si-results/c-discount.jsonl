@@ -1,0 +1,8 @@
+{"id":"C3-pct-calc","text":"typing the additional discount (pct) does not raise a server error and updates the totals","ok":false,"detail":"[\"MODAL: خطأ في الخادم TypeError: can't multiply sequence by non-int of type 'float' Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة\"]","known":"SI-33"}
+{"id":"C3-pct-labels","text":"labels containing خصم","ok":null,"detail":"[\"تطبيق الخصم الإضافي على\",\"نسبة الخصم الإضافي\",\"مبلغ الخصم الإضافي (بعملة الشركة الأساسية)\",\"مبلغ الخصم الإضافي (العملة)\",\"حساب الخصم *\",\"سبب الخصم *\",\"رمز سبب الخصم\"]"}
+{"id":"C3-pct-save","text":"save","ok":null,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: سبب الخصم مطلوب\"] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new"}
+{"id":"C3-pct-errs","text":"inline errors after closing","ok":null,"detail":"[\"سبب الخصم مطلوب\"]"}
+{"id":"C3-amount-calc","text":"typing the additional discount (amount) does not raise a server error and updates the totals","ok":false,"detail":"[\"MODAL: خطأ في الخادم TypeError: can't multiply sequence by non-int of type 'float' Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة\"]","known":"SI-33"}
+{"id":"C3-amount-labels","text":"labels containing خصم","ok":null,"detail":"[\"تطبيق الخصم الإضافي على\",\"نسبة الخصم الإضافي\",\"مبلغ الخصم الإضافي (بعملة الشركة الأساسية)\",\"مبلغ الخصم الإضافي (العملة)\",\"حساب الخصم *\",\"سبب الخصم *\",\"رمز سبب الخصم\"]"}
+{"id":"C3-amount-save","text":"save","ok":null,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: سبب الخصم مطلوب\"] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new"}
+{"id":"C3-amount-errs","text":"inline errors after closing","ok":null,"detail":"[\"سبب الخصم مطلوب\"]"}

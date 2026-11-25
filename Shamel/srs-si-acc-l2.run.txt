@@ -1,0 +1,91 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:58:5 › L03 credit note: partial then full return, statuses on both documents
+[3/4] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:76:5 › L04 refund of a paid invoice return
+  1) [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:76:5 › L04 refund of a paid invoice return 
+
+    Error: L04-5 Refund Status = Fully Refunded and Refund Amount = 800 بدون استرداد | 0.00 SAR
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (C:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at C:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:91:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L04-refund-of-a-paid-invoice-return-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L04-refund-of-a-paid-invoice-return-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-l-payments-ui-L04-refund-of-a-paid-invoice-return-chromium\error-context.md
+
+
+[4/4] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:94:5 › L05 advance payment: Get Advance Received, allocation and UnReconcile
+  2) [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:94:5 › L05 advance payment: Get Advance Received, allocation and UnReconcile 
+
+    Error: L05-3 Get Advance Received adds the customer advance to the Advances table 0 -> 0
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (C:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at C:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:104:7
+
+    Error: L05-13 UnReconcile releases the advance and restores the Outstanding Amount (1000) 700.00 SAR
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (C:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at C:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:129:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L-61839--allocation-and-UnReconcile-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L-61839--allocation-and-UnReconcile-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-l-payments-ui-L-61839--allocation-and-UnReconcile-chromium\error-context.md
+
+
+  2 failed
+    [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:76:5 › L04 refund of a paid invoice return 
+    [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:94:5 › L05 advance payment: Get Advance Received, allocation and UnReconcile 
+  2 passed (4.1m)

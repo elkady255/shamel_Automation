@@ -1,0 +1,7 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\si8-k-probe.spec.ts:6:5 › K1 currencies in sequence
+[3/3] [chromium] › Shamel\si8-k-probe.spec.ts:15:5 › K2 loyalty fields
+  3 passed (1.6m)

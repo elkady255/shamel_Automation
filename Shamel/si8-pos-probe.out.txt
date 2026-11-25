@@ -1,0 +1,6 @@
+API keys with pos: {"posting_date":"2026-09-05","posting_time":"21:12:25.925343","set_posting_time":1,"is_pos":1,"pos_profile":"new","is_consolidated":1,"is_created_using_pos":0}
+API payments: [["Cash",28000,"الخزينة الرئيسية - E"],["My Fatoorah",595,"122303 - My Fatoorah - E"]]
+API paid_amount/grand_total/outstanding: 28595 / 28595 / 0 / 1
+[التفاصيل] has "تم إنشاؤها باستخدام"=false | has "إدخال إغلاق"=false | payments tbl: 
+[المعلومات العامة] has "تم إنشاؤها باستخدام"=false | has "إدخال إغلاق"=false | payments tbl: 2 rows
+[معلومات إضافية] has "تم إنشاؤها باستخدام"=false | has "إدخال إغلاق"=false | payments tbl: 

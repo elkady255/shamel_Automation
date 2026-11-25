@@ -1,0 +1,94 @@
+
+Running 7 tests using 1 worker
+
+[1/7] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/7] [chromium] › Shamel\si8-c-taxes.spec.ts:21:5 › C01 tax templates fill the table and the maths is right
+[3/7] [chromium] › Shamel\si8-c-taxes.spec.ts:34:5 › C02 manual tax row
+[4/7] [chromium] › Shamel\si8-c-taxes.spec.ts:51:5 › C03 additional discount
+  1) [chromium] › Shamel\si8-c-taxes.spec.ts:51:5 › C03 additional discount ────────────────────────
+
+    Error: C03-2 10% of 1,000 = 100: grand total 900 {"total":1000,"net":1000,"taxes":0,"grand":1000,"rounded":0,"outstanding":0,"discAmt":0}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-c-taxes.spec.ts:57:7
+
+    Error: C03-5 amount 250: grand total 750 {"total":1000,"net":1000,"taxes":0,"grand":1000,"rounded":0,"outstanding":0,"discAmt":0}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-c-taxes.spec.ts:61:7
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').locator('label').filter({ hasText: /^\s*نسبة الخصم الإضافي\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input or .//textarea or .//*[contains(@class,\'cd-readonly\') or contains(@class,\'status-chip\') or contains(@class,\'selected-value\')]][1]').locator('input,textarea').first()
+        - locator resolved to <input min="0" value="" disabled max="100" step="any" type="number" wfd-id="id32" class="cd-input" data-v-abc7ab6f=""/>
+        - fill("150")
+      - attempting fill action
+        2 × waiting for element to be visible, enabled and editable
+          - element is not enabled
+        - retrying fill action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and editable
+          - element is not enabled
+        - retrying fill action
+          - waiting 100ms
+        29 × waiting for element to be visible, enabled and editable
+           - element is not enabled
+         - retrying fill action
+           - waiting 500ms
+
+
+       at helpers\si-ui.ts:57
+
+      55 | export async function setText(p: Page, label: string, v: string) {
+      56 |   const f = box(p, label).locator('input,textarea').first();
+    > 57 |   await f.fill(v); await f.press('Tab'); await wait(p, 600); return f.inputValue();
+         |           ^
+      58 | }
+      59 | export async function value(p: Page, label: string) {
+      60 |   const b = box(p, label);
+        at setText (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:57:11)
+        at c:\Playwright_Automation\Shamel\si8-c-taxes.spec.ts:62:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-c-taxes-C03-additional-discount-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-c-taxes-C03-additional-discount-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-c-taxes-C03-additional-discount-chromium\error-context.md
+
+
+[5/7] [chromium] › Shamel\si8-c-taxes.spec.ts:71:5 › C04 totals, rounding, in words, outstanding
+[6/7] [chromium] › Shamel\si8-c-taxes.spec.ts:83:5 › C05 shipping rule
+[7/7] [chromium] › Shamel\si8-c-taxes.spec.ts:89:5 › C06 tax withholding and rate adjustment switches
+  1 failed
+    [chromium] › Shamel\si8-c-taxes.spec.ts:51:5 › C03 additional discount ─────────────────────────
+  6 passed (4.4m)

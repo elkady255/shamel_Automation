@@ -1,0 +1,102 @@
+{"id":"B01-fixed asset 2121","text":"fixed asset 2121: not listed","ok":true,"detail":"[]","known":""}
+{"id":"B01-fixed asset Test Asset","text":"fixed asset Test Asset: not listed","ok":true,"detail":"[]","known":""}
+{"id":"B01-template item 1111","text":"template item 1111: not listed","ok":true,"detail":"[]","known":""}
+{"id":"B01-not for sale Item-123","text":"not for sale Item-123: not listed","ok":true,"detail":"[]","known":""}
+{"id":"B01-not for sale asdasd","text":"not for sale asdasd: not listed","ok":true,"detail":"[]","known":""}
+{"id":"B01-service Ads","text":"service Ads: listed","ok":true,"detail":"[\"Marketing Ads Spend - Ads\",\"Ads - tefsdft\"]","known":""}
+{"id":"B01-IND182210 sales item","text":"IND182210 sales item: listed","ok":true,"detail":"[\"ميديا موقع 6 شهور - IND182210\"]","known":""}
+{"id":"B02-1","text":"table headers","ok":null,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]"}
+{"id":"B02-2","text":"table has a No. column","ok":false,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":"SI-30"}
+{"id":"B02-col-Item Code","text":"column Item Code exists","ok":true,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":""}
+{"id":"B02-col-Qty","text":"column Qty exists","ok":true,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":""}
+{"id":"B02-col-Available Qty","text":"column Available Qty exists","ok":true,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":""}
+{"id":"B02-col-Shortage Qty","text":"column Shortage Qty exists","ok":true,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":""}
+{"id":"B02-col-Rate","text":"column Rate exists","ok":true,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":""}
+{"id":"B02-col-Amount","text":"column Amount exists","ok":true,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":""}
+{"id":"B02-col-Warehouse","text":"column Warehouse exists","ok":true,"detail":"[\"\",\"كود الصنف\",\"الكمية\",\"الكمية المتاحة\",\"كمية العجز\",\"السعر\",\"المبلغ\",\"المستودع\",\"\"]","known":""}
+{"id":"B02-3","text":"first row text","ok":null,"detail":" -337 338 10,200.00 SAR "}
+{"id":"B02-4","text":"row action titles","ok":null,"detail":"[\"-337\",\"338\",\"10,200.00 SAR\",\"حذف الصف\",\"تعديل الصف\"]"}
+{"id":"B03-1","text":"letters are not accepted in Qty","ok":true,"detail":"","known":""}
+{"id":"B03-2","text":"amount = qty x rate (3 x 100 = 300)","ok":true,"detail":" -337 340 300.00 SAR ","known":""}
+{"id":"B03-3","text":"qty 0 -> row","ok":null,"detail":" -337 337 0.00 SAR "}
+{"id":"B03-4","text":"Qty 0 is refused on Save","ok":true,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: الصف رقم 1 (IND182210): الكمية يجب أن تكون أكبر من صفر\"]","known":""}
+{"id":"B03-5","text":"qty -2 -> value","ok":null,"detail":"-2"}
+{"id":"B03-6","text":"qty 1.5 -> value","ok":null,"detail":"1.5"}
+{"id":"B03-8","text":"empty qty save","ok":null,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: الصف رقم 1 (IND182210): الكمية يجب أن تكون أكبر من صفر\"] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new"}
+{"id":"B03-9","text":"empty Qty is refused","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new","known":""}
+{"id":"B04-0","text":"rate input after typing 250 and waiting 4s","ok":null,"detail":"250 |  -337 341 40,800.00 SAR "}
+{"id":"B04-1","text":"a manually entered rate (250, below valuation) is kept and amount = 4 x 250 = 1,000","ok":false,"detail":"250 |  -337 341 40,800.00 SAR ","known":""}
+{"id":"B04-2","text":"negative rate","ok":null,"detail":"-5 |  -337 341 40,800.00 SAR "}
+{"id":"B04-3","text":"letters in rate","ok":null,"detail":"-5"}
+{"id":"B04-4","text":"rate 0","ok":null,"detail":" -337 341 40,800.00 SAR "}
+{"id":"B04-5","text":"rate 1e3","ok":null,"detail":"1000 |  -337 341 40,800.00 SAR "}
+{"id":"B04-6","text":"rate 3 decimals","ok":null,"detail":"250.555 |  -337 341 40,800.00 SAR "}
+{"id":"B04-7","text":"summary","ok":null,"detail":" إجمالي الكمية 4 إجمالي المبلغ بالعملة 1,002.24 SAR إجمالي المبلغ بعملة الشركة الأساسية 1,002.24 SAR إجمالي الوزن الصافي 40 صافي الإجمالي بالعملة 1,002.24 SAR صافي الإجمالي بعملة الشركة الأساسية 1,002.24 SAR الضرائب والر"}
+{"id":"B05-1","text":"row after qty 1 (available / shortage)","ok":null,"detail":" -337 338 10,200.00 SAR "}
+{"id":"B05-2","text":"messages after qty 999999","ok":null,"detail":"[]"}
+{"id":"B05-2b","text":"body text with warning words","ok":null,"detail":"[\"\\tكود الصنف\\tالكمية\\tالكمية المتاحة\\tكمية العجز\\tالسعر\\tالمبلغ\\tالمستودع\\t\"]"}
+{"id":"B05-3","text":"row text after qty 999999","ok":null,"detail":" -337 1,000,336 10,499,989,500.00 SAR "}
+{"id":"B05-4","text":"shortage = qty - available is displayed","ok":true,"detail":"","known":""}
+{"id":"B05-5","text":"save with shortage (setting Warn)","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02851"}
+{"id":"B06-1","text":"default warehouse","ok":null,"detail":"Stores - Stores - E"}
+{"id":"B06-2","text":"second row is added","ok":true,"detail":"2","known":""}
+{"id":"B06-3","text":"row has a delete icon","ok":true,"detail":"","known":""}
+{"id":"B06-4","text":"deleting a row removes it","ok":true,"detail":"1","known":""}
+{"id":"B06-5","text":"header checkbox exists (select all)","ok":true,"detail":"","known":""}
+{"id":"B06-6","text":"selecting a row shows an action bar with delete","ok":null,"detail":"true"}
+{"id":"B07-1","text":"popup text","ok":null,"detail":"تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود كود الصنف الكمية الكمية المتاحة كمية العجز السعر المبلغ المستودع إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي تحديث"}
+{"id":"B07-2","text":"popup buttons","ok":null,"detail":"[\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"إضافة/إزالة حقول\",\"إلغاء\",\"إعادة تعيين إلى الافتراضي\",\"تحديث\"]"}
+{"id":"B07-3","text":"checkbox count","ok":null,"detail":"0"}
+{"id":"B07-4","text":"width inputs","ok":null,"detail":"[\"auto\",\"auto\",\"auto\",\"auto\",\"auto\",\"auto\"]"}
+{"id":"B07-5","text":"popup has a \"Reset to default\" button","ok":true,"detail":"","known":""}
+{"id":"B04-0","text":"rate input after typing 250 and waiting 4s","ok":null,"detail":"250 |  -337 341 40,800.00 SAR "}
+{"id":"B04-1","text":"a manually entered rate (250, below valuation) is kept and amount = 4 x 250 = 1,000","ok":false,"detail":"250 |  -337 341 40,800.00 SAR ","known":""}
+{"id":"B04-2","text":"negative rate","ok":null,"detail":"-5 |  -337 341 40,800.00 SAR "}
+{"id":"B04-3","text":"letters in rate","ok":null,"detail":"-5"}
+{"id":"B04-4","text":"rate 0","ok":null,"detail":" -337 341 40,800.00 SAR "}
+{"id":"B04-5","text":"rate 1e3","ok":null,"detail":"1000 |  -337 341 40,800.00 SAR "}
+{"id":"B04-6","text":"rate 3 decimals","ok":null,"detail":"250.555 |  -337 341 40,800.00 SAR "}
+{"id":"B04-7","text":"summary","ok":null,"detail":" إجمالي الكمية 4 إجمالي المبلغ بالعملة 1,002.24 SAR إجمالي المبلغ بعملة الشركة الأساسية 1,002.24 SAR إجمالي الوزن الصافي 40 صافي الإجمالي بالعملة 1,002.24 SAR صافي الإجمالي بعملة الشركة الأساسية 1,002.24 SAR الضرائب والر"}
+{"id":"B08-1","text":"edit row text","ok":null,"detail":"تعديل الصف كود الصنف كود الصنف * مجموعة الأصناف Services اسم الصنف ميديا موقع 6 شهور اسم العلامة التجارية — الباركود 234324324325 صورة — الوصف أصل ثابت لا كمية وقيم الكمية * الكمية المتاحة -337 كمية العجز 338 وحدة القياس * وحدة قياس المخزون Subscription عامل تحويل وحدة القياس 1 الكمية بوحدة قياس المخزون 1 السعر المبلغ 10,200 التسعير سعر قائمة الأسعار (العملة) 10,200 سعر قائمة الأسعار (بعملة الشركة) 0 نوع الهامش نسبة أو قيمة الهامش السعر مع الهامش 10,200 السعر مع الهامش (بعملة الشركة) — الخصم (%) على سعر قائمة الأسعار مع الهامش 0 مبلغ الخصم 0 مبلغ الخصم الموزع — قالب ضريبة الصنف — السعر (بعملة الشركة) 0 المبلغ (بعملة الشركة) 10,200 قواعد التسعير — سعر وحدة قياس المخزون — صنف مجاني — احتساب ضريبة الخصم والتحصيل — منح العمولة نعم السماح بتقييم صفري السماح بتقييم صفري صافي السعر 0 صافي المبلغ 10,200 صافي السعر (بعملة الشركة) — صافي المبلغ (بعملة الشركة) 10,200 التسليم بواسطة المورد لا المحاسبة حساب الإيرادات * حساب المصروفات حساب الخصم مركز التكلفة المشروع إيراد مؤجل تمكين الإيراد المؤجل تمكين الإيراد المؤجل المستودع والمخزون المستودع الكمية (المستودع) 16 الكمية (الشركة) 21 الكمية المتوقعة 73 الكمية المطلوبة للشراء 353 الكمية المطلوبة 408 الكمية المرتجعة — الكمية المسلمة — الوزن لكل وحدة 10 الوزن الإجمالي 10 وحدة قياس الوزن Acre فحوصات الجودة — سعر الوارد التسلسل والدفعة اختيار الرقم التسلسلي/رقم التشغيلة استخدام حقول الرقم التسلسلي/التشغيلة استخدام حقول الرقم التسلسلي/التشغيلة الرقم التسلسلي رقم التشغيلة الكمية المتاحة للدفعة في المستودع — المراجع مقابل أمر البيع — مقابل صنف أمر البيع — مقابل صنف فاتورة البيع — مقابل إشعار التسليم — مقابل صنف إذن التسليم — فاتورة نقطة البيع — صنف فاتورة نقطة البيع — أمر شراء — صنف أمر الشراء — الفوترة الإلكترونية (زاتكا) رمز الضريبة — نسبة الضريبة (%) — سبب الإعفاء — رمز سبب الإعفاء — سبب الخصم رمز سبب الخصم — مبلغ الرسوم سبب الرسوم رمز سبب الرسوم — حفظ إلغاء"}
+{"id":"B08-كود الصنف","text":"Edit Row shows \"كود الصنف\"","ok":true,"detail":"","known":""}
+{"id":"B08-مجموعة الأصناف","text":"Edit Row shows \"مجموعة الأصناف\"","ok":true,"detail":"","known":""}
+{"id":"B08-اسم الصنف","text":"Edit Row shows \"اسم الصنف\"","ok":true,"detail":"","known":""}
+{"id":"B08-اسم العلامة التجارية","text":"Edit Row shows \"اسم العلامة التجارية\"","ok":true,"detail":"","known":""}
+{"id":"B08-الوصف","text":"Edit Row shows \"الوصف\"","ok":true,"detail":"","known":""}
+{"id":"B08-الكمية","text":"Edit Row shows \"الكمية\"","ok":true,"detail":"","known":""}
+{"id":"B08-الكمية المتاحة","text":"Edit Row shows \"الكمية المتاحة\"","ok":true,"detail":"","known":""}
+{"id":"B08-كمية العجز","text":"Edit Row shows \"كمية العجز\"","ok":true,"detail":"","known":""}
+{"id":"B08-وحدة القياس","text":"Edit Row shows \"وحدة القياس\"","ok":true,"detail":"","known":""}
+{"id":"B08-عامل تحويل وحدة القياس","text":"Edit Row shows \"عامل تحويل وحدة القياس\"","ok":true,"detail":"","known":""}
+{"id":"B08-نوع الهامش","text":"Edit Row shows \"نوع الهامش\"","ok":true,"detail":"","known":""}
+{"id":"B08-السعر","text":"Edit Row shows \"السعر\"","ok":true,"detail":"","known":""}
+{"id":"B08-المبلغ","text":"Edit Row shows \"المبلغ\"","ok":true,"detail":"","known":""}
+{"id":"B08-صافي السعر","text":"Edit Row shows \"صافي السعر\"","ok":true,"detail":"","known":""}
+{"id":"B08-صافي المبلغ","text":"Edit Row shows \"صافي المبلغ\"","ok":true,"detail":"","known":""}
+{"id":"B08-المستودع","text":"Edit Row shows \"المستودع\"","ok":true,"detail":"","known":""}
+{"id":"B08-قواعد التسعير","text":"Edit Row shows \"قواعد التسعير\"","ok":true,"detail":"","known":""}
+{"id":"B08-مركز التكلفة","text":"Edit Row shows \"مركز التكلفة\"","ok":true,"detail":"","known":""}
+{"id":"B08-المشروع","text":"Edit Row shows \"المشروع\"","ok":true,"detail":"","known":""}
+{"id":"B08-حساب الإيرادات","text":"Edit Row shows \"حساب الإيرادات\"","ok":true,"detail":"","known":""}
+{"id":"B08-حساب المصروفات","text":"Edit Row shows \"حساب المصروفات\"","ok":true,"detail":"","known":""}
+{"id":"B08-حساب الخصم","text":"Edit Row shows \"حساب الخصم\"","ok":true,"detail":"","known":""}
+{"id":"B08-تمكين الإيراد المؤجل","text":"Edit Row shows \"تمكين الإيراد المؤجل\"","ok":true,"detail":"","known":""}
+{"id":"B08-الوزن لكل وحدة","text":"Edit Row shows \"الوزن لكل وحدة\"","ok":true,"detail":"","known":""}
+{"id":"B08-الوزن الإجمالي","text":"Edit Row shows \"الوزن الإجمالي\"","ok":true,"detail":"","known":""}
+{"id":"B08-فحوصات الجودة","text":"Edit Row shows \"فحوصات الجودة\"","ok":true,"detail":"","known":""}
+{"id":"B08-سعر الوارد","text":"Edit Row shows \"سعر الوارد\"","ok":true,"detail":"","known":""}
+{"id":"B08-الكمية المتوقعة","text":"Edit Row shows \"الكمية المتوقعة\"","ok":true,"detail":"","known":""}
+{"id":"B08-الكمية المطلوبة","text":"Edit Row shows \"الكمية المطلوبة\"","ok":true,"detail":"","known":""}
+{"id":"B08-مقابل أمر البيع","text":"Edit Row shows \"مقابل أمر البيع\"","ok":true,"detail":"","known":""}
+{"id":"B08-مقابل إشعار التسليم","text":"Edit Row shows \"مقابل إشعار التسليم\"","ok":true,"detail":"","known":""}
+{"id":"B08-labels","text":"all labels","ok":null,"detail":"[\"كود الصنف *\",\"مجموعة الأصناف\",\"اسم الصنف\",\"اسم العلامة التجارية\",\"الباركود\",\"صورة\",\"الوصف\",\"أصل ثابت\",\"الكمية *\",\"الكمية المتاحة\",\"كمية العجز\",\"وحدة القياس *\",\"وحدة قياس المخزون\",\"عامل تحويل وحدة القياس\",\"الكمية بوحدة قياس المخزون\",\"السعر\",\"المبلغ\",\"سعر قائمة الأسعار (العملة)\",\"سعر قائمة الأسعار (بعملة الشركة)\",\"نوع الهامش\",\"نسبة أو قيمة الهامش\",\"السعر مع الهامش\",\"السعر مع الهامش (بعملة الشركة)\",\"الخصم (%) على سعر قائمة الأسعار مع الهامش\",\"مبلغ الخصم\",\"مبلغ الخصم الموزع\",\"قالب ضريبة الصنف\",\"السعر (بعملة الشركة)\",\"المبلغ (بعملة الشركة)\",\"قواعد التسعير\",\"سعر وحدة قياس المخزون\",\"صنف مجاني\",\"احتساب ضريبة الخصم والتحصيل\",\"منح العمولة\",\"السماح بتقييم صفري\",\"السماح بتقييم صفري\",\"صافي السعر\",\"صافي المبلغ\",\"صافي السعر (بعملة الشركة)\",\"صافي المبلغ (بعملة الشركة)\",\"التسليم بواسطة المورد\",\"حساب الإيرادات *\",\"حساب المصروفات\",\"حساب الخصم\",\"مركز التكلفة\",\"المشروع\",\"تمكين الإيراد المؤجل\",\"تمكين الإيراد المؤجل\",\"المستودع\",\"الكمية (المستودع)\",\"الكمية (الشركة)\",\"الكمية المتوقعة\",\"الكمية المطلوبة للشراء\",\"الكمية المطلوبة\",\"الكمية المرتجعة\",\"الكمية المسلمة\",\"الوزن لكل وحدة\",\"الوزن الإجمالي\",\"وحدة قياس الوزن\",\"فحوصات الجودة\",\"سعر الوارد\",\"استخدام حقول الرقم التسلسلي/التشغيلة\",\"استخدام حقول الرقم التسلسلي/التشغيلة\",\"الرقم التسلسلي\",\"رقم التشغيلة\",\"الكمية المتاحة للدفعة في المستودع\",\"مقابل أمر البيع\",\"مقابل صنف أمر البيع\",\"مقابل صنف فاتورة البيع\",\"مقابل إشعار التسليم\",\"مقابل صنف إذن التسليم\",\"فاتورة نقطة البيع\",\"صنف فاتورة نقطة البيع\",\"أمر شراء\",\"صنف أمر الشراء\",\"رمز الضريبة\",\"نسبة الضريبة (%)\",\"سبب الإعفاء\",\"رمز سبب الإعفاء\",\"سبب الخصم\",\"رمز سبب الخصم\",\"مبلغ الرسوم\",\"سبب الرسوم\",\"رمز سبب الرسوم\"]"}
+{"id":"B08-desc2","text":"description 2 chars -> messages","ok":null,"detail":"[\"MODAL: رسالة كود الصنف مطلوب\"]"}
+{"id":"B08-desc500","text":"description is limited to 500 characters","ok":true,"detail":"len 500","known":""}
+{"id":"B04-0","text":"rate input after typing 250 and waiting 4s","ok":null,"detail":"250 |  -337 341 40,800.00 SAR "}
+{"id":"B04-1","text":"a manually entered rate (250, below valuation) is kept and amount = 4 x 250 = 1,000","ok":false,"detail":"250 |  -337 341 40,800.00 SAR ","known":"SI-35"}
+{"id":"B04-2","text":"negative rate","ok":null,"detail":"-5 |  -337 341 40,800.00 SAR "}
+{"id":"B04-3","text":"letters in rate","ok":null,"detail":"-5"}
+{"id":"B04-4","text":"rate 0","ok":null,"detail":" -337 341 40,800.00 SAR "}
+{"id":"B04-5","text":"rate 1e3","ok":null,"detail":"1000 |  -337 341 40,800.00 SAR "}
+{"id":"B04-6","text":"rate 3 decimals","ok":null,"detail":"250.555 |  -337 341 40,800.00 SAR "}
+{"id":"B04-7","text":"summary","ok":null,"detail":" إجمالي الكمية 4 إجمالي المبلغ بالعملة 1,002.24 SAR إجمالي المبلغ بعملة الشركة الأساسية 1,002.24 SAR إجمالي الوزن الصافي 40 صافي الإجمالي بالعملة 1,002.24 SAR صافي الإجمالي بعملة الشركة الأساسية 1,002.24 SAR الضرائب والر"}

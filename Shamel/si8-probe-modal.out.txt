@@ -1,0 +1,11 @@
+[
+ {
+  "html": " <div class=\"modal-dialog msgprint-dialog\"> <div class=\"modal-content\"> <div class=\"modal-header\"> <div class=\"fill-width flex title-section\"> <span class=\"indicator orange\"></span> <h4 class=\"modal-title\">تعذّر الحفظ</h4> </div> <div class=\"modal-actions d-flex\"> <button class=\"btn btn-ghost btn-modal-minimize icon-btn hide\"> <svg class=\"icon icon-sm\" style=\"\" aria-hidden=\"true\"> <use class=\"\" href=\"#icon-collapse\"> </use> </svg> </button> <button class=\"btn btn-ghost btn-modal-close icon-btn\" data-dismiss=\"modal\"> <svg class=\"icon icon-sm\" style=\"\" aria-hidden=\"true\"> <use class=\"\" href=\"#icon-x\"> </use> </svg> </button> </div> </div> <div class=\"modal-body ui-front\"><div><div class=\"msgprint\">يرجى ملء الحقول الإلزامية</div></div><div class=\"hide modal-message\"></div></div> <div class=\"modal-footer hide\"> <div class=\"custom-actions\"></div> <div class=\"standard-actions\"> <button type=\"button\" class=\"btn btn-secondary btn-sm hide btn-modal-secondary\"> </button> <button type=\"button\" class=\"btn btn-primary btn-sm hide btn-modal-primary\"> تأكيد </button> </div> </div> </div> </div> ",
+  "buttons": [
+   "\n\t\t\t\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\n\t\t\t\t\t\t|btn btn-ghost btn-modal-minimize icon-btn hide",
+   "|btn btn-ghost btn-modal-close icon-btn",
+   "\n\t\t\t\t\t\t|btn btn-secondary btn-sm hide btn-modal-secondary",
+   "\n\t\t\t\t\t\t\tتأكيد\n\t\t\t\t\t\t|btn btn-primary btn-sm hide btn-modal-primary"
+  ]
+ }
+]

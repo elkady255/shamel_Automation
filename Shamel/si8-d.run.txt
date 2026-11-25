@@ -1,0 +1,120 @@
+
+Running 8 tests using 1 worker
+
+[1/8] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/8] [chromium] › Shamel\si8-d-general.spec.ts:15:5 › D01 payments and changes sections
+[3/8] [chromium] › Shamel\si8-d-general.spec.ts:26:5 › D02 advance payment defaults
+[4/8] [chromium] › Shamel\si8-d-general.spec.ts:37:5 › D03 write off rules
+  1) [chromium] › Shamel\si8-d-general.spec.ts:37:5 › D03 write off rules ──────────────────────────
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').locator('label').filter({ hasText: /^\s*مبلغ الشطب\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input or .//textarea or .//*[contains(@class,\'cd-readonly\') or contains(@class,\'status-chip\') or contains(@class,\'selected-value\')]][1]').locator('input').first()
+        - locator resolved to <input min="0" step="any" value="900" type="number" class="cd-input" data-v-90a61d17=""/>
+        - fill("-50")
+      - attempting fill action
+        2 × waiting for element to be visible, enabled and editable
+          - element is not visible
+        - retrying fill action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and editable
+          - element is not visible
+        - retrying fill action
+          - waiting 100ms
+        28 × waiting for element to be visible, enabled and editable
+           - element is not visible
+         - retrying fill action
+           - waiting 500ms
+
+
+      45 |   rec.check('D03-4', 'write off larger than the invoice total is refused (old SI-01)', isNew(s.url), s.url, 'SI-01');
+      46 |   await closeModal(page);
+    > 47 |   await wo.fill('-50'); await wo.press('Tab'); await wait(page, 1000);
+         |            ^
+      48 |   const s2 = await save(page, 9000); rec.check('D03-5', 'negative write off is refused (old SI-09)', isNew(s2.url), s2.url + ' ' + JSON.stringify(s2.msgs), 'SI-09'); await closeModal(page);
+      49 | });
+      50 |
+        at c:\Playwright_Automation\Shamel\si8-d-general.spec.ts:47:12
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-d-general-D03-write-off-rules-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-d-general-D03-write-off-rules-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-d-general-D03-write-off-rules-chromium\error-context.md
+
+
+[5/8] [chromium] › Shamel\si8-d-general.spec.ts:51:5 › D04 loyalty redemption section
+  2) [chromium] › Shamel\si8-d-general.spec.ts:51:5 › D04 loyalty redemption section ───────────────
+
+    Error: D04-3 Loyalty Points, Loyalty Amount, Redemption Account and Redemption Cost Center appear when Redeem is checked ["حساب الاسترداد","مركز تكلفة الاسترداد"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-d-general.spec.ts:58:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-d-general-D04-loyalty-redemption-section-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-d-general-D04-loyalty-redemption-section-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-d-general-D04-loyalty-redemption-section-chromium\error-context.md
+
+
+[6/8] [chromium] › Shamel\si8-d-general.spec.ts:62:5 › D05 addresses and contacts
+  3) [chromium] › Shamel\si8-d-general.spec.ts:62:5 › D05 addresses and contacts ───────────────────
+
+    Error: D05-3 choosing another billing address refreshes the address text Street 1، Riyadh، Saudi Arabia -> Street 1، Riyadh، Saudi Arabia
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-d-general.spec.ts:67:100
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-d-general-D05-addresses-and-contacts-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-d-general-D05-addresses-and-contacts-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-d-general-D05-addresses-and-contacts-chromium\error-context.md
+
+
+[7/8] [chromium] › Shamel\si8-d-general.spec.ts:75:5 › D06 payment terms template and schedule
+[8/8] [chromium] › Shamel\si8-d-general.spec.ts:89:5 › D07 terms and conditions
+  3 failed
+    [chromium] › Shamel\si8-d-general.spec.ts:37:5 › D03 write off rules ───────────────────────────
+    [chromium] › Shamel\si8-d-general.spec.ts:51:5 › D04 loyalty redemption section ────────────────
+    [chromium] › Shamel\si8-d-general.spec.ts:62:5 › D05 addresses and contacts ────────────────────
+  5 passed (5.9m)

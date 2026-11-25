@@ -1,0 +1,24 @@
+{"id":"K01-0","text":"draft created","ok":null,"detail":"ACC-SINV-2026-02885"}
+{"id":"K01-1","text":"editing qty and rate recalculates the row and the totals (3 x 1,200 = 3,600)","ok":true,"detail":"3,600.00 SAR","known":""}
+{"id":"K01-2","text":"save after edit","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02885"}
+{"id":"K01-3","text":"saving an edited draft succeeds and stays on the same document","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02885 []","known":""}
+{"id":"K01-4","text":"every edited value is kept after reload","ok":false,"detail":"[\"ا8:المبلغ المستحق: \\\"2,000.00 SAR\\\" -> \\\"4,140.00 SAR\\\"\"]","known":"SI-44"}
+{"id":"K01-5","text":"the database has the new qty, rate, PO and total","ok":true,"detail":"{\"qty\":3,\"rate\":1200,\"po\":\"PO-ED-2\",\"gt\":4140}","known":""}
+{"id":"K01-6","text":"doc id","ok":null,"detail":"ACC-SINV-2026-02885"}
+{"id":"K02-1","text":"editing the quantity to 0 is refused on Save","ok":true,"detail":"[\"MODAL: تعذّر الحفظ يرجى ملء الحقول الإلزامية\",\"ERR: الصف رقم 1 (IND182210): الكمية يجب أن تكون أكبر من صفر\"]","known":""}
+{"id":"K02-2","text":"after pressing the form Cancel button (unsaved changes)","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices []"}
+{"id":"K02-3","text":"the form Cancel button does not save the unsaved edit","ok":true,"detail":"1","known":""}
+{"id":"K03-0","text":"draft for delete","ok":null,"detail":"ACC-SINV-2026-02887"}
+{"id":"K03-1","text":"the delete confirmation asks \"هل أنت متأكد؟\"","ok":true,"detail":"حذف هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء.","known":""}
+{"id":"K03-2","text":"after Yes: url and messages","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices [\"TOAST: تم الحذف بنجاح\"]"}
+{"id":"K03-3","text":"the draft is deleted (API returns 404)","ok":true,"detail":"404","known":""}
+{"id":"K03-4","text":"the screen leaves the deleted document","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices","known":""}
+{"id":"K04-0","text":"cancelled original","ok":null,"detail":"ACC-SINV-2026-02887"}
+{"id":"K04-1","text":"Amend created <id>-1","ok":true,"detail":"ACC-SINV-2026-02887-1","known":""}
+{"id":"K04-2","text":"delete original that has an amended draft: dialog / messages","ok":null,"detail":"حذف هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء. | [\"MODAL: لا يمكن الحذف هذا السجل مرتبط بالمستندات التالية. يجب حذفها أولاً. GL الدخول (4): 38459e3121، 40a60dfdba، 416c46694c، c2ee20a535 إدخال بيانات دفتر المدفوعات (2): 701l86vt47، 75f344spb0 فاتورة مبيعات (1): ACC-SINV-2026-02887-1\"]"}
+{"id":"K04-3","text":"the original is NOT deleted while an amended document exists","ok":true,"detail":"200","known":""}
+{"id":"K04-4","text":"a warning names the related document as a link","ok":true,"detail":"[\"MODAL: لا يمكن الحذف هذا السجل مرتبط بالمستندات التالية. يجب حذفها أولاً. GL الدخول (4): 38459e3121، 40a60dfdba، 416c46694c، c2ee20a535 إدخال بيانات دفتر المدفوعات (2): 701l86vt47، 75f344spb0 فاتورة مبيعات (1): ACC-SINV-2026-02887-1\"]","known":""}
+{"id":"K04-5","text":"the amended draft can be deleted","ok":true,"detail":"404","known":""}
+{"id":"K04-6","text":"after the amended draft is gone the cancelled original can be deleted","ok":false,"detail":"200 []","known":"SI-45"}
+{"id":"K05-1","text":"REST delete of a submitted invoice is refused","ok":true,"detail":"417 {\"exception\":\"frappe.exceptions.ValidationError: فاتورة مبيعات ACC-SINV-2026-02832: لا يمكن حذف السجل المقدم. يجب عليك <a href='https://docs.frappe.io/erpnext/u","known":""}
+{"id":"K05-2","text":"the submitted invoice still exists","ok":true,"detail":"","known":""}

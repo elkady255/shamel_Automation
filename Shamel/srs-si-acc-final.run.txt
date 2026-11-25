@@ -1,0 +1,722 @@
+
+Running 49 tests using 1 worker
+
+[1/49] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/49] [chromium] › Shamel\srs-si-acc-a-header.spec.ts:8:5 › A01 defaults of the Add screen
+  1) [chromium] › Shamel\srs-si-acc-a-header.spec.ts:8:5 › A01 defaults of the Add screen ──────────
+
+    Error: A01-11 Update Outstanding for Self is shown and checked by default ["تعديل تاريخ ووقت الترحيل","فاتورة موحدة","مرتجع (إشعار دائن)","احتساب ضريبة الخصم والتحصيل","قيد تعديل السعر (إشعار مدين)","فاتورة صادرة عن طرف ثالث","توريد اسمي","فاتورة تصدير","فاتورة الفوترة الذاتية","فاتورة ملخصة","تجاهل قاعدة التسعير","استخدام مركز التكلفة الافتراضي للشركة للتقريب","الحساب نقدي أو غير تجاري","تخصيص الدفعة المقدمة تلقائيًا (الوارد أولاً يُصرف أولاً)","تضمين الدفعات المخصصة مقابل أمر البيع المرجعي فقط","استرداد نقاط الولاء","عدم إنشاء نقاط ولاء","شطب المبلغ المتبقي","الطباعة بدون المبالغ","تجميع الأصناف المتشابهة"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-a-header.spec.ts:26:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-a-header-A01-defaults-of-the-Add-screen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-a-header-A01-defaults-of-the-Add-screen-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-a-header-A01-defaults-of-the-Add-screen-chromium\error-context.md
+
+
+[3/49] [chromium] › Shamel\srs-si-acc-a-header.spec.ts:32:5 › A02 posting date and time switch
+[4/49] [chromium] › Shamel\srs-si-acc-a-header.spec.ts:47:5 › A03 empty Save shows the mandatory field errors
+[5/49] [chromium] › Shamel\srs-si-acc-a-header.spec.ts:56:5 › A04 mandatory fields one by one
+[6/49] [chromium] › Shamel\srs-si-acc-a-header.spec.ts:74:5 › A05 customer / company auto fill
+[7/49] [chromium] › Shamel\srs-si-acc-a-header.spec.ts:101:5 › A06 currency / price list / exchange rate behaviour
+[8/49] [chromium] › Shamel\srs-si-acc-a-header.spec.ts:116:5 › A07 invoice type, series and other dropdown contents
+[9/49] [chromium] › Shamel\srs-si-acc-b-items-extra.spec.ts:9:5 › B2-1 rate change: row amount vs summary vs persisted
+[10/49] [chromium] › Shamel\srs-si-acc-b-items-extra.spec.ts:32:5 › B2-2 rate below valuation / negative / zero on Save
+[11/49] [chromium] › Shamel\srs-si-acc-b-items-extra.spec.ts:44:5 › B2-3 Edit Row description min length message
+[12/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:18:5 › B01 item dropdown filter (fixed asset / template / not for sale)
+[13/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:32:5 › B02 table structure and columns
+[14/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:43:5 › B03 qty field rules
+[15/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:59:5 › B04 rate field and amounts
+  2) [chromium] › Shamel\srs-si-acc-b-items.spec.ts:59:5 › B04 rate field and amounts ──────────────
+
+    Error: B04-1 a manually entered rate (250, below valuation) is kept and amount = 4 x 250 = 1,000 250 |  -337 341 40,800.00 SAR 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:66:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-b-items-B04-rate-field-and-amounts-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-b-items-B04-rate-field-and-amounts-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-b-items-B04-rate-field-and-amounts-chromium\error-context.md
+
+
+[16/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:76:5 › B05 availability, shortage and warning
+[17/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:91:5 › B06 warehouse and row operations
+[18/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:106:5 › B07 gear (Setting) popup
+[19/49] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:118:5 › B08 edit row popup contents
+  3) [chromium] › Shamel\srs-si-acc-b-items.spec.ts:118:5 › B08 edit row popup contents ────────────
+
+    Error: B08-مجموعة الصنف Edit Row shows "مجموعة الصنف" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-معامل تحويل الوحدة Edit Row shows "معامل تحويل الوحدة" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-حساب الدخل Edit Row shows "حساب الدخل" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-الأصل Edit Row shows "الأصل" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-تفعيل الإيراد المؤجل Edit Row shows "تفعيل الإيراد المؤجل" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-وزن الوحدة Edit Row shows "وزن الوحدة" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-فحص الجودة Edit Row shows "فحص الجودة" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-سعر التقييم Edit Row shows "سعر التقييم" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:125:29
+
+    Error: B08-hidden Barcode and Has Item Scanned are hidden (not in the SRS columns) 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-b-items.spec.ts:128:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-b-items-B08-edit-row-popup-contents-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-b-items-B08-edit-row-popup-contents-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-b-items-B08-edit-row-popup-contents-chromium\error-context.md
+
+
+[20/49] [chromium] › Shamel\srs-si-acc-c-discount.spec.ts:7:7 › C3 discount pct
+[21/49] [chromium] › Shamel\srs-si-acc-c-discount.spec.ts:7:7 › C3 discount amount
+[22/49] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:21:5 › C01 tax templates fill the table and the maths is right
+[23/49] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:34:5 › C02 manual tax row
+[24/49] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:51:5 › C03 additional discount
+  4) [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:51:5 › C03 additional discount ─────────────────
+
+    Error: C03-2 10% of 1,000 = 100: grand total 900 {"total":1000,"net":1000,"taxes":0,"grand":1000,"rounded":0,"outstanding":0,"discAmt":0}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-c-taxes.spec.ts:57:7
+
+    Error: C03-3 Additional Discount Amount (currency) is calculated from the percentage 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-c-taxes.spec.ts:58:7
+
+    Error: C03-5 amount 250: grand total 750 {"total":1000,"net":1000,"taxes":0,"grand":1000,"rounded":0,"outstanding":0,"discAmt":0}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-c-taxes.spec.ts:61:7
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').locator('label').filter({ hasText: /^\s*نسبة الخصم الإضافي\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input or .//textarea or .//*[contains(@class,\'cd-readonly\') or contains(@class,\'status-chip\') or contains(@class,\'selected-value\')]][1]').locator('input,textarea').first()
+        - locator resolved to <input min="0" value="" disabled max="100" step="any" type="number" wfd-id="id32" class="cd-input" data-v-abc7ab6f=""/>
+        - fill("150")
+      - attempting fill action
+        2 × waiting for element to be visible, enabled and editable
+          - element is not enabled
+        - retrying fill action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and editable
+          - element is not enabled
+        - retrying fill action
+          - waiting 100ms
+        29 × waiting for element to be visible, enabled and editable
+           - element is not enabled
+         - retrying fill action
+           - waiting 500ms
+
+
+       at helpers\si-ui.ts:57
+
+      55 | export async function setText(p: Page, label: string, v: string) {
+      56 |   const f = box(p, label).locator('input,textarea').first();
+    > 57 |   await f.fill(v); await f.press('Tab'); await wait(p, 600); return f.inputValue();
+         |           ^
+      58 | }
+      59 | export async function value(p: Page, label: string) {
+      60 |   const b = box(p, label);
+        at setText (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:57:11)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-c-taxes.spec.ts:62:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-c-taxes-C03-additional-discount-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-c-taxes-C03-additional-discount-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-c-taxes-C03-additional-discount-chromium\error-context.md
+
+
+[25/49] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:71:5 › C04 totals, rounding, in words, outstanding
+[26/49] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:83:5 › C05 shipping rule
+[27/49] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:89:5 › C06 tax withholding and rate adjustment switches
+  5) [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:89:5 › C06 tax withholding and rate adjustment switches 
+
+    Error: C06-5 Update Outstanding for Self is shown (checked by default) ["المبلغ المستحق"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-c-taxes.spec.ts:96:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-c-taxes-C06-tax-14119-nd-rate-adjustment-switches-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-c-taxes-C06-tax-14119-nd-rate-adjustment-switches-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-c-taxes-C06-tax-14119-nd-rate-adjustment-switches-chromium\error-context.md
+
+
+[28/49] [chromium] › Shamel\srs-si-acc-d-general.spec.ts:15:5 › D01 payments and changes sections
+[29/49] [chromium] › Shamel\srs-si-acc-d-general.spec.ts:26:5 › D02 advance payment defaults
+[30/49] [chromium] › Shamel\srs-si-acc-d-general.spec.ts:37:5 › D03 write off rules
+  6) [chromium] › Shamel\srs-si-acc-d-general.spec.ts:37:5 › D03 write off rules ───────────────────
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').locator('label').filter({ hasText: /^\s*مبلغ الشطب\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input or .//textarea or .//*[contains(@class,\'cd-readonly\') or contains(@class,\'status-chip\') or contains(@class,\'selected-value\')]][1]').locator('input').first()
+        - locator resolved to <input min="0" step="any" value="900" type="number" class="cd-input" data-v-90a61d17=""/>
+        - fill("-50")
+      - attempting fill action
+        2 × waiting for element to be visible, enabled and editable
+          - element is not visible
+        - retrying fill action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and editable
+          - element is not visible
+        - retrying fill action
+          - waiting 100ms
+        29 × waiting for element to be visible, enabled and editable
+           - element is not visible
+         - retrying fill action
+           - waiting 500ms
+
+
+      45 |   rec.check('D03-4', 'write off larger than the invoice total is refused (old SI-01)', isNew(s.url), s.url, 'SI-01');
+      46 |   await closeModal(page);
+    > 47 |   await wo.fill('-50'); await wo.press('Tab'); await wait(page, 1000);
+         |            ^
+      48 |   const s2 = await save(page, 9000); rec.check('D03-5', 'negative write off is refused (old SI-09)', isNew(s2.url), s2.url + ' ' + JSON.stringify(s2.msgs), 'SI-09'); await closeModal(page);
+      49 | });
+      50 |
+        at c:\Playwright_Automation\Shamel\srs-si-acc-d-general.spec.ts:47:12
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-d-general-D03-write-off-rules-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-d-general-D03-write-off-rules-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-d-general-D03-write-off-rules-chromium\error-context.md
+
+
+[31/49] [chromium] › Shamel\srs-si-acc-d-general.spec.ts:51:5 › D04 loyalty redemption section
+[32/49] [chromium] › Shamel\srs-si-acc-d-general.spec.ts:62:5 › D05 addresses and contacts
+[33/49] [chromium] › Shamel\srs-si-acc-d-general.spec.ts:75:5 › D06 payment terms template and schedule
+[34/49] [chromium] › Shamel\srs-si-acc-d-general.spec.ts:89:5 › D07 terms and conditions
+[35/49] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:28:5 › F01 save a full invoice and reopen it: every value is kept
+  7) [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:28:5 › F01 save a full invoice and reopen it: every value is kept 
+
+    Error: F01-6 all entered values are kept after save and reload ["ا:وقت الترحيل: \"12:17:26\" -> \"12:18:38\""]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-f-lifecycle.spec.ts:42:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F01-2d50c-open-it-every-value-is-kept-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F01-2d50c-open-it-every-value-is-kept-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-f-lifecycle-F01-2d50c-open-it-every-value-is-kept-chromium\error-context.md
+
+
+[36/49] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:55:5 › F02 submit, read-only after submit, statuses
+[37/49] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:94:5 › F03 Create menu of a submitted invoice
+  8) [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:94:5 › F03 Create menu of a submitted invoice 
+
+    Error: F03-2 Create has Return / Credit Note ["عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-f-lifecycle.spec.ts:100:7
+
+    Error: F03-3 Create has Delivery Note ["عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-f-lifecycle.spec.ts:101:7
+
+    Error: F03-4 Create has Payment ["عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-f-lifecycle.spec.ts:102:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F03-e0c4a-menu-of-a-submitted-invoice-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F03-e0c4a-menu-of-a-submitted-invoice-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-f-lifecycle-F03-e0c4a-menu-of-a-submitted-invoice-chromium\error-context.md
+
+
+[38/49] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:108:5 › F04 cancel, amend and delete rules
+[39/49] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted)
+  9) [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+
+    Error: F05-3 a confirmation message asks whether to delete 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-f-lifecycle.spec.ts:140:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\error-context.md
+
+
+[40/49] [chromium] › Shamel\srs-si-acc-g-getitems.spec.ts:19:7 › G01 Get Items From أمر المبيعات
+[41/49] [chromium] › Shamel\srs-si-acc-g-getitems.spec.ts:19:7 › G01 Get Items From عرض سعر
+[42/49] [chromium] › Shamel\srs-si-acc-g-getitems.spec.ts:19:7 › G01 Get Items From إذن التسليم
+[43/49] [chromium] › Shamel\srs-si-acc-h-list.spec.ts:14:5 › H01 list columns and statuses
+[44/49] [chromium] › Shamel\srs-si-acc-h-list.spec.ts:28:5 › H02 action bar depends on the invoice status
+  10) [chromium] › Shamel\srs-si-acc-h-list.spec.ts:28:5 › H02 action bar depends on the invoice status 
+
+    TimeoutError: locator.evaluate: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').locator('table tbody tr').filter({ hasText: /ACC-SINV-2026-02831(?!-)/ }).first().locator('input[type=checkbox]').first()
+
+
+       at helpers\si-ui.ts:8
+
+       6 | export const ROUTE_LIST = '/desk/shamel#/accounting/sales-invoices';
+       7 | export const main = (p: Page) => p.getByRole('main');
+    >  8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+         |                                        ^
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+      11 |
+        at press (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:8:40)
+        at selectRow (c:\Playwright_Automation\Shamel\srs-si-acc-h-list.spec.ts:11:14)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-h-list.spec.ts:36:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H02-acti-a09a4-pends-on-the-invoice-status-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H02-acti-a09a4-pends-on-the-invoice-status-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-h-list-H02-acti-a09a4-pends-on-the-invoice-status-chromium\error-context.md
+
+
+[45/49] [chromium] › Shamel\srs-si-acc-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice
+  11) [chromium] › Shamel\srs-si-acc-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice 
+
+    TimeoutError: locator.evaluate: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').locator('table tbody tr').filter({ hasText: /ACC-SINV-2026-02833(?!-)/ }).first().locator('input[type=checkbox]').first()
+
+
+       at helpers\si-ui.ts:8
+
+       6 | export const ROUTE_LIST = '/desk/shamel#/accounting/sales-invoices';
+       7 | export const main = (p: Page) => p.getByRole('main');
+    >  8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+         |                                        ^
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+      11 |
+        at press (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:8:40)
+        at selectRow (c:\Playwright_Automation\Shamel\srs-si-acc-h-list.spec.ts:11:14)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-h-list.spec.ts:44:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\error-context.md
+
+
+[46/49] [chromium] › Shamel\srs-si-acc-i-flows.spec.ts:11:5 › I01 Create > Return / Credit Note
+[47/49] [chromium] › Shamel\srs-si-acc-i-flows.spec.ts:34:5 › I02 Debit Note (Is Rate Adjustment Entry)
+[48/49] [chromium] › Shamel\srs-si-acc-i-flows.spec.ts:45:5 › I03 Update Stock appears only when the setting is on (setting restored)
+  12) [chromium] › Shamel\srs-si-acc-i-flows.spec.ts:45:5 › I03 Update Stock appears only when the setting is on (setting restored) 
+
+    Error: I03-3 Update Stock switch is shown when the setting is on []
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-i-flows.spec.ts:54:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-i-flows-I03-Upd-8c321-ing-is-on-setting-restored--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-i-flows-I03-Upd-8c321-ing-is-on-setting-restored--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-i-flows-I03-Upd-8c321-ing-is-on-setting-restored--chromium\error-context.md
+
+
+[49/49] [chromium] › Shamel\srs-si-acc-j-server.spec.ts:23:5 › J01 server rules (create through the API; drafts only)
+  13) [chromium] › Shamel\srs-si-acc-j-server.spec.ts:23:5 › J01 server rules (create through the API; drafts only) 
+
+    Error: J12 terms over 500 characters is refused accepted ACC-SINV-2026-02864 | OK
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at tryDoc (c:\Playwright_Automation\Shamel\srs-si-acc-j-server.spec.ts:19:7)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-j-server.spec.ts:36:3
+
+    Error Context: test-results\srs-si-acc-j-server-J01-se-fe827-hrough-the-API-drafts-only--chromium\error-context.md
+
+
+  13 failed
+    [chromium] › Shamel\srs-si-acc-a-header.spec.ts:8:5 › A01 defaults of the Add screen ───────────
+    [chromium] › Shamel\srs-si-acc-b-items.spec.ts:59:5 › B04 rate field and amounts ───────────────
+    [chromium] › Shamel\srs-si-acc-b-items.spec.ts:118:5 › B08 edit row popup contents ─────────────
+    [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:51:5 › C03 additional discount ──────────────────
+    [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:89:5 › C06 tax withholding and rate adjustment switches 
+    [chromium] › Shamel\srs-si-acc-d-general.spec.ts:37:5 › D03 write off rules ────────────────────
+    [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:28:5 › F01 save a full invoice and reopen it: every value is kept 
+    [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:94:5 › F03 Create menu of a submitted invoice 
+    [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+    [chromium] › Shamel\srs-si-acc-h-list.spec.ts:28:5 › H02 action bar depends on the invoice status 
+    [chromium] › Shamel\srs-si-acc-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice ─
+    [chromium] › Shamel\srs-si-acc-i-flows.spec.ts:45:5 › I03 Update Stock appears only when the setting is on (setting restored) 
+    [chromium] › Shamel\srs-si-acc-j-server.spec.ts:23:5 › J01 server rules (create through the API; drafts only) 
+  36 passed (32.4m)

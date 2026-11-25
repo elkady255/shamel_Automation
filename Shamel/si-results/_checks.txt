@@ -1,0 +1,237 @@
+A01-1|P|series default is ACC-SINV-.YYYY.-
+A01-2|P|posting date defaults to the current date
+A01-3|P|due date has a default
+A01-4|P|posting time has a default
+A01-5|P|price list defaults to Standard Selling
+A01-8|P|Is Consolidated and Is Return are read-only
+A01-9|P|Include payment (POS), POS Profile, Is Created Using POS and POS Closi
+A01-12|P|Update Stock is hidden while "Allow Update Stock In Sales Invoice" is 
+A01-13|P|Source Invoice is hidden until Is Rate Adjustment Entry is checked
+A01-14|P|Amended From is hidden on a new invoice
+A02-1|P|posting date is disabled while the switch is off
+A02-2|P|posting time is disabled while the switch is off
+A02-3|P|posting date is enabled after the switch is on
+A02-4|P|posting time is enabled after the switch is on
+A02-6|P|posting date is disabled again after the switch is off
+A03-2|P|empty Save does not create a document
+A03-3|P|empty Save shows an error message
+A04-2|P|Save without a customer is refused
+A04-4|P|Save without items is refused
+A05-2|P|Company Tax ID is fetched from the company
+A05-4|P|Customer Name is fetched
+A05-7|P|Currency is fetched from the company default currency (SAR)
+A06-4|P|Exchange Rate is fetched when the currency differs from the company cu
+A06-5|P|Exchange Rate field is read-only (rule configured)
+B01-fixed asset 2121|P|fixed asset 2121: not listed
+B01-fixed asset Test Asset|P|fixed asset Test Asset: not listed
+B01-template item 1111|P|template item 1111: not listed
+B01-not for sale Item-123|P|not for sale Item-123: not listed
+B01-not for sale asdasd|P|not for sale asdasd: not listed
+B01-service Ads|P|service Ads: listed
+B01-IND182210 sales item|P|IND182210 sales item: listed
+B02-2|F|table has a No. column
+B02-col-Item Code|P|column Item Code exists
+B02-col-Qty|P|column Qty exists
+B02-col-Available Qty|P|column Available Qty exists
+B02-col-Shortage Qty|P|column Shortage Qty exists
+B02-col-Rate|P|column Rate exists
+B02-col-Amount|P|column Amount exists
+B02-col-Warehouse|P|column Warehouse exists
+B03-1|P|letters are not accepted in Qty
+B03-2|P|amount = qty x rate (3 x 100 = 300)
+B03-4|P|Qty 0 is refused on Save
+B03-9|P|empty Qty is refused
+B04-1|F|a manually entered rate (250, below valuation) is kept and amount = 4 
+B05-4|P|shortage = qty - available is displayed
+B06-2|P|second row is added
+B06-3|P|row has a delete icon
+B06-4|P|deleting a row removes it
+B06-5|P|header checkbox exists (select all)
+B07-5|P|popup has a "Reset to default" button
+B08-كود الصنف|P|Edit Row shows "كود الصنف"
+B08-مجموعة الأصناف|P|Edit Row shows "مجموعة الأصناف"
+B08-اسم الصنف|P|Edit Row shows "اسم الصنف"
+B08-اسم العلامة التجارية|P|Edit Row shows "اسم العلامة التجارية"
+B08-الوصف|P|Edit Row shows "الوصف"
+B08-الكمية|P|Edit Row shows "الكمية"
+B08-الكمية المتاحة|P|Edit Row shows "الكمية المتاحة"
+B08-كمية العجز|P|Edit Row shows "كمية العجز"
+B08-وحدة القياس|P|Edit Row shows "وحدة القياس"
+B08-عامل تحويل وحدة القياس|P|Edit Row shows "عامل تحويل وحدة القياس"
+B08-نوع الهامش|P|Edit Row shows "نوع الهامش"
+B08-السعر|P|Edit Row shows "السعر"
+B08-المبلغ|P|Edit Row shows "المبلغ"
+B08-صافي السعر|P|Edit Row shows "صافي السعر"
+B08-صافي المبلغ|P|Edit Row shows "صافي المبلغ"
+B08-المستودع|P|Edit Row shows "المستودع"
+B08-قواعد التسعير|P|Edit Row shows "قواعد التسعير"
+B08-مركز التكلفة|P|Edit Row shows "مركز التكلفة"
+B08-المشروع|P|Edit Row shows "المشروع"
+B08-حساب الإيرادات|P|Edit Row shows "حساب الإيرادات"
+B08-حساب المصروفات|P|Edit Row shows "حساب المصروفات"
+B08-حساب الخصم|P|Edit Row shows "حساب الخصم"
+B08-تمكين الإيراد المؤجل|P|Edit Row shows "تمكين الإيراد المؤجل"
+B08-الوزن لكل وحدة|P|Edit Row shows "الوزن لكل وحدة"
+B08-الوزن الإجمالي|P|Edit Row shows "الوزن الإجمالي"
+B08-فحوصات الجودة|P|Edit Row shows "فحوصات الجودة"
+B08-سعر الوارد|P|Edit Row shows "سعر الوارد"
+B08-الكمية المتوقعة|P|Edit Row shows "الكمية المتوقعة"
+B08-الكمية المطلوبة|P|Edit Row shows "الكمية المطلوبة"
+B08-مقابل أمر البيع|P|Edit Row shows "مقابل أمر البيع"
+B08-مقابل إشعار التسليم|P|Edit Row shows "مقابل إشعار التسليم"
+B08-desc500|P|description is limited to 500 characters
+B2-1b|F|row Amount follows the edited Rate
+B2-1c|P|summary total follows the edited Rate
+B2-3d|F|Barcode is hidden in Edit Row
+B2-3e|F|Grant Commission is hidden in Edit Row
+B2-3f|F|Asset field exists in Edit Row
+B2-3g|F|Serial and Batch Bundle field exists in Edit Row
+C3-pct-calc|F|typing the additional discount (pct) does not raise a server error and
+C3-amount-calc|F|typing the additional discount (amount) does not raise a server error 
+C01-sum-a - E|P|grand total = net + taxes for template a - E
+C01-sum-PW ST 30914 - E|P|grand total = net + taxes for template PW ST 30914 - E
+C01-sum-PW ST 30915 - E|P|grand total = net + taxes for template PW ST 30915 - E
+C01-sum-PW ST 30918 - E|P|grand total = net + taxes for template PW ST 30918 - E
+C02-4|P|Mode has the 5 SRS values (Actual, On Net Total, On Previous Row Amoun
+C02-6|P|a tax row without Mode / Account Head is refused
+C03-2|F|10% of 1,000 = 100: grand total 900
+C03-3|F|Additional Discount Amount (currency) is calculated from the percentag
+C03-5|F|amount 250: grand total 750
+C04-2|P|total = 999.99
+C04-5|P|Outstanding Amount equals the grand total on a draft
+C04-7|P|In Words is shown in Arabic on an Arabic interface
+C06-4|P|Source Invoice appears when Is Rate Adjustment Entry (Debit Note) is c
+D01-5|P|Add Row button exists for Sales Invoice Payments
+D01-6|P|Get Advance Received button exists on a draft
+D02-5|P|Only Include Allocated Payments is shown only while FIFO is checked
+D03-4|F|write off larger than the invoice total is refused (old SI-01)
+D04-3|P|Loyalty Points, Loyalty Amount, Redemption Account and Redemption Cost
+D04-4|P|Restore Redeemed Loyalty Points is hidden on a normal invoice
+D05-8|P|Contact (Hidden) field is not shown
+D07-2|P|terms content is fetched from the selected term
+D07-3|P|terms content is limited to 500 characters
+F01-2|P|the invoice is created and the URL changes to its ID
+F01-4|P|ID follows the series ACC-SINV-YYYY-#####
+F01-6|P|all entered values are kept after save and reload
+F01-8|P|Invoice Status shows Draft
+F01-9|P|Credit Status and Refund Status show Not Applicable on a draft
+F01-11|P|a draft shows the Submit button
+F01-12|P|Hold / Resume / Close / Re-open are hidden (the SRS marks them Hidden)
+F01-13|P|the Create menu is not shown on a draft
+F02-6|P|Invoice Status = Unpaid after submit
+F02-7|P|Credit Status = No Credit
+F02-8|P|Refund Status = No Refund
+F02-9|P|Debit To shows the receivable account
+F02-10|P|Against Income Account is filled
+F02-11|P|after submit the fields are read-only (no editable inputs)
+F02-12|P|Save button is gone after submit
+F02-13|P|Cancel / Create / Print are available
+F02-14|F|Delete is not offered on a submitted invoice
+F03-2|P|Create has Return / Credit Note
+F03-3|P|Create has Delivery Note
+F03-4|P|Create has Payment
+F03-5|F|Maintenance Schedule is hidden (the SRS marks it Hidden)
+F04-5|P|Invoice Status = Cancelled
+F04-6|P|Amend button replaces Cancel
+F04-7|P|Delete is offered on a cancelled invoice
+F04-8|P|Create menu is gone after cancel
+F04-10|P|Amend creates a new draft named <id>-1
+F04-11|P|Amended From shows the original invoice
+F04-12|P|the amended document is a Draft with Submit
+F05-1|P|Delete is offered on a draft
+F05-3|P|a confirmation message asks whether to delete
+G01-أمر المبيعات-open|P|the "أمر المبيعات" popup opens
+G01-أمر المبيعات-cols|P|popup has No., Name and Customer columns
+G01-أمر المبيعات-search|P|popup has a Name search field and a Customer field
+G01-أمر المبيعات-btn|P|popup has a "Get Items" button
+G01-أمر المبيعات-limit|P|the popup lists more than 50 documents when they exist (old SI-16)
+G01-عرض سعر-open|P|the "عرض سعر" popup opens
+G01-عرض سعر-cols|P|popup has No., Name and Customer columns
+G01-عرض سعر-search|P|popup has a Name search field and a Customer field
+G01-عرض سعر-btn|P|popup has a "Get Items" button
+G01-عرض سعر-limit|P|the popup lists more than 50 documents when they exist (old SI-16)
+G01-quotation-fetch|P|Get Items adds the quotation items to the Items table
+G01-quotation-totals|P|totals are calculated after Get Items (old SI-22)
+G01-إذن التسليم-open|P|the "إذن التسليم" popup opens
+G01-إذن التسليم-cols|P|popup has No., Name and Customer columns
+G01-إذن التسليم-search|P|popup has a Name search field and a Customer field
+G01-إذن التسليم-btn|P|popup has a "Get Items" button
+G01-إذن التسليم-limit|P|the popup lists more than 50 documents when they exist (old SI-16)
+H01-col-رقم المعرف|P|column "رقم المعرف" exists
+H01-col-حالة الفاتورة|P|column "حالة الفاتورة" exists
+H01-col-حالة الائتمان|P|column "حالة الائتمان" exists
+H01-col-حالة الاسترداد|P|column "حالة الاسترداد" exists
+H01-col-اسم العميل|P|column "اسم العميل" exists
+H01-col-تاريخ الترحيل|P|column "تاريخ الترحيل" exists
+H01-col-تاريخ الاستحقاق|P|column "تاريخ الاستحقاق" exists
+H01-col-الإجمالي|P|column "الإجمالي" exists
+H01-2|P|Add Sales Invoice button exists
+H01-3|P|Grand Total is shown with a currency
+H01-5|P|every status text is one of the SRS statuses
+H02-draft-row|P|a draft invoice exists in the list
+H02-draft-has-اعتماد|P|draft: "اعتماد" is offered
+H02-draft-has-حذف|P|draft: "حذف" is offered
+H02-draft-has-تعديل|P|draft: "تعديل" is offered
+H02-draft-has-تصدير|P|draft: "تصدير" is offered
+H02-draft-has-طباعة|P|draft: "طباعة" is offered
+H02-draft-has-اسناد|P|draft: "اسناد" is offered
+H02-draft-has-إضافة وسوم|P|draft: "إضافة وسوم" is offered
+H02-draft-not-إلغاء|P|draft: "إلغاء" is not offered
+H02-submitted-row|P|a submitted invoice exists in the list
+H02-cancelled-row|P|a cancelled invoice exists in the list
+H03-0|P|a submitted invoice exists in the list
+H02-submitted-has-إلغاء|P|submitted: "إلغاء" is offered
+H02-submitted-has-تعديل|P|submitted: "تعديل" is offered
+H02-submitted-has-تصدير|P|submitted: "تصدير" is offered
+H02-submitted-has-طباعة|P|submitted: "طباعة" is offered
+H02-submitted-not-اعتماد|P|submitted: "اعتماد" is not offered
+H02-submitted-not-حذف|F|submitted: "حذف" is not offered
+H02-cancelled-has-حذف|P|cancelled: "حذف" is offered
+H02-cancelled-has-تعديل|P|cancelled: "تعديل" is offered
+H02-cancelled-has-تصدير|P|cancelled: "تصدير" is offered
+H02-cancelled-has-طباعة|P|cancelled: "طباعة" is offered
+H02-cancelled-not-اعتماد|P|cancelled: "اعتماد" is not offered
+H02-cancelled-not-إلغاء|P|cancelled: "إلغاء" is not offered
+H03-2|P|Edit on a submitted invoice is refused with "لا يمكن تعديل فاتورة مبيع
+I01-2|F|Return opens an unsaved Add Sales Invoice screen (not a saved document
+I01-5|P|Is Return (Credit Note) is checked
+I01-8|P|quantity is negative in the return
+I01-9|F|the return item row does not use the group warehouse "All Warehouses" 
+I01-10|P|Update Billed Amount in Sales Order / Delivery Note are shown on a ret
+I01-11|P|Update Outstanding for Self is shown on a return
+I01-12|P|Restore Redeemed Loyalty Points is hidden when the original did not re
+I02-2|P|Source Invoice lists the customer submitted invoices
+I02-4|P|Is Return stays disabled when Debit Note is checked
+J01|P|valid draft is accepted (control)
+J02|P|qty 0 is refused
+J03|P|negative rate is refused
+J04|F|group warehouse is refused (SI-18)
+J05|F|UOM the item does not have is refused (SI-18)
+J06|F|negative write off amount is refused (SI-09)
+J07|F|write off larger than the invoice is refused (SI-01)
+J08|F|negative additional discount % is refused (SI-19)
+J09|P|due date before posting date is refused, not silently changed (SI-08)
+J10|F|item description over 500 characters is refused (SI-23)
+J11|P|customer PO over 100 characters is refused (SI-23)
+J12|F|terms over 500 characters is refused
+J13|P|quantity 1e15 gives a readable error, not a database error (SI-24)
+J14|P|tax template "VAT - E" can be used (SI-06)
+J15|F|quantity 0.0000001 is refused instead of saved as 0 (SI-25)
+J16|P|draft without Sales Order / Delivery Note is accepted when they are no
+J17|F|rate below valuation is refused when Validate Selling Price is on (SI-
+K01-1|P|editing qty and rate recalculates the row and the totals (3 x 1,200 = 
+K01-3|P|saving an edited draft succeeds and stays on the same document
+K01-4|F|every edited value is kept after reload
+K01-5|P|the database has the new qty, rate, PO and total
+K02-1|P|editing the quantity to 0 is refused on Save
+K02-3|P|the form Cancel button does not save the unsaved edit
+K03-1|P|the delete confirmation asks "هل أنت متأكد؟"
+K03-3|P|the draft is deleted (API returns 404)
+K03-4|P|the screen leaves the deleted document
+K04-1|P|Amend created <id>-1
+K04-3|P|the original is NOT deleted while an amended document exists
+K04-4|P|a warning names the related document as a link
+K04-5|P|the amended draft can be deleted
+K04-6|F|after the amended draft is gone the cancelled original can be deleted
+K05-1|P|REST delete of a submitted invoice is refused
+K05-2|P|the submitted invoice still exists

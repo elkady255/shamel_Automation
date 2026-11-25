@@ -1,0 +1,76 @@
+
+Running 7 tests using 1 worker
+
+[1/7] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/7] [chromium] › Shamel\si8-g-getitems.spec.ts:19:7 › G01 Get Items From أمر المبيعات
+[3/7] [chromium] › Shamel\si8-g-getitems.spec.ts:19:7 › G01 Get Items From عرض سعر
+[4/7] [chromium] › Shamel\si8-g-getitems.spec.ts:19:7 › G01 Get Items From إذن التسليم
+[5/7] [chromium] › Shamel\si8-h-list.spec.ts:14:5 › H01 list columns and statuses
+[6/7] [chromium] › Shamel\si8-h-list.spec.ts:28:5 › H02 action bar depends on the invoice status
+  1) [chromium] › Shamel\si8-h-list.spec.ts:28:5 › H02 action bar depends on the invoice status ────
+
+    Error: H02-cancelled-not-اعتماد cancelled: "اعتماد" is not offered ["تحديد الكل","تعديل","اسناد","إلغاء الإسناد","إضافة وسوم","تصدير","إلغاء التعيين","اعتماد","طباعة","حذف","إغلاق"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-h-list.spec.ts:39:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-h-list-H02-action-bar-depends-on-the-invoice-status-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-h-list-H02-action-bar-depends-on-the-invoice-status-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-h-list-H02-action-bar-depends-on-the-invoice-status-chromium\error-context.md
+
+
+[7/7] [chromium] › Shamel\si8-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice
+  2) [chromium] › Shamel\si8-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice ───────
+
+    Error: H03-2 the Edit popup has a Field dropdown and a Value field 0
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-h-list.spec.ts:48:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\error-context.md
+
+
+  2 failed
+    [chromium] › Shamel\si8-h-list.spec.ts:28:5 › H02 action bar depends on the invoice status ─────
+    [chromium] › Shamel\si8-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice ────────
+  5 passed (2.8m)

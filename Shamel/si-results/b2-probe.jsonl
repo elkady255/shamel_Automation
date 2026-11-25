@@ -1,0 +1,17 @@
+{"id":"B2-1a","text":"rate 12000 qty 4 (expect 48,000)","ok":null,"detail":"{\"rate\":\"12000\",\"row\":\" -337 341 40,800.00 SAR \",\"total\":\"48,000.00 SAR\",\"net\":\"48,000.00 SAR\"}"}
+{"id":"B2-1b","text":"row Amount follows the edited Rate","ok":false,"detail":"{\"rate\":\"12000\",\"row\":\" -337 341 40,800.00 SAR \",\"total\":\"48,000.00 SAR\",\"net\":\"48,000.00 SAR\"}","known":"SI-35"}
+{"id":"B2-1c","text":"summary total follows the edited Rate","ok":true,"detail":"{\"rate\":\"12000\",\"row\":\" -337 341 40,800.00 SAR \",\"total\":\"48,000.00 SAR\",\"net\":\"48,000.00 SAR\"}","known":""}
+{"id":"B2-1d","text":"edit row popup amounts","ok":null,"detail":"السعر المبلغ 40,800 "}
+{"id":"B2-1e","text":"save with rate 12000","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02848"}
+{"id":"B2-1f","text":"saved row","ok":null,"detail":" -337 341 48,000.00 SAR "}
+{"id":"B2-1g","text":"saved doc","ok":null,"detail":"ACC-SINV-2026-02848"}
+{"id":"B2-2-below valuation 250","text":"save with rate below valuation 250","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02849"}
+{"id":"B2-2-negative -5","text":"save with rate negative -5","ok":null,"detail":"[\"MODAL: تعذّر الحفظ خطأ في التحقق في الحقول التالية: items.0.rate: يجب أن تكون القيمة أكبر من أو تساوي 0.0 تعذر حفظ فاتورة المبيعات\"] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new"}
+{"id":"B2-2-zero 0","text":"save with rate zero 0","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02850"}
+{"id":"B2-3a","text":"first textarea current value","ok":null,"detail":"تسويق بالحملات الإعلانية لمدة 6 شهور"}
+{"id":"B2-3b","text":"messages after 2 chars","ok":null,"detail":"[\"MODAL: رسالة كود الصنف مطلوب\"]"}
+{"id":"B2-3c","text":"popup still open","ok":null,"detail":"1"}
+{"id":"B2-3d","text":"Barcode is hidden in Edit Row","ok":false,"detail":"shown","known":"SI-37"}
+{"id":"B2-3e","text":"Grant Commission is hidden in Edit Row","ok":false,"detail":"shown","known":"SI-37"}
+{"id":"B2-3f","text":"Asset field exists in Edit Row","ok":false,"detail":"[\"أصل ثابت\"]","known":"SI-37"}
+{"id":"B2-3g","text":"Serial and Batch Bundle field exists in Edit Row","ok":false,"detail":"","known":"SI-37"}

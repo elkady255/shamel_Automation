@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted)
+  2 passed (23.0s)

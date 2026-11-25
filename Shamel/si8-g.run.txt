@@ -1,0 +1,8 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\si8-g-probe.spec.ts:8:5 › G1 Get Items From menu and popups
+[3/4] [chromium] › Shamel\si8-g-probe.spec.ts:30:5 › G2 Quality inspection button and View menu
+[4/4] [chromium] › Shamel\si8-g-probe.spec.ts:39:5 › G3 list screen
+  4 passed (1.4m)

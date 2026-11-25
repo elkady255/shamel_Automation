@@ -1,0 +1,7 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:76:5 › L04 refund of a paid invoice return
+[3/3] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:94:5 › L05 advance payment: Get Advance Received, allocation and UnReconcile
+  3 passed (2.4m)

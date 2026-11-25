@@ -1,0 +1,75 @@
+
+Running 6 tests using 1 worker
+
+[1/6] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/6] [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:29:5 › K01 edit a draft in every tab and save
+  1) [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:29:5 › K01 edit a draft in every tab and save 
+
+    Error: K01-4 every edited value is kept after reload ["ا8:المبلغ المستحق: \"2,000.00 SAR\" -> \"4,140.00 SAR\""]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-k-edit-delete.spec.ts:48:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-k-edit-delete-K-e4641-draft-in-every-tab-and-save-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-k-edit-delete-K-e4641-draft-in-every-tab-and-save-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-k-edit-delete-K-e4641-draft-in-every-tab-and-save-chromium\error-context.md
+
+
+[3/6] [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:53:5 › K02 edit validations on a draft
+[4/6] [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:64:5 › K03 delete a draft (Yes)
+[5/6] [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:73:5 › K04 delete rules: cancelled invoice that has an amended draft
+  2) [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:73:5 › K04 delete rules: cancelled invoice that has an amended draft 
+
+    Error: K04-6 after the amended draft is gone the cancelled original can be deleted 200 []
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-k-edit-delete.spec.ts:88:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-k-edit-delete-K-403f5-e-that-has-an-amended-draft-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-k-edit-delete-K-403f5-e-that-has-an-amended-draft-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-k-edit-delete-K-403f5-e-that-has-an-amended-draft-chromium\error-context.md
+
+
+[6/6] [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:91:5 › K05 a submitted invoice cannot be deleted (server rule)
+  2 failed
+    [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:29:5 › K01 edit a draft in every tab and save 
+    [chromium] › Shamel\srs-si-acc-k-edit-delete.spec.ts:73:5 › K04 delete rules: cancelled invoice that has an amended draft 
+  4 passed (7.1m)

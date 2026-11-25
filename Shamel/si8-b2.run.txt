@@ -1,0 +1,8 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\si8-b2-probe.spec.ts:9:5 › B2-1 rate change: row amount vs summary vs persisted
+[3/4] [chromium] › Shamel\si8-b2-probe.spec.ts:32:5 › B2-2 rate below valuation / negative / zero on Save
+[4/4] [chromium] › Shamel\si8-b2-probe.spec.ts:44:5 › B2-3 Edit Row description min length message
+  4 passed (3.6m)

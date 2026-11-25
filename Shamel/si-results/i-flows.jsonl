@@ -1,0 +1,17 @@
+{"id":"I01-1","text":"url after Create > Return","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02856"}
+{"id":"I01-2","text":"Return opens an unsaved Add Sales Invoice screen (not a saved document)","ok":false,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02856","known":"SI-13"}
+{"id":"I01-3","text":"messages","ok":null,"detail":"[\"MODAL: رسالة We can see Credit Note is made against ACC-SINV-2026-02830. If you want ACC-SINV-2026-02830's outstanding to be updated, uncheck the 'تحديث رائع للذات' checkbox. You can use دفع المصالحة to reconcile against ACC-SINV-2026-02830 later.\"]"}
+{"id":"I01-4","text":"return doc header","ok":null,"detail":"[[\"نوع الفاتورة\",\"إشعار دائن\"],[\"فاتورة موحدة\",\"off\"],[\"مرتجع (إشعار دائن)\",\"on\"],[\"تحديث المستحقات على الفاتورة نفسها\",\"on\"],[\"تحديث المبلغ المفوتر في أمر البيع\",\"off\"],[\"تحديث المبلغ المفوتر في إشعار التسليم\",\"on\"],[\"مرتجع مقابل فاتورة المبيعات\",\"off\"],[\"فاتورة صادرة عن طرف ثالث\",\"off\"],[\"فاتورة تصدير\",\"off\"],[\"فاتورة الفوترة الذاتية\",\"off\"],[\"فاتورة ملخصة\",\"off\"]]"}
+{"id":"I01-5","text":"Is Return (Credit Note) is checked","ok":true,"detail":"on","known":""}
+{"id":"I01-6","text":"first item row","ok":null,"detail":" 0 -1 -2,000.00 SAR "}
+{"id":"I01-7","text":"row inputs","ok":null,"detail":"[\"checkbox:on\",\"text:IND182210\",\"number:-1\",\"number:2000\",\"text:All Warehouses - E\"]"}
+{"id":"I01-8","text":"quantity is negative in the return","ok":true,"detail":"[\"checkbox:on\",\"text:IND182210\",\"number:-1\",\"number:2000\",\"text:All Warehouses - E\"]","known":""}
+{"id":"I01-9","text":"the return item row does not use the group warehouse \"All Warehouses\" (old SI-14)","ok":false,"detail":" 0 -1 -2,000.00 SAR ","known":"SI-14"}
+{"id":"I01-10","text":"Update Billed Amount in Sales Order / Delivery Note are shown on a return","ok":true,"detail":"[\"تحديث المبلغ المفوتر في أمر البيع\",\"تحديث المبلغ المفوتر في إشعار التسليم\",\"فاتورة الفوترة الذاتية\",\"إجمالي ساعات الفوترة\",\"إجمالي مبالغ الفوترة\",\"تضمين الدفعات المخصصة مقابل أمر البيع المرجعي فقط\"]","known":""}
+{"id":"I01-11","text":"Update Outstanding for Self is shown on a return","ok":true,"detail":"[\"تحديث المستحقات على الفاتورة نفسها\",\"المبلغ المستحق\"]","known":""}
+{"id":"I01-12","text":"Restore Redeemed Loyalty Points is hidden when the original did not redeem points","ok":true,"detail":"","known":""}
+{"id":"I01-13","text":"buttons","ok":null,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\"]"}
+{"id":"I02-1","text":"Source Invoice options","ok":null,"detail":"[\"ACC-SINV-2026-02830\",\"ACC-SINV-2026-02832\",\"ACC-SINV-2026-02854\"]"}
+{"id":"I02-2","text":"Source Invoice lists the customer submitted invoices","ok":true,"detail":"[\"ACC-SINV-2026-02830\",\"ACC-SINV-2026-02832\",\"ACC-SINV-2026-02854\"]","known":""}
+{"id":"I02-3","text":"labels with فاتورة","ok":null,"detail":"[\"نوع الفاتورة *\",\"فاتورة موحدة\",\"فاتورة المصدر\",\"فاتورة صادرة عن طرف ثالث\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"حالة الفاتورة\"]"}
+{"id":"I02-4","text":"Is Return stays disabled when Debit Note is checked","ok":true,"detail":"off disabled","known":""}

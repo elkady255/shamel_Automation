@@ -1,0 +1,87 @@
+{"id":"L01-0","text":"invoice","ok":null,"detail":"ACC-SINV-2026-02889"}
+{"id":"L01-1","text":"status chip / info after paying 400","ok":null,"detail":"مدفوعة جزئيًا | [[\"حالة الفاتورة\",\"مدفوعة جزئيًا\"],[\"حالة الائتمان\",\"بدون رصيد\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"400.00 SAR\"],[\"مبلغ الدائن\",\"0.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]]"}
+{"id":"L01-2","text":"status is Partially Paid after a partial payment","ok":true,"detail":"مدفوعة جزئيًا","known":""}
+{"id":"L01-3","text":"Paid Amount shows 400","ok":true,"detail":"400.00 SAR","known":""}
+{"id":"L01-4","text":"Outstanding Amount shows 600","ok":true,"detail":"600.00 SAR","known":""}
+{"id":"L01-5","text":"the Actions menu (UnReconcile) is shown when the invoice is Partially Paid","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"إجراءات\",\"التفاصيل\"]","known":""}
+{"id":"L01-6","text":"Create > Payment is still offered while Outstanding is not 0","ok":true,"detail":"","known":""}
+{"id":"L01-7","text":"after full payment","ok":null,"detail":"مدفوعة بالكامل | [[\"حالة الفاتورة\",\"مدفوعة بالكامل\"],[\"حالة الائتمان\",\"بدون رصيد\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"1,000.00 SAR\"],[\"مبلغ الدائن\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]] | create=[\"مرتجع / إشعار دائن\",\"إذن التسليم\",\"جدول الصيانة\"]"}
+{"id":"L01-8","text":"status is Fully Paid after the full payment","ok":true,"detail":"مدفوعة بالكامل","known":""}
+{"id":"L01-9","text":"Create > Payment disappears when Outstanding = 0","ok":true,"detail":"[\"مرتجع / إشعار دائن\",\"إذن التسليم\",\"جدول الصيانة\"]","known":""}
+{"id":"L01-10","text":"the Actions menu is still shown when Fully Paid","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"إجراءات\",\"التفاصيل\"]","known":""}
+{"id":"L01-11","text":"an invoice with a payment cannot be cancelled until the payment is cancelled","ok":true,"detail":"","known":""}
+{"id":"L02-1","text":"overdue invoice","ok":null,"detail":"ACC-SINV-2026-02890"}
+{"id":"L02-2","text":"status is Overdue when the due date has passed and nothing is paid","ok":true,"detail":"متأخرة | متأخرة","known":""}
+{"id":"L03-0","text":"invoice","ok":null,"detail":"ACC-SINV-2026-02891"}
+{"id":"L03-1","text":"partial return","ok":null,"detail":"ACC-SINV-2026-02892"}
+{"id":"L03-2","text":"original after a partial return","ok":null,"detail":"[[\"حالة الفاتورة\",\"غير مدفوعة\"],[\"حالة الائتمان\",\"دائن جزئيًا\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"500.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]] chip=غير مدفوعة"}
+{"id":"L03-3","text":"Credit Status = Partially Credited on the original","ok":true,"detail":"دائن جزئيًا","known":""}
+{"id":"L03-4","text":"Credit Amount = 500 on the original","ok":true,"detail":"500.00 SAR","known":""}
+{"id":"L03-5","text":"the return document","ok":null,"detail":"مرتجع | [[\"مرتجع (إشعار دائن)\",\"on\"],[\"مرتجع مقابل فاتورة المبيعات\",\"off\"]]"}
+{"id":"L03-6","text":"the return shows status Return and Is Return checked","ok":true,"detail":"مرتجع | on","known":""}
+{"id":"L03-7","text":"the return shows the \"Return Against\" invoice","ok":true,"detail":"[[\"مرتجع مقابل فاتورة المبيعات\",\"off\"]]","known":""}
+{"id":"L03-8","text":"second return","ok":null,"detail":"ACC-SINV-2026-02893"}
+{"id":"L03-9","text":"original after the full return","ok":null,"detail":"[[\"حالة الفاتورة\",\"غير مدفوعة\"],[\"حالة الائتمان\",\"دائن بالكامل\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"1,000.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]] chip=غير مدفوعة"}
+{"id":"L03-10","text":"Credit Status = Fully Credited after the total is returned","ok":true,"detail":"دائن بالكامل","known":""}
+{"id":"L03-11","text":"Invoice Status = Fully Credited when Outstanding = 0 and Grand Total = Credit Amount","ok":false,"detail":"غير مدفوعة","known":""}
+{"id":"L04-0","text":"paid invoice and its return","ok":null,"detail":"ACC-SINV-2026-02894 / ACC-SINV-2026-02895"}
+{"id":"L05-0","text":"advance payment entry","ok":null,"detail":"ACC-PAY-2026-03063"}
+{"id":"L05-1","text":"draft invoice","ok":null,"detail":"ACC-SINV-2026-02896"}
+{"id":"L05-2","text":"messages after Get Advance Received","ok":null,"detail":"[\"TOAST: لا توجد دفعات مقدمة لهذا العميل\"]"}
+{"id":"L05-3","text":"Get Advance Received adds the customer advance to the Advances table","ok":false,"detail":"0 -> 0","known":""}
+{"id":"L05-4","text":"advances table","ok":null,"detail":""}
+{"id":"L05-5","text":"save with the allocated advance","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02896"}
+{"id":"L05-6","text":"after submit: status / outstanding / advance total","ok":null,"detail":"غير مدفوعة | 1,000.00 SAR | 0.00 SAR"}
+{"id":"L05-7","text":"the allocated advance reduces the Outstanding Amount (1000 - 300 = 700)","ok":false,"detail":"1,000.00 SAR","known":""}
+{"id":"L05-8","text":"status is Partially Paid after an advance is applied","ok":false,"detail":"غير مدفوعة","known":""}
+{"id":"L05-9","text":"the Actions menu is shown","ok":false,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"التفاصيل\",\"المعلومات العامة\"]","known":""}
+{"id":"L03-0","text":"invoice","ok":null,"detail":"ACC-SINV-2026-02897"}
+{"id":"L03-1","text":"partial return","ok":null,"detail":"ACC-SINV-2026-02898"}
+{"id":"L03-2","text":"original after a partial return","ok":null,"detail":"[[\"حالة الفاتورة\",\"غير مدفوعة\"],[\"حالة الائتمان\",\"دائن جزئيًا\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"500.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]] chip=غير مدفوعة"}
+{"id":"L03-3","text":"Credit Status = Partially Credited on the original","ok":true,"detail":"دائن جزئيًا","known":""}
+{"id":"L03-4","text":"Credit Amount = 500 on the original","ok":true,"detail":"500.00 SAR","known":""}
+{"id":"L03-5","text":"the return document","ok":null,"detail":"مرتجع | [[\"مرتجع (إشعار دائن)\",\"on\"],[\"مرتجع مقابل فاتورة المبيعات\",\"off\"]]"}
+{"id":"L03-6","text":"the return shows status Return and Is Return checked","ok":true,"detail":"مرتجع | on","known":""}
+{"id":"L03-7","text":"the return shows the original invoice it was made against","ok":true,"detail":"ACC-SINV-2026-02897","known":"SI-45"}
+{"id":"L03-8","text":"second return","ok":null,"detail":"ACC-SINV-2026-02899"}
+{"id":"L03-9","text":"original after the full return","ok":null,"detail":"[[\"حالة الفاتورة\",\"غير مدفوعة\"],[\"حالة الائتمان\",\"دائن بالكامل\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"1,000.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]] chip=غير مدفوعة"}
+{"id":"L03-10","text":"Credit Status = Fully Credited after the total is returned","ok":true,"detail":"دائن بالكامل","known":""}
+{"id":"L03-11","text":"Invoice Status after the total is returned (the return keeps its own outstanding because Update Outstanding for Self is on by default, so the original stays Unpaid)","ok":null,"detail":"غير مدفوعة"}
+{"id":"L04-0","text":"paid invoice and its return","ok":null,"detail":"ACC-SINV-2026-02900 / ACC-SINV-2026-02901"}
+{"id":"L04-1","text":"before refund","ok":null,"detail":"[[\"حالة الفاتورة\",\"دائن بالكامل\"],[\"حالة الائتمان\",\"دائن بالكامل\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"800.00 SAR\"],[\"مبلغ الدائن\",\"800.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]]"}
+{"id":"L04-2","text":"Refund Status shows No Refund before the refund payment","ok":true,"detail":"بدون استرداد","known":""}
+{"id":"L04-4","text":"after refund","ok":null,"detail":"[[\"حالة الفاتورة\",\"دائن بالكامل\"],[\"حالة الائتمان\",\"دائن بالكامل\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"800.00 SAR\"],[\"مبلغ الدائن\",\"800.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]]"}
+{"id":"L04-5","text":"Refund Status = Fully Refunded and Refund Amount = 800","ok":false,"detail":"بدون استرداد | 0.00 SAR","known":""}
+{"id":"L05-0","text":"advance payment entry","ok":null,"detail":"ACC-PAY-2026-03066"}
+{"id":"L05-1","text":"draft invoice","ok":null,"detail":"ACC-SINV-2026-02902"}
+{"id":"L05-2","text":"messages after Get Advance Received","ok":null,"detail":"[\"MODAL: خطأ في الخادم TypeError: unsupported operand type(s) for -: 'NoneType' and 'int' Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة\",\"MODAL: خطأ تعذّر تحميل الدفعات المقدمة\"]"}
+{"id":"L05-3","text":"Get Advance Received adds the customer advance to the Advances table","ok":false,"detail":"0 -> 0","known":""}
+{"id":"L05-4","text":"advances table","ok":null,"detail":""}
+{"id":"L05-5","text":"save with the allocated advance","ok":null,"detail":"[\"MODAL: خطأ في الخادم TypeError: unsupported operand type(s) for -: 'NoneType' and 'int' Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة\",\"MODAL: خطأ تعذّر تحميل الدفعات المقدمة\"] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02902"}
+{"id":"L05-6","text":"after submit: status / outstanding / advance total","ok":null,"detail":"مدفوعة جزئيًا | 700.00 SAR | 300.00 SAR"}
+{"id":"L05-7","text":"the allocated advance reduces the Outstanding Amount (1000 - 300 = 700)","ok":true,"detail":"700.00 SAR","known":""}
+{"id":"L05-8","text":"status is Partially Paid after an advance is applied","ok":true,"detail":"مدفوعة جزئيًا","known":""}
+{"id":"L05-9","text":"the Actions menu is shown","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"إجراءات\",\"التفاصيل\"]","known":""}
+{"id":"L05-10","text":"Actions menu items","ok":null,"detail":"[\"إلغاء التسوية\"]"}
+{"id":"L05-11","text":"UnReconcile popup","ok":null,"detail":""}
+{"id":"L05-12","text":"after UnReconcile","ok":null,"detail":"مدفوعة جزئيًا | 700.00 SAR"}
+{"id":"L05-13","text":"UnReconcile releases the advance and restores the Outstanding Amount (1000)","ok":false,"detail":"700.00 SAR","known":""}
+{"id":"L04-0","text":"paid invoice and its return","ok":null,"detail":"ACC-SINV-2026-02903 / ACC-SINV-2026-02904"}
+{"id":"L04-1","text":"before refund","ok":null,"detail":"[[\"حالة الفاتورة\",\"دائن بالكامل\"],[\"حالة الائتمان\",\"دائن بالكامل\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"المبلغ المدفوع\",\"800.00 SAR\"],[\"مبلغ الدائن\",\"800.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]]"}
+{"id":"L04-2","text":"Refund Status shows No Refund before the refund payment","ok":true,"detail":"بدون استرداد","known":""}
+{"id":"L04-4","text":"the return document after the refund payment","ok":null,"detail":"[[\"حالة الفاتورة\",\"مرتجع\"],[\"حالة الائتمان\",\"غير منطبق\"],[\"حالة الاسترداد\",\"مسترد بالكامل\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"0.00 SAR\"],[\"الدائن المخصص\",\"800.00 SAR\"],[\"مبلغ الاسترداد\",\"800.00 SAR\"]]"}
+{"id":"L04-5","text":"the return shows Refund Status = Fully Refunded and Refund Amount = 800","ok":true,"detail":"مسترد بالكامل | 800.00 SAR","known":""}
+{"id":"L05-0","text":"advance payment entry","ok":null,"detail":"ACC-PAY-2026-03069"}
+{"id":"L05-1","text":"draft invoice","ok":null,"detail":"ACC-SINV-2026-02905"}
+{"id":"L05-2","text":"messages after Get Advance Received","ok":null,"detail":"[\"MODAL: خطأ في الخادم TypeError: unsupported operand type(s) for -: 'NoneType' and 'int' Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة\",\"MODAL: خطأ تعذّر تحميل الدفعات المقدمة\"]"}
+{"id":"L05-3","text":"Get Advance Received adds the customer advance to the Advances table","ok":false,"detail":"0 -> 0 [\"MODAL: خطأ في الخادم TypeError: unsupported operand type(s) for -: 'NoneType' and 'int' Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة\",\"MODAL: خطأ تعذّر تحميل الدفعات المقدمة\"]","known":"SI-46"}
+{"id":"L05-4","text":"advances table","ok":null,"detail":""}
+{"id":"L05-5","text":"save with the allocated advance","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02905"}
+{"id":"L05-6","text":"after submit: status / outstanding / advance total","ok":null,"detail":"مدفوعة جزئيًا | 700.00 SAR | 300.00 SAR"}
+{"id":"L05-7","text":"the allocated advance reduces the Outstanding Amount (1000 - 300 = 700)","ok":true,"detail":"700.00 SAR","known":""}
+{"id":"L05-8","text":"status is Partially Paid after an advance is applied","ok":true,"detail":"مدفوعة جزئيًا","known":""}
+{"id":"L05-9","text":"the Actions menu is shown","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"إجراءات\",\"التفاصيل\"]","known":""}
+{"id":"L05-10","text":"Actions menu items","ok":null,"detail":"[\"إلغاء التسوية\"]"}
+{"id":"L05-11","text":"UnReconcile popup","ok":null,"detail":"إلغاء التسوية إلغاء التسوية المخصصات نوع السند رقم السند المبلغ المخصص قيد الدفع ACC-PAY-2026-03069 300.00 SAR إلغاء التسوية إلغاء"}
+{"id":"L05-12","text":"after UnReconcile","ok":null,"detail":"غير مدفوعة | 1,000.00 SAR"}
+{"id":"L05-13","text":"UnReconcile releases the advance and restores the Outstanding Amount (1000)","ok":true,"detail":"1,000.00 SAR","known":""}

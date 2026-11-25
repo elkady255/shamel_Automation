@@ -1,0 +1,105 @@
+{"id":"F01-0","text":"fields captured before save","ok":null,"detail":"110"}
+{"id":"F01-1","text":"save","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02853"}
+{"id":"F01-2","text":"the invoice is created and the URL changes to its ID","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02853","known":""}
+{"id":"F01-3","text":"document id","ok":null,"detail":"ACC-SINV-2026-02853"}
+{"id":"F01-4","text":"ID follows the series ACC-SINV-YYYY-#####","ok":true,"detail":"ACC-SINV-2026-02853","known":""}
+{"id":"F01-5","text":"fields that changed after reload","ok":null,"detail":"[\"ا:وقت الترحيل: \\\"12:17:26\\\" -> \\\"12:18:38\\\"\"]"}
+{"id":"F01-6","text":"all entered values are kept after save and reload","ok":false,"detail":"[\"ا:وقت الترحيل: \\\"12:17:26\\\" -> \\\"12:18:38\\\"\"]","known":""}
+{"id":"F01-7","text":"statuses of a draft","ok":null,"detail":"[[\"حالة الفاتورة\",\"مسودة\"],[\"حالة الائتمان\",\"غير منطبق\"],[\"حالة الاسترداد\",\"غير منطبق\"],[\"الحساب المدين\",\"1210 - العملاء - E\"],[\"قيد افتتاحي\",\"لا\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"0.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]]"}
+{"id":"F01-8","text":"Invoice Status shows Draft","ok":true,"detail":"مسودة","known":""}
+{"id":"F01-9","text":"Credit Status and Refund Status show Not Applicable on a draft","ok":true,"detail":"غير منطبق / غير منطبق","known":""}
+{"id":"F01-10","text":"draft buttons","ok":null,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]"}
+{"id":"F01-11","text":"a draft shows the Submit button","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"F01-12","text":"Hold / Resume / Close / Re-open are hidden (the SRS marks them Hidden)","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"F01-13","text":"the Create menu is not shown on a draft","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"F01-14","text":"doc id for next tests","ok":null,"detail":"ACC-SINV-2026-02853"}
+{"id":"F02-1","text":"draft saved","ok":null,"detail":"ACC-SINV-2026-02854"}
+{"id":"F02-2","text":"messages after Submit","ok":null,"detail":"[\"MODAL: مخزون غير كافٍ للصنف IND182210، الكمية المتاحة -337.0 أقل من الكمية المطلوبة 1.0 في المستودع Stores - E. هل ترغب في الاعتماد على أي حال؟ إلغاء إرسال\"]"}
+{"id":"F02-3","text":"a confirmation dialog appeared","ok":null,"detail":"yes"}
+{"id":"F02-4","text":"buttons after submit","ok":null,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"المعلومات الأساسية\",\"Show popup\",\"Show popup\",\"Show popup\",\"Show popup\",\"الأبعاد المحاسبية\",\"Show popup\",\"Show popup\",\"العملة وقائمة الأسعار\",\"Show popup\",\"Show popup\",\"تفاصيل الأصناف\",\"مسح الباركود\",\"إعدادات\",\"Show popup\",\"Show popup\",\"الملخص المالي\",\"الضرائب والرسوم\",\"Show popup\",\"Show popup\",\"الإجماليات\",\"الخصم الإضافي\",\"Show popup\",\"Show popup\",\"Show popup\",\"فواتير الدفعات المقدمة المرجعية\",\"أصناف حزمة المنتجات\"]"}
+{"id":"F02-5","text":"status block","ok":null,"detail":"[[\"حالة الفاتورة\",\"غير مدفوعة\"],[\"حالة الائتمان\",\"بدون رصيد\"],[\"حالة الاسترداد\",\"بدون استرداد\"],[\"الحساب المدين\",\"1210 - العملاء - E\"],[\"قيد افتتاحي\",\"لا\"],[\"مقابل حساب الإيرادات\",\"4100 - المبيعات - E\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"0.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]]"}
+{"id":"F02-6","text":"Invoice Status = Unpaid after submit","ok":true,"detail":"غير مدفوعة","known":""}
+{"id":"F02-7","text":"Credit Status = No Credit","ok":true,"detail":"بدون رصيد","known":""}
+{"id":"F02-8","text":"Refund Status = No Refund","ok":true,"detail":"بدون استرداد","known":""}
+{"id":"F02-9","text":"Debit To shows the receivable account","ok":true,"detail":"1210 - العملاء - E","known":""}
+{"id":"F02-10","text":"Against Income Account is filled","ok":true,"detail":"4100 - المبيعات - E","known":""}
+{"id":"F02-11","text":"after submit the fields are read-only (no editable inputs)","ok":true,"detail":"1","known":""}
+{"id":"F02-12","text":"Save button is gone after submit","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"المعلومات الأساسية\",\"Show popup\",\"Show popup\",\"Show popup\",\"Show popup\",\"الأبعاد المحاسبية\",\"Show popup\",\"Show popup\",\"العملة وقائمة الأسعار\",\"Show popup\",\"Show popup\",\"تفاصيل الأصناف\",\"مسح الباركود\",\"إعدادات\",\"","known":""}
+{"id":"F02-13","text":"Cancel / Create / Print are available","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"المعلومات الأساسية\",\"Show popup\",\"Show popup\",\"Show popup\",\"Show popup\",\"الأبعاد المحاسبية\",\"Show popup\",\"Show popup\",\"العملة وقائمة الأسعار\",\"Show popup\",\"Show popup\",\"تفاصيل الأصناف\",\"مسح الباركود\",\"إعدادات\",\"","known":""}
+{"id":"F02-14","text":"Delete is not offered on a submitted invoice","ok":false,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"إلغاء المستند\",\"إنشاء\"]","known":"SI-03"}
+{"id":"F02-15","text":"submitted doc","ok":null,"detail":"ACC-SINV-2026-02854"}
+{"id":"F03-1","text":"Create menu items","ok":null,"detail":"[\"عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون\"]"}
+{"id":"F03-2","text":"Create has Return / Credit Note","ok":false,"detail":"[\"عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون\"]","known":""}
+{"id":"F03-3","text":"Create has Delivery Note","ok":false,"detail":"[\"عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون\"]","known":""}
+{"id":"F03-4","text":"Create has Payment","ok":false,"detail":"[\"عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون\"]","known":""}
+{"id":"F03-5","text":"Maintenance Schedule is hidden (the SRS marks it Hidden)","ok":true,"detail":"[\"عرض دفتر الأستاذ المحاسبيعرض دفتر أستاذ المخزون\"]","known":""}
+{"id":"F03-6","text":"after Payment click: url","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/payment-entries/new?sales_invoice=ACC-SINV-2026-02830"}
+{"id":"F03-7","text":"page title","ok":null,"detail":"مرحباً Administrator ! AN Administrator admin@example.com 73 إضافة قيد دفع غير محفوظة نوع الدفع السلسلة* نوع الدفع تاريخ الترحيل* الشركة* طريقة الدفع* الدفع من "}
+{"id":"F03-8","text":"popup/messages","ok":null,"detail":"[]"}
+{"id":"F04-0","text":"submitted for cancel test","ok":null,"detail":"ACC-SINV-2026-02855"}
+{"id":"F04-1","text":"messages/dialog after Cancel Document","ok":null,"detail":"[\"TOAST: Sales Invoice cancelled successfully\"]"}
+{"id":"F04-3","text":"buttons after cancel","ok":null,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"تعديل\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"المعلومات الأساسية\"]"}
+{"id":"F04-4","text":"chip","ok":null,"detail":"ملغي"}
+{"id":"F04-5","text":"Invoice Status = Cancelled","ok":true,"detail":"ملغي","known":""}
+{"id":"F04-6","text":"Amend button replaces Cancel","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"إنشاء فحص جودة\",\"عرض\",\"تعديل\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"المعلومات الأساسية\"]","known":""}
+{"id":"F04-7","text":"Delete is offered on a cancelled invoice","ok":true,"detail":"","known":""}
+{"id":"F04-8","text":"Create menu is gone after cancel","ok":true,"detail":"","known":""}
+{"id":"F04-9","text":"after Amend url","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02855-1"}
+{"id":"F04-10","text":"Amend creates a new draft named <id>-1","ok":true,"detail":"ACC-SINV-2026-02855-1","known":""}
+{"id":"F04-11","text":"Amended From shows the original invoice","ok":true,"detail":"[[\"معدل من\",\"on\"]]","known":""}
+{"id":"F04-12","text":"the amended document is a Draft with Submit","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\"]","known":""}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":""}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":false,"detail":"","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}
+{"id":"F01-0","text":"fields captured before save","ok":null,"detail":"110"}
+{"id":"F01-1","text":"save","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02870"}
+{"id":"F01-2","text":"the invoice is created and the URL changes to its ID","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02870","known":""}
+{"id":"F01-3","text":"document id","ok":null,"detail":"ACC-SINV-2026-02870"}
+{"id":"F01-4","text":"ID follows the series ACC-SINV-YYYY-#####","ok":true,"detail":"ACC-SINV-2026-02870","known":""}
+{"id":"F01-5","text":"fields that changed after reload","ok":null,"detail":"[]"}
+{"id":"F01-6","text":"all entered values are kept after save and reload","ok":true,"detail":"[]","known":""}
+{"id":"F01-7","text":"statuses of a draft","ok":null,"detail":"[[\"حالة الفاتورة\",\"مسودة\"],[\"حالة الائتمان\",\"غير منطبق\"],[\"حالة الاسترداد\",\"غير منطبق\"],[\"الحساب المدين\",\"1210 - العملاء - E\"],[\"قيد افتتاحي\",\"لا\"],[\"المبلغ المدفوع\",\"0.00 SAR\"],[\"مبلغ الدائن\",\"0.00 SAR\"],[\"الدائن المخصص\",\"0.00 SAR\"],[\"مبلغ الاسترداد\",\"0.00 SAR\"]]"}
+{"id":"F01-8","text":"Invoice Status shows Draft","ok":true,"detail":"مسودة","known":""}
+{"id":"F01-9","text":"Credit Status and Refund Status show Not Applicable on a draft","ok":true,"detail":"غير منطبق / غير منطبق","known":""}
+{"id":"F01-10","text":"draft buttons","ok":null,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]"}
+{"id":"F01-11","text":"a draft shows the Submit button","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"F01-12","text":"Hold / Resume / Close / Re-open are hidden (the SRS marks them Hidden)","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"F01-13","text":"the Create menu is not shown on a draft","ok":true,"detail":"[\"رجوع\",\"تعيين إلى\",\"الوسوم\",\"المرفقات\",\"طباعة\",\"مشاركة\",\"السجلات\",\"حذف\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"اعتماد\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"السجلات المرتبطة 0\",\"الحالة\",\"تفاصيل المحاسبة\",\"نقاط الولاء\",\"إعدادات الطباعة\",\"Show popup\",\"معلومات إضافية\",\"×\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"F01-14","text":"doc id for next tests","ok":null,"detail":"ACC-SINV-2026-02870"}
+{"id":"F03-1","text":"Create menu items","ok":null,"detail":"[\"مرتجع / إشعار دائن\",\"إذن التسليم\",\"دفعة\",\"جدول الصيانة\"]"}
+{"id":"F03-2","text":"Create has Return / Credit Note","ok":true,"detail":"[\"مرتجع / إشعار دائن\",\"إذن التسليم\",\"دفعة\",\"جدول الصيانة\"]","known":""}
+{"id":"F03-3","text":"Create has Delivery Note","ok":true,"detail":"[\"مرتجع / إشعار دائن\",\"إذن التسليم\",\"دفعة\",\"جدول الصيانة\"]","known":""}
+{"id":"F03-4","text":"Create has Payment","ok":true,"detail":"[\"مرتجع / إشعار دائن\",\"إذن التسليم\",\"دفعة\",\"جدول الصيانة\"]","known":""}
+{"id":"F03-5","text":"Maintenance Schedule is hidden (the SRS marks it Hidden)","ok":false,"detail":"[\"مرتجع / إشعار دائن\",\"إذن التسليم\",\"دفعة\",\"جدول الصيانة\"]","known":"SI-38"}
+{"id":"F03-6","text":"after Payment click: url","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/payment-entries/new?sales_invoice=ACC-SINV-2026-02830"}
+{"id":"F03-7","text":"page title","ok":null,"detail":"مرحباً Administrator ! AN Administrator admin@example.com 73 إضافة قيد دفع غير محفوظة نوع الدفع السلسلة* نوع الدفع تاريخ الترحيل* الشركة* طريقة الدفع* الدفع من "}
+{"id":"F03-8","text":"popup/messages","ok":null,"detail":"[]"}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":""}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":false,"detail":"","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":""}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":false,"detail":"","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":""}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":false,"detail":"","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":""}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":false,"detail":"","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":""}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":false,"detail":"","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":""}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":false,"detail":"","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}
+{"id":"F05-1","text":"Delete is offered on a draft","ok":true,"detail":"","known":""}
+{"id":"F05-2","text":"delete confirmation text","ok":null,"detail":"حذف هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء."}
+{"id":"F05-3","text":"a confirmation message asks whether to delete","ok":true,"detail":"حذف هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء.","known":""}
+{"id":"F05-4","text":"still on the document","ok":null,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02829"}

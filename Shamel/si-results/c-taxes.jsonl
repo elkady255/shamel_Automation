@@ -1,0 +1,59 @@
+{"id":"C01-1","text":"tax templates","ok":null,"detail":"[\"a - E\",\"PW ST 30914 - E\",\"PW ST 30915 - E\",\"PW ST 30918 - E\",\"PW ST 30926 - E\",\"PW ST 30927 - E\",\"PW ST 30928 - E\",\"PW ST 30929 - E\",\"PW ST 4929 - E\",\"PW ST 4940 - E\",\"PW ST DEF 30930 - E\",\"PW ST DUP 30915 - E\",\"PW ST DUP 30915 - E-1\",\"TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT - E\",\"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU - E\",\"VAT - E\",\"عنوان قال ضريبة جديد - E\",\"عنوان قالب ضريبى جديد - E\"]"}
+{"id":"C01-tpl-a - E","text":"template a - E","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} |  طريقة الاحتساب الحساب نسبة الضريبة صافي المبلغ المبلغ الإجمالي 1,000.00 SAR 150.00 SAR 1,150.00 SAR "}
+{"id":"C01-sum-a - E","text":"grand total = net + taxes for template a - E","ok":true,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C01-tpl-PW ST 30914 - E","text":"template PW ST 30914 - E","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} |  طريقة الاحتساب الحساب نسبة الضريبة صافي المبلغ المبلغ الإجمالي 1,000.00 SAR 150.00 SAR 1,150.00 SAR "}
+{"id":"C01-sum-PW ST 30914 - E","text":"grand total = net + taxes for template PW ST 30914 - E","ok":true,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C01-tpl-PW ST 30915 - E","text":"template PW ST 30915 - E","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} |  طريقة الاحتساب الحساب نسبة الضريبة صافي المبلغ المبلغ الإجمالي 1,000.00 SAR 150.00 SAR 1,150.00 SAR "}
+{"id":"C01-sum-PW ST 30915 - E","text":"grand total = net + taxes for template PW ST 30915 - E","ok":true,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C01-tpl-PW ST 30918 - E","text":"template PW ST 30918 - E","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} |  طريقة الاحتساب الحساب نسبة الضريبة صافي المبلغ المبلغ الإجمالي 1,000.00 SAR 150.00 SAR 1,150.00 SAR "}
+{"id":"C01-sum-PW ST 30918 - E","text":"grand total = net + taxes for template PW ST 30918 - E","ok":true,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":150,\"grand\":1150,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C02-1","text":"taxes table headers","ok":null,"detail":"[\"\",\"طريقة الاحتساب\",\"الحساب\",\"نسبة الضريبة\",\"صافي المبلغ\",\"المبلغ\",\"الإجمالي\",\"\"]"}
+{"id":"C02-2","text":"new row inputs","ok":null,"detail":"[\"checkbox::on\",\"text:اختيار:على صافي الإجمالي\",\"text:ابحث واختر:\",\"number::0\"]"}
+{"id":"C02-3","text":"mode options","ok":null,"detail":"[\"مبلغ ثابت\",\"على صافي الإجمالي\",\"على مبلغ الصف السابق\",\"على إجمالي الصف السابق\",\"على كمية الصنف\"]"}
+{"id":"C02-4","text":"Mode has the 5 SRS values (Actual, On Net Total, On Previous Row Amount, On Previous Row Total, On Item Quantity)","ok":true,"detail":"[\"مبلغ ثابت\",\"على صافي الإجمالي\",\"على مبلغ الصف السابق\",\"على إجمالي الصف السابق\",\"على كمية الصنف\"]","known":""}
+{"id":"C02-5","text":"save with an empty tax row","ok":null,"detail":"[\"MODAL: تعذّر الحفظ خطأ في التحقق في الحقول التالية: taxes.0.account_head: هذا الحقل مطلوب تعذر حفظ فاتورة المبيعات\"] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new"}
+{"id":"C02-6","text":"a tax row without Mode / Account Head is refused","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/new","known":""}
+{"id":"C03-0","text":"discount fields at start","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}"}
+{"id":"C03-1","text":"net total 10%","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} amtField="}
+{"id":"C03-2","text":"10% of 1,000 = 100: grand total 900","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C03-3","text":"Additional Discount Amount (currency) is calculated from the percentage","ok":false,"detail":"","known":""}
+{"id":"C03-4","text":"amount 250","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} pct="}
+{"id":"C03-5","text":"amount 250: grand total 750","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C04-1","text":"totals for 3 x 333.33","ok":null,"detail":"{\"total\":999.99,\"net\":999.99,\"taxes\":0,\"grand\":999.99,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}"}
+{"id":"C04-2","text":"total = 999.99","ok":true,"detail":"{\"total\":999.99,\"net\":999.99,\"taxes\":0,\"grand\":999.99,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C04-3","text":"rounding adjustment","ok":null,"detail":"0.00 SAR"}
+{"id":"C04-4","text":"in words","ok":null,"detail":"ريال سعودي تسعمائة و تسعة و تسعون و تسعة و تسعون Halala فقط."}
+{"id":"C04-5","text":"Outstanding Amount equals the grand total on a draft","ok":true,"detail":"{\"total\":999.99,\"net\":999.99,\"taxes\":0,\"grand\":999.99,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":""}
+{"id":"C04-6","text":"total advance","ok":null,"detail":"—"}
+{"id":"C04-7","text":"In Words is shown in Arabic on an Arabic interface","ok":true,"detail":"ريال سعودي تسعمائة و تسعة و تسعون و تسعة و تسعون Halala فقط.","known":""}
+{"id":"C05-1","text":"shipping rules","ok":null,"detail":"[\"s\",\"test data\"]"}
+{"id":"C05-2","text":"after shipping rule","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":8,\"grand\":1008,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} |  كود الصنف الكمية الكمية المتاحة كمية العجز السعر المبلغ المستودع -337 338 10,200.00 SAR "}
+{"id":"C06-1","text":"switch Consider for Tax Withholding","ok":null,"detail":"true"}
+{"id":"C06-2","text":"after tax withholding: new fields","ok":null,"detail":"[\"تطبيق الخصم الإضافي على\",\"نسبة الخصم الإضافي\",\"مبلغ الخصم الإضافي (بعملة الشركة الأساسية)\",\"مبلغ الخصم الإضافي (العملة)\",\"حساب الخصم\"]"}
+{"id":"C06-3","text":"switch Debit Note","ok":null,"detail":"true"}
+{"id":"C06-4","text":"Source Invoice appears when Is Rate Adjustment Entry (Debit Note) is checked","ok":true,"detail":"[\"نوع الفاتورة *\",\"فاتورة موحدة\",\"فاتورة المصدر\",\"فاتورة صادرة عن طرف ثالث\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"حالة الفاتورة\"]","known":""}
+{"id":"C06-5","text":"Update Outstanding for Self is shown (checked by default)","ok":false,"detail":"[\"المبلغ المستحق\"]","known":""}
+{"id":"C03-0","text":"discount fields at start","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}"}
+{"id":"C03-1","text":"net total 10%","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} amtField="}
+{"id":"C03-2","text":"10% of 1,000 = 100: grand total 900","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":"SI-33"}
+{"id":"C03-3","text":"Additional Discount Amount (currency) is calculated from the percentage","ok":false,"detail":"","known":"SI-33"}
+{"id":"C03-4","text":"amount 250","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} pct="}
+{"id":"C03-5","text":"amount 250: grand total 750","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":"SI-33"}
+{"id":"C06-1","text":"switch Consider for Tax Withholding","ok":null,"detail":"true"}
+{"id":"C06-2","text":"after tax withholding: new fields","ok":null,"detail":"[\"تطبيق الخصم الإضافي على\",\"نسبة الخصم الإضافي\",\"مبلغ الخصم الإضافي (بعملة الشركة الأساسية)\",\"مبلغ الخصم الإضافي (العملة)\",\"حساب الخصم\"]"}
+{"id":"C06-3","text":"switch Debit Note","ok":null,"detail":"true"}
+{"id":"C06-4","text":"Source Invoice appears when Is Rate Adjustment Entry (Debit Note) is checked","ok":true,"detail":"[\"نوع الفاتورة *\",\"فاتورة موحدة\",\"فاتورة المصدر\",\"فاتورة صادرة عن طرف ثالث\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"حالة الفاتورة\"]","known":""}
+{"id":"C06-5","text":"Update Outstanding for Self on a normal invoice","ok":null,"detail":"[\"المبلغ المستحق\"]"}
+{"id":"C03-0","text":"discount fields at start","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}"}
+{"id":"C03-1","text":"net total 10%","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} amtField="}
+{"id":"C03-2","text":"10% of 1,000 = 100: grand total 900","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":"SI-33"}
+{"id":"C03-3","text":"Additional Discount Amount (currency) is calculated from the percentage","ok":false,"detail":"","known":"SI-33"}
+{"id":"C03-4","text":"amount 250","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} pct="}
+{"id":"C03-5","text":"amount 250: grand total 750","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":"SI-33"}
+{"id":"C03-0","text":"discount fields at start","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}"}
+{"id":"C03-1","text":"net total 10%","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} amtField="}
+{"id":"C03-2","text":"10% of 1,000 = 100: grand total 900","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":"SI-33"}
+{"id":"C03-3","text":"Additional Discount Amount (currency) is calculated from the percentage","ok":false,"detail":"","known":"SI-33"}
+{"id":"C03-4","text":"amount 250","ok":null,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0} pct="}
+{"id":"C03-5","text":"amount 250: grand total 750","ok":false,"detail":"{\"total\":1000,\"net\":1000,\"taxes\":0,\"grand\":1000,\"rounded\":0,\"outstanding\":0,\"discAmt\":0}","known":"SI-33"}
+{"id":"C03-stop","text":"stopped after the server error popup of SI-33","ok":null,"detail":"locator.fill: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('main').locator('label').filter({ hasText: /^\\s*نسبة الخصم الإضافي\\s*\\*?\\s*$/ })"}

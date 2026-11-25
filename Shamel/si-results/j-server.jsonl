@@ -1,0 +1,38 @@
+{"id":"J-0","text":"base doc","ok":null,"detail":"{\"company\":\"Ahmed Ebrahim CO.\",\"customer\":\"CU-2026-00001\",\"currency\":\"SAR\",\"selling_price_list\":\"Standard Selling\",\"posting_date\":\"2026-11-23\",\"due_date\":\"2026-11-23\",\"invoice_type\":\"Sales Invoice\",\"update_stock\":0,\"items\":1}"}
+{"id":"J01","text":"valid draft is accepted (control)","ok":true,"detail":"accepted ACC-SINV-2026-02857 | OK","known":""}
+{"id":"J02","text":"qty 0 is refused","ok":true,"detail":"refused | الصف # 1: كمية البند IND182210 لا يمكن أن يكون صفرا","known":""}
+{"id":"J03","text":"negative rate is refused","ok":true,"detail":"refused | Incorrect value:Grand Total (Company Currency must be &gt;= 0.0","known":""}
+{"id":"J04","text":"group warehouse is refused (SI-18)","ok":false,"detail":"accepted ACC-SINV-2026-02858 | OK","known":"SI-18"}
+{"id":"J05","text":"UOM the item does not have is refused (SI-18)","ok":false,"detail":"accepted ACC-SINV-2026-02859 | OK","known":"SI-18"}
+{"id":"J06","text":"negative write off amount is refused (SI-09)","ok":false,"detail":"accepted ACC-SINV-2026-02860 | OK","known":"SI-09"}
+{"id":"J07","text":"write off larger than the invoice is refused (SI-01)","ok":false,"detail":"accepted ACC-SINV-2026-02861 | OK","known":"SI-01"}
+{"id":"J08","text":"negative additional discount % is refused (SI-19)","ok":false,"detail":"accepted ACC-SINV-2026-02862 | OK","known":"SI-19"}
+{"id":"J09","text":"due date before posting date is refused, not silently changed (SI-08)","ok":true,"detail":"refused | لا يمكن أن يكون تاريخ الاستحقاق قبل Posting Date","known":"SI-08"}
+{"id":"J10","text":"item description over 500 characters is refused (SI-23)","ok":false,"detail":"accepted ACC-SINV-2026-02863 | OK","known":"SI-23"}
+{"id":"J11","text":"customer PO over 100 characters is refused (SI-23)","ok":true,"detail":"refused | فاتورة مبيعات ACC-SINV-2026-02864: 'طلب شراء الزبون' (pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp) سيتم اقتطاعه، حيث أن الحد الأقصى المسموح به هو 140","known":"SI-23"}
+{"id":"J12","text":"terms over 500 characters is refused","ok":false,"detail":"accepted ACC-SINV-2026-02864 | OK","known":""}
+{"id":"J13","text":"quantity 1e15 gives a readable error, not a database error (SI-24)","ok":true,"detail":"refused | MySQLdb.DataError: (1264, \"Out of range value for column 'total_qty' at row 1\")","known":""}
+{"id":"J14","text":"tax template \"VAT - E\" can be used (SI-06)","ok":true,"detail":"accepted ACC-SINV-2026-02865 | OK","known":"SI-06"}
+{"id":"J15","text":"quantity 0.0000001 is refused instead of saved as 0 (SI-25)","ok":false,"detail":"accepted ACC-SINV-2026-02866 | OK","known":"SI-25"}
+{"id":"J15b","text":"saved qty/amount","ok":null,"detail":"0 / 0"}
+{"id":"J16","text":"draft without Sales Order / Delivery Note is accepted when they are not required","ok":true,"detail":"accepted ACC-SINV-2026-02867 | OK","known":""}
+{"id":"J17","text":"rate below valuation is refused when Validate Selling Price is on (SI-20)","ok":false,"detail":"accepted ACC-SINV-2026-02868 | OK","known":"SI-20"}
+{"id":"J-0","text":"base doc","ok":null,"detail":"{\"company\":\"Ahmed Ebrahim CO.\",\"customer\":\"CU-2026-00001\",\"currency\":\"SAR\",\"selling_price_list\":\"Standard Selling\",\"posting_date\":\"2026-11-23\",\"due_date\":\"2026-11-23\",\"invoice_type\":\"Sales Invoice\",\"update_stock\":0,\"items\":1}"}
+{"id":"J01","text":"valid draft is accepted (control)","ok":true,"detail":"accepted ACC-SINV-2026-02871 | OK","known":""}
+{"id":"J02","text":"qty 0 is refused","ok":true,"detail":"refused | الصف # 1: كمية البند IND182210 لا يمكن أن يكون صفرا","known":""}
+{"id":"J03","text":"negative rate is refused","ok":true,"detail":"refused | Incorrect value:Grand Total (Company Currency must be &gt;= 0.0","known":""}
+{"id":"J04","text":"group warehouse is refused (SI-18)","ok":false,"detail":"accepted ACC-SINV-2026-02872 | OK","known":"SI-18"}
+{"id":"J05","text":"UOM the item does not have is refused (SI-18)","ok":false,"detail":"accepted ACC-SINV-2026-02873 | OK","known":"SI-18"}
+{"id":"J06","text":"negative write off amount is refused (SI-09)","ok":false,"detail":"accepted ACC-SINV-2026-02874 | OK","known":"SI-09"}
+{"id":"J07","text":"write off larger than the invoice is refused (SI-01)","ok":false,"detail":"accepted ACC-SINV-2026-02875 | OK","known":"SI-01"}
+{"id":"J08","text":"negative additional discount % is refused (SI-19)","ok":false,"detail":"accepted ACC-SINV-2026-02876 | OK","known":"SI-19"}
+{"id":"J09","text":"due date before posting date is refused, not silently changed (SI-08)","ok":true,"detail":"refused | لا يمكن أن يكون تاريخ الاستحقاق قبل Posting Date","known":"SI-08"}
+{"id":"J10","text":"item description over 500 characters is refused (SI-23)","ok":false,"detail":"accepted ACC-SINV-2026-02877 | OK","known":"SI-23"}
+{"id":"J11","text":"customer PO over 100 characters is refused (SI-23)","ok":true,"detail":"refused | فاتورة مبيعات ACC-SINV-2026-02878: 'طلب شراء الزبون' (pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp) سيتم اقتطاعه، حيث أن الحد الأقصى المسموح به هو 140","known":"SI-23"}
+{"id":"J12","text":"terms over 500 characters is refused","ok":false,"detail":"accepted ACC-SINV-2026-02878 | OK","known":"SI-23"}
+{"id":"J13","text":"quantity 1e15 gives a readable error, not a database error (SI-24)","ok":true,"detail":"refused | MySQLdb.DataError: (1264, \"Out of range value for column 'total_qty' at row 1\")","known":""}
+{"id":"J14","text":"tax template \"VAT - E\" can be used (SI-06)","ok":true,"detail":"accepted ACC-SINV-2026-02879 | OK","known":"SI-06"}
+{"id":"J15","text":"quantity 0.0000001 is refused instead of saved as 0 (SI-25)","ok":false,"detail":"accepted ACC-SINV-2026-02880 | OK","known":"SI-25"}
+{"id":"J15b","text":"saved qty/amount","ok":null,"detail":"0 / 0"}
+{"id":"J16","text":"draft without Sales Order / Delivery Note is accepted when they are not required","ok":true,"detail":"accepted ACC-SINV-2026-02881 | OK","known":""}
+{"id":"J17","text":"rate below valuation is refused when Validate Selling Price is on (SI-20)","ok":false,"detail":"accepted ACC-SINV-2026-02882 | OK","known":"SI-20"}

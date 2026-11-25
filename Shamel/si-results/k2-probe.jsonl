@@ -1,0 +1,4 @@
+{"id":"K2-2000","text":"msgs at 2000ms","ok":null,"detail":"[] url=https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02888"}
+{"id":"K2-4000","text":"msgs at 4000ms","ok":null,"detail":"[] url=https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02888"}
+{"id":"K2-8000","text":"msgs at 8000ms","ok":null,"detail":"[\"MODAL: لا يمكن الحذف هذا السجل مرتبط بالمستندات التالية. يجب حذفها أولاً. GL الدخول (4): 3f54510a27، 463041e058، bf7e6d75bc، c0d45216f3 إدخال بيانات دفتر المدفوعات (2): 8jo6cr8v7i، 8p4fcntj5g\"] url=https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02888"}
+{"id":"K2-api","text":"ACC-SINV-2026-02888 status after delete attempt","ok":null,"detail":"200"}

@@ -1,0 +1,40 @@
+{"id":"D01-1","text":"tables on tab","ok":null,"detail":"[]"}
+{"id":"D01-2","text":"cash/bank options","ok":null,"detail":"[\"ALRAJHY BANK - 122101 - ALRAJHY BANK - E\",\"RIYAD BANK - 122102 - RIYAD BANK - E\",\"Alinma Bank - 122103 - Alinma Bank - E\",\"SNB BANK - 122104 - SNB BANK - E\",\"SAB الاول Bank - 122105 - SAB الاول Bank - E\",\"CIB Bank - 122201 - CIB Bank - E\"]"}
+{"id":"D01-3","text":"account for change options","ok":null,"detail":"[\"يوليوس رمزي - 01204523609 - يوليوس رمزي - E\",\"s - 1 - s - E\",\"أجهزة كمبيوتر - 1110 - أجهزة كمبيوتر - E\",\"أثاث - 1111 - أثاث - E\"]"}
+{"id":"D01-4","text":"buttons on tab","ok":null,"detail":"[\"رجوع\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"المدفوعات\",\"إضافة دفعة\",\"التغييرات\",\"الدفعة المقدمة\",\"جلب الدفعات المقدمة المستلمة\",\"إضافة صف\",\"استرداد نقاط الولاء\",\"شطب المبلغ\",\"عنوان الفوترة\",\"عنوان الشحن\",\"عنوان الشركة\",\"بيانات وشروط الدفع\",\"إضافة صف\",\"الشروط والأحكام\",\"إلغاء\",\"حفظ\"]"}
+{"id":"D01-5","text":"Add Row button exists for Sales Invoice Payments","ok":true,"detail":"[\"رجوع\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"المدفوعات\",\"إضافة دفعة\",\"التغييرات\",\"الدفعة المقدمة\",\"جلب الدفعات المقدمة المستلمة\",\"إضافة صف\",\"استرداد نقاط الولاء\",\"شطب المبلغ\",\"عنوان الفوترة\",\"عنوان الشحن\",\"عنوان الشركة\",\"بيانات وشروط الدفع\",\"إضافة صف\",\"الشروط والأحكام\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"D01-6","text":"Get Advance Received button exists on a draft","ok":true,"detail":"[\"رجوع\",\"جلب الأصناف من\",\"إنشاء فحص جودة\",\"عرض\",\"التفاصيل\",\"المعلومات العامة\",\"معلومات إضافية\",\"المدفوعات\",\"إضافة دفعة\",\"التغييرات\",\"الدفعة المقدمة\",\"جلب الدفعات المقدمة المستلمة\",\"إضافة صف\",\"استرداد نقاط الولاء\",\"شطب المبلغ\",\"عنوان الفوترة\",\"عنوان الشحن\",\"عنوان الشركة\",\"بيانات وشروط الدفع\",\"إضافة صف\",\"الشروط والأحكام\",\"إلغاء\",\"حفظ\"]","known":""}
+{"id":"D02-1","text":"Allocate Advance Automatically (FIFO)","ok":null,"detail":"on"}
+{"id":"D02-2","text":"all switches on General tab","ok":null,"detail":"[\"تعديل تاريخ ووقت الترحيل\",\"فاتورة موحدة\",\"مرتجع (إشعار دائن)\",\"احتساب ضريبة الخصم والتحصيل\",\"قيد تعديل السعر (إشعار مدين)\",\"فاتورة صادرة عن طرف ثالث\",\"توريد اسمي\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"تجاهل قاعدة التسعير\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\",\"الحساب نقدي أو غير تجاري\",\"تخصيص الدفعة المقدمة تلقائيًا (الوارد أولاً يُصرف أولاً)\",\"تضمين الدفعات المخصصة مقابل أمر البيع المرجعي فقط\",\"استرداد نقاط الولاء\",\"عدم إنشاء نقاط ولاء\",\"شطب المبلغ المتبقي\",\"الطباعة بدون المبالغ\",\"تجميع الأصناف المتشابهة\"]"}
+{"id":"D02-3","text":"Only include allocated payments against reference SO","ok":null,"detail":"on"}
+{"id":"D02-4","text":"after turning FIFO off, \"only include allocated\" visible?","ok":null,"detail":"[\"تعديل تاريخ ووقت الترحيل\",\"فاتورة موحدة\",\"مرتجع (إشعار دائن)\",\"احتساب ضريبة الخصم والتحصيل\",\"قيد تعديل السعر (إشعار مدين)\",\"فاتورة صادرة عن طرف ثالث\",\"توريد اسمي\",\"فاتورة تصدير\",\"فاتورة الفوترة الذاتية\",\"فاتورة ملخصة\",\"تجاهل قاعدة التسعير\",\"استخدام مركز التكلفة الافتراضي للشركة للتقريب\",\"الحساب نقدي أو غير تجاري\",\"تخصيص الدفعة المقدمة تلقائيًا (الوارد أولاً يُصرف أولاً)\",\"استرداد نقاط الولاء\",\"عدم إنشاء نقاط ولاء\",\"شطب المبلغ المتبقي\",\"الطباعة بدون المبالغ\",\"تجميع الأصناف المتشابهة\"]"}
+{"id":"D02-5","text":"Only Include Allocated Payments is shown only while FIFO is checked","ok":true,"detail":"","known":""}
+{"id":"D03-1","text":"write off 900 on a 500 invoice: company amount","ok":null,"detail":"—"}
+{"id":"D03-2","text":"write off account","ok":null,"detail":"\"يوليوس رمزي - 01204523609 - يوليوس رمزي - E\""}
+{"id":"D03-3","text":"save","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02852"}
+{"id":"D03-4","text":"write off larger than the invoice total is refused (old SI-01)","ok":false,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02852","known":"SI-01"}
+{"id":"D04-1","text":"loyalty program value","ok":null,"detail":"Golden Program"}
+{"id":"D04-2","text":"fields shown after Redeem Loyalty Points","ok":null,"detail":"[\"نقاط الولاء\",\"قيمة نقاط الولاء\",\"حساب الاسترداد\",\"مركز تكلفة الاسترداد\"]"}
+{"id":"D04-3","text":"Loyalty Points, Loyalty Amount, Redemption Account and Redemption Cost Center appear when Redeem is checked","ok":true,"detail":"[\"نقاط الولاء\",\"قيمة نقاط الولاء\",\"حساب الاسترداد\",\"مركز تكلفة الاسترداد\"]","known":""}
+{"id":"D04-4","text":"Restore Redeemed Loyalty Points is hidden on a normal invoice","ok":true,"detail":"","known":""}
+{"id":"D05-1","text":"billing address options (10)","ok":null,"detail":"[\"PW AD P7 176481 - PW AD P7 176481-الفوترة\",\"PW AD P6 176481 - PW AD P6 176481-الفوترة\",\"PW AD P3 176481 - PW AD P3 176481-الفوترة\",\"PW AD P2 176481 - PW AD P2 176481-الفوترة\",\"PW AD P1 176481 - PW AD P1 176481-الفوترة\",\"PW AD P7 156278 - PW AD P7 156278-الفوترة\",\"PW AD P6 156278 - PW AD P6 156278-الفوترة\",\"PW AD P3 156278 - PW AD P3 156278-الفوترة\",\"PW AD P2 156278 - PW AD P2 156278-الفوترة\",\"PW AD P1 156278 - PW AD P1 156278-الفوترة\"]"}
+{"id":"D05-2","text":"selected billing","ok":null,"detail":"PW AD P2 176481 - PW AD P2 176481-الفوترة"}
+{"id":"D05-3","text":"choosing another billing address refreshes the address text","ok":null,"detail":"false"}
+{"id":"D05-4","text":"contact options","ok":null,"detail":"[]"}
+{"id":"D05-5","text":"shipping options count","ok":null,"detail":"10"}
+{"id":"D05-6","text":"company address options","ok":null,"detail":"[\"54 - 54-Billing\"]"}
+{"id":"D05-7","text":"company contact options","ok":null,"detail":"[]"}
+{"id":"D05-8","text":"Contact (Hidden) field is not shown","ok":true,"detail":"","known":""}
+{"id":"D06-1","text":"payment terms templates","ok":null,"detail":"[\"test\"]"}
+{"id":"D06-2","text":"tables before","ok":null,"detail":"[]"}
+{"id":"D06-3","text":"schedule headers","ok":null,"detail":"[\"\",\"شرط الدفع\",\"الوصف\",\"تاريخ الاستحقاق\",\"نسبة الفاتورة\",\"مبلغ الدفعة\",\"\"]"}
+{"id":"D06-4","text":"schedule rows","ok":null,"detail":"[\"on ;  ;  ; 2026-11-23 ; 23-11-2026 ; 2026-11-23 ; 100 ; 1000\"]"}
+{"id":"D06-5","text":"numeric inputs per row","ok":null,"detail":"[[100,1000]]"}
+{"id":"D07-1","text":"terms options","ok":null,"detail":"[\"dsfsdfsdf\",\"PW TC C 074765\",\"PW Terms\",\"شرط جديد\",\"شروط و احكام للتيست جديدة\",\"عنوان جديد للشروط و الاحكام\"]"}
+{"id":"D07-2","text":"terms content is fetched from the selected term","ok":true,"detail":"sdfsdfsdf\nfdjkgnjfkdlg","known":""}
+{"id":"D07-3","text":"terms content is limited to 500 characters","ok":true,"detail":"len 500","known":""}
+{"id":"D07-4","text":"messages for 2 characters","ok":null,"detail":"[]"}
+{"id":"D03-1","text":"write off 900 on a 500 invoice: company amount","ok":null,"detail":"—"}
+{"id":"D03-2","text":"write off account","ok":null,"detail":"\"يوليوس رمزي - 01204523609 - يوليوس رمزي - E\""}
+{"id":"D03-3","text":"save","ok":null,"detail":"[] https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02869"}
+{"id":"D03-4","text":"write off larger than the invoice total is refused (old SI-01)","ok":false,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02869","known":"SI-01"}

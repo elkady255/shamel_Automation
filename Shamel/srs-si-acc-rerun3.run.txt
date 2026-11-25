@@ -1,0 +1,42 @@
+
+Running 5 tests using 1 worker
+
+[1/5] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/5] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:70:5 › C03 additional discount
+[3/5] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted)
+  1) [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+
+    Error: F05-3 a confirmation message asks whether to delete 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-f-lifecycle.spec.ts:140:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\error-context.md
+
+
+[4/5] [chromium] › Shamel\srs-si-acc-h-list.spec.ts:32:5 › H02 action bar depends on the invoice status
+[5/5] [chromium] › Shamel\srs-si-acc-h-list.spec.ts:49:5 › H03 bulk Edit refuses a submitted invoice
+  1 failed
+    [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+  4 passed (4.4m)

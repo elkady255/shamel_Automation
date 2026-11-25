@@ -1,0 +1,156 @@
+
+Running 6 tests using 1 worker
+
+[1/6] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/6] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:29:5 › L01 partial then full payment: statuses, amounts, Actions and Create > Payment
+[3/6] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:50:5 › L02 overdue status
+[4/6] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:58:5 › L03 credit note: partial then full return, statuses on both documents
+  1) [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:58:5 › L03 credit note: partial then full return, statuses on both documents 
+
+    Error: L03-11 Invoice Status = Fully Credited when Outstanding = 0 and Grand Total = Credit Amount غير مدفوعة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:73:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L-fb938--statuses-on-both-documents-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L-fb938--statuses-on-both-documents-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-l-payments-ui-L-fb938--statuses-on-both-documents-chromium\error-context.md
+
+
+[5/6] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:76:5 › L04 refund of a paid invoice return
+  2) [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:76:5 › L04 refund of a paid invoice return 
+
+    TimeoutError: page.goto: Timeout 100000ms exceeded.
+    Call log:
+      - navigating to "https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02894", waiting until "load"
+
+
+       at helpers\si-ui.ts:24
+
+      22 | export async function openDoc(p: Page, name: string) {
+      23 |   await p.goto('about:blank');
+    > 24 |   await p.goto(`/desk/shamel#/accounting/sales-invoices/${name}`, { timeout: 100_000 });
+         |           ^
+      25 |   await main(p).getByRole('button', { name: 'التفاصيل', exact: true }).waitFor({ timeout: 60_000 });
+      26 |   await wait(p, 4000);
+      27 | }
+        at openDoc (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:24:11)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:79:3
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L04-refund-of-a-paid-invoice-return-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-l-payments-ui-L04-refund-of-a-paid-invoice-return-chromium\error-context.md
+
+
+[6/6] [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:94:5 › L05 advance payment: Get Advance Received, allocation and UnReconcile
+  3) [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:94:5 › L05 advance payment: Get Advance Received, allocation and UnReconcile 
+
+    Error: L05-3 Get Advance Received adds the customer advance to the Advances table 0 -> 0
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:103:7
+
+    Error: L05-7 the allocated advance reduces the Outstanding Amount (1000 - 300 = 700) 1,000.00 SAR
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:112:7
+
+    Error: L05-8 status is Partially Paid after an advance is applied غير مدفوعة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:113:7
+
+    Error: L05-9 the Actions menu is shown ["رجوع","تعيين إلى","الوسوم","المرفقات","طباعة","مشاركة","السجلات","حذف","إنشاء فحص جودة","عرض","إلغاء المستند","إنشاء","التفاصيل","المعلومات العامة"]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-l-payments-ui.spec.ts:114:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L-61839--allocation-and-UnReconcile-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-l-payments-ui-L-61839--allocation-and-UnReconcile-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-l-payments-ui-L-61839--allocation-and-UnReconcile-chromium\error-context.md
+
+
+  3 failed
+    [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:58:5 › L03 credit note: partial then full return, statuses on both documents 
+    [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:76:5 › L04 refund of a paid invoice return 
+    [chromium] › Shamel\srs-si-acc-l-payments-ui.spec.ts:94:5 › L05 advance payment: Get Advance Received, allocation and UnReconcile 
+  3 passed (5.6m)

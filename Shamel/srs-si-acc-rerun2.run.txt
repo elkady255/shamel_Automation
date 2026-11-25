@@ -1,0 +1,171 @@
+
+Running 6 tests using 1 worker
+
+[1/6] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/6] [chromium] › Shamel\srs-si-acc-b-items.spec.ts:59:5 › B04 rate field and amounts
+[3/6] [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:51:5 › C03 additional discount
+  1) [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:51:5 › C03 additional discount ─────────────────
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('main').locator('label').filter({ hasText: /^\s*نسبة الخصم الإضافي\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input or .//textarea or .//*[contains(@class,\'cd-readonly\') or contains(@class,\'status-chip\') or contains(@class,\'selected-value\')]][1]').locator('input,textarea').first()
+        - locator resolved to <input min="0" value="" disabled max="100" step="any" type="number" wfd-id="id32" class="cd-input" data-v-abc7ab6f=""/>
+        - fill("150")
+      - attempting fill action
+        2 × waiting for element to be visible, enabled and editable
+          - element is not enabled
+        - retrying fill action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and editable
+          - element is not enabled
+        - retrying fill action
+          - waiting 100ms
+        29 × waiting for element to be visible, enabled and editable
+           - element is not enabled
+         - retrying fill action
+           - waiting 500ms
+
+
+       at helpers\si-ui.ts:57
+
+      55 | export async function setText(p: Page, label: string, v: string) {
+      56 |   const f = box(p, label).locator('input,textarea').first();
+    > 57 |   await f.fill(v); await f.press('Tab'); await wait(p, 600); return f.inputValue();
+         |           ^
+      58 | }
+      59 | export async function value(p: Page, label: string) {
+      60 |   const b = box(p, label);
+        at setText (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:57:11)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-c-taxes.spec.ts:62:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-c-taxes-C03-additional-discount-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-c-taxes-C03-additional-discount-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-c-taxes-C03-additional-discount-chromium\error-context.md
+
+
+[4/6] [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted)
+  2) [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+
+    Error: F05-3 a confirmation message asks whether to delete 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-f-lifecycle.spec.ts:140:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-f-lifecycle-F05-66e53--cancelled-nothing-deleted--chromium\error-context.md
+
+
+[5/6] [chromium] › Shamel\srs-si-acc-h-list.spec.ts:34:5 › H02 action bar depends on the invoice status
+  3) [chromium] › Shamel\srs-si-acc-h-list.spec.ts:34:5 › H02 action bar depends on the invoice status 
+
+    Error: H02-submitted-row a submitted invoice exists in the list غير مدفوعة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-h-list.spec.ts:42:9
+
+    Error: H02-cancelled-row a cancelled invoice exists in the list ملغي
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-h-list.spec.ts:42:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H02-acti-a09a4-pends-on-the-invoice-status-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H02-acti-a09a4-pends-on-the-invoice-status-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-h-list-H02-acti-a09a4-pends-on-the-invoice-status-chromium\error-context.md
+
+
+[6/6] [chromium] › Shamel\srs-si-acc-h-list.spec.ts:50:5 › H03 bulk Edit refuses a submitted invoice
+  4) [chromium] › Shamel\srs-si-acc-h-list.spec.ts:50:5 › H03 bulk Edit refuses a submitted invoice 
+
+    Error: H03-0 a submitted invoice exists in the list 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\srs-si-acc-h-list.spec.ts:52:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H03-bulk-Edit-refuses-a-submitted-invoice-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\srs-si-acc-h-list-H03-bulk-Edit-refuses-a-submitted-invoice-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\srs-si-acc-h-list-H03-bulk-Edit-refuses-a-submitted-invoice-chromium\error-context.md
+
+
+  4 failed
+    [chromium] › Shamel\srs-si-acc-c-taxes.spec.ts:51:5 › C03 additional discount ──────────────────
+    [chromium] › Shamel\srs-si-acc-f-lifecycle.spec.ts:132:5 › F05 delete dialog on a draft (cancelled, nothing deleted) 
+    [chromium] › Shamel\srs-si-acc-h-list.spec.ts:34:5 › H02 action bar depends on the invoice status 
+    [chromium] › Shamel\srs-si-acc-h-list.spec.ts:50:5 › H03 bulk Edit refuses a submitted invoice ─
+  2 passed (3.0m)

@@ -1,0 +1,32 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\si8-j-server.spec.ts:23:5 › J01 server rules (create through the API; drafts only)
+  1) [chromium] › Shamel\si8-j-server.spec.ts:23:5 › J01 server rules (create through the API; drafts only) 
+
+    Error: J12 terms over 500 characters is refused accepted ACC-SINV-2026-02842 | OK
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at tryDoc (c:\Playwright_Automation\Shamel\si8-j-server.spec.ts:19:7)
+        at c:\Playwright_Automation\Shamel\si8-j-server.spec.ts:36:3
+
+    Error Context: test-results\si8-j-server-J01-server-ru-59c9d-hrough-the-API-drafts-only--chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\si8-j-server.spec.ts:23:5 › J01 server rules (create through the API; drafts only) 
+  1 passed (8.2s)

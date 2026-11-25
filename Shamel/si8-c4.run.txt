@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\si8-c4-probe.spec.ts:6:5 › C4 discount with account and reason
+  2 passed (1.4m)

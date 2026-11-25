@@ -1,0 +1,26 @@
+{"id":"G01-أمر المبيعات-open","text":"the \"أمر المبيعات\" popup opens","ok":true,"detail":"","known":""}
+{"id":"G01-أمر المبيعات-text","text":"popup text","ok":null,"detail":"جلب الأصناف من أمر البيع جلب الأصناف من أمر البيع الاسم العميل م الاسم العميل التاريخ 1 SAL-ORD-2026-03114 CU-2026-00001 2026-11-18 2 SAL-ORD-2026-02816 CU-2026-00001 2026-10-07 3 SAL-ORD-2026-02813 CU-2026-00001 2026-10-07 4 SAL-ORD-2026-02810 CU-2026-00001 2026-10-07 5 SAL-ORD-2026-02809 CU-2026-00001 2026-10-07 6 SAL-ORD-2026-02808 CU-2026-00001 2026-10-07 7 SAL-ORD-2026-02805 CU-2026-00001 2026-10-07 إلغاء جلب الأصناف"}
+{"id":"G01-أمر المبيعات-heads","text":"headers","ok":null,"detail":"[\"\",\"م\",\"الاسم\",\"العميل\",\"التاريخ\"]"}
+{"id":"G01-أمر المبيعات-cols","text":"popup has No., Name and Customer columns","ok":true,"detail":"[\"\",\"م\",\"الاسم\",\"العميل\",\"التاريخ\"]","known":""}
+{"id":"G01-أمر المبيعات-search","text":"popup has a Name search field and a Customer field","ok":true,"detail":"9","known":""}
+{"id":"G01-أمر المبيعات-btn","text":"popup has a \"Get Items\" button","ok":true,"detail":"","known":""}
+{"id":"G01-أمر المبيعات-rows","text":"rows listed","ok":null,"detail":"7"}
+{"id":"G01-أمر المبيعات-limit","text":"the popup lists more than 50 documents when they exist (old SI-16)","ok":true,"detail":"rows 7","known":""}
+{"id":"G01-عرض سعر-open","text":"the \"عرض سعر\" popup opens","ok":true,"detail":"","known":""}
+{"id":"G01-عرض سعر-text","text":"popup text","ok":null,"detail":"جلب الأصناف من عرض السعر جلب الأصناف من عرض السعر الاسم العميل م الاسم العميل التاريخ 1 SAL-QTN-2026-01702 CU-2026-00001 2026-11-17 2 SAL-QTN-2026-01674-1 CU-2026-00001 2026-11-17 3 SAL-QTN-2026-01703 CU-2026-00001 2026-11-17 إلغاء جلب الأصناف"}
+{"id":"G01-عرض سعر-heads","text":"headers","ok":null,"detail":"[\"\",\"م\",\"الاسم\",\"العميل\",\"التاريخ\"]"}
+{"id":"G01-عرض سعر-cols","text":"popup has No., Name and Customer columns","ok":true,"detail":"[\"\",\"م\",\"الاسم\",\"العميل\",\"التاريخ\"]","known":""}
+{"id":"G01-عرض سعر-search","text":"popup has a Name search field and a Customer field","ok":true,"detail":"5","known":""}
+{"id":"G01-عرض سعر-btn","text":"popup has a \"Get Items\" button","ok":true,"detail":"","known":""}
+{"id":"G01-عرض سعر-rows","text":"rows listed","ok":null,"detail":"3"}
+{"id":"G01-عرض سعر-limit","text":"the popup lists more than 50 documents when they exist (old SI-16)","ok":true,"detail":"rows 3","known":""}
+{"id":"G01-quotation-fetch","text":"Get Items adds the quotation items to the Items table","ok":true,"detail":"rows 2","known":""}
+{"id":"G01-quotation-totals","text":"totals are calculated after Get Items (old SI-22)","ok":true,"detail":"20,400.00 SAR","known":"SI-22"}
+{"id":"G01-إذن التسليم-open","text":"the \"إذن التسليم\" popup opens","ok":true,"detail":"","known":""}
+{"id":"G01-إذن التسليم-text","text":"popup text","ok":null,"detail":"جلب الأصناف من إذن التسليم جلب الأصناف من إذن التسليم الاسم العميل م الاسم العميل التاريخ لا توجد أذونات تسليم إلغاء جلب الأصناف"}
+{"id":"G01-إذن التسليم-heads","text":"headers","ok":null,"detail":"[\"\",\"م\",\"الاسم\",\"العميل\",\"التاريخ\"]"}
+{"id":"G01-إذن التسليم-cols","text":"popup has No., Name and Customer columns","ok":true,"detail":"[\"\",\"م\",\"الاسم\",\"العميل\",\"التاريخ\"]","known":""}
+{"id":"G01-إذن التسليم-search","text":"popup has a Name search field and a Customer field","ok":true,"detail":"2","known":""}
+{"id":"G01-إذن التسليم-btn","text":"popup has a \"Get Items\" button","ok":true,"detail":"","known":""}
+{"id":"G01-إذن التسليم-rows","text":"rows listed","ok":null,"detail":"1"}
+{"id":"G01-إذن التسليم-limit","text":"the popup lists more than 50 documents when they exist (old SI-16)","ok":true,"detail":"rows 1","known":""}

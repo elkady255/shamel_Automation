@@ -1,0 +1,40 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\si8-h-list.spec.ts:28:5 › H02 action bar depends on the invoice status
+[3/3] [chromium] › Shamel\si8-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice
+  1) [chromium] › Shamel\si8-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice ───────
+
+    Error: H03-2 the Edit popup has a Field dropdown and a Value field 0
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\si8-h-list.spec.ts:48:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\si8-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\si8-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\si8-h-list-H03-bulk-Edit-refuses-a-cancelled-invoice-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\si8-h-list.spec.ts:43:5 › H03 bulk Edit refuses a cancelled invoice ────────
+  2 passed (1.2m)
