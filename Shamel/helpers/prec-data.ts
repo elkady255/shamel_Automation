@@ -50,7 +50,7 @@ export async function purchaseInvoice(supplier: string, rate: number, days = 1, 
 export async function purchaseReturn(pi: Doc, amount: number, extra: Doc = {}): Promise<Doc> {
   return api.insertAndSubmit('Purchase Invoice', {
     company: CO, supplier: pi.supplier, is_return: 1, return_against: pi.name, update_outstanding_for_self: 1, update_stock: 0,
-    credit_to: pi.credit_to, set_posting_time: 1, posting_date: daysAgo(1), due_date: daysAgo(1),
+    credit_to: pi.credit_to, buying_price_list: 'Standard Buying - SAR', set_posting_time: 1, posting_date: daysAgo(1), due_date: daysAgo(1),
     items: [{ item_code: ITEM, qty: -1, rate: amount, cost_center: CC, purchase_invoice_item: pi.items[0].name }], taxes: [], ...extra,
   });
 }
@@ -85,3 +85,12 @@ export async function journal(partyType: 'Customer' | 'Supplier', party: string,
   });
 }
 export const reload = (doctype: string, name: string) => api.get(doctype, name);
+
+export const USD_REC = 'usd debtors - E';
+/** Foreign currency (USD) invoice and advance at different rates, to produce an exchange difference. */
+export async function usdInvoice(customer: string, usd: number, rate: number, days = 8) {
+  return salesInvoice(customer, usd, days, { currency: 'USD', conversion_rate: rate, debit_to: USD_REC, selling_price_list: 'Standard Selling' });
+}
+export async function usdAdvance(customer: string, usd: number, rate: number, days = 6) {
+  return advance('Customer', customer, usd, days, { paid_from: USD_REC, source_exchange_rate: rate, received_amount: usd * rate });
+}

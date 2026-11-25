@@ -12,5 +12,9 @@
  "pi2": "ACC-PINV-2026-00006",
  "peS1": "ACC-PAY-2026-03074",
  "peS2": "ACC-PAY-2026-03075",
- "jeS": "ACC-JV-2026-01714"
+ "jeS": "ACC-JV-2026-01714",
+ "piR": "ACC-PINV-2026-00007",
+ "custUsd": "QA-PR Cust USD",
+ "peU": "ACC-PAY-2026-03076",
+ "siU": "ACC-SINV-2026-02911"
 }

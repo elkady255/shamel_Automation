@@ -31,4 +31,7 @@ test('seed customer and supplier data', async () => {
   await step('peS2', () => d.advance('Supplier', s, 2000, 1));
   await step('jeS', () => d.journal('Supplier', s, 300, 2));
   await step('piR', async () => d.purchaseReturn(await get('Purchase Invoice', 'pi2'), 100));
+  const u = await step('custUsd', () => d.newCustomer('USD', { default_currency: 'USD' }));
+  await step('siU', () => d.usdInvoice(u, 300, 3.7));
+  await step('peU', () => d.usdAdvance(u, 100, 3.8));
 });

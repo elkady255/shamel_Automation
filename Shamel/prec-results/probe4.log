@@ -1,0 +1,56 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\prec-probe4.spec.ts:14:5 › walk
+[chromium] › Shamel\prec-probe4.spec.ts:14:5 › walk
+API 200 GET /assets/shamel/frontend/assets/PaymentReconciliationView-DleZE8MS.css  => .prd-form[data-v-795639cf]{gap:16px 24px;display:grid}.prd-field[data-v-795639cf]{flex-direction:column;gap:8px;min-width:0;display:flex}.prd-field .cd-readonly[data-v-795639cf]{box-sizing:border-box;background:var(--color-neutral-150,#f2f2f2);width:100%;min-height:44px;color:var(--color-text-body-primary);overflow-wrap:anywhere;border-radius:12px;align-items:center;padding:8px 16px;font-size:15px;display:flex}#page-shamel .prd-field .prd-input[data-v-795639cf]{min-height:44px;color:var(--color-neutral-850,#1a1a1a);padding:8px 16px;font-size:15px;font-weight:600}.prd-field[data-v-795639cf] .date-picker-wrapper{height:44px}#page-shamel .prd-field[data-v-795639cf] .date-picker-input,#page-shamel .prd-field[data-v-795639cf] .flatpickr-input{background:var(--color-surface-bg-primary);width:100%;height:100%;color:var(--color-neutral-850,#1a1a1a);box-sizing:border-box;box-shadow:none;cursor:pointer;border:none;border-radius:12px;outline:none;padding-block:8px;padding-inline:16px 40px;font-family:inherit;font-size:15px;font-weight:600}.prd-multiline[data-v-795639cf]{white-space:pre-line;height:auto;min-height:52px;padding-top:12px;padding-bottom:12px;line-height:1.6}.prd-link[data-v-79563
+
+API 200 GET /assets/shamel/frontend/assets/PaymentReconciliationView-CvNvBf4R.js  => import{A as e,At as t,C as n,D as r,E as i,Et as a,G as o,J as s,Ot as c,T as l,U as u,X as d,a as f,b as p,ct as m,gt as h,it as g,j as _,jt as v,vt as y,w as b}from"./vendor-DEguN9t5.js";import{t as x}from"./_plugin-vue_export-helper-BDNMzG2s.js";import{Bg as S,R as C,V as w,Vg as T,W as E,s_ as D,z as O,zg as k}from"./index-wm_KxuEL.js";import{t as ee}from"./DatePicker-D2HGHe1_.js";import{o as A,r as j}from"./apiErrors-D4evOWSp.js";import{t as M}from"./CreatableSelect-DY_7f0SL.js";import{Qr as te,Xr as ne,gr as re,hr as N,t as P}from"./accounting-DWCislQM.js";import{n as F,r as I,t as ie}from"./useOptionSources-Dg23Xs4V.js";import{t as L}from"./AccordionSection-DR9zAMby.js";import{t as ae}from"./SupplierChildTable-Lufxs5x5.js";import{t as oe}from"./BaseButton-BU9TMMAz.js";import{t as se}from"./SuccessPopup-HWqBkULR.js";var R=window.__||(e=>e),z=`Payment Reconciliation`,B=z,V=e=>R(e,null,B),H=.009,U=[`from_invoice_date`,`to_invoice_date`,`from_payment_date`,`to_payment_date`],ce=[`invoice_limit`,`payment_limit`],W=[`minimum_invoice_amount`,`maximum_invoice_amount`,`minimum_payment_amount`,`maximum_payment_amount`],G=[`company`,`party_type`,`party`,`receivable_payable_account`,`de
+
+OPTIONS الشركة Ahmed ["Ahmed Ebrahim CO."]
+
+OPTIONS نوع الطرف  ["العميل","الموظف","المساهم","المورد"]
+
+PT search ["العميل"]
+
+== p4-a-type ==
+
+TEXT مرحباً Administrator ! | AN | 73 | تسوية الدفعات | المعلومات الاساسية | الشركة* | نوع الطرف* | الطرف* | جلب القيود غير المسواة
+
+LABELS ["الشركة*","نوع الطرف*","الطرف*"]
+
+INPUTS ["search|ابحث عن الصفحات والأنواع...||","text|ابحث واختر|Ahmed Ebrahim CO.|","text|ابحث واختر|العميل|","text|ابحث واختر||"]
+
+BUTTONS ["73 إشعارات غير مقروءة","المعلومات الاساسية","Show popup","Show popup","Show popup","جلب القيود غير المسواة"]
+
+OPTIONS الطرف QA-PR Cust Main ["QA-PR Cust Main"]
+
+API 200 GET /api/method/shamel.api.routes.account.transactions.payment_reconcilition.get_party_accounts?company=Ahmed Ebrahim CO.&party_type=Customer&party=QA-PR Cust Main&_=1795618482906  => {"message":{"status":200,"message":"fetch party accounts successfully","data":{"receivable_payable_account":"1210 - العملاء - E","default_advance_account":null}}}
+
+API 200 GET /api/method/shamel.api.routes.account.transactions.payment_reconcilition.get_account_options?field=receivable_payable_account&company=Ahmed Ebrahim CO.&_=1795618482907  => {"message":{"status":200,"message":"fetch accounts successfully","data":[{"name":"1210 - العملاء - E"},{"name":"2300 - مصروفات مستحقة - E"},{"name":"QA-PR Payable - E"},{"name":"test USD - E"},{"name":"usd debtors - E"}]}}
+
+== p4-b-party ==
+
+TEXT مرحباً Administrator ! | AN | 73 | تسوية الدفعات | المعلومات الاساسية | الشركة* | نوع الطرف* | الطرف* | حساب المدينين / الدائنين* | حساب الدفعات المقدمة الافتراضي | الفلاتر | من تاريخ الفاتورة | إلى تاريخ الفاتورة | حد الفواتير | من تاريخ الدفع | إلى تاريخ الدفع | الحد الأدنى لمبلغ الفاتورة | الحد الأقصى لمبلغ الفاتورة | حد الدفعات | الحد الأدنى لمبلغ الدفعة | الحد الأقصى لمبلغ الدفعة | حساب البنك / النقدية | مركز التكلفة | المشروع | جلب القيود غير المسواة
+
+LABELS ["الشركة*","نوع الطرف*","الطرف*","حساب المدينين / الدائنين*","حساب الدفعات المقدمة الافتراضي","من تاريخ الفاتورة","إلى تاريخ الفاتورة","حد الفواتير","من تاريخ الدفع","إلى تاريخ الدفع","الحد الأدنى لمبلغ الفاتورة","الحد الأقصى لمبلغ الفاتورة","حد الدفعات","الحد الأدنى لمبلغ الدفعة","الحد الأقصى لمبلغ الدفعة","حساب البنك / النقدية","مركز التكلفة","المشروع"]
+
+INPUTS ["search|ابحث عن الصفحات والأنواع...||","text|ابحث واختر|Ahmed Ebrahim CO.|","text|ابحث واختر|العميل|","text|ابحث واختر|QA-PR Cust Main|","text|ابحث واختر|1210 - العملاء - E|","text|ابحث واختر||","text|اختر التاريخ||ro","text|اختر التاريخ||ro","text||50|","text|اختر التاريخ||ro","text|اختر التاريخ||ro","text|||","text|||","text||50|","text|||","text|||","text|ابحث واختر||","text|ابحث واختر||","text|ابحث واختر||"]
+
+BUTTONS ["73 إشعارات غير مقروءة","المعلومات الاساسية","Show popup","Show popup","Show popup","Show popup","Show popup","الفلاتر","Show popup","Show popup","Show popup","جلب القيود غير المسواة"]
+
+API 200 POST /api/method/shamel.api.routes.account.transactions.payment_reconcilition.get_unreconciled_entries data=%7B%22company%22%3A%22Ahmed+Ebrahim+CO.%22%2C%22party_type%22%3A%22Customer%22%2C%22party%22%3A%22QA-PR+Cust+Main%22%2C%22receivable_payable_account%22%3A%221210+-+%D8%A7%D9%84%D8%B9%D9%85%D9%84%D8%A7%D8%A1+-+E%22%2C%22invoice_limit%22%3A50%2C%22payment_limit%22%3A50%7D => {"message":{"status":200,"message":"fetch unreconciled entries successfully","data":{"invoices":[{"invoice_type":"Sales Invoice","invoice_number":"ACC-SINV-2026-02907","invoice_date":"2026-11-05","amount":1000.0,"outstanding_amount":1000.0,"currency":"SAR"},{"invoice_type":"Sales Invoice","invoice_number":"ACC-SINV-2026-02908","invoice_date":"2026-11-15","amount":2000.0,"outstanding_amount":2000.0,"currency":"SAR"},{"invoice_type":"Sales Invoice","invoice_number":"ACC-SINV-2026-02909","invoice_date":"2026-11-24","amount":500.0,"outstanding_amount":500.0,"currency":"SAR"}],"payments":[{"reference_type":"Payment Entry","reference_name":"ACC-PAY-2026-03072","reference_row":null,"posting_date":"2026-11-10","amount":700.0,"difference_amount":null,"remarks":"القيمة ريال سعودي 700 مستلم من QA-PR Cust Main\nإشارة عملية لا QA-PR بتاريخ 2026-11-10","cost_center":null,"currency":"SAR","is_advance":0},{"reference_type":"Payment Entry","reference_name":"ACC-PAY-2026-03073","reference_row":null,"posting_date":"2026-11-20","amount":3000.0,"difference_amount":null,"remarks":"القيمة ريال سعودي 3000 مستلم من QA-PR Cust Main\nإشارة عملية لا QA-PR بتاريخ 2026-11-20","cost_center":null,"currency":"SAR"
+
+== p4-c-entries ==
+
+TEXT مرحباً Administrator ! | AN | 73 | تسوية الدفعات | المعلومات الاساسية | الشركة* | نوع الطرف* | الطرف* | حساب المدينين / الدائنين* | حساب الدفعات المقدمة الافتراضي | الفلاتر | من تاريخ الفاتورة | إلى تاريخ الفاتورة | حد الفواتير | من تاريخ الدفع | إلى تاريخ الدفع | الحد الأدنى لمبلغ الفاتورة | الحد الأقصى لمبلغ الفاتورة | حد الدفعات | الحد الأدنى لمبلغ الدفعة | الحد الأقصى لمبلغ الدفعة | حساب البنك / النقدية | مركز التكلفة | المشروع | القيود غير المسواة | تصفية الفواتير | الفواتير | 	م	نوع الفاتورة	رقم الفاتورة	تاريخ الفاتورة	المبلغ المستحق	 | 	1	فاتورة مبيعات	ACC-SINV-2026-02907	05-11-2026	1,000.00	 | 	2	فاتورة مبيعات	ACC-SINV-2026-02908	15-11-2026	2,000.00	 | 	3	فاتورة مبيعات	ACC-SINV-2026-02909	24-11-2026	500.00	 | الدفعات | 	م	اسم المرجع	تاريخ الترحيل	المبلغ	 | 	1	ACC-PAY-2026-03072	10-11-2026	700.00	 | 	2	ACC-PAY-2026-03073	20-11-2026	3,000.00	 | 	3	ACC-JV-2026-01713	23-11-2026	400.00	 | 	4	ACC-SINV-2026-02910	24-11-2026	200.00	 | جلب القيود غير المسواة | تخصيص
+
+LABELS ["الشركة*","نوع الطرف*","الطرف*","حساب المدينين / الدائنين*","حساب الدفعات المقدمة الافتراضي","من تاريخ الفاتورة","إلى تاريخ الفاتورة","حد الفواتير","من تاريخ الدفع","إلى تاريخ الدفع","الحد الأدنى لمبلغ الفاتورة","الحد الأقصى لمبلغ الفاتورة","حد الدفعات","الحد الأدنى لمبلغ الدفعة","الحد الأقصى لمبلغ الدفعة","حساب البنك / النقدية","مركز التكلفة","المشروع","تصفية الفواتير"]
+
+INPUTS ["search|ابحث عن الصفحات والأنواع...||","text|ابحث واختر|Ahmed Ebrahim CO.|","text|ابحث واختر|العميل|","text|ابحث واختر|QA-PR Cust Main|","text|ابحث واختر|1210 - العملاء - E|","text|ابحث واختر||","text|اختر التاريخ||ro","text|اختر التاريخ||ro","text||50|","text|اختر التاريخ||ro","text|اختر التاريخ||ro","text|||","text|||","text||50|","text|||","text|||","text|ابحث واختر||","text|ابحث واختر||","text|ابحث واختر||","text|ابحث برقم الفاتورة||"]
+
+BUTTONS ["73 إشعارات غير مقروءة","المعلومات الاساسية","Show popup","Show popup","Show popup","Show popup","Show popup","الفلاتر","Show popup","Show popup","Show popup","القيود غير المسواة","إعدادات الجدول","تعديل الصف","حذف","تعديل الصف","حذف","تعديل الصف","حذف","إعدادات الجدول","تعديل الصف","حذف","تعديل الصف","حذف","تعديل الصف","حذف","تعديل الصف","حذف","جلب القيود غير المسواة","تخصيص"]
+
+TABLES [{"cls":"editable-table","head":["","م","نوع الفاتورة","رقم الفاتورة","تاريخ الفاتورة","المبلغ المستحق",""],"rows":["1 فاتورة مبيعات ACC-SINV-2026-02907 05-11-2026 1,000.00","2 فاتورة مبيعات ACC-SINV-2026-02908 15-11-2026 2,000.00","3 فاتورة مبيعات ACC-SINV-2026-02909 24-11-2026 500.00"]},{"cls":"editable-table","head":["","م","اسم المرجع","تاريخ الترحيل","المبلغ",""],"rows":["1 ACC-PAY-2026-03072 10-11-2026 700.00","2 ACC-PAY-2026-03073 20-11-2026 3,000.00","3 ACC-JV-2026-01713 23-11-2026 400.00","4 ACC-SINV-2026-02910 24-11-2026 200.00"]}]
+
