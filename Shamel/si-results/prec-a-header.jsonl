@@ -1,0 +1,45 @@
+{"id":"A01-1","text":"On open only Company and Party Type are shown (Party, accounts and filters hidden)","ok":true,"detail":"الشركة, نوع الطرف","known":""}
+{"id":"A01-2","text":"No tables and no Allocate / Reconcile before Get Unreconciled Entries","ok":true,"detail":"","known":""}
+{"id":"A01-3","text":"Company is marked mandatory","ok":true,"detail":"","known":""}
+{"id":"A01-4","text":"After Party Type has a value the Party field appears","ok":true,"detail":"الشركة, نوع الطرف, الطرف","known":""}
+{"id":"A01-5","text":"Accounts and filters stay hidden until Party has a value","ok":true,"detail":"الشركة, نوع الطرف, الطرف","known":""}
+{"id":"A01-6","text":"After Party: Receivable / Payable Account, Default Advance Account and Filters appear","ok":true,"detail":"الشركة, نوع الطرف, الطرف, حساب المدينين / الدائنين, حساب الدفعات المقدمة الافتراضي, من تاريخ الفاتورة, إلى تاريخ الفاتورة, حد الفواتير, من تاريخ الدفع, إلى تاريخ الدفع, الحد الأدنى لمبلغ الفاتورة, الحد الأقصى لمبلغ الفاتورة, حد الدفعات, الحد الأدنى لمبلغ الدفعة, الحد الأقصى لمبلغ الدفعة, حساب البنك / النقدية, مركز التكلفة, المشروع","known":""}
+{"id":"A01-7","text":"All 13 SRS filters are present","ok":true,"detail":"","known":""}
+{"id":"A01-8","text":"Receivable / Payable Account is marked mandatory, advance account optional","ok":true,"detail":"","known":""}
+{"id":"A02-1","text":"Get with nothing filled shows errors for Company and Party Type","ok":false,"detail":"هذا الحقل مطلوب ERR: هذا الحقل مطلوب","known":""}
+{"id":"A02-2","text":"Get with Company only shows an error for Party Type","ok":false,"detail":"هذا الحقل مطلوب ERR: هذا الحقل مطلوب","known":""}
+{"id":"A02-3","text":"Get without Party shows an error for Party","ok":false,"detail":"هذا الحقل مطلوب ERR: هذا الحقل مطلوب","known":""}
+{"id":"A02-4","text":"A cleared Receivable / Payable Account blocks Get with an error (or the value cannot be cleared)","ok":false,"detail":"field=\"\" requestSent=false msg=هذا الحقل مطلوب ERR: هذا الحقل مطلوب","known":""}
+{"id":"A03-1","text":"Company list offers records of the Company doctype","ok":true,"detail":"20 of 60","known":""}
+{"id":"A03-2","text":"Company is searchable","ok":true,"detail":"Ahmed Ebrahim CO.","known":""}
+{"id":"A03-3","text":"Search with no match offers no company","ok":true,"detail":"","known":""}
+{"id":"A03-4","text":"Party Type options","ok":null,"detail":"العميل, الموظف, المساهم, المورد"}
+{"id":"A03-5","text":"Party Type offers Customer and Supplier","ok":true,"detail":"العميل, الموظف, المساهم, المورد","known":""}
+{"id":"A03-6","text":"Party is searchable and lists the selected type (customers)","ok":true,"detail":"QA-PR Cust Main, QA-PR Cust USD","known":""}
+{"id":"A03-7","text":"A supplier is not offered when Party Type is Customer","ok":true,"detail":"","known":""}
+{"id":"A03-8","text":"حساب المدينين / الدائنين: only non-group Receivable / Payable accounts of the company","ok":true,"detail":"1210 - العملاء - E | 2300 - مصروفات مستحقة - E | QA-PR Payable - E | test USD - E | usd debtors - E","known":""}
+{"id":"A03-8b","text":"حساب المدينين / الدائنين: all enabled matching accounts are offered","ok":true,"detail":"","known":""}
+{"id":"A03-9","text":"حساب الدفعات المقدمة الافتراضي: only non-group Receivable / Payable accounts of the company","ok":true,"detail":"1210 - العملاء - E | 2300 - مصروفات مستحقة - E | QA-PR Payable - E | test USD - E | usd debtors - E","known":""}
+{"id":"A03-9b","text":"حساب الدفعات المقدمة الافتراضي: all enabled matching accounts are offered","ok":true,"detail":"","known":""}
+{"id":"A03-10","text":"Bank / Cash account options","ok":null,"detail":"122101 - ALRAJHY BANK - E | 122102 - RIYAD BANK - E | 122103 - Alinma Bank - E | 122104 - SNB BANK - E | 122105 - SAB الاول Bank - E | 122201 - CIB Bank - E | 122301 - Tabby - E | 122302 - Tamara - E | 122303 - My Fatoorah - E | 122304 - Salla - E | 122305 - ZID - E | 122306 - Emkan - E | 12241 - Bank al Etihad - E | 1231 - Cash 1 - E | الخزينة الرئيسية - E"}
+{"id":"A03-11","text":"Bank / Cash Account offers only bank or cash accounts of the company","ok":true,"detail":"15 options","known":""}
+{"id":"A03-12","text":"Cost Center offers cost centers of the selected company only","ok":true,"detail":"1 options","known":""}
+{"id":"A03-13","text":"Project options","ok":null,"detail":"PROJ-0001"}
+{"id":"A04-1","text":"Customer: account = company Default Receivable Account","ok":true,"detail":"1210 - العملاء - E","known":""}
+{"id":"A04-2","text":"Customer: advance account = company Default Advance Received Account","ok":true,"detail":"\"\" company=\"undefined\"","known":""}
+{"id":"A04-3","text":"The fetched account can be edited","ok":true,"detail":"usd debtors - E","known":""}
+{"id":"A04-4","text":"Tables after Get with usd debtors for a SAR customer","ok":null,"detail":"0"}
+{"id":"A04-5","text":"Changing the Party clears the previous entry tables","ok":true,"detail":"0","known":""}
+{"id":"A04-6","text":"Changing Party Type clears the Party and hides dependent fields","ok":true,"detail":"party=\"\" labels=الشركة,نوع الطرف,الطرف","known":""}
+{"id":"A04-7","text":"Supplier: account = company Default Payable Account","ok":true,"detail":"2300 - مصروفات مستحقة - E","known":""}
+{"id":"A04-8","text":"Supplier: advance account = company Default Advance Paid Account","ok":true,"detail":"\"\" company=\"undefined\"","known":""}
+{"id":"A04-9","text":"Changing Company does not keep accounts of the old company","ok":true,"detail":"party=\"\" account=\"\"","known":""}
+{"id":"A02-1","text":"Get with nothing filled shows an error under Company and under Party Type","ok":false,"detail":"نوع الطرف","known":""}
+{"id":"A02-2","text":"Get with Company only shows an error under Party Type only","ok":true,"detail":"نوع الطرف","known":""}
+{"id":"A02-3","text":"Get without Party shows an error under Party","ok":true,"detail":"الطرف","known":""}
+{"id":"A02-4","text":"A cleared Receivable / Payable Account blocks Get with an error (or the value cannot be cleared)","ok":true,"detail":"field=\"\" requestSent=false errors=حساب المدينين / الدائنين","known":""}
+{"id":"A02-0","text":"Company value on open (session default)","ok":null,"detail":"Ahmed Ebrahim CO."}
+{"id":"A02-1","text":"Get with Company cleared and no Party Type shows an error under both","ok":true,"detail":"company=\"\" errors=الشركة, نوع الطرف","known":""}
+{"id":"A02-2","text":"Get with Company only shows an error under Party Type only","ok":true,"detail":"نوع الطرف","known":""}
+{"id":"A02-3","text":"Get without Party shows an error under Party","ok":true,"detail":"الطرف","known":""}
+{"id":"A02-4","text":"A cleared Receivable / Payable Account blocks Get with an error (or the value cannot be cleared)","ok":true,"detail":"field=\"\" requestSent=false errors=حساب المدينين / الدائنين","known":""}

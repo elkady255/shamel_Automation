@@ -54,3 +54,35 @@ BUTTONS ["73 إشعارات غير مقروءة","المعلومات الاسا�
 
 TABLES [{"cls":"editable-table","head":["","م","نوع الفاتورة","رقم الفاتورة","تاريخ الفاتورة","المبلغ المستحق",""],"rows":["1 فاتورة مبيعات ACC-SINV-2026-02907 05-11-2026 1,000.00","2 فاتورة مبيعات ACC-SINV-2026-02908 15-11-2026 2,000.00","3 فاتورة مبيعات ACC-SINV-2026-02909 24-11-2026 500.00"]},{"cls":"editable-table","head":["","م","اسم المرجع","تاريخ الترحيل","المبلغ",""],"rows":["1 ACC-PAY-2026-03072 10-11-2026 700.00","2 ACC-PAY-2026-03073 20-11-2026 3,000.00","3 ACC-JV-2026-01713 23-11-2026 400.00","4 ACC-SINV-2026-02910 24-11-2026 200.00"]}]
 
+  1) [chromium] › Shamel\prec-probe4.spec.ts:14:5 › walk ───────────────────────────────────────────
+
+    Test timeout of 240000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 240000ms exceeded.
+    Call log:
+      - waiting for locator('main').locator('table:visible').first().locator('tbody tr').first().locator('input[type=checkbox]')
+
+
+      45 |   console.log('TABLES', JSON.stringify(await main.locator('table:visible').evaluateAll((ts: any[]) => ts.map((x) => ({ cls: x.className, head: [...x.querySelectorAll('thead th')].map((e: any) => e.innerText.trim()), rows: [...x.querySelectorAll('tbody tr')].map((r: any) => r.innerText.replace(/\s+/g, ' ').trim()) })))));
+      46 |   const tables = main.locator('table:visible');
+    > 47 |   await tables.nth(0).locator('tbody tr').first().locator('input[type=checkbox]').evaluate((e: any) => e.click());
+         |                                                                                   ^
+      48 |   await tables.nth(1).locator('tbody tr').first().locator('input[type=checkbox]').evaluate((e: any) => e.click());
+      49 |   await page.waitForTimeout(1500);
+      50 |   await dump(page, 'p4-d-selected');
+        at c:\Playwright_Automation\Shamel\prec-probe4.spec.ts:47:83
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-probe4-walk-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-probe4-walk-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-probe4-walk-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\prec-probe4.spec.ts:14:5 › walk ────────────────────────────────────────────
+  1 passed (4.2m)

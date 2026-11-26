@@ -1,0 +1,37 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\je-add.spec.ts:96:5 › J04 bank entry with a reference
+[3/4] [chromium] › Shamel\je-add.spec.ts:106:5 › J06 contra entry
+[4/4] [chromium] › Shamel\je-add.spec.ts:134:5 › J10 quick entry
+  1) [chromium] › Shamel\je-add.spec.ts:134:5 › J10 quick entry ────────────────────────────────────
+
+    TimeoutError: locator.click: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('.qr-dialog:visible, .base-modal:visible, [role=dialog]:visible').last().locator('.custom-select-input').getByText('122102').visible().first()
+
+
+      141 |     await m.locator('.qr-field').filter({ hasText: label }).locator('.select-head').click(); await wait(2000);
+      142 |     const search = m.locator('.custom-select-input input:visible'); if (await search.count()) { await search.first().fill(q); await wait(2500); }
+    > 143 |     await m.locator('.custom-select-input').getByText(q).filter({ visible: true }).first().click(); await wait(1500);
+          |                                                                                            ^
+      144 |   }
+      145 |   await box('ملاحظات').fill('QA quick entry'); await box('ملاحظات').press('Tab'); await wait(1000);
+      146 |   await page.screenshot({ path: 'Shamel/je-results/J10-popup.png' });
+        at c:\Playwright_Automation\Shamel\je-add.spec.ts:143:92
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-add-J10-quick-entry-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-add-J10-quick-entry-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-add-J10-quick-entry-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\je-add.spec.ts:134:5 › J10 quick entry ─────────────────────────────────────
+  3 passed (3.0m)

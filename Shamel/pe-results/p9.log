@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+[1/1] [chromium] › Shamel\pe-probe9.spec.ts:8:5 › tabs and bulk popup
+[chromium] › Shamel\pe-probe9.spec.ts:8:5 › tabs and bulk popup
+TAB ACC-PAY-2026-03089 المعلومات الاضافية مرحباً Administrator ! | AN | Administrator | admin@example.com | تفاصيل قيد الدفع | مسودة | معاينة | التفاصيل | المعلومات الاضافية | السجلات المرتبطة | 0 | معلومات إضافية | الحالة | مسودة | ملاحظات مخصصة | ملاحظات | القيمة ريال سعودي 500.0 مستلم من QA-PE Cust | المبلغ كتابةً (عملة الشركة) | ريال سعودي خمسمائة فقط. | المبلغ كتابةً | ريال سعودي خمسمائة فقط. | البنك | بنك القاضى | رقم الحساب البنكي | 9876543210000 | اعتماد
+
+FIELDS {"الحالة":"مسودة","ملاحظات مخصصة":"off","ملاحظات":"القيمة ريال سعودي 500.0 مستلم من QA-PE Cust","المبلغ كتابةً (عملة الشركة)":"ريال سعودي خمسمائة فقط.","المبلغ كتابةً":"ريال سعودي خمسمائة فقط.","البنك":"بنك القاضى","رقم الحساب البنكي":"9876543210000"}
+
+INPUTS ["INPUT:search:rw","INPUT:checkbox:rw"]
+
+السجلات المرتبطة locator.click: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator('main').getByText('السجلات المرتبطة', { ex
+
+TAB ACC-PAY-2026-03089 السجلات المرتبطة مرحباً Administrator ! | AN | Administrator | admin@example.com | 73 | تفاصيل قيد الدفع | مسودة | معاينة | التفاصيل | المعلومات الاضافية | السجلات المرتبطة | 0 | معلومات إضافية | الحالة | مسودة | ملاحظات مخصصة | ملاحظات | القيمة ريال سعودي 500.0 مستلم من QA-PE Cust | المبلغ كتابةً (عملة الشركة) | ريال سعودي خمسمائة فقط. | المبلغ كتابةً | ريال سعودي خمسمائة فقط. | البنك | بنك القاضى | رقم الحساب البنكي | 9876543210000 | اعتماد
+
+FIELDS {"الحالة":"مسودة","ملاحظات مخصصة":"off","ملاحظات":"القيمة ريال سعودي 500.0 مستلم من QA-PE Cust","المبلغ كتابةً (عملة الشركة)":"ريال سعودي خمسمائة فقط.","المبلغ كتابةً":"ريال سعودي خمسمائة فقط.","البنك":"بنك القاضى","رقم الحساب البنكي":"9876543210000"}
+
+INPUTS ["INPUT:search:rw","INPUT:checkbox:rw"]
+
+TAB ACC-PAY-2026-03080 المعلومات الاضافية مرحباً Administrator ! | AN | Administrator | admin@example.com | تفاصيل قيد الدفع | معتمد | دفتر الأستاذ | التفاصيل | المعلومات الاضافية | السجلات المرتبطة | 0 | معلومات إضافية | الحالة | معتمد | ملاحظات مخصصة | ملاحظات | القيمة ريال سعودي 2000.0 مستلم من QA-PE Cust | Amount ريال سعودي 1500.0 adjusted against Sales Invoice ACC-SINV-2026-02915 | Amount ريال سعودي 500.0 adjusted against Sales Invoice ACC-SINV-2026-02916 | المبلغ كتابةً (عملة الشركة) | ريال سعودي ألفا فقط. | المبلغ كتابةً | ريال سعودي ألفا فقط. | البنك | بنك القاضى | رقم الحساب البنكي | 9876543210000 | إلغاء
+
+FIELDS {"الحالة":"معتمد","ملاحظات مخصصة":"off","ملاحظات":"القيمة ريال سعودي 2000.0 مستلم من QA-PE Cust\nAmount ريال سعودي 1500.0 adjusted against Sales Invoice ACC-SINV-2026-02915\nAmount ريال سعودي 500.0 adjusted against Sales Invoice ACC-SINV-2026-02916","المبلغ كتابةً (عملة الشركة)":"ريال سعودي ألفا فقط.","المبلغ كتابةً":"ريال سعودي ألفا فقط.","البنك":"بنك القاضى","رقم الحساب البنكي":"9876543210000"}
+
+INPUTS ["INPUT:search:rw","INPUT:checkbox:ro"]
+
+السجلات المرتبطة locator.click: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator('main').getByText('السجلات المرتبطة', { ex
+
+TAB ACC-PAY-2026-03080 السجلات المرتبطة مرحباً Administrator ! | AN | Administrator | admin@example.com | 73 | تفاصيل قيد الدفع | معتمد | دفتر الأستاذ | التفاصيل | المعلومات الاضافية | السجلات المرتبطة | 0 | معلومات إضافية | الحالة | معتمد | ملاحظات مخصصة | ملاحظات | القيمة ريال سعودي 2000.0 مستلم من QA-PE Cust | Amount ريال سعودي 1500.0 adjusted against Sales Invoice ACC-SINV-2026-02915 | Amount ريال سعودي 500.0 adjusted against Sales Invoice ACC-SINV-2026-02916 | المبلغ كتابةً (عملة الشركة) | ريال سعودي ألفا فقط. | المبلغ كتابةً | ريال سعودي ألفا فقط. | البنك | بنك القاضى | رقم الحساب البنكي | 9876543210000 | إلغاء
+
+FIELDS {"الحالة":"معتمد","ملاحظات مخصصة":"off","ملاحظات":"القيمة ريال سعودي 2000.0 مستلم من QA-PE Cust\nAmount ريال سعودي 1500.0 adjusted against Sales Invoice ACC-SINV-2026-02915\nAmount ريال سعودي 500.0 adjusted against Sales Invoice ACC-SINV-2026-02916","المبلغ كتابةً (عملة الشركة)":"ريال سعودي ألفا فقط.","المبلغ كتابةً":"ريال سعودي ألفا فقط.","البنك":"بنك القاضى","رقم الحساب البنكي":"9876543210000"}
+
+INPUTS ["INPUT:search:rw","INPUT:checkbox:ro"]
+
+SEARCH  ACC-PAY-2026-03080 معتمد استلام 26-11-2026 2,000.00 QA-PE Cust Ahmed Ebrahim CO. Cash
+
+POPUP تعديل | تعديل | الحقل * | تحديث <div data-v-b63f1f2a="" class="modal-header"><h2 data-v-b63f1f2a="" id="radix-vue-dialog-title-v-0" class="modal-title">تعديل</h2><p data-v-b63f1f2a="" id="radix-vue-dialog-description-v-1" class="sr-only">تعديل</p><button data-v-b63f1f2a="" type="button" class="close-btn" aria-label="إغلاق"><svg data-v-b63f1f2a="" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line data-v-b63f1f2a="" x1="18" y1="6" x2="6" y2="18"></line><line data-v-b63f1f2a="" x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div data-v-b63f1f2a="" class="form-body"><!----><div data-v-6c457cec="" class="ip-bulk-field"><label data-v-6c457cec="" class="cd-label">الحقل <span data-v-6c457cec="" class="required">*</span></label><div dir="ltr" class="creatable-select"><div data-v-29b1decf="" class="cs-control"><input data-v-29b1decf="" type="text" aria-expanded="false" aria-controls="" aria-disabled="false" aria-autocomplete="list" role="combobox" autocomplete="false" class="cs-input" placeholder="اختر الحقل المراد تعديله" value=""><button data-v-29b1decf="" type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" class="cs-toggle"><svg data-v-29b1decf="" class="cs-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path data-v-29b1decf="" fill-rule="evenodd" clip-rule="evenodd" d="M12.7069 15
+
+OPTIONS ["تاريخ الترحيل","رقم الشيك / المرجع","تاريخ الشيك / المرجع","مركز التكلفة","المشروع","ملاحظات","ترويسة الخطاب","عنوان الطباعة"]
+
+  1 passed (1.1m)

@@ -1,0 +1,26 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\pe-probe11.spec.ts:7:5 › ledger and bulk delete
+[chromium] › Shamel\pe-probe11.spec.ts:7:5 › ledger and bulk delete
+E03 [{"name":"ACC-PAY-2026-03113","docstatus":2,"paid_amount":25,"amended_from":null,"modified":"2026-11-26 13:25:00.334123"},{"name":"ACC-PAY-2026-03115","docstatus":2,"paid_amount":16,"amended_from":null,"modified":"2026-11-26 13:30:19.473117"}]
+
+SAME https://test.hr.azzrk.com/desk/shamel#/accounting/payment-entries/ACC-PAY-2026-03080
+
+NEW https://test.hr.azzrk.com/desk/query-report/General%20Ledger?company=Ahmed+Ebrahim+CO.&from_date=2026-11-26&to_date=2026-11-26&voucher_no=ACC-PAY-2026-03080&include_dimensions=1&include_default_book_entries=1
+
+REQ https://test.hr.azzrk.com/desk/query-report/General%20Ledger?voucher_no=ACC-PAY-2026-03080&from_date=2026-11-26&to_date=2026-11-26&company=Ahmed+Ebrahim+CO.&categorize_by=&show_cancelled_entries=0
+https://test.hr.azzrk.com/assets/frappe/dist/css-rtl/report.bundle.JBJQKRYE.css
+https://test.hr.azzrk.com/assets/frappe/dist/js/report.bundle.XXACKEXX.js
+https://test.hr.azzrk.com/desk/query-report/undefined
+https://test.hr.azzrk.com/api/method/frappe.desk.form.load.getdoc?doctype=Report&name=General%20Ledger&_=1795692695958
+https://test.hr.azzrk.com/api/method/frappe.desk.query_report.get_script
+https://test.hr.azzrk.com/api/method/frappe.desk.query_report.run?report_name=General%20Ledger&filters=%7B%22company%22%3A%22Ahmed%20Ebrahim%20CO.%22%2C%22from_date%22%3A%222026-11-26%22%2C%22to_date%22%3A%222026-11-26%22%2C%22account%22%3A%5B%5D%2C%22voucher_no%22%3A%22ACC-PAY-2026-03080%22%2C%22pa
+https://test.hr.azzrk.com/api/method/frappe.desk.query_report.run?report_name=General%20Ledger&filters=%7B%22company%22%3A%22Ahmed%20Ebrahim%20CO.%22%2C%22from_date%22%3A%222026-11-26%22%2C%22to_date%22%3A%222026-11-26%22%2C%22account%22%3A%5B%5D%2C%22voucher_no%22%3A%22ACC-PAY-2026-03080%22%2C%22pa
+
+NEWTEXT المدفوعات ERPNext بحث Ctrl+K إعلام لوحة التحكم المدفوعات سند دفع قيد يومية طلب الدفع من قبل المورد أمر دفع دفع المصالحة دفعة غير متطابقة معالجة تسوية المدفوعات دفتر حسابات إعادة النشر دفتر مدفوعات إعادة النشر تقارير الحسابات المدينة الحسابات الدائنة دفتر الأستاذ ميزان المراجعة التقارير المالية AN Administrator None admin@example.com المدفوعات دفتر الأستاذ الإجراءات Begin typing for results. الشركة تاريخ إصدار الفاتورة الحساب مدين (SAR) الائتمان (SAR) الرصيد (SAR) نوع السند نوع القسيمة الفرعي رقم السند مقابل الحساب نوع الطرف الطرف المشروع مركز التكلفة مقابل إيصال نوع مقابل إيصال رقم فاتورة المورد 1 افتتاحي ريال سعودي 0.00 ريال سعودي 0.00 ريال سعودي 0.00 2 26-11-2026 1210 - العملاء - E ريال سعودي 0.00 ريال سعودي 1,500.00 ريال سعودي -1,500.00 Payment Entry تسلم ACC-PAY-2026-03080 122102 - RIYAD BANK - E العميل QA-PE Cust 101 - Main X - E فاتورة مبيعات ACC-SINV-2026-02915 3 26-11-2026 1210 -
+
+DIALOG ACC-PAY-2026-03115 shamel-confirm-dialog :: "إلغاء".shamel-btn-cancel | "حذف".shamel-btn-confirm shamel-btn-destructive :: parents shamel-confirm-overlay is-visible / no-breadcrumbs
+
+  2 passed (1.0m)

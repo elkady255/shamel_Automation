@@ -1,0 +1,45 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\pe-probe5.spec.ts:11:5 › tables
+[chromium] › Shamel\pe-probe5.spec.ts:11:5 › tables
+BTNS ["رجوع","تعيين إلى","الوسوم","المرفقات","طباعة","مشاركة","السجلات","حذف","معاينة","التفاصيل","المعلومات الاضافية","السجلات المرتبطة 0","نوع الدفع","الدفع من / إلى","الحسابات","المبلغ","المراجع","جلب الفواتير المستحقة","جلب الأوامر المستحقة","إضافة صف","الشطب","الضرائب والرسوم","إضافة صف","الخصم أو الخسارة","إضافة صف","رقم المعاملة","الأبعاد المحاسبية","اعتماد"]
+
+ADD count 3
+
+ADDED 0 [{"head":["","م","النوع","الاسم","تاريخ الاستحقاق","الإجمالي الكلي (SAR)","المستحق (SAR)","المخصص (SAR)",""],"rows":[["","1","","","—","—","—","",""]]}] dlg none
+
+ADD ERR 1 locator.count: Target page, context or browser has been closed
+
+ADD ERR 2 locator.count: Target page, context or browser has been closed
+
+  1) [chromium] › Shamel\pe-probe5.spec.ts:11:5 › tables ───────────────────────────────────────────
+
+    Test timeout of 290000ms exceeded.
+
+    Error: page.screenshot: Target page, context or browser has been closed
+
+      23 |     } catch (e: any) { console.log('ADD ERR', i, e.message.slice(0, 150)); }
+      24 |   }
+    > 25 |   await page.screenshot({ path: 'Shamel/pe-results/p5-rows.png', fullPage: true });
+         |              ^
+      26 |   const edits = u.main(page).locator('button[title="تعديل الصف"]');
+      27 |   console.log('EDIT count', await edits.count());
+      28 |   for (let i = 0; i < (await edits.count()); i++) {
+        at c:\Playwright_Automation\Shamel\pe-probe5.spec.ts:25:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-probe5-tables-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-probe5-tables-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-probe5-tables-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\pe-probe5.spec.ts:11:5 › tables ────────────────────────────────────────────
+  1 passed (5.1m)

@@ -1,0 +1,42 @@
+
+Running 5 tests using 1 worker
+
+[1/5] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/5] [chromium] › Shamel\pe-a-form.spec.ts:97:5 › A06 party selection: fetched values per party type
+  1) [chromium] › Shamel\pe-a-form.spec.ts:97:5 › A06 party selection: fetched values per party type 
+
+    Error: A06-2e Supplier: Consider for Tax Withholding is shown only for Pay + Supplier not shown
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:113:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\error-context.md
+
+
+[3/5] [chromium] › Shamel\pe-b-e2e.spec.ts:71:5 › B01 receive from customer against invoices (cash)
+[4/5] [chromium] › Shamel\pe-b-e2e.spec.ts:79:5 › B02 pay supplier by bank against an invoice
+[5/5] [chromium] › Shamel\pe-d-tds-fx.spec.ts:81:5 › D02 foreign currency receipt with exchange gain
+  1 failed
+    [chromium] › Shamel\pe-a-form.spec.ts:97:5 › A06 party selection: fetched values per party type 
+  4 passed (6.3m)

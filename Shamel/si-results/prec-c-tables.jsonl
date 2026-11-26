@@ -1,0 +1,97 @@
+{"id":"C01-1","text":"Invoices table lists exactly the submitted invoices with an outstanding balance","ok":true,"detail":"screen=ACC-SINV-2026-02907,ACC-SINV-2026-02908,ACC-SINV-2026-02909 db=ACC-SINV-2026-02907,ACC-SINV-2026-02908,ACC-SINV-2026-02909","known":""}
+{"id":"C01-2","text":"Each invoice row shows its type, number, posting date and outstanding amount as stored","ok":true,"detail":"bad= rows=[[\"\",\"1\",\"فاتورة مبيعات\",\"ACC-SINV-2026-02907\",\"05-11-2026\",\"1,000.00\",\"\"],[\"\",\"2\",\"فاتورة مبيعات\",\"ACC-SINV-2026-02908\",\"15-11-2026\",\"2,000.00\",\"\"],[\"\",\"3\",\"فاتورة مبيعات\",\"ACC-SINV-2026-02909\",\"24-11-2026\",\"500.00\",\"\"]]","known":""}
+{"id":"C01-3","text":"Returned Amount = grand total and Outstanding = document outstanding","ok":true,"detail":"[]","known":""}
+{"id":"C01-4","text":"Rows are numbered 1..n","ok":true,"detail":"[[\"1\",\"2\",\"3\"],[\"1\",\"2\",\"3\",\"4\"]]","known":""}
+{"id":"C01-5","text":"Every submitted payment entry with an unallocated amount is listed with date and available amount","ok":true,"detail":"missing/wrong= rows=[[\"\",\"1\",\"ACC-PAY-2026-03072\",\"10-11-2026\",\"700.00\",\"\"],[\"\",\"2\",\"ACC-PAY-2026-03073\",\"20-11-2026\",\"3,000.00\",\"\"],[\"\",\"3\",\"ACC-JV-2026-01713\",\"23-11-2026\",\"400.00\",\"\"],[\"\",\"4\",\"ACC-SINV-2026-02910\",\"24-11-2026\",\"200.00\",\"\"]]","known":""}
+{"id":"C01-6","text":"Return invoices with an available amount are listed in Payments","ok":true,"detail":"missing=","known":""}
+{"id":"C01-7","text":"The advance journal entry is listed in Payments","ok":true,"detail":"ACC-JV-2026-01713","known":""}
+{"id":"C01-8","text":"Payments lists nothing else (no normal invoices, no allocated documents)","ok":true,"detail":"extra=","known":""}
+{"id":"C02-1","text":"Invoices table lists exactly the submitted invoices with an outstanding balance","ok":true,"detail":"screen=ACC-PINV-2026-00005,ACC-PINV-2026-00006 db=ACC-PINV-2026-00005,ACC-PINV-2026-00006","known":""}
+{"id":"C02-2","text":"Each invoice row shows its type, number, posting date and outstanding amount as stored","ok":false,"detail":"bad= rows=[[\"\",\"1\",\"فاتورة مشتريات\",\"ACC-PINV-2026-00005\",\"05-11-2026\",\"1,500.00\",\"\"],[\"\",\"2\",\"فاتورة مشتريات\",\"ACC-PINV-2026-00006\",\"22-11-2026\",\"800.00\",\"\"]]","known":""}
+{"id":"C02-3","text":"Returned Amount = grand total and Outstanding = document outstanding","ok":true,"detail":"[]","known":""}
+{"id":"C02-4","text":"Rows are numbered 1..n","ok":true,"detail":"[[\"1\",\"2\"],[\"1\",\"2\",\"3\",\"4\"]]","known":""}
+{"id":"C02-5","text":"Every submitted payment entry with an unallocated amount is listed with date and available amount","ok":true,"detail":"missing/wrong= rows=[[\"\",\"1\",\"ACC-PAY-2026-03074\",\"13-11-2026\",\"600.00\",\"\"],[\"\",\"2\",\"ACC-JV-2026-01714\",\"23-11-2026\",\"300.00\",\"\"],[\"\",\"3\",\"ACC-PAY-2026-03075\",\"24-11-2026\",\"2,000.00\",\"\"],[\"\",\"4\",\"ACC-PINV-2026-00007\",\"24-11-2026\",\"100.00\",\"\"]]","known":""}
+{"id":"C02-6","text":"Return invoices with an available amount are listed in Payments","ok":true,"detail":"missing=","known":""}
+{"id":"C02-7","text":"The advance journal entry is listed in Payments","ok":true,"detail":"ACC-JV-2026-01714","known":""}
+{"id":"C02-8","text":"Payments lists nothing else (no normal invoices, no allocated documents)","ok":true,"detail":"extra=","known":""}
+{"id":"C03-1","text":"Invoices columns: No., Invoice Type, Invoice Number, Invoice Date, Outstanding Amount","ok":true,"detail":"|م|نوع الفاتورة|رقم الفاتورة|تاريخ الفاتورة|المبلغ المستحق|","known":""}
+{"id":"C03-2","text":"Payments columns: No., Reference Name, Posting Date, Amount","ok":true,"detail":"|م|اسم المرجع|تاريخ الترحيل|المبلغ|","known":""}
+{"id":"C03-3","text":"All columns are fully visible without clipping at 1400px width","ok":false,"detail":"[[\"المبلغ المستحق\"],[]]","known":""}
+{"id":"C05-1","text":"Invoice Number is a link","ok":true,"detail":"1","known":""}
+{"id":"C05-2","text":"The link opens the corresponding Sales Invoice","ok":false,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02907","known":""}
+{"id":"C05-3","text":"The opened document is not an error / empty screen","ok":true,"detail":"مرحباً Administrator !\n\nAN\n\nAdministrator\nadmin@example.com","known":""}
+{"id":"C06-1","text":"Full number shows only that invoice","ok":true,"detail":"ACC-SINV-2026-02908","known":""}
+{"id":"C06-2","text":"Part of the number works","ok":true,"detail":"ACC-SINV-2026-02909","known":""}
+{"id":"C06-3","text":"Search ignores letter case","ok":true,"detail":"ACC-SINV-2026-02907","known":""}
+{"id":"C06-4","text":"Leading / trailing spaces are ignored","ok":true,"detail":"ACC-SINV-2026-02907","known":""}
+{"id":"C06-5","text":"No match shows an empty table","ok":true,"detail":"10-11-2026,20-11-2026,23-11-2026,24-11-2026","known":""}
+{"id":"C06-6","text":"Clearing the search restores every invoice","ok":true,"detail":"ACC-SINV-2026-02907,ACC-SINV-2026-02908,ACC-SINV-2026-02909","known":""}
+{"id":"C06-7","text":"The search does not filter the payments table","ok":true,"detail":"","known":""}
+{"id":"C07-1","text":"Header checkbox selects all rows and shows the action bar with the count","ok":true,"detail":"3 المحدد تحديد الكل حذف","known":""}
+{"id":"C07-2","text":"Unticking the header hides the action bar","ok":true,"detail":"","known":""}
+{"id":"C07-4","text":"Delete removes exactly the selected rows","ok":true,"detail":" 1 فاتورة مبيعات ACC-SINV-2026-02909 24-11-2026 500.00 ","known":""}
+{"id":"C07-5","text":"The row delete icon removes that payment row only","ok":true,"detail":" 1 ACC-PAY-2026-03073 20-11-2026 3,000.00   2 ACC-JV-2026-01713 23-11-2026 400.00   3 ACC-SINV-2026-02910 24-11-2026 200.00 ","known":""}
+{"id":"C07-6","text":"Remaining rows are renumbered from 1","ok":true,"detail":"{\"cells\":[\"\",\"1\",\"ACC-PAY-2026-03073\",\"20-11-2026\",\"3,000.00\",\"\"]}","known":""}
+{"id":"C07-7","text":"Deleting rows only removes them from the screen (documents stay submitted)","ok":true,"detail":"","known":""}
+{"id":"C07-8","text":"Get Unreconciled Entries brings the removed rows back","ok":true,"detail":"3","known":""}
+{"id":"C08-1","text":"Invoice Edit Row shows Invoice Type, Number, Date, Outstanding Amount and Amount","ok":true,"detail":"تعديل الفاتورة تعديل الفاتورة نوع الفاتورة فاتورة مبيعات رقم الفاتورة ACC-SINV-2026-02908 تاريخ الفاتورة 15-11-2026 المبلغ المستحق 2,000.00 المبلغ 2,000.00 إلغاء تعديل","known":""}
+{"id":"C08-2","text":"Invoice Edit Row values match the row","ok":true,"detail":"تعديل الفاتورة تعديل الفاتورة نوع الفاتورة فاتورة مبيعات رقم الفاتورة ACC-SINV-2026-02908 تاريخ الفاتورة 15-11-2026 المبلغ المستحق 2,000.00 المبلغ 2,000.00 إلغاء تعديل","known":""}
+{"id":"C08-3","text":"All invoice popup fields are read-only labels","ok":true,"detail":"editable inputs=0","known":""}
+{"id":"C08-4","text":"Invoice Number inside Edit Row is clickable (opens the document)","ok":true,"detail":"links=1","known":""}
+{"id":"C08-5","text":"Payment Edit Row shows Reference Type, Name, Posting Date, Amount, Difference Amount, Remarks, Cost Center","ok":true,"detail":"تعديل الدفعة تعديل الدفعة نوع المرجع قيد يومية اسم المرجع ACC-JV-2026-01713 تاريخ الترحيل 23-11-2026 المبلغ 400.00 مبلغ الفرق — ملاحظات المرجع # QA-PR بتاريخ 23-11-2026 مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C08-6","text":"Payment Edit Row shows Journal Entry values","ok":false,"detail":"تعديل الدفعة تعديل الدفعة نوع المرجع قيد يومية اسم المرجع ACC-JV-2026-01713 تاريخ الترحيل 23-11-2026 المبلغ 400.00 مبلغ الفرق — ملاحظات المرجع # QA-PR بتاريخ 23-11-2026 مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C08-7","text":"Cost Center in the payment popup is a searchable dropdown (SRS)","ok":true,"detail":"inputs=1 editable=true","known":""}
+{"id":"C08-8","text":"Return invoice payment shows reference type Invoice","ok":true,"detail":"تعديل الدفعة تعديل الدفعة نوع المرجع فاتورة مبيعات اسم المرجع ACC-SINV-2026-02910 تاريخ الترحيل 24-11-2026 المبلغ 200.00 مبلغ الفرق — ملاحظات — مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C08-9","text":"Payment Entry row shows reference type Payment Entry with remarks","ok":true,"detail":"تعديل الدفعة تعديل الدفعة نوع المرجع قيد دفع اسم المرجع ACC-PAY-2026-03073 تاريخ الترحيل 20-11-2026 المبلغ 3,000.00 مبلغ الفرق — ملاحظات القيمة ريال سعودي 3000 مستلم من QA-PR Cust Main إشارة عملية لا QA-PR بتاريخ 2026-11-20 مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C09-1-1","text":"Invoices: settings popup has drag handles, column width, Add/Remove columns, Reset and Save","ok":true,"detail":"تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود نوع الفاتورة رقم الفاتورة تاريخ الفاتورة المبلغ المستحق إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ","known":""}
+{"id":"C09-1-2","text":"Invoices: save button is labelled Update as in the SRS","ok":false,"detail":"تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود نوع الفاتورة رقم الفاتورة تاريخ الفاتورة المبلغ المستحق إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ","known":""}
+{"id":"C09-1-3","text":"Invoices: default column width is 3","ok":true,"detail":"3,3,3,3","known":""}
+{"id":"C09-1-4","text":"Invoices: column width accepts numbers only","ok":false,"detail":"\"autoabc\"","known":""}
+{"id":"C09-1-5","text":"Invoices: column width maximum 3 characters","ok":false,"detail":"\"12345\"","known":""}
+{"id":"C09-1-6","text":"Invoices: negative width is not accepted","ok":true,"detail":"\"1\"","known":""}
+{"id":"C09-1-7","text":"Invoices: empty width (below 1 character) is rejected or replaced by the default","ok":true,"detail":"closed","known":""}
+{"id":"C09-1-8","text":"Invoices: Add/Remove lists every SRS column","ok":true,"detail":"missing= popup=الحقول المتاحة الحقول المتاحة رقم الفاتورة نوع الفاتورة تاريخ الفاتورة المبلغ المستحق المبلغ إلغاء إضافة","known":""}
+{"id":"C09-1-9","text":"checkboxes in the column picker","ok":null,"detail":"5"}
+{"id":"C09-1-10","text":"Invoices: ticking / unticking a column changes the table after saving","ok":true,"detail":"before=م,نوع الفاتورة,رقم الفاتورة,تاريخ الفاتورة,المبلغ المستحق after=م,نوع الفاتورة,رقم الفاتورة,تاريخ الفاتورة,المبلغ المستحق,المبلغ","known":""}
+{"id":"C09-1-11","text":"Invoices: saved column choice persists after reopening the page","ok":true,"detail":"م,نوع الفاتورة,رقم الفاتورة,تاريخ الفاتورة,المبلغ المستحق,المبلغ","known":""}
+{"id":"C09-1-12","text":"Invoices: Reset to default restores the original columns","ok":true,"detail":"م,نوع الفاتورة,رقم الفاتورة,تاريخ الفاتورة,المبلغ المستحق","known":""}
+{"id":"C09-1-13","text":"Invoices: Cancel discards a width change","ok":true,"detail":"3","known":""}
+{"id":"C09-2-1","text":"Payments: settings popup has drag handles, column width, Add/Remove columns, Reset and Save","ok":true,"detail":"تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود اسم المرجع تاريخ الترحيل المبلغ إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ","known":""}
+{"id":"C09-2-2","text":"Payments: save button is labelled Update as in the SRS","ok":false,"detail":"تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود اسم المرجع تاريخ الترحيل المبلغ إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ","known":""}
+{"id":"C09-2-3","text":"Payments: default column width is 3","ok":true,"detail":"3,3,3","known":""}
+{"id":"C09-2-4","text":"Payments: column width accepts numbers only","ok":false,"detail":"\"autoabc\"","known":""}
+{"id":"C09-2-5","text":"Payments: column width maximum 3 characters","ok":false,"detail":"\"12345\"","known":""}
+{"id":"C09-2-6","text":"Payments: negative width is not accepted","ok":true,"detail":"\"1\"","known":""}
+{"id":"C09-2-7","text":"Payments: empty width (below 1 character) is rejected or replaced by the default","ok":true,"detail":"closed","known":""}
+{"id":"C09-2-8","text":"Payments: Add/Remove lists every SRS column","ok":true,"detail":"missing= popup=الحقول المتاحة الحقول المتاحة اسم المرجع تاريخ الترحيل المبلغ نوع المرجع مبلغ الفرق ملاحظات مركز التكلفة إلغاء إضافة","known":""}
+{"id":"C09-2-9","text":"checkboxes in the column picker","ok":null,"detail":"7"}
+{"id":"C09-2-10","text":"Payments: ticking / unticking a column changes the table after saving","ok":true,"detail":"before=م,اسم المرجع,تاريخ الترحيل,المبلغ after=م,اسم المرجع,تاريخ الترحيل,المبلغ,مركز التكلفة","known":""}
+{"id":"C09-2-11","text":"Payments: saved column choice persists after reopening the page","ok":true,"detail":"م,اسم المرجع,تاريخ الترحيل,المبلغ,مركز التكلفة","known":""}
+{"id":"C09-2-12","text":"Payments: Reset to default restores the original columns","ok":true,"detail":"م,اسم المرجع,تاريخ الترحيل,المبلغ","known":""}
+{"id":"C09-2-13","text":"Payments: Cancel discards a width change","ok":true,"detail":"3","known":""}
+{"id":"C02-1","text":"Invoices table lists exactly the submitted invoices with an outstanding balance","ok":true,"detail":"screen=ACC-PINV-2026-00005,ACC-PINV-2026-00006 db=ACC-PINV-2026-00005,ACC-PINV-2026-00006","known":""}
+{"id":"C02-2","text":"Each invoice row shows its type, number, posting date and outstanding amount as stored","ok":true,"detail":"bad= rows=[[\"\",\"1\",\"فاتورة مشتريات\",\"ACC-PINV-2026-00005\",\"05-11-2026\",\"1,500.00\",\"\"],[\"\",\"2\",\"فاتورة مشتريات\",\"ACC-PINV-2026-00006\",\"22-11-2026\",\"800.00\",\"\"]]","known":""}
+{"id":"C02-3","text":"Returned Amount = grand total and Outstanding = document outstanding","ok":true,"detail":"[]","known":""}
+{"id":"C02-4","text":"Rows are numbered 1..n","ok":true,"detail":"[[\"1\",\"2\"],[\"1\",\"2\",\"3\",\"4\"]]","known":""}
+{"id":"C02-5","text":"Every submitted payment entry with an unallocated amount is listed with date and available amount","ok":true,"detail":"missing/wrong= rows=[[\"\",\"1\",\"ACC-PAY-2026-03074\",\"13-11-2026\",\"600.00\",\"\"],[\"\",\"2\",\"ACC-JV-2026-01714\",\"23-11-2026\",\"300.00\",\"\"],[\"\",\"3\",\"ACC-PAY-2026-03075\",\"24-11-2026\",\"2,000.00\",\"\"],[\"\",\"4\",\"ACC-PINV-2026-00007\",\"24-11-2026\",\"100.00\",\"\"]]","known":""}
+{"id":"C02-6","text":"Return invoices with an available amount are listed in Payments","ok":true,"detail":"missing=","known":""}
+{"id":"C02-7","text":"The advance journal entry is listed in Payments","ok":true,"detail":"ACC-JV-2026-01714","known":""}
+{"id":"C02-8","text":"Payments lists nothing else (no normal invoices, no allocated documents)","ok":true,"detail":"extra=","known":""}
+{"id":"C05-1","text":"Invoice Number is a link","ok":true,"detail":"1","known":""}
+{"id":"C05-2","text":"The link opens the corresponding Sales Invoice","ok":true,"detail":"https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02907 opened=true","known":""}
+{"id":"C05-3","text":"The opened document is not an error / empty screen","ok":true,"detail":"مرحباً Administrator !\n\nAN\n\nAdministrator\nadmin@example.com\nACC-SINV-2026-02907\nمتأخرة\nإنشاء فحص جودة\nعرض\nإلغاء المستند\nإنشاء\nالتفاصيل\nالمعلومات العامة\nمعلومات إضافية\nالسجلات المرتبطة\n0\nالمعلومات الأس","known":""}
+{"id":"C08-1","text":"Invoice Edit Row shows Invoice Type, Number, Date, Outstanding Amount and Amount","ok":true,"detail":"تعديل الفاتورة تعديل الفاتورة نوع الفاتورة فاتورة مبيعات رقم الفاتورة ACC-SINV-2026-02908 تاريخ الفاتورة 15-11-2026 المبلغ المستحق 2,000.00 المبلغ 2,000.00 إلغاء تعديل","known":""}
+{"id":"C08-2","text":"Invoice Edit Row values match the row","ok":true,"detail":"تعديل الفاتورة تعديل الفاتورة نوع الفاتورة فاتورة مبيعات رقم الفاتورة ACC-SINV-2026-02908 تاريخ الفاتورة 15-11-2026 المبلغ المستحق 2,000.00 المبلغ 2,000.00 إلغاء تعديل","known":""}
+{"id":"C08-3","text":"All invoice popup fields are read-only labels","ok":true,"detail":"editable inputs=0","known":""}
+{"id":"C08-4","text":"Invoice Number inside Edit Row is clickable (opens the document)","ok":true,"detail":"links=1","known":""}
+{"id":"C08-5","text":"Payment Edit Row shows Reference Type, Name, Posting Date, Amount, Difference Amount, Remarks, Cost Center","ok":true,"detail":"تعديل الدفعة تعديل الدفعة نوع المرجع قيد يومية اسم المرجع ACC-JV-2026-01713 تاريخ الترحيل 23-11-2026 المبلغ 400.00 مبلغ الفرق — ملاحظات المرجع # QA-PR بتاريخ 23-11-2026 مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C08-6","text":"Payment Edit Row shows Journal Entry values","ok":true,"detail":"costCenter=\"101 - Main X - E\" تعديل الدفعة تعديل الدفعة نوع المرجع قيد يومية اسم المرجع ACC-JV-2026-01713 تاريخ الترحيل 23-11-2026 المبلغ 400.00 مبلغ الفرق — ملاحظات المرجع # QA-PR بتاريخ 23-11-2026 مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C08-7","text":"Cost Center in the payment popup is a searchable dropdown (SRS)","ok":true,"detail":"inputs=1 editable=true","known":""}
+{"id":"C08-8","text":"Return invoice payment shows reference type Invoice","ok":true,"detail":"تعديل الدفعة تعديل الدفعة نوع المرجع فاتورة مبيعات اسم المرجع ACC-SINV-2026-02910 تاريخ الترحيل 24-11-2026 المبلغ 200.00 مبلغ الفرق — ملاحظات — مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C08-9","text":"Payment Entry row shows reference type Payment Entry with remarks","ok":true,"detail":"تعديل الدفعة تعديل الدفعة نوع المرجع قيد دفع اسم المرجع ACC-PAY-2026-03073 تاريخ الترحيل 20-11-2026 المبلغ 3,000.00 مبلغ الفرق — ملاحظات القيمة ريال سعودي 3000 مستلم من QA-PR Cust Main إشارة عملية لا QA-PR بتاريخ 2026-11-20 مركز التكلفة إلغاء تعديل","known":""}
+{"id":"C04-1","text":"Draft invoice ACC-SINV-2026-02912 is not listed","ok":true,"detail":"","known":""}
+{"id":"C04-2","text":"Cancelled invoice ACC-SINV-2026-02913 is not listed","ok":true,"detail":"","known":""}
+{"id":"C04-3","text":"Cancelled payment ACC-PAY-2026-03077 is not listed","ok":true,"detail":"","known":""}
+{"id":"C09-3-1","text":"Saving column width \"abc\" is refused or corrected to a valid 1-3 digit number","ok":false,"detail":"typed=\"autobc\" afterSave=\"auto\" popupStillOpen=0 msg=","known":""}
+{"id":"C09-3-2","text":"Saving column width \"12345\" is refused or corrected to a valid 1-3 digit number","ok":true,"detail":"typed=\"12345\" afterSave=\"123\" popupStillOpen=0 msg=","known":""}
+{"id":"C09-3-1","text":"Saving a non-numeric column width falls back to the default (auto)","ok":true,"detail":"abc -> auto; 12345 -> 123","reviewed":true}

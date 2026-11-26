@@ -1,17 +1,17 @@
-# Graph Report - Playwright_Automation  (2026-11-17)
+# Graph Report - Playwright_Automation  (2026-11-26)
 
 ## Corpus Check
-- 224 files · ~986,707 words
+- 386 files · ~1,425,725 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 7 file(s) not represented in the graph (top: (none) 3, .log 3, .example 1)
+- Unclassified: 68 file(s) not represented in the graph (top: .log 38, .jsonl 26, (none) 3)
 
 ## Summary
-- 1618 nodes · 2441 edges · 150 communities (103 shown, 47 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 66 edges (avg confidence: 0.86)
+- 2485 nodes · 4313 edges · 226 communities (148 shown, 78 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 95 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d1b188ef`
+- Built from commit: `8017a242`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,12 +21,12 @@
 - DeliveryNotePage
 - QualityInspectionPage
 - Cookies
-- Cookies
+- Local Storage
 - StockReconciliationPage
-- api.ts
+- @playwright/test
 - si-data.ts
 - sr-data.ts
-- code
+- srs-stock-ledger.spec.ts
 - Browser Automation with playwright-cli
 - Browser Automation with playwright-cli
 - ps-data.ts
@@ -36,21 +36,21 @@
 - steps
 - Browser Session Management
 - Browser Session Management
-- @playwright/test
+- srs-quality-inspection-list.spec.ts
 - srs-coupon-code.spec.ts
 - dn-data.ts
 - srs-quality-inspection-add.spec.ts
-- qa_xlsx.py
+- build_si_case_status.py
 - Tracing
 - qt-api.ts
 - Agent steps
-- AccountingTab
+- si-ui.ts
 - pr-probe5.spec.ts
 - Running Custom Playwright Code
 - 3. Heal
 - Running Custom Playwright Code
 - package.json
-- devDependencies
+- prec-data.ts
 - srs-landed-cost-add.spec.ts
 - srs-sales-invoice-remaining.spec.ts
 - compilerOptions
@@ -129,18 +129,18 @@
 - st-probe2.spec.ts
 - st-probe9.spec.ts
 - Attaching Screenshots and Videos to Pull Requests
-- 0. How generation works
+- qt-api.ts
 - 1. Planning
 - Attaching Screenshots and Videos to Pull Requests
 - Page Objects and Fixtures
 - eslint-plugin-playwright
 - playwright
 - pr-probe6.spec.ts
-- Trace Output Files
-- playwright.config.ts
+- pe-flow.ts
+- prec-results/build-cases.js
 - ref_fs
 - srs-landed-cost-add-api.spec.ts
-- .claude/skills/playwright-cli/references/element-attributes.md
+- pe-c-advanced.spec.ts
 - e2e
 - SHAMEL_Bin_Test_Cases_EN_e038332a.md
 - SHAMEL_CouponCode_Test_Cases_EN_844a0f32.md
@@ -161,47 +161,111 @@
 - SHAMEL_StockReconciliation_Test_Cases_EN_91ea715c.md
 - SHAMEL_StockReservationEntry_Test_Cases_EN_21a77220.md
 - CLAUDE.md
+- srs-product-bundle-2.spec.ts
+- pe-data.ts
+- pe-e-lifecycle.spec.ts
+- bo-probe4.spec.ts
+- SRS-Accounting-Account.md
+- Test cases - Payment Reconciliation (executed 2026-11-26 on test.hr.azzrk.com)
+- Commands
+- bo-probe8.spec.ts
+- Test cases - Payment Entry (executed 2026-11-26 on test.hr.azzrk.com)
+- bo-probe3.spec.ts
+- pe-results/build-cases.js
+- prec-d-alloc.spec.ts
+- SRS-Accounting-Sales-Invoice.md
+- so3-probe8.spec.ts
+- so3-probe9.spec.ts
+- Cookies
+- Playwright Tester
+- bo-probe5.spec.ts
+- bo-probe6.spec.ts
+- srs-accounting.spec.ts
+- si2-probe14.spec.ts
+- so3-probe10.spec.ts
+- so3-probe4.spec.ts
+- bo-probe2.spec.ts
+- si2-probe10.spec.ts
+- si2-probe2.spec.ts
+- si2-probe3.spec.ts
+- si2-probe4.spec.ts
+- si2-probe9.spec.ts
+- so3-probe11.spec.ts
+- so3-probe5.spec.ts
+- pe-f-advance.spec.ts
+- si2-probe11.spec.ts
+- si2-probe12.spec.ts
+- si2-probe13.spec.ts
+- si2-probe15.spec.ts
+- si2-probe16.spec.ts
+- si2-probe17.spec.ts
+- si2-probe5.spec.ts
+- si2-probe8.spec.ts
+- si2-probe.spec.ts
+- so3-api2.spec.ts
+- so3-probe12.spec.ts
+- so3-probe13.spec.ts
+- so3-probe14.spec.ts
+- so3-probe2.spec.ts
+- so3-probe3.spec.ts
+- so3-probe6.spec.ts
+- so3-probe7.spec.ts
+- so3-probe.spec.ts
+- Session Storage
+- bo-probe.spec.ts
+- pe-a-form.spec.ts
+- si2-probe6.spec.ts
+- si7-inventory.spec.ts
+- so5-fill.spec.ts
+- so-probe2.spec.ts
+- 2. Generate
+- Attaching to a Running Browser
+- so4-dump2.spec.ts
+- so-probe.spec.ts
+- Storage State
+- SHAMEL_SalesInvoice_Test_Cases_EN_executed_52ff66e1.md
+- bo-probe7.spec.ts
+- prec-a-header.spec.ts
+- build_account_cases.py
+- render-check.cjs
+- { CO, REC, PAY_DEFAULT, PAY, ITEM, CC, today, daysAgo }
 
 ## God Nodes (most connected - your core abstractions)
-1. `@playwright/test` - 129 edges
-2. `api` - 59 edges
-3. `code()` - 33 edges
-4. `seed()` - 33 edges
-5. `QualityInspectionPage` - 26 edges
-6. `StockReconciliationPage` - 24 edges
-7. `ITEM_A` - 22 edges
-8. `today()` - 22 edges
-9. `ProductBundlePage` - 22 edges
-10. `DeliveryNotePage` - 21 edges
+1. `@playwright/test` - 269 edges
+2. `api` - 96 edges
+3. `wait()` - 63 edges
+4. `main()` - 55 edges
+5. `press()` - 40 edges
+6. `code()` - 36 edges
+7. `seed()` - 36 edges
+8. `recorder()` - 35 edges
+9. `combo()` - 26 edges
+10. `QualityInspectionPage` - 26 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `The browser fixture (browser only)` --references--> `json()`  [INFERRED]
   .claude/skills/e2e/references/writing-tests.md → Shamel/helpers/api.ts
 - `receipt()` --calls--> `today()`  [EXTRACTED]
   Shamel/srs-item-tracking-lock.spec.ts → Shamel/helpers/ps-data.ts
+- `t()` --calls--> `post()`  [EXTRACTED]
+  Shamel/bo-probe7.spec.ts → Shamel/helpers/qt-api.ts
 - `draftDN()` --calls--> `code()`  [EXTRACTED]
   Shamel/helpers/dn-data.ts → Shamel/helpers/ps-data.ts
 - `draftDN()` --calls--> `customer()`  [EXTRACTED]
-  Shamel/helpers/dn-data.ts → Shamel/helpers/ps-data.ts
-- `draftDN()` --calls--> `seed()`  [EXTRACTED]
   Shamel/helpers/dn-data.ts → Shamel/helpers/ps-data.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (150 total, 47 thin omitted)
+## Communities (226 total, 78 thin omitted)
 
 ### Community 0 - "mr-data.ts"
 Cohesion: 0.08
 Nodes (22): addDays(), cancel(), COMPANY, CUSTOMER, GROUP_WAREHOUSE, ITEM_NAME, mr(), MrPurpose (+14 more)
 
-### Community 1 - "ProductBundlePage"
-Cohesion: 0.06
-Nodes (11): Further references, Know the project first, Minimal template, Playwright Tester, Running tests — quick reference, When a test fails, Workflow for a new test, Writing rules (and why) (+3 more)
-
 ### Community 2 - "DeliveryNotePage"
-Cohesion: 0.07
-Nodes (9): DeliveryNotePage, LOAD, rowEl(), rowSelect(), act(), setPicked(), statusOf(), toDeliver() (+1 more)
+Cohesion: 0.10
+Nodes (3): DeliveryNotePage, rowEl(), rowSelect()
 
 ### Community 3 - "QualityInspectionPage"
 Cohesion: 0.08
@@ -211,45 +275,49 @@ Nodes (14): param(), paramGroup(), QualityInspectionPage, clean(), errText(), gr
 Cohesion: 0.06
 Nodes (35): Advanced: Multiple Cookies or Custom Options, Advanced: Multiple Operations, Authentication State Reuse, Clear All Cookies, Clear All localStorage, Clear sessionStorage, Common Patterns, Cookies (+27 more)
 
-### Community 5 - "Cookies"
-Cohesion: 0.06
-Nodes (35): Advanced: Multiple Cookies or Custom Options, Advanced: Multiple Operations, Authentication State Reuse, Clear All Cookies, Clear All localStorage, Clear sessionStorage, Common Patterns, Cookies (+27 more)
+### Community 5 - "Local Storage"
+Cohesion: 0.12
+Nodes (16): Advanced: Multiple Operations, Authentication State Reuse, Clear All localStorage, Common Patterns, Delete Database, Delete Single Item, Get Single Value, IndexedDB (+8 more)
 
 ### Community 6 - "StockReconciliationPage"
 Cohesion: 0.08
 Nodes (16): A complete file, Actions, app, Contents, expect, Fixtures, Habits, Locators (+8 more)
 
-### Community 7 - "api.ts"
-Cohesion: 0.09
-Nodes (12): api, apiSession(), createItem(), deleteItem(), getItem(), ItemDoc, ItemSeed, UI_DEFAULTS (+4 more)
+### Community 7 - "@playwright/test"
+Cohesion: 0.08
+Nodes (8): @playwright/test, api, apiSession(), deleteItem(), ItemDoc, withSession(), TWC, txt
 
 ### Community 8 - "si-data.ts"
-Cohesion: 0.17
-Nodes (20): COMPANY, today(), advance(), BOOKS, cancel(), contractFields(), deliveryNote(), draftFor() (+12 more)
+Cohesion: 0.16
+Nodes (21): COMPANY, ITEM_B, today(), advance(), BOOKS, cancel(), contractFields(), deliveryNote() (+13 more)
 
 ### Community 9 - "sr-data.ts"
-Cohesion: 0.10
-Nodes (15): Doc, entriesOf(), ACCOUNT, COST_CENTER, removeSR(), sr(), SRStatus, LOAD (+7 more)
+Cohesion: 0.09
+Nodes (21): WAREHOUSE, binQty(), books, entriesOf(), OTHER_WAREHOUSE, plainItem(), ACCOUNT, COST_CENTER (+13 more)
 
-### Community 10 - "code"
-Cohesion: 0.13
-Nodes (12): code(), binQty(), books, ledger(), OTHER_WAREHOUSE, plainItem(), stockEntry(), draftSR() (+4 more)
+### Community 10 - "srs-stock-ledger.spec.ts"
+Cohesion: 0.22
+Nodes (3): buttons(), clean(), LOAD
 
 ### Community 11 - "Browser Automation with playwright-cli"
-Cohesion: 0.07
-Nodes (27): Attaching screenshots and videos to pull requests, Browser Automation with playwright-cli, Browser Sessions, Commands, Core, DevTools, Emulation, Example: Debugging with DevTools (+19 more)
+Cohesion: 0.13
+Nodes (15): Attaching screenshots and videos to pull requests, Browser Automation with playwright-cli, Browser Sessions, Example: Debugging with DevTools, Example: Form submission, Example: Interactive session, Example: Multi-tab workflow, Installation (+7 more)
 
 ### Community 12 - "Browser Automation with playwright-cli"
 Cohesion: 0.07
 Nodes (27): Attaching screenshots and videos to pull requests, Browser Automation with playwright-cli, Browser Sessions, Commands, Core, DevTools, Emulation, Example: Debugging with DevTools (+19 more)
 
 ### Community 13 - "ps-data.ts"
-Cohesion: 0.15
-Nodes (14): bundle(), BundleLine, parentItem(), stamp(), customer(), CUSTOMER_NAME, draftDN(), ensureItem() (+6 more)
+Cohesion: 0.20
+Nodes (12): code(), customer(), CUSTOMER_NAME, draftDN(), ensureItem(), ITEM_C, itemCodes, Line (+4 more)
 
 ### Community 14 - "3. Heal"
 Cohesion: 0.09
 Nodes (23): 0. How generation works, 1.1 Prerequisite: workspace, 1.2 Prerequisite: seed test, 1.3 Explore the app, 1.4 Write the spec file, 1. Planning, 2.1 Inputs, 2.2 Generate one scenario (+15 more)
+
+### Community 15 - "ItemFormPage"
+Cohesion: 0.08
+Nodes (3): @faker-js/faker, AccountingTab, ItemFormPage
 
 ### Community 17 - "steps"
 Cohesion: 0.10
@@ -260,40 +328,40 @@ Cohesion: 0.10
 Nodes (20): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser (+12 more)
 
 ### Community 19 - "Browser Session Management"
-Cohesion: 0.10
-Nodes (20): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser (+12 more)
-
-### Community 20 - "@playwright/test"
-Cohesion: 0.11
-Nodes (3): @playwright/test, LOAD, { chromium }
+Cohesion: 0.13
+Nodes (15): 1. Name Browser Sessions Semantically, 2. Always Clean Up, 3. Delete Stale Browser Data, A/B Testing Sessions, Best Practices, Browser Session Commands, Browser Session Configuration, Browser Session Isolation Properties (+7 more)
 
 ### Community 21 - "srs-coupon-code.spec.ts"
 Cohesion: 0.18
 Nodes (16): clean(), codeBox(), descBox(), field(), LOAD, main(), maxUseBox(), nameBox() (+8 more)
 
 ### Community 22 - "dn-data.ts"
-Cohesion: 0.17
-Nodes (7): books(), draftDN(), note(), Status, stockOf(), ITEM_A, ids
+Cohesion: 0.10
+Nodes (13): books(), draftDN(), note(), Status, stockOf(), ITEM_A, LOAD, ids (+5 more)
 
 ### Community 23 - "srs-quality-inspection-add.spec.ts"
 Cohesion: 0.16
 Nodes (11): draftQI(), inspectable(), qi(), QIStatus, refDN(), clean(), dd(), fillValid() (+3 more)
 
-### Community 24 - "qa_xlsx.py"
-Cohesion: 0.19
-Nodes (4): mk(), cb(), build(), mk()
+### Community 24 - "build_si_case_status.py"
+Cohesion: 0.07
+Nodes (6): mk(), cb(), res(), clean(), build(), mk()
 
 ### Community 25 - "Tracing"
 Cohesion: 0.12
 Nodes (16): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Analyzing Performance, Basic Usage, Best Practices, Capturing Evidence, Debugging Failed Actions, Limitations (+8 more)
 
 ### Community 26 - "qt-api.ts"
-Cohesion: 0.26
-Nodes (12): BASE(), ctx(), method(), post(), put(), Res, serverMsg(), log() (+4 more)
+Cohesion: 0.33
+Nodes (6): BASE(), log(), t(), today, log(), t()
 
 ### Community 27 - "Agent steps"
 Cohesion: 0.14
 Nodes (14): act: one goal, Agent steps, assert, waitFor, extract: one question, Beyond the built-in agent, Budgets and cost, Choose an agent, Configure a model, Contents (+6 more)
+
+### Community 28 - "si-ui.ts"
+Cohesion: 0.06
+Nodes (115): btn(), choose(), docName(), fields(), inlineErrors(), labels(), LIST, NEW (+107 more)
 
 ### Community 29 - "pr-probe5.spec.ts"
 Cohesion: 0.27
@@ -305,19 +373,19 @@ Nodes (13): Clipboard, Complex Workflows, Error Handling, File Downloads, Frames
 
 ### Community 31 - "3. Heal"
 Cohesion: 0.15
-Nodes (13): 2.1 Inputs, 2.2 Generate one scenario, 2.3 Generate multiple scenarios, 2.4 Run generated tests, 2. Generate, 3.1 Find failing tests, 3.2 Debug one failure, 3.3 Apply the fix (+5 more)
+Nodes (13): 0. How generation works, 3.1 Find failing tests, 3.2 Debug one failure, 3.3 Apply the fix, 3.4 Reconcile with the spec, 3.5 Iteration and giving up, 3. Heal, Add assertions manually (+5 more)
 
 ### Community 32 - "Running Custom Playwright Code"
 Cohesion: 0.15
 Nodes (13): Clipboard, Complex Workflows, Error Handling, File Downloads, Frames and Iframes, Geolocation, JavaScript Execution, Media Emulation (+5 more)
 
 ### Community 33 - "package.json"
-Cohesion: 0.15
-Nodes (12): author, description, ai@^7.0.0, @playwright/mcp@^0.0.83, keywords, license, main, name (+4 more)
+Cohesion: 0.10
+Nodes (25): author, description, devDependencies, ai@^7.0.0, eslint@^10.12.0, @faker-js/faker@^10.6.0, @playwright/mcp@^0.0.83, @playwright/test@^1.63.0 (+17 more)
 
-### Community 34 - "devDependencies"
-Cohesion: 0.15
-Nodes (13): devDependencies, eslint@^10.12.0, @faker-js/faker@^10.6.0, @playwright/test@^1.63.0, prettier@^3.9.9, @types/node@^26.6.4, typescript@^6.0.3, zod@^4.1.8 (+5 more)
+### Community 34 - "prec-data.ts"
+Cohesion: 0.05
+Nodes (27): advance(), bankAccount(), CC, CO, daysAgo(), ITEM, journal(), PAY (+19 more)
 
 ### Community 35 - "srs-landed-cost-add.spec.ts"
 Cohesion: 0.29
@@ -340,8 +408,8 @@ Cohesion: 0.17
 Nodes (12): Contents, Done when, Environment variables the runner reads, Existing MCP registration, Let the runner start the app, Mobile targets, Requirements, Scaffold (+4 more)
 
 ### Community 40 - "Tracing"
-Cohesion: 0.17
-Nodes (12): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Analyzing Performance, Basic Usage, Best Practices, Capturing Evidence, Debugging Failed Actions, Limitations (+4 more)
+Cohesion: 0.12
+Nodes (16): 1. Start Tracing Before the Problem, 2. Clean Up Old Traces, Analyzing Performance, Basic Usage, Best Practices, Capturing Evidence, Debugging Failed Actions, Limitations (+8 more)
 
 ### Community 41 - "scripts"
 Cohesion: 0.17
@@ -371,6 +439,10 @@ Nodes (10): 1. Use Descriptive Filenames, 2. Record entire hero scripts., 3. Att
 Cohesion: 0.20
 Nodes (10): 1. Prepare, 2. Plan charters, 3. Fan out, 4. Merge, 5. Triage, 6. Verify, 7. Report, Contents (+2 more)
 
+### Community 48 - ".claude/skills/playwright-cli/SKILL.md"
+Cohesion: 0.21
+Nodes (4): Examples, Inspecting Element Attributes, Debugging Playwright Tests, Running Playwright Tests
+
 ### Community 49 - "Video Recording"
 Cohesion: 0.20
 Nodes (10): 1. Use Descriptive Filenames, 2. Record entire hero scripts., 3. Attach the recording to the pull request, Basic Recording, Best Practices, Cursor, Target Highlight and Click Point, Limitations, Overlay API Summary (+2 more)
@@ -392,7 +464,7 @@ Cohesion: 0.22
 Nodes (8): Advanced Mocking with run-code, CLI Route Commands, Conditional Response Based on Request, Delayed Response, Modify Real Response, Request Mocking, Simulate Network Failures, URL Patterns
 
 ### Community 55 - "Advanced Mocking with run-code"
-Cohesion: 0.22
+Cohesion: 0.25
 Nodes (8): Advanced Mocking with run-code, CLI Route Commands, Conditional Response Based on Request, Delayed Response, Modify Real Response, Request Mocking, Simulate Network Failures, URL Patterns
 
 ### Community 56 - "e2e"
@@ -404,8 +476,8 @@ Cohesion: 0.28
 Nodes (4): clean(), dialogText(), LOAD, opts()
 
 ### Community 58 - "srs-item-tracking-lock.spec.ts"
-Cohesion: 0.28
-Nodes (6): WAREHOUSE, failure(), newItem(), receipt(), short(), stamp()
+Cohesion: 0.32
+Nodes (5): failure(), newItem(), receipt(), short(), stamp()
 
 ### Community 59 - "pr-probe3.spec.ts"
 Cohesion: 0.25
@@ -512,8 +584,8 @@ Cohesion: 0.29
 Nodes (3): dInputs(), dlg(), LOAD
 
 ### Community 86 - "st-probe4.spec.ts"
-Cohesion: 0.36
-Nodes (6): create(), base(), ins(), log(), short(), tax()
+Cohesion: 0.43
+Nodes (5): base(), ins(), log(), short(), tax()
 
 ### Community 87 - "st-probe8.spec.ts"
 Cohesion: 0.29
@@ -571,9 +643,9 @@ Nodes (5): Common errors → likely cause, Debugging Failing and Flaky Tests, Fl
 Cohesion: 0.40
 Nodes (5): Attaching Screenshots and Videos to Pull Requests, From a local session, From CI, Limits, When to attach
 
-### Community 113 - "0. How generation works"
-Cohesion: 0.40
-Nodes (5): 0. How generation works, Add assertions manually, Building a test file, Explore before recording, Use semantic locators
+### Community 113 - "qt-api.ts"
+Cohesion: 0.11
+Nodes (17): ctx(), get(), method(), post(), put(), Res, serverMsg(), base() (+9 more)
 
 ### Community 114 - "1. Planning"
 Cohesion: 0.40
@@ -599,29 +671,205 @@ Nodes (4): npx, e2e, playwright, playwright-mcp
 Cohesion: 0.60
 Nodes (3): ins(), log(), short()
 
-### Community 121 - "Trace Output Files"
+### Community 121 - "pe-flow.ts"
+Cohesion: 0.09
+Nodes (24): box(), day(), fill(), offered(), option(), PARTY, PartyType, Payment (+16 more)
+
+### Community 122 - "prec-results/build-cases.js"
+Cohesion: 0.15
+Nodes (8): dotenv@^18.0.5, dotenv, fs, groups, md, path, root, total
+
+### Community 123 - "ref_fs"
+Cohesion: 0.06
+Nodes (5): authFile, fs, fs, LOAD, LOAD
+
+### Community 127 - "pe-c-advanced.spec.ts"
+Cohesion: 0.11
+Nodes (22): addRow(), cancelModal(), cell(), cellText(), click(), columns(), editRow(), errorPopups() (+14 more)
+
+### Community 150 - "srs-product-bundle-2.spec.ts"
+Cohesion: 0.12
+Nodes (7): Doc, bundle(), BundleLine, parentItem(), stamp(), LOAD, Row
+
+### Community 151 - "pe-data.ts"
+Cohesion: 0.10
+Nodes (6): CUST, data(), FILE, remember(), seedStep(), SUPP
+
+### Community 152 - "pe-e-lifecycle.spec.ts"
+Cohesion: 0.16
+Nodes (12): closeAll(), confirmYes(), dialog(), dialogText(), draft(), openDoc(), pe(), rec (+4 more)
+
+### Community 153 - "bo-probe4.spec.ts"
+Cohesion: 0.27
+Nodes (10): clean(), cs(), head(), LOAD, log(), main(), modal(), opts() (+2 more)
+
+### Community 154 - "SRS-Accounting-Account.md"
+Cohesion: 0.15
+Nodes (12): Existing material for the same module, Generated test cases - Accounting module / Account (use cases 1-3), Hidden (red) items - first line of each red block, How to use this file for test cases, Index, SRS Azzrk SHAMEL - Accounting module V1.0 - Part: Account (Chart of Accounts doctype), Use case 1 - Account List, Use case 1 - Account List (35 cases) (+4 more)
+
+### Community 155 - "Test cases - Payment Reconciliation (executed 2026-11-26 on test.hr.azzrk.com)"
+Cohesion: 0.15
+Nodes (12): A - Header fields (32 cases: 32 passed, 0 failed) - `Shamel/prec-a-header.spec.ts`, B - Filters (41 cases: 39 passed, 2 failed) - `Shamel/prec-b-filters.spec.ts`, C - Unreconciled Entries tables (74 cases: 67 passed, 7 failed) - `Shamel/prec-c-tables.spec.ts`, D - Allocate and Allocation table (46 cases: 46 passed, 0 failed) - `Shamel/prec-d-alloc.spec.ts`, E - Reconcile (customer) (22 cases: 22 passed, 0 failed) - `Shamel/prec-e-reconcile.spec.ts`, F/G - Supplier and foreign currency (19 cases: 19 passed, 0 failed) - `Shamel/prec-f-supplier-usd.spec.ts`, Hidden (red) items - first line of each red block, How to use this file for test cases (+4 more)
+
+### Community 156 - "Commands"
+Cohesion: 0.17
+Nodes (12): Commands, Core, DevTools, Emulation, Keyboard, Mouse, Navigation, Network (+4 more)
+
+### Community 157 - "bo-probe8.spec.ts"
+Cohesion: 0.21
+Nodes (6): clean(), cs(), LOAD, main(), opts(), saveBtn()
+
+### Community 158 - "Test cases - Payment Entry (executed 2026-11-26 on test.hr.azzrk.com)"
+Cohesion: 0.17
+Nodes (11): A - Add screen: fields and rules (72 cases: 70 passed, 2 failed) - `Shamel/pe-a-form.spec.ts`, B - End to end, every payment and party type (60 cases: 60 passed, 0 failed) - `Shamel/pe-b-e2e.spec.ts`, C - References, taxes, deductions and write off (41 cases: 40 passed, 1 failed) - `Shamel/pe-c-advanced.spec.ts`, D - Tax withholding and foreign currency (36 cases: 36 passed, 0 failed) - `Shamel/pe-d-tds-fx.spec.ts`, E - List, details and document life cycle (51 cases: 48 passed, 3 failed) - `Shamel/pe-e-lifecycle.spec.ts`, Hidden (red) items - first line of each red block, Index, SRS Azzrk SHAMEL - Accounting module V1.0 - Part: Payment Entry (+3 more)
+
+### Community 159 - "bo-probe3.spec.ts"
+Cohesion: 0.25
+Nodes (7): clean(), cs(), LOAD, main(), opts(), pickDay(), toasts()
+
+### Community 160 - "pe-results/build-cases.js"
+Cohesion: 0.18
+Nodes (9): areas, bugsFile, fs, groups, md, path, root, total (+1 more)
+
+### Community 161 - "prec-d-alloc.spec.ts"
+Cohesion: 0.24
+Nodes (6): alloc(), amountInput(), errText(), rec, setAmount(), start()
+
+### Community 162 - "SRS-Accounting-Sales-Invoice.md"
+Cohesion: 0.18
+Nodes (10): Existing material for the same module, Hidden (red) items - first line of each red block, How to use this file for test cases, Index, SRS Azzrk SHAMEL - Accounting module V1.0 - Part: Sales Invoice, Use case 1 - Sales Invoice List, Use case 2 - Add Sales Invoice, Details tab, Use case 3 - General Info tab (+2 more)
+
+### Community 163 - "so3-probe8.spec.ts"
+Cohesion: 0.27
+Nodes (5): clean(), LOAD, main(), status(), toasts()
+
+### Community 164 - "so3-probe9.spec.ts"
+Cohesion: 0.27
+Nodes (5): clean(), LOAD, main(), status(), toasts()
+
+### Community 165 - "Cookies"
+Cohesion: 0.22
+Nodes (9): Advanced: Multiple Cookies or Custom Options, Clear All Cookies, Cookies, Delete a Cookie, Filter Cookies by Domain, Filter Cookies by Path, Get Specific Cookie, List All Cookies (+1 more)
+
+### Community 166 - "Playwright Tester"
+Cohesion: 0.22
+Nodes (8): Further references, Know the project first, Minimal template, Playwright Tester, Running tests — quick reference, When a test fails, Workflow for a new test, Writing rules (and why)
+
+### Community 167 - "bo-probe5.spec.ts"
+Cohesion: 0.31
+Nodes (5): btns(), clean(), LOAD, main(), toasts()
+
+### Community 168 - "bo-probe6.spec.ts"
+Cohesion: 0.31
+Nodes (5): btns(), clean(), LOAD, main(), toasts()
+
+### Community 169 - "srs-accounting.spec.ts"
+Cohesion: 0.25
+Nodes (7): createItem(), getItem(), ItemSeed, UI_DEFAULTS, ITEM_DEFAULTS_COLUMNS, TAX_COLUMNS, withItem()
+
+### Community 170 - "si2-probe14.spec.ts"
+Cohesion: 0.25
+Nodes (3): closeModals(), LOAD, press()
+
+### Community 171 - "so3-probe10.spec.ts"
+Cohesion: 0.28
+Nodes (4): create(), LOAD, main(), press()
+
+### Community 172 - "so3-probe4.spec.ts"
+Cohesion: 0.25
+Nodes (3): checks(), LOAD, main()
+
+### Community 173 - "bo-probe2.spec.ts"
+Cohesion: 0.32
+Nodes (5): clean(), LOAD, main(), opts(), vis()
+
+### Community 174 - "si2-probe10.spec.ts"
+Cohesion: 0.32
+Nodes (4): expandAll(), LOAD, main(), press()
+
+### Community 175 - "si2-probe2.spec.ts"
+Cohesion: 0.36
+Nodes (5): expandAll(), inputs(), LOAD, main(), press()
+
+### Community 176 - "si2-probe3.spec.ts"
+Cohesion: 0.32
+Nodes (4): expandAll(), LOAD, main(), press()
+
+### Community 177 - "si2-probe4.spec.ts"
+Cohesion: 0.32
+Nodes (4): expandAll(), LOAD, main(), press()
+
+### Community 179 - "so3-probe11.spec.ts"
+Cohesion: 0.29
+Nodes (3): clean(), LOAD, toasts()
+
+### Community 184 - "si2-probe13.spec.ts"
+Cohesion: 0.38
+Nodes (4): expandAll(), LOAD, main(), press()
+
+### Community 190 - "si2-probe.spec.ts"
+Cohesion: 0.33
+Nodes (3): inputs(), LOAD, main()
+
+### Community 191 - "so3-api2.spec.ts"
+Cohesion: 0.48
+Nodes (6): base(), it(), log(), plus(), t(), today
+
+### Community 195 - "so3-probe2.spec.ts"
+Cohesion: 0.33
+Nodes (3): inputs(), LOAD, main()
+
+### Community 199 - "so3-probe.spec.ts"
+Cohesion: 0.33
+Nodes (3): inputs(), LOAD, main()
+
+### Community 200 - "Session Storage"
+Cohesion: 0.33
+Nodes (6): Clear sessionStorage, Delete Single Item, Get Single Value, List All sessionStorage Items, Session Storage, Set Value
+
+### Community 202 - "pe-a-form.spec.ts"
+Cohesion: 0.40
+Nodes (3): accountsCheck(), has(), rec
+
+### Community 207 - "2. Generate"
+Cohesion: 0.40
+Nodes (5): 2.1 Inputs, 2.2 Generate one scenario, 2.3 Generate multiple scenarios, 2.4 Run generated tests, 2. Generate
+
+### Community 208 - "Attaching to a Running Browser"
+Cohesion: 0.40
+Nodes (5): Attach by channel name, Attach via browser extension, Attach via CDP endpoint, Attaching to a Running Browser, Detach
+
+### Community 211 - "Storage State"
 Cohesion: 0.50
-Nodes (4): `resources/`, Trace Output Files, `trace-{timestamp}.network`, `trace-{timestamp}.trace`
+Nodes (4): Restore Storage State, Save Storage State, Storage State, Storage State File Format
+
+### Community 212 - "SHAMEL_SalesInvoice_Test_Cases_EN_executed_52ff66e1.md"
+Cohesion: 0.50
+Nodes (3): Sheet: Execution Summary, Sheet: Summary, Sheet: Test Cases
+
+### Community 213 - "bo-probe7.spec.ts"
+Cohesion: 0.83
+Nodes (3): base(), log(), t()
 
 ## Knowledge Gaps
-- **2 isolated node(s):** `npx`, `playwright-mcp`
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 911 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **47 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 isolated node(s):** `npx`, `playwright-mcp`, `{ CO, REC, PAY_DEFAULT, PAY, ITEM, CC, today, daysAgo }`
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1368 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **78 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `@playwright/test` connect `@playwright/test` to `mr-data.ts`, `ProductBundlePage`, `DeliveryNotePage`, `QualityInspectionPage`, `api.ts`, `si-data.ts`, `sr-data.ts`, `code`, `ps-data.ts`, `ItemFormPage`, `PackingSlipPage`, `srs-coupon-code.spec.ts`, `dn-data.ts`, `srs-quality-inspection-add.spec.ts`, `qt-api.ts`, `pr-probe5.spec.ts`, `package.json`, `devDependencies`, `srs-landed-cost-add.spec.ts`, `srs-sales-invoice-remaining.spec.ts`, `pr-probe4.spec.ts`, `qt-probe11.spec.ts`, `srs-sales-invoice-tabs.spec.ts`, `ItemsListPage`, `pr-probe7.spec.ts`, `qt-probe16.spec.ts`, `srs-sales-invoice-ui.spec.ts`, `ct-probe2.spec.ts`, `srs-item-tracking-lock.spec.ts`, `pr-probe3.spec.ts`, `qt-probe18.spec.ts`, `qt-probe20.spec.ts`, `qt-probe21.spec.ts`, `qt-probe23.spec.ts`, `qt-probe27.spec.ts`, `st-probe3.spec.ts`, `st-probe5.spec.ts`, `st-probe6.spec.ts`, `addr-probe2.spec.ts`, `addr-probe4.spec.ts`, `addr-probe.spec.ts`, `ct-probe.spec.ts`, `pr-probe2.spec.ts`, `pr-probe8.spec.ts`, `qt-probe10.spec.ts`, `qt-probe17.spec.ts`, `qt-probe25.spec.ts`, `qt-probe30.spec.ts`, `qt-probe3.spec.ts`, `qt-probe4.spec.ts`, `qt-probe6.spec.ts`, `qt-probe7.spec.ts`, `qt-probe8.spec.ts`, `st-probe4.spec.ts`, `st-probe8.spec.ts`, `qt-probe19.spec.ts`, `pr-probe.spec.ts`, `qt-probe22.spec.ts`, `qt-probe28.spec.ts`, `qt-probe2.spec.ts`, `qt-probe31.spec.ts`, `qt-probe9.spec.ts`, `st-probe7.spec.ts`, `st-probe.spec.ts`, `ct-probe3.spec.ts`, `ct-probe5.spec.ts`, `ct-probe6.spec.ts`, `pr-probe9.spec.ts`, `qt-probe26.spec.ts`, `qt-probe29.spec.ts`, `qt-probe32.spec.ts`, `qt-probe.spec.ts`, `st-probe2.spec.ts`, `st-probe9.spec.ts`, `pr-probe6.spec.ts`, `playwright.config.ts`, `ref_fs`, `addr-probe3.spec.ts`, `ct-probe4.spec.ts`, `srs-landed-cost-add-api.spec.ts`?**
-  _High betweenness centrality (0.295) - this node is a cross-community bridge._
-- **What connects `npx`, `playwright-mcp` to the rest of the system?**
-  _2 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `@playwright/test` connect `@playwright/test` to `mr-data.ts`, `DeliveryNotePage`, `QualityInspectionPage`, `si-data.ts`, `sr-data.ts`, `srs-stock-ledger.spec.ts`, `ps-data.ts`, `ItemFormPage`, `PackingSlipPage`, `srs-quality-inspection-list.spec.ts`, `srs-coupon-code.spec.ts`, `dn-data.ts`, `srs-quality-inspection-add.spec.ts`, `qt-api.ts`, `si-ui.ts`, `pr-probe5.spec.ts`, `package.json`, `prec-data.ts`, `srs-landed-cost-add.spec.ts`, `srs-sales-invoice-remaining.spec.ts`, `pr-probe4.spec.ts`, `qt-probe11.spec.ts`, `srs-sales-invoice-tabs.spec.ts`, `ItemsListPage`, `pr-probe7.spec.ts`, `qt-probe16.spec.ts`, `srs-sales-invoice-ui.spec.ts`, `ct-probe2.spec.ts`, `srs-item-tracking-lock.spec.ts`, `pr-probe3.spec.ts`, `qt-probe18.spec.ts`, `qt-probe20.spec.ts`, `qt-probe21.spec.ts`, `qt-probe23.spec.ts`, `qt-probe27.spec.ts`, `st-probe3.spec.ts`, `st-probe5.spec.ts`, `st-probe6.spec.ts`, `addr-probe2.spec.ts`, `addr-probe4.spec.ts`, `addr-probe.spec.ts`, `ct-probe.spec.ts`, `pr-probe2.spec.ts`, `pr-probe8.spec.ts`, `qt-probe10.spec.ts`, `qt-probe17.spec.ts`, `qt-probe25.spec.ts`, `qt-probe30.spec.ts`, `qt-probe3.spec.ts`, `qt-probe4.spec.ts`, `qt-probe6.spec.ts`, `qt-probe7.spec.ts`, `qt-probe8.spec.ts`, `st-probe4.spec.ts`, `st-probe8.spec.ts`, `qt-probe19.spec.ts`, `pr-probe.spec.ts`, `qt-probe22.spec.ts`, `qt-probe28.spec.ts`, `qt-probe2.spec.ts`, `qt-probe31.spec.ts`, `qt-probe9.spec.ts`, `st-probe7.spec.ts`, `st-probe.spec.ts`, `ct-probe3.spec.ts`, `ct-probe5.spec.ts`, `ct-probe6.spec.ts`, `pr-probe9.spec.ts`, `qt-probe26.spec.ts`, `qt-probe29.spec.ts`, `qt-probe32.spec.ts`, `qt-probe.spec.ts`, `st-probe2.spec.ts`, `st-probe9.spec.ts`, `qt-api.ts`, `pr-probe6.spec.ts`, `pe-flow.ts`, `prec-results/build-cases.js`, `ref_fs`, `addr-probe3.spec.ts`, `ct-probe4.spec.ts`, `srs-landed-cost-add-api.spec.ts`, `pe-c-advanced.spec.ts`, `srs-product-bundle-2.spec.ts`, `pe-data.ts`, `pe-e-lifecycle.spec.ts`, `bo-probe4.spec.ts`, `bo-probe8.spec.ts`, `bo-probe3.spec.ts`, `prec-d-alloc.spec.ts`, `so3-probe8.spec.ts`, `so3-probe9.spec.ts`, `bo-probe5.spec.ts`, `bo-probe6.spec.ts`, `srs-accounting.spec.ts`, `si2-probe14.spec.ts`, `so3-probe10.spec.ts`, `so3-probe4.spec.ts`, `bo-probe2.spec.ts`, `si2-probe10.spec.ts`, `si2-probe2.spec.ts`, `si2-probe3.spec.ts`, `si2-probe4.spec.ts`, `si2-probe9.spec.ts`, `so3-probe11.spec.ts`, `so3-probe5.spec.ts`, `pe-f-advance.spec.ts`, `si2-probe11.spec.ts`, `si2-probe12.spec.ts`, `si2-probe13.spec.ts`, `si2-probe15.spec.ts`, `si2-probe16.spec.ts`, `si2-probe17.spec.ts`, `si2-probe5.spec.ts`, `si2-probe8.spec.ts`, `si2-probe.spec.ts`, `so3-api2.spec.ts`, `so3-probe12.spec.ts`, `so3-probe13.spec.ts`, `so3-probe14.spec.ts`, `so3-probe2.spec.ts`, `so3-probe3.spec.ts`, `so3-probe6.spec.ts`, `so3-probe7.spec.ts`, `so3-probe.spec.ts`, `bo-probe.spec.ts`, `pe-a-form.spec.ts`, `si2-probe6.spec.ts`, `si7-inventory.spec.ts`, `so5-fill.spec.ts`, `so-probe2.spec.ts`, `so4-dump2.spec.ts`, `so-probe.spec.ts`, `bo-probe7.spec.ts`, `prec-a-header.spec.ts`, `pe-probe4.spec.ts`, `lcv-open-probe.spec.ts`, `lcv-probe2.spec.ts`, `lcv-probe.spec.ts`, `pe-probe3.spec.ts`, `prec-probe4.spec.ts`, `prec-probe6.spec.ts`, `render-check.cjs`, `sle-probe.spec.ts`?**
+  _High betweenness centrality (0.423) - this node is a cross-community bridge._
+- **What connects `npx`, `playwright-mcp`, `{ CO, REC, PAY_DEFAULT, PAY, ITEM, CC, today, daysAgo }` to the rest of the system?**
+  _3 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `mr-data.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.07777777777777778 - nodes in this community are weakly interconnected._
-- **Why does `ProductBundlePage` connect `ProductBundlePage` to `ps-data.ts`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
-- **Should `ProductBundlePage` be split into smaller, more focused modules?**
-  _Cohesion score 0.057692307692307696 - nodes in this community are weakly interconnected._
 - **Why does `Writing tests` connect `StockReconciliationPage` to `e2e/SKILL.md`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+- **Should `ProductBundlePage` be split into smaller, more focused modules?**
+  _Cohesion score 0.12631578947368421 - nodes in this community are weakly interconnected._
 - **Should `DeliveryNotePage` be split into smaller, more focused modules?**
-  _Cohesion score 0.06882591093117409 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09846153846153846 - nodes in this community are weakly interconnected._
+- **Should `QualityInspectionPage` be split into smaller, more focused modules?**
+  _Cohesion score 0.08408408408408409 - nodes in this community are weakly interconnected._

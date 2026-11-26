@@ -1,0 +1,56 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\pe-f-advance.spec.ts:32:5 › F01 advance payments booked in a separate party account
+[chromium] › Shamel\pe-f-advance.spec.ts:32:5 › F01 advance payments booked in a separate party account
+ORIGINAL {"book_advance_payments_in_separate_party_account":0,"reconcile_on_advance_payment_date":0,"default_advance_received_account":"","default_advance_paid_account":""}
+
+  1) [chromium] › Shamel\pe-f-advance.spec.ts:32:5 › F01 advance payments booked in a separate party account 
+
+    Error: frappe.client.set_value failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 41, in handle_rpc_call\\n    retu
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:50:40
+        at c:\Playwright_Automation\Shamel\pe-f-advance.spec.ts:37:3
+
+    Error: frappe.client.set_value failed: 500 {"exception":"TypeError: DatabaseQuery.execute() got an unexpected keyword argument 'for_update'","exc_type":"TypeError","_exc_source":"shamel (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 41, in handle_rpc_call\\n    retu
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:50:40
+        at c:\Playwright_Automation\Shamel\pe-f-advance.spec.ts:23:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-f-advance-F01-advance-p-64ca3-in-a-separate-party-account-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-f-advance-F01-advance-p-64ca3-in-a-separate-party-account-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-f-advance-F01-advance-p-64ca3-in-a-separate-party-account-chromium\error-context.md
+
+    Error Context: test-results\pe-f-advance-F01-advance-p-64ca3-in-a-separate-party-account-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\pe-f-advance.spec.ts:32:5 › F01 advance payments booked in a separate party account 
+  1 passed (29.8s)

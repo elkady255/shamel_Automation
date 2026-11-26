@@ -1,0 +1,55 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer)
+  1) [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer) 
+
+    Error: C02-1 Add Row in Advance Taxes and Charges adds a row without any error خطأ في الخادم UnboundLocalError: cannot access local variable 'current_tax_amount' where it is not associated with a value Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:115:7
+
+    Test timeout of 560000ms exceeded.
+
+    Error: page.screenshot: Target page, context or browser has been closed
+
+      123 |   const amt = await cellText(page, TAXES, 'المبلغ'), tot = await cellText(page, TAXES, 'الإجمالي'); const x = await u.fields(page);
+      124 |   rec.check('C02-4', 'Amount = 10% of 500 = 50 and totals show it', /50\.00/.test(amt) && /50\.00/.test(x['إجمالي الضرائب والرسوم (SAR)'] ?? ''), `amount=${amt} total=${tot} totals=${x['إجمالي الضرائب والرسوم (SAR)']}`);
+    > 125 |   const text = await editRow(page, TAXES); await page.screenshot({ path: 'Shamel/pe-results/c02-edit.png' });
+          |                                                       ^
+      126 |   const want = ['إضافة', 'النوع', 'رأس الحساب', 'الوصف', 'المدفوع', 'مركز التكلفة', 'المشروع', 'نسبة الضريبة', 'عملة الحساب', 'صافي المبلغ', 'المبلغ', 'الإجمالي'];
+      127 |   rec.check('C02-5', 'Tax Edit Row shows the SRS fields', want.every((w) => text.includes(w)), `missing=${want.filter((w) => !text.includes(w))} popup=${text}`);
+      128 |   rec.check('C02-6', 'Reference Row is hidden for On Paid Amount', !/الصف المرجعي|صف المرجع|رقم الصف/.test(text), text);
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:125:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\error-context.md
+
+
+[3/3] [chromium] › Shamel\pe-c-advanced.spec.ts:139:5 › C03 tax template and template visibility
+  2) [chromium] › Shamel\pe-c-advanced.spec.ts:139:5 › C03 tax template and template visibility ────
+
+    Error: worker process exited unexpectedly (code=3221225794, signal=null)
+
+
+  2 failed
+    [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer) 
+    [chromium] › Shamel\pe-c-advanced.spec.ts:139:5 › C03 tax template and template visibility ─────
+  1 passed (10.1m)

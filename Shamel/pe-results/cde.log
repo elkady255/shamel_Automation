@@ -1,0 +1,302 @@
+
+Running 16 tests using 1 worker
+
+[1/16] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/16] [chromium] › Shamel\pe-c-advanced.spec.ts:69:5 › C01 references table: add a row by hand
+  1) [chromium] › Shamel\pe-c-advanced.spec.ts:69:5 › C01 references table: add a row by hand ──────
+
+    Error: C01-12 Add/Remove columns of references lists the SRS columns missing=تأثير التسوية popup=الحقول المتاحة الحقول المتاحة النوع الاسم تاريخ الاستحقاق الإجمالي الكلي (SAR) المستحق (SAR) المخصص (SAR) رقم فاتورة المورد شرط الدفع المستحق من شرط الدفع نوع الحساب نوع الدفع تاريخ أثر التسوية سعر الصرف أرباح / خسائر الصرف الحساب طلب الدفع المستحق من طلب الدفع نوع سند الدفعة المقدمة رقم سند الدفعة المقدمة إلغاء إضافة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:101:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C01-references-table-add-a-row-by-hand-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C01-references-table-add-a-row-by-hand-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C01-references-table-add-a-row-by-hand-chromium\error-context.md
+
+
+[3/16] [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer)
+  2) [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer) 
+
+    Error: C02-1 Add Row in Advance Taxes and Charges adds a row without any error خطأ في الخادم UnboundLocalError: cannot access local variable 'current_tax_amount' where it is not associated with a value Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:115:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\error-context.md
+
+
+[4/16] [chromium] › Shamel\pe-c-advanced.spec.ts:139:5 › C03 tax template and template visibility
+[5/16] [chromium] › Shamel\pe-c-advanced.spec.ts:156:5 › C04 deductions and write off
+[6/16] [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check
+[chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check
+ERR siC5 insert Sales Invoice failed: 417 {"exception":"\t\t\t\t\tهذا التحقق.","exc_type":"ValidationError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, 
+
+  3) [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check 
+
+    TimeoutError: locator.evaluate: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('main').getByRole('button', { name: 'اعتماد', exact: true }).first()
+
+
+       at helpers\si-ui.ts:8
+
+       6 | export const ROUTE_LIST = '/desk/shamel#/accounting/sales-invoices';
+       7 | export const main = (p: Page) => p.getByRole('main');
+    >  8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+         |                                        ^
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+      11 |
+        at Object.press (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:8:40)
+        at Object.submit (c:\Playwright_Automation\Shamel\helpers\pe-flow.ts:69:11)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:184:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\error-context.md
+
+
+[7/16] [chromium] › Shamel\pe-d-tds-fx.spec.ts:34:5 › D01 consider for tax withholding
+[8/16] [chromium] › Shamel\pe-d-tds-fx.spec.ts:81:5 › D02 foreign currency receipt with exchange gain
+[9/16] [chromium] › Shamel\pe-d-tds-fx.spec.ts:107:5 › D03 manual exchange rate overrides the fetched one
+[10/16] [chromium] › Shamel\pe-d-tds-fx.spec.ts:118:5 › D04 paid amount calculated from received amount
+[11/16] [chromium] › Shamel\pe-d-tds-fx.spec.ts:128:5 › D05 internal transfer between currencies
+[12/16] [chromium] › Shamel\pe-e-lifecycle.spec.ts:52:5 › E01 list screen
+[13/16] [chromium] › Shamel\pe-e-lifecycle.spec.ts:71:5 › E02 edit a draft, preview and More Info
+[14/16] [chromium] › Shamel\pe-e-lifecycle.spec.ts:116:5 › E03 submit, cancel, amend and delete rules
+  4) [chromium] › Shamel\pe-e-lifecycle.spec.ts:116:5 › E03 submit, cancel, amend and delete rules ─
+
+    Error: E03-5 Ledger opens the General Ledger report filtered on this entry https://test.hr.azzrk.com/desk/shamel#/accounting/payment-entries/ACC-PAY-2026-03113 مرحباً Administrator ! AN Administrator admin@example.com تفاصيل قيد الدفع معتمد دفتر الأستاذ التفاصيل المعلومات الاضافية السجلات المرتبطة 0 نوع الدفع السلسلة ACC-PAY-.YYYY.- نوع الدفع استلام تاريخ الترحيل 26-11-2026 الشركة Ahmed Ebrahim CO. طريقة الدفع Cash الدفع من / إلى نوع الطرف عميل الطرف QA-PE
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:127:7
+
+    Error: E03-6 Cancel cancels the entry docstatus=1 confirm="" msg= 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:131:7
+
+    Error: E03-8 The ledger entries are reversed 2
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:133:7
+
+    Error: E03-9 Cancelled shows status Cancelled, Amend and Delete (no Cancel / Submit) الإشعارات | رجوع | تعيين إلى | الوسوم | المرفقات | طباعة | مشاركة | السجلات | حذف | التفاصيل | المعلومات الاضافية | السجلات المرتبطة
+    0 | نوع الدفع | الدفع من / إلى | الحسابات | المبلغ | المراجع | الشطب | الضرائب والرسوم | الخصم أو الخسارة | رقم المعاملة | الأبعاد المحاسبية | إنشاء نسخة للتعديل
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:136:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E03-submit-cancel-amend-and-delete-rules-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E03-submit-cancel-amend-and-delete-rules-chromium\test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E03-submit-cancel-amend-and-delete-rules-chromium\video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E03-submit-cancel-amend-and-delete-rules-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-e-lifecycle-E03-submit-cancel-amend-and-delete-rules-chromium\error-context.md
+
+
+[15/16] [chromium] › Shamel\pe-e-lifecycle.spec.ts:165:5 › E04 delete an own draft and an own cancelled entry
+  5) [chromium] › Shamel\pe-e-lifecycle.spec.ts:165:5 › E04 delete an own draft and an own cancelled entry 
+
+    Error: apiRequestContext.get: socket hang up
+    Call log:
+      - → GET https://test.hr.azzrk.com/api/resource/Payment%20Entry?fields=%5B%22name%22%5D&filters=%5B%5B%22name%22%2C%22%3D%22%2C%22ACC-PAY-2026-03114%22%5D%5D&limit_page_length=100
+        - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36
+        - accept: */*
+        - accept-encoding: gzip,deflate,br
+        - cookie: sid=dbad05ca0054a15b175b99d53ff1e4be228398b17aa15041a7d27d89; system_user=yes; full_name=Administrator; user_id=Administrator; user_lang=ar
+
+
+       at helpers\api.ts:46
+
+      44 |   async list(doctype: string, filters: unknown[] = [], fields: string[] = ['name'], limit = 100): Promise<Doc[]> {
+      45 |     const q = `fields=${encodeURIComponent(JSON.stringify(fields))}&filters=${encodeURIComponent(JSON.stringify(filters))}&limit_page_length=${limit}`;
+    > 46 |     return withSession(async (ctx) => (await json(await ctx.get(`/api/resource/${encodeURIComponent(doctype)}?${q}`), `list ${doctype}`)).data);
+         |                                                             ^
+      47 |   },
+      48 |   /** Call a whitelisted server method, e.g. frappe.client.submit or an ERPNext "make_*" mapper. */
+      49 |   async call(method: string, args: Doc = {}): Promise<any> { // eslint-disable-line @typescript-eslint/no-explicit-any
+        at fn (c:\Playwright_Automation\Shamel\helpers\api.ts:46:61)
+        at withSession (c:\Playwright_Automation\Shamel\helpers\api.ts:22:10)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E04-delete--8ec3e--and-an-own-cancelled-entry-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E04-delete--8ec3e--and-an-own-cancelled-entry-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-e-lifecycle-E04-delete--8ec3e--and-an-own-cancelled-entry-chromium\error-context.md
+
+
+[16/16] [chromium] › Shamel\pe-e-lifecycle.spec.ts:181:5 › E05 bulk actions on the list
+  6) [chromium] › Shamel\pe-e-lifecycle.spec.ts:181:5 › E05 bulk actions on the list ───────────────
+
+    Error: E05-4 Bulk Edit does not offer the hidden (red) Letter Head تاريخ الترحيل | رقم الشيك / المرجع | تاريخ الشيك / المرجع | مركز التكلفة | المشروع | ملاحظات | ترويسة الخطاب | عنوان الطباعة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:204:7
+
+    Error: E05-11 Bulk Delete asks for confirmation then deletes confirm="حذف السجل سيتم حذف هذا العنصر نهائيا ولن يمكنك استرجاعه" 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:221:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E05-bulk-actions-on-the-list-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E05-bulk-actions-on-the-list-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-e-lifecycle-E05-bulk-actions-on-the-list-chromium\error-context.md
+
+
+  Slow test file: [chromium] › Shamel\pe-d-tds-fx.spec.ts (5.8m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  6 failed
+    [chromium] › Shamel\pe-c-advanced.spec.ts:69:5 › C01 references table: add a row by hand ───────
+    [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer) 
+    [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check 
+    [chromium] › Shamel\pe-e-lifecycle.spec.ts:116:5 › E03 submit, cancel, amend and delete rules ──
+    [chromium] › Shamel\pe-e-lifecycle.spec.ts:165:5 › E04 delete an own draft and an own cancelled entry 
+    [chromium] › Shamel\pe-e-lifecycle.spec.ts:181:5 › E05 bulk actions on the list ────────────────
+  10 passed (29.7m)

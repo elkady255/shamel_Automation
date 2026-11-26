@@ -1,0 +1,171 @@
+
+Running 12 tests using 1 worker
+
+[1/12] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/12] [chromium] › Shamel\prec-d-alloc.spec.ts:30:5 › D01 selection validation
+[3/12] [chromium] › Shamel\prec-d-alloc.spec.ts:41:5 › D02 one invoice and one payment
+[4/12] [chromium] › Shamel\prec-d-alloc.spec.ts:58:5 › D03 one invoice, several payments
+[5/12] [chromium] › Shamel\prec-d-alloc.spec.ts:67:5 › D04 several invoices, one payment
+[6/12] [chromium] › Shamel\prec-d-alloc.spec.ts:75:5 › D05 return invoice and journal entry as payments
+[7/12] [chromium] › Shamel\prec-d-alloc.spec.ts:85:5 › D06 everything selected
+[8/12] [chromium] › Shamel\prec-d-alloc.spec.ts:98:5 › D07 edit Allocated Amount in the table
+  1) [chromium] › Shamel\prec-d-alloc.spec.ts:98:5 › D07 edit Allocated Amount in the table ────────
+
+    Error: D07-1 Decimals are accepted {"value":"700,500.55","error":"لا يمكن أن يكون المبلغ المخصص أكبر من المبلغ المستحق على الفاتورة (1,000.00)","diff":"-699,500.55"}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-d-alloc.spec.ts:101:7
+
+    Error: D07-2 Difference Amount is recalculated after editing (1000 - 500.55 = 499.45) diff=-699,500.55
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-d-alloc.spec.ts:102:7
+
+    Error: D07-3 Integers are accepted and the difference becomes 900 {"value":"700,500.55","error":"لا يمكن أن يكون المبلغ المخصص أكبر من المبلغ المستحق على الفاتورة (1,000.00)","diff":"-699,500.55"}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-d-alloc.spec.ts:103:41
+
+    Error: D07-10 The exact payment amount is accepted without error {"value":"700,500.55","error":"لا يمكن أن يكون المبلغ المخصص أكبر من المبلغ المستحق على الفاتورة (1,000.00)","diff":"-699,500.55"}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-d-alloc.spec.ts:110:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-d-alloc-D07-edit-Allocated-Amount-in-the-table-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-d-alloc-D07-edit-Allocated-Amount-in-the-table-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-d-alloc-D07-edit-Allocated-Amount-in-the-table-chromium\error-context.md
+
+
+[9/12] [chromium] › Shamel\prec-d-alloc.spec.ts:113:5 › D08 over-allocation across several rows
+[10/12] [chromium] › Shamel\prec-d-alloc.spec.ts:119:5 › D09 Edit Row of the allocation
+  2) [chromium] › Shamel\prec-d-alloc.spec.ts:119:5 › D09 Edit Row of the allocation ───────────────
+
+    Error: D09-6 Empty Allocated Amount in the popup shows an error and is not applied 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-d-alloc.spec.ts:137:7
+
+    Error: D09-8 A valid change in the popup updates the table row (250, difference 750) |1|ACC-PAY-2026-03072|ACC-SINV-2026-02907|700.00|300.00|
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-d-alloc.spec.ts:144:7
+
+    Error: D09-9 Cancel keeps the previous amount |1|ACC-PAY-2026-03072|ACC-SINV-2026-02907|700.00|300.00|
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-d-alloc.spec.ts:146:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-d-alloc-D09-Edit-Row-of-the-allocation-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-d-alloc-D09-Edit-Row-of-the-allocation-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-d-alloc-D09-Edit-Row-of-the-allocation-chromium\error-context.md
+
+
+[11/12] [chromium] › Shamel\prec-d-alloc.spec.ts:149:5 › D10 delete allocation rows
+[12/12] [chromium] › Shamel\prec-d-alloc.spec.ts:167:5 › D11 allocation table settings
+  2 failed
+    [chromium] › Shamel\prec-d-alloc.spec.ts:98:5 › D07 edit Allocated Amount in the table ─────────
+    [chromium] › Shamel\prec-d-alloc.spec.ts:119:5 › D09 Edit Row of the allocation ────────────────
+  10 passed (11.6m)

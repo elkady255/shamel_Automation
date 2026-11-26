@@ -8,9 +8,9 @@ test('usd invoice error', async () => {
   await ctx.post('/api/method/login', { form: { usr: process.env.APP_USERNAME!, pwd: process.env.APP_PASSWORD! } });
   const res = await ctx.post('/api/resource/Sales%20Invoice', {
     data: {
-      company: d.CO, customer: 'QA-PR Cust USD', set_posting_time: 1, posting_date: d.daysAgo(8), due_date: d.daysAgo(1),
-      update_stock: 0, currency: 'USD', conversion_rate: 3.7, debit_to: d.USD_REC, selling_price_list: 'Standard Selling',
-      items: [{ item_code: d.ITEM, qty: 1, rate: 100, cost_center: d.CC }], taxes: [],
+      company: d.CO, customer: 'QA-PR Cust Main', set_posting_time: 1, posting_date: d.daysAgo(3), due_date: d.daysAgo(1),
+      update_stock: 0, debit_to: d.REC, docstatus: 0,
+      items: [{ item_code: d.ITEM, qty: 1, rate: 1900, cost_center: d.CC }], taxes: [],
     },
   });
   const j = await res.json();

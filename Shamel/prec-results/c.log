@@ -1,0 +1,314 @@
+
+Running 11 tests using 1 worker
+
+[1/11] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/11] [chromium] › Shamel\prec-c-tables.spec.ts:51:5 › C01 customer data returned correctly
+[3/11] [chromium] › Shamel\prec-c-tables.spec.ts:56:5 › C02 supplier data returned correctly
+  1) [chromium] › Shamel\prec-c-tables.spec.ts:56:5 › C02 supplier data returned correctly ─────────
+
+    Error: C02-2 Each invoice row shows its type, number, posting date and outstanding amount as stored bad= rows=[["","1","فاتورة مشتريات","ACC-PINV-2026-00005","05-11-2026","1,500.00",""],["","2","فاتورة مشتريات","ACC-PINV-2026-00006","22-11-2026","800.00",""]]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at checkData (c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:37:7)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:60:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C02-supplier-data-returned-correctly-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C02-supplier-data-returned-correctly-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C02-supplier-data-returned-correctly-chromium\error-context.md
+
+
+[4/11] [chromium] › Shamel\prec-c-tables.spec.ts:63:5 › C03 columns of both tables
+  2) [chromium] › Shamel\prec-c-tables.spec.ts:63:5 › C03 columns of both tables ───────────────────
+
+    Error: C03-3 All columns are fully visible without clipping at 1400px width [["المبلغ المستحق"],[]]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:69:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C03-columns-of-both-tables-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C03-columns-of-both-tables-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C03-columns-of-both-tables-chromium\error-context.md
+
+
+[5/11] [chromium] › Shamel\prec-c-tables.spec.ts:73:5 › C04 draft and cancelled documents are excluded
+  3) [chromium] › Shamel\prec-c-tables.spec.ts:73:5 › C04 draft and cancelled documents are excluded 
+
+    Error: insert Sales Invoice failed: 417 {"exception":"\t\t\t\t\tهذا التحقق.","exc_type":"ValidationError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return frappe.new_doc(doctype, **data).insert()\\n           ~~
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:76:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C04-draft-and-cancelled-documents-are-excluded-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C04-draft-and-cancelled-documents-are-excluded-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C04-draft-and-cancelled-documents-are-excluded-chromium\error-context.md
+
+
+[6/11] [chromium] › Shamel\prec-c-tables.spec.ts:86:5 › C05 invoice number opens the document
+  4) [chromium] › Shamel\prec-c-tables.spec.ts:86:5 › C05 invoice number opens the document ────────
+
+    Error: C05-2 The link opens the corresponding Sales Invoice https://test.hr.azzrk.com/desk/shamel#/accounting/sales-invoices/ACC-SINV-2026-02907
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:93:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C05-invoice-number-opens-the-document-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C05-invoice-number-opens-the-document-chromium\video-1.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C05-invoice-number-opens-the-document-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C05-invoice-number-opens-the-document-chromium\error-context.md
+
+
+[7/11] [chromium] › Shamel\prec-c-tables.spec.ts:97:5 › C06 filter on invoice number
+[8/11] [chromium] › Shamel\prec-c-tables.spec.ts:111:5 › C07 select and delete rows
+[9/11] [chromium] › Shamel\prec-c-tables.spec.ts:137:5 › C08 edit row of invoice and payment
+  5) [chromium] › Shamel\prec-c-tables.spec.ts:137:5 › C08 edit row of invoice and payment ─────────
+
+    Error: C08-6 Payment Edit Row shows Journal Entry values تعديل الدفعة تعديل الدفعة نوع المرجع قيد يومية اسم المرجع ACC-JV-2026-01713 تاريخ الترحيل 23-11-2026 المبلغ 400.00 مبلغ الفرق — ملاحظات المرجع # QA-PR بتاريخ 23-11-2026 مركز التكلفة إلغاء تعديل
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:151:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C08-edit-row-of-invoice-and-payment-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C08-edit-row-of-invoice-and-payment-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C08-edit-row-of-invoice-and-payment-chromium\error-context.md
+
+
+[10/11] [chromium] › Shamel\prec-c-tables.spec.ts:164:7 › C09-1 table settings: Invoices
+  6) [chromium] › Shamel\prec-c-tables.spec.ts:164:7 › C09-1 table settings: Invoices ──────────────
+
+    Error: C09-1-2 Invoices: save button is labelled Update as in the SRS تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود نوع الفاتورة رقم الفاتورة تاريخ الفاتورة المبلغ المستحق إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:175:9
+
+    Error: C09-1-4 Invoices: column width accepts numbers only "autoabc"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:182:9
+
+    Error: C09-1-5 Invoices: column width maximum 3 characters "12345"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:183:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C09-1-table-settings-Invoices-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C09-1-table-settings-Invoices-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C09-1-table-settings-Invoices-chromium\error-context.md
+
+
+[11/11] [chromium] › Shamel\prec-c-tables.spec.ts:164:7 › C09-2 table settings: Payments
+  7) [chromium] › Shamel\prec-c-tables.spec.ts:164:7 › C09-2 table settings: Payments ──────────────
+
+    Error: C09-2-2 Payments: save button is labelled Update as in the SRS تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود اسم المرجع تاريخ الترحيل المبلغ إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:175:9
+
+    Error: C09-2-4 Payments: column width accepts numbers only "autoabc"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:182:9
+
+    Error: C09-2-5 Payments: column width maximum 3 characters "12345"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:183:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C09-2-table-settings-Payments-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C09-2-table-settings-Payments-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C09-2-table-settings-Payments-chromium\error-context.md
+
+
+  7 failed
+    [chromium] › Shamel\prec-c-tables.spec.ts:56:5 › C02 supplier data returned correctly ──────────
+    [chromium] › Shamel\prec-c-tables.spec.ts:63:5 › C03 columns of both tables ────────────────────
+    [chromium] › Shamel\prec-c-tables.spec.ts:73:5 › C04 draft and cancelled documents are excluded 
+    [chromium] › Shamel\prec-c-tables.spec.ts:86:5 › C05 invoice number opens the document ─────────
+    [chromium] › Shamel\prec-c-tables.spec.ts:137:5 › C08 edit row of invoice and payment ──────────
+    [chromium] › Shamel\prec-c-tables.spec.ts:164:7 › C09-1 table settings: Invoices ───────────────
+    [chromium] › Shamel\prec-c-tables.spec.ts:164:7 › C09-2 table settings: Payments ───────────────
+  4 passed (8.8m)

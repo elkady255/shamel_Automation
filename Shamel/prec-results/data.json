@@ -16,5 +16,8 @@
  "piR": "ACC-PINV-2026-00007",
  "custUsd": "QA-PR Cust USD",
  "peU": "ACC-PAY-2026-03076",
- "siU": "ACC-SINV-2026-02911"
+ "siU": "ACC-SINV-2026-02911",
+ "siDraft": "ACC-SINV-2026-02912",
+ "siCancelled": "ACC-SINV-2026-02913",
+ "peCancelled": "ACC-PAY-2026-03077"
 }

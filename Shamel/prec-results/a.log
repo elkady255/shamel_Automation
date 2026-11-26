@@ -1,0 +1,96 @@
+
+Running 5 tests using 1 worker
+
+[1/5] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/5] [chromium] › Shamel\prec-a-header.spec.ts:15:5 › A01 initial state and progressive fields
+[3/5] [chromium] › Shamel\prec-a-header.spec.ts:34:5 › A02 mandatory validation
+  1) [chromium] › Shamel\prec-a-header.spec.ts:34:5 › A02 mandatory validation ─────────────────────
+
+    Error: A02-1 Get with nothing filled shows errors for Company and Party Type هذا الحقل مطلوب ERR: هذا الحقل مطلوب
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-a-header.spec.ts:38:29
+
+    Error: A02-2 Get with Company only shows an error for Party Type هذا الحقل مطلوب ERR: هذا الحقل مطلوب
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-a-header.spec.ts:40:25
+
+    Error: A02-3 Get without Party shows an error for Party هذا الحقل مطلوب ERR: هذا الحقل مطلوب
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-a-header.spec.ts:42:25
+
+    Error: A02-4 A cleared Receivable / Payable Account blocks Get with an error (or the value cannot be cleared) field="" requestSent=false msg=هذا الحقل مطلوب ERR: هذا الحقل مطلوب
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-a-header.spec.ts:48:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-a-header-A02-mandatory-validation-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-a-header-A02-mandatory-validation-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-a-header-A02-mandatory-validation-chromium\error-context.md
+
+
+[4/5] [chromium] › Shamel\prec-a-header.spec.ts:51:5 › A03 dropdown content and filtering
+[5/5] [chromium] › Shamel\prec-a-header.spec.ts:80:5 › A04 default accounts and re-selection
+  1 failed
+    [chromium] › Shamel\prec-a-header.spec.ts:34:5 › A02 mandatory validation ──────────────────────
+  4 passed (3.4m)

@@ -1,0 +1,8 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\prec-d-alloc.spec.ts:98:5 › D07 edit Allocated Amount in the table
+[3/4] [chromium] › Shamel\prec-d-alloc.spec.ts:113:5 › D08 over-allocation across several rows
+[4/4] [chromium] › Shamel\prec-d-alloc.spec.ts:119:5 › D09 Edit Row of the allocation
+  4 passed (3.9m)

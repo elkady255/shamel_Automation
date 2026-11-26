@@ -1,0 +1,114 @@
+
+Running 7 tests using 1 worker
+
+[1/7] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/7] [chromium] › Shamel\je-a-form.spec.ts:46:5 › A03 accounting rows and amount rules
+[3/7] [chromium] › Shamel\je-a-form.spec.ts:87:5 › A05 mandatory checks on save
+[4/7] [chromium] › Shamel\je-a-form.spec.ts:96:5 › A06 row Edit Row and column settings
+  1) [chromium] › Shamel\je-a-form.spec.ts:96:5 › A06 row Edit Row and column settings ─────────────
+
+    Error: A06-6 Table settings has Column width, Add / Remove columns, Update and Reset to default تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود الحساب نوع الطرف الطرف مدين دائن إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:114:7
+
+    Error: A06-7 Column width accepts numbers only "autobc"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:116:7
+
+    Error: A06-8 Column width stops at 3 characters "12345"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:117:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-a-form-A06-row-Edit-Row-and-column-settings-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-a-form-A06-row-Edit-Row-and-column-settings-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-a-form-A06-row-Edit-Row-and-column-settings-chromium\error-context.md
+
+
+[5/7] [chromium] › Shamel\je-b-tabs.spec.ts:107:5 › B05 tax withholding on a credit / debit note
+[6/7] [chromium] › Shamel\je-c-lifecycle.spec.ts:80:5 › C04 cancel, amend and delete rules
+[7/7] [chromium] › Shamel\je-c-lifecycle.spec.ts:107:5 › C05 delete own draft and own cancelled entry
+  2) [chromium] › Shamel\je-c-lifecycle.spec.ts:107:5 › C05 delete own draft and own cancelled entry 
+
+    Error: C05-5 A cancelled entry without links can be deleted خطأ قيد اليومية ACC-JV-2026-01746 ملغي وقيود دفتر الأستاذ الخاصة به محفوظة. لحذفه، فعّل خيار "حذف القيود المحاسبية والمخزنية عند حذف المعاملة" في إعدادات الحسابات. حذف هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء. إلغاء حذف | خطأ قيد اليومية ACC-JV-2026-01746 ملغي وقيود دفتر الأستاذ الخاصة به محفوظة. لحذفه، فعّل خيار "حذف القيود المحاسبية والمخزنية عند حذف المعاملة" في إعدادات الحسابات.
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-c-lifecycle.spec.ts:117:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C05-delete-own-draft-and-own-cancelled-entry-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C05-delete-own-draft-and-own-cancelled-entry-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-c-lifecycle-C05-delete-own-draft-and-own-cancelled-entry-chromium\error-context.md
+
+
+  Slow test file: [chromium] › Shamel\je-c-lifecycle.spec.ts (5.2m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  2 failed
+    [chromium] › Shamel\je-a-form.spec.ts:96:5 › A06 row Edit Row and column settings ──────────────
+    [chromium] › Shamel\je-c-lifecycle.spec.ts:107:5 › C05 delete own draft and own cancelled entry 
+  5 passed (11.1m)

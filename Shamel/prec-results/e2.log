@@ -1,0 +1,8 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\prec-e-reconcile.spec.ts:90:5 › E03 one invoice with two payments
+[3/4] [chromium] › Shamel\prec-e-reconcile.spec.ts:103:5 › E04 journal entry against an invoice
+[4/4] [chromium] › Shamel\prec-e-reconcile.spec.ts:111:5 › E05 return invoice against an invoice
+  4 passed (2.6m)

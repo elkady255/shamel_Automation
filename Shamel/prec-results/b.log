@@ -1,0 +1,155 @@
+
+Running 9 tests using 1 worker
+
+[1/9] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/9] [chromium] › Shamel\prec-b-filters.spec.ts:43:5 › B01 invoice date range
+  1) [chromium] › Shamel\prec-b-filters.spec.ts:43:5 › B01 invoice date range ──────────────────────
+
+    Error: locator.click: Element is not visible
+    Call log:
+      - waiting for locator('main').locator('label').filter({ hasText: /^\s*من تاريخ الفاتورة\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input][1]').locator('input').first()
+        - locator resolved to <input readonly type="hidden" data-v-dacf3662="" autocomplete="off" placeholder="اختر التاريخ" class="date-picker-input flatpickr-input"/>
+      - attempting click action
+        - scrolling into view if needed
+
+
+      24 | /** Chooses an ISO date in the calendar of a filter. */
+      25 | async function date(page: Page, label: string, iso: string) {
+    > 26 |   const f = u.input(page, label); await f.click({ force: true }); await u.wait(page, 800);
+         |                                           ^
+      27 |   const day = String(Number(iso.slice(8)));
+      28 |   await page.locator('.flatpickr-calendar.open .flatpickr-day:not(.prevMonthDay):not(.nextMonthDay)').filter({ hasText: new RegExp('^' + day + '$') }).first().click();
+      29 |   await u.wait(page, 700); return f.inputValue();
+        at date (c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:26:43)
+        at c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:47:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B01-invoice-date-range-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B01-invoice-date-range-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-b-filters-B01-invoice-date-range-chromium\error-context.md
+
+
+[3/9] [chromium] › Shamel\prec-b-filters.spec.ts:55:5 › B02 invoice From later than To
+  2) [chromium] › Shamel\prec-b-filters.spec.ts:55:5 › B02 invoice From later than To ──────────────
+
+    Error: locator.click: Element is not visible
+    Call log:
+      - waiting for locator('main').locator('label').filter({ hasText: /^\s*من تاريخ الفاتورة\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input][1]').locator('input').first()
+        - locator resolved to <input readonly type="hidden" data-v-dacf3662="" autocomplete="off" placeholder="اختر التاريخ" class="date-picker-input flatpickr-input"/>
+      - attempting click action
+        - scrolling into view if needed
+
+
+      24 | /** Chooses an ISO date in the calendar of a filter. */
+      25 | async function date(page: Page, label: string, iso: string) {
+    > 26 |   const f = u.input(page, label); await f.click({ force: true }); await u.wait(page, 800);
+         |                                           ^
+      27 |   const day = String(Number(iso.slice(8)));
+      28 |   await page.locator('.flatpickr-calendar.open .flatpickr-day:not(.prevMonthDay):not(.nextMonthDay)').filter({ hasText: new RegExp('^' + day + '$') }).first().click();
+      29 |   await u.wait(page, 700); return f.inputValue();
+        at date (c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:26:43)
+        at c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:57:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B02-invoice-From-later-than-To-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B02-invoice-From-later-than-To-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-b-filters-B02-invoice-From-later-than-To-chromium\error-context.md
+
+
+[4/9] [chromium] › Shamel\prec-b-filters.spec.ts:63:5 › B03 payment date range
+  3) [chromium] › Shamel\prec-b-filters.spec.ts:63:5 › B03 payment date range ──────────────────────
+
+    Error: locator.click: Element is not visible
+    Call log:
+      - waiting for locator('main').locator('label').filter({ hasText: /^\s*من تاريخ الدفع\s*\*?\s*$/ }).first().locator('xpath=ancestor::div[.//input][1]').locator('input').first()
+        - locator resolved to <input readonly type="hidden" data-v-dacf3662="" autocomplete="off" placeholder="اختر التاريخ" class="date-picker-input flatpickr-input"/>
+      - attempting click action
+        - scrolling into view if needed
+
+
+      24 | /** Chooses an ISO date in the calendar of a filter. */
+      25 | async function date(page: Page, label: string, iso: string) {
+    > 26 |   const f = u.input(page, label); await f.click({ force: true }); await u.wait(page, 800);
+         |                                           ^
+      27 |   const day = String(Number(iso.slice(8)));
+      28 |   await page.locator('.flatpickr-calendar.open .flatpickr-day:not(.prevMonthDay):not(.nextMonthDay)').filter({ hasText: new RegExp('^' + day + '$') }).first().click();
+      29 |   await u.wait(page, 700); return f.inputValue();
+        at date (c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:26:43)
+        at c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:66:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B03-payment-date-range-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B03-payment-date-range-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-b-filters-B03-payment-date-range-chromium\error-context.md
+
+
+[5/9] [chromium] › Shamel\prec-b-filters.spec.ts:73:5 › B04 invoice amount range
+[6/9] [chromium] › Shamel\prec-b-filters.spec.ts:89:5 › B05 payment amount range
+[7/9] [chromium] › Shamel\prec-b-filters.spec.ts:98:5 › B06 limits
+[8/9] [chromium] › Shamel\prec-b-filters.spec.ts:112:5 › B07 invalid input in numeric filters
+[9/9] [chromium] › Shamel\prec-b-filters.spec.ts:133:5 › B08 bank account, cost center and project
+  4) [chromium] › Shamel\prec-b-filters.spec.ts:133:5 › B08 bank account, cost center and project ──
+
+    Error: B08-5 A bank with no payments of this party returns no payment entries inv=[02907,02908,02909] pay=[03072,03073,02910] status=200 sent="bank_cash_account":"122102 - RIYAD BANK - E","invoice_limit":50,"payment_limit":50}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:146:7
+
+    Test timeout of 280000ms exceeded.
+
+    Error: page.waitForTimeout: Target page, context or browser has been closed
+
+       at helpers\si-ui.ts:10
+
+       8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    > 10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+         |                                                ^
+      11 |
+      12 | /** Field container found through its label text (a trailing * is ignored). */
+      13 | export const box = (p: Page, label: string) =>
+        at wait (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:10:48)
+        at Object.getEntries (c:\Playwright_Automation\Shamel\helpers\prec-ui.ts:45:13)
+        at c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:147:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B08-bank-account-cost-center-and-project-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-b-filters-B08-bank-account-cost-center-and-project-chromium\error-context.md
+
+
+  4 failed
+    [chromium] › Shamel\prec-b-filters.spec.ts:43:5 › B01 invoice date range ───────────────────────
+    [chromium] › Shamel\prec-b-filters.spec.ts:55:5 › B02 invoice From later than To ───────────────
+    [chromium] › Shamel\prec-b-filters.spec.ts:63:5 › B03 payment date range ───────────────────────
+    [chromium] › Shamel\prec-b-filters.spec.ts:133:5 › B08 bank account, cost center and project ───
+  5 passed (12.9m)

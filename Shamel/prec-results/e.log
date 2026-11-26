@@ -1,0 +1,62 @@
+
+Running 6 tests using 1 worker
+
+[1/6] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/6] [chromium] › Shamel\prec-e-reconcile.spec.ts:49:5 › E01 invalid allocation cannot be reconciled
+[3/6] [chromium] › Shamel\prec-e-reconcile.spec.ts:61:5 › E02 partial reconcile of one invoice and one payment
+  1) [chromium] › Shamel\prec-e-reconcile.spec.ts:61:5 › E02 partial reconcile of one invoice and one payment 
+
+    Error: E02-1 A success confirmation message is displayed 
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-e-reconcile.spec.ts:66:7
+
+    Error: E02-3 Invoice status becomes Partly Paid Overdue
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-e-reconcile.spec.ts:69:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-e-reconcile-E02-parti-6602f-one-invoice-and-one-payment-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-e-reconcile-E02-parti-6602f-one-invoice-and-one-payment-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-e-reconcile-E02-parti-6602f-one-invoice-and-one-payment-chromium\error-context.md
+
+
+[4/6] [chromium] › Shamel\prec-e-reconcile.spec.ts:83:5 › E03 one invoice with two payments
+[5/6] [chromium] › Shamel\prec-e-reconcile.spec.ts:95:5 › E04 journal entry against an invoice
+[6/6] [chromium] › Shamel\prec-e-reconcile.spec.ts:103:5 › E05 return invoice against an invoice
+  1 failed
+    [chromium] › Shamel\prec-e-reconcile.spec.ts:61:5 › E02 partial reconcile of one invoice and one payment 
+  3 did not run
+  2 passed (2.5m)

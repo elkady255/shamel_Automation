@@ -1,0 +1,21 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\pe-probe7.spec.ts:8:5 › popups
+[chromium] › Shamel\pe-probe7.spec.ts:8:5 › popups
+POPUP after add 1 خطأ في الخادم | UnboundLocalError: cannot access local variable 'current_tax_amount' where it is not associated with a value | Possible source of error: shamel (app) | حصل خطأ أثناء النسخ إلى الحافظة
+
+POPUP after add 2 خطأ في الخادم | UnboundLocalError: cannot access local variable 'current_tax_amount' where it is not associated with a value | Possible source of error: shamel (app) | حصل خطأ أثناء النسخ إلى الحافظة
+
+TABLES [{"head":["","م","النوع","الاسم","تاريخ الاستحقاق","الإجمالي الكلي (SAR)","المستحق (SAR)","المخصص (SAR)",""],"rows":[["","1","","","—","—","—","",""]]},{"head":["","م","النوع","رأس الحساب","نسبة الضريبة","صافي المبلغ","المبلغ","الإجمالي",""],"rows":[["","1","","","","—","—","—",""]]},{"head":["","م","الحساب","مركز التكلفة","المبلغ (عملة الشركة)",""],"rows":[["","1","","101 - Main X - E - Main X","",""]]}]
+
+edit 1 locator.click: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator('main').locator('button[title="تعديل الصف"
+
+edit 2 locator.click: Timeout 8000ms exceeded.
+Call log:
+  - waiting for locator('main').locator('button[title="تعديل الصف"
+
+  2 passed (1.3m)

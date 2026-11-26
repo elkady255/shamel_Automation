@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\prec-c-tables.spec.ts:73:5 › C04 draft and cancelled documents are excluded
+  2 passed (46.0s)

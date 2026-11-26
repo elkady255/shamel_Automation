@@ -1,0 +1,42 @@
+
+Running 5 tests using 1 worker
+
+[1/5] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/5] [chromium] › Shamel\prec-b-filters.spec.ts:43:5 › B01 invoice date range
+[3/5] [chromium] › Shamel\prec-b-filters.spec.ts:55:5 › B02 invoice From later than To
+[4/5] [chromium] › Shamel\prec-b-filters.spec.ts:63:5 › B03 payment date range
+[5/5] [chromium] › Shamel\prec-b-filters.spec.ts:133:5 › B08 bank account, cost center and project
+  1) [chromium] › Shamel\prec-b-filters.spec.ts:133:5 › B08 bank account, cost center and project ──
+
+    Error: B08-5 A bank with no payments of this party returns no payment entries inv=[02907,02908,02909] pay=[03072,03073,02910] status=200 sent="bank_cash_account":"122102 - RIYAD BANK - E","invoice_limit":50,"payment_limit":50}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-b-filters.spec.ts:146:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B08-bank-account-cost-center-and-project-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-b-filters-B08-bank-account-cost-center-and-project-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-b-filters-B08-bank-account-cost-center-and-project-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\prec-b-filters.spec.ts:133:5 › B08 bank account, cost center and project ───
+  4 passed (6.3m)

@@ -1,0 +1,13 @@
+
+Running 7 tests using 1 worker
+
+[1/7] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/7] [chromium] › Shamel\pe-b-e2e.spec.ts:95:5 › B04 receive from employee
+[3/7] [chromium] › Shamel\pe-b-e2e.spec.ts:103:5 › B05 pay to employee
+[4/7] [chromium] › Shamel\pe-b-e2e.spec.ts:111:5 › B06 receive from shareholder
+[5/7] [chromium] › Shamel\pe-b-e2e.spec.ts:119:5 › B07 pay to shareholder
+[6/7] [chromium] › Shamel\pe-b-e2e.spec.ts:127:5 › B08 refund to customer (pay)
+[7/7] [chromium] › Shamel\pe-b-e2e.spec.ts:135:5 › B09 refund from supplier (receive)
+  Slow test file: [chromium] › Shamel\pe-b-e2e.spec.ts (7.6m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  7 passed (7.7m)

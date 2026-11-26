@@ -1,0 +1,324 @@
+
+Running 6 tests using 1 worker
+
+[1/6] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/6] [chromium] › Shamel\pe-c-advanced.spec.ts:69:5 › C01 references table: add a row by hand
+  1) [chromium] › Shamel\pe-c-advanced.spec.ts:69:5 › C01 references table: add a row by hand ──────
+
+    Error: C01-9 Reference Edit Row shows the SRS fields missing=النوع,الاسم,تاريخ الاستحقاق,شرط الدفع,الإجمالي,المستحق,المخصص,سعر الصرف,الحساب popup=NO POPUP OPENED
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:95:7
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('main').locator('table:visible').filter({ has: locator('thead th').filter({ hasText: 'المخصص' }) }).first().locator('button[title="إعدادات الجدول"]')
+        - locator resolved to <button type="button" data-v-ea220602="" class="sct-setting" title="إعدادات الجدول">…</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-v-b69da15c="" data-v-6536eac1="" class="qr-overlay">…</div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-v-b69da15c="" data-v-6536eac1="" class="qr-overlay">…</div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        19 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <div data-v-b69da15c="" data-v-6536eac1="" class="qr-overlay">…</div> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+      46 | const cancelModal = async (p: Page) => { for (let i = 0; i < 3 && (await p.locator('.base-modal:visible').count()); i++) { await click(modal(p).locator('button').filter({ hasText: /^\s*(إلغاء|إغلاق)\s*$/ }).last()).catch(() => {}); await wait(1200); } };
+      47 | async function columns(p: Page, head: string) {
+    > 48 |   await errorPopups(p); await table(p, head).locator('button[title="إعدادات الجدول"]').click({ timeout: 10_000 }); await wait(2000);
+         |                                                                                        ^
+      49 |   await modal(p).getByText('إضافة/إزالة حقول').click({ timeout: 10_000 }); await wait(2000);
+      50 |   const t = (await modal(p).innerText({ timeout: 5000 })).replace(/\s+/g, ' '); await cancelModal(p); return t;
+      51 | }
+        at columns (c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:48:88)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:99:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C01-references-table-add-a-row-by-hand-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C01-references-table-add-a-row-by-hand-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C01-references-table-add-a-row-by-hand-chromium\error-context.md
+
+
+[3/6] [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer)
+  2) [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer) 
+
+    Error: C02-1 Add Row in Advance Taxes and Charges adds a row without any error خطأ في الخادم UnboundLocalError: cannot access local variable 'current_tax_amount' where it is not associated with a value Possible source of error: shamel (app) حصل خطأ أثناء النسخ إلى الحافظة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:115:7
+
+    Error: C02-5 Tax Edit Row shows the SRS fields missing=إضافة,النوع,رأس الحساب,الوصف,المدفوع,مركز التكلفة,المشروع,نسبة الضريبة,عملة الحساب,صافي المبلغ,المبلغ,الإجمالي popup=NO POPUP OPENED
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:127:7
+
+    Error: C02-7 Description is mandatory in the tax Edit Row NO POPUP OPENED
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:129:7
+
+    Error: C02-8 The tax row is saved with the draft 0 ERR: الحد الأدنى للطول هو 3 الوصف: الحد الأدنى للطول هو 3 []
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:132:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C02-taxes-added-by-hand-receive-from-customer--chromium\error-context.md
+
+
+[4/6] [chromium] › Shamel\pe-c-advanced.spec.ts:139:5 › C03 tax template and template visibility
+  3) [chromium] › Shamel\pe-c-advanced.spec.ts:139:5 › C03 tax template and template visibility ────
+
+    Error: C03-4 Pay + Supplier shows the Purchase template only قالب ضرائب ورسوم الشراء
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:150:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C03-tax-template-and-template-visibility-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C03-tax-template-and-template-visibility-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C03-tax-template-and-template-visibility-chromium\error-context.md
+
+
+[5/6] [chromium] › Shamel\pe-c-advanced.spec.ts:156:5 › C04 deductions and write off
+[chromium] › Shamel\pe-c-advanced.spec.ts:156:5 › C04 deductions and write off
+OK siC4 ACC-SINV-2026-02920
+
+  4) [chromium] › Shamel\pe-c-advanced.spec.ts:156:5 › C04 deductions and write off ────────────────
+
+    Error: C04-4 Deduction Edit Row shows Account, Cost Center, Amount, Is Exchange Gain / Loss, Description missing=الحساب,مركز التكلفة,المبلغ,أرباح,الوصف popup=NO POPUP OPENED
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:169:7
+
+    Error: C04-5 Account, Cost Center and Amount are marked mandatory NO POPUP OPENED
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:170:7
+
+    Error: C04-6 Draft saves with allocation 900 and deduction 20 0  [] diff=0
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:173:7
+
+    TimeoutError: locator.evaluate: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('main').getByRole('button', { name: 'اعتماد', exact: true }).first()
+
+
+       at helpers\si-ui.ts:8
+
+       6 | export const ROUTE_LIST = '/desk/shamel#/accounting/sales-invoices';
+       7 | export const main = (p: Page) => p.getByRole('main');
+    >  8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+         |                                        ^
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+      11 |
+        at Object.press (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:8:40)
+        at Object.submit (c:\Playwright_Automation\Shamel\helpers\pe-flow.ts:69:11)
+        at submitCheck (c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:63:13)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:174:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C04-deductions-and-write-off-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C04-deductions-and-write-off-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C04-deductions-and-write-off-chromium\error-context.md
+
+
+[6/6] [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check
+[chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check
+ERR siC5 insert Sales Invoice failed: 417 {"exception":"\t\t\t\t\tهذا التحقق.","exc_type":"ValidationError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, 
+
+  5) [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check 
+
+    TimeoutError: locator.evaluate: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('main').getByRole('button', { name: 'اعتماد', exact: true }).first()
+
+
+       at helpers\si-ui.ts:8
+
+       6 | export const ROUTE_LIST = '/desk/shamel#/accounting/sales-invoices';
+       7 | export const main = (p: Page) => p.getByRole('main');
+    >  8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+         |                                        ^
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+      11 |
+        at Object.press (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:8:40)
+        at Object.submit (c:\Playwright_Automation\Shamel\helpers\pe-flow.ts:69:11)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:184:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\error-context.md
+
+
+  5 failed
+    [chromium] › Shamel\pe-c-advanced.spec.ts:69:5 › C01 references table: add a row by hand ───────
+    [chromium] › Shamel\pe-c-advanced.spec.ts:112:5 › C02 taxes added by hand (receive from customer) 
+    [chromium] › Shamel\pe-c-advanced.spec.ts:139:5 › C03 tax template and template visibility ─────
+    [chromium] › Shamel\pe-c-advanced.spec.ts:156:5 › C04 deductions and write off ─────────────────
+    [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check 
+  1 passed (13.1m)

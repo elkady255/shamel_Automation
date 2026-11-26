@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\prec-a-header.spec.ts:34:5 › A02 mandatory validation
+  2 passed (1.6m)

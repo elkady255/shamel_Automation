@@ -1,0 +1,37 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\je-probe1.spec.ts:7:5 › add screen
+[chromium] › Shamel\je-probe1.spec.ts:7:5 › add screen
+LIST https://test.hr.azzrk.com/desk/shamel#/accounting/journal-entries  |  | إضافة قيد يومية |  | آخر التحديثات |  |  | 1 | 2 | 3 | 4 | 5 | 377 |  | 
+
+ADD https://test.hr.azzrk.com/desk/shamel#/accounting/journal-entries/new
+
+FIELDS {"الشركة":"Ahmed Ebrahim CO.","السلسلة":"ACC-JV-.YYYY.-","نوع القيد":"Journal Entry","تاريخ الترحيل":"26-11-2026","عملات متعددة":"off","إجمالي المدين":"0.00 SAR","إجمالي الدائن":"0.00 SAR","الفرق (مدين - دائن)":"0.00 SAR","الرقم المرجعي":"","تاريخ المرجع":""}
+
+LABELS ["الشركة*","السلسلة*","نوع القيد","تاريخ الترحيل*","","إجمالي المدين","إجمالي الدائن","الفرق (مدين - دائن)","الرقم المرجعي","تاريخ المرجع"]
+
+BUTTONS ["","","إدخال سريع","التفاصيل","المعلومات الاضافية","المعلومات الاساسية","","","","القيود المحاسبية","إضافة صف","المرجع","إلغاء","حفظ"]
+
+TABLES []
+
+MODAL 
+
+NET 400 https://test.hr.azzrk.com/socket.io/?EIO=4&transport=polling&t=Q8NmWIO&sid=Au8V1fJfiAPGHWTTAASB {"code":1,"message":"Session ID unknown"}
+ok https://test.hr.azzrk.com/assets/shamel/frontend/assets/JournalEntriesView-DD-Oa91N.css
+ok https://test.hr.azzrk.com/assets/shamel/frontend/assets/JournalEntriesView-D-SRlDjn.js
+ok https://test.hr.azzrk.com/assets/shamel/frontend/assets/useJournalEntries-SypP6ft4.js
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.common.view_settings.get_list_settings?doctype=Journal%20Entry&_=1795694919984
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_journal_entries?page=1&page_size=10&ordered=modified&dir=DESC&sear
+ok https://test.hr.azzrk.com/assets/shamel/frontend/assets/JournalEntryDetailsView-4s4bd2aP.js
+ok https://test.hr.azzrk.com/assets/shamel/frontend/assets/JournalEntryDetailsView-CocBg6IG.css
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_form_settings?_=1795694919986
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_company_defaults?company=Ahmed%20Ebrahim%20CO.&_=1795694919987
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_options?field=naming_series&context=%7B%7D&_=1795694919991
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_options?field=company&context=%7B%7D&_=1795694919990
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_options?field=naming_series&context=%7B%7D&_=1795694919988
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_options?field=voucher_type&context=%7B%7D&_=1795694919989
+ok https://test.hr.azzrk.com/api/method/shamel.api.routes.account.transactions.journal_entry.get_options?field=voucher_type&context=%7B%7D&_=1795694919992
+
+  2 passed (54.7s)

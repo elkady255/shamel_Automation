@@ -1,0 +1,113 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\pe-b-e2e.spec.ts:65:5 › B01 receive from customer against invoices (cash)
+  1) [chromium] › Shamel\pe-b-e2e.spec.ts:65:5 › B01 receive from customer against invoices (cash) ─
+
+    Error: B01-5 Receive / Customer: Submit from the screen submits the document with a success message docstatus=1 status=200 msg= body={"message":{"status":200,"message":"payment entry submitted successfully","data":{"name":"ACC-PAY-2026-03080","owner":"Administrator","creation":"2026-11-26 11:58:01.952700","modified":"2026-11-26 11:58:33.558634","modified_by":"Administrator","docstatus":1,"idx":0,"naming_series":"ACC-PAY-.YYYY.-",
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at run (c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:46:7)
+        at c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:66:3
+
+    Error: B01-6 Receive / Customer: General Ledger posts Dr 122102 - RIYAD BANK - E / Cr 1210 - العملاء - E with 2000 1210 - العملاء - E Dr0 Cr1500 QA-PE Cust ; 1210 - العملاء - E Dr0 Cr500 QA-PE Cust ; 122102 - RIYAD BANK - E Dr2000 Cr0
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at run (c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:49:7)
+        at c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:66:3
+
+    Error: B01-8 Receive / Customer: invoice balances are reduced (0 / 1200) 0 / 700
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at run (c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:54:9)
+        at c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:66:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-b-e2e-B01-receive-from-customer-against-invoices-cash--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-b-e2e-B01-receive-from-customer-against-invoices-cash--chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-b-e2e-B01-receive-from-customer-against-invoices-cash--chromium\error-context.md
+
+
+[3/4] [chromium] › Shamel\pe-b-e2e.spec.ts:73:5 › B02 pay supplier by bank against an invoice
+[4/4] [chromium] › Shamel\pe-b-e2e.spec.ts:81:5 › B03 internal transfer cash to bank
+  2) [chromium] › Shamel\pe-b-e2e.spec.ts:81:5 › B03 internal transfer cash to bank ────────────────
+
+    Error: B03-5 Internal Transfer: Submit from the screen submits the document with a success message docstatus=1 status=200 msg= body={"message":{"status":200,"message":"payment entry submitted successfully","data":{"name":"ACC-PAY-2026-03082","owner":"Administrator","creation":"2026-11-26 12:01:42.367517","modified":"2026-11-26 12:01:54.700244","modified_by":"Administrator","docstatus":1,"idx":0,"naming_series":"ACC-PAY-.YYYY.-",
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at run (c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:46:7)
+        at c:\Playwright_Automation\Shamel\pe-b-e2e.spec.ts:82:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-b-e2e-B03-internal-transfer-cash-to-bank-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-b-e2e-B03-internal-transfer-cash-to-bank-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-b-e2e-B03-internal-transfer-cash-to-bank-chromium\error-context.md
+
+
+  2 failed
+    [chromium] › Shamel\pe-b-e2e.spec.ts:65:5 › B01 receive from customer against invoices (cash) ──
+    [chromium] › Shamel\pe-b-e2e.spec.ts:81:5 › B03 internal transfer cash to bank ─────────────────
+  2 passed (4.9m)

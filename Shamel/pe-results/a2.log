@@ -1,0 +1,41 @@
+
+Running 4 tests using 1 worker
+
+[1/4] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/4] [chromium] › Shamel\pe-a-form.spec.ts:38:5 › A02 payment types change the screen
+[3/4] [chromium] › Shamel\pe-a-form.spec.ts:54:5 › A03 mandatory validation on Save
+[4/4] [chromium] › Shamel\pe-a-form.spec.ts:97:5 › A06 party selection: fetched values per party type
+  1) [chromium] › Shamel\pe-a-form.spec.ts:97:5 › A06 party selection: fetched values per party type 
+
+    Error: A06-2e Supplier: Consider for Tax Withholding is shown only for Pay + Supplier not shown
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:113:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\error-context.md
+
+
+  1 failed
+    [chromium] › Shamel\pe-a-form.spec.ts:97:5 › A06 party selection: fetched values per party type 
+  3 passed (3.3m)

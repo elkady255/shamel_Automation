@@ -1,0 +1,210 @@
+
+Running 11 tests using 1 worker
+
+[1/11] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/11] [chromium] › Shamel\pe-a-form.spec.ts:18:5 › A01 initial screen, defaults and mandatory marks
+  1) [chromium] › Shamel\pe-a-form.spec.ts:18:5 › A01 initial screen, defaults and mandatory marks ─
+
+    Error: A01-5 Party Type defaults to Customer for Receive and is shown translated in Arabic Customer
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:25:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A01-initial-screen-defaults-and-mandatory-marks-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A01-initial-screen-defaults-and-mandatory-marks-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A01-initial-screen-defaults-and-mandatory-marks-chromium\error-context.md
+
+
+[3/11] [chromium] › Shamel\pe-a-form.spec.ts:38:5 › A02 payment types change the screen
+  2) [chromium] › Shamel\pe-a-form.spec.ts:38:5 › A02 payment types change the screen ──────────────
+
+    Test timeout of 280000ms exceeded.
+
+    Error: locator.evaluate: Test timeout of 280000ms exceeded.
+    Call log:
+      - waiting for locator('.cs-option:visible').filter({ hasText: 'تحويل داخلي' }).first()
+
+
+       at helpers\si-ui.ts:8
+
+       6 | export const ROUTE_LIST = '/desk/shamel#/accounting/sales-invoices';
+       7 | export const main = (p: Page) => p.getByRole('main');
+    >  8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+         |                                        ^
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+      11 |
+        at Object.press (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:8:40)
+        at Object.option (c:\Playwright_Automation\Shamel\helpers\pe-flow.ts:15:11)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:45:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A02-payment-types-change-the-screen-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A02-payment-types-change-the-screen-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A02-payment-types-change-the-screen-chromium\error-context.md
+
+
+[4/11] [chromium] › Shamel\pe-a-form.spec.ts:54:5 › A03 mandatory validation on Save
+  3) [chromium] › Shamel\pe-a-form.spec.ts:54:5 › A03 mandatory validation on Save ─────────────────
+
+    Error: A03-1 Saving an empty form shows an error under every empty mandatory field (Mode of Payment, Party, Account) Save is disabled, no field errors are shown
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:62:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A03-mandatory-validation-on-Save-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A03-mandatory-validation-on-Save-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A03-mandatory-validation-on-Save-chromium\error-context.md
+
+
+[5/11] [chromium] › Shamel\pe-a-form.spec.ts:83:5 › A04 account filters for Receive
+[6/11] [chromium] › Shamel\pe-a-form.spec.ts:88:5 › A05 account filters for Pay
+[7/11] [chromium] › Shamel\pe-a-form.spec.ts:94:5 › A06 party selection: fetched values per party type
+  4) [chromium] › Shamel\pe-a-form.spec.ts:94:5 › A06 party selection: fetched values per party type 
+
+    Error: A06-2e Supplier: Tax Withholding checkbox only for Pay + Supplier المبلغ المدفوع بعد الضريبة,المبلغ المدفوع بعد الضريبة (عملة الشركة),المبلغ المستلم بعد الضريبة,المبلغ المستلم بعد الضريبة (عملة الشركة)
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:110:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A06-party-selection-fetched-values-per-party-type-chromium\error-context.md
+
+
+[8/11] [chromium] › Shamel\pe-a-form.spec.ts:118:5 › A07 accounts: type, currency and amount fields
+[9/11] [chromium] › Shamel\pe-a-form.spec.ts:135:5 › A08 reference mandatory for bank accounts
+[10/11] [chromium] › Shamel\pe-a-form.spec.ts:147:5 › A09 bank accounts and tax template visibility
+  5) [chromium] › Shamel\pe-a-form.spec.ts:147:5 › A09 bank accounts and tax template visibility ───
+
+    Error: A09-3 The default company bank account is consistent with the chosen payment account prefilled "حساب بنكى جديد للتيست - بنك القاضى" before any account is chosen
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:154:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A09-bank-accounts-and-tax-template-visibility-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A09-bank-accounts-and-tax-template-visibility-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A09-bank-accounts-and-tax-template-visibility-chromium\error-context.md
+
+
+[11/11] [chromium] › Shamel\pe-a-form.spec.ts:157:5 › A10 date, company and cost center
+  6) [chromium] › Shamel\pe-a-form.spec.ts:157:5 › A10 date, company and cost center ───────────────
+
+    Error: A10-2 Cost Center option text is not duplicated 101 - Main X - E - Main X
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-a-form.spec.ts:161:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-a-form-A10-date-company-and-cost-center-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-a-form-A10-date-company-and-cost-center-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-a-form-A10-date-company-and-cost-center-chromium\error-context.md
+
+
+  6 failed
+    [chromium] › Shamel\pe-a-form.spec.ts:18:5 › A01 initial screen, defaults and mandatory marks ──
+    [chromium] › Shamel\pe-a-form.spec.ts:38:5 › A02 payment types change the screen ───────────────
+    [chromium] › Shamel\pe-a-form.spec.ts:54:5 › A03 mandatory validation on Save ──────────────────
+    [chromium] › Shamel\pe-a-form.spec.ts:94:5 › A06 party selection: fetched values per party type 
+    [chromium] › Shamel\pe-a-form.spec.ts:147:5 › A09 bank accounts and tax template visibility ────
+    [chromium] › Shamel\pe-a-form.spec.ts:157:5 › A10 date, company and cost center ────────────────
+  5 passed (13.9m)

@@ -1,0 +1,127 @@
+
+Running 5 tests using 1 worker
+
+[1/5] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/5] [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check
+[chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check
+OK siC5 ACC-SINV-2026-02921
+
+  1) [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check 
+
+    TimeoutError: locator.evaluate: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('main').getByRole('button', { name: 'اعتماد', exact: true }).first()
+
+
+       at helpers\si-ui.ts:8
+
+       6 | export const ROUTE_LIST = '/desk/shamel#/accounting/sales-invoices';
+       7 | export const main = (p: Page) => p.getByRole('main');
+    >  8 | export const press = (l: Locator) => l.evaluate((e: any) => e.click());
+         |                                        ^
+       9 | export const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      10 | export const wait = (p: Page, ms: number) => p.waitForTimeout(ms);
+      11 |
+        at Object.press (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:8:40)
+        at Object.submit (c:\Playwright_Automation\Shamel\helpers\pe-flow.ts:69:11)
+        at c:\Playwright_Automation\Shamel\pe-c-advanced.spec.ts:184:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-c-advanced-C05-deductio-a7c4e-y-hand-and-difference-check-chromium\error-context.md
+
+
+[3/5] [chromium] › Shamel\pe-e-lifecycle.spec.ts:118:5 › E03 submit, cancel, amend and delete rules
+[4/5] [chromium] › Shamel\pe-e-lifecycle.spec.ts:168:5 › E04 delete an own draft and an own cancelled entry
+  2) [chromium] › Shamel\pe-e-lifecycle.spec.ts:168:5 › E04 delete an own draft and an own cancelled entry 
+
+    Error: E04-5 A cancelled entry without links can be deleted خطأ قيد الدفع ACC-PAY-2026-03118 ملغي وقيود دفتر الأستاذ الخاصة به محفوظة. لحذفه، فعّل خيار "حذف القيود المحاسبية والمخزنية عند حذف المعاملة" في إعدادات الحسابات. حذف هل أنت متأكد؟ لا يمكن التراجع عن هذا الإجراء. إلغاء حذف | خطأ قيد الدفع ACC-PAY-2026-03118 ملغي وقيود دفتر الأستاذ الخاصة به محفوظة. لحذفه، فعّل خيار "حذف القيود المحاسبية والمخزنية عند حذف المعاملة" في إعدادات الحسابات.
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:181:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E04-delete--8ec3e--and-an-own-cancelled-entry-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E04-delete--8ec3e--and-an-own-cancelled-entry-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-e-lifecycle-E04-delete--8ec3e--and-an-own-cancelled-entry-chromium\error-context.md
+
+
+[5/5] [chromium] › Shamel\pe-e-lifecycle.spec.ts:184:5 › E05 bulk actions on the list
+  3) [chromium] › Shamel\pe-e-lifecycle.spec.ts:184:5 › E05 bulk actions on the list ───────────────
+
+    Error: E05-4 Bulk Edit does not offer the hidden (red) Letter Head تاريخ الترحيل | رقم الشيك / المرجع | تاريخ الشيك / المرجع | مركز التكلفة | المشروع | ملاحظات | ترويسة الخطاب | عنوان الطباعة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:207:7
+
+    Error: E05-11 Bulk Delete asks for confirmation then deletes confirm="حذف السجل سيتم حذف هذا العنصر نهائيا ولن يمكنك استرجاعه إلغاء حذف" لا يمكن الحذف قيد الدفع ACC-PAY-2026-03119 ملغي وقيود دفتر الأستاذ الخاصة به محفوظة. لحذفه، فعّل خيار "حذف القيود المحاسبية والمخزنية عند حذف المعاملة" في إعدادات الحسابات. ACC-PAY-2026-03119 خطأ غير معروف
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\pe-e-lifecycle.spec.ts:224:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E05-bulk-actions-on-the-list-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\pe-e-lifecycle-E05-bulk-actions-on-the-list-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pe-e-lifecycle-E05-bulk-actions-on-the-list-chromium\error-context.md
+
+
+  3 failed
+    [chromium] › Shamel\pe-c-advanced.spec.ts:180:5 › C05 deduction added by hand and difference check 
+    [chromium] › Shamel\pe-e-lifecycle.spec.ts:168:5 › E04 delete an own draft and an own cancelled entry 
+    [chromium] › Shamel\pe-e-lifecycle.spec.ts:184:5 › E05 bulk actions on the list ────────────────
+  2 passed (11.9m)

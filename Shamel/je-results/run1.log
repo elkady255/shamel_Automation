@@ -1,0 +1,7 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\je-add.spec.ts:80:5 › J01 plain journal entry between two cash accounts
+[3/3] [chromium] › Shamel\je-add.spec.ts:85:5 › J02 row with a customer
+  3 passed (2.3m)

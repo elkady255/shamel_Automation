@@ -1,0 +1,412 @@
+
+Running 19 tests using 1 worker
+
+[1/19] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/19] [chromium] › Shamel\je-a-form.spec.ts:15:5 › A01 default state
+  1) [chromium] › Shamel\je-a-form.spec.ts:15:5 › A01 default state ────────────────────────────────
+
+    Error: A01-3 Entry Type defaults to Journal Entry and is shown translated Journal Entry
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:19:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-a-form-A01-default-state-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-a-form-A01-default-state-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-a-form-A01-default-state-chromium\error-context.md
+
+
+[3/19] [chromium] › Shamel\je-a-form.spec.ts:35:5 › A02 entry type dependent fields
+[4/19] [chromium] › Shamel\je-a-form.spec.ts:46:5 › A03 accounting rows and amount rules
+  2) [chromium] › Shamel\je-a-form.spec.ts:46:5 › A03 accounting rows and amount rules ─────────────
+
+    TimeoutError: locator.click: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('main').locator('table:visible').first().locator('tbody tr').first().locator('input:visible').nth(4)
+        - locator resolved to <input value="" disabled type="text" wfd-id="id12" maxlength="100" class="cd-input" data-v-6536eac1="" placeholder="0.00" inputmode="decimal"/>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        37 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+       at helpers\je-ui.ts:48
+
+      46 | }
+      47 | export async function typeCell(p: Page, row: number, col: number, v: string) {
+    > 48 |   const c = cell(p, row, col); await c.click(); await c.press('Control+a'); if (v) await c.pressSequentially(v); else await c.press('Delete'); await c.press('Tab'); await wait(1500); return c.inputValue();
+         |                                        ^
+      49 | }
+      50 | export type Row = { account: string; partyType?: string; party?: string; debit?: string; credit?: string };
+      51 | export async function rows(p: Page, list: Row[]) {
+        at Object.typeCell (c:\Playwright_Automation\Shamel\helpers\je-ui.ts:48:40)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:58:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-a-form-A03-accounting-rows-and-amount-rules-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-a-form-A03-accounting-rows-and-amount-rules-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-a-form-A03-accounting-rows-and-amount-rules-chromium\error-context.md
+
+
+[5/19] [chromium] › Shamel\je-a-form.spec.ts:65:5 › A04 totals, difference and make difference entry
+[6/19] [chromium] › Shamel\je-a-form.spec.ts:82:5 › A05 mandatory checks on save
+  3) [chromium] › Shamel\je-a-form.spec.ts:82:5 › A05 mandatory checks on save ─────────────────────
+
+    Error: A05-3 Saving without any accounting row shows an error enabled=true  
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:88:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-a-form-A05-mandatory-checks-on-save-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-a-form-A05-mandatory-checks-on-save-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-a-form-A05-mandatory-checks-on-save-chromium\error-context.md
+
+
+[7/19] [chromium] › Shamel\je-a-form.spec.ts:91:5 › A06 row Edit Row and column settings
+  4) [chromium] › Shamel\je-a-form.spec.ts:91:5 › A06 row Edit Row and column settings ─────────────
+
+    Error: A06-6 Table settings has Column width, Add / Remove columns, Update and Reset to default تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود الحساب نوع الطرف الطرف مدين دائن إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:109:7
+
+    Error: A06-7 Column width accepts numbers only "autobc"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:111:7
+
+    Error: A06-8 Column width stops at 3 characters "12345"
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-a-form.spec.ts:112:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-a-form-A06-row-Edit-Row-and-column-settings-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-a-form-A06-row-Edit-Row-and-column-settings-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-a-form-A06-row-Edit-Row-and-column-settings-chromium\error-context.md
+
+
+[8/19] [chromium] › Shamel\je-a-form.spec.ts:118:5 › A07 quick entry rules
+[9/19] [chromium] › Shamel\je-b-tabs.spec.ts:21:5 › B01 pay an invoice through a journal entry reference
+[chromium] › Shamel\je-b-tabs.spec.ts:21:5 › B01 pay an invoice through a journal entry reference
+OK jeInv ACC-SINV-2026-02926
+
+[10/19] [chromium] › Shamel\je-b-tabs.spec.ts:40:5 › B02 multi currency: rate and company amounts
+[11/19] [chromium] › Shamel\je-b-tabs.spec.ts:62:5 › B03 More Info tab fields and stored values
+  5) [chromium] › Shamel\je-b-tabs.spec.ts:62:5 › B03 More Info tab fields and stored values ───────
+
+    Error: B03-2 Hidden (red) Payment Order is not shown أمر الدفع (Payment Order) is displayed
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-b-tabs.spec.ts:67:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-b-tabs-B03-More-Info-tab-fields-and-stored-values-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-b-tabs-B03-More-Info-tab-fields-and-stored-values-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-b-tabs-B03-More-Info-tab-fields-and-stored-values-chromium\error-context.md
+
+
+[12/19] [chromium] › Shamel\je-b-tabs.spec.ts:93:5 › B04 write off entry
+  6) [chromium] › Shamel\je-b-tabs.spec.ts:93:5 › B04 write off entry ──────────────────────────────
+
+    Error: B04-4 Get Outstanding Invoices adds the open invoices within the limit to the accounting entries rows=0 msg=  undefined
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-b-tabs.spec.ts:103:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-b-tabs-B04-write-off-entry-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-b-tabs-B04-write-off-entry-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-b-tabs-B04-write-off-entry-chromium\error-context.md
+
+
+[13/19] [chromium] › Shamel\je-b-tabs.spec.ts:107:5 › B05 tax withholding on a credit / debit note
+  7) [chromium] › Shamel\je-b-tabs.spec.ts:107:5 › B05 tax withholding on a credit / debit note ────
+
+    Error: B05-6 A withholding entry of 5% = 50 is calculated {"apply":1,"cat":"QA-PE TDS 5","entries":[[-1000,5,-50,"Settled"]],"accounts":[["QA-PR Payable - E",950,0],["122102 - RIYAD BANK - E",0,1000],["QA-PE WHT - E",0,-50]]}
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-b-tabs.spec.ts:123:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-b-tabs-B05-tax-withholding-on-a-credit-debit-note-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-b-tabs-B05-tax-withholding-on-a-credit-debit-note-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-b-tabs-B05-tax-withholding-on-a-credit-debit-note-chromium\error-context.md
+
+
+[14/19] [chromium] › Shamel\je-c-lifecycle.spec.ts:16:5 › C01 list screen
+[15/19] [chromium] › Shamel\je-c-lifecycle.spec.ts:34:5 › C02 edit a draft
+[16/19] [chromium] › Shamel\je-c-lifecycle.spec.ts:51:5 › C03 submitted entry, ledger and reverse
+[17/19] [chromium] › Shamel\je-c-lifecycle.spec.ts:80:5 › C04 cancel, amend and delete rules
+  8) [chromium] › Shamel\je-c-lifecycle.spec.ts:80:5 › C04 cancel, amend and delete rules ──────────
+
+    TimeoutError: locator.click: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('button:visible').filter({ hasText: /^\s*حذف\s*$/ }).last()
+
+
+       at helpers\je-ui.ts:71
+
+      69 | export const flashed = async (p: Page) => ((await p.evaluate(() => (window as any).__qa ?? []).catch(() => [])) as string[]).join(' | '); // eslint-disable-line @typescript-eslint/no-explicit-any
+      70 | const button = (p: Page, label: string): Locator => p.locator('button:visible').filter({ hasText: new RegExp('^\\s*' + label + '\\s*$') }).last();
+    > 71 | export const click = async (p: Page, label: string) => { await button(p, label).click(); await wait(2500); };
+         |                                                                                 ^
+      72 | /** Clicks a button and returns the server answer plus every message shown. */
+      73 | export async function send(p: Page, label: string, call = /journal_entry|Journal/) {
+      74 |   await watch(p);
+        at Object.click (c:\Playwright_Automation\Shamel\helpers\je-ui.ts:71:81)
+        at c:\Playwright_Automation\Shamel\je-c-lifecycle.spec.ts:99:61
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C04-cancel-amend-and-delete-rules-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C04-cancel-amend-and-delete-rules-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-c-lifecycle-C04-cancel-amend-and-delete-rules-chromium\error-context.md
+
+
+[18/19] [chromium] › Shamel\je-c-lifecycle.spec.ts:107:5 › C05 delete own draft and own cancelled entry
+  9) [chromium] › Shamel\je-c-lifecycle.spec.ts:107:5 › C05 delete own draft and own cancelled entry 
+
+    TimeoutError: locator.click: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('button:visible').filter({ hasText: /^\s*حذف\s*$/ }).last()
+
+
+       at helpers\je-ui.ts:71
+
+      69 | export const flashed = async (p: Page) => ((await p.evaluate(() => (window as any).__qa ?? []).catch(() => [])) as string[]).join(' | '); // eslint-disable-line @typescript-eslint/no-explicit-any
+      70 | const button = (p: Page, label: string): Locator => p.locator('button:visible').filter({ hasText: new RegExp('^\\s*' + label + '\\s*$') }).last();
+    > 71 | export const click = async (p: Page, label: string) => { await button(p, label).click(); await wait(2500); };
+         |                                                                                 ^
+      72 | /** Clicks a button and returns the server answer plus every message shown. */
+      73 | export async function send(p: Page, label: string, call = /journal_entry|Journal/) {
+      74 |   await watch(p);
+        at Object.click (c:\Playwright_Automation\Shamel\helpers\je-ui.ts:71:81)
+        at c:\Playwright_Automation\Shamel\je-c-lifecycle.spec.ts:109:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C05-delete-own-draft-and-own-cancelled-entry-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C05-delete-own-draft-and-own-cancelled-entry-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-c-lifecycle-C05-delete-own-draft-and-own-cancelled-entry-chromium\error-context.md
+
+
+[19/19] [chromium] › Shamel\je-c-lifecycle.spec.ts:120:5 › C06 bulk actions on the list
+  10) [chromium] › Shamel\je-c-lifecycle.spec.ts:120:5 › C06 bulk actions on the list ──────────────
+
+    Error: C06-2 Bulk Edit does not offer the hidden (red) Letter Head تاريخ الترحيل | الرقم المرجعي | تاريخ المرجع | رقم الفاتورة | تاريخ الفاتورة | تاريخ الاستحقاق | طريقة الدفع | ملاحظات | ترويسة الخطاب | عنوان الطباعة
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-c-lifecycle.spec.ts:138:7
+
+    Error: C06-9 Bulk Delete asks for confirmation then deletes confirm="حذف السجل سيتم حذف هذا العنصر نهائيا ولن يمكنك استرجاعه إلغاء حذف" لا يمكن الحذف قيد اليومية ACC-JV-2026-01743 ملغي وقيود دفتر الأستاذ الخاصة به محفوظة. لحذفه، فعّل خيار "حذف القيود المحاسبية والمخزنية عند حذف المعاملة" في إعدادات الحسابات. ACC-JV-2026-01743 خطأ غير معروف
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\je-c-lifecycle.spec.ts:154:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C06-bulk-actions-on-the-list-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-c-lifecycle-C06-bulk-actions-on-the-list-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-c-lifecycle-C06-bulk-actions-on-the-list-chromium\error-context.md
+
+
+  10 failed
+    [chromium] › Shamel\je-a-form.spec.ts:15:5 › A01 default state ─────────────────────────────────
+    [chromium] › Shamel\je-a-form.spec.ts:46:5 › A03 accounting rows and amount rules ──────────────
+    [chromium] › Shamel\je-a-form.spec.ts:82:5 › A05 mandatory checks on save ──────────────────────
+    [chromium] › Shamel\je-a-form.spec.ts:91:5 › A06 row Edit Row and column settings ──────────────
+    [chromium] › Shamel\je-b-tabs.spec.ts:62:5 › B03 More Info tab fields and stored values ────────
+    [chromium] › Shamel\je-b-tabs.spec.ts:93:5 › B04 write off entry ───────────────────────────────
+    [chromium] › Shamel\je-b-tabs.spec.ts:107:5 › B05 tax withholding on a credit / debit note ─────
+    [chromium] › Shamel\je-c-lifecycle.spec.ts:80:5 › C04 cancel, amend and delete rules ───────────
+    [chromium] › Shamel\je-c-lifecycle.spec.ts:107:5 › C05 delete own draft and own cancelled entry 
+    [chromium] › Shamel\je-c-lifecycle.spec.ts:120:5 › C06 bulk actions on the list ────────────────
+  9 passed (30.2m)

@@ -1,0 +1,39 @@
+
+Running 5 tests using 1 worker
+
+[1/5] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/5] [chromium] › Shamel\prec-c-tables.spec.ts:56:5 › C02 supplier data returned correctly
+[3/5] [chromium] › Shamel\prec-c-tables.spec.ts:73:5 › C04 draft and cancelled documents are excluded
+  1) [chromium] › Shamel\prec-c-tables.spec.ts:73:5 › C04 draft and cancelled documents are excluded 
+
+    Error: insert Sales Invoice failed: 417 {"exception":"\t\t\t\t\tهذا التحقق.","exc_type":"ValidationError","_exc_source":"erpnext (app)","exc":"[\"Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/app.py\\\", line 121, in application\\n    response = frappe.api.handle(request)\\n  File \\\"apps/frappe/frappe/api/__init__.py\\\", line 63, in handle\\n    data = endpoint(**arguments)\\n  File \\\"apps/frappe/frappe/api/v1.py\\\", line 47, in create_doc\\n    return frappe.new_doc(doctype, **data).insert()\\n           ~~
+
+       at helpers\api.ts:28
+
+      26 |
+      27 | async function json(res: Awaited<ReturnType<APIRequestContext['get']>>, what: string): Promise<Doc> {
+    > 28 |   if (!res.ok()) throw new Error(`${what} failed: ${res.status()} ${(await res.text()).slice(0, 500)}`);
+         |                        ^
+      29 |   return (await res.json()) as Doc;
+      30 | }
+      31 |
+        at json (c:\Playwright_Automation\Shamel\helpers\api.ts:28:24)
+        at c:\Playwright_Automation\Shamel\helpers\api.ts:36:8
+        at c:\Playwright_Automation\Shamel\prec-c-tables.spec.ts:76:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C04-draft-and-cancelled-documents-are-excluded-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-c-tables-C04-draft-and-cancelled-documents-are-excluded-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-c-tables-C04-draft-and-cancelled-documents-are-excluded-chromium\error-context.md
+
+
+[4/5] [chromium] › Shamel\prec-c-tables.spec.ts:86:5 › C05 invoice number opens the document
+[5/5] [chromium] › Shamel\prec-c-tables.spec.ts:139:5 › C08 edit row of invoice and payment
+  1 failed
+    [chromium] › Shamel\prec-c-tables.spec.ts:73:5 › C04 draft and cancelled documents are excluded 
+  4 passed (2.2m)

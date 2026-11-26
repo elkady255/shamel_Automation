@@ -1,0 +1,76 @@
+
+Running 10 tests using 1 worker
+
+[1/10] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/10] [chromium] › Shamel\je-add.spec.ts:91:5 › J03 row with a supplier
+[3/10] [chromium] › Shamel\je-add.spec.ts:96:5 › J04 bank entry with a reference
+  1) [chromium] › Shamel\je-add.spec.ts:96:5 › J04 bank entry with a reference ─────────────────────
+
+    Error: J04-2 Bank Entry: the stored data matches what was typed [["122301",20,0],["122102",0,20]] cheque_no: expected QA-JE-BANK-01 got 01
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at saveAndSubmit (c:\Playwright_Automation\Shamel\je-add.spec.ts:65:7)
+        at c:\Playwright_Automation\Shamel\je-add.spec.ts:98:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-add-J04-bank-entry-with-a-reference-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-add-J04-bank-entry-with-a-reference-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-add-J04-bank-entry-with-a-reference-chromium\error-context.md
+
+
+[4/10] [chromium] › Shamel\je-add.spec.ts:101:5 › J05 cash entry
+[5/10] [chromium] › Shamel\je-add.spec.ts:106:5 › J06 contra entry
+[6/10] [chromium] › Shamel\je-add.spec.ts:111:5 › J07 three rows
+[7/10] [chromium] › Shamel\je-add.spec.ts:116:5 › J08 multi currency
+[8/10] [chromium] › Shamel\je-add.spec.ts:124:5 › J09 Edit Row values are saved
+[9/10] [chromium] › Shamel\je-add.spec.ts:134:5 › J10 quick entry
+  2) [chromium] › Shamel\je-add.spec.ts:134:5 › J10 quick entry ────────────────────────────────────
+
+    TimeoutError: locator.click: Timeout 20000ms exceeded.
+    Call log:
+      - waiting for locator('.cs-option:visible').filter({ hasText: '122102' }).first()
+
+
+      138 |   const box = (label: string) => m.locator('label').filter({ hasText: new RegExp('^\\s*' + label + '\\s*\\*?\\s*$') }).locator('xpath=ancestor::div[.//input or .//textarea][1]').locator('input:visible, textarea:visible').first();
+      139 |   await box('المبلغ').fill('8');
+    > 140 |   for (const [label, q] of [['الحساب المدين', CASH], ['الحساب الدائن', BANK]]) { await box(label).click(); await box(label).fill(q); await wait(2500); await page.locator('.cs-option:visible').filter({ hasText: q }).first().click(); await wait(1500); }
+          |                                                                                                                                                                                                                                ^
+      141 |   await box('ملاحظات').fill('QA quick entry'); await box('ملاحظات').press('Tab'); await wait(1000);
+      142 |   await page.screenshot({ path: 'Shamel/je-results/J10-popup.png' });
+      143 |   const s = await send(page, 'حفظ', /journal_entry|Journal/);
+        at c:\Playwright_Automation\Shamel\je-add.spec.ts:140:224
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\je-add-J10-quick-entry-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\je-add-J10-quick-entry-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\je-add-J10-quick-entry-chromium\error-context.md
+
+
+[10/10] [chromium] › Shamel\je-add.spec.ts:156:5 › J11 unbalanced entry is refused
+  2 failed
+    [chromium] › Shamel\je-add.spec.ts:96:5 › J04 bank entry with a reference ──────────────────────
+    [chromium] › Shamel\je-add.spec.ts:134:5 › J10 quick entry ─────────────────────────────────────
+  8 passed (10.0m)

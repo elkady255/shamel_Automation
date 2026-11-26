@@ -1,0 +1,43 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\prec-probe6.spec.ts:12:5 › allocate walk
+[chromium] › Shamel\prec-probe6.spec.ts:12:5 › allocate walk
+NOSEL ["MODAL: خطأ اختر فاتورة واحدة ودفعة واحدة على الأقل للتخصيص"] ["modal fade show :: خطأ | اختر فاتورة واحدة ودفعة واحدة على الأقل للتخصيص"] tables 2
+
+SELBAR 1
+المحدد
+تحديد الكل
+حذف // 1
+المحدد
+تحديد الكل
+حذف
+
+API 200 shamel.api.routes.account.transactions.payment_reconcilition.allocate_entries data={"company":"Ahmed Ebrahim CO.","party_type":"Customer","party":"QA-PR Cust Main","receivable_payable_account":"1210 - العملاء - E","invoice_limit":50,"payment_limit":50,"payments":[{"reference_type":"Payment Entry","reference_name":"ACC-PAY-2026-03072"}],"invoices":[{"invoice_type":"Sales Invoice","invoice_number":"ACC-SINV-2026-02907"}]} => {"message":{"status":200,"message":"entries allocated successfully","data":{"allocation":[{"reference_type":"Payment Entry","reference_name":"ACC-PAY-2026-03072","reference_row":null,"invoice_type":"Sales Invoice","invoice_number":"ACC-SINV-2026-02907","allocated_amount":700.0,"difference_account":"5220 - ديون مشكوك في تحصيلها - E","exchange_rate":1.0,"gain_loss_posting_date":"2026-11-26","debit_or_credit_note_posting_date":null,"cost_center":null,"currency":"SAR","invoice_outstanding":1000.0,"payment_amount":700.0}]}}}
+
+ALLOC [{"head":["","م","نوع الفاتورة","رقم الفاتورة","تاريخ الفاتورة","المبلغ المستحق",""],"rows":[{"cells":["","1","فاتورة مبيعات","ACC-SINV-2026-02907","05-11-2026","1,000.00",""]},{"cells":["","2","فاتورة مبيعات","ACC-SINV-2026-02908","15-11-2026","2,000.00",""]},{"cells":["","3","فاتورة مبيعات","ACC-SINV-2026-02909","24-11-2026","500.00",""]}]},{"head":["","م","اسم المرجع","تاريخ الترحيل","المبلغ",""],"rows":[{"cells":["","1","ACC-PAY-2026-03072","10-11-2026","700.00",""]},{"cells":["","2","ACC-PAY-2026-03073","20-11-2026","3,000.00",""]},{"cells":["","3","ACC-JV-2026-01713","23-11-2026","400.00",""]},{"cells":["","4","ACC-SINV-2026-02910","24-11-2026","200.00",""]}]},{"head":["","م","اسم المرجع","رقم الفاتورة","المبلغ المخصص","مبلغ الفرق",""],"rows":[{"cells":["","1","ACC-PAY-2026-03072","ACC-SINV-2026-02907","700.00","300.00",""]}]}]
+
+BTNS ["المعلومات الاساسية","الفلاتر","القيود غير المسواة","تحديد الكل","حذف","تحديد الكل","حذف","التخصيص","جلب القيود غير المسواة","تخصيص","تسوية"]
+
+ALLOCROW <tr><td class=""><div class="sr-checkbox"><!----></div></td><td class="">1</td><td class=""><div class="prc-box">ACC-PAY-2026-03072</div></td><td class=""><div class="prc-box">ACC-SINV-2026-02907</div></td><td class=""><div class="prc-amount-cell"><input class="cd-input prc-amount" type="text" inputmode="decimal" dir="ltr" maxlength="15" value="700.00"><!----></div></td><td class=""><div class="prc-box">300.00</div></td><td class="tbl-center"><div class="wh-actions-group"><button class="wh-table-row-btn" type="button" title="تعديل الصف"><span>
+        
+    </span></button><button class="wh-table-row-btn wh-table-row-btn--danger" type="button" title="حذف"><span>
+
+<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.47578 3.70662L4.4127 15.406C4.50129 15.9416 4.77715 16.4284 5.19113 16.7796C5.60511 17.1308 6.13032 17.3236 6.6732 17.3237H9.7422M15.882 3.70662L13.946 15.406C13.8574 15.9416 13.5816 16.4284 13.1676 16.7796C12.7536 17.1308 12.2284 17.3236 11.6855 17.3237H8.61653M7.3662 8.20104V12.8293M10.9925 8.20104V12.8293M0.700195 3.70662H17.6585M11.7249 3.70662V2.07495C11.7249 1.71028 11.5801 1.36054 11.3222 1.10268C11.0644 0.844817 10.7146 0.699951 10.3499 0.699951H8.00878C7.64411 0.699951 7.29437 0.844817 7.03651 1.10268C6.77865 1.36054 6.63378 1.71028 6.63378 2.07495V3.70662H11.7249Z" stroke="#F24D4A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+
+</span></button></div></td></tr>
+
+EDITALLOC ["base-modal base-modal--scroll-body :: تعديل التخصيص | تعديل التخصيص | نوع المرجع | قيد دفع | اسم المرجع | ACC-PAY-2026-03072 | نوع الفاتورة | فاتورة مبيعات | رقم الفاتورة | ACC-SINV-2026-02907 | المبلغ المخصص* | مبلغ الفرق | 300.00 | حساب الفرق | 5220 - ديون مشكوك في تحصيلها - E | تاريخ ترحيل الفرق | سعر الصرف | 1.00 | تاريخ ترحيل إشعار المدين / الدائن | إلغاء | تعديل"]
+
+after esc []
+
+EDIT inv ["base-modal base-modal--scroll-body :: تعديل الفاتورة | تعديل الفاتورة | نوع الفاتورة | فاتورة مبيعات | رقم الفاتورة | ACC-SINV-2026-02907 | تاريخ الفاتورة | 05-11-2026 | المبلغ المستحق | 1,000.00 | المبلغ | 1,000.00 | إلغاء | تعديل"]
+
+EDIT pay ["base-modal base-modal--scroll-body :: تعديل الدفعة | تعديل الدفعة | نوع المرجع | قيد دفع | اسم المرجع | ACC-PAY-2026-03072 | تاريخ الترحيل | 10-11-2026 | المبلغ | 700.00 | مبلغ الفرق | — | ملاحظات | القيمة ريال سعودي 700 مستلم من QA-PR Cust Main | إشارة عملية لا QA-PR بتاريخ 2026-11-10 | مركز التكلفة | إلغاء | تعديل"]
+
+SETTINGS ["base-modal base-modal--scroll-body :: تعديل الأعمدة | تعديل الأعمدة | اسم الحقل | عرض العمود | نوع الفاتورة | رقم الفاتورة | تاريخ الفاتورة | المبلغ المستحق | إضافة/إزالة حقول | إلغاء | إعادة تعيين إلى الافتراضي | حفظ"]
+
+  2 passed (2.4m)

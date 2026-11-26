@@ -1,0 +1,128 @@
+
+Running 5 tests using 1 worker
+
+[1/5] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/5] [chromium] › Shamel\prec-f-supplier-usd.spec.ts:46:5 › F01 supplier: invoice with advance payment
+  1) [chromium] › Shamel\prec-f-supplier-usd.spec.ts:46:5 › F01 supplier: invoice with advance payment 
+
+    Error: F01-5 No new Journal Entry [{"name":"ACC-JV-2026-00437","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":187.8},{"name":"ACC-JV-2026-00438","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":2.36},{"name":"ACC-JV-2026-00439","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":237.4},{"name":"ACC-JV-2026-00440","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":2.36},{"name":"ACC-JV-2026-00444","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":138.19},{"name":"ACC-JV-2026-00445","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":6.69},{"name":"ACC-JV-2026-00446","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":2750},{"name":"ACC-JV-2026-00447","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":787.4},{"name":"ACC-JV-2026-00448","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":590.55},{"name":"ACC-JV-2026-00449","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":157.48},{"name":"ACC-JV-2026-00450","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":478.35},{"name":"ACC-JV-2026-00451","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":59.06},{"name":"ACC-JV-2026-00452","voucher_type":"Journal Entry","posting_date":"2026-01-10","docstatus":1,"total_debit":393.7},{"name":"ACC-JV-2026-00453","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":20944.88},{"name":"ACC-JV-2026-00454","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":11023.62},{"name":"ACC-JV-2026-00455","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":9921.26},{"name":"ACC-JV-2026-00456","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":5826.77},{"name":"ACC-JV-2026-00457","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":20484.25},{"name":"ACC-JV-2026-00458","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":20484.25},{"name":"ACC-JV-2026-00460","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":196.85},{"name":"ACC-JV-2026-00461","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":236.22},{"name":"ACC-JV-2026-00462","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":2.36},{"name":"ACC-JV-2026-00463","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":236.22},{"name":"ACC-JV-2026-00464","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":1614.17},{"name":"ACC-JV-2026-00465","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":249.61},{"name":"ACC-JV-2026-00466","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":407.87},{"name":"ACC-JV-2026-00467","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":8535.43},{"name":"ACC-JV-2026-00468","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":7531.5},{"name":"ACC-JV-2026-00469","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":1003.94},{"name":"ACC-JV-2026-00470","voucher_type":"Journal Entry","posting_date":"2026-01-11","docstatus":1,"total_debit":2.36},{"name":"ACC-JV-2026-00471","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":48212.6},{"name":"ACC-JV-2026-00472","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":1574.8},{"name":"ACC-JV-2026-00524","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":1299.21},{"name":"ACC-JV-2026-00525","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":196.85},{"name":"ACC-JV-2026-00526","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":826.77},{"name":"ACC-JV-2026-00527","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":10814.96},{"name":"ACC-JV-2026-00528","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":4763.78},{"name":"ACC-JV-2026-00530","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":196.85},{"name":"ACC-JV-2026-00531","voucher_type":"Journal Entry","posting_date":"2026-01-12","docstatus":1,"total_debit":311.02},{"name":"ACC-JV-2026-00537","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":50.39},{"name":"ACC-JV-2026-00538","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":11.81},{"name":"ACC-JV-2026-00539","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":637.8},{"name":"ACC-JV-2026-00540","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":637.8},{"name":"ACC-JV-2026-00541","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":236.22},{"name":"ACC-JV-2026-00542","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":4.72},{"name":"ACC-JV-2026-00543","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":118.11},{"name":"ACC-JV-2026-00544","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":78.74},{"name":"ACC-JV-2026-00545","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":629.92},{"name":"ACC-JV-2026-00546","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":314.96},{"name":"ACC-JV-2026-00547","voucher_type":"Journal Entry","posting_date":"2026-01-13","docstatus":1,"total_debit":311.81}]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-f-supplier-usd.spec.ts:55:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-f-supplier-usd-F01-su-723f9-nvoice-with-advance-payment-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-f-supplier-usd-F01-su-723f9-nvoice-with-advance-payment-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-f-supplier-usd-F01-su-723f9-nvoice-with-advance-payment-chromium\error-context.md
+
+
+[3/5] [chromium] › Shamel\prec-f-supplier-usd.spec.ts:58:5 › F02 supplier: return invoice (debit note)
+[4/5] [chromium] › Shamel\prec-f-supplier-usd.spec.ts:68:5 › F03 supplier: journal entry and payment against one invoice
+[5/5] [chromium] › Shamel\prec-f-supplier-usd.spec.ts:79:5 › G01 foreign currency: entries, allocation, difference and reconcile
+  2) [chromium] › Shamel\prec-f-supplier-usd.spec.ts:79:5 › G01 foreign currency: entries, allocation, difference and reconcile 
+
+    Error: G01-2 The tables show which currency the amounts are in [{"head":["","م","نوع الفاتورة","رقم الفاتورة","تاريخ الفاتورة","المبلغ المستحق",""],"rows":[{"cells":["","1","فاتورة مبيعات","ACC-SINV-2026-02911","17-11-2026","300.00",""]}]},{"head":["","م","اسم المرجع","تاريخ الترحيل","المبلغ",""],"rows":[{"cells":["","1","ACC-PAY-2026-03076","19-11-2026","100.00",""]}]},{"head":["","م","اسم المرجع","رقم الفاتورة","المبلغ المخصص","مبلغ الفرق",""],"rows":[{"cells":["","1","ACC-PAY-2026-03076","ACC-SINV-2026-02911","100.00","200.00",""]}]}]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-f-supplier-usd.spec.ts:86:7
+
+    Error: G01-7 The popup shows the exchange gain / loss of 10 SAR somewhere تعديل التخصيص تعديل التخصيص نوع المرجع قيد دفع اسم المرجع ACC-PAY-2026-03076 نوع الفاتورة فاتورة مبيعات رقم الفاتورة ACC-SINV-2026-02911 المبلغ المخصص* مبلغ الفرق 200.00 حساب الفرق 5220 - ديون مشكوك في تحصيلها - E تاريخ ترحيل الفرق سعر الصرف 3.70 تاريخ ترحيل إشعار المدين / الدائن إلغاء تعديل
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-f-supplier-usd.spec.ts:96:7
+
+    Error: G01-12 The exchange difference of 10 SAR is posted to the Difference Account [{"name":"ACC-JV-2026-00437","type":"Journal Entry","date":"2026-01-10","rows":[["5217 - ادوات مكتبية ونثريات - E",187.8,0,null],["1231 - Cash 1 - E",0,187.8,null]]},{"name":"ACC-JV-2026-00438","type":"Journal Entry","date":"2026-01-10","rows":[["5217 - ادوات مكتبية ونثريات - E",2.36,0,null],["1231 - Cash 1 - E",0,2.36,null]]},{"name":"ACC-JV-2026-00439","type":"Journal Entry","date":"2026-01-10","rows":[["5215 - صيانة ومرافق - E",237.4,0,null],["1231 - Cash 1 - E",0,237.4,null]]},{"name":"ACC-JV-2026-00440","type":"Journal Entry","date":"2026-01-10","rows":[["5217 - ادوات مكتبية ونثريات - E",2.36,0,null],["1231 - Cash 1 - E",0,2.36,null]]},{"name":"ACC-JV-2026-00444","type":"Journal Entry","date":"2026-01-10","rows":[["5216 - بوفية وضيافة - E",138.19,0,null],["1231 - Cash 1 - E",0,138.19,null]]},{"name":"ACC-JV-2026-00445","type":"Journal Entry","date":"2026-01-10","rows":[["5215 - صيانة ومرافق - E",6.69,0,null],["1231 - Cash 1 - E",0,6.69,null]]},{"name":"ACC-JV-2026-00446","type":"Journal Entry","date":"2026-01-10","rows":[["5215 - صيانة ومرافق - E",2750,0,null],["1231 - Cash 1 - E",0,2750,null]]},{"name":"ACC-JV-2026-00447","type":"Journal Entry","date":"2026-01-10","rows":[["5211 - سلف عاملين - E",787.4,0,null],["1231 - Cash 1 - E",0,787.4,null]]},{"name":"ACC-JV-2026-00448","type":"Journal Entry","date":"2026-01-10","rows":[["2200 - صندوق الزكاة - E",590.55,0,null],["1231 - Cash 1 - E",0,590.55,null]]},{"name":"ACC-JV-2026-00449","type":"Journal Entry","date":"2026-01-10","rows":[["5211 - سلف عاملين - E",157.48,0,null],["1231 - Cash 1 - E",0,157.48,null]]},{"name":"ACC-JV-2026-00450","type":"Journal Entry","date":"2026-01-10","rows":[["5219 - اتصالات وانترنت - E",478.35,0,null],["1231 - Cash 1 - E",0,478.35,null]]},{"name":"ACC-JV-2026-00451","type":"Journal Entry","date":"2026-01-10","rows":[["5217 - ادوات مكتبية ونثريات - E",59.06,0,null],["1231 - Cash 1 - E",0,59.06,null]]},{"name":"ACC-JV-2026-00452","type":"Journal Entry","date":"2026-01-10","rows":[["5211 - سلف عاملين - E",393.7,0,null],["1231 - Cash 1 - E",0,393.7,null]]},{"name":"ACC-JV-2026-00453","type":"Journal Entry","date":"2026-01-11","rows":[["1231 - Cash 1 - E",20944.88,0,null],["1250 - تصفيات - E",0,20944.88,null]]},{"name":"ACC-JV-2026-00454","type":"Journal Entry","date":"2026-01-11","rows":[["5217 - ادوات مكتبية ونثريات - E",11023.62,0,null],["1231 - Cash 1 - E",0,11023.62,null]]},{"name":"ACC-JV-2026-00455","type":"Journal Entry","date":"2026-01-11","rows":[["1240 - عهد - E",9921.26,0,null],["1231 - Cash 1 - E",0,9921.26,null]]},{"name":"ACC-JV-2026-00456","type":"Journal Entry","date":"2026-01-11","rows":[["1231 - Cash 1 - E",5826.77,0,null],["5214 - رسوم ادارية وحكومية وتأمينات - E",0,5826.77,null]]},{"name":"ACC-JV-2026-00457","type":"Journal Entry","date":"2026-01-11","rows":[["1231 - Cash 1 - E",20484.25,0,null],["1250 - تصفيات - E",0,20484.25,null]]},{"name":"ACC-JV-2026-00458","type":"Journal Entry","date":"2026-01-11","rows":[["5212 - ايجارات - E",20484.25,0,null],["1231 - Cash 1 - E",0,20484.25,null]]},{"name":"ACC-JV-2026-00460","type":"Journal Entry","date":"2026-01-11","rows":[["5215 - صيانة ومرافق - E",196.85,0,null],["1231 - Cash 1 - E",0,196.85,null]]},{"name":"ACC-JV-2026-00461","type":"Journal Entry","date":"2026-01-11","rows":[["5211 - سلف عاملين - E",236.22,0,null],["1231 - Cash 1 - E",0,236.22,null]]},{"name":"ACC-JV-2026-00462","type":"Journal Entry","date":"2026-01-11","rows":[["5217 - ادوات مكتبية ونثريات - E",2.36,0,null],["1231 - Cash 1 - E",0,2.36,null]]},{"name":"ACC-JV-2026-00463","type":"Journal Entry","date":"2026-01-11","rows":[["5211 - سلف عاملين - E",236.22,0,null],["1231 - Cash 1 - E",0,236.22,null]]},{"name":"ACC-JV-2026-00464","type":"Journal Entry","date":"2026-01-11","rows":[["2200 - صندوق الزكاة - E",1614.17,0,null],["1231 - Cash 1 - E",0,1614.17,null]]},{"name":"ACC-JV-2026-00465","type":"Journal Entry","date":"2026-01-11","rows":[["5211 - سلف عاملين - E",249.61,0,null],["1231 - Cash 1 - E",0,249.61,null]]},{"name":"ACC-JV-2026-00466","type":"Journal Entry","date":"2026-01-11","rows":[["5219 - اتصالات وانترنت - E",407.87,0,null],["1231 - Cash 1 - E",0,407.87,null]]},{"name":"ACC-JV-2026-00467","type":"Journal Entry","date":"2026-01-11","rows":[["1231 - Cash 1 - E",8535.43,0,null],["1250 - تصفيات - E",0,8535.43,null]]},{"name":"ACC-JV-2026-00468","type":"Journal Entry","date":"2026-01-11","rows":[["5411 - اثاث - E",7531.5,0,null],["1231 - Cash 1 - E",0,7531.5,null]]},{"name":"ACC-JV-2026-00469","type":"Journal Entry","date":"2026-01-11","rows":[["5215 - صيانة ومرافق - E",1003.94,0,null],["1231 - Cash 1 - E",0,1003.94,null]]},{"name":"ACC-JV-2026-00470","type":"Journal Entry","date":"2026-01-11","rows":[["5217 - ادوات مكتبية ونثريات - E",2.36,0,null],["1231 - Cash 1 - E",0,2.36,null]]},{"name":"ACC-JV-2026-00471","type":"Journal Entry","date":"2026-01-12","rows":[["1231 - Cash 1 - E",48212.6,0,null],["1250 - تصفيات - E",0,48212.6,null]]},{"name":"ACC-JV-2026-00472","type":"Journal Entry","date":"2026-01-12","rows":[["5212 - ايجارات - E",1574.8,0,null],["1231 - Cash 1 - E",0,1574.8,null]]},{"name":"ACC-JV-2026-00524","type":"Journal Entry","date":"2026-01-12","rows":[["5212 - ايجارات - E",1299.21,0,null],["1231 - Cash 1 - E",0,1299.21,null]]},{"name":"ACC-JV-2026-00525","type":"Journal Entry","date":"2026-01-12","rows":[["5218 - هدايا ومكافأت - E",196.85,0,null],["1231 - Cash 1 - E",0,196.85,null]]},{"name":"ACC-JV-2026-00526","type":"Journal Entry","date":"2026-01-12","rows":[["1231 - Cash 1 - E",826.77,0,null],["1240 - عهد - E",0,826.77,null]]},{"name":"ACC-JV-2026-00527","type":"Journal Entry","date":"2026-01-12","rows":[["5410 - اجهزة كمبيوتر - E",10814.96,0,null],["1231 - Cash 1 - E",0,10814.96,null]]},{"name":"ACC-JV-2026-00528","type":"Journal Entry","date":"2026-01-12","rows":[["5212 - ايجارات - E",4763.78,0,null],["1231 - Cash 1 - E",0,4763.78,null]]},{"name":"ACC-JV-2026-00530","type":"Journal Entry","date":"2026-01-12","rows":[["5218 - هدايا ومكافأت - E",196.85,0,null],["1231 - Cash 1 - E",0,196.85,null]]},{"name":"ACC-JV-2026-00531","type":"Journal Entry","date":"2026-01-12","rows":[["5219 - اتصالات وانترنت - E",311.02,0,null],["1231 - Cash 1 - E",0,311.02,null]]},{"name":"ACC-JV-2026-00537","type":"Journal Entry","date":"2026-01-13","rows":[["5216 - بوفية وضيافة - E",50.39,0,null],["1231 - Cash 1 - E",0,50.39,null]]},{"name":"ACC-JV-2026-00538","type":"Journal Entry","date":"2026-01-13","rows":[["5215 - صيانة ومرافق - E",11.81,0,null],["1231 - Cash 1 - E",0,11.81,null]]},{"name":"ACC-JV-2026-00539","type":"Journal Entry","date":"2026-01-13","rows":[["1231 - Cash 1 - E",637.8,0,null],["1250 - تصفيات - E",0,637.8,null]]},{"name":"ACC-JV-2026-00540","type":"Journal Entry","date":"2026-01-13","rows":[["5212 - ايجارات - E",637.8,0,null],["1231 - Cash 1 - E",0,637.8,null]]},{"name":"ACC-JV-2026-00541","type":"Journal Entry","date":"2026-01-13","rows":[["1240 - عهد - E",236.22,0,null],["1231 - Cash 1 - E",0,236.22,null]]},{"name":"ACC-JV-2026-00542","type":"Journal Entry","date":"2026-01-13","rows":[["5217 - ادوات مكتبية ونثريات - E",4.72,0,null],["1231 - Cash 1 - E",0,4.72,null]]},{"name":"ACC-JV-2026-00543","type":"Journal Entry","date":"2026-01-13","rows":[["5211 - سلف عاملين - E",118.11,0,null],["1231 - Cash 1 - E",0,118.11,null]]},{"name":"ACC-JV-2026-00544","type":"Journal Entry","date":"2026-01-13","rows":[["5211 - سلف عاملين - E",78.74,0,null],["1231 - Cash 1 - E",0,78.74,null]]},{"name":"ACC-JV-2026-00545","type":"Journal Entry","date":"2026-01-13","rows":[["2200 - صندوق الزكاة - E",629.92,0,null],["1231 - Cash 1 - E",0,629.92,null]]},{"name":"ACC-JV-2026-00546","type":"Journal Entry","date":"2026-01-13","rows":[["1240 - عهد - E",314.96,0,null],["1231 - Cash 1 - E",0,314.96,null]]},{"name":"ACC-JV-2026-00547","type":"Journal Entry","date":"2026-01-13","rows":[["5210 - رواتب وعمولات - E",311.81,0,null],["1231 - Cash 1 - E",0,311.81,null]]}]
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-f-supplier-usd.spec.ts:110:7
+
+    Error: G01-13 It is posted on the chosen Difference Posting Date undefined
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+       at helpers\si-ui.ts:147
+
+      145 |       fs.appendFileSync(file, JSON.stringify({ id, text, ok, detail: String(detail).slice(0, 400), known }) + '\n');
+      146 |       if (known && !ok) test.info().annotations.push({ type: 'known-bug', description: `${id} ${known}` });
+    > 147 |       else expect.soft(ok, `${id} ${text} ${detail}`).toBeTruthy();
+          |                                                       ^
+      148 |     },
+      149 |     note(id: string, text: string, detail = '') { fs.appendFileSync(file, JSON.stringify({ id, text, ok: null, detail: String(detail).slice(0, 6000) }) + '\n'); },
+      150 |   };
+        at Object.check (c:\Playwright_Automation\Shamel\helpers\si-ui.ts:147:55)
+        at c:\Playwright_Automation\Shamel\prec-f-supplier-usd.spec.ts:111:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\prec-f-supplier-usd-G01-fo-4c5bb-on-difference-and-reconcile-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\prec-f-supplier-usd-G01-fo-4c5bb-on-difference-and-reconcile-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\prec-f-supplier-usd-G01-fo-4c5bb-on-difference-and-reconcile-chromium\error-context.md
+
+
+  2 failed
+    [chromium] › Shamel\prec-f-supplier-usd.spec.ts:46:5 › F01 supplier: invoice with advance payment 
+    [chromium] › Shamel\prec-f-supplier-usd.spec.ts:79:5 › G01 foreign currency: entries, allocation, difference and reconcile 
+  3 passed (3.9m)

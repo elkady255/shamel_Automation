@@ -1,0 +1,27 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\pe-probe6.spec.ts:10:7 › add row taxes
+[chromium] › Shamel\pe-probe6.spec.ts:10:7 › add row taxes
+taxes before alive rows=0
+
+taxes HTTP 500 SENT "references":[],"taxes":[{"charge_type":null,"account_head":null,"add_deduct_tax":"Add","row_id":null,"description":null,"included_in_paid_amount":0,"set_by_item_tax_template":0,"is_tax_withholding_account":0,"cost_center":"101 - Main X - E","project":null,"rate":null,"currency":null,"net_amount":null,"tax_amount":null,"total":null,"base_tax_amount":null,"base_net_amount":null,"base_total":null}],
+
+taxes EXC n    doc.apply_taxes()\\n    ~~~~~~~~~~~~~~~^^\\n  File \\\"apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\\\", line 957, in apply_taxes\\n    self.calculate_taxes()\\n    ~~~~~~~~~~~~~~~~~~~~^^\\n  File \\\"apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\\\", line 1794, in calculate_taxes\\n    current_tax_amount = self.get_current_tax_amount(tax)\\n  File \\\"apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\\\", line 1859, in get_current_tax_amount\\n    return current_tax_amount\\n           ^^^^^^^^^^^^^^^^^^\\nUnboundLocalError: cannot access local variable 'current_tax_amount' where it is not associated with a value\\n\"]"}
+
+taxes after add on table 1 alive rows=1
+
+[3/3] [chromium] › Shamel\pe-probe6.spec.ts:10:7 › add row refs-then-taxes
+[chromium] › Shamel\pe-probe6.spec.ts:10:7 › add row refs-then-taxes
+refs-then-taxes before alive rows=0
+
+refs-then-taxes after add on table 0 alive rows=1
+
+refs-then-taxes HTTP 500 SENT "references":[{"reference_doctype":null,"reference_name":null,"due_date":null,"bill_no":null,"payment_term":null,"payment_term_outstanding":null,"account_type":null,"payment_type":null,"reconcile_effect_on":null,"total_amount":null,"outstanding_amount":null,"allocated_amount":null,"exchange_rate":null,"exchange_gain_loss":null,"account":null,"payment_request":null,"payment_request_outstanding":null,"advance_voucher_type":null,"advance_voucher_no":null}],"taxes":[{"charge_type":null,"account_head":null,"add_deduct_tax":"Add","row_id":null,"description":null,"included_in_paid_amount":0,"set_by_i
+
+refs-then-taxes EXC n    doc.apply_taxes()\\n    ~~~~~~~~~~~~~~~^^\\n  File \\\"apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\\\", line 957, in apply_taxes\\n    self.calculate_taxes()\\n    ~~~~~~~~~~~~~~~~~~~~^^\\n  File \\\"apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\\\", line 1794, in calculate_taxes\\n    current_tax_amount = self.get_current_tax_amount(tax)\\n  File \\\"apps/erpnext/erpnext/accounts/doctype/payment_entry/payment_entry.py\\\", line 1859, in get_current_tax_amount\\n    return current_tax_amount\\n           ^^^^^^^^^^^^^^^^^^\\nUnboundLocalError: cannot access local variable 'current_tax_amount' where it is not associated with a value\\n\"]"}
+
+refs-then-taxes after add on table 1 alive rows=2
+
+  3 passed (59.3s)

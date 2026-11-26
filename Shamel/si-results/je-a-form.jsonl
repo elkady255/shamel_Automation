@@ -1,0 +1,66 @@
+{"id":"A01-1","text":"Company is shown and mandatory","ok":true,"detail":"Ahmed Ebrahim CO.","known":""}
+{"id":"A01-2","text":"Series is mandatory and filled","ok":true,"detail":"ACC-JV-.YYYY.-","known":""}
+{"id":"A01-3","text":"Entry Type defaults to Journal Entry and is shown translated","ok":false,"detail":"Journal Entry","known":""}
+{"id":"A01-4","text":"Posting Date defaults to the current date and is mandatory","ok":true,"detail":"26-11-2026 today=26-11-2026","known":""}
+{"id":"A01-5","text":"Multi Currency is a switch, off by default","ok":true,"detail":"off","known":""}
+{"id":"A01-6","text":"Consider for Tax Withholding is hidden for a Journal Entry","ok":true,"detail":"عملات متعددة","known":""}
+{"id":"A01-7","text":"Is System Generated and Amended From are hidden on a new entry","ok":true,"detail":"الشركة,السلسلة,نوع القيد,تاريخ الترحيل,إجمالي المدين,إجمالي الدائن,الفرق (مدين - دائن),الرقم المرجعي,تاريخ المرجع","known":""}
+{"id":"A01-8","text":"Hidden (red) Periodic Accounting fields are not shown","ok":true,"detail":"مرحباً Administrator ! AN Administrator admin@example.com 73 إضافة قيد يومية غير محفوظة إدخال سريع التفاصيل المعلومات الاضافية المعلومات الاساسية الشركة* السلسلة* نوع القيد تاريخ الترحيل* عملات متعددة القيود المحاسبية سجل القيود المحاسبية إضافة صف لا توجد قيود محاسبية بعد أضف الحسابات المدينة والدائ","known":""}
+{"id":"A01-9","text":"Hidden (red) Auto Repeat is not shown","ok":true,"detail":"","known":""}
+{"id":"A01-10","text":"Total Debit, Total Credit and Difference are read only labels","ok":true,"detail":"","known":""}
+{"id":"A01-11","text":"Reference Number and Reference Date are optional for a Journal Entry","ok":true,"detail":"","known":""}
+{"id":"A01-12","text":"Clearance Date is hidden before submit","ok":true,"detail":"الشركة,السلسلة,نوع القيد,تاريخ الترحيل,إجمالي المدين,إجمالي الدائن,الفرق (مدين - دائن),الرقم المرجعي,تاريخ المرجع","known":""}
+{"id":"A01-13","text":"Quick Entry is offered before Save","ok":true,"detail":"","known":""}
+{"id":"A01-14","text":"Entry Type offers the 17 SRS values (no Periodic Accounting Entry)","ok":true,"detail":"17: قيد يومية | قيد يومية بين الشركات | قيد بنكي | قيد نقدي | قيد بطاقة ائتمان | إشعار مدين | إشعار دائن | قيد مقابل | قيد ضريبة إنتاج | قيد شطب | قيد افتتاحي | قيد إهلاك | استبعاد أصل | إعادة تقييم سعر الصرف | أرباح أو خسائر فروق العملة | إيرادات مؤجلة | مصروفات مؤجلة","known":""}
+{"id":"A02-1","text":"Bank Entry makes Reference Number and Date mandatory","ok":true,"detail":"","known":""}
+{"id":"A02-2","text":"Bank Entry without a reference is not saved and the fields show errors","ok":true,"detail":"الرقم المرجعي: هذا الحقل مطلوب,تاريخ المرجع: هذا الحقل مطلوب ","known":""}
+{"id":"A02-3","text":"إشعار دائن: Consider for Tax Withholding is shown","ok":true,"detail":"عملات متعددة,احتسابها لحجز الضرائب","known":""}
+{"id":"A02-4","text":"إشعار مدين: Consider for Tax Withholding is shown","ok":true,"detail":"عملات متعددة,احتسابها لحجز الضرائب","known":""}
+{"id":"A02-5","text":"قيد نقد: Consider for Tax Withholding is hidden","ok":true,"detail":"عملات متعددة","known":""}
+{"id":"A03-1","text":"Table columns: No., Account, Party Type, Party, Debit, Credit","ok":true,"detail":"الرقم | الحساب | نوع الطرف | الطرف | مدين | دائن","known":""}
+{"id":"A03-2","text":"party types offered","ok":null,"detail":"عميل | موظف | مساهم | مورد"}
+{"id":"A03-3","text":"Party is disabled until a Party Type is chosen","ok":true,"detail":"","known":""}
+{"id":"A03-4","text":"Party lists records of the chosen Party Type","ok":true,"detail":"QA-PE Cust 11261152","known":""}
+{"id":"A03-5","text":"Debit accepts numbers only","ok":true,"detail":"\"\"","known":""}
+{"id":"A03-6","text":"Debit accepts decimals","ok":true,"detail":"12.55","known":""}
+{"id":"A03-7","text":"Debit rejects a negative value","ok":true,"detail":"\"7.00\"","known":""}
+{"id":"A04-1","text":"Totals and Difference follow the rows (70 / 0 / 70)","ok":true,"detail":"70.00 SAR 0.00 SAR 70.00 SAR","known":""}
+{"id":"A04-2","text":"Make Difference Entry button appears while Difference is not zero","ok":true,"detail":"رجوع | إدخال سريع | التفاصيل | المعلومات الاضافية | المعلومات الاساسية | القيود المحاسبية | إضافة صف | إعدادات الجدول | تعديل الصف | حذف | إنشاء قيد الفرق | المرجع | إلغاء | حفظ","known":""}
+{"id":"A04-3","text":"It adds a balancing row (credit 70) and the Difference becomes zero","ok":true,"detail":"rows=2 credit=70.00 diff=0.00 SAR","known":""}
+{"id":"A04-4","text":"The button disappears when the entry is balanced","ok":true,"detail":"","known":""}
+{"id":"A04-5","text":"An unbalanced entry cannot be saved","ok":true,"detail":"الفرق (مدين - دائن) 10.00 SAR يجب أن يساوي إجمالي المدين إجمالي الدائن. | يجب أن يساوي إجمالي المدين إجمالي الدائن.","known":""}
+{"id":"A05-1","text":"An untouched form is not saved","ok":true,"detail":"enabled=false ","known":""}
+{"id":"A05-2","text":"A row without an Account is refused with an error","ok":true,"detail":" ","known":""}
+{"id":"A05-3","text":"Saving without any accounting row shows an error","ok":false,"detail":"enabled=true  ","known":""}
+{"id":"A06-1","text":"Edit Row shows the SRS fields","ok":true,"detail":"missing= popup=تعديل الصف الحساب * 122102 - RIYAD BANK - E - RIYAD BANK نوع الحساب نقدية الحساب البنكي ابحث واختر نوع الطرف ابحث واختر الطرف ابحث واختر مركز التكلفة 101 - Main X - E - Main X المشروع ابحث واختر مدين دائن نوع المرجع اختر خياراً اسم المرجع ابحث واختر تاريخ استحقاق المرجع رقم تفصيل المرجع — نوع سند الدفعة المقدمة — رقم سند الدفعة المقدمة — حساب حجز ضرائب لا دفعة مقدمة اختر خياراً ملاح","known":""}
+{"id":"A06-2","text":"Account Currency and company currency amounts are hidden without Multi Currency","ok":true,"detail":"تعديل الصف الحساب * 122102 - RIYAD BANK - E - RIYAD BANK نوع الحساب نقدية الحساب البنكي ابحث واختر نوع الطرف ابحث واختر الطرف ابحث واختر مركز التكلفة 101 - Main X - E - Main X المشروع ابحث واختر مدين دائن نوع المرجع اختر خياراً اسم المرجع ابحث واختر تاريخ استحقاق المرجع رقم تفصيل المرجع — نوع سند الدفعة المقدمة — رقم سند الدفعة المقدمة — حساب حجز ضرائب لا دفعة مقدمة اختر خياراً ملاحظة المستخدم حفظ","known":""}
+{"id":"A06-3","text":"Reference Type options","ok":null,"detail":""}
+{"id":"A06-6","text":"Table settings has Column width, Add / Remove columns, Update and Reset to default","ok":false,"detail":"تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود الحساب نوع الطرف الطرف مدين دائن إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ","known":""}
+{"id":"A06-7","text":"Column width accepts numbers only","ok":false,"detail":"\"autobc\"","known":""}
+{"id":"A06-8","text":"Column width stops at 3 characters","ok":false,"detail":"\"12345\"","known":""}
+{"id":"A06-9","text":"Add / Remove columns lists the SRS columns","ok":true,"detail":"missing=","known":""}
+{"id":"A07-1","text":"Pop-up has Amount, Debit Account, Credit Account, Date, Remark, Series (all mandatory) and Save","ok":true,"detail":"إدخال سريع لقيد اليومية المبلغ * الحساب المدين * ابحث واختر الحساب الدائن * ابحث واختر التاريخ * السلسلة * ACC-JV-.YYYY.- ملاحظات * حفظ إلغاء","known":""}
+{"id":"A07-2","text":"Saving it empty shows an error for the fields","ok":true,"detail":"إدخال سريع لقيد اليومية المبلغ * المبلغ مطلوب الحساب المدين * ابحث واختر الحساب المدين مطلوب الحساب الدائن * ابحث واختر الحساب الدائن مطلوب التاريخ * السلسلة * ACC-JV-.YYYY.- ملاحظات * ملاحظات مطلوب حفظ إلغاء","known":""}
+{"id":"A07-3","text":"Amount accepts integers and decimals only","ok":true,"detail":"\"\" \"12.5\"","known":""}
+{"id":"A07-4","text":"Amount stops at 100 characters","ok":true,"detail":"length=100","known":""}
+{"id":"A03-1","text":"Table columns: No., Account, Party Type, Party, Debit, Credit","ok":true,"detail":"الرقم | الحساب | نوع الطرف | الطرف | مدين | دائن","known":""}
+{"id":"A03-2","text":"party types offered","ok":null,"detail":"عميل | موظف | مساهم | مورد"}
+{"id":"A03-3","text":"Party is disabled until a Party Type is chosen","ok":true,"detail":"","known":""}
+{"id":"A03-4","text":"Party lists records of the chosen Party Type","ok":true,"detail":"QA-PE Cust 11261152","known":""}
+{"id":"A03-5","text":"Debit accepts numbers only","ok":true,"detail":"\"\"","known":""}
+{"id":"A03-6","text":"Debit accepts decimals","ok":true,"detail":"12.55","known":""}
+{"id":"A03-7","text":"Debit rejects a negative value","ok":true,"detail":"\"7.00\"","known":""}
+{"id":"A03-8","text":"Debit and Credit cannot both be entered on one row in the table (the other box is locked)","ok":true,"detail":"credit editable=false","known":""}
+{"id":"A03-9","text":"Edit Row also prevents Debit and Credit together on one row","ok":true,"detail":"popup credit editable=false debit=10.00 credit= msg= تعديل الصف الحساب * 122102 - RIYAD BANK - E - RIYAD BANK نوع الحساب نقدية الحساب البنكي ابحث واختر نوع الطرف ابحث واختر الطرف ابحث واختر مركز التكلفة 101 - Main X - E - Main X المشروع ابحث واختر مدين","known":""}
+{"id":"A05-1","text":"An untouched form is not saved","ok":true,"detail":"enabled=false ","known":""}
+{"id":"A05-2","text":"A row without an Account is refused with an error","ok":true,"detail":" ","known":""}
+{"id":"A05-3","text":"Saving without any accounting row shows an error","ok":true,"detail":"enabled=true  ","known":""}
+{"id":"A06-1","text":"Edit Row shows the SRS fields","ok":true,"detail":"missing= popup=تعديل الصف الحساب * 122102 - RIYAD BANK - E - RIYAD BANK نوع الحساب نقدية الحساب البنكي ابحث واختر نوع الطرف ابحث واختر الطرف ابحث واختر مركز التكلفة 101 - Main X - E - Main X المشروع ابحث واختر مدين دائن نوع المرجع اختر خياراً اسم المرجع ابحث واختر تاريخ استحقاق المرجع رقم تفصيل المرجع — نوع سند الدفعة المقدمة — رقم سند الدفعة المقدمة — حساب حجز ضرائب لا دفعة مقدمة اختر خياراً ملاح","known":""}
+{"id":"A06-2","text":"Account Currency and company currency amounts are hidden without Multi Currency","ok":true,"detail":"تعديل الصف الحساب * 122102 - RIYAD BANK - E - RIYAD BANK نوع الحساب نقدية الحساب البنكي ابحث واختر نوع الطرف ابحث واختر الطرف ابحث واختر مركز التكلفة 101 - Main X - E - Main X المشروع ابحث واختر مدين دائن نوع المرجع اختر خياراً اسم المرجع ابحث واختر تاريخ استحقاق المرجع رقم تفصيل المرجع — نوع سند الدفعة المقدمة — رقم سند الدفعة المقدمة — حساب حجز ضرائب لا دفعة مقدمة اختر خياراً ملاحظة المستخدم حفظ","known":""}
+{"id":"A06-3","text":"Reference Type options","ok":null,"detail":"فاتورة مبيعات | فاتورة مشتريات | قيد يومية | أمر بيع | أمر شراء | أصل | إعادة تقييم سعر الصرف | قيد دفع | معاملة بنكية"}
+{"id":"A06-4","text":"Reference Type offers the visible SRS doctypes","ok":true,"detail":"فاتورة مبيعات | فاتورة مشتريات | قيد يومية | أمر بيع | أمر شراء | أصل | إعادة تقييم سعر الصرف | قيد دفع | معاملة بنكية","known":""}
+{"id":"A06-5","text":"Hidden (red) reference types are not offered (Expense Claim, Loan, Payroll, Employee Advance, Invoice Discounting, Fees, FnF)","ok":true,"detail":"فاتورة مبيعات | فاتورة مشتريات | قيد يومية | أمر بيع | أمر شراء | أصل | إعادة تقييم سعر الصرف | قيد دفع | معاملة بنكية","known":""}
+{"id":"A06-6","text":"Table settings has Column width, Add / Remove columns, Update and Reset to default","ok":false,"detail":"تعديل الأعمدة تعديل الأعمدة اسم الحقل عرض العمود الحساب نوع الطرف الطرف مدين دائن إضافة/إزالة حقول إلغاء إعادة تعيين إلى الافتراضي حفظ","known":""}
+{"id":"A06-7","text":"Column width accepts numbers only","ok":false,"detail":"\"autobc\"","known":""}
+{"id":"A06-8","text":"Column width stops at 3 characters","ok":false,"detail":"\"12345\"","known":""}
+{"id":"A06-9","text":"Add / Remove columns lists the SRS columns","ok":true,"detail":"missing=","known":""}

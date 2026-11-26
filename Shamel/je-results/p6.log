@@ -1,0 +1,29 @@
+
+Running 2 tests using 1 worker
+
+[1/2] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/2] [chromium] › Shamel\je-probe6.spec.ts:6:5 › reference types and write off
+[chromium] › Shamel\je-probe6.spec.ts:6:5 › reference types and write off
+NET 200 GET shamel.api.routes.account.transactions.journal_entry.get_company_defaults?company=Ahmed Ebrahim CO.&_=1795701967133  => {"message":{"status":200,"message":"fetch company defaults successfully","data":{"company_currency":"SAR","cost_center":"101 - Main X - E"}}}
+
+NET 200 GET shamel.api.routes.account.transactions.journal_entry.get_account_details?account=122102 - RIYAD BANK - E&company=Ahmed Ebrahim CO.&posting_date=2026-11-26&debit=0&credit=0&exchange_rate=1&_=1795701967  => {"message":{"status":200,"message":"fetch account details successfully","data":{"account_type":"Cash","account_currency":"SAR","party_type":"","bank_account":"","exchange_rate":1.0}}}
+
+HTML  | select-dropdown is-teleported | لا يوجد ; فاتورة مبيعات ; فاتورة مشتريات ; قيد يومية ; أمر بيع ; أمر شراء ; أصل ; إعادة تقييم سعر الصرف ; قيد دفع ; معاملة بنكية
+
+NET 200 GET shamel.api.routes.account.transactions.journal_entry.get_company_defaults?company=Ahmed Ebrahim CO.&_=1795701996962  => {"message":{"status":200,"message":"fetch company defaults successfully","data":{"company_currency":"SAR","cost_center":"101 - Main X - E"}}}
+
+CLICK amount= (empty)
+
+MSG  
+
+ROWS []
+
+NET 200 GET shamel.api.routes.account.transactions.journal_entry.get_company_defaults?company=Ahmed Ebrahim CO.&_=1795702036076  => {"message":{"status":200,"message":"fetch company defaults successfully","data":{"company_currency":"SAR","cost_center":"101 - Main X - E"}}}
+
+CLICK amount= 100000
+
+MSG  
+
+ROWS []
+
+  2 passed (2.0m)

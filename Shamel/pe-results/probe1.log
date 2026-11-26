@@ -1,0 +1,53 @@
+
+Running 3 tests using 1 worker
+
+[1/3] [setup] › Shamel\auth.setup.ts:20:6 › authenticate
+[2/3] [chromium] › Shamel\pe-probe1.spec.ts:5:5 › environment
+[chromium] › Shamel\pe-probe1.spec.ts:5:5 › environment
+ACCSET {"unlink_payment_on_cancellation_of_invoice":0,"unlink_advance_payment_on_cancelation_of_order":1,"delete_linked_ledger_entries":0,"automatically_fetch_payment_terms":1,"show_payment_schedule_in_print":1,"allow_stale":1,"allow_pegged_currencies_exchange_rates":0,"stale_days":1,"custom_action_if_no_exchange_rate_found":"Use API to Get Exchange Rate","auto_reconcile_payments":0,"exchange_gain_loss_posting_date":"Payment","fetch_payment_schedule_in_payment_request":0,"make_payment_via_journal_entry":0}
+
+CO {"default_bank_account":"122101 - ALRAJHY BANK - E","default_receivable_account":"1210 - العملاء - E","default_payable_account":"2300 - مصروفات مستحقة - E","write_off_account":"5317 - ديون معدومة - E","default_expense_account":"","default_income_account":"4100 - المبيعات - E","default_discount_account":"1210 - العملاء - E","cost_center":"101 - Main X - E","exchange_gain_loss_account":"5220 - ديون مشكوك في تحصيلها - E","unrealized_exchange_gain_loss_account":"5317 - ديون معدومة - E","round_off_account":"5317 - ديون معدومة - E","round_off_cost_center":"101 - Main X - E","book_advance_payments_in_separate_party_account":0,"reconcile_on_advance_payment_date":0,"reconciliation_takes_effect_on":"Oldest Of Invoice Or Advance","auto_exchange_rate_revaluation":0,"depreciation_cost_center":"101 - Main X - E","default_expense_claim_payable_account":"","default_inventory_account":"1561 - E"}
+
+TWC [{"name":"12"}]
+
+TWG []
+
+STT [{"name":"6+526 - E"},{"name":"a - E"},{"name":"PW ST 30914 - E"},{"name":"PW ST 30915 - E"},{"name":"PW ST 30918 - E"},{"name":"PW ST 30926 - E"},{"name":"PW ST 30927 - E"},{"name":"PW ST 30928 - E"},{"name":"PW ST 30929 - E"},{"name":"PW ST 4929 - E"},{"name":"PW ST 4940 - E"},{"name":"PW ST DEF 30930 - E"},{"name":"PW ST DUP 30915 - E"},{"name":"PW ST DUP 30915 - E-1"},{"name":"TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT - E"},{"name":"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU - E"},{"name":"VAT - E"},{"name":"عنوان قال ضريبة جديد - E"},{"name":"عنوان قالب ضريبى جديد - E"}]
+
+PTT []
+
+EMP [{"name":"HR-EMP-03389","employee_name":"رحمه محمد على عبدالعزيز","personal_email":null},{"name":"HR-EMP-01325","employee_name":"اميره محمد محمود احمد سليمان","personal_email":"amira.soliman479@gmail.com"},{"name":"HR-EMP-01329","employee_name":"محمد محمد انور ابراهيم باشا","personal_email":"mohammedanwar123m@gmail.com"},{"name":"HR-EMP-01330","employee_name":"محمد محسن مصطفى محمد منطاش","personal_email":"mohamed.mohsen.1.MNT@gmail.com"},{"name":"HR-EMP-02359","employee_name":"محمد طه السيد ابو عطيه","personal_email":"mohamed.taha12212@gmail.com"}]
+
+SH [{"name":"ACC-SH-2026-00001","title":"kjkn"}]
+
+ACCTS [{"name":"122201 - CIB Bank - E","account_type":"Bank","account_currency":"EGP"},{"name":"122301 - Tabby - E","account_type":"Bank","account_currency":"SAR"},{"name":"122302 - Tamara - E","account_type":"Bank","account_currency":"SAR"},{"name":"122303 - My Fatoorah - E","account_type":"Bank","account_currency":"SAR"},{"name":"122306 - Emkan - E","account_type":"Bank","account_currency":"SAR"},{"name":"122101 - ALRAJHY BANK - E","account_type":"Cash","account_currency":"SAR"},{"name":"122102 - RIYAD BANK - E","account_type":"Cash","account_currency":"SAR"},{"name":"122103 - Alinma Bank - E","account_type":"Cash","account_currency":"SAR"},{"name":"122104 - SNB BANK - E","account_type":"Cash","account_currency":"SAR"},{"name":"122105 - SAB الاول Bank - E","account_type":"Cash","account_currency":"SAR"},{"name":"122304 - Salla - E","account_type":"Cash","account_currency":"SAR"},{"name":"122305 - ZID - E","account_type":"Cash","account_currency":"SAR"},{"name":"12241 - Bank al Etihad - E","account_type":"Cash","account_currency":"JOD"},{"name":"1231 - Cash 1 - E","account_type":"Cash","account_currency":"EGP"},{"name":"الخزينة الرئيسية - E","account_type":"Cash","account_currency":"SAR"},{"name":"3100 - راس المال - E","account_type":"Equity","account_currency":"EGP"},{"name":"3200 - ارباح مرحلة - E","account_type":"Equity","account_currency":"SAR"}]
+
+BANKACC [{"name":"hh - CIB","account":"122201 - CIB Bank - E","is_company_account":1,"party":null,"bank":"CIB","bank_account_no":"cgo.azzrk@gmail.com"},{"name":"الأهلي - مؤسسة أزرق المتحدة للتسويق الالكتروني - SNB Alahli","account":"122104 - SNB BANK - Azzrk","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة التكامل الذهبي للخدمات التسويقية - SNB Alahli","account":"122104 - SNB BANK - Tak","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة الخطوة الموفقة للتسويق الالكتروني - SNB Alahli","account":"122104 - SNB BANK - Khatwa","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة الورقة المتحدة للخدمات التسويقية - SNB Alahli","account":"122104 - SNB BANK - Warrqa","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة بصمة البريق المضئ للتسويق الالكتروني - SNB Alahli","account":"122104 - SNB BANK - Basma","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة ثيم التطور لتقنية المعلومات - SNB Alahli","account":"122104 - SNB BANK - Theme","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة خدمات مردود للتسويق - SNB Alahli","account":"122104 - SNB BANK - Mardoud","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة رونق المجد للتسويق الالكترونى - SNB Alahli","account":"122104 - SNB BANK - Rawnaq","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة سهم الوحدة أرو للتسويق الالكتروني - SNB Alahli","account":"122104 - SNB BANK - Sahm","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة شارك المدى للخدمات التسويقية - SNB Alahli","account":"122104 - SNB BANK - Shark","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الأهلي - مؤسسة وان مليون المتحدة للخدمات التسويقية - SNB Alahli","account":"122104 - SNB BANK - One Million","is_company_account":1,"party":null,"bank":"SNB Alahli","bank_account_no":null},{"name":"الراجحي - مؤسسة أثر الهمة للتسويق الالكتروني - Al Rajhi","account":"122101 - ALRAJHY BANK - Ather","is_company_account":1,"party":null,"bank":"Al Rajhi","bank_account_no":null},{"name":"الراجحي - مؤسسة أزرق المتحدة للتسويق الالكتروني - Al Rajhi","account":"122101 - ALRAJHY BANK - Azzrk","is_company_account":1,"party":null,"bank":"Al Rajhi","bank_account_no":null},{"name":"الراجحي - مؤسسة التحول الفريد للخدمات التسويقية - Al Rajhi","account":"122101 - ALRAJHY BANK - T","is_company_account":1,"party":null,"bank":"Al Rajhi","bank_account_no":null},{"name":"الراجحي - مؤسسة التسامي الموحد للتسويق الالكتروني - Al Rajhi","account":"122101 - ALRAJHY BANK - Sumoue","is_company_account":1,"party":null,"bank":"Al Rajhi","bank_account_no":null},{"name":"الراجحي - مؤسسة التكامل ا
+
+MOP [{"name":"Alinma Bank","type":"Bank"},{"name":"Bank al Etihad - JOR","type":"Cash"},{"name":"BANK ALRAJHY","type":"Bank"},{"name":"Bank Riyad","type":"Bank"},{"name":"Bank SAB الاول","type":"Bank"},{"name":"Bank SNB","type":"Bank"},{"name":"Cash","type":"Cash"},{"name":"cash usd","type":"Cash"},{"name":"Emkan","type":"Bank"},{"name":"main cash","type":"Cash"},{"name":"My Fatoorah","type":"Bank"},{"name":"QNB","type":"Cash"},{"name":"Salla","type":"Bank"},{"name":"Tabby","type":"Bank"},{"name":"Tamara","type":"Bank"},{"name":"ZID","type":"Bank"},{"name":"بنك قطر","type":"Cash"}]
+
+PECOUNT [{"name":"ACC-PAY-2025-00024","docstatus":1,"payment_type":"Receive"},{"name":"ACC-PAY-2025-00025","docstatus":2,"payment_type":"Receive"},{"name":"ACC-PAY-2025-00026","docstatus":1,"payment_type":"Receive"}]
+
+[3/3] [chromium] › Shamel\pe-probe1.spec.ts:33:5 › screens
+[chromium] › Shamel\pe-probe1.spec.ts:33:5 › screens
+== list https://test.hr.azzrk.com/desk/shamel#/accounting/payment-entries
+
+LABELS []
+
+BUTTONS ["رجوع","إضافة قيد دفع","اتجاه الترتيب","آخر التحديثات","1","2","3","4","5","1695"]
+
+INPUTS []
+
+LISTHEAD ["","رقم المعرف","الحالة","نوع الدفع","تاريخ الترحيل","المبلغ المدفوع","العنوان","الشركة","طريقة الدفع"]
+
+ROW1  ACC-PAY-2026-03078 مسودة دفع 02-12-2026 15,000.00 CU-2026-00002 _ZATCA Invoice Test Co BANK ALRAJHY
+
+== new https://test.hr.azzrk.com/desk/shamel#/accounting/payment-entries/new
+
+LABELS ["السلسلة*","نوع الدفع","تاريخ الترحيل*","الشركة*","طريقة الدفع*","نوع الطرف*","الطرف*","اسم الطرف","جهة الاتصال","","","الحساب المدفوع إليه*","نوع الحساب المدفوع إليه","عملة الحساب (إلى)","المشروع","مركز التكلفة*"]
+
+BUTTONS ["رجوع","نوع الدفع","الدفع من / إلى","الحسابات","الأبعاد المحاسبية","إلغاء","حفظ"]
+
+INPUTS ["السلسلة*=ACC-PAY-.YYYY.-","نوع الدفع=استلام","تاريخ الترحيل*=2026-11-26 [ro]","الشركة*=Ahmed Ebrahim CO.","طريقة الدفع*=","نوع الطرف*=Customer","الطرف*=","اسم الطرف=— [label]","جهة الاتصال= [ro]","=on [ro]","=on [ro]","الحساب المدفوع إليه*=","نوع الحساب المدفوع إليه=— [label]","عملة الحساب (إلى)=— [label]","المشروع=","مركز التكلفة*=101 - Main X - E"]
+
+  3 passed (1.0m)
